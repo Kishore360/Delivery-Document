@@ -3,7 +3,7 @@ SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
 ELSE 'Data Matched' END AS Message 
 FROM (
 select count(1) as cnt from pgi_mdsdb.u_external_incident_final a
-inner join pgi_mdwdb.d_incident b on a.sys_id  b.row_id and a.sourceinstance = b.source_id
+inner join pgi_mdwdb.d_incident b on a.sys_id = b.row_id and a.sourceinstance = b.source_id
 where
 requires_review_flag <> case when a.u_flag_for_review = 1 then 'Y' else 'N' end or
 area_of_focus  <> coalesce(a.u_area_of_focus,'UNSPECIFIED') or
