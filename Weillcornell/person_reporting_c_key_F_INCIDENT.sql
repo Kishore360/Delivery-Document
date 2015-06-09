@@ -6,5 +6,3 @@ inner join weillcornell_mdwdb.f_incident  b on a.sys_id=b.row_id and a.sourceins
 left outer join weillcornell_mdwdb.d_internal_contact c on a.u_person_reporting=c.row_id where a.u_person_reporting is not null
  and case when  a.u_person_reporting is null then '0' 
  else case when c.row_key is null then '-1' else c.row_key end end <>b.person_reporting_c_key ) c;
- 
- 
