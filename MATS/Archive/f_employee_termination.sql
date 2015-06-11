@@ -1,0 +1,7 @@
+
+
+
+SELECT row_key,row_id,source_id,etl_run_number,employee_key,report_work_week,transaction_id,last_working_day_key,termination_date_key,notice_date_key,transaction_date_key,termination_reason,compliance_flag,soft_deleted_flag,created_by,changed_by,created_on,changed_on,dw_inserted_on,dw_updated_on
+FROM #TABLE_SCHEMA.f_employee_termination
+ORDER BY row_key,row_id,source_id,etl_run_number,employee_key,report_work_week,transaction_id,last_working_day_key,termination_date_key,notice_date_key,transaction_date_key,termination_reason,compliance_flag,soft_deleted_flag,created_by,changed_by,created_on,changed_on,dw_inserted_on,dw_updated_on
+
