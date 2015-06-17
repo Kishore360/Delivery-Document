@@ -6,5 +6,5 @@ CASE WHEN COUNT(1) >0 THEN 'fs_incident has invalid resolve_to_close_duration ' 
 FROM <<tenant>>_mdsdb.incident_final
 WHERE crc32(CONCAT_WS(' ',sys_id ,sourceinstance , TIMESTAMPDIFF(SECOND,resolved_at,closed_at)))
 NOT IN (SELECT crc32(CONCAT_WS(' ',row_id ,source_id ,resolve_to_close_duration ))
-FROM <<tenant>>_mdwdb.fs_incident );
+FROM <<tenant>>_workdb.fs_incident );
 
