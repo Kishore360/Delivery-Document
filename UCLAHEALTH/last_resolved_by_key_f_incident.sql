@@ -11,4 +11,4 @@ u_resolved_by=REPLACE(row_id,'INTERNAL_CONTACT~','')
 LEFT OUTER JOIN  
 (SELECT  REPLACE(last_resolved_by_key,'INTERNAL_CONTACT~','') AS last_resolved_by_key,source_id,ROW_ID FROM  uclahealth_mdwdb.f_incident
   )B on A.sourceinstance=B.source_id AND B.ROW_ID=SYS_ID)H
-WHERE A. last_resolved_by_key<> B.  last_resolved_by_key)E; 
+WHERE A_last_resolved_by_key<> B_last_resolved_by_key)E; 

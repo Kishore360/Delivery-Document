@@ -5,7 +5,7 @@ FROM (
 select count(1) as cnt from(
 SELECT A.SYS_ID,B.ROW_ID,A.  category_src_code A_category_src_code,B.  category_src_code B_category_src_code FROM
 (SELECT SYS_ID,sourceinstance,   
-case when u_category =1 then 'Y' else 'N' end as category_src_code
+ u_category  as category_src_code
 FROM uclahealth_mdsdb.incident_final)A
 LEFT OUTER JOIN  
 (SELECT  category_src_code,source_id,ROW_ID FROM  uclahealth_workdb.fs_incident

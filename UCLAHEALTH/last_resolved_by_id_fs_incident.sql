@@ -9,5 +9,5 @@ FROM uclahealth_mdsdb.incident_final )A
 LEFT OUTER JOIN  
 (SELECT REPLACE(last_resolved_by_id,'INTERNAL_CONTACT~','') AS last_resolved_by_id
 ,source_id,ROW_ID FROM  uclahealth_workdb.fs_incident
- )B on A.sourceinstance=B.source_id AND B.ROW_ID=SYS_I0ED)H
-WHERE A_last_resolved_by_id<>  B_last_resolved_by_id; 
+ )B on A.sourceinstance=B.source_id AND B.ROW_ID=SYS_ID)H
+WHERE A_last_resolved_by_id<>  B_last_resolved_by_id)E; 
