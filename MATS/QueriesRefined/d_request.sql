@@ -1,0 +1,4 @@
+
+
+SELECT active_flag,backlog_flag,changed_by,changed_on,closed_on,created_by,created_on,description,domain_key,dormant_flag,due_on,first_call_resolution_flag,met_sla_flag,multiple_assignment_flag,opened_on,over_due_flag,priority_escalated_flag,reassignment_count,request_number,request_type,row_key,short_description,source_id,source_url FROM <<tenant>>_mdwdb.d_request 
+ORDER BY active_flag,backlog_flag,changed_by,changed_on,closed_on,created_by,created_on,description,domain_key,dormant_flag,due_on,first_call_resolution_flag,met_sla_flag,multiple_assignment_flag,opened_on,over_due_flag,priority_escalated_flag,reassignment_count,request_number,request_type,row_key,short_description,source_id,source_url
