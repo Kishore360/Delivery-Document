@@ -8,6 +8,6 @@ WHERE crc32(CONCAT_WS(' ',sys_id ,sourceinstance,
 CASE WHEN resolved_at IS NULL THEN 'UNSPECIFIED' ELSE date_format(resolved_at,'%Y%m%d')END ) )  
 NOT IN (SELECT crc32(CONCAT_WS(' ',row_id ,source_id 
 ,last_resolved_on_id))
- FROM <<tenant>>_mdwdb.fs_incident );
+ FROM <<tenant>>_workdb.fs_incident );
 
 
