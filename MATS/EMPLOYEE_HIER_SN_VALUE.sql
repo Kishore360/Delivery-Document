@@ -1,3 +1,6 @@
+select case when count(1)<0 then 'Failure' else 'Success' end as Result,
+case when count(1)<0 then 'Failure' else 'Success' end as Message 
+from(
 SELECT CONCAT(a.s0,'~-1~EMPLOYEE') AS row_id,
 a.s0 AS lev_0_id,IFNULL(level_0.row_key ,CASE WHEN a.s0 IS NULL THEN 0 ELSE -1 END) AS lev_0_key,
 a.s1 AS lev_1_id,IFNULL(level_1.row_key ,CASE WHEN a.s1 IS NULL THEN 0 ELSE -1 END) AS lev_1_key,
@@ -31,7 +34,8 @@ ON a.s3 = level_3.row_id
 LEFT JOIN  <<tenant>>_mdwdb.d_internal_contact level_4
 ON a.s4 = level_4.row_id
 LEFT JOIN  <<tenant>>_mdwdb.d_internal_contact level_5
-ON a.s5 = level_5.row_id ;
+ON a.s5 = level_5.row_id 
+)a;
 
 
 
