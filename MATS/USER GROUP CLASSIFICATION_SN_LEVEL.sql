@@ -33,7 +33,7 @@ ON a.s3 = level_3.row_id
 LEFT JOIN  <<tenant>>_mdwdb.d_internal_organization level_4
 ON a.s4 = level_4.row_id
 LEFT JOIN  <<tenant>>_mdwdb.d_internal_organization level_5
-ON a.s5 = level_5.row_id) a ;
+ON a.s5 = level_5.row_id) c ;
 
 
 select case when count(1)<1 then 'Failure' else 'Success' end as Result,
