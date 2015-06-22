@@ -8,9 +8,10 @@ SELECT A.SYS_ID,B.ROW_ID,A.last_resolved_by_key as  A_last_resolved_by_key,B.las
 FROM uclahealth_mdsdb.incident_final x join 
 (select row_key,row_id  from uclahealth_mdwdb.d_internal_contact
  )y on 
-u_resolved_by=REPLACE(row_id,'INTERNAL_CONTACT~','' )
+CONCAT('INTERNAL_CONTACT~',x.u_resolved_by)=y.row_id
 )A
  JOIN  
 (SELECT  last_resolved_by_key AS last_resolved_by_key,source_id,ROW_ID FROM  uclahealth_mdwdb.f_incident
   )B on A.sourceinstance=B.source_id AND B.ROW_ID=SYS_ID)H
 WHERE A_last_resolved_by_key<> B_last_resolved_by_key)E; 
+
