@@ -6,5 +6,5 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  LEFT JOIN <<tenant>>_mdwdb.d_change_request TRGT 
  ON (SRC.sys_id  =TRGT.row_id ) 
  AND (SRC.sourceinstance= TRGT.source_id  )
- WHERE (CASE WHEN SRC.`state` not in
-( 'Unsuccessful','Fail','Roll','Regress','Revert','Backed') then 'Y' ELSE 'N' END <> TRGT.failure_flag )
+ WHERE (CASE WHEN SRC.state not in
+( 'Unsuccessful','Fail','Roll','Regress','Revert','Backed') then 'N' ELSE 'Y' END <> TRGT.failure_flag )
