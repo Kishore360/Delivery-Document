@@ -5,13 +5,13 @@ CASE WHEN COUNT(1) > 0 THEN 'MDS to DWH data validation failed between cmdb_ci_f
 FROM <<tenant>>_mdsdb.cmdb_ci_final S
 
 left join <<tenant>>_mdsdb.core_company_final CCF_COM
-on (convert(CCF_COM.sys_id using utf8) = convert(S.company using utf8))
+on (CCF_COM.sys_id  = S.company )
 
-where convert(concat(
+where (concat(
 ifnull(S.sys_id,''),
 ifnull(S.sourceinstance,''),
-ifnull(CCF_COM.name,'') )using utf8)not in (
-select convert(concat(
+ifnull(CCF_COM.name,'') ))not in (
+select (concat(
 ifnull(DWH.row_id,''),
 ifnull(DWH.source_id,''),
-ifnull(DWH.company,'') )using utf8) from <<tenant>>_mdwdb.d_configuration_item DWH);
+ifnull(DWH.company,'') )) from <<tenant>>_mdwdb.d_configuration_item DWH);
