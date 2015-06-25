@@ -5,7 +5,7 @@ case when count(1)<1 then 'No records found' else 'Records found' end as Message
 
 select routine_name
 from information_schema.routines
-where routine_schema ='<<tenant>>_mdwdb'
+where routine_schema ='<<tenant>>_mdsdb'
 order by 1) a;
 
 #no routine names.
