@@ -1,3 +1,4 @@
+
 select case when count(1) > 1 then 'FAILURE' else 'SUCCESS' end as Result,
 case when count(1) > 1 then CONCAT( CAST(COUNT(1) AS CHAR(10)), ' invalid aging_key set for f_incident') 
 else 'SUCCESS' end as Message from(
