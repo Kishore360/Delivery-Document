@@ -8,5 +8,4 @@ from information_schema.routines
 where routine_schema ='<<tenant>>_mdwdb'
 order by 1) a;
 
-
 #no routine names.
