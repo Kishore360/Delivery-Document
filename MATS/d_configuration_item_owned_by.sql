@@ -13,7 +13,7 @@ on (SYF_OWN.sys_id  = S.owned_by )
 where concat(
 ifnull(S.sys_id,''),
 ifnull(S.sourceinstance,''),
-ifnull(concat(concat(SYF_OWN.first_name,' '),SYF.last_name),'') )not in (
+ifnull(concat(concat(SYF_OWN.first_name,' '),SYF_OWN.last_name),'') )not in (
 select concat(
 ifnull(DWH.row_id,''),
 ifnull(DWH.source_id,''),

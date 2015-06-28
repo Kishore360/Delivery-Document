@@ -7,7 +7,7 @@ FROM <<tenant>>_mdsdb.cmdb_ci_final S
 where (concat(
 ifnull(S.sys_id,''),
 ifnull(S.sourceinstance,''),
-ifnull(S.model_id,'') ))not in (
+ifnull(S.model_number,'') ))not in (
 select (concat(
 ifnull(DWH.row_id,''),
 ifnull(DWH.source_id,''),
