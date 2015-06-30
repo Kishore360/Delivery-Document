@@ -1,12 +1,13 @@
 
 
-
-
-SELECT CASE WHEN  (count_mds = count_dwh) THEN 'SUCCESS' ELSE 'FAILURE' END AS Result
-,CASE WHEN (count_mds =count_dwh) THEN 'Data Matched'
-ELSE CONCAT( 'MDS-DWH RowCount did not Match for ', DWH.Table_DWH , '. MDS:',count_mds,'DWH : ' ,DWH.Count_DWH)
-END AS Message
-FROM (SELECT (SELECT 1 FROM( SELECT table_rows FROM information_schema.TABLES WHERE TABLE_SCHEMA='<<tenant>>_mdsdb' AND TABLE_NAME='discountitem_final'
+SELECT CASE WHEN  (count_mds = Count_DWH) THEN 'SUCCESS' ELSE 'FAILURE' END AS Result
+,CASE WHEN (count_mds =Count_DWH) THEN 'Data Matched'
+ELSE CONCAT( 'MDS-DWH RowCount did not Match for d_master_item. MDS:',count_mds,'DWH : ' ,Count_DWH)
+END AS Message from(
+select count_mds,Count_DWH  from(
+SELECT COUNT(1) as count_mds FROM <<tenant>>_mdsdb.sc_cat_item_final
+where not exists (
+ SELECT table_rows FROM information_schema.TABLES WHERE TABLE_SCHEMA='<<tenant>>_mdsdb' AND TABLE_NAME='discountitem_final'
 UNION ALL
 SELECT table_rows FROM information_schema.TABLES WHERE TABLE_SCHEMA='<<tenant>>_mdsdb' AND TABLE_NAME='servicesaleitem_final' 
 UNION ALL
@@ -48,10 +49,7 @@ SELECT table_rows FROM information_schema.TABLES WHERE TABLE_SCHEMA='<<tenant>>_
 UNION ALL
 SELECT table_rows FROM information_schema.TABLES WHERE TABLE_SCHEMA='<<tenant>>_mdsdb' AND TABLE_NAME='inventoryitem_final' 
 UNION ALL
-SELECT table_rows FROM information_schema.TABLES WHERE TABLE_SCHEMA='<<tenant>>_mdsdb' AND TABLE_NAME='taxgroup_final' )dfg)
-+
-(SELECT COUNT(1) FROM <<tenant>>_mdsdb.sc_cat_item_final) AS count_mds) MDS,
+SELECT table_rows FROM information_schema.TABLES WHERE TABLE_SCHEMA='<<tenant>>_mdsdb' AND TABLE_NAME='taxgroup_final' ))dfg,
 (SELECT COUNT(1) Count_DWH, 'd_master_item'  Table_DWH 
 FROM <<tenant>>_mdwdb.d_master_item WHERE row_key NOT IN (0,-1))  DWH
-
-
+)ghi
