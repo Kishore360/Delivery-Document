@@ -1,4 +1,0 @@
-
-
-
-SELECT  row_key, row_dn_key, row_current_key, row_id, source_id, etl_run_number, asset_tag, assigned_to, category, department, lease_contract, location, managed_by, manufacturer, model_number, name, owned_by, subcategory, support_group, class, vendor, supported_by, company, company_key, domain_key, soft_deleted_flag, created_by, changed_by, created_on, changed_on, current_flag, effective_from, effective_to, dw_inserted_on, dw_updated_on FROM <<tenant>>_mdwdb.d_configuration_item ORDER BY  row_key, row_dn_key, row_current_key, row_id, source_id, etl_run_number, asset_tag, assigned_to, category, department, lease_contract, location, managed_by, manufacturer, model_number, name, owned_by, subcategory, support_group, class, vendor, supported_by, company, company_key, domain_key, soft_deleted_flag, created_by, changed_by, created_on, changed_on, current_flag, effective_from, effective_to, dw_inserted_on, dw_updated_on
