@@ -7,7 +7,7 @@ select count(1) as cnt from(
 (SELECT SYS_ID,sourceinstance, 
 case when u_first_call_resolved=1 then 'Y' else 'N'end  AS  first_call_resolution_flag
 FROM uclahealth_mdsdb.incident_final )A
-LEFT OUTER JOIN  
+JOIN  
 (SELECT  first_call_resolution_flag,source_id,ROW_ID FROM  uclahealth_workdb.ds_incident
  )B on A.sourceinstance=B.source_id AND B.ROW_ID=SYS_ID)h
 WHERE A_first_call_resolution_flag <> 

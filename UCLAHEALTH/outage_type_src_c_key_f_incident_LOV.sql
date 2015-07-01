@@ -4,11 +4,18 @@ SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
 ELSE 'Data Matched' END AS Message 
 FROM (
 select count(1) as cnt from(
-select a.sys_id,b.row_id,a.u_category 
-from uclahealth_mdwdb.f_incident b
-inner join uclahealth_mdsdb.incident_final a
-on a.sys_id= b.row_id 
- join (select row_id,row_key,dimension_code,dimension_name from uclahealth_mdwdb.d_lov 
-where dimension_class  like 'OUTAGE_TYPE_C~INCIDENT%')c
-on dimension_code=u_outage_type 
-where CONCAT('OUTAGE_TYPE_C~INCIDENT~~~',u_outage_type)<>c.row_id)E)i;
+select a.outage_type_src_c_key
+,CONCAT('OUTAGE_TYPE_C~INCIDENT~~~',b.u_outage_type),
+c.row_key,c.dimension_name 
+from uclahealth_mdwdb.f_incident a
+inner join uclahealth_mdsdb.incident_final b
+on a.row_id=b.sys_id and a.source_id=b.sourceinstance
+ left join uclahealth_mdwdb.d_lov c 
+on  c.dimension_class  like 'OUTAGE_TYPE_C~INCIDENT%'
+and CONCAT('OUTAGE_TYPE_C~INCIDENT~~~',b.u_outage_type)=c.src_row_id)
+where c.row_key<>a.outage_type_src_c_key
+)E
+)i;
+
+
+

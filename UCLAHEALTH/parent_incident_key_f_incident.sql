@@ -7,7 +7,7 @@ SELECT A.SYS_ID,B.ROW_ID,A.  parent_incident_key A_parent_incident_key,B.  paren
 (SELECT SYS_ID,sourceinstance,  y.row_key AS   parent_incident_key
 FROM uclahealth_mdsdb.incident_final x join uclahealth_mdwdb.d_incident y on
 x.u_parent_ticket=y.row_id)A
-LEFT OUTER JOIN  
+ JOIN  
 (SELECT  parent_incident_key,source_id,ROW_ID FROM  uclahealth_mdwdb.f_incident
  )B on A.sourceinstance=B.source_id AND B.ROW_ID=SYS_ID)H
 WHERE A_parent_incident_key<> B_parent_incident_key)E;

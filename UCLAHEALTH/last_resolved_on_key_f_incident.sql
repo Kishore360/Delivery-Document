@@ -14,7 +14,7 @@ DATE_FORMAT(CONVERT_TZ(u_resolved_date,'GMT','America/Los_Angeles'),'%Y%m%d')  A
 FROM uclahealth_mdsdb.incident_final 
 #where sys_id='092bf5f2f547b9c00f4bd5728aaf9afc'
 )A
-LEFT OUTER JOIN  
+ JOIN  
 (SELECT  last_resolved_on_key,source_id,ROW_ID FROM  uclahealth_mdwdb.f_incident
 where state_src_code>4
  )B on A.sourceinstance=B.source_id AND B.ROW_ID=SYS_ID)H

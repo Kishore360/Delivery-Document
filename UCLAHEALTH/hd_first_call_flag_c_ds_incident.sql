@@ -7,7 +7,7 @@ SELECT A.SYS_ID,B.ROW_ID,A.  hd_first_call_flag_c A_hd_first_call_flag_c ,B.  hd
 (SELECT SYS_ID,sourceinstance, 
 case when u_hd_first_call  =1 then 'Y' else 'N'end AS   hd_first_call_flag_c  
 FROM uclahealth_mdsdb.incident_final )A
-LEFT OUTER JOIN  
+ JOIN  
 (SELECT  hd_first_call_flag_c,source_id,ROW_ID FROM  uclahealth_workdb.ds_incident
  )B on A.sourceinstance=B.source_id AND B.ROW_ID=SYS_ID)H
 WHERE A_hd_first_call_flag_c<> B_hd_first_call_flag_c)E;

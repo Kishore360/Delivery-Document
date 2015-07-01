@@ -15,7 +15,7 @@ last_resolved_on_id
 FROM uclahealth_mdsdb.incident_final 
 #where sys_id='092bf5f2f547b9c00f4bd5728aaf9afc'
 )A
-LEFT OUTER JOIN  
+ JOIN  
 (SELECT  DATE_FORMAT(last_resolved_on_id,'%Y%m%d')last_resolved_on_id,source_id,ROW_ID FROM  
 uclahealth_workdb.fs_incident
  )B on A.sourceinstance=B.source_id AND B.ROW_ID=SYS_ID)H

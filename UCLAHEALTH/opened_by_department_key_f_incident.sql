@@ -9,7 +9,7 @@ y.row_key AS   opened_by_department_key
 FROM uclahealth_mdsdb.incident_final x join uclahealth_mdwdb.d_incident y
 where x.u_department=row_id
 )A
-LEFT OUTER JOIN  
+ JOIN  
 (SELECT    
 opened_by_department_key,source_id,ROW_ID FROM  uclahealth_mdwdb.f_incident
  )B on A.sourceinstance=B.source_id AND B.ROW_ID=SYS_ID)H

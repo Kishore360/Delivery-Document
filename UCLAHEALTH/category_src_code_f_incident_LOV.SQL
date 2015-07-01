@@ -4,13 +4,17 @@ SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
 ELSE 'Data Matched' END AS Message 
 FROM (
 select count(1) as cnt from(
-select a.sys_id,b.row_id,CONCAT('CATEGORY~INCIDENT~~~',a.u_category) 
-from uclahealth_mdwdb.f_incident b
-inner join uclahealth_mdsdb.incident_final a
-on a.sys_id= b.row_id 
- left outer join (select row_id,row_key,dimension_code,dimension_name from uclahealth_mdwdb.d_lov 
-where dimension_class  like 'CATEGORY~INCIDENT%')c
-on dimension_code=u_category 
-where CONCAT('CATEGORY~INCIDENT~~~',u_category)<> c.row_id)E
+select  a.category_src_code,a.category_src_key,b.u_category,CONCAT('CATEGORY~INCIDENT~~~',b.u_category),c.row_key,c.dimension_name
+from f_incident a
+inner join uclahealth_mdsdb.incident_final b
+on a.row_id=b.sys_id
+and a.source_id=b.sourceinstance
+left join d_lov c
+on c.dimension_class like '%CATEGORY~INCIDENT%'
+and CONCAT('CATEGORY~INCIDENT~~~',b.u_category)=c.src_rowid
+where c.row_key<>a.category_src_key
+
+)E
 
 )i;
+
