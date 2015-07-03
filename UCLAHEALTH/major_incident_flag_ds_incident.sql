@@ -8,6 +8,6 @@ B.MAJOR_INCIDENT_FLAG B_MAJOR_INCIDENT_FLAG_SRC FROM
 (SELECT SYS_ID,sourceinstance,CASE WHEN PRIORITY IN (1,0) THEN 'Y' else 'N'END AS MAJOR_INCIDENT_FLAG_SRC 
 FROM uclahealth_mdsdb.incident_final )A
  JOIN  
-(SELECT MAJOR_INCIDENT_FLAG,source_id,ROW_ID FROM  uclahealth_mdwdb.ds_incident
+(SELECT MAJOR_INCIDENT_FLAG,source_id,ROW_ID FROM  uclahealth_workdb.ds_incident
  )B on A.sourceinstance=B.source_id AND B.ROW_ID=SYS_ID)H
 WHERE A_MAJOR_INCIDENT_FLAG_SRC<>B_MAJOR_INCIDENT_FLAG_SRC)E;
