@@ -5,4 +5,4 @@ FROM (
 select count(1) as cnt from uclahealth_mdsdb.incident_final 
  JOIN  
 uclahealth_mdwdb.f_incident B on sourceinstance=B.source_id AND B.ROW_ID=SYS_ID
-WHERE u_outage_type <> b.outage_type_src_code_c)E;
+WHERE u_outage_type <> outage_type_src_code_c)E;
