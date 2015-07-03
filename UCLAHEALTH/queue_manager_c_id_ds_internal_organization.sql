@@ -15,6 +15,6 @@ FROM uclahealth_mdsdb.sys_user_group_final )a
 on concat('INTERNAL_CONTACT~',a.u_queue_manager)=c.row_id
 and a.sourceinstance=c.source_id
 )h
-where b_queue_manager_c_id<>(case when a_u_queue_manager is null then 'UNSPECIFIED' else coalesce(concat('INTERNAL_CONTACT~',a_u_queue_manager),-1) end))E;
+where b_queue_manager_c_id<>(case when a_u_queue_manager is null then 'UNSPECIFIED' else coalesce(concat('INTERNAL_CONTACT~',left(a_u_queue_manager,32)),-1) end))E;
 
 
