@@ -7,6 +7,6 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
  LEFT JOIN <<tenant>>_mdwdb.d_internal_organization LKP 
- ON ( SRC.assignment_group= LKP.row_id 
+ ON ( SRC.assignment_group= substr(LKP.row_id,instr(LKP.row_id,'~')+1,length(LKP.row_id))
 AND SRC.sourceinstance= LKP.source_id )
  WHERE COALESCE(LKP.row_key,CASE WHEN SRC.assignment_group IS NULL THEN 0 else '-1' end)<> COALESCE(TRGT.assignment_group_key,'')
