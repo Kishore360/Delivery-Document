@@ -4,5 +4,5 @@ ELSE 'Data Matched' END AS Message
 FROM (
 select count(1) as cnt,cause_code from uclahealth_mdsdb.incident_final 
  JOIN  
-  uclahealth_mdwdb.d_incident B on A.sourceinstance=B.source_id AND B.ROW_ID=A.SYS_ID
+  uclahealth_mdwdb.d_incident B on sourceinstance=B.source_id AND B.ROW_ID=SYS_ID
 WHERE  cause_code<> B.cause_code)E;
