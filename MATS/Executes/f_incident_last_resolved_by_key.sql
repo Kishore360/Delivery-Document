@@ -1,12 +1,17 @@
+SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
+,CASE WHEN cnt > 0 THEN 'Data did not Match.' 
+ELSE 'Data Matched' END AS Message 
+FROM (
+select count(1) as cnt from(
 
-
-SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
- CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for f_incident.last_resolved_by_key' ELSE 'SUCCESS' END as Message
- FROM <<tenant>>_mdsdb.incident_final SRC 
- LEFT JOIN <<tenant>>_mdwdb.f_incident TRGT 
- ON (SRC.sys_id =TRGT.row_id  
- AND SRC.sourceinstance= TRGT.source_id  )
-LEFT JOIN <<tenant>>_mdwdb.d_internal_contact LKP 
- ON ( concat('INTERNAL_CONTACT~',resolved_by)= LKP.row_id 
-AND SRC.sourceinstance= LKP.source_id )
- WHERE COALESCE(LKP.row_key,CASE WHEN SRC.resolved_by IS NULL THEN 0 else '-1' end)<> COALESCE(TRGT.last_resolved_by_key,'')
+SELECT A.SYS_ID,B.ROW_ID,A.last_resolved_by_key as  A_last_resolved_by_key,B.last_resolved_by_key as  B_last_resolved_by_key FROM
+(SELECT SYS_ID,sourceinstance, y.row_key AS   last_resolved_by_key
+FROM <<tenant>>_mdsdb.incident_final x  left outer join 
+(select source_id,row_key,row_id  from <<tenant>>_mdwdb.d_internal_contact
+ )y on 
+CONCAT('INTERNAL_CONTACT~',x.u_resolved_by)=y.row_id  AND sourceinstance= source_id 
+)A
+ JOIN  
+(SELECT  last_resolved_by_key AS last_resolved_by_key,source_id,ROW_ID FROM  <<tenant>>_mdwdb.f_incident
+  )B on A.sourceinstance=B.source_id AND B.ROW_ID=SYS_ID)h
+WHERE A_last_resolved_by_key<> B_last_resolved_by_key)E; 
