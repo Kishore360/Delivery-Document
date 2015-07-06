@@ -17,15 +17,14 @@ on (LSM.column_value ='stage')
  join  <<tenant>>_mdsdb.wf_workflow_version_final SRC2
 on (LSM.table_value=SRC2.table
 and SRC2.sys_id=SRC.workflow_version)
-where SRC.value not in (
+join (
 	select distinct SRC.value as dimension_code
 	from <<tenant>>_mdsdb.sys_choice_final SRC
 	join <<tenant>>_workdb.lsm_ls_system_variables LSM
 	on (LSM.table_value=SRC.name
-	and LSM.column_value=SRC.element)
-	where language='en'
-	)
-) SRC
+	and LSM.column_value=SRC.element )where language='en')bc 
+on SRC.value <>bc.dimension_code
+	) SRC
 left join <<tenant>>_mdwdb.d_lov TRGT
 on(SRC.row_id=TRGT.row_id
 and TRGT.source_id = 2)

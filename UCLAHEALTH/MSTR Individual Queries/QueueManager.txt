@@ -4,7 +4,7 @@ select	d.full_name	, count(1)
 inner join ldb.d_internal_organization_group b 
 on   a.assignment_group_key=b.row_key
 join ldb.d_internal_contact_queue_manager_c d
-on b.query_manager_c_key = d.row_key
+on b.queue_manager_c_key = d.row_key
 join	ldb.d_calendar_date	A14
 	  on 	(a.opened_on_key = a14.row_key)
 	  join	ldb.d_calendar_month	a15
@@ -17,7 +17,7 @@ select	d.full_name	, count(1)
 inner join ldb.d_internal_organization_group b 
 on   a.assignment_group_key=b.row_key
 join ldb.d_internal_contact_queue_manager_c d
-on b.query_manager_c_key = d.row_key
+on b.queue_manager_c_key = d.row_key
 join	ldb.d_calendar_date	A14
 	  on 	(a.closed_on_key = a14.row_key)
 	  join	ldb.d_calendar_month	a15
@@ -30,7 +30,7 @@ select	d.full_name	, count(1)
 inner join ldb.d_internal_organization_group b 
 on   a.assignment_group_key=b.row_key
 join ldb.d_internal_contact_queue_manager_c d
-on b.query_manager_c_key = d.row_key
+on b.queue_manager_c_key = d.row_key
 join	ldb.d_calendar_date	A14
 	  on 	(a.resolved_on_key = a14.row_key)
 	  join	ldb.d_calendar_month	a15
