@@ -1,6 +1,8 @@
 
 SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
- CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for d_request_task.multiple_categorization_flag' ELSE 'SUCCESS' END as Message
+ CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for d_request_task.multiple_categorization_flag' ELSE 'SUCCESS' END as Message FROM(
+ SELECT CASE WHEN TA.task_attribute_wh_old_value <> TA.task_attribute_wh_new_value THEN 'Y' ELSE 'N' END ABC,
+ COALESCE(TRGT.priority_escalated_flag,'') DEF
  FROM <<tenant>>_mdsdb.sc_task_final SRC 
  LEFT JOIN <<tenant>>_mdwdb.d_request_task TRGT 
  ON (SRC.sys_id =TRGT.row_id  
@@ -9,6 +11,5 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  ON (SRC.sys_id =TA.task_row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
  AND TA.task_wh_type = 'incident' 
-AND TA.task_attribute_wh_name =  'category' 
- WHERE  CASE WHEN TA.task_attribute_wh_old_value <> TA.task_attribute_wh_new_value THEN 'Y' ELSE 'N' END
- <> COALESCE(TRGT.priority_escalated_flag,'')
+AND TA.task_attribute_wh_name =  'category' )A
+ WHERE  ABC<>DEF

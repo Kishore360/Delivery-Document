@@ -5,7 +5,7 @@
  LEFT JOIN <<tenant>>_mdwdb.d_request_task TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
-  LEFT JOIN  <<tenant>>_mdwdb.f_request_task TRGTF 
+  JOIN  <<tenant>>_mdwdb.f_request_task TRGTF 
  ON (TRGTF.request_task_key =TRGT.row_key
  AND TRGTF.source_id =TRGT.source_id)
 LEFT JOIN <<tenant>>_mdwdb.d_lov_map LM
