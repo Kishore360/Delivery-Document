@@ -1,8 +1,0 @@
-
-SELECT CASE WHEN COUNT(1) >0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
-CASE WHEN COUNT(1) >0 THEN '#STG_TABLE_NAME has invalid #COL_NAME ' ELSE 'SUCCESS' END as Message
- FROM <<tenant>>_mdsdb.#BASE_TABLE 
-WHERE crc32(CONCAT_WS(' ',sys_id ,sourceinstance,
- CASE WHEN #BASE_COL_NAME IS NULL THEN 'UNSPECIFIED' ELSE #BASE_COL_NAME END ))
-NOT IN (SELECT crc32(CONCAT_WS(' ',row_id ,source_id ,#COL_NAME ))
-FROM <<tenant>>_workdb.#STG_TABLE_NAME );
