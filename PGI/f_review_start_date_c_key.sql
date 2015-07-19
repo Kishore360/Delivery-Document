@@ -13,4 +13,4 @@ left join pgi_mdwdb.f_problem c
 
 on b.row_key=c.review_start_date_c_key
 
-where b.row_id=date_format(convert_tz(a.u_start,"GMT","UTC"),'%Y%m%d')) a;
+where b.row_id<>date_format(convert_tz(a.u_start,"GMT","UTC"),'%Y%m%d')) a;

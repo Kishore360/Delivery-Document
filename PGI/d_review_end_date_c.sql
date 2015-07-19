@@ -6,4 +6,5 @@ from pgi_mdsdb.problem_final a
 
 left join pgi_mdwdb.d_problem b
 
-on b.review_end_date_c=convert_tz(a.u_end,"GMT","UTC")) a;
+on b.review_end_date_c=convert_tz(a.u_end,"GMT","UTC")
+where b.review_end_date_c<>convert_tz(a.u_end,"GMT","UTC")) a;
