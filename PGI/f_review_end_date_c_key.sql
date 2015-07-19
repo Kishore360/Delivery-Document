@@ -1,7 +1,7 @@
 SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
 ,CASE WHEN cnt > 0 THEN 'Data did not Match.' 
 ELSE 'Data Matched' END AS Message 
-from(select b.row_id,date_format(convert_tz(a.u_end,"GMT","UTC"),'%Y%m%d'), b.row_key,c.review_end_date_c_key
+from(select count(1) as cnt
 
 from pgi_mdsdb.problem_final a
 
