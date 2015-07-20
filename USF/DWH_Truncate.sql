@@ -1,3 +1,3 @@
 
 
-TRUNCATE TABLE #TABLE_NAME
+TRUNCATE TABLE <<tablename>>

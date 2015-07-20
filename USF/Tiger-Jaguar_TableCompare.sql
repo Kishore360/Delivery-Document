@@ -1,6 +1,6 @@
-SELECT case when count(*) > 0 then 'FAILURE' else 'SUCCESS' end as Result,
+SELECT case when count(1) > 0 then 'FAILURE' else 'SUCCESS' end as Result,
 
-case when count(*) > 0 then CONCAT( CAST(COUNT(*) AS CHAR(10)), ' records did not match for #JAGUAR_TABLE_NAME.#COLUMN_NAME ') 
+case when count(1) > 0 then CONCAT( CAST(COUNT(1) AS CHAR(10)), ' records did not match for #JAGUAR_TABLE_NAME.#COLUMN_NAME ') 
 else 'SUCCESS' end as Message
  
 
@@ -14,5 +14,5 @@ FROM
    FROM #JAGUAR_DWH_SCHEMA.#JAGUAR_TABLE_NAME  t2
 )  t
 GROUP BY t.row_id, #COLUMN_NAME
-HAVING COUNT(*) = 1
+HAVING COUNT(1) = 1
 ORDER BY t.row_id

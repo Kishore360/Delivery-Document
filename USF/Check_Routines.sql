@@ -1,5 +1,5 @@
 
 select routine_name
 from information_schema.routines
-where routine_schema ='#DWH_TABLE_SCHEMA'
+where routine_schema ='usf_mdwdb'
 order by 1
