@@ -1,3 +1,3 @@
 
 
-select 1 from <<tablename>>
+select * from #TABLE_NAME

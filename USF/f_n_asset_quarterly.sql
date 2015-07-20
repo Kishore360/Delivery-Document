@@ -1,7 +1,7 @@
 SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 CASE WHEN count(1) >0 THEN ' f_n_asset_quarterly has records which are not having correct flag' ELSE 'SUCCESS' END as Message
 from 
-<<tenant>>_mdwdb.f_n_asset_quarterly a join <<tenant>>_mdwdb.d_calendar_date b
+#DWH_TABLE_SCHEMA.f_n_asset_quarterly a join #DWH_TABLE_SCHEMA.d_calendar_date b
 on a.n_key = b.row_id 
 and b.lagging_count_of_quarter =0 
 where 

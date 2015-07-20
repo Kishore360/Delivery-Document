@@ -1,8 +1,8 @@
 
 SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for d_asset.disposal_reason' ELSE 'SUCCESS' END as Message
- FROM <<tenant>>_mdsdb.alm_asset SRC 
- LEFT JOIN <<tenant>>_mdwdb.d_asset TRGT 
- ON (SRC.sys_id =TRGT.row_id  
- AND SRC.sourceinstance= TRGT.source_id  )
- WHERE COALESCE( SRC.disposal_reason,'')<> COALESCE(TRGT.disposal_reason ,'')
+ FROM #MDS_TABLE_SCHEMA.alm_asset SRC 
+ LEFT JOIN #DWH_TABLE_SCHEMA.d_asset TRGT 
+ ON (convert(SRC.sys_id using utf8) =convert(TRGT.row_id using utf8) 
+ AND convert(SRC.sourceinstance using utf8)= convert(TRGT.source_id using utf8) )
+ WHERE COALESCE( CONVERT(SRC.disposal_reason using utf8),'')<> COALESCE(CONVERT(TRGT.disposal_reason using utf8),'')

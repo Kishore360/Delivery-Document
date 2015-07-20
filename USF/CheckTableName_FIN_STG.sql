@@ -1,10 +1,10 @@
 
 SELECT CASE WHEN COUNT(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
-, CASE WHEN COUNT(1) > 0 THEN 'Some #COL_NAME are invalid in <<tablename>>' 
-ELSE 'All #COL_NAME are valid in <<tablename>>' END AS Message 
+, CASE WHEN COUNT(1) > 0 THEN 'Some #COL_NAME are invalid in #TABLE_NAME' 
+ELSE 'All #COL_NAME are valid in #TABLE_NAME' END AS Message 
 FROM (
-SELECT 1
-FROM <<tenant>>_mdwdb.<<tablename>> LSM
+SELECT *
+FROM #TABLE_SCHEMA.#TABLE_NAME LSM
 WHERE #COL_NAME NOT IN ('dwh_d_ap_debit_memo_detail'
 ,'dwh_d_ap_debit_memo_summary'
 ,'dwh_d_ar_debit_memo_detail'
@@ -27,8 +27,8 @@ WHEN LSM.#COL_NAME LIKE 'dh^_%' ESCAPE '^' THEN 'dwh'
 WHEN LSM.#COL_NAME LIKE 'f^_%' ESCAPE '^' THEN 'dwh'
 WHEN LSM.#COL_NAME LIKE 't^_%' ESCAPE '^' THEN 'dwh'
 WHEN LSM.#COL_NAME LIKE 's^_%' ESCAPE '^' THEN 'dwh'
-ELSE 'stg' END ,'_',LSM.#COL_NAME) 
+ELSE 'stg' END ,'_',LSM.#COL_NAME) COLLATE utf8_unicode_ci
 not in
-(select ISch.table_name 
+(select ISch.table_name COLLATE utf8_unicode_ci
 from information_schema.tables ISch
-where ISch.table_schema = '<<tenant>>_mdwdb')) R
+where ISch.table_schema = '#TABLE_SCHEMA')) R

@@ -1,6 +1,6 @@
-SELECT case when count(1) = TigerCount then 'SUCCESS' else 'FAILURE' end as Result,
-case when count(1) =TigerCount then  'SUCCESS' else  
-CONCAT('For #JAGUAR_TABLE_NAME.#COLUMN_NAME records Matched:', CAST(COUNT(1) AS CHAR(10)), '. TigerCount: '
+SELECT case when count(*) = TigerCount then 'SUCCESS' else 'FAILURE' end as Result,
+case when count(*) =TigerCount then  'SUCCESS' else  
+CONCAT('For #JAGUAR_TABLE_NAME.#COLUMN_NAME records Matched:', CAST(COUNT(*) AS CHAR(10)), '. TigerCount: '
 ,TigerCount,'. JaguarCount: ',JaguarCount)
 end as Message
 FROM 
@@ -18,10 +18,10 @@ FROM
    JOIN #JAGUAR_DWH_SCHEMA.#JAGUAR_LKP_NAME l2
    ON(l2.row_key=t2.#COLUMN_NAME)
    WHERE t2.row_key not in (0,-1)
-)  t, (SELECT count(1) cnt
+)  t, (SELECT count(*) cnt
    FROM #TIGER_DWH_SCHEMA.#TIGER_TABLE_NAME WHERE row_key not in (0,-1)) Ttotal
-,(SELECT count(1) cnt
+,(SELECT count(*) cnt
    FROM #JAGUAR_DWH_SCHEMA.#JAGUAR_TABLE_NAME  WHERE row_key not in (0,-1)) Jtotal
 GROUP BY t.row_id, t.lkp_row_id
-HAVING COUNT(1) =2
+HAVING COUNT(*) =2
 ) Result
