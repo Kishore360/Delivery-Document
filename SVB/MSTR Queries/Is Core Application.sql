@@ -1,8 +1,7 @@
 select  b.core_application_flag_c, count(1) 
 from ldb.f_incident a
- inner join ldb.d_configuration_item b
- on a.row_id=b.row_id
- and a.source_id=b.source_id
+ inner join ldb.d_configuration_item_application_c b
+ on configuration_item_application_c_key=d.row_key
 join	ldb.d_calendar_date	A14
 	  on 	(a.opened_on_key = a14.row_key)
 	  join	ldb.d_calendar_month	a15

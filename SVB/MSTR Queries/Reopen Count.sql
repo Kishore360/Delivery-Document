@@ -1,4 +1,4 @@
-select  b.reopened_count, count(1) 
+select  sum(b.reopened_count), count(1) 
 from ldb.f_incident a
  join	ldb.d_calendar_date	A14
 	  on 	(a.opened_on_key = a14.row_key)
