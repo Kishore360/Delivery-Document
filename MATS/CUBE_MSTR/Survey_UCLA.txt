@@ -1,0 +1,42 @@
+SELECT CASE WHEN max_count<>min_count THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+ CASE WHEN  max_count<>min_count THEN 'OOTB has Keys Dropped' ELSE 'SUCCESS'  END as Message FROM (
+ select max(Row_Count) max_count,Min(Row_Count) min_count from (
+
+select 'f_incident_response'as Table_Name,count(a11.row_key) Row_Count
+from ldb.f_incident_response	a11
+
+union
+
+select  'd_internal_organization_department'as Table_Name,count(a11.row_key) Row_Count
+from ldb.f_incident_response	a11
+   join        ldb.d_internal_organization_department	a12
+   on       	(a11.taken_by_department_key = a12.row_key)
+union
+
+
+select  'd_internal_organization_contact'as Table_Name,count(a11.row_key) Row_Count
+from ldb.f_incident_response	a11
+   join        ldb.d_internal_contact	a13
+   on       	(a11.sent_to_key = a13.row_key)
+union
+
+select  'd_calendar_date'as Table_Name,count(a11.row_key) Row_Count
+from ldb.f_incident_response	a11
+   join        ldb.d_calendar_date	a14
+   on       	(a11.requested_on_key = a14.row_key)
+union
+
+select  'd_calendar_month'as Table_Name,count(a11.row_key) Row_Count
+from ldb.f_incident_response	a11
+   join        ldb.d_calendar_date	a15
+   on       	(a11.requested_on_key = a12.row_key)
+   join ldb.d_calendar_month	a16
+	  on 	(a15.month_start_date_key = a16.row_key)
+
+
+
+)a
+)b
+
+
+
