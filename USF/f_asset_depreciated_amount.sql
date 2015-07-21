@@ -5,4 +5,4 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  LEFT JOIN usf_mdwdb.f_asset TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
- WHERE COALESCE( SRC.depreciated_doc_value,'')<> COALESCE(TRGT.depreciated_doc_value ,'')
+ WHERE COALESCE( SRC.depreciated_amount,'')<> COALESCE(TRGT.depreciated_doc_amount ,'')

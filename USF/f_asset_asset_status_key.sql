@@ -1,10 +1,10 @@
 SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for f_asset.asset_status_key' ELSE 'SUCCESS' END as Message
- FROM appsqacds_mdsdb.alm_asset SRC 
- LEFT JOIN appsqacds_mdwdb.f_asset TRGT 
+ FROM usf_mdsdb.alm_asset SRC 
+ LEFT JOIN usf_mdwdb.f_asset TRGT 
  ON ( SRC.sys_id  =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
- LEFT JOIN appsqacds_mdwdb.d_lov LKP 
+ LEFT JOIN usf_mdwdb.d_lov LKP 
  ON COALESCE(CONCAT('ASSET~STATUS~~',SRC.install_status) ,'UNSPECIFIED') = LKP.row_id 
 AND SRC.sourceinstance= LKP.source_id 
 AND LKP.dimension_class ='ASSET'

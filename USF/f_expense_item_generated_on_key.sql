@@ -4,8 +4,10 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  LEFT JOIN usf_mdwdb.f_expense_item TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
+ LEFT JOIN  app_test.lsm_ls_source_timezone L 
+ON (SRC.sourceinstance  = L.sourceid )
  LEFT JOIN usf_mdwdb.d_calendar_date LKP 
- ON COALESCE(convert_tz(SRC.date,'%Y%m%d%H%i%S','GMT','America/Los_Angeles'))= LKP.row_id 
---AND SRC.sourceinstance= LKP.source_id )
+ ON (date_format(convert_tz(SRC.date,source_time_zone,target_time_zone),'%Y%m%d')= LKP.row_id )
+-- AND SRC.sourceinstance= LKP.source_id )
  WHERE COALESCE(LKP.row_key,CASE WHEN SRC.date IS NULL THEN NULL else '-1' end)<> COALESCE(TRGT.generated_on_key,'')and SRC.asset is not null;
 
