@@ -1,0 +1,21 @@
+SELECT
+source_id,soft_deleted_flag,secondary2_changed_on,secondary1_changed_on,row_key,row_id,row_dn_key,row_current_key,etl_run_number,dw_updated_on,dw_inserted_on,created_on,created_by,changed_on,changed_by,cdctype,asset_class_name
+FROM usf_mdwdb.d_asset_class
+ORDER BY
+source_id
+,soft_deleted_flag
+,secondary2_changed_on
+,secondary1_changed_on
+,row_key
+,row_id
+,row_dn_key
+,row_current_key
+,etl_run_number
+,dw_updated_on
+,dw_inserted_on
+,created_on
+,created_by
+,changed_on
+,changed_by
+,cdctype
+,asset_class_name

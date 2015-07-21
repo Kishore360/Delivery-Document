@@ -7,4 +7,4 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  AND SRC.sourceinstance= TRGT.source_id  )
 JOIN  app_test.lsm_ls_source_timezone L 
 ON (SRC.sourceinstance  = L.sourceid )
- WHERE convert_tz(SRC.sys_updated_on,source_time_zone,target_time_zone)<> TRGT.changed_on and SRC.asset is not null;
+ WHERE SRC.sys_updated_on <> TRGT.changed_on and SRC.asset is not null;

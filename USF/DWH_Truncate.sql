@@ -1,3 +1,0 @@
-
-
-TRUNCATE TABLE <<tablename>>
