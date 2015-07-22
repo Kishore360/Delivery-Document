@@ -21,4 +21,4 @@ svb_mdwdb.f_incident c
 on a.sys_id=c.row_id and a.sourceinstance=c.source_id
 )h
 
-where configuration_item_application_c_key<>(case when u_application is null then 'UNSPECIFIED' else coalesce(row_key,-1) end))E;
+where configuration_item_application_c_key<> coalesce(row_key,-1) )E;

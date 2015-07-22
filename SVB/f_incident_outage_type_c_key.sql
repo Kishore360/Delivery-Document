@@ -6,7 +6,7 @@ FROM
 (
 select count(1) as cnt from(
 
-select c.outage_type_c_key,b.row_key,u_outage_type_
+select c.outage_type_c_key outage_type_c_key,b.row_key,u_outage_type_
 fROM svb_mdsdb.incident_final a
  left JOIN  
  svb_mdwdb.d_incident_outage_type_c b on
@@ -18,4 +18,4 @@ join
 svb_mdwdb.f_incident c on a.sys_id=c.row_id and a.sourceinstance=c.source_id
 )h
 
-where outage_type_c_key<>(case when u_outage_type_ is null then 'UNSPECIFIED' else coalesce(row_key,-1) end))E;
+where outage_type_c_key<>coalesce(row_key,-1) )E;
