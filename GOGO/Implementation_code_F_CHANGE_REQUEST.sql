@@ -5,5 +5,5 @@ FROM ( select count(1) as cnt from gogo_mdsdb.change_request_final a
 inner join gogo_mdwdb.f_change_request  b on a.sys_id=b.row_id and a.sourceinstance=b.source_id 
 left outer join gogo_mdwdb.d_lov c on a.u_implementation_code=c.dimension_code and dimension_class='IMPLEMENTATION_CODE~CHANGE_REQUEST'
  where case when  a.u_implementation_code is null then '0' 
- else case when c.row_key is null then '-1' else c.row_key end end =b.implementation_code_src_c_key
+ else case when c.row_key is null then '-1' else c.row_key end end <>b.implementation_code_src_c_key
 ) c;
