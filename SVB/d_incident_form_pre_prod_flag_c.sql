@@ -6,4 +6,6 @@ FROM (
 select count(1) as cnt  from svb_mdwdb. d_incident b
  inner  JOIN  svb_mdsdb.incident_final a
 on  b.ROW_ID=SYS_ID and sourceinstance=b.source_id
- where a. u_is_form_pre_prod<> b. form_pre_prod_flag_c)c
+ where case when a. u_is_form_pre_prod=1 then 'Y' else 'N' end
+<> b. form_pre_prod_flag_c)c
+

@@ -5,4 +5,5 @@ FROM (
 select count(1) as cnt  from svb_workdb.ds_configuration_item b
  inner  JOIN  svb_mdsdb.cmdb_ci_appl a
 on  b.ROW_ID=SYS_ID and sourceinstance=b.source_id
- where a.u_is_core_application<> b.core_application_flag_c)c
+ where case when a.u_is_core_application=1 then 'Y' else 'N' end<> b.core_application_flag_c)c
+
