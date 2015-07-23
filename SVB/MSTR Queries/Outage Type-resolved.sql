@@ -1,4 +1,4 @@
-select  b.Full_name, count(1) 
+select  b.source_dimension_name , count(1) 
 from ldb.f_incident a
  join ldb.d_incident_outage_type_c b
 on a.outage_type_c_key=b.row_key

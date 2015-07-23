@@ -1,7 +1,7 @@
 select  b.created_by_tier1_flag_c, count(1) 
 from ldb.f_incident a
  join ldb.d_incident b
-on a.parent_incident_key=b.row_key
+on a.incident_key=b.row_key
  join	ldb.d_calendar_date	A14
 	  on 	(a.opened_on_key = a14.row_key)
 	  join	ldb.d_calendar_month	a15

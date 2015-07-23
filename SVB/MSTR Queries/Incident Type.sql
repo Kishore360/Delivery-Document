@@ -1,4 +1,4 @@
-select  b. Incident Type, count(1) 
+select  b. Incident_Type, count(1) 
 from ldb.f_incident a
  inner join ldb.d_incident b
  on a.row_id=b.row_id
