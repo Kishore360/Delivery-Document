@@ -7,4 +7,5 @@ FROM (
 select count(1) as cnt  from svb_mdwdb. d_incident b
  inner  JOIN  svb_mdsdb.incident_final a
 on  b.ROW_ID=SYS_ID and sourceinstance=b.source_id
- where a. u_fcr<> b. first_call_resolution_flag)c
+ where case when a. u_fcr=1 then 'Y' else 'N' end<> b. first_call_resolution_flag)c
+

@@ -13,12 +13,12 @@ left JOIN
 
 svb_mdwdb.d_configuration_item b on
 a.sourceinstance=b.source_id AND  
-substring(b.row_id,instr(b.row_id,'~')+1,32)=a.u_application
+b.row_id=a.u_application
  
-join
+left join
 
 svb_mdwdb.f_incident c 
-on a.sys_id=c.row_id and a.sourceinstance=c.source_id
+on b.row_id=c.row_id and b.source_id=c.source_id
 )h
 
-where configuration_item_application_c_key<>(case when u_application is null then 'UNSPECIFIED' else coalesce(row_key,-1) end))E;
+where configuration_item_application_c_key<> coalesce(row_key,-1) )E;

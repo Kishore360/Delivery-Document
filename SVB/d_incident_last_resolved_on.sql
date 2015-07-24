@@ -6,4 +6,4 @@ FROM (
 select count(1) as cnt  from svb_mdwdb. d_incident b
  inner  JOIN  svb_mdsdb.incident_final a
 on  b.ROW_ID=SYS_ID and sourceinstance=b.source_id
- where a. u_resolved<> b. last_resolved_on)c
+ where CONVERT_TZ(a. u_resolved,'GMT','America/Los_Angeles')<> b. last_resolved_on)c

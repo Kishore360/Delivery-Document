@@ -6,4 +6,5 @@ FROM (
 select count(1) as cnt  from svb_workdb. ds_incident b
  inner  JOIN  svb_mdsdb.incident_final a
 on  b.ROW_ID=SYS_ID and sourceinstance=b.source_id
- where a. u_lateral_assignment<> b. multiple_assignment_flag)c
+ where case when a. u_lateral_assignment=1 then 'Y' else 'N' end<> b. multiple_assignment_flag)c
+
