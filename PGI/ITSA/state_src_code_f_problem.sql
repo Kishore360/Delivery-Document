@@ -6,4 +6,4 @@ select count(1) as cnt from pgi_mdwdb.f_problem dfi
 join pgi_mdsdb.problem_final incf on
 dfi.row_id = incf.sys_id
 where
-dfi.state_src_code <> incf.state)c
+dfi.state_src_code <> incf.problem_state)c;
