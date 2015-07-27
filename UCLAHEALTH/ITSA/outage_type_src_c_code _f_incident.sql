@@ -3,10 +3,10 @@ SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
 ELSE 'Data Matched' END AS Message 
 FROM (
 select count(1) as cnt from(
-SELECT A.SYS_ID,B.ROW_ID,A.  duration_c A_duration_c,B.  duration_c B_duration_c FROM
-(SELECT SYS_ID,sourceinstance, TIMESTAMPDIFF(SECOND,'1970-01-01 00:00:00',calendar_duration) AS   duration_c
+SELECT A.SYS_ID,B.ROW_ID,A.  outage_type_src_code_c A_outage_type_src_code_c,B.  outage_type_src_code_c B_outage_type_src_code_c FROM
+(SELECT SYS_ID,sourceinstance, TIMESTAMPDIFF(SECOND,'1970-01-01 00:00:00',u_outage_type) AS   outage_type_src_code_c
 FROM uclahealth_mdsdb.incident_final )A
  JOIN  
-(SELECT  duration_c,source_id,ROW_ID FROM  uclahealth_mdwdb.f_incident
+(SELECT  outage_type_src_code_c,source_id,ROW_ID FROM  uclahealth_mdwdb.f_incident
  )B on A.sourceinstance=B.source_id AND B.ROW_ID=SYS_ID)H
-WHERE A_duration_c<> B_duration_c)E;
+WHERE A_outage_type_src_code_c<> B_outage_type_src_code_c)E;
