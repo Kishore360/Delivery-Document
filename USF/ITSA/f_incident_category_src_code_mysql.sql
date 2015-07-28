@@ -1,4 +1,4 @@
-select count(*) from
+select CASE WHEN count(*) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result from
 usf_mdwdb.f_incident a  INNER JOIN usf_mdsdb.incident_final  b  ON a.row_id =b.sys_id 
 LEFT OUTER JOIN usf_mdsdb.sc_category_final c ON (b.u_csi_category=c.sys_id)
  
