@@ -9,4 +9,4 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 on (LKP.row_id = date_format(convert_tz(SRC.start_date,<<TENANT_SSI_TIME_ZONE>>,<<DW_TARGET_TIME_ZONE>>),'%Y%m%d') and LKP.source_id=0
  
 )
- WHERE COALESCE(LKP.row_key,CASE WHEN SRC.start_date IS NULL THEN 0 else '-1' end)<> COALESCE(TRGT.planned_start_on_key,'')
+ WHERE COALESCE(LKP.row_key,CASE WHEN SRC.start_date IS NULL THEN 0 else '-1' end)<> COALESCE(TRGT.planned_start_on_key,0)

@@ -7,6 +7,6 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
 LEFT JOIN <<tenant>>_mdwdb.d_lov LKP 
- ON ( concat('CATEGORY','~','','~','~','~',upper(null))= LKP.src_rowid 
+ ON ( concat('CATEGORY~INCIDENT~~~',upper(null))= LKP.src_rowid 
 AND SRC.sourceinstance= LKP.source_id )
  WHERE COALESCE(LKP.row_key,CASE WHEN null IS NULL THEN 0 else '-1' end)<> COALESCE(TRGT.category_src_key,'')
