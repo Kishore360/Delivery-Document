@@ -9,7 +9,7 @@ Matched' END as Message
  FROM
 
  
-cardinalhealth_mdsdb.incident_delta a
+cardinalhealth_mdsdb.incident_final a
 left join cardinalhealth_mdwdb.f_incident b
 on a.sys_id=b.row_id and a.sourceinstance=b.source_id
 where b.u_verb_src_code_c<>a.u_verb;
