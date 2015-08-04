@@ -1,9 +1,6 @@
-SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
-CASE WHEN count(1) >0 THEN 'Failure' ELSE 'Data Matched' END as Message
-from
-cardinalhealth_mdwdb.d_internal_contact a
-join cardinalhealth_mdsdb.sys_user_final b
-on a.row_id=b.sys_id AND a.source_id=b.sourceinstance
-left join cardinalhealth_mdwdb.d_internal_contact c
-on c.row_id=COALESCE(concat('INTERNAL_CONTACT~',b.manager),'UNSPECIFIED') AND c.source_id=b.sourceinstance
-where a.manager_c_key<>COALESCE(CASE WHEN (COALESCE(concat('INTERNAL_CONTACT~',b.manager),'UNSPECIFIED'))='UNSPECIFIED' THEN 0 ELSE c.row_key END,-1);
+select count(1)
+from cardinalhealth_mdwdb.d_internal_contact a
+JOIN cardinalhealth_mdsdb.sys_user_final b ON right(a.row_id,32)=b.sys_id AND a.source_id=b.sourceinstance 
+LEFT JOIN cardinalhealth_mdwdb.d_internal_contact e 
+ON e.row_id= COALESCE(concat('INTERNAL_CONTACT~',b.manager),'UNSPECIFIED')AND e.source_id=b.sourceinstance
+where a.manager_c_key<> case when b.manager is null then 0  ELSE COALESCE(e.row_key,-1) END;
