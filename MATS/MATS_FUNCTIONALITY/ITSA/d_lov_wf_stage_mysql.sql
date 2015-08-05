@@ -13,7 +13,7 @@ distinct LSM.class_value as dimension_class
 ,'Y' as current_flag
 from <<tenant>>_mdsdb.wf_stage_final SRC
  join <<tenant>>_workdb.lsm_ls_system_variables LSM
-on (LSM.column_value ='stage')
+on (LSM.table_value=SRC.name and LSM.column_value ='stage' and enable_flag='Y')
  join  <<tenant>>_mdsdb.wf_workflow_version_final SRC2
 on (LSM.table_value=SRC2.table
 and SRC2.sys_id=SRC.workflow_version)
@@ -22,7 +22,7 @@ join (
 	from <<tenant>>_mdsdb.sys_choice_final SRC
 	join <<tenant>>_workdb.lsm_ls_system_variables LSM
 	on (LSM.table_value=SRC.name
-	and LSM.column_value=SRC.element )where language='en')bc 
+	and LSM.column_value=SRC.element and enable_flag='Y' )where language='en')bc 
 on SRC.value <>bc.dimension_code
 	) SRC
 left join <<tenant>>_mdwdb.d_lov TRGT

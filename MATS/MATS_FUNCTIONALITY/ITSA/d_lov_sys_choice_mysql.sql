@@ -12,8 +12,8 @@ from
  <<tenant>>_mdsdb.sys_choice_final SRC
 join <<tenant>>_workdb.lsm_ls_system_variables LSM
 on (LSM.table_value=SRC.name
-and LSM.column_value=SRC.element)
-where language='en'
+and LSM.column_value=SRC.element )
+where language='en' and enable_flag='Y'
 ) SRC
 left join <<tenant>>_mdwdb.d_lov TRGT
 on(SRC.row_id=TRGT.row_id
