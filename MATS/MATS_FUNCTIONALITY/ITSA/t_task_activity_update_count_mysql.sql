@@ -14,7 +14,7 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  LEFT JOIN <<tenant>>_mdwdb.f_t_task_activity TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
- WHERE COALESCE( SRC.record_checkpoint,'')<> COALESCE(TRGT.update_count ,'')
+ WHERE COALESCE( SRC.record_checkpoint,'')<> COALESCE(TRGT.update_count ,'');
 
 
 DROP index `SYS_ID` on `<<tenant>>_mdsdb`.`sys_audit_final`;
