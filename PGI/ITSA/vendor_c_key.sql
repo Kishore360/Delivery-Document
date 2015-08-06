@@ -12,6 +12,6 @@ a.source_id=b.sourceinstance
 
 join d_internal_organization c
 
-on c.row_id=concat('GROUP~',b.sys_id)
+on c.row_id=concat('GROUP~',b.u_vendor)
 
 where a.vendor_c_key<>c.row_key) a;
