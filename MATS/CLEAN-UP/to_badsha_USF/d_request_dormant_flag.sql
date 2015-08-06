@@ -11,5 +11,5 @@ AND  LM.dimension_wh_code='OPEN' THEN 'Y' ELSE 'N' END abc, COALESCE(TRGT.dorman
  AND TRGTF.source_id= TRGT.source_id  )
  
 LEFT JOIN <<tenant>>_mdwdb.d_lov_map LM ON TRGTF.state_src_key=LM.src_key
-LEFT JOIN <<tenant>>_mdwdb.d_o_data_freshness FRESH  ON(FRESH.source_id=SRC.sourceinstance) 
+LEFT JOIN <<tenant>>_mdwdb.d_o_data_freshness FRESH  ON(FRESH.source_id=SRC.sourceinstance and FRESH.etl_run_number=TRGTF.etl_run_number) 
  )a wHERE   ABC<>DEF

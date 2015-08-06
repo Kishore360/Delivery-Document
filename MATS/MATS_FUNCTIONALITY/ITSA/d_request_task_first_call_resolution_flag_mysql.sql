@@ -1,7 +1,7 @@
 SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for d_request_task.first_call_resolution_flag' ELSE 'SUCCESS' END as Message from(
  select 
- CASE WHEN  TIMESTAMPDIFF(MINUTE,TRGT.opened_on,TRGT.closed_on)<30 AND  LM.dimension_wh_code IN('RESOLVED','CLOSED') THEN 'Y' ELSE 'N' END ABC,
+ CASE WHEN  TIMESTAMPDIFF(MINUTE,TRGT.opened_on,TRGT.closed_on)<30  THEN 'Y' ELSE 'N' END ABC,
  COALESCE(TRGT.first_call_resolution_flag ,'') DEF
  FROM <<tenant>>_mdsdb.sc_task_final SRC 
  LEFT JOIN <<tenant>>_mdwdb.d_request_task TRGT 
