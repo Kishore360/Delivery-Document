@@ -7,17 +7,14 @@ FROM (select count(1) as cnt
 
 from pgi_mdsdb.change_request_final a
 
+left join pgi_mdwdb.f_change_request b
 
-left join pgi_mdwdb.d_calendar_date b
+on a.sys_id=b.row_id and
 
+a.sourceinstance=b.source_id
 
-on b.row_id=date_format(convert_tz(a.u_impact_end_date_time,'GMT','UTC'),'%Y%m%d')
+left join pgi_mdwdb.d_calendar_date c
 
+on c.row_id=date_format(convert_tz(a.u_impact_end_date_time,'GMT','UTC'),'%Y%m%d')
 
-left join pgi_mdwdb.f_change_request c
-
-
-on b.row_key=c.impact_end_date_time_c_key
-
-
-where b.row_id<>date_format(convert_tz(a.u_impact_end_date_time,'GMT','UTC'),'%Y%m%d')) a;
+where b.impact_end_date_time_c_key<>c.row_key) a;
