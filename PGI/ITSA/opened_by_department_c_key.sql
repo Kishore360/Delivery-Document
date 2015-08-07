@@ -10,7 +10,7 @@ on a.row_id=b.sys_id and
 
 a.source_id=b.sourceinstance
 
-join d_internal_organization c
+join pgi_mdwdb.d_internal_organization c
 
 on c.row_id=concat('GROUP~',b.sys_id)
 
