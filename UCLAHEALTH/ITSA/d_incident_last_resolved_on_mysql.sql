@@ -3,9 +3,12 @@ SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
 ELSE 'Data Matched' END AS Message 
 FROM (
 select count(1) as cnt from(
-SELECT A.SYS_ID,B.ROW_ID,A. last_resolved_on  A_last_resolved_on
+SELECT A.SYS_ID,B.ROW_ID,case when year <2000 then A.last_resolved_on+20000000000000 
+else A.last_resolved_on
+end as  A_last_resolved_on
 ,B. last_resolved_on  B_last_resolved_on FROM
 (SELECT SYS_ID,sourceinstance,
+DATE_FORMAT(CONVERT_TZ(u_resolved_date,'GMT','America/Los_Angeles'),'%Y')  AS   year,
  DATE_FORMAT(CONVERT_TZ(u_resolved_date,'GMT','America/Los_Angeles'),'%Y%m%d%h%m%s%p')  
  AS last_resolved_on
 FROM uclahealth_mdsdb.incident_final )A
