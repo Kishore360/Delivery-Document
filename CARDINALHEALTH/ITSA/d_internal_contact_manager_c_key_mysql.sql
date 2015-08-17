@@ -1,4 +1,5 @@
-select count(1)
+SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+CASE WHEN count(1) >0 THEN 'Failure' ELSE 'Data Matched' END as Message 
 from cardinalhealth_mdwdb.d_internal_contact a
 JOIN cardinalhealth_mdsdb.sys_user_final b ON right(a.row_id,32)=b.sys_id AND a.source_id=b.sourceinstance 
 LEFT JOIN cardinalhealth_mdwdb.d_internal_contact e 
