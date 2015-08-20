@@ -13,4 +13,4 @@ ON a.row_id =b.sys_id
 AND a.source_id=b.sourceinstance
 
 
-where coalesce(a.category_src_code,'') <> coalesce(b.u_application,''))z;
+where coalesce(a.sub_category_src_code,'')<> coalesce(b.u_technical_service,''))z;

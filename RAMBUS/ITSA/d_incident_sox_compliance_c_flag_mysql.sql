@@ -6,4 +6,4 @@ from rambus_mdwdb.d_incident a
 join rambus_mdsdb.incident_final b
 on a.row_id=b.sys_id and
 a.source_id=b.sourceinstance
-where a.major_incident_flag<>CASE WHEN b.u_major_incident=1 THEN 'Y' ELSE 'N' END)z ;
+where coalesce(a.sox_compliance_c_flag,'') <> CASE WHEN b.u_sox_compliance=1 THEN 'Y' ELSE 'N' END )z ;
