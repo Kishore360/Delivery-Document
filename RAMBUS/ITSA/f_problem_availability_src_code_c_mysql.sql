@@ -13,4 +13,4 @@ ON a.row_id =b.sys_id
 AND a.source_id=b.sourceinstance
 
 
-where coalesce(a.category_src_code,'') <> coalesce(b.u_application,''))z;
+where coalesce(a.availability_src_code_c,'')<>coalesce(b.u_availability,''))z;

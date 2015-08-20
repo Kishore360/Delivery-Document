@@ -1,9 +1,16 @@
+SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result,
+
+CASE WHEN cnt > 0 THEN 'Data did not Match.'ELSE 'Data Matched' END AS Message 
+
+from(select count(1) as cnt
+
+from rambus_mdwdb.f_problem a
+
+INNER JOIN rambus_mdsdb.problem_final b 
+
+ON a.row_id =b.sys_id
+ 
+AND a.source_id=b.sourceinstance
 
 
-SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
- CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for f_problem.state_src_code' ELSE 'SUCCESS' END as Message
- FROM <<tenant>>_mdsdb.problem_final SRC 
- LEFT JOIN <<tenant>>_mdwdb.f_problem TRGT 
- ON (SRC.sys_id =TRGT.row_id  
- AND SRC.sourceinstance= TRGT.source_id  )
- WHERE COALESCE( SRC.state,'')<> COALESCE(TRGT.state_src_code ,'')
+where coalesce(a.state_src_code,'') <>coalesce(b.state,''))z;
