@@ -52,7 +52,7 @@ ldb.d_calendar_date	a15
 	  on 	(a11.opened_on_key = a15.row_key)
 join 	ldb.d_calendar_month  a123
 on      (a15.month_start_date_key = a123.row_key)
-union
+
 
 )a
 )b
