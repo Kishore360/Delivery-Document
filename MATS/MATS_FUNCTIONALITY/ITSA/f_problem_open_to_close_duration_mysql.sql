@@ -6,4 +6,4 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  LEFT JOIN <<tenant>>_mdwdb.f_problem TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
-WHERE  TIMESTAMPDIFF(second, sys_created_on, closed_at)<>  COALESCE(TRGT.open_to_close_duration,'') 
+WHERE  TIMESTAMPDIFF(second, opened_at, closed_at)<>  COALESCE(TRGT.open_to_close_duration,'') 
