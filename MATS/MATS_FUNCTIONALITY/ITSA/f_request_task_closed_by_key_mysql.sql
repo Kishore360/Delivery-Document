@@ -11,4 +11,4 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 AND SRC.sourceinstance= LKP.source_id
 and DATE_FORMAT(CONVERT_TZ (SRC.closed_at,<<TENANT_SSI_TIME_ZONE>>,<<DW_TARGET_TIME_ZONE>>),'%Y-%m-%d %H:%i:%s') BETWEEN 
 LKP.effective_from AND LKP.effective_to )
- WHERE COALESCE(LKP.row_key,CASE WHEN SRC.closed_by IS NULL THEN 0 else 'UNSPECIFIED' end)<> COALESCE(TRGT.closed_by_key,'')
+ WHERE COALESCE(LKP.row_key,CASE WHEN SRC.closed_by IS NULL THEN 0 else -1 end)<> COALESCE(TRGT.closed_by_key,'')
