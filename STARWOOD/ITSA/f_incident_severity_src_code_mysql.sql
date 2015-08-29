@@ -1,5 +1,6 @@
-select SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
- CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for f_incident.severity_src_code' ELSE 'SUCCESS' END as Messagefrom 
+ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+ CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for f_incident.severity_src_code' ELSE 'SUCCESS'
+ END as Message from 
 (select a.sys_id,e.row_id,c.severity AS SEVERITY_SRC_CODE ,e.severity_src_code as f_severity_src_code
 from starwood_mdsdb.task_final a
 inner join starwood_mdsdb.incident_final c
