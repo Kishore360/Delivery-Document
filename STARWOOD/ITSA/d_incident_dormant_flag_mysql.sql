@@ -1,4 +1,4 @@
-SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+ SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  CASE WHEN cnt >0 THEN 'MDS to DWH data validation failed for d_incident.active_flag' ELSE 'SUCCESS' END as Message
  FROM
 (
@@ -25,7 +25,10 @@ LEFT JOIN starwood_mdwdb.d_o_data_freshness FRESH  ON(FRESH.source_id=SRC.source
 
 -- LEFT JOIN starwood_mdwdb.d_calendar_date LKP 
 -- on (LKP.row_id = date_format(convert_tz(SRC.closed_at,"GMT","America/New_York"),'%Y%m%d')  and LKP.source_id=0)
-where 
+where timestampdiff(DAY,TRGT.changed_on, FRESH.lastupdated)>30
+  AND LM.dimension_class = 'STATE~INCIDENT'
+  AND LM.dimension_wh_code = 'OPEN'
+  AND TRGT.dormant_flag = 'N' and 
 d.name IN ('Booking.com','Central 
 Reservation','DirectConnect','EZYield','HBSi','Hotwire','Orbitz','Priceline/Travelweb','PRSnet','Rational Dynamic Pricing','Saratoga',
 'Valhalla','Valhalla Availability','Valhalla Booking Engine','Valhalla Data Quality Engine(DQE)','Valhalla Inventory',
