@@ -9,8 +9,8 @@ B.  last_resolved_on_key B_last_resolved_on_key ,
 case when year <2000 then A.last_resolved_on_key+20000000 else A.last_resolved_on_key 
 end as  A_last_resolved_on_key from
 (SELECT SRC.SYS_ID,SRC.sourceinstance, 
-DATE_FORMAT(CONVERT_TZ(SRC.resolved_at,'GMT','America/Los_Angeles'),'%Y')  AS   year,
-DATE_FORMAT(CONVERT_TZ(SRC.resolved_at,'GMT','America/Los_Angeles'),'%Y%m%d')  AS   last_resolved_on_key
+DATE_FORMAT(CONVERT_TZ(SRC.resolved_at,'GMT','America/New_York'),'%Y')  AS   year,
+DATE_FORMAT(CONVERT_TZ(SRC.resolved_at,'GMT','America/New_York'),'%Y%m%d')  AS   last_resolved_on_key
 FROM  starwood_mdsdb.task_final a
 inner join starwood_mdsdb.incident_final SRC 
 on a.sys_id=SRC.sys_id

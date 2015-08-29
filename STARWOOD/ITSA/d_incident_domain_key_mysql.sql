@@ -22,7 +22,7 @@ LEFT JOIN starwood_mdwdb.d_domain LKP
 AND SRC.sourceinstance= LKP.source_id )
  
 -- LEFT JOIN starwood_mdwdb.d_calendar_date LKP 
--- on (LKP.row_id = date_format(convert_tz(SRC.closed_at,"GMT","America/Los_Angeles"),'%Y%m%d')  and LKP.source_id=0)
+-- on (LKP.row_id = date_format(convert_tz(SRC.closed_at,"GMT","America/New_York"),'%Y%m%d')  and LKP.source_id=0)
 where 
 d.name IN ('Booking.com','Central 
 Reservation','DirectConnect','EZYield','HBSi','Hotwire','Orbitz','Priceline/Travelweb','PRSnet','Rational Dynamic Pricing','Saratoga',

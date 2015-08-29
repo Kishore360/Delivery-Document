@@ -15,7 +15,7 @@ LEFT JOIN starwood_mdwdb.f_incident TRGT
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
 LEFT JOIN starwood_mdwdb.d_lov LKP 
- ON ( concat('CATEGORY','~','INCIDENT','~','~','~',upper(category ))= LKP.src_rowid 
+ ON ( concat('CATEGORY','~','INCIDENT','~','~','~',upper(SRC.category ))= LKP.src_rowid 
 AND SRC.sourceinstance= LKP.source_id )
 where 
 d.name IN ('Booking.com','Central 

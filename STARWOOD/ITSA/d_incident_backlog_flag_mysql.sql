@@ -22,7 +22,7 @@ LEFT JOIN  starwood_mdwdb.f_incident TRGTF
 LEFT JOIN starwood_mdwdb.d_lov_map LM
  on TRGTF.state_src_key = LM.src_key 
 -- LEFT JOIN starwood_mdwdb.d_calendar_date LKP 
--- on (LKP.row_id = date_format(convert_tz(SRC.closed_at,"GMT","America/Los_Angeles"),'%Y%m%d')  and LKP.source_id=0)
+-- on (LKP.row_id = date_format(convert_tz(SRC.closed_at,"GMT","America/New_York"),'%Y%m%d')  and LKP.source_id=0)
 where 
 d.name IN ('Booking.com','Central 
 Reservation','DirectConnect','EZYield','HBSi','Hotwire','Orbitz','Priceline/Travelweb','PRSnet','Rational Dynamic Pricing','Saratoga',
