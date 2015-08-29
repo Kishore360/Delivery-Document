@@ -2,10 +2,8 @@ SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  CASE WHEN cnt >0 THEN 'MDS to DWH data validation failed for d_incident.active_flag' ELSE 'SUCCESS' END as Message
  FROM
 (
-select count(1) as cnt from
-(SELECT SRC.sys_id,TRGT.row_id, COALESCE( CASE WHEN SRC.active= 1 then 'Y' else 'N' END,'')as abc,
- COALESCE(TRGT.active_flag ,'')as def
-
+select count(1) as cnt from(SELECT SRC.sys_id,TRGT.row_id, CASE WHEN timestampdiff(DAY,TRGT.changed_on,FRESH.lastupdated)>30
+AND  LM.dimension_wh_code='OPEN' THEN 'Y' ELSE 'N' END as abc, COALESCE(TRGT.dormant_flag ,'')as def
 
 
 FROM  starwood_mdsdb.task_final a
@@ -18,7 +16,13 @@ on b.sys_id=SRC.u_request_category
 LEFT JOIN starwood_mdwdb.d_incident TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
+LEFT JOIN starwood_mdwdb.f_incident TRGTF
+ ON (TRGTF.incident_key =TRGT.row_key  
+ AND TRGTF.source_id= TRGT.source_id  )
  
+LEFT JOIN starwood_mdwdb.d_lov_map LM ON TRGTF.state_src_key=LM.src_key
+LEFT JOIN starwood_mdwdb.d_o_data_freshness FRESH  ON(FRESH.source_id=SRC.sourceinstance and FRESH.etl_run_number=TRGTF.etl_run_number)  
+
 -- LEFT JOIN starwood_mdwdb.d_calendar_date LKP 
 -- on (LKP.row_id = date_format(convert_tz(SRC.closed_at,"GMT","America/Los_Angeles"),'%Y%m%d')  and LKP.source_id=0)
 where 

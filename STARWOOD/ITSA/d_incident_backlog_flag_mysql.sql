@@ -3,9 +3,7 @@ SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  FROM
 (
 select count(1) as cnt from
-(SELECT SRC.sys_id,TRGT.row_id, COALESCE( CASE WHEN SRC.active= 1 then 'Y' else 'N' END,'')as abc,
- COALESCE(TRGT.active_flag ,'')as def
-
+(SELECT SRC.sys_id,TRGT.row_id, COALESCE( CASE WHEN LM.dimension_wh_code NOT IN('RESOLVED','CLOSED') THEN 'Y' ELSE 'N' END,'') as abc,COALESCE(TRGT.backlog_flag ,'') as def
 
 
 FROM  starwood_mdsdb.task_final a
@@ -18,7 +16,11 @@ on b.sys_id=SRC.u_request_category
 LEFT JOIN starwood_mdwdb.d_incident TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
- 
+LEFT JOIN  starwood_mdwdb.f_incident TRGTF 
+ ON (TRGTF.incident_key =TRGT.row_key
+ AND TRGTF.source_id =TRGT.source_id)
+LEFT JOIN starwood_mdwdb.d_lov_map LM
+ on TRGTF.state_src_key = LM.src_key 
 -- LEFT JOIN starwood_mdwdb.d_calendar_date LKP 
 -- on (LKP.row_id = date_format(convert_tz(SRC.closed_at,"GMT","America/Los_Angeles"),'%Y%m%d')  and LKP.source_id=0)
 where 

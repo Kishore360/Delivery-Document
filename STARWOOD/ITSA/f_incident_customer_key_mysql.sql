@@ -2,12 +2,8 @@ SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  CASE WHEN cnt >0 THEN 'MDS to DWH data validation failed for d_incident.active_flag' ELSE 'SUCCESS' END as Message
  FROM
 (
-select count(1) as cnt from
-(SELECT SRC.sys_id,TRGT.row_id, COALESCE( CASE WHEN SRC.active= 1 then 'Y' else 'N' END,'')as abc,
- COALESCE(TRGT.active_flag ,'')as def
-
-
-
+select count(1) as cnt from 
+(SELECT SRC.sys_id,TRGT.row_id,COALESCE(LKP.row_key,CASE WHEN SRC.company IS NULL THEN 0 else '-1' end)as abc, COALESCE(TRGT.customer_key,'') as def
 FROM  starwood_mdsdb.task_final a
 inner join starwood_mdsdb.incident_final SRC 
 on a.sys_id=SRC.sys_id
@@ -15,12 +11,12 @@ inner join starwood_mdsdb.cmdb_ci_service_final d
 on a.u_service=d.sys_id 
 inner  JOIN  starwood_mdsdb.request_category_final b
 on b.sys_id=SRC.u_request_category   
-LEFT JOIN starwood_mdwdb.d_incident TRGT 
+LEFT JOIN starwood_mdwdb.f_incident TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
- 
--- LEFT JOIN starwood_mdwdb.d_calendar_date LKP 
--- on (LKP.row_id = date_format(convert_tz(SRC.closed_at,"GMT","America/Los_Angeles"),'%Y%m%d')  and LKP.source_id=0)
+LEFT JOIN starwood_mdwdb.d_organization_customer LKP 
+ ON ( concat('ORG_CUST~',SRC.company)= LKP.row_id 
+AND SRC.sourceinstance= LKP.source_id )
 where 
 d.name IN ('Booking.com','Central 
 Reservation','DirectConnect','EZYield','HBSi','Hotwire','Orbitz','Priceline/Travelweb','PRSnet','Rational Dynamic Pricing','Saratoga',
@@ -37,4 +33,4 @@ OR d.name like ('Opera-PMS%')
   OR b.u_name  IN ('Valhalla','Central Reservation Systems')  
 )abc
   where abc<>def
-)i
+)I

@@ -1,8 +1,9 @@
- SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result 
-,CASE WHEN cnt > 0 THEN 'Data did not Match.' 
-ELSE 'Data Matched' END AS Message 
-FROM  (
-select count(1) as cnt from 
+SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+CASE WHEN cnt >0 THEN 'MDS to DWH data validation failed for d_incident.active_flag' ELSE 'SUCCESS' END as Message
+FROM
+(
+select count(1) as cnt from
+ 
 (SELECT SRC.sys_id,TRGT.row_id,CASE WHEN  ta.task_attribute_wh_new_value < ta.task_attribute_wh_old_value
 THEN 'Y' ELSE 'N' END
 as abc, COALESCE(TRGT.priority_escalated_flag,'') as def
