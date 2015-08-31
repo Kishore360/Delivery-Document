@@ -2,10 +2,7 @@ SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  CASE WHEN cnt >0 THEN 'MDS to DWH data validation failed for d_incident.active_flag' ELSE 'SUCCESS' END as Message
  FROM
 (
-select count(1) as cnt from
-(SELECT SRC.sys_id,TRGT.row_id, COALESCE( CASE WHEN SRC.active= 1 then 'Y' else 'N' END,'')as abc,
- COALESCE(TRGT.active_flag ,'')as def
-
+select count(1) as cnt from(SELECT SRC.sys_id,TRGT.row_id, COALESCE( SRC.sys_updated_by,'')as abc,COALESCE(TRGT.changed_by ,'')as def
 
 
 FROM  starwood_mdsdb.task_final a

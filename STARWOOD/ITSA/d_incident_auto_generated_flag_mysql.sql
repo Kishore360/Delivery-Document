@@ -3,9 +3,7 @@ SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  FROM
 (
 select count(1) as cnt from
-(SELECT SRC.sys_id,TRGT.row_id, COALESCE( CASE WHEN SRC.active= 1 then 'Y' else 'N' END,'')as abc,
- COALESCE(TRGT.active_flag ,'')as def
-
+(SELECT SRC.sys_id,TRGT.row_id, COALESCE( 'N','')as abc, COALESCE(TRGT.auto_generated_flag ,'')as def
 
 
 FROM  starwood_mdsdb.task_final a
