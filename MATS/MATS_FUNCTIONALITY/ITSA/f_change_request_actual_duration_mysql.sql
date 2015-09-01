@@ -14,8 +14,7 @@ select CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
     left join <<tenant>>_mdwdb.d_calendar_date we  
 		ON (we.row_key = fi.work_end_on_key
         and we.source_id = 0)
-	where lm.dimension_class = 'STATE~TASK'
-	and case when lm.dimension_wh_code in ('OPEN') 
+	where case when lm.dimension_wh_code in ('OPEN') 
 				then 0
                 else TIMESTAMPDIFF(DAY, ws.calendar_date, we.calendar_date)
             end  <> fi.actual_duration
