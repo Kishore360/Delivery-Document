@@ -10,9 +10,14 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 LEFT JOIN <<tenant>>_mdwdb.d_lov_map LM
  on TRGTF.state_src_key = LM.src_key 
 <<<<<<< HEAD
+<<<<<<< HEAD
 WHERE LM.dimension_class = 'STATE~INCIDENT' and COALESCE( CASE WHEN LM.dimension_wh_code NOT IN('RESOLVED','CLOSED') THEN 'Y' ELSE 'N' END,'')<> COALESCE(TRGT.backlog_flag ,'')
 =======
 WHERE   LM.dimension_class = 'STATE~INCIDENT' and 
 COALESCE( CASE WHEN LM.dimension_wh_code NOT IN('RESOLVED','CLOSED') THEN 'Y' ELSE 'N' END,'')<> COALESCE(TRGT.backlog_flag ,'')
 >>>>>>> a5fa536e25b3be231a5fded99554f8880ec7eb5f
+=======
+WHERE   LM.dimension_class = 'STATE~INCIDENT' and 
+COALESCE( CASE WHEN LM.dimension_wh_code NOT IN('RESOLVED','CLOSED') THEN 'Y' ELSE 'N' END,'')<> COALESCE(TRGT.backlog_flag ,'')
+>>>>>>> 9467ad812e2581a32a4b254c5353f8b2bad6fb41
 

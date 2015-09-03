@@ -8,8 +8,16 @@
  ON (TRGTF.incident_key =TRGT.row_key  
  AND TRGTF.source_id= TRGT.source_id  )
  
+<<<<<<< HEAD
 LEFT JOIN uclahealth_mdwdb.d_lov_map LM ON TRGTF.state_src_key=LM.src_key and  LM.dimension_class = 'STATE~INCIDENT'
 AND  LM.dimension_wh_code='OPEN'
 LEFT JOIN uclahealth_mdwdb.d_o_data_freshness FRESH  ON(FRESH.source_id=SRC.sourceinstance and FRESH.etl_run_number=TRGTF.etl_run_number) 
  WHERE  CASE WHEN timestampdiff(DAY,TRGT.changed_on,FRESH.lastupdated)>15 AND LM.dimension_class = 'STATE~INCIDENT'
 AND  LM.dimension_wh_code='OPEN' THEN 'Y' ELSE 'N' END <> COALESCE(TRGT.dormant_flag ,'')
+=======
+LEFT JOIN uclahealth_mdwdb.d_lov_map LM ON TRGTF.state_src_key=LM.src_key AND LM.dimension_class = 'STATE~INCIDENT'
+AND  LM.dimension_wh_code='OPEN'
+LEFT JOIN uclahealth_mdwdb.d_o_data_freshness FRESH  ON(FRESH.source_id=SRC.sourceinstance and FRESH.etl_run_number=TRGTF.etl_run_number) 
+ WHERE  CASE WHEN timestampdiff(DAY,TRGT.changed_on,FRESH.lastupdated)>15 AND LM.dimension_class = 'STATE~INCIDENT'
+AND  LM.dimension_wh_code='OPEN' THEN 'Y' ELSE 'N' END <> COALESCE(TRGT.dormant_flag ,'')
+>>>>>>> 9467ad812e2581a32a4b254c5353f8b2bad6fb41
