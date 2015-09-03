@@ -7,7 +7,7 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
  LEFT JOIN <<tenant>>_mdwdb.d_configuration_item LKP 
- ON ( concat('INTERNAL_CONTACT~',SRC.configuration_item)= LKP.row_id AND SRC.sourceinstance= LKP.source_id )
+ ON ( SRC.configuration_item= LKP.row_id AND SRC.sourceinstance= LKP.source_id )
  WHERE CASE WHEN SRC.configuration_item IS NULL THEN 0 else 
 COALESCE(LKP.row_key,'-1')
 end<> COALESCE(TRGT.configuration_item_key,'')
