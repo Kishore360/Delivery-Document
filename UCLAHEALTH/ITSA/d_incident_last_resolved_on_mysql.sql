@@ -9,7 +9,7 @@ end as  A_last_resolved_on
 ,B. last_resolved_on  B_last_resolved_on FROM
 (SELECT SYS_ID,sourceinstance,
 DATE_FORMAT(CONVERT_TZ(u_resolved_date,'GMT','America/Los_Angeles'),'%Y')  AS   year,
- DATE_FORMAT(CONVERT_TZ(u_resolved_date,'GMT','America/Los_Angeles'),'%Y%m%d%h%m%s%p')  
+ DATE_FORMAT(CONVERT_TZ(u_resolved_date,'GMT','America/Los_Angeles'),'%Y%m%d%h%m%s')  
  AS last_resolved_on
 FROM uclahealth_mdsdb.incident_final )A
 JOIN  
