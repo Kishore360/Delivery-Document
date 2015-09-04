@@ -3,7 +3,7 @@ SELECT CASE WHEN cnt<>cntt THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  FROM
 (
 
-select RES1.cnt, RES2.cntt from
+select RES1.cnt+2 as cnt, RES2.cntt from
 
 (select count(sys_id) as cnt from
 rei_mdsdb.pm_project_final) as RES1,
