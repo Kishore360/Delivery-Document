@@ -14,4 +14,4 @@ on a.row_id =b.sys_id
 
 and a.source_id=b.sourceinstance
 
-where coalesce(a.workaround_on_c,'')<>coalesce(CONVERT_TZ(b.u_workaround_date,'GMT','America/Los_Angeles'),'')
+where coalesce(a.workaround_on_c,'')<>coalesce(CONVERT_TZ(b.u_workaround_date,'GMT','America/Los_Angeles'),''))z;
