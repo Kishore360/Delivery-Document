@@ -15,5 +15,5 @@ where fcr_isac_c=
 case when d.isac_c_flag ='Y' 
 and o.organization_name = 'ISAC  Service Desk'
 AND b.reassignment_count = 0 and d.sla_recall_made_c_flag='Y' and z.dimension_name like '%MET_SLA%'
-and   b.open_to_resolve_duration/3600 < 96
-AND c.dimension_wh_code = 'RESOLVED' then 1 else 0 end 
+and   (b.open_to_resolve_duration/3600 < 96 or b.open_to_close_duration/3600 < 96 )
+AND c.dimension_wh_code in ('RESOLVED','CLOSED') then 1 else 0 end 
