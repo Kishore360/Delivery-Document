@@ -5,4 +5,4 @@ FROM (
 select count(1) as cnt  from homedepot_mdsdb.cmn_location_final a
  left  JOIN homedepot_mdwdb.d_geography b 
 on  b.ROW_ID=a.SYS_ID and a.sourceinstance=b.source_id
- where a.longitude<> b.longitude)b
+ where round(a.longitude,7)<> b.longitude)b
