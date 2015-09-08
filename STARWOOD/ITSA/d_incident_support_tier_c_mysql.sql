@@ -24,4 +24,4 @@ when b .u_company ='Accenture' and (b.name like '%Run%') then 'TIER 2'
 when b.u_company 
 
 ='Accenture' and (b.name like '%Maintenance%') then 'TIER 3' end
-
+)a
