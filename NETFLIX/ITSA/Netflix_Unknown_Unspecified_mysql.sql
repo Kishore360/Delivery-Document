@@ -1,3 +1,10 @@
+
+SELECT distinct CASE WHEN cnt> 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+ CASE WHEN cnt >0 THEN  'UNKNOWN HAVING -1 IN FEW TABLES' ELSE 'SUCCESS' END as Message from
+(
+select (tName) as table1 , (UNKNOWN) as cnt  from 
+(
+
 SELECT 'f_a_incident_monthly'as tName,'assigned_to_key' as Cname ,count(*) as totalrecs, COUNT(CASE WHEN assigned_to_key = '-1' THEN 1 ELSE NULL END) as UNKNOWN, COUNT(CASE WHEN assigned_to_key = '0' THEN 1 ELSE NULL END) as UNSPECIFIED  FROM netflix_mdwdb.f_a_incident_monthly UNION ALL
 SELECT 'f_a_incident_monthly'as tName,'assignment_group_key' as Cname ,count(*) as totalrecs, COUNT(CASE WHEN assignment_group_key = '-1' THEN 1 ELSE NULL END) as UNKNOWN, COUNT(CASE WHEN assignment_group_key = '0' THEN 1 ELSE NULL END) as UNSPECIFIED  FROM netflix_mdwdb.f_a_incident_monthly UNION ALL
 SELECT 'f_a_incident_monthly'as tName,'a_key' as Cname ,count(*) as totalrecs, COUNT(CASE WHEN a_key = '-1' THEN 1 ELSE NULL END) as UNKNOWN, COUNT(CASE WHEN a_key = '0' THEN 1 ELSE NULL END) as UNSPECIFIED  FROM netflix_mdwdb.f_a_incident_monthly UNION ALL
@@ -253,3 +260,6 @@ SELECT 'f_vending_machine_c'as tName,'product_c_key' as Cname ,count(*) as total
 SELECT 'f_vending_machine_c'as tName,'vendiing_machine_c_key' as Cname ,count(*) as totalrecs, COUNT(CASE WHEN vendiing_machine_c_key = '-1' THEN 1 ELSE NULL END) as UNKNOWN, COUNT(CASE WHEN vendiing_machine_c_key = '0' THEN 1 ELSE NULL END) as UNSPECIFIED  FROM netflix_mdwdb.f_vending_machine_c UNION ALL
 SELECT 'f_vending_machine_c'as tName,'transaction_date_c_key' as Cname ,count(*) as totalrecs, COUNT(CASE WHEN transaction_date_c_key = '-1' THEN 1 ELSE NULL END) as UNKNOWN, COUNT(CASE WHEN transaction_date_c_key = '0' THEN 1 ELSE NULL END) as UNSPECIFIED  FROM netflix_mdwdb.f_vending_machine_c UNION ALL
 SELECT 'f_vending_machine_c'as tName,'transaction_time_c_key' as Cname ,count(*) as totalrecs, COUNT(CASE WHEN transaction_time_c_key = '-1' THEN 1 ELSE NULL END) as UNKNOWN, COUNT(CASE WHEN transaction_time_c_key = '0' THEN 1 ELSE NULL END) as UNSPECIFIED  FROM netflix_mdwdb.f_vending_machine_c 
+
+)a
+ where unknown>0)b

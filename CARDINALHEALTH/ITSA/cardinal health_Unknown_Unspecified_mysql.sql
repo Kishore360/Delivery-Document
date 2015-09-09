@@ -1,3 +1,9 @@
+
+SELECT distinct CASE WHEN cnt> 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+ CASE WHEN cnt >0 THEN  'UNKNOWN HAVING -1 IN FEW TABLES' ELSE 'SUCCESS' END as Message from
+(
+select (tName) as table1 , (UNKNOWN) as cnt  from 
+(
 SELECT 'f_a_incident_monthly'as tName,'assignment_group_key' as Cname ,count(*) as totalrecs, COUNT(CASE WHEN assignment_group_key = '-1' THEN 1 ELSE NULL END) as UNKNOWN, COUNT(CASE WHEN assignment_group_key = '0' THEN 1 ELSE NULL END) as UNSPECIFIED  FROM cardinalhealth_mdwdb.f_a_incident_monthly UNION ALL
 SELECT 'f_a_incident_monthly'as tName,'assigned_to_key' as Cname ,count(*) as totalrecs, COUNT(CASE WHEN assigned_to_key = '-1' THEN 1 ELSE NULL END) as UNKNOWN, COUNT(CASE WHEN assigned_to_key = '0' THEN 1 ELSE NULL END) as UNSPECIFIED  FROM cardinalhealth_mdwdb.f_a_incident_monthly UNION ALL
 SELECT 'f_a_incident_monthly'as tName,'a_key' as Cname ,count(*) as totalrecs, COUNT(CASE WHEN a_key = '-1' THEN 1 ELSE NULL END) as UNKNOWN, COUNT(CASE WHEN a_key = '0' THEN 1 ELSE NULL END) as UNSPECIFIED  FROM cardinalhealth_mdwdb.f_a_incident_monthly UNION ALL
@@ -263,3 +269,6 @@ SELECT 'f_time_entry_c'as tName,'charge_type_c_key' as Cname ,count(*) as totalr
 SELECT 'f_time_entry_c'as tName,'category_src_key' as Cname ,count(*) as totalrecs, COUNT(CASE WHEN category_src_key = '-1' THEN 1 ELSE NULL END) as UNKNOWN, COUNT(CASE WHEN category_src_key = '0' THEN 1 ELSE NULL END) as UNSPECIFIED  FROM cardinalhealth_mdwdb.f_time_entry_c UNION ALL
 SELECT 'f_time_entry_c'as tName,'configuration_item_key' as Cname ,count(*) as totalrecs, COUNT(CASE WHEN configuration_item_key = '-1' THEN 1 ELSE NULL END) as UNKNOWN, COUNT(CASE WHEN configuration_item_key = '0' THEN 1 ELSE NULL END) as UNSPECIFIED  FROM cardinalhealth_mdwdb.f_time_entry_c UNION ALL
 SELECT 'f_time_entry_c'as tName,'user_c_key' as Cname ,count(*) as totalrecs, COUNT(CASE WHEN user_c_key = '-1' THEN 1 ELSE NULL END) as UNKNOWN, COUNT(CASE WHEN user_c_key = '0' THEN 1 ELSE NULL END) as UNSPECIFIED  FROM cardinalhealth_mdwdb.f_time_entry_c 
+
+)a
+ where unknown>0)b
