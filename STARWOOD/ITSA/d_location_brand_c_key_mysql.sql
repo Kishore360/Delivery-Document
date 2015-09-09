@@ -11,5 +11,5 @@ b.dimension_class like '%BRAND~LOCATION%'
 
 and CONCAT('BRAND~LOCATION~~~',a.u_brand)=b.src_rowid
 left join starwood_mdwdb.d_location c  on a.sys_id=c.row_id and a.sourceinstance=c.source_id
-where b.row_key=c.brand_c_key
+where b.row_key<>c.brand_c_key
 )i; 
