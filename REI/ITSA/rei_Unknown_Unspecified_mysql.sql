@@ -1,3 +1,9 @@
+
+SELECT distinct CASE WHEN cnt> 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+ CASE WHEN cnt >0 THEN  'UNKNOWN HAVING -1 IN FEW TABLES' ELSE 'SUCCESS' END as Message from
+(
+select (tName) as table1 , (UNKNOWN) as cnt  from 
+(
 SELECT 'f_a_incident_monthly'as tName,'assigned_to_key' as Cname ,count(*) as totalrecs, COUNT(CASE WHEN assigned_to_key = '-1' THEN 1 ELSE NULL END) as UNKNOWN, COUNT(CASE WHEN assigned_to_key = '0' THEN 1 ELSE NULL END) as UNSPECIFIED  FROM rei_mdwdb.f_a_incident_monthly UNION ALL
 SELECT 'f_a_incident_monthly'as tName,'a_key' as Cname ,count(*) as totalrecs, COUNT(CASE WHEN a_key = '-1' THEN 1 ELSE NULL END) as UNKNOWN, COUNT(CASE WHEN a_key = '0' THEN 1 ELSE NULL END) as UNSPECIFIED  FROM rei_mdwdb.f_a_incident_monthly UNION ALL
 SELECT 'f_a_incident_monthly'as tName,'assignment_group_key' as Cname ,count(*) as totalrecs, COUNT(CASE WHEN assignment_group_key = '-1' THEN 1 ELSE NULL END) as UNKNOWN, COUNT(CASE WHEN assignment_group_key = '0' THEN 1 ELSE NULL END) as UNSPECIFIED  FROM rei_mdwdb.f_a_incident_monthly UNION ALL
@@ -282,3 +288,6 @@ SELECT 'f_time_entry'as tName,'category_src_key' as Cname ,count(*) as totalrecs
 SELECT 'f_time_entry'as tName,'charge_type_key' as Cname ,count(*) as totalrecs, COUNT(CASE WHEN charge_type_key = '-1' THEN 1 ELSE NULL END) as UNKNOWN, COUNT(CASE WHEN charge_type_key = '0' THEN 1 ELSE NULL END) as UNSPECIFIED  FROM rei_mdwdb.f_time_entry UNION ALL
 SELECT 'f_time_entry'as tName,'project_key' as Cname ,count(*) as totalrecs, COUNT(CASE WHEN project_key = '-1' THEN 1 ELSE NULL END) as UNKNOWN, COUNT(CASE WHEN project_key = '0' THEN 1 ELSE NULL END) as UNSPECIFIED  FROM rei_mdwdb.f_time_entry UNION ALL
 SELECT 'f_time_entry'as tName,'date_key' as Cname ,count(*) as totalrecs, COUNT(CASE WHEN date_key = '-1' THEN 1 ELSE NULL END) as UNKNOWN, COUNT(CASE WHEN date_key = '0' THEN 1 ELSE NULL END) as UNSPECIFIED  FROM rei_mdwdb.f_time_entry 
+
+)a
+ where unknown>0)b

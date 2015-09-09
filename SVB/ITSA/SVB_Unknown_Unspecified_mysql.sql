@@ -1,3 +1,8 @@
+SELECT distinct CASE WHEN cnt> 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+ CASE WHEN cnt >0 THEN  'UNKNOWN HAVING -1 IN FEW TABLES' ELSE 'SUCCESS' END as Message from
+(
+select (tName) as table1 , (UNKNOWN) as cnt  from 
+(
 SELECT 'f_a_incident_monthly'as tName,'a_key' as Cname ,count(*) as totalrecs, COUNT(CASE WHEN a_key = '-1' THEN 1 ELSE NULL END) as UNKNOWN, COUNT(CASE WHEN a_key = '0' THEN 1 ELSE NULL END) as UNSPECIFIED  FROM svb_mdwdb.f_a_incident_monthly UNION ALL
 SELECT 'f_a_incident_monthly'as tName,'assignment_group_key' as Cname ,count(*) as totalrecs, COUNT(CASE WHEN assignment_group_key = '-1' THEN 1 ELSE NULL END) as UNKNOWN, COUNT(CASE WHEN assignment_group_key = '0' THEN 1 ELSE NULL END) as UNSPECIFIED  FROM svb_mdwdb.f_a_incident_monthly UNION ALL
 SELECT 'f_a_incident_monthly'as tName,'assigned_to_key' as Cname ,count(*) as totalrecs, COUNT(CASE WHEN assigned_to_key = '-1' THEN 1 ELSE NULL END) as UNKNOWN, COUNT(CASE WHEN assigned_to_key = '0' THEN 1 ELSE NULL END) as UNSPECIFIED  FROM svb_mdwdb.f_a_incident_monthly UNION ALL
@@ -244,3 +249,6 @@ SELECT 'f_task_survey'as tName,'request_item_key' as Cname ,count(*) as totalrec
 SELECT 'f_task_survey'as tName,'completed_on_key' as Cname ,count(*) as totalrecs, COUNT(CASE WHEN completed_on_key = '-1' THEN 1 ELSE NULL END) as UNKNOWN, COUNT(CASE WHEN completed_on_key = '0' THEN 1 ELSE NULL END) as UNSPECIFIED  FROM svb_mdwdb.f_task_survey UNION ALL
 SELECT 'f_task_survey'as tName,'problem_task_key' as Cname ,count(*) as totalrecs, COUNT(CASE WHEN problem_task_key = '-1' THEN 1 ELSE NULL END) as UNKNOWN, COUNT(CASE WHEN problem_task_key = '0' THEN 1 ELSE NULL END) as UNSPECIFIED  FROM svb_mdwdb.f_task_survey UNION ALL
 SELECT 'f_task_survey'as tName,'taken_by_department_key' as Cname ,count(*) as totalrecs, COUNT(CASE WHEN taken_by_department_key = '-1' THEN 1 ELSE NULL END) as UNKNOWN, COUNT(CASE WHEN taken_by_department_key = '0' THEN 1 ELSE NULL END) as UNSPECIFIED  FROM svb_mdwdb.f_task_survey '
+
+)a
+ where unknown>0)b
