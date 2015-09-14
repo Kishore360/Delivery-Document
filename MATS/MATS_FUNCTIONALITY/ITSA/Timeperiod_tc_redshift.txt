@@ -1,0 +1,11 @@
+
+select
+DC.year_name,DC.month_name,count(distinct FTC.timecard_src_id)
+FROM 
+<<tenant>>_mdwdb.f_time_card FTC
+inner join  <<tenant>>_mdwdb.d_calendar_date DC
+ON FTC.timecard_on_key=DC.ROW_key
+and DC.week_start_date_key BETWEEN DC.month_start_date_key AND DC.month_end_date_key
+-- and FTC.soft_deleted_flag='N'
+group by DC.year_name,DC.month_name
+order by DC.year_name,DC.month_name ;
