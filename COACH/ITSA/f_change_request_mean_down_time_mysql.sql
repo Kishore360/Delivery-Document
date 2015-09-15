@@ -7,6 +7,6 @@ from coach_mdsdb.change_request_final a
 left  JOIN  coach_mdwdb.f_change_request b
 on  a.SYS_ID= b.ROW_ID and a.sourceinstance=b.source_id
 where u_system_down_time= 'Yes Downtime' and 
-(timestampdiff(SECOND,a.u_outage_start,a.u_outage_end)
+(timestampdiff(MINUTE,a.u_outage_start,a.u_outage_end)
 ) <> b.mean_down_time_c
 )b

@@ -5,7 +5,7 @@ ELSE 'Data Matched' END AS Message
 FROM (
 select count(1) as cnt  
 from coach_mdsdb.change_request_final a
-left join coach_mdsdb.task c
+left join coach_mdsdb.task_final c
  on c.sys_id=a.u_cab_meeting and a.sourceinstance=c.sourceinstance 
  left  JOIN coach_mdwdb.d_change_request b 
 on  b.ROW_ID=a.SYS_ID and a.sourceinstance=b.source_id 
