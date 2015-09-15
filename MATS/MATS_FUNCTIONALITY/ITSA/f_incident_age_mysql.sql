@@ -21,6 +21,4 @@ AND br.dimension_wh_code IN ('CLOSED','RESOLVED')
 JOIN <<tenant>>_mdwdb.d_incident a ON a.row_key = f.incident_key
 AND f.source_id = a.source_id
 WHERE
-timestampdiff(DAY, a.opened_on, coalesce(a.last_resolved_on, a.closed_on)) <> f.age
-  OR f.age IS NULL
- )A
+timestampdiff(DAY, a.opened_on, coalesce(a.last_resolved_on, a.closed_on)) <> f.age)A
