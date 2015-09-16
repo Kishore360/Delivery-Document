@@ -10,3 +10,4 @@ left join coach_mdsdb.u_artifacts c
 on a.u_artifacts =c.sys_id
  where  c.number <> b.artifacts_c)b
 
+
