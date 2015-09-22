@@ -1,3 +1,12 @@
+SELECT CASE WHEN CNT>0 THEN concat('FAILURE ON TABLE -',B.table_name) ELSE 'SUCCESS' END FROM 
+
+( 
+SELECT COUNT(1) AS CNT,group_concat(A.table_name) as table_name FROM
+
+
+
+(
+
 SELECT "DATABASECHANGELOG" AS table_name, COUNT(*) AS exact_row_count FROM `asu_workdb`.`DATABASECHANGELOG` UNION 
 SELECT "DATABASECHANGELOGLOCK" AS table_name, COUNT(*) AS exact_row_count FROM `asu_workdb`.`DATABASECHANGELOGLOCK` UNION 
 SELECT "DS_DATE_SEED" AS table_name, COUNT(*) AS exact_row_count FROM `asu_workdb`.`DS_DATE_SEED` UNION 
@@ -335,4 +344,10 @@ SELECT "lsm_ls_lov_metadata" AS table_name, COUNT(*) AS exact_row_count FROM `as
 SELECT "lsm_ls_system_variables" AS table_name, COUNT(*) AS exact_row_count FROM `asu_workdb`.`lsm_ls_system_variables` UNION 
 SELECT "lsm_ls_validation" AS table_name, COUNT(*) AS exact_row_count FROM `asu_workdb`.`lsm_ls_validation` UNION 
 SELECT "mds_all_hierarchies" AS table_name, COUNT(*) AS exact_row_count FROM `asu_workdb`.`mds_all_hierarchies` UNION 
-SELECT "o_data_freshness" AS table_name, COUNT(*) AS exact_row_count FROM `asu_workdb`.`o_data_freshness` UNION 
+SELECT "o_data_freshness" AS table_name, COUNT(*) AS exact_row_count FROM `asu_workdb`.`o_data_freshness` 
+
+) A
+
+
+
+where exact_row_count=0)B
