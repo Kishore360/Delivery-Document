@@ -8,8 +8,6 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  LEFT JOIN cardinalhealth_mdwdb.f_incident TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
-LEFT JOIN cardinalhealth_mdwdb.d_lov LKP 
- ON ( concat('INCIDENT_STATE','~','INCIDENT','~','~','~',upper(state))= LKP.src_rowid 
 LEFT JOIN <<tenant>>_mdwdb.d_lov LKP 
  ON ( concat('STATE','~','INCIDENT','~','~','~',upper(incident_state))= LKP.src_rowid 
 AND SRC.sourceinstance= LKP.source_id )
