@@ -7,6 +7,6 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
 LEFT JOIN <<tenant>>_mdwdb.d_internal_contact LKP 
- ON ( concat('INTERNAL_CONTACT~',u_caller)= LKP.row_id 
+ ON ( coalesce(concat('INTERNAL_CONTACT~',u_caller),'UNSPECIFIED')= LKP.row_id 
 AND SRC.sourceinstance= LKP.source_id )
- WHERE COALESCE(LKP.row_key,CASE WHEN SRC.caller_id IS NULL THEN 0 else '-1' end)<> COALESCE(TRGT.opened_by_key,'')
+ WHERE COALESCE(LKP.row_key,CASE WHEN SRC.caller_id IS NULL THEN 0 end)<> COALESCE(TRGT.opened_by_key,'')
