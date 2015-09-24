@@ -15,4 +15,4 @@ ON TRGT.source_id = df.source_id
 where lm.dimension_class = 'STATE~INCIDENT'
 
 AND   lm.dimension_wh_code = 'OPEN' and
-DATEDIFF(convert_tz(df.lastupdated,'GMT','America/Los_Angeles'),TRGT.changed_on) <> TRGT.dormancy_age;
+DATEDIFF(convert_tz(df.lastupdated,'GMT','America/New_York'),TRGT.changed_on) <> TRGT.dormancy_age;
