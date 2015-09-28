@@ -10,4 +10,4 @@ ON a.row_id=b.sys_id
  AND a.source_id=b.sourceinstance
  LEFT OUTER JOIN rambus_mdwdb.d_calendar_date c 
 ON c.row_id=DATE_FORMAT(CONVERT_TZ(b.u_workaround_date,'GMT','America/Los_Angeles'),'%Y%m%d')
-where  a.workaround_on_c_key<> CASE WHEN b.u_workaround_date is null THEN 0 ELSE coalesce(c.row_key ,-1)END) z;
+where  a.workaround_on_c_key<> CASE WHEN b.u_workaround_date is null THEN 0 ELSE (c.row_key )END) z;

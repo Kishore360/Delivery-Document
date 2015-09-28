@@ -9,5 +9,5 @@ AND a.source_id=b.sourceinstance
 LEFT OUTER JOIN rambus_mdwdb.d_configuration_item c
  ON c.row_id = b.u_business_service  
  AND c.source_id =  b.sourceinstance
-where a.business_service_c_key<>case when b.u_business_service is null then 0 else coalesce(c.row_key,-1) end) z;
+where a.business_service_c_key<>case when b.u_business_service is null then 0 else (c.row_key) end) z;
  

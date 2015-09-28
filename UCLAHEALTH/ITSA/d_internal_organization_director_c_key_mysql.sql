@@ -4,7 +4,7 @@ ELSE 'Data Matched' END AS Message
 FROM (
 select count(1) as cnt from(
 SELECT a.sys_id,b.row_id   ,b.  director_c_key b_director_c_key  ,a.u_director a_u_director,c.row_key,
-(case when a.u_director is null then 'UNSPECIFIED' else coalesce(c.row_key,-1) end)
+(case when a.u_director is null then 'UNSPECIFIED' else (c.row_key) end)
 FROM
 (SELECT sys_id,sourceinstance, u_director  
 FROM uclahealth_mdsdb.sys_user_group_final )a
@@ -15,6 +15,6 @@ FROM uclahealth_mdsdb.sys_user_group_final )a
 on concat('INTERNAL_CONTACT~',a.u_director)=c.row_id
 and a.sourceinstance=c.source_id
 )h
-where b_director_c_key<>(case when a_u_director is null then 'UNSPECIFIED' else coalesce(row_key,-1) end))E;
+where b_director_c_key<>(case when a_u_director is null then 'UNSPECIFIED' else (row_key) end))E;
 
 

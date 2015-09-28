@@ -5,7 +5,7 @@ ELSE 'Data Matched' END AS Message
 FROM (
 select count(1) as cnt from(
 SELECT a.sys_id,b.row_id   ,b.  reported_by_c_key b_reported_by_c_key ,a.u_contact a_u_contact,c.row_key,
-(case when a.u_contact is null then 'UNSPECIFIED' else coalesce(c.row_key,-1) end)
+(case when a.u_contact is null then 'UNSPECIFIED' else (c.row_key) end)
 FROM
 (SELECT sys_id,sourceinstance, u_contact  
 FROM svb_mdsdb.incident_final )a
@@ -17,4 +17,4 @@ and a.sourceinstance=c.source_id
  )b on b.source_id=c.source_id AND  b.row_id=c.row_id
  
 )h
-where b_reported_by_c_key<>coalesce(row_key,-1) )E;
+where b_reported_by_c_key<>(row_key) )E;

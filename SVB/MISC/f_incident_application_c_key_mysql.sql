@@ -21,4 +21,4 @@ svb_mdwdb.f_incident c
 on b.row_id=c.row_id and b.source_id=c.source_id
 )h
 
-where configuration_item_application_c_key<> coalesce(row_key,-1) )E;
+where configuration_item_application_c_key<> (row_key) )E;

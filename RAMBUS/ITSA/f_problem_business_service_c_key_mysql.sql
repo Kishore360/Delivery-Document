@@ -18,4 +18,4 @@ left outer join rambus_mdwdb.d_configuration_item b
 
 on b.row_id=a.u_business_service
 
-where c.business_service_c_key<>coalesce(b.row_key,-1)) z;
+where c.business_service_c_key<>(b.row_key)) z;
