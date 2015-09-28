@@ -8,4 +8,8 @@ left join cardinalhealth_mdwdb.d_lov c
 on c.row_id = CASE WHEN b.u_business_unit IS NULL THEN 'UNSPECIFIED' ELSE UPPER(CONCAT('U_CAH_BUSINESS_UNIT~CMDB_CI_APPLICATION','~','','~','','~',COALESCE(b.u_business_unit,''))) END 
 AND 
 c.source_id = CASE WHEN b.u_business_unit IS NULL THEN 0 ELSE b.sourceinstance END
+<<<<<<< HEAD
 where a.cah_bus_unit_src_code_c_key<>(c.row_key);
+=======
+where a.cah_bus_unit_src_code_c_key<>coalesce(c.row_key,'');
+>>>>>>> b24a4dfda5506de5959fa3ef85cf0d2c8e75a5ef
