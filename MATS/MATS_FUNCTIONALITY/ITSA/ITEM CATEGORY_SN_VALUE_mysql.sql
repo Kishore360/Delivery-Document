@@ -2,7 +2,7 @@ SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
 ,CASE WHEN cnt > 0 THEN 'Data did not Match.' 
 ELSE 'Data Matched' END AS Message 
 FROM (
-select count(*) from(select * from (
+select count(*) as cnt from(select * from (
 SELECT CONCAT(a.s0,'~-1~ITEM CATEGORY') AS s_row_id,
 a.s0 AS lev_0_id,IFNULL(level_0.row_key ,0) AS s_lev_0_key,
 a.s1 AS lev_1_id,IFNULL(level_1.row_key ,0) AS s_lev_1_key,
