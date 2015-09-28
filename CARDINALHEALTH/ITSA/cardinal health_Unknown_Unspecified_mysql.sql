@@ -1,8 +1,10 @@
+SELECT CASE WHEN CNT>0 THEN concat('FAILURE ON TABLE -',b.table_name) ELSE 'SUCCESS' END FROM 
 
-SELECT distinct CASE WHEN cnt> 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
- CASE WHEN cnt >0 THEN  'UNKNOWN HAVING -1 IN FEW TABLES' ELSE 'SUCCESS' END as Message from
-(
-select (tName) as table1 , (UNKNOWN) as cnt  from 
+( 
+SELECT COUNT(1) AS CNT,group_concat(a.tName) as table_name FROM
+ 
+
+/*'select (atName) as table1 , (UNKNOWN) as cnt  from '*/
 (
 SELECT 'f_a_incident_monthly'as tName,'assignment_group_key' as Cname ,count(*) as totalrecs, COUNT(CASE WHEN assignment_group_key = '-1' THEN 1 ELSE NULL END) as UNKNOWN, COUNT(CASE WHEN assignment_group_key = '0' THEN 1 ELSE NULL END) as UNSPECIFIED  FROM cardinalhealth_mdwdb.f_a_incident_monthly UNION ALL
 SELECT 'f_a_incident_monthly'as tName,'assigned_to_key' as Cname ,count(*) as totalrecs, COUNT(CASE WHEN assigned_to_key = '-1' THEN 1 ELSE NULL END) as UNKNOWN, COUNT(CASE WHEN assigned_to_key = '0' THEN 1 ELSE NULL END) as UNSPECIFIED  FROM cardinalhealth_mdwdb.f_a_incident_monthly UNION ALL

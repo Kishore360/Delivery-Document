@@ -19,7 +19,10 @@ SELECT "d_ar_debit_memo_summary" AS table_name, COUNT(*) AS exact_row_count FROM
 SELECT "d_ar_invoice" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`d_ar_invoice` UNION 
 SELECT "d_ar_payment" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`d_ar_payment` UNION 
 SELECT "d_ar_payment_method" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`d_ar_payment_method` UNION 
+SELECT "d_asset" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`d_asset` UNION 
+SELECT "d_asset_class" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`d_asset_class` UNION 
 SELECT "d_calendar_date" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`d_calendar_date` UNION 
+SELECT "d_calendar_date_month" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`d_calendar_date_month` UNION 
 SELECT "d_calendar_list" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`d_calendar_list` UNION 
 SELECT "d_calendar_time" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`d_calendar_time` UNION 
 SELECT "d_change_request" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`d_change_request` UNION 
@@ -31,6 +34,7 @@ SELECT "d_customer_address" AS table_name, COUNT(*) AS exact_row_count FROM `car
 SELECT "d_dh_hierarchy_security" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`d_dh_hierarchy_security` UNION 
 SELECT "d_domain" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`d_domain` UNION 
 SELECT "d_dq_map" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`d_dq_map` UNION 
+SELECT "d_expense_item" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`d_expense_item` UNION 
 SELECT "d_facility_request" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`d_facility_request` UNION 
 SELECT "d_fiscal_period" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`d_fiscal_period` UNION 
 SELECT "d_fiscal_quarter" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`d_fiscal_quarter` UNION 
@@ -39,6 +43,7 @@ SELECT "d_geography" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhe
 SELECT "d_gl_account" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`d_gl_account` UNION 
 SELECT "d_gl_segment" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`d_gl_segment` UNION 
 SELECT "d_h_all_hierarchies" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`d_h_all_hierarchies` UNION 
+SELECT "d_hr_change" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`d_hr_change` UNION 
 SELECT "d_hr_employee" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`d_hr_employee` UNION 
 SELECT "d_incident" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`d_incident` UNION 
 SELECT "d_internal_contact" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`d_internal_contact` UNION 
@@ -47,16 +52,9 @@ SELECT "d_keyword_filter" AS table_name, COUNT(*) AS exact_row_count FROM `cardi
 SELECT "d_ledger" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`d_ledger` UNION 
 SELECT "d_location" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`d_location` UNION 
 SELECT "d_lov" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`d_lov` UNION 
-SELECT "d_lov_BKP20150831" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`d_lov_BKP20150831` UNION 
-SELECT "d_lov_BKP20150831_1" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`d_lov_BKP20150831_1` UNION 
-SELECT "d_lov_BKP20150831_2" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`d_lov_BKP20150831_2` UNION 
-SELECT "d_lov_BKP20150831_STATE_WH" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`d_lov_BKP20150831_STATE_WH` UNION 
 SELECT "d_lov_map" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`d_lov_map` UNION 
-SELECT "d_lov_map_BKP20150831" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`d_lov_map_BKP20150831` UNION 
-SELECT "d_lov_map_BKP20150831_1" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`d_lov_map_BKP20150831_1` UNION 
-SELECT "d_lov_map_BKP20150831_2" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`d_lov_map_BKP20150831_2` UNION 
-SELECT "d_lov_map_BKP20150831_STATE_WH" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`d_lov_map_BKP20150831_STATE_WH` UNION 
 SELECT "d_master_item" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`d_master_item` UNION 
+SELECT "d_model_category" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`d_model_category` UNION 
 SELECT "d_month" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`d_month` UNION 
 SELECT "d_natural_account" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`d_natural_account` UNION 
 SELECT "d_o_data_freshness" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`d_o_data_freshness` UNION 
@@ -67,6 +65,7 @@ SELECT "d_party" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth
 SELECT "d_payment_terms" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`d_payment_terms` UNION 
 SELECT "d_problem" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`d_problem` UNION 
 SELECT "d_problem_task" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`d_problem_task` UNION 
+SELECT "d_product_model" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`d_product_model` UNION 
 SELECT "d_project" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`d_project` UNION 
 SELECT "d_purchase_order" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`d_purchase_order` UNION 
 SELECT "d_purchase_order_detail" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`d_purchase_order_detail` UNION 
@@ -83,6 +82,7 @@ SELECT "d_sales_contract_item" AS table_name, COUNT(*) AS exact_row_count FROM `
 SELECT "d_sales_order" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`d_sales_order` UNION 
 SELECT "d_sales_order_item" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`d_sales_order_item` UNION 
 SELECT "d_storage_item" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`d_storage_item` UNION 
+SELECT "d_storage_location" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`d_storage_location` UNION 
 SELECT "d_supplier" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`d_supplier` UNION 
 SELECT "d_supplier_account" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`d_supplier_account` UNION 
 SELECT "d_supplier_address" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`d_supplier_address` UNION 
@@ -90,8 +90,10 @@ SELECT "d_supplier_item" AS table_name, COUNT(*) AS exact_row_count FROM `cardin
 SELECT "d_survey" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`d_survey` UNION 
 SELECT "d_survey_instance" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`d_survey_instance` UNION 
 SELECT "d_survey_question" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`d_survey_question` UNION 
+SELECT "d_task" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`d_task` UNION 
 SELECT "d_task_c" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`d_task_c` UNION 
 SELECT "d_task_sla" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`d_task_sla` UNION 
+SELECT "d_time_card" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`d_time_card` UNION 
 SELECT "d_uom_conversion" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`d_uom_conversion` UNION 
 SELECT "d_year" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`d_year` UNION 
 SELECT "f_a_incident_monthly" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`f_a_incident_monthly` UNION 
@@ -119,14 +121,18 @@ SELECT "f_ar_invoice" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalh
 SELECT "f_ar_invoice_detail" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`f_ar_invoice_detail` UNION 
 SELECT "f_ar_payment" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`f_ar_payment` UNION 
 SELECT "f_ar_payment_application" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`f_ar_payment_application` UNION 
+SELECT "f_asset" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`f_asset` UNION 
+SELECT "f_asset_status_history" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`f_asset_status_history` UNION 
 SELECT "f_change_request" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`f_change_request` UNION 
 SELECT "f_employee_termination" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`f_employee_termination` UNION 
+SELECT "f_expense_item" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`f_expense_item` UNION 
 SELECT "f_facility_request" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`f_facility_request` UNION 
 SELECT "f_fin_relationship_profile" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`f_fin_relationship_profile` UNION 
 SELECT "f_financials_target" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`f_financials_target` UNION 
 SELECT "f_gl_balance" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`f_gl_balance` UNION 
 SELECT "f_gl_budget" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`f_gl_budget` UNION 
 SELECT "f_gl_journal" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`f_gl_journal` UNION 
+SELECT "f_hr_change" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`f_hr_change` UNION 
 SELECT "f_incident" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`f_incident` UNION 
 SELECT "f_incident_monthly_temp" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`f_incident_monthly_temp` UNION 
 SELECT "f_itsm_target" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`f_itsm_target` UNION 
@@ -139,7 +145,21 @@ SELECT "f_n_ar_ct_deposit_monthly" AS table_name, COUNT(*) AS exact_row_count FR
 SELECT "f_n_ar_ct_refund_monthly" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`f_n_ar_ct_refund_monthly` UNION 
 SELECT "f_n_ar_invoice_monthly" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`f_n_ar_invoice_monthly` UNION 
 SELECT "f_n_ar_payment_monthly" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`f_n_ar_payment_monthly` UNION 
+SELECT "f_n_asset_monthly" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`f_n_asset_monthly` UNION 
+SELECT "f_n_asset_quarterly" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`f_n_asset_quarterly` UNION 
+SELECT "f_n_asset_status_history_monthly" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`f_n_asset_status_history_monthly` UNION 
+SELECT "f_n_asset_status_history_quarterly" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`f_n_asset_status_history_quarterly` UNION 
+SELECT "f_n_asset_status_history_weekly" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`f_n_asset_status_history_weekly` UNION 
+SELECT "f_n_asset_weekly" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`f_n_asset_weekly` UNION 
+SELECT "f_n_asset_yearly" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`f_n_asset_yearly` UNION 
+SELECT "f_n_expense_item_monthly" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`f_n_expense_item_monthly` UNION 
+SELECT "f_n_expense_item_quarterly" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`f_n_expense_item_quarterly` UNION 
+SELECT "f_n_expense_item_weekly" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`f_n_expense_item_weekly` UNION 
 SELECT "f_n_incident_monthly" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`f_n_incident_monthly` UNION 
+SELECT "f_n_incident_monthly_temp" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`f_n_incident_monthly_temp` UNION 
+SELECT "f_n_incident_monthly_temp1" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`f_n_incident_monthly_temp1` UNION 
+SELECT "f_n_incident_monthly_temp2" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`f_n_incident_monthly_temp2` UNION 
+SELECT "f_n_incident_monthly_temp3" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`f_n_incident_monthly_temp3` UNION 
 SELECT "f_n_incident_weekly" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`f_n_incident_weekly` UNION 
 SELECT "f_outage_c" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`f_outage_c` UNION 
 SELECT "f_problem" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`f_problem` UNION 
@@ -155,8 +175,11 @@ SELECT "f_sales_order" AS table_name, COUNT(*) AS exact_row_count FROM `cardinal
 SELECT "f_sales_order_item" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`f_sales_order_item` UNION 
 SELECT "f_so_po_cube" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`f_so_po_cube` UNION 
 SELECT "f_t_task_activity" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`f_t_task_activity` UNION 
+SELECT "f_t_task_activity_temp" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`f_t_task_activity_temp` UNION 
+SELECT "f_t_task_activity_temp_created_on" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`f_t_task_activity_temp_created_on` UNION 
 SELECT "f_task_sla" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`f_task_sla` UNION 
 SELECT "f_task_survey" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`f_task_survey` UNION 
+SELECT "f_time_card" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`f_time_card` UNION 
 SELECT "f_time_entry_c" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`f_time_entry_c` UNION 
 SELECT "lsm_ls_dw_aggregator" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`lsm_ls_dw_aggregator` UNION 
 SELECT "lsm_ls_dw_snapshot_audit" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`lsm_ls_dw_snapshot_audit` UNION 
@@ -168,7 +191,9 @@ SELECT "lsm_ls_lov_metadata" AS table_name, COUNT(*) AS exact_row_count FROM `ca
 SELECT "lsm_ls_system_variables" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`lsm_ls_system_variables` UNION 
 SELECT "lsm_ls_validation" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`lsm_ls_validation` UNION 
 SELECT "mds_all_hierarchies" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`mds_all_hierarchies` UNION 
-SELECT "o_data_freshness" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`o_data_freshness`  
+SELECT "o_data_freshness" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`o_data_freshness` UNION 
+SELECT "sys_audit_final_temp" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`sys_audit_final_temp` UNION 
+SELECT "t_incident_maxupdateddate_monthly_temp" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdwdb`.`t_incident_maxupdateddate_monthly_temp`  
 
 ) A
 
