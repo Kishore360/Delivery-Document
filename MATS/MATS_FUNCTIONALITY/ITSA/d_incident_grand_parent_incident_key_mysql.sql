@@ -4,7 +4,7 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 from (
 SELECT CASE
               WHEN si.grand_parent_incident_id ='UNSPECIFIED' THEN 0
-              ELSE coalesce(di.row_key,-1)
+              ELSE (di.row_key)
           END AS row_key,
           si.row_id AS row_id,
           si.source_id,

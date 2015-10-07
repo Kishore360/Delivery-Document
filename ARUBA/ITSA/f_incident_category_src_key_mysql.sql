@@ -7,4 +7,4 @@ left join aruba_mdsdb.u_category_sla_final d
  ON a.u_category  = d.sys_id
 left join aruba_mdwdb.d_lov c
 on c.src_rowid=COALESCE( CONCAT('CATEGORY','~','INCIDENT','~','~','~',UPPER(d.u_category)),'UNSPECIFIED')
-where coalesce(c.row_key,-1)<>b.category_src_key;
+where (c.row_key)<>b.category_src_key;

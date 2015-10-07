@@ -9,4 +9,4 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  LEFT JOIN <<tenant>>_mdwdb.d_internal_contact LKP 
  ON ( concat('INTERNAL_CONTACT~',SRC.closed_by)= LKP.row_id
 AND SRC.sourceinstance= LKP.source_id )
- WHERE CASE WHEN SRC.closed_by IS NULL THEN 0 else COALESCE(LKP.row_key,'-1') end<> COALESCE(TRGT.closed_by_key,'');
+ WHERE CASE WHEN SRC.closed_by IS NULL THEN 0 else (LKP.row_key) end<> COALESCE(TRGT.closed_by_key,'');

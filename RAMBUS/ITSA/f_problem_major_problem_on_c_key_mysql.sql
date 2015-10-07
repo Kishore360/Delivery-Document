@@ -1,7 +1,7 @@
 
 select (case when count(1)=0 then 'SUCCESS' else 'FAILURE' end) dataValidation from (
 select (case when 
-d.major_problem_on_c_key= CASE WHEN fs.u_major_problem_date is null THEN 0 ELSE coalesce(c.row_key ,-1)END
+d.major_problem_on_c_key= CASE WHEN fs.u_major_problem_date is null THEN 0 ELSE  (c.row_key)END
 then 'SUCCESS' else 'FAILURE' end) result from 
 rambus_mdwdb.f_problem d
  INNER JOIN rambus_mdsdb.problem_final fs 

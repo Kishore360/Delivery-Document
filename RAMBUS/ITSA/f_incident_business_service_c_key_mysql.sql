@@ -23,4 +23,4 @@ on b.row_id=coalesce(a.u_business_service,'UNSPECIFIED')
 
 and b.source_id=case when a.u_business_service is null then b.source_id else a.sourceinstance end
 
-where  c.business_service_c_key<>coalesce(b.row_key,-1)) z;
+where  c.business_service_c_key<>coalesce(b.row_key)) z;
