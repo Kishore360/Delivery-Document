@@ -4,7 +4,7 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 
  FROM  <<tenant>>_mdwdb.d_problem_task REQ_ITM 
 LEFT JOIN
- (SELECT max(lastupdated) as lastupdated, source_id ,etl_run_number FROM <<tenant>>_mdwdb.o_data_freshness
+ (SELECT max(lastupdated) as lastupdated, source_id ,etl_run_number FROM <<tenant>>_mdwdb.d_o_data_freshness
  group by source_id) ODF   ON  REQ_ITM.source_id = ODF.source_id
 and ODF.etl_run_number=REQ_ITM.etl_run_number 
 
