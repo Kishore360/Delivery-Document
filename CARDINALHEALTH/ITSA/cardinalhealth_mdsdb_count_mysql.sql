@@ -5,8 +5,7 @@ SELECT COUNT(1) AS CNT,group_concat(A.table_name) as table_name FROM
 
 
 
-(
-SELECT "_num_db_pvttable" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`_num_db_pvttable` UNION 
+(SELECT "_num_db_pvttable" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`_num_db_pvttable` UNION 
 SELECT "_numerify_dataprofile_statistic_templates" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`_numerify_dataprofile_statistic_templates` UNION 
 SELECT "_numerify_dataprofile_statistics" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`_numerify_dataprofile_statistics` UNION 
 SELECT "_numerify_dataprofile_statistics_with_dict" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`_numerify_dataprofile_statistics_with_dict` UNION 
@@ -53,6 +52,7 @@ SELECT "contract_sla_final" AS table_name, COUNT(*) AS exact_row_count FROM `car
 SELECT "core_company" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`core_company` UNION 
 SELECT "core_company_bwd_delta" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`core_company_bwd_delta` UNION 
 SELECT "core_company_final" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`core_company_final` UNION 
+SELECT "f_t_task_activity" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`f_t_task_activity` UNION 
 SELECT "fiscal_temp" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`fiscal_temp` UNION 
 SELECT "fx_currency" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`fx_currency` UNION 
 SELECT "fx_currency_bwd_delta" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`fx_currency_bwd_delta` UNION 
@@ -77,6 +77,7 @@ SELECT "pm_project_final" AS table_name, COUNT(*) AS exact_row_count FROM `cardi
 SELECT "problem" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`problem` UNION 
 SELECT "problem_bwd_delta" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`problem_bwd_delta` UNION 
 SELECT "problem_final" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`problem_final` UNION 
+SELECT "problem_final_bkp_30092015" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`problem_final_bkp_30092015` UNION 
 SELECT "problem_task" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`problem_task` UNION 
 SELECT "problem_task_bwd_delta" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`problem_task_bwd_delta` UNION 
 SELECT "problem_task_final" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`problem_task_final` UNION 
@@ -209,7 +210,9 @@ SELECT "us_change_request_bwd_delta" AS table_name, COUNT(*) AS exact_row_count 
 SELECT "us_change_request_final" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_change_request_final` UNION 
 SELECT "us_change_request_map" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_change_request_map` UNION 
 SELECT "us_change_request_map_bwd_delta" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_change_request_map_bwd_delta` UNION 
+SELECT "us_change_request_map_bwd_delta_BKP20150831" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_change_request_map_bwd_delta_BKP20150831` UNION 
 SELECT "us_change_request_map_final" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_change_request_map_final` UNION 
+SELECT "us_change_request_map_final_BKP20150831" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_change_request_map_final_BKP20150831` UNION 
 SELECT "us_city_iso_codes" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_city_iso_codes` UNION 
 SELECT "us_city_iso_codes_bwd_delta" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_city_iso_codes_bwd_delta` UNION 
 SELECT "us_city_iso_codes_final" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_city_iso_codes_final` UNION 
@@ -246,6 +249,12 @@ SELECT "us_gender_iso_codes_final" AS table_name, COUNT(*) AS exact_row_count FR
 SELECT "us_gender_map" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_gender_map` UNION 
 SELECT "us_gender_map_bwd_delta" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_gender_map_bwd_delta` UNION 
 SELECT "us_gender_map_final" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_gender_map_final` UNION 
+SELECT "us_hr_change" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_hr_change` UNION 
+SELECT "us_hr_change_bwd_delta" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_hr_change_bwd_delta` UNION 
+SELECT "us_hr_change_final" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_hr_change_final` UNION 
+SELECT "us_hr_change_map" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_hr_change_map` UNION 
+SELECT "us_hr_change_map_bwd_delta" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_hr_change_map_bwd_delta` UNION 
+SELECT "us_hr_change_map_final" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_hr_change_map_final` UNION 
 SELECT "us_incident" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_incident` UNION 
 SELECT "us_incident_age_bucket_lov" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_incident_age_bucket_lov` UNION 
 SELECT "us_incident_age_bucket_lov_bwd_delta" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_incident_age_bucket_lov_bwd_delta` UNION 
@@ -255,6 +264,12 @@ SELECT "us_incident_final" AS table_name, COUNT(*) AS exact_row_count FROM `card
 SELECT "us_incident_map" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_incident_map` UNION 
 SELECT "us_incident_map_bwd_delta" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_incident_map_bwd_delta` UNION 
 SELECT "us_incident_map_final" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_incident_map_final` UNION 
+SELECT "us_itaa_lov" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_itaa_lov` UNION 
+SELECT "us_itaa_lov_bwd_delta" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_itaa_lov_bwd_delta` UNION 
+SELECT "us_itaa_lov_final" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_itaa_lov_final` UNION 
+SELECT "us_itaa_lov_map" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_itaa_lov_map` UNION 
+SELECT "us_itaa_lov_map_bwd_delta" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_itaa_lov_map_bwd_delta` UNION 
+SELECT "us_itaa_lov_map_final" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_itaa_lov_map_final` UNION 
 SELECT "us_itsm_kpi" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_itsm_kpi` UNION 
 SELECT "us_itsm_kpi_bwd_delta" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_itsm_kpi_bwd_delta` UNION 
 SELECT "us_itsm_kpi_final" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_itsm_kpi_final` UNION 
@@ -264,15 +279,22 @@ SELECT "us_itsm_targets_final" AS table_name, COUNT(*) AS exact_row_count FROM `
 SELECT "us_mds_naturalaccounthier" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_mds_naturalaccounthier` UNION 
 SELECT "us_mds_naturalaccounthier_bwd_delta" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_mds_naturalaccounthier_bwd_delta` UNION 
 SELECT "us_mds_naturalaccounthier_final" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_mds_naturalaccounthier_final` UNION 
+SELECT "us_model_asset_type_map" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_model_asset_type_map` UNION 
+SELECT "us_model_asset_type_map_bwd_delta" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_model_asset_type_map_bwd_delta` UNION 
+SELECT "us_model_asset_type_map_final" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_model_asset_type_map_final` UNION 
 SELECT "us_om_wh_codes" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_om_wh_codes` UNION 
 SELECT "us_om_wh_codes_bwd_delta" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_om_wh_codes_bwd_delta` UNION 
 SELECT "us_om_wh_codes_final" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_om_wh_codes_final` UNION 
 SELECT "us_problem" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_problem` UNION 
 SELECT "us_problem_bwd_delta" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_problem_bwd_delta` UNION 
+SELECT "us_problem_bwd_delta_BKP20150831" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_problem_bwd_delta_BKP20150831` UNION 
 SELECT "us_problem_final" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_problem_final` UNION 
+SELECT "us_problem_final_BKP20150831" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_problem_final_BKP20150831` UNION 
 SELECT "us_problem_map" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_problem_map` UNION 
 SELECT "us_problem_map_bwd_delta" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_problem_map_bwd_delta` UNION 
+SELECT "us_problem_map_bwd_delta_BKP20150831" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_problem_map_bwd_delta_BKP20150831` UNION 
 SELECT "us_problem_map_final" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_problem_map_final` UNION 
+SELECT "us_problem_map_final_BKP20150831" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_problem_map_final_BKP20150831` UNION 
 SELECT "us_question" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_question` UNION 
 SELECT "us_question_bwd_delta" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_question_bwd_delta` UNION 
 SELECT "us_question_final" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_question_final` UNION 
@@ -321,6 +343,12 @@ SELECT "us_task_sla_final" AS table_name, COUNT(*) AS exact_row_count FROM `card
 SELECT "us_task_sla_map" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_task_sla_map` UNION 
 SELECT "us_task_sla_map_bwd_delta" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_task_sla_map_bwd_delta` UNION 
 SELECT "us_task_sla_map_final" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_task_sla_map_final` UNION 
+SELECT "us_time_card" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_time_card` UNION 
+SELECT "us_time_card_bwd_delta" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_time_card_bwd_delta` UNION 
+SELECT "us_time_card_final" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_time_card_final` UNION 
+SELECT "us_time_card_map" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_time_card_map` UNION 
+SELECT "us_time_card_map_bwd_delta" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_time_card_map_bwd_delta` UNION 
+SELECT "us_time_card_map_final" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_time_card_map_final` UNION 
 SELECT "us_tm_keyword_filter" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_tm_keyword_filter` UNION 
 SELECT "us_tm_keyword_filter_bwd_delta" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_tm_keyword_filter_bwd_delta` UNION 
 SELECT "us_tm_keyword_filter_final" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_tm_keyword_filter_final` UNION 
@@ -330,6 +358,9 @@ SELECT "us_units_final" AS table_name, COUNT(*) AS exact_row_count FROM `cardina
 SELECT "us_wh_finbucket" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_wh_finbucket` UNION 
 SELECT "us_wh_finbucket_bwd_delta" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_wh_finbucket_bwd_delta` UNION 
 SELECT "us_wh_finbucket_final" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_wh_finbucket_final` UNION 
+SELECT "us_wh_itaa_lov" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_wh_itaa_lov` UNION 
+SELECT "us_wh_itaa_lov_bwd_delta" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_wh_itaa_lov_bwd_delta` UNION 
+SELECT "us_wh_itaa_lov_final" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`us_wh_itaa_lov_final` UNION 
 SELECT "wf_stage" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`wf_stage` UNION 
 SELECT "wf_stage_bwd_delta" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`wf_stage_bwd_delta` UNION 
 SELECT "wf_stage_default" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`wf_stage_default` UNION 
@@ -338,8 +369,7 @@ SELECT "wf_stage_default_final" AS table_name, COUNT(*) AS exact_row_count FROM 
 SELECT "wf_stage_final" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`wf_stage_final` UNION 
 SELECT "wf_workflow_version" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`wf_workflow_version` UNION 
 SELECT "wf_workflow_version_bwd_delta" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`wf_workflow_version_bwd_delta` UNION 
-SELECT "wf_workflow_version_final" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`wf_workflow_version_final` 
-
+SELECT "wf_workflow_version_final" AS table_name, COUNT(*) AS exact_row_count FROM `cardinalhealth_mdsdb`.`wf_workflow_version_final`
 ) A
 
 
