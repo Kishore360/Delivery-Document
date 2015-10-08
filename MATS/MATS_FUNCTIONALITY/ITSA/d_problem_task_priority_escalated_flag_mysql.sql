@@ -11,7 +11,9 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  AND SRC.sourceinstance= TRGT.source_id  )
  AND TA.task_wh_type = 'problem_task' 
 AND TA.task_attribute_wh_name =  'priority' 
- WHERE  CASE WHEN TA.task_attribute_wh_old_value IS NOT NULL AND TA.task_attribute_wh_new_value IS NOT NULL   
-AND  TA.task_attribute_wh_new_value < TA.task_attribute_wh_old_value 
+and TA.task_attribute_wh_old_value IS NOT NULL 
+AND TA.task_attribute_wh_new_value IS NOT NULL
+ WHERE  CASE WHEN 
+  TA.task_attribute_wh_new_value < TA.task_attribute_wh_old_value 
 THEN 'Y' ELSE 'N' END
 <> COALESCE(TRGT.priority_escalated_flag,'')

@@ -4,6 +4,6 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  LEFT JOIN <<tenant>>_mdwdb.f_change_request TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  ) LEFT JOIN <<tenant>>_mdwdb.d_calendar_date LKP 
-on (LKP.row_id = date_format(convert_tz(SRC.opened_at,<<TENANT_SSI_TIME_ZONE>>,<<DW_TARGET_TIME_ZONE>>),'%Y%m%d') and LKP.source_id=0 
+on (LKP.row_id = date_format(convert_tz(SRC.sys_created_on,<<TENANT_SSI_TIME_ZONE>>,<<DW_TARGET_TIME_ZONE>>),'%Y%m%d') and LKP.source_id=0 
 )
- WHERE COALESCE(LKP.row_key,CASE WHEN SRC.opened_at IS NULL THEN 0 else '-1' end)<> COALESCE(TRGT.opened_on_key,'')
+ WHERE COALESCE(LKP.row_key,CASE WHEN SRC.sys_created_on IS NULL THEN 0 else '-1' end)<> COALESCE(TRGT.opened_on_key,'')
