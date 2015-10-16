@@ -1,6 +1,6 @@
  
- select CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
- CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for f_incident.secondary_age_c_key' 
+ select CASE WHEN cnt> 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+ CASE WHEN cnt >0 THEN 'MDS to DWH data validation failed for f_incident.secondary_age_c_key' 
 ELSE 'SUCCESS' END as Message
 from 
 ( select count(1) as cnt

@@ -1,6 +1,7 @@
 SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for d_lov' ELSE 'SUCCESS' END as Message
- FROM (select distinct LSM.class_value as dimension_class
+ FROM 
+(select distinct LSM.class_value as dimension_class
 ,SRC.value as dimension_code
 ,SRC.label as dimension_name
 ,concat(LSM.class_value,'~~~',SRC.value) as src_rowid
