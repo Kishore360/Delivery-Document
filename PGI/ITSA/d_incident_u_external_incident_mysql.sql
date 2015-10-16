@@ -11,5 +11,4 @@ caller_type  <> coalesce(a.u_caller_type,'UNSPECIFIED') or
 company_name <> coalesce(a.u_company_name,'UNSPECIFIED') or
 enterprise_name  <> coalesce(a.u_enterprise_name,'UNSPECIFIED') or
 source_channel <> coalesce(a.u_ticket_initiated_from,'UNSPECIFIED') or
-service_restoration_flag <> case when u_service_restored = 1 then 'Y' else 'N' end or
-first_call_resolution_flag <> case when u_first_call_resolution = 1 then 'Y' else 'N' end)c
+service_restoration_flag <> case when u_service_restored = 1 then 'Y' else 'N' end)c
