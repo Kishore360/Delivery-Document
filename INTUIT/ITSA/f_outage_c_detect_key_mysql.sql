@@ -8,7 +8,7 @@ from intuit_mdsdb.cmdb_ci_outage_final s
 left join intuit_mdwdb.f_outage_c t
 on s.sys_id=t.row_id and s.sourceinstance = t.source_id
 left join intuit_mdwdb.d_calendar_date lkp
-on lkp.row_id = COALESCE(DATE_FORMAT(CONVERT_TZ(s.u_detect_date,'@#TENANT_SSI_TIME_ZONE@#' ,'@#DW_TARGET_TIME_ZONE@#'),'%Y%m%d'),'UNSPECIFIED') 
+on lkp.row_id = COALESCE(DATE_FORMAT(CONVERT_TZ(s.u_detect_date,'GMT' ,'America/Los_Angeles'),'%Y%m%d'),'UNSPECIFIED') 
 and lkp.source_id = s.sourceinstance
 WHERE lkp.row_key <> t.detect_key) temp 
 
