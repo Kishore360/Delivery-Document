@@ -1,5 +1,6 @@
 
-SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result, CASE WHEN cnt > 0 THEN 'Data did not Match.'
+SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result, CASE WHEN cnt > 0 THEN 'Data did not Match.' else 
+'MATCHED' end as result from
 (SELECT COUNT(*) as cnt 
 FROM intuit_mdsdb.change_request_final SOURC
 LEFT JOIN intuit_mdsdb.sys_template_final TF 

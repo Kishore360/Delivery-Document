@@ -18,4 +18,3 @@ ON     l3.etl_run_number = l1.etl_run_number AND    l3.source_id = l1.source_id
 WHERE case when  timestampdiff(day,b.changed_on,l3.lastupdated)>30 AND  l2.dimension_wh_code='OPEN' then 'Y' else 'N'
 end <> b.dormant_flag ) temp
 
-select distinct dormant_flag from intuit_mdwdb.d_incident_task_c
