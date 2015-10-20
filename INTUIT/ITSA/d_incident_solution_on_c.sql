@@ -6,5 +6,5 @@ select count(1) as cnt
 from intuit_mdsdb.incident_final s
 left join intuit_mdwdb.d_incident t
 on s.sys_id=t.row_id and s.sourceinstance = t.source_id
-where t.solution_on_c =CONVERT_TZ(s.u_solution_timestamp,'GMT','America/Los_Angeles')) temp
+where t.solution_on_c <> CONVERT_TZ(s.u_solution_timestamp,'GMT','America/Los_Angeles')) temp
 
