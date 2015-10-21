@@ -6,4 +6,4 @@ select count(1) as cnt
 from intuit_mdsdb.change_task_final a
 left join intuit_mdwdb.f_change_task_c c 
 on  a.sys_id = c.ROW_ID and a.sourceinstance=c.source_id
-where a.time_worked <> c.time_worked) g
+where COALESCE(a.time_worked,0) <> COALESCE(c.time_worked,0)) g

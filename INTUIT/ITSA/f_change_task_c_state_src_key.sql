@@ -7,6 +7,6 @@ from intuit_mdsdb.change_task_final a
 left join intuit_mdwdb.f_change_task_c c 
 on  a.sys_id = c.ROW_ID and a.sourceinstance=c.source_id
 left join intuit_mdwdb.d_lov b
-on concat('STATE','~','TASK','~','~','~',upper(a.state))= b.src_rowid 
+on concat('STATE','~','CHANGE_TASK','~','~','~',upper(a.state))= b.src_rowid 
  AND a.sourceinstance= b.source_id  
 where dimension_class='STATE~CHANGE_TASK' and b.row_key <> c.state_src_key) g

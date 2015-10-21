@@ -6,6 +6,4 @@ select count(1) as cnt
 from intuit_mdsdb.u_incident_task_final s
 left join intuit_mdwdb.d_incident_task_c t
 on s.sys_id=t.row_id and s.sourceinstance = t.source_id
-left join intuit_mdwdb.f_task_sla L 
-on t.row_key=L.incident_task_c_key
-where s.made_sla <> t.met_sla_flag and incident_task_c_key <>-1 ) temp
+ where case when s.made_sla = 1 then 'Y' else 'N' end <> t.met_sla_flag  ) temp

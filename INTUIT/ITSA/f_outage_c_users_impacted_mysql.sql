@@ -6,6 +6,5 @@ select count(1) as cnt
 from intuit_mdsdb.cmdb_ci_outage_final s
 left join intuit_mdwdb.f_outage_c t
 on s.sys_id=t.row_id and s.sourceinstance = t.source_id
-left join intuit_mdwdb.d_calendar_date  lkp
-on lkp.row_id =s.u_number_of_users and lkp.source_id = s.sourceinstance
-WHERE lkp.row_key <> t.users_impacted) temp 
+where s.u_number_of_users 
+<> t.users_impacted) temp 

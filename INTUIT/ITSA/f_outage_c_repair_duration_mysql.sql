@@ -6,6 +6,4 @@ select count(1) as cnt
 from intuit_mdsdb.cmdb_ci_outage_final s
 left join intuit_mdwdb.f_outage_c t
 on s.sys_id=t.row_id and s.sourceinstance = t.source_id
-left join intuit_mdwdb.d_calendar_date  lkp
-on lkp.row_id =COALESCE(TIMESTAMPDIFF(SECOND,'1970-01-01 00:00:00',s.u_time_to_repair),0) and lkp.source_id = s.sourceinstance
-WHERE lkp.row_key <> t.repair_duration) temp 
+where TIMESTAMPDIFF(SECOND,'1970-01-01 00:00:00',s.u_time_to_repair)<> t.repair_duration) temp 

@@ -6,6 +6,4 @@ select count(1) as cnt
 from intuit_mdsdb.cmdb_ci_outage_final s
 left join intuit_mdwdb.f_outage_c t
 on s.sys_id=t.row_id and s.sourceinstance = t.source_id
-left join intuit_mdwdb.d_calendar_date  lkp
-on lkp.row_id = COALESCE(s.u_percent_of_impact,0) and lkp.source_id = s.sourceinstance
-WHERE lkp.row_key <> t.percentage_impacted) temp 
+WHERE u_percent_of_impact <> t.percentage_impacted) temp 
