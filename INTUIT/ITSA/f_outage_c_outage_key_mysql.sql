@@ -8,4 +8,4 @@ left join intuit_mdwdb.f_outage_c t
 on s.sys_id=t.row_id and s.sourceinstance = t.source_id
 left join intuit_mdwdb.d_outage_c  lkp
 on lkp.row_id =s.sys_id and lkp.source_id = s.sourceinstance
-WHERE lkp.row_key <> t.outage_key) temp 
+WHERE lkp.row_key <> t.outage_c_key) temp 
