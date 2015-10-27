@@ -21,7 +21,7 @@ on (a11.request_item_key = a14.row_key)
 union
 select'ldb.d_calendar_date_closed' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_request_item             a11 
-join ldb.d_calendar_date_closed         a15
+left join ldb.d_calendar_date_closed         a15
 on (a11.closed_on_key = a15.row_key)
 union
 select'ldb.d_calendar_date' as Table_Name, count(a11.row_key) Row_Count
@@ -85,9 +85,9 @@ on (a16.month_start_date_key = a116.row_key)
 union
 select'ldb.d_calendar_month_closed' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_request_item             a11 
- join ldb.d_calendar_date_closed         a15
+ left join ldb.d_calendar_date_closed         a15
 on (a11.closed_on_key = a15.row_key)
-join ldb.d_calendar_month_closed         a117
+left join ldb.d_calendar_month_closed         a117
 on (a15.month_start_date_key = a117.row_key)
 )a
 )b
