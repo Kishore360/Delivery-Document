@@ -10,5 +10,5 @@ left join intuit_mdwdb.d_configuration_item lkp
 on 
 COALESCE(s.u_business_service,'UNSPECIFIED')
 =lkp.row_id and t.source_id = lkp.source_id
-where lkp.row_key <> t.business_service_key
+where lkp.row_key <> t.business_service_c_key
 ) temp

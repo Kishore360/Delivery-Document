@@ -5,6 +5,5 @@ from <<tenant>>_mdwdb.f_incident f
 LEFT JOIN <<tenant>>_mdwdb.d_lov L  
 ON ((f.age BETWEEN L.lower_range_value AND L.upper_range_value)
 	AND L.dimension_class = 'AGEBUCKET_WH~INCIDENT' )
-WHERE COALESCE(L.row_key, case when f.age is null or f.age = 0 THEN 0 else -1 end ) 
+WHERE COALESCE(L.row_key, -1 ) 
  <> f.age_key
-
