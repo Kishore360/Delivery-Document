@@ -12,7 +12,7 @@ union
 select'ldb.d_internal_contact' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_change_request             a11 
 join ldb.d_internal_contact         a13
-on (a11.opened_by_key = a13.row_key 
+on (a11.opened_by_key = a13.row_key )
 union
 select'ldb.d_change_request' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_change_request             a11 
@@ -130,7 +130,7 @@ select'ldb.d_calendar_year' as Table_Name, count(a11.row_key) Row_Count
  join ldb.d_calendar_date         a15
 on (a11.opened_on_key = a15.row_key)
 join ldb.d_calendar_year         a125
-on (a15.year_start_date_key = a125.row_key) where a125.row_key is null
+on (a15.year_start_date_key = a125.row_key) 
 )a
 )b
 

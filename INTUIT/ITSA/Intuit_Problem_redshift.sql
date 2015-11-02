@@ -74,7 +74,7 @@ union
 select 'ldb.d_problem_state' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_problem             a11 
 join ldb.d_problem_state         a115
-on (a11.state_src_key = a115.row_key)
+on (a11.problem_state_src_key = a115.row_key)
 union
 select 'ldb.d_task_priority' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_problem             a11 

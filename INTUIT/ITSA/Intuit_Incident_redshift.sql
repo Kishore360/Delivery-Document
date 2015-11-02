@@ -1,3 +1,4 @@
+
 SELECT CASE WHEN max_count<>min_count THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  CASE WHEN  max_count<>min_count THEN 'OOTB has Keys Dropped' ELSE 'SUCCESS'  END as Message FROM (
  select max(Row_Count) max_count,Min(Row_Count) min_count from (
@@ -23,6 +24,17 @@ select 'ldb.d_calendar_time' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_incident             a11 
 join ldb.d_calendar_time         a15
 on (a11.opened_time_key = a15.row_key)
+
+
+union
+
+select 'ldb.d_calendar_time_hour' as Table_Name, count(a11.row_key) Row_Count
+ from  ldb.f_incident             a11 
+join ldb.d_calendar_time         a15
+on (a11.opened_time_key = a15.row_key)
+    join    ldb.d_calendar_time_hour    a115
+     on     (a15.hour_24_format_num = a115.hour_24_format_num)
+
 union
 select 'ldb.d_internal_contact' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_incident             a11 
@@ -41,6 +53,19 @@ on (a11.assignment_group_key = a17.user_group_key)
 join ldb.dh_user_group_classification_hierarchy_level1         a18
 on (a17.user_group_classification_level1 = a18.user_group_level1_key)
 union
+
+	 
+select 'ldb.dh_user_group_classification_hierarchy_level2' as Table_Name, count(a11.row_key) Row_Count
+ from  ldb.f_incident             a11 
+ join ldb.dh_user_group_classification_hierarchy         a16
+on (a11.assignment_group_key = a16.user_group_key)
+   join    ldb.dh_user_group_classification_hierarchy_level1    a17
+     on     (a16.user_group_classification_level1 = a17.user_group_level1_key)
+join ldb.dh_user_group_classification_hierarchy_level2         a18
+on (a17.user_group_level2_key  = a18.user_group_level2_key)
+
+union
+
 select 'ldb.d_configuration_item' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_incident             a11 
 join ldb.d_configuration_item         a19

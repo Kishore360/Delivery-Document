@@ -1,9 +1,16 @@
 SELECT CASE WHEN max_count<>min_count THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  CASE WHEN  max_count<>min_count THEN 'OOTB has Keys Dropped' ELSE 'SUCCESS'  END as Message FROM (
- select max(Row_Count) max_count,Min(Row_Count) min_count from (select  'd_internal_contact' as Table_Name,count(a11.row_key) Row_Count 
+ select max(Row_Count) max_count,Min(Row_Count) min_count from (
+select  'f_request_item' as Table_Name,count(a11.row_key) Row_Count 
+from 	ldb.f_request_item a11 
+
+union
+
+select  'd_internal_contact' as Table_Name,count(a11.row_key) Row_Count 
 from 	ldb.f_request_item a11 
 join	ldb.d_internal_contact	a12
 on 		(a11.opened_by_key = a12.row_key)
+
 union
 
 select  'd_master_item' as Table_Name,count(a11.row_key) Row_Count 
@@ -116,7 +123,7 @@ union
 
 select  'd_varaible_lov_data_center_request_item' as Table_Name,count(a11.row_key) Row_Count 
 from 	ldb.f_request_item a11 
-join	ldb.d_varaible_lov_data_center_request_item	a121
+join	ldb.d_variable_lov_c_data_center_request_item	a121
 on 		(a11.data_center_c_key = a121.row_key)
 union
 
@@ -125,7 +132,7 @@ from 	ldb.f_request_item a11
 join	ldb.d_internal_contact	a12
 on 	(a11.opened_by_key = a12.row_key)
 join	ldb.d_internal_contact_mdm	a122
-on 		(a12.row_current_key = a122.row_current_key)
+on 		(a12.row_current_key = a122.row_key)
 union
 
 select  'd_party_primary_contact' as Table_Name,count(a11.row_key) Row_Count 
@@ -137,7 +144,7 @@ union
 select  'd_request' as Table_Name,count(a11.row_key) Row_Count 
 from 	ldb.f_request_item a11 
 join	ldb.d_request	a124
-on 		(a11.request_key = a124.row_current_key)
+on 		(a11.request_key = a124.row_key)
 union
 
 select  'd_request_item_state' as Table_Name,count(a11.row_key) Row_Count 
@@ -154,8 +161,8 @@ union
 
 select  'd_varaible_lov_service_requested_for' as Table_Name,count(a11.row_key) Row_Count 
 from 	ldb.f_request_item a11 
-join	ldb.d_varaible_lov_service_requested_for	a127
-on 		(a11.service_requested_for_c_key = a127.row_current_key)
+join	ldb.d_variable_lov_c_service_requested_for	a127
+on 		(a11.service_requested_for_c_key = a127.row_key)
 union
 
 select  'd_task_approval' as Table_Name,count(a11.row_key) Row_Count 
@@ -166,19 +173,19 @@ union
 select  'd_internal_contact_task_closed_by' as Table_Name,count(a11.row_key) Row_Count 
 from 	ldb.f_request_item a11 
 join	ldb.d_internal_contact_task_closed_by	a129
-on 		(a11.closed_by_key = a129.row_current_key)
+on 		(a11.closed_by_key = a129.row_key)
 union
 
 select  'd_bufg_c_bu_func_group' as Table_Name,count(a11.row_key) Row_Count 
 from 	ldb.f_request_item a11 
 join	ldb.d_bufg_c_bu_func_group	a130
-on 		(a11.bu_func_group_c_key = a130.row_current_key)
+on 		(a11.bu_func_group_c_key = a130.row_key)
 union
 
 select  'd_service_delivery_team_l4s_c' as Table_Name,count(a11.row_key) Row_Count 
 from 	ldb.f_request_item a11 
 join	ldb.d_service_delivery_team_l4s_c	a131
-on 		(a11.l4_options_c_key = a131.row_current_key)
+on 		(a11.l4_options_c_key = a131.row_key)
 union
 
 select  'd_calendar_month' as Table_Name,count(a11.row_key) Row_Count 

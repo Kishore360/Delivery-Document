@@ -40,6 +40,8 @@ union
 
 select  		'ldb.d_calendar_month' as Table_Name,count(a11.row_key) Row_Count 
 from			ldb.f_incident_task_c	a11
+left outer join	ldb.d_calendar_date	a17
+on 				(a11.opened_on_key = a17.row_key)
 left outer join	ldb.d_calendar_month	a18
 on			 	(a17.month_start_date_key = a18.row_key)
 
