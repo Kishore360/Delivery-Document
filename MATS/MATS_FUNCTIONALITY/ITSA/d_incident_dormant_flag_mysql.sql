@@ -5,7 +5,7 @@
 <<tenant>>_mdwdb.d_incident di
   JOIN <<tenant>>_mdwdb.f_incident fi ON di.row_key = fi.incident_key
   JOIN <<tenant>>_mdwdb.d_lov_map dlm ON fi.state_src_key = dlm.src_key
-  JOIN  <<tenant>>_mdwdb.d_o_data_freshness FRESH on fi.etl_run_number=FRESH.etl_run_number										
+  JOIN  <<tenant>>_mdwdb.d_o_data_freshness FRESH on di.etl_run_number=FRESH.etl_run_number										
   where dlm.dimension_class = 'STATE~INCIDENT'
   AND dlm.dimension_wh_code = 'OPEN'
   AND  (CASE WHEN timestampdiff(DAY,di.changed_on, FRESH.lastupdated)>30 THEN 'Y' ELSE 'N' END) <> di.dormant_flag)a;
