@@ -1,7 +1,10 @@
-select (case when count(1)=0 then 'SUCCESS' else 'FAILURE' end) dataValidation from (
+SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result,
+CASE WHEN cnt > 0 THEN 'Data did not Match.' 
+ELSE 'Data Matched' END AS Message 
+from(select count(1) as cnt from (
 select (case when
 AA.last_resolved_on != CONVERT_TZ(CASE WHEN c.dimension_wh_code IN('RESOLVED','CLOSED')
-                                  AND BB.resolved_at IS NULL THEN sys_updated_on ELSE BB.resolved_at END, 'GMT','America/Los_Angeles')
+AND BB.resolved_at IS NULL THEN sys_updated_on ELSE BB.resolved_at END, 'GMT','America/Los_Angeles')
 then 'FAILURE'
 else 'SUCCESS'
 end) result from 
@@ -11,4 +14,4 @@ AND AA.source_id=BB.sourceinstance
 LEFT JOIN rambus_mdwdb.d_lov_map c ON (c.dimension_class ='STATE~INCIDENT'
                                                             AND BB.sourceinstance=c.source_id
                                                             AND c.dimension_code = BB.state)
-) res where res.result = 'FAILURE';
+)a )b ;
