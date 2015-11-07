@@ -54,12 +54,12 @@ ldb.d_request	a117
 	  on 	(a11.approval_state_src_key = a121.row_key)union
 	select  'd_internal_contact_task_closed_by' as Table_Name,count(a11.row_key) Row_Count from ldb.f_request_item a11 join 	ldb.d_internal_contact_task_closed_by	a122
 	  on 	(a11.closed_by_key = a122.row_key)union
-	select  'd_calendar_month' as Table_Name,count(a11.row_key) Row_Count from 
+	select  'd_calendar_month' as Table_Name,count(a11.row_key) Row_Count 
 from ldb.f_request_item a11 join 	ldb.d_calendar_date	a19
 	  on 	(a11.opened_on_key = a19.row_key)
 join 	ldb.d_calendar_month	a123
 	  on 	(a19.month_start_date_key = a123.row_key)union
-	select  'd_calendar_month_closed' as Table_Name,count(a11.row_key) Row_Count from 
+	select  'd_calendar_month_closed' as Table_Name,count(a11.row_key) Row_Count 
 from ldb.f_request_item a11 join 	ldb.d_calendar_date_closed	a15
 	  on 	(a11.closed_on_key = a15.row_key)
  join 	ldb.d_calendar_month_closed	a124
