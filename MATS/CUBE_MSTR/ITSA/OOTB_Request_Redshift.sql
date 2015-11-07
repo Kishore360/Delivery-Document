@@ -14,10 +14,10 @@ select'ldb.d_request' as Table_Name, count(a11.row_key) Row_Count
 join ldb.d_request         a13
 on (a11.request_key = a13.row_key)
 union
-select'ldb.d_task_contacttype' as Table_Name, count(a11.row_key) Row_Count
- from  ldb.f_request             a11 
-cross join ldb.d_task_contacttype         a14
-union
+-- select'ldb.d_task_contacttype' as Table_Name, count(a11.row_key) Row_Count
+-- from  ldb.f_request             a11 
+-- join ldb.d_task_contacttype         a14
+-- union
 select'ldb.d_internal_contact' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_request             a11 
 join ldb.d_internal_contact         a15
