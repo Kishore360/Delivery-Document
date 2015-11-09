@@ -24,12 +24,7 @@ select'd_internal_organization_department' as Table_Name, count(a11.row_key) Row
  from  ldb.f_request_task             a11 
    join        ldb.d_internal_organization_department           a12
                   on         (a11.opened_by_department_key = a12.row_key)
-				  union
-				  select'd_master_item' as Table_Name, count(a11.row_key) Row_Count
- from  ldb.f_request_task             a11 
-				  join        ldb.d_master_item        a13
-                  on         (a11.catalog_item_key = a13.row_key)
-				  union
+				   union
 				    select'd_calendar_date_closed' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_request_task             a11 
 				   join        ldb.d_calendar_date_closed     a14
@@ -39,12 +34,7 @@ select'd_internal_organization_department' as Table_Name, count(a11.row_key) Row
  from  ldb.f_request_task             a11 
 				  join        ldb.d_request_task        a16
                   on         (a11.request_task_key = a16.row_key)
-				  union
-				  select'd_request_item_variable_requested_completion_date_c' as Table_Name, count(a11.row_key) Row_Count
- from  ldb.f_request_task             a11 
-				  join        ldb.d_request_item_variable_requested_completion_date_c                a17
-                  on         (a11.request_item_key = a17.row_key)
-				  union
+				 				  union
 				  select'd_internal_contact' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_request_task             a11 
 				  join        ldb.d_internal_contact a18

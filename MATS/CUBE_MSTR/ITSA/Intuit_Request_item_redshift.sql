@@ -115,4 +115,3 @@ left outer join ldb.d_calendar_month_closed         a121
 on (a18.month_start_date_key = a121.row_key)
 )a
 )b
-
