@@ -2,21 +2,7 @@ SELECT CASE WHEN max_count<>min_count THEN 'FAILURE' ELSE 'SUCCESS' END as Resul
  CASE WHEN  max_count<>min_count THEN 'OOTB has Keys Dropped' ELSE 'SUCCESS'  END as Message FROM (
  select max(Row_Count) max_count,Min(Row_Count) min_count from (
 select  'f_request_item' as Table_Name,count(a11.row_key) Row_Count 
-from 	ldb.f_request_item a11 
-
-union
-
-select  'd_internal_contact' as Table_Name,count(a11.row_key) Row_Count 
-from 	ldb.f_request_item a11 
-join	ldb.d_internal_contact	a12
-on 		(a11.opened_by_key = a12.row_key)
-
-union
-
-select  'd_master_item' as Table_Name,count(a11.row_key) Row_Count 
-from 	ldb.f_request_item a11 
-join	ldb.d_master_item	a13
-on 		(a11.catalog_item_key = a13.row_key)
+from 	ldb.f_request_item a11
 union
 
 select  'd_request_item_variable_app_not_listed' as Table_Name,count(a11.row_key) Row_Count 
@@ -48,13 +34,6 @@ from 	ldb.f_request_item a11
 join	ldb.d_request_item	a18
 on 		(a11.request_item_key = a18.row_key)
 union
-
-select  'd_calendar_date_closed' as Table_Name,count(a11.row_key) Row_Count 
-from 	ldb.f_request_item a11 
-join	ldb.d_calendar_date_closed	a19
-on 		(a11.closed_on_key = a19.row_key)
-union
-
 select  'd_request_item_variable_date_time' as Table_Name,count(a11.row_key) Row_Count 
 from 	ldb.f_request_item a11 
 join	ldb.d_request_item_variable_date_time	a110
@@ -65,12 +44,6 @@ select  'd_request_item_variable_description' as Table_Name,count(a11.row_key) R
 from 	ldb.f_request_item a11 
 join	ldb.d_request_item_variable_description	a111
 on 		(a11.request_item_key = a111.row_key)
-union
-
-select  'd_calendar_date' as Table_Name,count(a11.row_key) Row_Count 
-from 	ldb.f_request_item a11 
-join	ldb.d_calendar_date	a112
-on 		(a11.opened_on_key = a112.row_key)
 union
 
 select  'd_request_item_variable_request_summary' as Table_Name,count(a11.row_key) Row_Count 
@@ -95,18 +68,6 @@ select  'd_request_item_variable_work_window' as Table_Name,count(a11.row_key) R
 from 	ldb.f_request_item a11 
 join	ldb.d_request_item_variable_work_window	a116
 on 		(a11.request_item_key = a116.row_key)
-union
-
-select  'd_internal_contact' as Table_Name,count(a11.row_key) Row_Count 
-from 	ldb.f_request_item a11 
-join	ldb.d_internal_contact	a117
-on 		(a11.assigned_to_key = a117.row_key)
-union
-
-select  'd_internal_organization_group' as Table_Name,count(a11.row_key) Row_Count 
-from 	ldb.f_request_item a11 
-join	ldb.d_internal_organization_group	a118
-on 		(a11.assignment_group_key = a118.row_key)
 union
 
 select  'd_bufg_c_business_unit' as Table_Name,count(a11.row_key) Row_Count 
@@ -146,34 +107,10 @@ from 	ldb.f_request_item a11
 join	ldb.d_request	a124
 on 		(a11.request_key = a124.row_key)
 union
-
-select  'd_request_item_state' as Table_Name,count(a11.row_key) Row_Count 
-from 	ldb.f_request_item a11 
-join	ldb.d_request_item_state	a125
-on 		(a11.state_src_key = a125.row_current_key)
-union
-
-select  'd_internal_contact_requested_for' as Table_Name,count(a11.row_key) Row_Count 
-from 	ldb.f_request_item a11 
-join	ldb.d_internal_contact_requested_for	a126
-on 		(a11.requested_for_key = a126.row_current_key)
-union
-
 select  'd_varaible_lov_service_requested_for' as Table_Name,count(a11.row_key) Row_Count 
 from 	ldb.f_request_item a11 
 join	ldb.d_variable_lov_c_service_requested_for	a127
 on 		(a11.service_requested_for_c_key = a127.row_key)
-union
-
-select  'd_task_approval' as Table_Name,count(a11.row_key) Row_Count 
-from 	ldb.f_request_item a11 
-join	ldb.d_task_approval	a128
-on 		(a11.approval_state_src_key = a128.row_current_key)
-union
-select  'd_internal_contact_task_closed_by' as Table_Name,count(a11.row_key) Row_Count 
-from 	ldb.f_request_item a11 
-join	ldb.d_internal_contact_task_closed_by	a129
-on 		(a11.closed_by_key = a129.row_key)
 union
 
 select  'd_bufg_c_bu_func_group' as Table_Name,count(a11.row_key) Row_Count 
@@ -186,23 +123,5 @@ select  'd_service_delivery_team_l4s_c' as Table_Name,count(a11.row_key) Row_Cou
 from 	ldb.f_request_item a11 
 join	ldb.d_service_delivery_team_l4s_c	a131
 on 		(a11.l4_options_c_key = a131.row_key)
-union
 
-select  'd_calendar_month' as Table_Name,count(a11.row_key) Row_Count 
-from 	ldb.f_request_item a11 
-join	ldb.d_calendar_date	a112
-on 		(a11.opened_on_key = a112.row_key)
-join	ldb.d_calendar_month	a132
-on 		(a112.month_start_date_key = a132.row_key)
-
-union
-
-select  'd_calendar_month_closed' as Table_Name,count(a11.row_key) Row_Count 
-from 	ldb.f_request_item a11 
-join	ldb.d_calendar_date	a112
-on 		(a11.opened_on_key = a112.row_key)
-join	ldb.d_calendar_month	a132
-on 		(a112.month_start_date_key = a132.row_key)
-join	ldb.d_calendar_month_closed	a133
-on 		(a132.month_start_date_key = a133.row_key)
 )a)b
