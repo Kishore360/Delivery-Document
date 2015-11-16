@@ -4,40 +4,15 @@ SELECT CASE WHEN max_count<>min_count THEN 'FAILURE' ELSE 'SUCCESS' END as Resul
 select 'ldb.f_problem' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_problem             a11 
 union
-select 'ldb.d_internal_contact' as Table_Name, count(a11.row_key) Row_Count
- from  ldb.f_problem             a11 
-join ldb.d_internal_contact         a12
-on (a11.opened_by_key = a12.row_key)
-union
-select 'ldb.d_calendar_time' as Table_Name, count(a11.row_key) Row_Count
- from  ldb.f_problem             a11 
-join ldb.d_calendar_time         a13
-on (a11.opened_time_key = a13.row_key)
-union
 select 'ldb.d_problem' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_problem             a11 
 join ldb.d_problem         a14
 on (a11.problem_key = a14.row_key)
 union
-select 'ldb.d_calendar_date' as Table_Name, count(a11.row_key) Row_Count
- from  ldb.f_problem             a11 
-join ldb.d_calendar_date         a15
-on (a11.incident_opened_on_key = a15.row_key)
-union
-select 'ldb.d_calendar_date' as Table_Name, count(a11.row_key) Row_Count
- from  ldb.f_problem             a11 
-join ldb.d_calendar_date         a16
-on (a11.opened_on_key = a16.row_key)
-union
 select 'ldb.d_configuration_item_problem_incident_c' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_problem             a11 
 join ldb.d_configuration_item_problem_incident_c         a17
 on (a11.incident_configuration_item_key = a17.row_key)
-union
-select 'ldb.d_internal_organization_group' as Table_Name, count(a11.row_key) Row_Count
- from  ldb.f_problem             a11 
-join ldb.d_internal_organization_group         a18
-on (a11.assignment_group_key = a18.row_key)
 union
 select 'ldb.d_problem_close_code_c' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_problem             a11 
@@ -48,13 +23,6 @@ select 'ldb.d_configuration_item' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_problem             a11 
 join ldb.d_configuration_item         a110
 on (a11.configuration_item_key = a110.row_key)
-union
-select 'ldb.d_internal_contact_mdm' as Table_Name, count(a11.row_key) Row_Count
- from  ldb.f_problem             a11 
- join ldb.d_internal_contact         a12
-on (a11.opened_by_key = a12.row_key)
-join ldb.d_internal_contact_mdm         a111
-on (a12.row_current_key = a111.row_current_key)
 union
 select 'ldb.d_incident' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_problem             a11 
@@ -74,22 +42,7 @@ union
 select 'ldb.d_problem_state' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_problem             a11 
 join ldb.d_problem_state         a115
-on (a11.problem_state_src_key = a115.row_key)
-union
-select 'ldb.d_task_priority' as Table_Name, count(a11.row_key) Row_Count
- from  ldb.f_problem             a11 
-join ldb.d_task_priority         a116
-on (a11.priority_src_key = a116.row_key)
-union
-select 'ldb.d_task_contacttype' as Table_Name, count(a11.row_key) Row_Count
- from  ldb.f_problem             a11 
-join ldb.d_task_contacttype         a117
-on (a11.reported_type_src_key = a117.row_key)
-union
-select 'ldb.d_task_urgency' as Table_Name, count(a11.row_key) Row_Count
- from  ldb.f_problem             a11 
-join ldb.d_task_urgency         a118
-on (a11.urgency_src_key = a118.row_key)
+on (a11.state_src_key = a115.row_key)
 union
 select 'ldb.d_problem_sub_type_c' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_problem             a11 
