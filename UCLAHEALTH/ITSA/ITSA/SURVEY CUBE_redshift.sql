@@ -15,6 +15,27 @@ join ldb.d_calendar_date         a12
 on (a11.requested_on_key = a12.row_key)
 join ldb.d_calendar_month        a13
 on (a12.month_start_date_key = a13.row_key)
+UNION
+select'd_calendar_week' as Table_Name, count(a11.row_key) Row_Count
+from  ldb.f_incident_response             a11 
+join ldb.d_calendar_date         a12
+on (a11.requested_on_key = a12.row_key)
+join	ldb.d_calendar_week a13
+on (a12.week_start_date_key = a13.row_key)
+union
+select'd_calendar_year' as Table_Name, count(a11.row_key) Row_Count
+from  ldb.f_incident_response             a11 
+join ldb.d_calendar_date         a12
+on (a11.requested_on_key = a12.row_key)
+join	ldb.d_calendar_year a13
+on (a12.year_start_date_key = a13.row_key)
+union
+select'd_calendar_quarter' as Table_Name, count(a11.row_key) Row_Count
+from  ldb.f_incident_response             a11 
+join ldb.d_calendar_date         a12
+on (a11.requested_on_key = a12.row_key)
+join	ldb.d_calendar_quarter a13
+on (a12.quarter_start_date_key = a13.row_key)
 union
 select'd_incident' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_incident_response             a11 
@@ -24,7 +45,7 @@ union
 select'd_internal_contact' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_incident_response             a11 
 join ldb.d_internal_contact         a15
-on (a11.opened_by_key = a15.row_key)
+on (a11.sent_to_key = a15.row_key)
 union
 select'd_internal_contact_mdm' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_incident_response             a11 
@@ -71,3 +92,4 @@ join ldb.d_survey_instance         a112
 on (a11.survey_instance_key = a112.row_key)
 )a
 )b
+	
