@@ -26,7 +26,7 @@ from  ldb.f_incident_response             a11
 join ldb.d_internal_contact         a15
 on (a11.opened_by_key = a15.row_key)
 union
-select'd_internal_contact' as Table_Name, count(a11.row_key) Row_Count
+select'd_internal_contact_mdm' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_incident_response             a11 
 join ldb.d_internal_contact         a15
 on (a11.opened_by_key = a15.row_key)
