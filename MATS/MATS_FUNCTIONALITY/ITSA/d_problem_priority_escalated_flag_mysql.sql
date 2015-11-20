@@ -18,3 +18,4 @@ AND  TA.task_attribute_wh_new_value < TA.task_attribute_wh_old_value
 THEN 'Y' ELSE 'N' END
 <> COALESCE(TRGT.priority_escalated_flag,'')
 
+
