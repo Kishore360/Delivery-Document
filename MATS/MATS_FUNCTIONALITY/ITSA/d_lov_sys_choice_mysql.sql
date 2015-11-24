@@ -14,7 +14,7 @@ from
 join <<tenant>>_workdb.lsm_ls_system_variables LSM
 on (LSM.table_value=SRC.name
 and LSM.column_value=SRC.element )
-where language='en' and enable_flag='Y'
+where language='en' and enable_flag='Y' and inactive=0
 ) SRC
 left join <<tenant>>_mdwdb.d_lov TRGT
 on(SRC.row_id=TRGT.row_id
