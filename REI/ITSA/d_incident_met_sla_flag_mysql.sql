@@ -1,7 +1,10 @@
-SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
- CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for d_problem.met_sla_flag' ELSE 'SUCCESS' END as Message
- FROM <<tenant>>_mdsdb.incident_final SRC 
- LEFT JOIN <<tenant>>_mdwdb.d_incident TRGT 
- ON (SRC.sys_id =TRGT.row_id  
+SELECT made_sla,TRGT.met_sla_flag,TRIM(tsf.stage)
+FROM rei_mdsdb.incident_final SRC 
+ LEFT JOIN rei_mdwdb.d_incident TRGT 
+ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
- WHERE COALESCE( CASE WHEN made_sla = 1 then 'Y' else 'N' END,'')<> COALESCE(TRGT.met_sla_flag ,'')
+left join (SELECT DISTINCT a.task, a.stage
+from rei_mdsdb.task_sla_final a 
+WHERE TRIM(a.stage) = 'breached') tsf
+ ON tsf.task= SRC.sys_id
+ WHERE  CASE when TRIM(tsf.stage) = 'breached' or made_sla <> 1 then 'N'  else 'Y' END <> TRGT.met_sla_flag 
