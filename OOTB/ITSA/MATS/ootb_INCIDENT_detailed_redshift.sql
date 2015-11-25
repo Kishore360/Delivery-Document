@@ -128,7 +128,7 @@ union
 select'd_internal_contact_assignment' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_incident             a11 
 join ldb.d_internal_contact       a123
-on (a11.assigned_to_key = a113.row_key)
+on (a11.assigned_to_key = a123.row_key)
  union
  select'd_calendar_month' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_incident             a11 
