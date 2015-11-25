@@ -56,7 +56,7 @@ union
  select'd_request_item' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_employee_termination             a11 
 join ldb.d_request_item         a19
-on (a11.request_item_key = a13.row_key)
+on (a11.request_item_key = a19.row_key)
 union
  select'dh_employee_hierarchy' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_employee_termination             a11 
