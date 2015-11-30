@@ -25,4 +25,4 @@ FRESH.lastupdated= (select lastupdated from rei_mdwdb.d_o_data_freshness
 
 where etl_run_number = ( select max(etl_run_number) from rei_mdwdb.d_o_data_freshness)) WHERE 
 CASE WHEN timestampdiff(DAY,TRGT.changed_on,FRESH.lastupdated)>14 
-AND  LM.dimension_wh_code='OPEN' THEN 'Y' ELSE 'N' END <> COALESCE(TRGT.dormant_flag ,'');
+AND LM.dimension_class= 'REQUEST_STATE~SC_REQUEST' AND  LM.dimension_wh_code='OPEN' THEN 'Y' ELSE 'N' END <> COALESCE(TRGT.dormant_flag ,'');
