@@ -8,7 +8,7 @@ select RES1.cnt+2 as cnt, RES2.cntt from
 (select count(sys_id) as cnt from
 <<tenant>>_mdsdb.incident_final) as RES1,
 
-(select count(row_id) as cntt 
+(select count(row_id)-2 as cntt 
 from <<tenant>>_mdwdb.d_incident) RES2
 
 )a;
