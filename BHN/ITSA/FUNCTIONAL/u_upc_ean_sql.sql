@@ -4,4 +4,4 @@ left join bhn_mdsdb.u_upc_final u on SRC.u_upc_ean=u.sys_id  and SRC.sourceinsta
 LEFT JOIN bhn_mdwdb.d_incident TRGT 
 ON (SRC.sys_id =TRGT.row_id  
 AND SRC.sourceinstance= TRGT.source_id  )
-WHERE COALESCE( u.u_product_description,'')<> COALESCE(TRGT.upc_ean_c,'')	`
+WHERE COALESCE( u.u_product_description,'')<> COALESCE(TRGT.upc_ean_c,'')	

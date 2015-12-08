@@ -8,4 +8,5 @@ bhn_mdwdb.d_incident di
   JOIN  bhn_mdwdb.d_o_data_freshness FRESH on di.etl_run_number=FRESH.etl_run_number										
   where dlm.dimension_class = 'STATE~INCIDENT'
   AND dlm.dimension_wh_code = 'OPEN'
-  AND  (CASE WHEN timestampdiff(DAY,di.changed_on, FRESH.lastupdated)>14 THEN 'Y' ELSE 'N' END) <> di.dormant_flag)a;
+  AND  (CASE WHEN timestampdiff(DAY,di.changed_on, FRESH.lastupdated)>=14 THEN 'Y' ELSE 'N' END) <> di.dormant_flag)a;
+  
