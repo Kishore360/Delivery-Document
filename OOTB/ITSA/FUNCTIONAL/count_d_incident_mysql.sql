@@ -3,12 +3,12 @@ SELECT CASE WHEN cnt<>cntt THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  FROM
 (
 
-select RES1.cnt+2 as cnt, RES2.cntt from
+select RES1.cnt as cnt, RES2.cntt from
 
 (select count(sys_id) as cnt from
-<<tenant>>_mdsdb.incident_final) as RES1,
+aruba_mdsdb.incident_final) as RES1,
 
 (select count(row_id)-2 as cntt 
-from <<tenant>>_mdwdb.d_incident) RES2
+from aruba_mdwdb.d_incident) RES2
 
 )a;
