@@ -8,4 +8,4 @@ from asu_mdsdb.problem_final s
 left join asu_mdwdb.f_problem   t
 on s.sys_id=t.row_id and s.sourceinstance=t.source_id
 WHERE 
-TIMESTAMPDIFF(second,'1970-01-01',s.business_duration)<> t.business_duration_c)  temp
+TIMESTAMPDIFF(second,'1970-01-01',s.business_duration)<> t.business_duration_c ) temp
