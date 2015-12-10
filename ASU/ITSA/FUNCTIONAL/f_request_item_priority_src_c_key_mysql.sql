@@ -10,7 +10,7 @@ on s.sys_id=t.row_id and s.sourceinstance=t.source_id
 LEFT JOIN asu_mdwdb.d_lov l 
  ON ( CONCAT('PRIORITY','~','TASK~~~',UPPER(s.priority))= l.src_rowid 
  AND s.sourceinstance= l.source_id )
-WHERE l.row_key <> t.priority_src_key)
+WHERE l.row_key <> t.priority_src_key
 ) temp
 
 
