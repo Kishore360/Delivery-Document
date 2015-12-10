@@ -4,8 +4,10 @@ SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
 ELSE 'Data Matched' END AS Message 
 FROM (
 select count(1) as cnt  
-from asu_mdsdb.problem_final s
-left join asu_mdwdb.f_problem   t
+from asu_mdsdb.sc_task_final s
+left join asu_mdwdb.f_request_task   t
 on s.sys_id=t.row_id and s.sourceinstance=t.source_id
-WHERE 
-TIMESTAMPDIFF(second,'1970-01-01',s.business_duration)<> t.business_duration_c)  temp
+left join asu_mdwdb.d_calendar_date l
+on l.row_id = date_format(convert_tz(s.due_date,'GMT','US/Mountain'),'%Y%m%d')
+WHERE t.due_on_key <> l.row_key
+) temp
