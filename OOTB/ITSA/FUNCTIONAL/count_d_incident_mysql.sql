@@ -1,3 +1,4 @@
+
 SELECT CASE WHEN cnt<>cntt THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  CASE WHEN cnt<>cntt THEN concat('Failure',(cnt-cntt)) ELSE 'Data Matched' END as Message
  FROM
@@ -10,5 +11,9 @@ aruba_mdsdb.incident_final) as RES1,
 
 (select count(row_id)-2 as cntt 
 from aruba_mdwdb.d_incident) RES2
+<<<<<<< HEAD
+=======
 
-)a;
+)a; 
+>>>>>>> 498e48c869d4480fddd340d756c8425b0f755f4a
+
