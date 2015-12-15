@@ -1,6 +1,3 @@
-select  CASE WHEN max_count<>min_count THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
- CASE WHEN  max_count<>min_count THEN 'OOTB has Keys Dropped' ELSE 'SUCCESS'  END as Message from (
- select  max(Row_Count) max_count,Min(Row_Count) min_count from (
 select 'ldb.f_incident' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_incident a11 
 union
@@ -148,4 +145,29 @@ select 'ldb.d_calendar_week' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_incident a11 join ldb.d_calendar_date a19 on (a11.opened_on_key=a19.row_key)
 join ldb.d_calendar_week a130
 on (a19.week_start_date_key=a130.row_key)
-)a)b
+
+union
+select 'ldb.d_location' as Table_Name, count(a.row_key) Row_Count
+from  ldb.f_incident a 
+join ldb.d_location b
+on (a.site_c_key =b.row_key)
+union
+select 'ldb.d_lov' as Table_Name, count(a.row_key) Row_Count
+from  ldb.f_incident a 
+join wow_mdwdb.d_lov b
+on (a.secondary_age_c_key =b.row_key)
+union
+select 'ldb.d_location 1' as Table_Name, count(a.row_key) Row_Count
+from  ldb.f_incident a 
+join ldb.d_location  b
+on (a.market_c_key =b.row_key)
+union
+select 'ldb.d_lov 1' as Table_Name, count(a.row_key) Row_Count
+from  ldb.f_incident a 
+join wow_mdwdb.d_lov  b
+on (a.customer_impacted_c_key =b.row_key)
+union
+select 'ldb.d_lov 2' as Table_Name, count(a.row_key) Row_Count
+from  ldb.f_incident a 
+join wow_mdwdb.d_lov  b
+on (a.type_c_key=b.row_key)
