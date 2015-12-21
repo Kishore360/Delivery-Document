@@ -45,3 +45,23 @@ select 'd_internal_organization' as Table_Name,count(a.row_key) Row_Count
 from ldb.f_request_task a
 join  asu_mdwdb.d_internal_contact b
 on  (a.assignment_group_key= b.row_key) 
+union
+select 'd_calendar_date 2' as Table_Name,count(a.row_key) Row_Count
+from ldb.f_request_task a
+join  asu_mdwdb.d_calendar_date b
+on  (a.work_end_on_c_key= b.row_key) 
+union
+select 'd_lov 2' as Table_Name,count(a.row_key) Row_Count
+from ldb.f_request_task a
+join  asu_mdwdb.d_lov b
+on  (a.approval_state_src_key = b.row_key)
+union
+select 'd_lov 2' as Table_Name,count(a.row_key) Row_Count
+from ldb.f_request_task a
+join  asu_mdwdb.d_lov b
+on  (a.urgency_src_key = b.row_key)
+union
+select 'd_lov 3' as Table_Name,count(a.row_key) Row_Count
+from ldb.f_request_task a
+join  asu_mdwdb.d_lov b
+on  (a.priority_src_key = b.row_key)
