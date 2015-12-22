@@ -5,6 +5,11 @@ select'f_incident_response' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_incident_response             a11 
 join ldb.d_calendar_date         a12
 on (a11.requested_on_key = a12.row_key)
+ union
+ select'd_calendar_date 1' as Table_Name, count(a11.row_key) Row_Count
+ from  ldb.f_incident_response             a11 
+join ldb.d_calendar_date         a12
+on (a11.completed_on_key = a12.row_key)
 union
  select'd_calendar_month' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_incident_response             a11 
