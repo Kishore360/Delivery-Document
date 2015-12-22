@@ -6,7 +6,6 @@
 left outer join  ldb.d_calendar_date         a12
 on (a11.opened_on_key = a12.row_key)
 union
------dropping of records for closed on key
  select'd_calendar_date_closed' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_request_item             a11 
 left outer join  ldb.d_calendar_date_closed         a13
@@ -19,7 +18,6 @@ on (a11.opened_on_key = a12.row_key)
 left outer join  ldb.d_calendar_month         a14
 on (a12.month_start_date_key = a14.row_key)
 union
------dropping of records for closed on key
 select'd_calendar_month_closed' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_request_item             a11 
 left outer join  ldb.d_calendar_date_closed         a13
