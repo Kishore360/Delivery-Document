@@ -6,7 +6,7 @@ ELSE 'Data Matched' END AS Message
 FROM (
 select count(1) as cnt  
 from (
-SELECT u_loc AS u_loc,sourceinstance,concat(sys_id,'~1') AS 
+SELECT u_loc AS u_loc,sourceinstance,concat(sys_id,'~1') AS sys_id
    FROM wow_mdsdb.catalog_variable_log_final
    UNION ALL 
    SELECT u_loc AS u_loc,sourceinstance,concat(sys_id,'~2') AS sys_id
