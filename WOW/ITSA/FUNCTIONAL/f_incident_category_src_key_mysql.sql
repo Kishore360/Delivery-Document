@@ -11,6 +11,6 @@ on s.sys_id=t.row_id and s.sourceinstance=t.source_id
 left join wow_mdwdb.d_lov l 
 on (concat('category~incident~~~',upper(uc.u_name))= l.row_id 
  and s.sourceinstance= l.source_id )
-where l.row_key <> t.category_src_key
+WHERE COALESCE(l.row_key,CASE WHEN s.subcategory IS NULL THEN 0 else '-1' end)<> COALESCE(t.sub_category_src_key,'')
 )
 temp
