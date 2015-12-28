@@ -5,7 +5,7 @@ DATE_FORMAT(last_resolved_on_key,'%b') as def
 where abc<>def
 
 
-use ucsf_workdb;
+use bhn_workdb;
 
 select * from (
 select DATE_FORMAT(opened_on_key,'%Y-%b-%d'),DATE_FORMAT(opened_on_key,'%b') as abc,
@@ -14,7 +14,7 @@ DATE_FORMAT(last_resolved_on_key,'%b') as def
 substring(closed_on_key,1,4) as closed_year,
 
 case when substring(closed_on_key,1,4)=substring(opened_on_key,1,4) and DATE_FORMAT(opened_on_key,'%b')= DATE_FORMAT(last_resolved_on_key,'%b')
-then 0 else 1 end as incident_identification_flag from ucsf_mdwdb.f_incident 
+then 0 else 1 end as incident_identification_flag from bhn_mdwdb.f_incident 
 )a
  where a.incident_identification_flag=1 limit 100000;
 

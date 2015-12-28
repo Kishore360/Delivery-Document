@@ -1,0 +1,11 @@
+select c.dimension_name,count(1) from ldbff_incident a
+join   ldb.d_calendar_date  A14
+         on   (a.closed_on_key = a14.row_key)
+         join ldb.d_calendar_month a15
+         on   (a14.month_start_date_key = a15.row_key)
+join ldb.d_incident_call_category_c c
+on a.call_categroy_c_key=c.row_key
+where  a15.lagging_count_of_month between 0 and 1
+and a.class_c_key in (select row_key from ldb.d_incident_class_c where 
+dimension_name like '%Internal%')
+group by 1
