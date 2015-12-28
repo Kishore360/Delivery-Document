@@ -8,4 +8,5 @@ left join wow_mdsdb.catalog_variable_log_final b
 ON a.sys_id = b.u_requested_item
 left join wow_mdwdb.d_request_item c
 on a.sys_id=c.row_id and a.sourceinstance=c.source_id
-where b.u_date_of_womo <> c.date_of_womo_c) temp
+where case when substring(b.u_date_of_womo,5,1) = '-' THEN str_to_date(b.u_date_of_womo,'%Y-%m-%d') 
+else str_to_date(b.u_date_of_womo,'%m-%d-%Y') end <> c.date_of_womo_c) temp
