@@ -6,9 +6,9 @@ ELSE 'Data Matched' END AS Message
 
 from(select count(1) as cnt
 
-from rambus_mdwdb.d_internal_contact a 
+from rambus_mdsdb.sys_user_final b  
 
-left JOIN rambus_mdsdb.sys_user_final b 
+left JOIN rambus_mdwdb.d_internal_contact a 
 
 ON a.row_id =concat('INTERNAL_CONTACT~',b.sys_id)  
 where coalesce(a.group_level_c,'')<>coalesce(b.u_it_group_level,''))z;
