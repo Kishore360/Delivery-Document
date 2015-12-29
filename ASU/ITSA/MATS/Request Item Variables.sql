@@ -15,11 +15,7 @@ on (a11.campus= a12.row_key)
  from  ldb.f_request_item             a11 
 left outer join  ldb.d_request_item_variable_v_department       a12
 on (a11.v_department = a12.row_key)
-union
-select'd_request_item_variable_v_campus' as Table_Name, count(a11.row_key) Row_Count
- from  ldb.f_request_item             a11 
-left outer join  ldb.d_request_item_variable_v_campus        a12
-on (a11. v_campus = a12.row_key)
+
  union
  select'd_request_item_variable_u_request_type' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_request_item             a11 
@@ -40,12 +36,7 @@ union
  from  ldb.f_request_item             a11 
 left outer join  ldb.d_request_item_variable_room         a12
 on (a11.request_item_key= a12.row_key)
-union
 
- select'd_request_item_u_building' as Table_Name, count(a11.row_key) Row_Count
- from  ldb.f_request_item             a11 
-left outer join  ldb.d_request_item_variable_u_building          a12
-on (a11.request_item_key = a12.row_key)
 union
  select'd_request_item_v_request_type' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_request_item             a11 

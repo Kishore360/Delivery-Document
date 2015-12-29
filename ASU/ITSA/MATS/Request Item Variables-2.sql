@@ -24,11 +24,6 @@ union
 left outer join  ldb.d_request_item_variable_urgent          a12
 on (a11.request_item_key = a12.row_key)
 union
- select'd_request_item_variable_v_building' as Table_Name, count(a11.row_key) Row_Count
- from  ldb.f_request_item             a11 
-left outer join  ldb.d_request_item_variable_v_building         a12
-on (a11.request_item_key = a12.row_key)
-union
  select'd_request_item_variable_v_request_category' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_request_item             a11 
 left outer join  ldb.d_request_item_variable_v_request_category         a12
