@@ -16,4 +16,4 @@ b.sys_id=d.row_id AND b.sourceinstance=d.source_id
 where
   c.short_description='Virtual Server' and  #a.sys_created_on=d.sys_created_on_c
 
-CONVERT_TZ(a.sys_created_on,'GMT','US/Mountain')<>d.sys_created_on_c)b
+CONVERT_TZ(a.sys_created_on,'GMT','America/Los_Angeles')<>d.sys_created_on_c)b

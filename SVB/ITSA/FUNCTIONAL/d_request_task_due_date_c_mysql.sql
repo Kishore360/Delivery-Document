@@ -7,5 +7,5 @@ svb_mdsdb.sc_task_final a join
  svb_mdwdb.d_request_task b
 on a.sys_id=b.row_id
 and a.sourceinstance=b.source_id
-where convert_tz(a.due_date,'GMT','US/Mountain')<>b.due_date_c)b
+where convert_tz(a.due_date,'GMT','America/Los_Angeles')<>b.due_date_c)b
 

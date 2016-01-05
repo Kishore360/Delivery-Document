@@ -3,4 +3,4 @@ CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for d_request_item
 FROM svb_mdsdb.sc_req_item_final SRC  
 LEFT JOIN svb_mdwdb.d_request_item TRGT
   ON (SRC.sys_id =TRGT.row_id   AND SRC.sourceinstance= TRGT.source_id  ) 
-  WHERE date(convert_tz(SRC.due_date,'GMT','US/Mountain'))<> date(TRGT.due_date_c)
+  WHERE date(convert_tz(SRC.due_date,'GMT','America/Los_Angeles'))<> date(TRGT.due_date_c)
