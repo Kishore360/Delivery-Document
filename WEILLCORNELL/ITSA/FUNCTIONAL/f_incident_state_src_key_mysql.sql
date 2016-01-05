@@ -1,5 +1,4 @@
 
-
 SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for f_incident.state_src_key' ELSE 'SUCCESS' END as Message
  FROM weillcornell_mdsdb.incident_final SRC 
@@ -7,14 +6,10 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
 LEFT JOIN weillcornell_mdwdb.d_lov LKP 
-<<<<<<< HEAD
- ON ( concat('STATE','~','INCIDENT','~','~','~',upper(SRC.state))= LKP.src_rowid 
-=======
- ON ( concat('STATE','~','INCIDENT','~','~','~',upper(state))= LKP.src_rowid 
->>>>>>> origin/master
+ ON ( concat('STATE','~','INCIDENT','~','~','~',upper(incident_state))= LKP.src_rowid 
 AND SRC.sourceinstance= LKP.source_id )
- WHERE COALESCE(LKP.row_key,CASE WHEN SRC.state IS NULL THEN 0 else '-1' end)<> COALESCE(TRGT.state_src_key,'')
-  and    SRC.sys_id not in (select B.sys_id
+ WHERE COALESCE(LKP.row_key,CASE WHEN SRC.incident_state IS NULL THEN 0 else '-1' end)<> COALESCE(TRGT.state_src_key,'')
+and    SRC.sys_id not in (select B.sys_id
 from
 weillcornell_mdsdb.incident_final B
 join weillcornell_mdsdb.sys_user_final C
