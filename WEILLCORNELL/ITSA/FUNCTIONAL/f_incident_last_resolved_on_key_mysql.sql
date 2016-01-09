@@ -10,7 +10,7 @@ case when year <2000 then A.last_resolved_on_key+20000000 else A.last_resolved_o
 end as  A_last_resolved_on_key from
 (SELECT SYS_ID,sourceinstance, 
 DATE_FORMAT(CONVERT_TZ(resolved_at,<<TENANT_SSI_TIME_ZONE>>,<<DW_TARGET_TIME_ZONE>>),'%Y')  AS   year,
-DATE_FORMAT(CONVERT_TZ(resolved_at,'GMT','America/Chicago'),'%Y%m%d')  AS   last_resolved_on_key
+DATE_FORMAT(CONVERT_TZ(resolved_at,<<TENANT_SSI_TIME_ZONE>>,<<DW_TARGET_TIME_ZONE>>),'%Y%m%d')  AS   last_resolved_on_key
 FROM weillcornell_mdsdb.incident_final 
 #where sys_id='092bf5f2f547b9c00f4bd5728aaf9afc'
 )A

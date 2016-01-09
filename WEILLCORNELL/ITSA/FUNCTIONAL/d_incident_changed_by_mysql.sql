@@ -7,7 +7,7 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  LEFT JOIN weillcornell_mdwdb.d_incident TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
- WHERE COALESCE( SRC.sys_updated_by,'')<> COALESCE(TRGT.changed_by ,'')
+ WHERE TRGT.soft_deleted_flag='N' and COALESCE( SRC.sys_updated_by,'')<> COALESCE(TRGT.changed_by ,'')
   and    SRC.sys_id not in (select B.sys_id
 from
 weillcornell_mdsdb.incident_final B

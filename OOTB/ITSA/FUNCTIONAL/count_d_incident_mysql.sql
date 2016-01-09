@@ -10,11 +10,7 @@ select RES1.cnt as cnt, RES2.cntt from
 <<tenant>>_mdsdb.incident_final) as RES1,
 
 (select count(row_id)-2 as cntt 
-from <<tenant>>_mdwdb.d_incident) RES2
-<<<<<<< HEAD
-=======
-
->>>>>>> 243ba958dffd6344a7970ae57f759ff20d735924
+from <<tenant>>_mdwdb.d_incident where soft_deleted_flag='N') RES2
 
 )a; 
 

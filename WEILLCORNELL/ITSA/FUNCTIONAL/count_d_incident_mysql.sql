@@ -18,6 +18,6 @@ where UPPER(C.user_name) = 'GUEST'
 and UPPER(D.name) = 'ONLINE DIRECTORY' ) ) as RES1,
 
 (select count(row_id) as cntt 
-from weillcornell_mdwdb.d_incident) RES2
+from weillcornell_mdwdb.d_incident where soft_deleted_flag='N') RES2
 
 )a;
