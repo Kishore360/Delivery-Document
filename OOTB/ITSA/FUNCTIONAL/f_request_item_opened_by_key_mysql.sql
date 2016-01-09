@@ -8,7 +8,7 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  LEFT JOIN <<tenant>>_mdwdb.d_internal_contact LKP 
  ON ( concat('INTERNAL_CONTACT~',SRC.opened_by)= LKP.row_id 
 AND SRC.sourceinstance= LKP.source_id
-and COALESCE(CONVERT_TZ (SRC.opened_at,'@#TENANT_SSI_TIME_ZONE@#','@#DW_TARGET_TIME_ZONE@#'), CONVERT_TZ (SRC.closed_at,'@#TENANT_SSI_TIME_ZONE@#','@#DW_TARGET_TIME_ZONE@#'),'UNSPECIFIED') 
+and COALESCE(CONVERT_TZ (SRC.opened_at,<<TENANT_SSI_TIME_ZONE>>,<<DW_TARGET_TIME_ZONE>>), CONVERT_TZ (SRC.closed_at,<<TENANT_SSI_TIME_ZONE>>,<<DW_TARGET_TIME_ZONE>>),'UNSPECIFIED') 
 BETWEEN effective_from AND effective_to) 
 
  WHERE COALESCE(LKP.row_key,CASE WHEN SRC.opened_by IS NULL THEN 0 else '-1' end)<> COALESCE(TRGT.opened_by_key,'')

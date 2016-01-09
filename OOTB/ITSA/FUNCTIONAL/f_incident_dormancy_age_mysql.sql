@@ -11,5 +11,5 @@
  AND TRGT.etl_run_number = df.etl_run_number)
 where lm.dimension_class = 'STATE~INCIDENT'
 AND CASE WHEN lm.dimension_wh_code = 'OPEN' THEN 
-DATEDIFF(CONVERT_TZ(df.lastupdated,'@#TENANT_SSI_TIME_ZONE@#','@#DW_TARGET_TIME_ZONE@#'),TRGT.changed_on)
+DATEDIFF(CONVERT_TZ(df.lastupdated,<<TENANT_SSI_TIME_ZONE>>,<<DW_TARGET_TIME_ZONE>>),TRGT.changed_on)
  ELSE 0 END <> TRGT.dormancy_age 
