@@ -7,13 +7,11 @@ SELECT CASE WHEN cnt<>cntt THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 select RES1.cnt as cnt, RES2.cntt from
 
 (select count(sys_id) as cnt from
-aruba_mdsdb.incident_final) as RES1,
+<<tenant>>_mdsdb.incident_final) as RES1,
 
 (select count(row_id)-2 as cntt 
-from aruba_mdwdb.d_incident) RES2
-<<<<<<< HEAD
-=======
+from <<tenant>>_mdwdb.d_incident) RES2
 
 )a; 
->>>>>>> 498e48c869d4480fddd340d756c8425b0f755f4a
+
 

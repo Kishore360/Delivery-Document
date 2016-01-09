@@ -24,16 +24,6 @@ select'ldb.d_internal_organization_group' as Table_Name, count(a11.incident_key)
 join ldb.d_internal_organization_group       a15
 on (a11.assignment_group_key = a15.row_key)
 union
-select'ldb.d_configuration_item' as Table_Name, count(a11.incident_key) Row_Count
- from  ldb.f_incident_reassignment_analysis_summary_c       a11 
-join ldb.d_configuration_item       a16
-on (a11.business_service_c_key = a16.row_key)
-union
-select'ldb.d_incident_category' as Table_Name, count(a11.incident_key) Row_Count
- from  ldb.f_incident_reassignment_analysis_summary_c       a11 
-join ldb.d_incident_category       a17
-on (a11.category_src_key = a17.row_key)
-union
 select'ldb.d_task_contacttype' as Table_Name, count(a11.incident_key) Row_Count
  from  ldb.f_incident_reassignment_analysis_summary_c       a11 
 join ldb.d_task_contacttype       a18
