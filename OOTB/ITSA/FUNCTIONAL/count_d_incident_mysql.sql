@@ -11,6 +11,10 @@ select RES1.cnt as cnt, RES2.cntt from
 
 (select count(row_id)-2 as cntt 
 from <<tenant>>_mdwdb.d_incident) RES2
+<<<<<<< HEAD
+=======
+
+>>>>>>> 243ba958dffd6344a7970ae57f759ff20d735924
 
 )a; 
 
