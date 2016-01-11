@@ -1,5 +1,5 @@
 select  a.last_resolved_on_key, count(1) 
-from ldb.f_incident a
+from ldb.f_incident_resolved a
 join   ldb.d_calendar_date  A14
          on   (a.last_resolved_on_key = a14.row_key)
          join ldb.d_calendar_month a15
@@ -8,7 +8,7 @@ where  a15.lagging_count_of_month between 0 and 11
 group by 1;
 
 select  a. closed_on_key, count(1) 
-from ldb.f_incident a
+from ldb.f_incident_closed a
 join   ldb.d_calendar_date  A14
          on   (a.closed_on_key = a14.row_key)
          join ldb.d_calendar_month a15
