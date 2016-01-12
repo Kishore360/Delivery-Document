@@ -13,6 +13,5 @@ INNER JOIN pgi_mdwdb.d_lov_map c ON c.dimension_class ='STATE~INCIDENT'
 AND a.sourceinstance=c.source_id
 AND c.dimension_code = a.state
 AND c.dimension_wh_code IN('RESOLVED','CLOSED')
-LEFT JOIN pgi_mdwdb.d_calendar_date d ON a.sourceinstance=d.source_id
-AND d.row_id=COALESCE(DATE_FORMAT(CONVERT_TZ(a.closed_at,'GMT','UTC'),'%Y%m%d'),'UNSPECIFIED')
-WHERE COALESCE(d.row_key,coalesce(b.closed_on_key,c.row_key)) <> b.last_resolved_on_key;
+LEFT JOIN pgi_mdwdb.d_calendar_date d ON  d.row_id=COALESCE(DATE_FORMAT(CONVERT_TZ(a.u_resolved,'GMT','UTC'),'%Y%m%d'),'UNSPECIFIED')
+WHERE COALESCE(d.row_key,coalesce(b.closed_on_key,0)) <> b.last_resolved_on_key;
