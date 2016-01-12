@@ -66,11 +66,6 @@ from ldb.f_request_task a
 join  asu_mdwdb.d_lov b
 on  (a.priority_src_key = b.row_key)
 union
-select 'd_celendar_date 3' as Table_Name,count(a.row_key) Row_Count
-from ldb.f_request_task a
-join  ldb.d_calendar_date  b
-on  (a.work_end_on_c_key = b.row_key)
-union
 select 'd_lov 5' as Table_Name,count(a.row_key) Row_Count
 from ldb.f_request_task a
 join  asu_mdwdb.d_lov b
