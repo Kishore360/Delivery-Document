@@ -5,7 +5,7 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
 LEFT JOIN weillcornell_mdwdb.d_calendar_date LKP 
-on (LKP.row_id = date_format(convert_tz(SRC.opened_at,<<TENANT_SSI_TIME_ZONE>>,<<DW_TARGET_TIME_ZONE>>),'%Y%m%d')  and LKP.source_id=0
+on (LKP.row_id = date_format(convert_tz(SRC.opened_at,'GMT','America/New_York'),'%Y%m%d')  and LKP.source_id=0
 )
 WHERE COALESCE(LKP.row_key,'') <> COALESCE(TRGT.opened_on_key,'') 
  and    SRC.sys_id not in (select B.sys_id

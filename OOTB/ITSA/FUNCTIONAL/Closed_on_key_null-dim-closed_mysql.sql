@@ -7,4 +7,4 @@ from <<tenant>>_mdwdb.f_incident f
  join <<tenant>>_mdwdb.d_lov lov on lov.dimension_class=d.dimension_class and lov.dimension_code=d.dimension_code 
 and d.dimension_class not IN ('STATE~GEO','CITY~GEO', 'COUNTRY~GEO','CURRENCY')
  and d.src_key not in(-1) 
-where f.closed_on_key is null	and dimension_name ='CLOSED')a
+where f.closed_on_key is null	and dimension_wh_code ='CLOSED')a
