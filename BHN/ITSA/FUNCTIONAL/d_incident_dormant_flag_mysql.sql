@@ -4,9 +4,9 @@
   FROM 
 bhn_mdwdb.d_incident di
   JOIN bhn_mdwdb.f_incident fi ON di.row_key = fi.incident_key
-  JOIN bhn_mdwdb.d_lov_map dlm ON fi.state_src_key = dlm.src_key
-  JOIN  bhn_mdwdb.d_o_data_freshness FRESH on di.etl_run_number=FRESH.etl_run_number										
+  JOIN bhn_mdwdb.d_lov_map dlm ON fi.state_src_key = dlm.src_key  							
   where dlm.dimension_class = 'STATE~INCIDENT'
   AND dlm.dimension_wh_code = 'OPEN'
-  AND  (CASE WHEN timestampdiff(DAY,di.changed_on, FRESH.lastupdated)>=14 THEN 'Y' ELSE 'N' END) <> di.dormant_flag)a;
+  AND  (CASE WHEN timestampdiff(DAY,di.changed_on, (SELECT MAX(lastupdated) AS lastupdated
+FROM bhn_mdwdb.d_o_data_freshness WHERE sourcename like 'ServiceNow%'))>=14 THEN 'Y' ELSE 'N' END) <> di.dormant_flag)a;
   

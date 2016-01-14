@@ -3,7 +3,8 @@ SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
 ELSE 'Data Matched' END AS Message 
 FROM  (
 select count(1) as cnt from (
-SELECT SRC.sys_id,TRGT.row_id,COALESCE( CASE WHEN SRC.active = 1 and SRC.due_date < FRESH.lastupdated then 'Y' else 'N' END,'')abc, COALESCE(TRGT.over_due_flag ,'')def
+SELECT SRC.sys_id,TRGT.row_id,COALESCE( CASE WHEN SRC.active = 1 and SRC.due_date < (SELECT MAX(lastupdated) AS lastupdated
+FROM starwood_mdwdb.d_o_data_freshness WHERE sourcename like 'ServiceNow%') then 'Y' else 'N' END,'')abc, COALESCE(TRGT.over_due_flag ,'')def
 FROM  starwood_mdsdb.task_final a
 inner join starwood_mdsdb.incident_final SRC 
 on a.sys_id=SRC.sys_id
@@ -14,7 +15,6 @@ on b.sys_id=SRC.u_request_category
 LEFT JOIN starwood_mdwdb.d_incident TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
-LEFT JOIN starwood_mdwdb.d_o_data_freshness FRESH  ON(FRESH.source_id=SRC.sourceinstance) 
 where 
 d.name IN ('Booking.com','Central 
 Reservation','DirectConnect','EZYield','HBSi','Hotwire','Orbitz','Priceline/Travelweb','PRSnet','Rational Dynamic Pricing','Saratoga',

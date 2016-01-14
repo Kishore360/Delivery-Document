@@ -8,9 +8,8 @@ JOIN wow_mdwdb.d_lov_map br ON f.state_src_key = br.src_key
 AND br.dimension_wh_code = 'OPEN'
 JOIN wow_mdwdb.d_incident a ON a.row_key = f.incident_key
 AND f.source_id = a.source_id
-JOIN wow_mdwdb.d_o_data_freshness df ON f.source_id = df.source_id
-and df.soft_deleted_flag='N'   AND f.etl_run_number = df.etl_run_number
-WHERE timestampdiff(second,a.opened_on,df.lastupdated)<> f.age_c
+WHERE timestampdiff(second,a.opened_on,(SELECT MAX(lastupdated) AS lastupdated
+FROM wow_mdwdb.d_o_data_freshness WHERE sourcename like 'ServiceNow%'))<> f.age_c
 
 union
 

@@ -21,11 +21,10 @@ LEFT JOIN starwood_mdwdb.f_incident TRGTF
  AND TRGTF.source_id= TRGT.source_id  )
  
 LEFT JOIN starwood_mdwdb.d_lov_map LM ON TRGTF.state_src_key=LM.src_key
-LEFT JOIN starwood_mdwdb.d_o_data_freshness FRESH  ON(FRESH.source_id=SRC.sourceinstance and FRESH.etl_run_number=TRGTF.etl_run_number)  
-
 -- LEFT JOIN starwood_mdwdb.d_calendar_date LKP 
 -- on (LKP.row_id = date_format(convert_tz(SRC.closed_at,"GMT","America/New_York"),'%Y%m%d')  and LKP.source_id=0)
-where timestampdiff(DAY,TRGT.changed_on, FRESH.lastupdated)>30
+where timestampdiff(DAY,TRGT.changed_on, (SELECT MAX(lastupdated) AS lastupdated
+FROM starwood_mdwdb.d_o_data_freshness WHERE sourcename like 'ServiceNow%'))>30
   AND LM.dimension_class = 'STATE~INCIDENT'
   AND LM.dimension_wh_code = 'OPEN'
   AND TRGT.dormant_flag = 'N' and 

@@ -13,8 +13,7 @@ left join intuit_mdwdb.f_incident_task_c l1
 ON b.row_key=l1.incident_task_key  AND  b.source_id=l1.source_id 
 left join intuit_mdwdb.d_lov_map l2
 on l1.state_src_key=l2.src_key 
-JOIN   intuit_mdwdb.d_o_data_freshness l3
-ON     l3.etl_run_number = l1.etl_run_number AND    l3.source_id = l1.source_id
-WHERE case when  timestampdiff(day,b.changed_on,l3.lastupdated)>30 AND  l2.dimension_wh_code='OPEN' then 'Y' else 'N'
+WHERE case when  timestampdiff(day,b.changed_on,(SELECT MAX(lastupdated) AS lastupdated
+FROM intuit_mdwdb.d_o_data_freshness WHERE sourcename like 'ServiceNow%'))>30 AND  l2.dimension_wh_code='OPEN' then 'Y' else 'N'
 end <> b.dormant_flag ) temp
 

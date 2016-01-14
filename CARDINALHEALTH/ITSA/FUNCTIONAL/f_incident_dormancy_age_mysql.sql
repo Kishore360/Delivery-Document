@@ -7,12 +7,7 @@ FROM cardinalhealth_mdsdb.incident_final SRC
     
     left join cardinalhealth_mdwdb.d_lov_map lm 
   ON (lm.src_key = TRGT.state_src_key)
-left join(
-SELECT lastupdated,source_id
-FROM cardinalhealth_mdwdb.d_o_data_freshness
-WHERE etl_run_number in (select max(etl_run_number) from cardinalhealth_mdwdb.d_o_data_freshness))df 
-ON TRGT.source_id = df.source_id
 where lm.dimension_class = 'STATE~INCIDENT'
-
 AND   lm.dimension_wh_code = 'OPEN' and
-DATEDIFF(convert_tz(df.lastupdated,'GMT','America/New_York'),TRGT.changed_on) <> TRGT.dormancy_age;
+DATEDIFF(convert_tz((SELECT MAX(lastupdated) AS lastupdated
+FROM cardinalhealth_mdwdb.d_o_data_freshness WHERE sourcename like 'ServiceNow%'),'GMT','America/New_York'),TRGT.changed_on) <> TRGT.dormancy_age;

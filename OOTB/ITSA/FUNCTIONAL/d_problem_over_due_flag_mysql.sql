@@ -10,11 +10,9 @@ COALESCE( CASE WHEN TRGT.active_flag = 'Y' and TRGT.due_on < FRESH.lastupdated t
  COALESCE(TRGT.over_due_flag ,'')
 from
 <<tenant>>_mdwdb.d_problem TRGT
-LEFT JOIN <<tenant>>_mdwdb.d_o_data_freshness FRESH  ON(FRESH.source_id=TRGT.source_id
-and TRGT.etl_run_number=FRESH.etl_run_number
-and sourcename like 'ServiceNow%') 
 WHERE due_on is not  null and 
-COALESCE( CASE WHEN TRGT.active_flag = 'Y' and TRGT.due_on < FRESH.lastupdated then 'Y' else 'N' END,'')<>
+COALESCE( CASE WHEN TRGT.active_flag = 'Y' and TRGT.due_on < (SELECT MAX(lastupdated) AS lastupdated
+FROM <<tenant>>_mdwdb.d_o_data_freshness WHERE sourcename like 'ServiceNow%') then 'Y' else 'N' END,'')<>
  COALESCE(TRGT.over_due_flag ,'')
 )a
 

@@ -9,7 +9,6 @@ select count(1) cnt
   LEFT JOIN  <<tenant>>_mdwdb.f_request_task TRGTF 
  ON (TRGTF.request_task_key =TRGT.row_key
  AND TRGTF.source_id =TRGT.source_id)
-JOIN <<tenant>>_mdwdb.d_o_data_freshness FRESH  ON(FRESH.source_id=SRC.sourceinstance and FRESH.etl_run_number=TRGTF.etl_run_number)
 LEFT JOIN <<tenant>>_mdwdb.d_lov_map LM ON TRGTF.state_src_key=LM.src_key
 where CASE WHEN  TIMESTAMPDIFF(MINUTE,TRGT.opened_on,TRGT.closed_on)<30  THEN 'Y' ELSE 'N' END<>COALESCE(TRGT.first_call_resolution_flag ,'')
 )a 

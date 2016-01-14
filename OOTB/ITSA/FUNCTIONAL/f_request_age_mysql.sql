@@ -11,11 +11,9 @@ select CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
     left join <<tenant>>_mdwdb.d_calendar_date cc 
   ON (cc.row_key = fi.closed_on_key
         and cc.source_id = 0)
- LEFT JOIN <<tenant>>_mdwdb.d_o_data_freshness df 
-  ON (fi.source_id = df.source_id
-  AND fi.etl_run_number = df.etl_run_number)
  where lm.dimension_class = 'STATE~REQUEST'
  and case when lm.dimension_wh_code in ('OPEN') 
-    then TIMESTAMPDIFF(DAY, co.calendar_date, convert_tz(df.lastupdated,<<TENANT_SSI_TIME_ZONE>>,<<DW_TARGET_TIME_ZONE>>))
+    then TIMESTAMPDIFF(DAY, co.calendar_date, convert_tz((SELECT MAX(lastupdated) AS lastupdated
+FROM <<tenant>>_mdwdb.d_o_data_freshness WHERE sourcename like 'ServiceNow%'),<<TENANT_SSI_TIME_ZONE>>,<<DW_TARGET_TIME_ZONE>>))
                 else TIMESTAMPDIFF(DAY, co.calendar_date, cc.calendar_date)
             end  <> fi.age

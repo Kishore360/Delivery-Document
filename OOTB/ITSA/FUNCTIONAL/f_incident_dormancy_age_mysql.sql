@@ -6,10 +6,8 @@
  AND SRC.sourceinstance= TRGT.source_id )
  left join <<tenant>>_mdwdb.d_lov_map lm 
  ON (lm.src_key = TRGT.state_src_key)
- LEFT JOIN <<tenant>>_mdwdb.d_o_data_freshness df 
- ON (TRGT.source_id = df.source_id
- AND TRGT.etl_run_number = df.etl_run_number)
-where lm.dimension_class = 'STATE~INCIDENT'
+ where lm.dimension_class = 'STATE~INCIDENT'
 AND CASE WHEN lm.dimension_wh_code = 'OPEN' THEN 
-DATEDIFF(CONVERT_TZ(df.lastupdated,<<TENANT_SSI_TIME_ZONE>>,<<DW_TARGET_TIME_ZONE>>),TRGT.changed_on)
+DATEDIFF(CONVERT_TZ((SELECT MAX(lastupdated) AS lastupdated
+FROM <<tenant>>_mdwdb.d_o_data_freshness WHERE sourcename like 'ServiceNow%'),<<TENANT_SSI_TIME_ZONE>>,<<DW_TARGET_TIME_ZONE>>),TRGT.changed_on)
  ELSE 0 END <> TRGT.dormancy_age 

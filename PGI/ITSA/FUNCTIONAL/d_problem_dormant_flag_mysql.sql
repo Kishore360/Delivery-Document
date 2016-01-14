@@ -17,12 +17,7 @@ ON (TRGTF.problem_key =TRGT.row_key
 LEFT JOIN pgi_mdwdb.d_lov_map LM 
 ON TRGTF.state_src_key=LM.src_key
 
-LEFT JOIN pgi_mdwdb.d_o_data_freshness FRESH  
-ON(FRESH.source_id=SRC.sourceinstance) 
- AND 
-
-FRESH.lastupdated= (select lastupdated from pgi_mdwdb.d_o_data_freshness
-
-where etl_run_number = ( select max(etl_run_number) from pgi_mdwdb.d_o_data_freshness)) WHERE 
-CASE WHEN timestampdiff(DAY,TRGT.changed_on,FRESH.lastupdated)>30 
+ WHERE 
+CASE WHEN timestampdiff(DAY,TRGT.changed_on,(SELECT MAX(lastupdated) AS lastupdated
+FROM pgi_mdwdb.d_o_data_freshness WHERE sourcename like 'ServiceNow%'))>30 
 AND  LM.dimension_wh_code='OPEN' THEN 'Y' ELSE 'N' END <> COALESCE(TRGT.dormant_flag ,'');
