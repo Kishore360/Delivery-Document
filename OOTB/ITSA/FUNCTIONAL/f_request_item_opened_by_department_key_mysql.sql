@@ -8,4 +8,4 @@ LEFT JOIN <<tenant>>_mdwdb.f_request_item TRGT ON SRC.sys_id=TRGT.row_id AND SRC
 
 left join <<tenant>>_mdwdb.d_internal_organization LKP on LKP.row_id =concat('DEPARTMENT~',scu.department) and SRC.sourceinstance=LKP.source_id 
 
-WHERE COALESCE(LKP.row_key ,CASE WHEN scu.department is null THEN 0 else '-1' end)<> COALESCE(TRGT.opened_by_department_key,'')
+WHERE COALESCE(LKP.row_key ,CASE WHEN scu.department is null THEN 0 else -1 end)<> (TRGT.opened_by_department_key)

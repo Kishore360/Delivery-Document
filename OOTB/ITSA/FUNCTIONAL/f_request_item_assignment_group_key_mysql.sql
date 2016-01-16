@@ -8,5 +8,5 @@ on (src.sys_id =trgt.row_id AND src.sourceinstance= trgt.source_id)
 LEFT JOIN <<tenant>>_mdwdb.d_internal_organization o
 ON  CONCAT('GROUP~', src.assignment_group)= o.row_id and src.sourceinstance=o.source_id
 WHERE 
-COALESCE(o.row_key,CASE WHEN src.assignment_group IS NULL THEN 0 else '-1' end)<> COALESCE(trgt.assignment_group_key,'')
+COALESCE(o.row_key,CASE WHEN src.assignment_group IS NULL THEN 0 else -1 end)<> (trgt.assignment_group_key)
 ;

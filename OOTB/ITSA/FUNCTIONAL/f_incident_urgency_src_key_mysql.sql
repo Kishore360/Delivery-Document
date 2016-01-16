@@ -7,4 +7,4 @@
 LEFT JOIN <<tenant>>_mdwdb.d_lov LKP 
  ON ( concat('URGENCY','~','TASK','~','~','~',upper(urgency))= LKP.src_rowid 
 AND SRC.sourceinstance= LKP.source_id )
- WHERE COALESCE(LKP.row_key,CASE WHEN SRC.urgency IS NULL THEN 0 else '-1' end)<> COALESCE(TRGT.urgency_src_key,'') 
+ WHERE COALESCE(LKP.row_key,CASE WHEN SRC.urgency IS NULL THEN 0 else -1 end)<> COALESCE(TRGT.urgency_src_key) 

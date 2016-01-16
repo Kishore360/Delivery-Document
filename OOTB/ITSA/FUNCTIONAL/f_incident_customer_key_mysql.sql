@@ -7,5 +7,5 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 LEFT JOIN <<tenant>>_mdwdb.d_organization_customer LKP 
  ON ( concat('ORG_CUST~',company)= LKP.row_id 
 AND SRC.sourceinstance= LKP.source_id )
- WHERE COALESCE(LKP.row_key,CASE WHEN SRC.company IS NULL THEN 0 else '-1' end)<> COALESCE(TRGT.customer_key,'')
+ WHERE COALESCE(LKP.row_key,CASE WHEN SRC.company IS NULL THEN 0 else -1 end)<> (TRGT.customer_key)
 

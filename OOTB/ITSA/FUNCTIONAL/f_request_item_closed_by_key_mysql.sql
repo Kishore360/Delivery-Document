@@ -12,4 +12,6 @@ AND SRC.sourceinstance= LKP.source_id
 AND COALESCE(CONVERT_TZ (SRC.opened_at,<<TENANT_SSI_TIME_ZONE>>,<<DW_TARGET_TIME_ZONE>>), CONVERT_TZ (SRC.closed_at,<<TENANT_SSI_TIME_ZONE>>,<<DW_TARGET_TIME_ZONE>>)) 
 BETWEEN effective_from AND effective_to
 )
- WHERE CASE WHEN SRC.closed_by IS NULL THEN 0 else (LKP.row_key) end<> COALESCE(TRGT.closed_by_key,'');
+ WHERE  COALESCE(LKP.row_key,CASE WHEN SRC.closed_by  IS NULL THEN 0 ELSE -1 END )<> (TRGT.closed_by_key);
+ 
+ 

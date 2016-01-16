@@ -8,7 +8,7 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  AND SRC.sourceinstance= TRGT.source_id  )
  LEFT JOIN <<tenant>>_mdwdb.d_configuration_item LKP 
  ON ( SRC.configuration_item= LKP.row_id AND SRC.sourceinstance= LKP.source_id )
- WHERE CASE WHEN SRC.configuration_item IS NULL THEN 0 else 
-(LKP.row_key)
-end<> COALESCE(TRGT.configuration_item_key,'')
+ WHERE COALESCE(LKP.row_key,CASE WHEN SRC.configuration_item  IS NULL THEN 0 ELSE -1 END )
+<> (TRGT.configuration_item_key)
 
+ 

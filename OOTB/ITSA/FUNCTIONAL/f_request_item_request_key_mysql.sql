@@ -9,4 +9,4 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  LEFT JOIN <<tenant>>_mdwdb.d_request LKP 
  ON ( SRC.request= LKP.row_id 
 AND SRC.sourceinstance= LKP.source_id )
- WHERE COALESCE(LKP.row_key,CASE WHEN SRC.request IS NULL THEN 0 else '-1' end)<> COALESCE(TRGT.request_key,'')
+ WHERE COALESCE(LKP.row_key,CASE WHEN SRC.request IS NULL THEN 0 else -1 end)<> (TRGT.request_key)

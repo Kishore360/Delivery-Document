@@ -10,7 +10,7 @@ select count(1) cnt
  ON (TRGTF.request_task_key =TRGT.row_key
  AND TRGTF.source_id =TRGT.source_id)
 LEFT JOIN <<tenant>>_mdwdb.d_lov_map LM ON TRGTF.state_src_key=LM.src_key
-where CASE WHEN  TIMESTAMPDIFF(MINUTE,TRGT.opened_on,TRGT.closed_on)<30  THEN 'Y' ELSE 'N' END<>COALESCE(TRGT.first_call_resolution_flag ,'')
+where CASE WHEN  TIMESTAMPDIFF(MINUTE,TRGT.opened_on,TRGT.closed_on)<30  THEN 'Y' ELSE 'N' END<>(TRGT.first_call_resolution_flag)
 )a 
  
  

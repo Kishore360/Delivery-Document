@@ -20,4 +20,4 @@ JOIN   <<tenant>>_mdwdb.d_internal_organization LKP2
  
  WHERE COALESCE(LKP.row_key,LKP2.row_key,CASE WHEN (SRC.opened_by is not null and LKP1.department_code IS NULL 
  or SRC.opened_by is  null)
- THEN 0 else '-1' end)<> COALESCE(TRGT.opened_by_department_key,'')
+ THEN 0 else -1 end)<> (TRGT.opened_by_department_key)

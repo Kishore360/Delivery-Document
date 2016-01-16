@@ -5,8 +5,8 @@ FROM (
 select count(1) as cnt
 from <<tenant>>_mdwdb.d_request TRGT
 WHERE due_on is not  null and 
-COALESCE( CASE WHEN TRGT.active_flag = 'Y' and TRGT.due_on < (SELECT MAX(lastupdated) AS lastupdated
-FROM <<tenant>>_mdwdb.d_o_data_freshness WHERE sourcename like 'ServiceNow%') then 'Y' else 'N' END,'')<>
- COALESCE(TRGT.over_due_flag ,'')
+( CASE WHEN TRGT.active_flag = 'Y' and TRGT.due_on < (SELECT MAX(lastupdated) AS lastupdated
+FROM <<tenant>>_mdwdb.d_o_data_freshness WHERE sourcename like 'ServiceNow%') then 'Y' else 'N' END)<>
+ (TRGT.over_due_flag)
 )a
 

@@ -10,4 +10,4 @@ LEFT JOIN <<tenant>>_mdwdb.d_lov LKP
  ON  LKP.dimension_class like '%STATE~INCIDENT%' and
 ( concat('STATE~INCIDENT~~~',upper(SRC.state))= LKP.src_rowid 
 AND SRC.sourceinstance= LKP.source_id )
- WHERE COALESCE(LKP.row_key,CASE WHEN SRC.state IS NULL THEN 0 else '-1' end)<> COALESCE(TRGT.state_src_key,'')
+ WHERE COALESCE(LKP.row_key,CASE WHEN SRC.state IS NULL THEN 0 else -1 end)<> (TRGT.state_src_key)

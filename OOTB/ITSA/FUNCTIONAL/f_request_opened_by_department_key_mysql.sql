@@ -20,4 +20,4 @@ AND SRC.sourceinstance= LKP2.source_id )
 and LKP.row_id  is null 
  
  WHERE COALESCE(LKP.row_key,LKP2.row_key,CASE WHEN (SRC.opened_by is not null and LKP1.department_code IS NULL 
- or SRC.opened_by is  null) THEN 0 else '-1' end)<> COALESCE(TRGT.opened_by_department_key,'')
+ or SRC.opened_by is  null) THEN 0 else -1 end)<> (TRGT.opened_by_department_key)
