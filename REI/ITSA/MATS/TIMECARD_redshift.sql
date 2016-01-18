@@ -57,6 +57,22 @@ select'd_internal_organization_department' as Table_Name, count(a11.row_key) Row
                   on         (a11.closed_on_key = a14.row_key)
 				   join        ldb.d_calendar_month_closed a114
                   on         (a14.month_start_date_key = a114.row_key)
+union  
+select  'd_portfolio_c 'as Table_Name,count(a11.row_key) Row_Count from ldb.f_time_entry 	a11  
+join ldb.d_project_c b
+on a11.project_key=b.row_key
+join ldb.d_portfolio_c c
+on b.portfolio_c_key=c.row_key
+union  
+select  'd_portfolio_owner_c 'as Table_Name,count(a11.row_key) Row_Count from ldb.f_time_entry 	a11
+	join	ldb.d_project_c	a17
+	  on 	(a11.project_key = a17.row_key)
+	join	ldb.d_portfolio_c	a111
+	  on 	(a17.portfolio_c_key = a111.row_key)
+	join	ldb.d_portfolio_owner_c	a133
+	  on 	(a111.portfolio_owner_key = a133.row_key)
+
+
 )a
 )b
 				  
