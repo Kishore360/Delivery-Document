@@ -6,5 +6,5 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  AND SRC.sourceinstance= TRGT.source_id  )
 LEFT JOIN <<tenant>>_mdwdb.d_calendar_date LKP 
 on (LKP.row_id = date_format(convert_tz(SRC.estimated_delivery,<<TENANT_SSI_TIME_ZONE>>,<<DW_TARGET_TIME_ZONE>>),'%Y%m%d') )
-WHERE LKP.row_key <> TRGT.estimated_delivery_on_key
+WHERE coalesce(LKP.row_key,-99) <> coalesce(TRGT.estimated_delivery_on_key,-99)
 

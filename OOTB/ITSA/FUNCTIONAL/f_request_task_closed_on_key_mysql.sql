@@ -7,4 +7,4 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 LEFT JOIN <<tenant>>_mdwdb.d_calendar_date LKP 
 on (LKP.row_id = date_format(convert_tz(SRC.closed_at,<<TENANT_SSI_TIME_ZONE>>,<<DW_TARGET_TIME_ZONE>>),'%Y%m%d')  and LKP.source_id=0
 )
-WHERE LKP.row_key <> TRGT.closed_on_key
+WHERE coalesce(LKP.row_key) <> coalesce(TRGT.closed_on_key)
