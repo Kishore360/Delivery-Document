@@ -5,7 +5,7 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  (select CASE WHEN TA.task_attribute_wh_old_value IS NOT NULL AND TA.task_attribute_wh_new_value IS NOT NULL   
 AND  TA.task_attribute_wh_new_value < TA.task_attribute_wh_old_value 
 THEN 'Y' ELSE 'N' END ABC
-, COALESCE(TRGT.priority_escalated_flag,'') DEF
+, (TRGT.priority_escalated_flag) DEF
  FROM <<tenant>>_mdsdb.sc_req_item_final SRC 
  LEFT JOIN <<tenant>>_mdwdb.d_request_item TRGT 
  ON (SRC.sys_id =TRGT.row_id  

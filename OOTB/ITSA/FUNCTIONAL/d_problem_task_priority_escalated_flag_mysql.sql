@@ -8,4 +8,4 @@ ON SRC.sys_id =TA.documentkey AND SRC.sourceinstance= TA.sourceinstance
 AND  TABLENAME = 'problem_task' AND FIELDNAME = 'priority'
 WHERE CASE   WHEN TA.NEWVALUE < TA.OLDVALUE THEN 'Y'
           ELSE 'N'
-      END <> COALESCE(TRGT.priority_escalated_flag,'');
+      END <> (TRGT.priority_escalated_flag);

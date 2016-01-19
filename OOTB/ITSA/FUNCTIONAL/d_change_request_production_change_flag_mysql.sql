@@ -6,4 +6,4 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  LEFT JOIN <<tenant>>_mdwdb.d_change_request TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
- WHERE COALESCE( CASE WHEN  SRC.production_system= TRUE THEN 'Y' ELSE 'N' END,'')<> COALESCE(TRGT.production_change_flag ,'')
+ WHERE ( CASE WHEN  SRC.production_system= TRUE THEN 'Y' ELSE 'N' END)<> (TRGT.production_change_flag )

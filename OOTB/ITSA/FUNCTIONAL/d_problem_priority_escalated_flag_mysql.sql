@@ -16,6 +16,6 @@ AND  TA.task_attribute_wh_new_value < TA.task_attribute_wh_old_value)
  WHERE  CASE WHEN TA.task_attribute_wh_old_value IS NOT NULL AND TA.task_attribute_wh_new_value IS NOT NULL   
 AND  TA.task_attribute_wh_new_value < TA.task_attribute_wh_old_value 
 THEN 'Y' ELSE 'N' END
-<> COALESCE(TRGT.priority_escalated_flag,'')
+<> (TRGT.priority_escalated_flag)
 
 

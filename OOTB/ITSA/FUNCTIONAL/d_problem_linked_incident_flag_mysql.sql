@@ -6,4 +6,4 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  LEFT JOIN <<tenant>>_mdwdb.d_problem TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
- WHERE COALESCE( SRC.related_incidents ,'')<> COALESCE(TRGT.linked_incident_count ,'')
+ WHERE ( SRC.related_incidents )<> (TRGT.linked_incident_count )

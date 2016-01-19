@@ -16,7 +16,7 @@ TRGT.row_id = ta.task_row_id AND TRGT.source_id = ta.source_id
 
  WHERE  CASE WHEN  ta.task_attribute_wh_new_value < ta.task_attribute_wh_old_value
 THEN 'Y' ELSE 'N' END
-<> COALESCE(TRGT.priority_escalated_flag,'')
+<> (TRGT.priority_escalated_flag)
 
 
 

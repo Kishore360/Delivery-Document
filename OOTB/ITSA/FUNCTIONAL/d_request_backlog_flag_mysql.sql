@@ -1,6 +1,6 @@
 SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for d_request.backlog_flag' ELSE 'SUCCESS' END as Message from (
-SELECT COALESCE( CASE WHEN LM.dimension_wh_code NOT IN('CLOSED') THEN 'Y' ELSE 'N' END,'') ABC, COALESCE(TRGT.backlog_flag ,'')DEF
+SELECT ( CASE WHEN LM.dimension_wh_code NOT IN('CLOSED') THEN 'Y' ELSE 'N' END) ABC, (TRGT.backlog_flag )DEF
  FROM <<tenant>>_mdsdb.sc_request_final SRC 
   left JOIN <<tenant>>_mdwdb.d_request TRGT 
  ON (SRC.sys_id =TRGT.row_id  

@@ -1,7 +1,7 @@
 SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for d_request.first_call_resolution_flag' ELSE 'SUCCESS' END as Message from (
  select  CASE WHEN  TIMESTAMPDIFF(MINUTE,TRGT.opened_on,TRGT.closed_on)<30
-THEN 'Y' ELSE 'N' END abc, COALESCE(TRGT.first_call_resolution_flag ,'') def
+THEN 'Y' ELSE 'N' END abc, (TRGT.first_call_resolution_flag ) def
  FROM  <<tenant>>_mdwdb.f_request TRGTF 
 LEFT JOIN  <<tenant>>_mdwdb.d_request  TRGT
  ON (TRGTF.request_key =TRGT.row_key
