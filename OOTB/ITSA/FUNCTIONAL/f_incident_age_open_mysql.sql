@@ -3,12 +3,12 @@
 from
 (select count(1) cnt FROM <<tenant>>_mdsdb.incident_final SRC 
   join <<tenant>>_mdwdb.f_incident f ON (SRC.sys_id =f.row_id  
- AND SRC.sourceinstance= f.source_id  )
+ AND SRC.sourceinstance= f.source_id and f.soft_deleted_flag='N' )
 JOIN <<tenant>>_mdwdb.d_lov_map br ON f.state_src_key = br.src_key
-AND br.dimension_wh_code = 'OPEN'
+AND br.dimension_wh_code = 'OPEN' and br.dimension_class = 'STATE~INCIDENT'
 JOIN <<tenant>>_mdwdb.d_incident a ON a.row_key = f.incident_key
 AND f.source_id = a.source_id
-WHERE timestampdiff(DAY,a.opened_on,(SELECT MAX(lastupdated) AS lastupdated
-FROM <<tenant>>_mdwdb.d_o_data_freshness WHERE sourcename like 'ServiceNow%'))<> f.age
+WHERE DATEDIFF((SELECT MAX(lastupdated) AS lastupdated
+FROM <<tenant>>_mdwdb.d_o_data_freshness WHERE sourcename like 'ServiceNow%'),a.opened_on)<> f.age
 
  )A
