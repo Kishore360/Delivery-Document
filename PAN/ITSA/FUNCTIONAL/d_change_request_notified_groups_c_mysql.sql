@@ -1,9 +1,9 @@
-SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
-,CASE WHEN count(1) > 0 THEN 'Data did not Match' 
+SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
+,CASE WHEN cnt > 0 THEN 'Data did not Match' 
 ELSE 'Data Matched' END AS Message  from 
 (
 select 
-count(1)
+count(1) as cnt
 from 
 (select 
 sys_id,
