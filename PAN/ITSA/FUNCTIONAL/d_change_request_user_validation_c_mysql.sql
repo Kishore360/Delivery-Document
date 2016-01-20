@@ -1,8 +1,8 @@
-SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
-,CASE WHEN count(1) > 0 THEN 'Data did not Match' 
-ELSE 'Data Matched' END AS Message  from 
+SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
+,CASE WHEN cnt > 0  THEN 'Data did not Match' 
+ELSE 'Data Matched' END AS Message  from
 (
-select count(1)
+select count(1) as cnt
 from pan_mdsdb.change_request_final SRC
 left join pan_mdwdb.d_change_request TRG
 on TRG.row_id=SRC.sys_id and TRG.source_id=SRC.sourceinstance
