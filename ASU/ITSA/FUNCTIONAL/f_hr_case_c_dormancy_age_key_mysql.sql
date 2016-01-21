@@ -7,5 +7,5 @@ from asu_mdwdb.f_hr_case_c f
 LEFT JOIN asu_mdwdb.d_lov L  
 ON (f.dormancy_age BETWEEN L.lower_range_value AND L.upper_range_value)
 AND L.dimension_class = 'DORMANCYAGE_C~HRCASE'
-where L.row_key<> f.dormancy_age_key
+where L.row_key<> f.dormancy_age_key and current_flag='Y'
 ) temp
