@@ -18,6 +18,6 @@ and scf.inactive = 0
 and scf.language='en') SRC
 on lov.row_id = SRC.row_id
 and lov.source_id = SRC.source_id
-where src_key=-1 and map.dimension_class not IN ('STATE~GEO','CITY~GEO', 'COUNTRY~GEO','CURRENCY','STATE~HR_CHANGE','CATEGORY~HR_CHANGE'))
+where src_key=-1 and map.dimension_class not IN ('STATE~GEO','CITY~GEO', 'COUNTRY~GEO','CURRENCY','STATE~HR_CHANGE','CATEGORY~HR_CHANGE')
 
 )a
