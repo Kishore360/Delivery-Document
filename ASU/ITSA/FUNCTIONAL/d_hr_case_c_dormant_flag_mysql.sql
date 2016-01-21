@@ -11,8 +11,9 @@ JOIN asu_mdwdb.d_hr_case_c a ON a.row_key = f.hr_case_c_key
 AND f.source_id = a.source_id
 JOIN asu_mdwdb.d_lov_map br ON a.state_src_key = br.src_key
 AND br.dimension_wh_code = 'OPEN'
-where  case when (timestampdiff(day,a.changed_on,(SELECT MAX(lastupdated) AS lastupdated
-FROM asu_mdwdb.d_o_data_freshness WHERE sourcename like 'ServiceNow%'))>30) then 'Y' else 'N' end
+JOIN ( select source_id,soft_deleted_flag, max(lastupdated) as lastupdated from asu_mdwdb.d_o_data_freshness) as df ON f.source_id = df.source_id
+and df.soft_deleted_flag='N'   
+where  case when (timestampdiff(day,a.changed_on,df.lastupdated)>3) then 'Y' else 'N' end
  <> dormant_flag
 union
 select count(1) cnt FROM asu_mdsdb.hr_case_final SRC 

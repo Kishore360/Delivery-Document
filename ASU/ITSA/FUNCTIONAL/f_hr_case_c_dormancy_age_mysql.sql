@@ -9,8 +9,10 @@ JOIN asu_mdwdb.d_hr_case_c a ON a.row_key = f.hr_case_c_key
 AND f.source_id = a.source_id
 JOIN asu_mdwdb.d_lov_map br ON a.state_src_key = br.src_key
 AND br.dimension_wh_code = 'OPEN'
-WHERE timestampdiff(day,a.changed_on,(SELECT MAX(lastupdated) AS lastupdated
-FROM asu_mdwdb.d_o_data_freshness WHERE sourcename like 'ServiceNow%'))<> f.dormancy_age
+JOIN ( select source_id,max(lastupdated) as lastupdated,soft_deleted_flag  from asu_mdwdb.d_o_data_freshness )as df 
+ON f.source_id = df.source_id
+and df.soft_deleted_flag='N'   
+WHERE timestampdiff(day,a.changed_on,df.lastupdated)<> f.dormancy_age
 
 union
 
