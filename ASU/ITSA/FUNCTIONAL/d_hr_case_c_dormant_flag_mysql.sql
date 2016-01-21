@@ -13,7 +13,7 @@ JOIN asu_mdwdb.d_lov_map br ON a.state_src_key = br.src_key
 AND br.dimension_wh_code = 'OPEN'
 JOIN ( select source_id,soft_deleted_flag, max(lastupdated) as lastupdated from asu_mdwdb.d_o_data_freshness) as df ON f.source_id = df.source_id
 and df.soft_deleted_flag='N'   
-where  case when (timestampdiff(day,a.changed_on,df.lastupdated)>30) then 'Y' else 'N' end
+where  case when (timestampdiff(day,a.changed_on,df.lastupdated)>3) then 'Y' else 'N' end
  <> dormant_flag
 union
 select count(1) cnt FROM asu_mdsdb.hr_case_final SRC 
