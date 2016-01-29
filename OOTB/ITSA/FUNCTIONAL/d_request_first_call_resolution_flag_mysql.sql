@@ -9,8 +9,5 @@ LEFT JOIN  <<tenant>>_mdwdb.d_request  TRGT
 left join <<tenant>>_mdsdb.sc_request_final SRC 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
-
- LEFT JOIN <<tenant>>_mdwdb.d_lov_map LM ON TRGTF.state_src_key=LM.src_key
  )A
  WHERE abc<>def
-
