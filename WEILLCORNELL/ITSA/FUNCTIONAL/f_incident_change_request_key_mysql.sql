@@ -9,7 +9,7 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  LEFT JOIN weillcornell_mdwdb.d_change_request LKP 
  ON ( SRC.rfc= LKP.row_id 
 AND SRC.sourceinstance= LKP.source_id )
- WHERE COALESCE(LKP.row_key,CASE WHEN SRC.rfc IS NULL THEN 0 else '-1' end)<> COALESCE(TRGT.change_request_key,'')
+ WHERE COALESCE(LKP.row_key,CASE WHEN SRC.rfc IS NULL THEN 0 else -1 end)<> (TRGT.change_request_key)
   and    SRC.sys_id not in (select B.sys_id
 from
 weillcornell_mdsdb.incident_final B

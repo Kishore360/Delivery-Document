@@ -9,7 +9,7 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 LEFT JOIN weillcornell_mdwdb.d_lov LKP 
  ON (coalesce( concat('CATEGORY','~','INCIDENT','~','~','~',upper(category )),'-99')= coalesce(LKP.src_rowid,'-99') 
 AND SRC.sourceinstance= LKP.source_id )
- WHERE COALESCE(LKP.row_key,CASE WHEN SRC.category IS NULL THEN 0 else '-1' end)<> COALESCE(TRGT.category_src_key,'')
+ WHERE COALESCE(LKP.row_key,CASE WHEN SRC.category IS NULL THEN 0 else -1 end)<> (TRGT.category_src_key)
   and    SRC.sys_id not in (select B.sys_id
 from
 weillcornell_mdsdb.incident_final B

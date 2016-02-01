@@ -7,7 +7,7 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  LEFT JOIN weillcornell_mdwdb.d_incident TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
- WHERE COALESCE( CASE WHEN SRC.caused_by is not null then 'Y' else 'N' END,'')<> COALESCE(TRGT.caused_by_change_flag ,'')
+ WHERE ( CASE WHEN SRC.caused_by is not null then 'Y' else 'N' END)<> (TRGT.caused_by_change_flag )
   and    SRC.sys_id not in (select B.sys_id
 from
 weillcornell_mdsdb.incident_final B

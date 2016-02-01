@@ -9,7 +9,7 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 LEFT JOIN weillcornell_mdwdb.d_internal_organization LKP 
  ON ( concat('SUBSIDIARY~',company)= LKP.row_id 
 AND SRC.sourceinstance= LKP.source_id )
- WHERE COALESCE(LKP.row_key,CASE WHEN SRC.company IS NULL THEN 0 else '-1' end)<> COALESCE(TRGT.company_key,'')
+ WHERE COALESCE(LKP.row_key,CASE WHEN SRC.company IS NULL THEN 0 else -1 end)<> (TRGT.company_key)
   and    SRC.sys_id not in (select B.sys_id
 from
 weillcornell_mdsdb.incident_final B

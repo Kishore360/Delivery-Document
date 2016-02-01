@@ -7,5 +7,5 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  LEFT JOIN <<tenant>>_mdwdb.d_internal_contact LKP 
  ON ( concat('INTERNAL_CONTACT~',SRC.closed_by)= LKP.row_id 
 AND SRC.sourceinstance= LKP.source_id
-and TRGT.pivotdate BETWEEN LKP.effective_from AND LKP.effective_to)
+and TRGT.pivot_date BETWEEN LKP.effective_from AND LKP.effective_to)
  WHERE COALESCE(LKP.row_key,CASE WHEN SRC.closed_by IS NULL THEN 0 else -1 end)<> (TRGT.closed_by_key)
