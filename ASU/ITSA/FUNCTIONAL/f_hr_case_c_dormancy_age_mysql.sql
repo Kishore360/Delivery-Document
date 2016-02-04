@@ -12,7 +12,7 @@ AND br.dimension_wh_code = 'OPEN'
 JOIN ( select source_id,max(lastupdated) as lastupdated,soft_deleted_flag  from asu_mdwdb.d_o_data_freshness )as df 
 ON f.source_id = df.source_id
 and df.soft_deleted_flag='N'   
-WHERE timestampdiff(day,a.changed_on,df.lastupdated)<> f.dormancy_age
+WHERE timestampdiff(day,convert_tz(a.changed_on,),df.lastupdated)<> f.dormancy_age
 
 union
 
