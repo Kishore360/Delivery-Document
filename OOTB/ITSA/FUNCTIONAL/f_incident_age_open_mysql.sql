@@ -11,7 +11,7 @@ AND br.dimension_wh_code = 'OPEN' and br.dimension_class = 'STATE~INCIDENT'
 JOIN <<tenant>>_mdwdb.d_incident a ON a.row_key = f.incident_key
 AND f.source_id = a.source_id 
 
-WHERE TIMESTAMPDIFF(DAY,a.opened_on,(SELECT MAX(lastupdated) AS lastupdated
+WHERE TIMESTAMPDIFF(DAY,convert_tz(a.opened_on,<<TENANT_SSI_TIME_ZONE>>,<<DW_TARGET_TIME_ZONE>>),(SELECT MAX(lastupdated) AS lastupdated
 
 FROM <<tenant>>_mdwdb.d_o_data_freshness WHERE sourcename like 'ServiceNow%'))<> f.age
 
