@@ -7,5 +7,7 @@ from intuit_mdsdb.u_incident_task_final s
 left join intuit_mdwdb.f_incident_task_c t
 on s.sys_id=t.row_id and s.sourceinstance = t.source_id
 left join intuit_mdwdb.d_internal_contact lkp
-on lkp.row_id = COALESCE(CONCAT('INTERNAL_CONTACT~',s.assigned_to),'UNSPECIFIED')AND lkp.source_id=s.sourceinstance
-WHERE lkp.row_key <> t.assigned_to_key) temp
+ON COALESCE(CONCAT('INTERNAL_CONTACT~',s.assigned_to ),'UNSPECIFIED')= lkp.row_id
+AND s.sourceinstance= lkp.source_id  
+WHERE COALESCE(lkp.row_key, CASE WHEN s.assigned_to IS NULL THEN 0 else '-1' end)
+<> t.assigned_to_key)x
