@@ -1,1 +1,1 @@
- SELECT CASE WHEN count(1) > 1 THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1) >1 THEN 'MDS to DWH data validation failed for d_problem_task.priority_escalated_flag' ELSE 'SUCCESS' END as  FROM ( SELECT 1)A
+ SELECT CASE WHEN count(1) > 1 THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1) >1 THEN 'MDS to DWH data validation failed for d_problem_task.priority_escalated_flag' ELSE 'SUCCESS' END as result FROM ( SELECT 1)A

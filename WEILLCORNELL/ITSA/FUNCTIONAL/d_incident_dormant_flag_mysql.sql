@@ -9,4 +9,4 @@ weillcornell_mdwdb.d_incident di
   where dlm.dimension_class = 'STATE~INCIDENT'
   AND dlm.dimension_wh_code = 'OPEN'
   AND (CASE WHEN timestampdiff(DAY,di.changed_on,  (SELECT MAX(lastupdated) AS lastupdated
-FROM asu_mdwdb.d_o_data_freshness WHERE sourcename like 'ServiceNow%'))>30  THEN 'Y' ELSE 'N' END) <> di.dormant_flag;
+FROM weillcornell_mdwdb.d_o_data_freshness WHERE sourcename like 'ServiceNow%'))>30  THEN 'Y' ELSE 'N' END) <> di.dormant_flag;
