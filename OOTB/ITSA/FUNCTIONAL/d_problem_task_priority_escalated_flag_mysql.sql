@@ -1,11 +1,14 @@
 SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
- CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for d_problem_task.priority_escalated_flag' ELSE 'SUCCESS' END as Message
-FROM <<tenant>>_mdsdb.problem_task_final SRC
-LEFT JOIN <<tenant>>_mdwdb.d_problem_task TRGT
- ON SRC.sys_id =TRGT.row_id    AND SRC.sourceinstance= TRGT.source_id
-LEFT JOIN <<tenant>>_mdsdb.sys_audit_final TA 
-ON SRC.sys_id =TA.documentkey AND SRC.sourceinstance= TA.sourceinstance
-AND  TABLENAME = 'problem_task' AND FIELDNAME = 'priority'
-WHERE CASE   WHEN TA.NEWVALUE < TA.OLDVALUE THEN 'Y'
-          ELSE 'N'
-      END <> (TRGT.priority_escalated_flag);
+ CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for d_request_item.priority_escalated_flag' ELSE 'SUCCESS' END as Message from (
+select case when locate('Y',b.res)>0 then 'Y' else 'N' end as priority_escalation,c.sys_id,
+d.priority_escalated_flag as target from (
+select group_concat(a.flag) as res,a.documentkey from (
+select case when newvalue<oldvalue then 'Y' else 'N' end as flag,documentkey from <<tenant>>_mdsdb.sys_audit_final 
+ where
+tablename = 'problem_task' 
+AND fieldname =  'priority' and oldvalue is not null and newvalue is not null
+)a group by a.documentkey
+)b
+ join <<tenant>>_mdsdb.problem_task_final c on b.documentkey=c.sys_id
+join <<tenant>>_mdwdb.d_problem_task d on c.sys_id = d.row_id and c.sourceinstance = d. source_id
+) e where priority_escalation<>target
