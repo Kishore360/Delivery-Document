@@ -8,5 +8,5 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  AND SRC.sourceinstance= TRGT.source_id  )
  LEFT JOIN <<tenant>>_mdwdb.d_incident LKP 
  ON ( SRC.sys_id= LKP.row_id 
-AND SRC.sourceinstance= LKP.source_id )
+AND SRC.sourceinstance= LKP.source_id and LKP.soft_deleted_flag='N' )
  WHERE COALESCE(LKP.row_key,CASE WHEN SRC.sys_id IS NULL THEN 0 else -1 end)<> (TRGT.incident_key)
