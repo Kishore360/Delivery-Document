@@ -7,3 +7,5 @@ from intuit_mdsdb.incident_final b
 left JOIN intuit_mdwdb.d_incident a
 ON a.row_id = b.sys_id AND a.source_id = b.sourceinstance
 where a.first_call_resolution_flag <> CASE WHEN b.u_fcr=1 THEN 'Y' ELSE 'N'END)g
+
+
