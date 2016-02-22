@@ -12,3 +12,4 @@ AND fieldname =  'priority' and oldvalue is not null and newvalue is not null
  join <<tenant>>_mdsdb.problem_task_final c on b.documentkey=c.sys_id
 join <<tenant>>_mdwdb.d_problem_task d on c.sys_id = d.row_id and c.sourceinstance = d. source_id
 ) e where priority_escalation<>target
+

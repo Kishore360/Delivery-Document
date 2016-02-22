@@ -19,10 +19,10 @@ where language='en' and enable_flag='Y' and inactive=0
 left join <<tenant>>_mdwdb.d_lov TRGT
 on(SRC.row_id=TRGT.row_id
 and TRGT.source_id = 2)
-where (SRC.dimension_class<>TRGT.dimension_class
+where SRC.dimension_class<>TRGT.dimension_class
 or SRC.dimension_code<>TRGT.dimension_code
 or SRC.dimension_name<>TRGT.dimension_name
 or SRC.src_rowid<>TRGT.src_rowid
 or SRC.soft_deleted_flag<>TRGT.soft_deleted_flag
 or SRC.current_flag<>TRGT.current_flag
-)
+
