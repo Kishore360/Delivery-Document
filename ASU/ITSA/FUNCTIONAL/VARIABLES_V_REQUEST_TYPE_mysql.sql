@@ -1,9 +1,5 @@
-
-
-CREATE TABLE asu_mdwdb.xxxxx(r1 varchar(100),r2 varchar(100),reference_c_key bigint, index(r1),index(r2),index(reference_c_key));
-INSERT INTO asu_mdwdb.xxxxx
-SELECT substring(row_id,1,32) as r1, SUBSTRING(row_id,34,32) as r2, reference_c_key  FROM asu_mdwdb.f_request_item_variable_c;
-
+SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+ CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for VARIABLES_V_REQUEST_TYPE' ELSE 'SUCCESS' END as Message  from(
 select -- COUNT(1) from
  f.row_key ,a.reference_c_key,a.r1, b.sys_id , a.r2,d.request_item from 
 -- b.sys_id,temp_substrin.part1 ,temp_substrin.part2,d.request_item,f.row_key,a.reference_c_key from 
@@ -32,6 +28,6 @@ inner join asu_mdwdb.d_variable_c g on b.item_option_new=g.row_id and g.source_i
 inner join asu_mdwdb.d_variable_lov_c f on f.variable_id=g.row_id and f.value=b.value
 join asu_mdsdb.sys_choice_final t  on t.name like 'question' and e.type=t.value and
  t.label='Select Box' and t.element='type' and t.label!='Reference'
-inner join asu_mdwdb.xxxxx a 
+inner join (SELECT substring(row_id,1,32) as r1, SUBSTRING(row_id,34,32) as r2, reference_c_key  FROM asu_mdwdb.f_request_item_variable_c) a 
 on  a.r1= b.sys_id and a.r2=d.request_item
- where f.row_key <>a.reference_c_key ;
+ where f.row_key <>a.reference_c_key)A ;

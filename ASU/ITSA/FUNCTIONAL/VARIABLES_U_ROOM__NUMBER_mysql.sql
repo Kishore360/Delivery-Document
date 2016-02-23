@@ -1,10 +1,5 @@
-
-
-CREATE TABLE asu_mdwdb.xxxxxyz(r1 varchar(100),r2 varchar(100),longtext_value varchar(250), index(r1),index(r2),index(longtext_value));
-INSERT INTO asu_mdwdb.xxxxxyz
-SELECT substring(row_id,1,32) as r1, SUBSTRING(row_id,34,32) as r2, longtext_value  FROM asu_mdwdb.f_request_item_variable_c;
-
-select count(1) from (
+SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+ CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for Variables_u_room' ELSE 'SUCCESS' END as Message from   (
 select 
 -- from (select count(1)
 a.longtext_value aa ,
@@ -29,6 +24,6 @@ on d.request_item=c.row_id and c.source_id=d.sourceinstance
 join asu_workdb.lsm_ls_variable_list z on e.sys_id=z.row_id and z.table_name='request_item' and z.variable_type!='Reference'
 join asu_mdsdb.sys_choice_final t  on t.name='question' and e.type=t.value
 join asu_workdb.lsm_ls_variable_datatype lvd on t.label = lvd.variable_type 
-join asu_mdwdb.xxxxxyz a 
+join (SELECT substring(row_id,1,32) as r1, SUBSTRING(row_id,34,32) as r2, longtext_value  FROM asu_mdwdb.f_request_item_variable_c) a 
 on  a.r1= b.sys_id and a.r2=d.request_item)v
 where aa<>bb
