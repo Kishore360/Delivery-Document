@@ -4,6 +4,7 @@ SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
 ELSE 'Data Matched' END AS Message 
 FROM (
 
+SELECT 'f_incident',count(*) as cnt from ldb.f_incident  union all
 SELECT 'd_internal_organization_legalentity',count(*) as cnt from ldb.f_incident a11 join ldb.d_internal_organization_legalentity a12  on (a11.company_key = a12.row_key) union all 
 
 SELECT 'd_customer',count(*) as cnt from ldb.f_incident a11 join ldb.d_customer a13  on (a11.customer_key = a13.row_key) union all 
