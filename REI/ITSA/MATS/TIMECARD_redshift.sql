@@ -1,6 +1,3 @@
-SELECT CASE WHEN max_count<>min_count THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
- CASE WHEN  max_count<>min_count THEN 'OOTB has Keys Dropped' ELSE 'SUCCESS'  END as Message FROM (
- select max(Row_Count) max_count,Min(Row_Count) min_count from (
 select'd_internal_organization_department' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_request_task             a11 
    join        ldb.d_internal_organization_department           a12
@@ -71,8 +68,3 @@ select  'd_portfolio_owner_c 'as Table_Name,count(a11.row_key) Row_Count from ld
 	  on 	(a17.portfolio_c_key = a111.row_key)
 	join	ldb.d_portfolio_owner_c	a133
 	  on 	(a111.portfolio_owner_key = a133.row_key)
-
-
-)a
-)b
-				  

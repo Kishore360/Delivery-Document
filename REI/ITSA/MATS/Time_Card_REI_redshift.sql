@@ -1,6 +1,3 @@
-SELECT CASE WHEN max_count<>min_count THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
- CASE WHEN  max_count<>min_count THEN 'OOTB has Keys Dropped' ELSE 'SUCCESS'  END as Message FROM (
- select max(Row_Count) max_count,Min(Row_Count) min_count from (
 select 'f_time_entry' as  Table_Name,count(a11.row_key) Row_Count
 from      ldb.f_time_entry             a11
                 union select  'd_internal_contact_mdm'as Table_Name,count(a11.row_key) Row_Count from ldb.f_time_entry 	a11  join        ldb.d_internal_contact_mdm    a12
@@ -156,5 +153,3 @@ from      ldb.f_time_entry             a11
 	  on 	(a12.row_dn_key = a18.lev_0_key)
 				join        ldb.dh_employee_level5             a132
                   on         (a18.lev_5_key = a132.row_key)
-)a
-)b

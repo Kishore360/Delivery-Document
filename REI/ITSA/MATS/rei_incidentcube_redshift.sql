@@ -1,9 +1,3 @@
-
-SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
-,CASE WHEN cnt > 0 THEN 'Data did not Match.' 
-ELSE 'Data Matched' END AS Message 
-FROM (
-
 SELECT 'f_incident',count(*) as cnt from ldb.f_incident  union all
 SELECT 'd_internal_organization_legalentity',count(*) as cnt from ldb.f_incident a11 join ldb.d_internal_organization_legalentity a12  on (a11.company_key = a12.row_key) union all 
 
@@ -67,4 +61,4 @@ SELECT 'd_assignment_group_director_c',count(*) as cnt from ldb.f_incident a11 j
 
 SELECT 'd_assignment_group_manager_c',count(*) as cnt from ldb.f_incident a11 join ldb.d_internal_organization_group_c a111  on (a11.assignment_group_key = a111.row_key) join ldb.d_assignment_group_manager_c a132  on (a111.manager_c_key = a132.manager_c_key) union all 
 
-SELECT 'd_calendar_month',count(*) as cnt from ldb.f_incident a11 join ldb.d_calendar_date a110  on (a11.opened_on_key = a110.row_key) join ldb.d_calendar_month a133  on (a110.month_start_date_key = a133.row_key))a;
+SELECT 'd_calendar_month',count(*) as cnt from ldb.f_incident a11 join ldb.d_calendar_date a110  on (a11.opened_on_key = a110.row_key) join ldb.d_calendar_month a133  on (a110.month_start_date_key = a133.row_key);

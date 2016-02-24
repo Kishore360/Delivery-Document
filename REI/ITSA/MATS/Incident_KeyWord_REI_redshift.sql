@@ -1,7 +1,3 @@
-SELECT CASE WHEN max_count<>min_count THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
- CASE WHEN  max_count<>min_count THEN 'OOTB has Keys Dropped' ELSE 'SUCCESS'  END as Message FROM (
- select max(Row_Count) max_count,Min(Row_Count) min_count from (
-
 select 'f_incident_response'as Table_Name,count(a11.row_key) Row_Count
 from ldb.f_incident_keyword	a11
 union
@@ -198,8 +194,3 @@ select  'd_task_contacttype' as Table_Name,count(a11.row_key) Row_Count
 from ldb.f_incident_keyword    a11
    join        ldb.d_task_urgency	a35
    on         (a11.urgency_src_key = a35.row_key)
-)a
-)b
-
-
-
