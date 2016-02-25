@@ -1,6 +1,4 @@
-SELECT CASE WHEN max_count<>min_count THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
- CASE WHEN  max_count<>min_count THEN 'OOTB has Keys Dropped' ELSE 'SUCCESS'  END as Message from (
- select max(Row_Count) max_count,Min(Row_Count) min_count from (
+
 select'ldb.f_incident' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_incident       a11 
 union
@@ -153,4 +151,25 @@ select 'ldb.d_calendar_month' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_incident       a11 join ldb.d_calendar_date	       a110	on (a11.opened_on_key=a110.row_key)
 join ldb.d_calendar_month       a131
 on (a110.month_start_date_key=a131.row_key)
-)a)b
+   union
+   
+select  'd_internal_organization_escalation_gp_c' as Table_Name,count(a11.row_key) Row_Count   
+   from ldb.f_incident a11
+ join ldb.d_internal_organization_group a12
+   on  (a11.assignment_group_key = a12.row_key)
+ join ldb.d_internal_organization_escalation_gp_c a13
+   on  (a12.escalation_group_c_key = a13.row_key)
+   
+   union
+ select  'd_configuration_item_causing_ci_c' as Table_Name,count(a11.row_key) Row_Count     
+   from ldb.f_incident a11
+ join ldb.d_configuration_item_causing_ci_c a12
+   on  (a11.causing_ci_c_key = a12.row_key)
+   
+   union
+  select  'd_internal_contact_owner_c' as Table_Name,count(a11.row_key) Row_Count     
+   from ldb.f_incident a11
+ join ldb.d_internal_organization_group a12
+   on  (a11.assignment_group_key = a12.row_key)
+ join ldb.d_internal_contact_owner_c a13
+   on  (a12.owner_c_key = a13.row_key)
