@@ -39,8 +39,8 @@ select'd_internal_contact_mdm' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_request             a11 
 join ldb.d_internal_contact         a17
 on (a11.opened_by_key = a17.row_key)
-join ldb.d_internal_contact         a18
-on (a17.row_current_key = a18.row_current_key)
+join ldb.d_internal_contact_mdm         a18
+on (a17.row_current_key = a18.row_current_key) 
 union
 select'd_internal_organization_group' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_request             a11 
