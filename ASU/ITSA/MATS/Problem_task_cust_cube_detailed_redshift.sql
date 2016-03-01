@@ -43,3 +43,8 @@ select  'd_internal_organization ' as Table_Name,count(a.row_key) Row_Count
 from ldb.f_problem_task    a
 join  asu_mdwdb.d_internal_organization    b
 on  (a.assignment_group_key = b.row_key)
+union
+select  'd_internal_contact' as Table_Name,count(a.row_key) Row_Count
+from ldb.f_problem_task    a
+join  ldb.d_internal_contact  b
+on  (a.prob_task_requester_c_key = b.row_key)
