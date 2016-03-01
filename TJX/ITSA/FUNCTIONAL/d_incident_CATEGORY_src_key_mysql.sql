@@ -3,7 +3,7 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  FROM tjx_mdsdb.incident_final SRC
 LEFT JOIN tjx_mdwdb.d_lov LKP 
  ON LKP.dimension_class like '%CATEGORY~INCIDENT%' and 
-( concat('CATEGORY~INCIDENT~~~',CATEGORY)= LKP.src_rowid 
+( concat('CATEGORY~INCIDENT~~~',CATEGORY)= LKP.row_id 
 AND SRC.sourceinstance= LKP.source_id ) 
  LEFT JOIN tjx_mdwdb.d_incident TRGT 
  ON (SRC.sys_id =TRGT.row_id  
