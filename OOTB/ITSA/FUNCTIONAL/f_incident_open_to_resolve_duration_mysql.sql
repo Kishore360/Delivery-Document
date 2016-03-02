@@ -6,5 +6,5 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  AND SRC.sourceinstance= TRGT.source_id  )
  LEFT JOIN <<tenant>>_mdwdb.d_lov_map br 
  ON TRGT.state_src_key = br.src_key
-WHERE  case when br.dimension_wh_code IN ('OPEN') THEN NULL
-ELSE TIMESTAMPDIFF(SECOND,SRC.opened_at,coalesce(SRC.resolved_at,SRC.closed_at)) END <>  COALESCE(TRGT.open_to_resolve_duration,'') 
+WHERE   br.dimension_wh_code IN ('RESOLVED')
+AND TIMESTAMPDIFF(SECOND,SRC.opened_at,coalesce(SRC.resolved_at,SRC.closed_at)) END <> TRGT.open_to_resolve_duration;
