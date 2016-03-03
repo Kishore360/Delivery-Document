@@ -8,7 +8,6 @@ inner join richemontdev_mdwdb.d_incident b
 on a.incident_key=b.row_key
 left join richemontdev_mdwdb.d_problem c
 on a.problem_key=c.row_key
-and c.external_reference_c is not null
 left join richemontdev_mdwdb.f_problem f
 on f.problem_key=c.row_key
 left join richemontdev_mdwdb.d_service d
@@ -17,10 +16,9 @@ left join richemontdev_mdwdb.d_lov_map e
 on f.state_src_key=e.src_key
 left join richemontdev_mdwdb.d_lov g
 on d.technical_impact_c_key=g.row_key
-and a.problem_key<>0
+where a.problem_key<>0 
 and c.external_reference_c is not null
 and e.dimension_wh_code='CLOSED'
-and g.dimension_code='SAP'
+and g.dimension_code='SAP';
 where a.workaround_duration_c<>timestampdiff(second,b.opened_on,c.closed_on)
 ) b
-
