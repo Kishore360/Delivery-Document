@@ -3,12 +3,14 @@ SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
 ELSE 'Data Matched' END AS Message 
 from(
 select count(1) as cnt
-from richemont_mdsdb.problem_final a
-left join richemontdev_mdwdb.d_problem b
-on a.sys_id=b.row_id and a.sourceInstance=b.source_id
-left join richemont_mdsdb.metric_instance_final c
-on b.row_id=c.id
-and c.table='problem'
-and c.field='u_planned_resolution_date'
-where (DATE_FORMAT(CONVERT_TZ(c.value,'GMT','Europe/Zurich'),'%Y/%m/%d %h:%i:%s'))<> b.first_planned_resolution_date_c
+from richemont_mdsdb.problem_final prob_source
+left join richemontdev_mdwdb.d_problem prob
+on prob_source.sys_id=prob.row_id and prob_source.sourceInstance=prob.source_id
+left join richemont_mdsdb.metric_instance_final metc
+on prob.row_id=metc.id
+and metc.table='problem'
+and metc.field='u_planned_resolution_date'
+where metc.value<>prob.first_planned_resolution_date_c
 )temp;
+
+
