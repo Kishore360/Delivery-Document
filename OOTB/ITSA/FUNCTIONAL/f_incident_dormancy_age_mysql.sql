@@ -9,7 +9,7 @@
  where lm.dimension_class = 'STATE~INCIDENT'
 AND  lm.dimension_wh_code = 'OPEN'  
 AND COALESCE(TIMESTAMPDIFF(DAY,SRC.sys_updated_on,(SELECT CONVERT_TZ(MAX(lastupdated),<<DW_TARGET_TIME_ZONE>>,<<TENANT_SSI_TIME_ZONE>>) AS lastupdated
-FROM tjx_mdwdb.d_o_data_freshness WHERE sourcename like 'ServiceNow%')),0)<> TRGT.dormancy_age 
+FROM <<tenant>>_mdwdb.d_o_data_freshness WHERE sourcename like 'ServiceNow%')),0)<> TRGT.dormancy_age 
  
  
 
