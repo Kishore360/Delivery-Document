@@ -10,5 +10,5 @@ select count(1) cnt
  ON (TRGTF.request_task_key =TRGT.row_key
  AND TRGTF.source_id =TRGT.source_id)
 
-where CASE WHEN  TIMESTAMPDIFF(MINUTE,TRGT.opened_on,TRGT.closed_on)<30  THEN 'Y' ELSE 'N' END<>(TRGT.first_call_resolution_flag)
+where CASE WHEN  TIMESTAMPDIFF(MINUTE,SRC.opened_at,coalesce(SRC.closed_at,SRC.sys_updated_on))<30  THEN 'Y' ELSE 'N' END<>(TRGT.first_call_resolution_flag)
 )a 
