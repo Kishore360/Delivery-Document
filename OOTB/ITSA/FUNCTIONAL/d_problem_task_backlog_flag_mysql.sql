@@ -9,6 +9,7 @@
  AND TRGTF.source_id =TRGT.source_id)
   LEFT JOIN <<tenant>>_mdwdb.d_lov_map LM
  on TRGTF.state_src_key = LM.src_key 
- WHERE LM.dimension_class='STATE~TASK' and  ( CASE WHEN LM.dimension_wh_code IN ('OPEN')
+ WHERE LM.dimension_class='STATE~TASK' and  
+ ( CASE WHEN LM.dimension_wh_code IN ('OPEN')
  THEN 'Y' ELSE 'N' END)<> (TRGT.backlog_flag )
 

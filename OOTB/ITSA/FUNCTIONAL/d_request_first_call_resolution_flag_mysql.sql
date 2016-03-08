@@ -10,6 +10,6 @@ left join <<tenant>>_mdsdb.sc_request_final SRC
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
  left join <<tenant>>_mdwdb.d_lov_map p
-on TRGTF.state_src_key=p.src_key and dimension_wh_code='CLOSED'
+on TRGTF.state_src_key=p.src_key
  )A
  WHERE abc<>def
