@@ -6,4 +6,4 @@ select count(1) as cnt  from asu_mdwdb.f_kb_knowledge_c kn inner join asu_mdwdb.
 
 on m2m.d_kb_knowledge_c_key=kn.d_kb_knowledge_c_key
 
-where m2m.public_access_requestor_c_key<>kn.configuration_item_key)x
+where m2m.configuration_item_key<>kn.configuration_item_key)x
