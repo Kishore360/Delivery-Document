@@ -6,7 +6,7 @@ select count(1) as cnt FROM (select * from <<tenant>>_mdsdb.incident_final where
   join <<tenant>>_mdwdb.f_incident f ON (SRC.sys_id =f.row_id  
  AND SRC.sourceinstance= f.source_id  )
 JOIN <<tenant>>_mdwdb.d_lov_map br ON f.state_src_key = br.src_key
-AND br.dimension_wh_code IN ('CLOSED','RESOLVED')
+AND br.dimension_wh_code IN ('RESOLVED','CLOSED')
 JOIN <<tenant>>_mdwdb.d_incident a ON a.row_key = f.incident_key
 AND f.source_id = a.source_id
 WHERE
