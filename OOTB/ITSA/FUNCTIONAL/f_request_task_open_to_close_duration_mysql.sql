@@ -6,4 +6,6 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  LEFT JOIN <<tenant>>_mdwdb.f_request_task TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
-WHERE  TIMESTAMPDIFF(second,SRC.opened_at,SRC.closed_at)<>  COALESCE(TRGT.open_to_close_duration,'') 
+left join <<tenant>>_mdwdb.d_lov_map p
+on TRGT.state_src_key=p.src_key and dimension_wh_code='CLOSED' 
+WHERE  TIMESTAMPDIFF(second,SRC.opened_at,coalesce(SRC.closed_at,SRC.sys_updated_on))<>  COALESCE(TRGT.open_to_close_duration,'') and (SRC.opened_at > SRC.closed_at)
