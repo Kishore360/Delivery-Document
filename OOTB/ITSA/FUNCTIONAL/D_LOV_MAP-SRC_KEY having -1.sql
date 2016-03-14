@@ -18,4 +18,4 @@ and scf.inactive = 0
 and scf.language='en') SRC
 on lov.row_id = SRC.row_id
 and lov.source_id = SRC.source_id
-where src_key=-1 )x
+where src_key<0 )x
