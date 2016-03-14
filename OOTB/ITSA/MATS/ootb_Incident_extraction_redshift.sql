@@ -1,4 +1,4 @@
-select a14.month_name, count(1) as cnt
+select a14.month_name as Table_Name, count(1) as Row_Count
 from ldb.f_incident a
 join   ldb.d_calendar_date  A14
          on   (a. opened_on_key = a14.row_key)
