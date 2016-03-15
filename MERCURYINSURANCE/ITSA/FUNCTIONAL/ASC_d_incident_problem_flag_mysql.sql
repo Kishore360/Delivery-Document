@@ -6,4 +6,4 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  LEFT JOIN mercuryinsurance_mdwdb.d_incident TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
- WHERE ( CASE WHEN SRC.problem_id is not null then 'Y' else 'N' END)<> (TRGT.problem_flag )
+ WHERE ( CASE WHEN SRC.u_problem_id is not null then 'Y' else 'N' END)<> (TRGT.problem_flag )

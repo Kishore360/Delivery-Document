@@ -9,7 +9,7 @@ SELECT A.SYS_ID,B.ROW_ID,A.last_resolved_by_key as  A_last_resolved_by_key,B.las
 FROM mercuryinsurance_mdsdb.u_asc_ticket_final x  left outer join 
 (select source_id,row_key,row_id  from mercuryinsurance_mdwdb.d_internal_contact
  )y on 
-CONCAT('INTERNAL_CONTACT~',x.resolved_by)=y.row_id  AND sourceinstance= source_id 
+CONCAT('INTERNAL_CONTACT~',x.u_resolved_by)=y.row_id  AND sourceinstance= source_id 
 )A
  JOIN  
 (SELECT  last_resolved_by_key AS last_resolved_by_key,source_id,ROW_ID FROM  mercuryinsurance_mdwdb.f_incident

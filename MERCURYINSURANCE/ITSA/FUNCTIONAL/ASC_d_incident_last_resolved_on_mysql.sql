@@ -9,5 +9,5 @@ ON f.state_src_key = dlm.src_key
  WHERE 
 case when
  dlm.dimension_wh_code = 'RESOLVED' then 
- convert_tz(SRC.resolved_at,'GMT','America/Los_Angeles') else null end 
+ convert_tz(SRC.u_resolved,'GMT','America/Los_Angeles') else null end 
 <> TRGT.last_resolved_on)x

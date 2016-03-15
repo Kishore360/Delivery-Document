@@ -8,4 +8,4 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
   LEFT JOIN mercuryinsurance_mdwdb.d_lov_map br 
  ON TRGT.state_src_key = br.src_key
 WHERE   br.dimension_wh_code IN ('CLOSED') 
-AND  TIMESTAMPDIFF(second, SRC.resolved_at,COALESCE(closed_at,sys_updated_on))<> TRGT.resolve_to_close_duration;
+AND  TIMESTAMPDIFF(second, SRC.u_resolved,COALESCE(closed_at,sys_updated_on))<> TRGT.resolve_to_close_duration;
