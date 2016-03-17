@@ -8,5 +8,5 @@ select count(*) as cnt
 from nbcu_mdsdb.problem_final s
 left  JOIN nbcu_mdwdb.d_problem t 
 on  t.ROW_ID=s.SYS_ID and s.sourceinstance=t.source_id 
-where  convert_tz(s.u_validated_at,'GMT','America/Los_Angeles')
+where  convert_tz(s.u_validated_at,'GMT','America/New_York')
 <> t.validated_at_c) temp
