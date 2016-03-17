@@ -8,4 +8,4 @@ mercuryinsurance_mdsdb.incident_final a join
 on a.sys_id=b.row_id
 and a.sourceinstance=b.source_id
 where 
-a.u_reason_for_escalation<>b.reason_for_escalation_c
+a.u_reason_for_escalation<>b.reason_for_escalation_c)a;

@@ -3,10 +3,17 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  SELECT CASE WHEN  TIMESTAMPDIFF(MINUTE,SRC.opened_at,coalesce(SRC.closed_at,SRC.sys_updated_on))<30
  THEN 'Y' ELSE 'N' END ABC , (TRGT.first_call_resolution_flag ) DEF
  FROM <<tenant>>_mdsdb.sc_req_item_final SRC 
- LEFT JOIN <<tenant>>_mdwdb.d_request_item TRGT 
+  JOIN <<tenant>>_mdwdb.d_request_item TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
+ JOIN <<tenant>>_mdwdb.f_request_item TRGTF 
+ ON (SRC.sys_id =TRGTF.row_id  
+ AND SRC.sourceinstance= TRGTF.source_id  )
+  JOIN <<tenant>>_mdwdb.d_lov_map LM ON TRGTF.state_src_key=LM.src_key AND LM.dimension_class = 'STATE~SC_REQ_ITEM'
+AND  LM.dimension_wh_code IN('RESOLVED','CLOSED')
  
 where TIMESTAMPDIFF(MINUTE,SRC.opened_at,coalesce(SRC.closed_at,SRC.sys_updated_on))<30
 )A
  WHERE  ABC<>DEF
+
+ 
