@@ -11,7 +11,7 @@ AND fieldname =  'priority' and oldvalue is not null and newvalue is not null
 )a group by a.documentkey
 )b
  join mercuryinsurance_mdsdb.u_asc_ticket_final c on b.documentkey=c.sys_id
-join mercuryinsurance_mdwdb.d_incident d on c.sys_id = d.row_id and c.sourceinstance = d. source_id
+join mercuryinsurance_mdwdb.d_incident_asc_c d on c.sys_id = d.row_id and c.sourceinstance = d. source_id
 ) e where priority_escalation<>target
 
 

@@ -4,7 +4,7 @@ ELSE 'Data Matched' END AS Message
 FROM (
 select count(1) cnt
 from mercuryinsurance_mdsdb.u_asc_ticket_final a
-left JOIN mercuryinsurance_mdwdb.f_incident b
+left JOIN mercuryinsurance_mdwdb.f_incident_asc_c b
 on 
 a.sys_id=b.row_id AND a.sourceinstance=b.source_id
 LEFT  JOIN  mercuryinsurance_mdwdb.d_lov c
