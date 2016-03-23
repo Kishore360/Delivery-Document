@@ -12,6 +12,6 @@ FROM mercuryinsurance_mdsdb.u_asc_ticket_final x  left outer join
 CONCAT('INTERNAL_CONTACT~',x.u_resolved_by)=y.row_id  AND sourceinstance= source_id 
 )A
  JOIN  
-(SELECT  last_resolved_by_key AS last_resolved_by_key,source_id,ROW_ID FROM  mercuryinsurance_mdwdb.f_incident
+(SELECT  last_resolved_by_key AS last_resolved_by_key,source_id,ROW_ID FROM  mercuryinsurance_mdwdb.f_incident_asc_c
   )B on A.sourceinstance=B.source_id AND B.ROW_ID=SYS_ID)h
 WHERE A_last_resolved_by_key<> B_last_resolved_by_key)E; 

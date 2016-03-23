@@ -2,22 +2,19 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for f_problem.opened_by_department_key' ELSE 'SUCCESS' END as Message
  
  FROM mercuryinsurance_mdsdb.u_asc_ticket_final SRC 
- JOIN mercuryinsurance_mdwdb.f_incident TRGT 
+ LEFT JOIN mercuryinsurance_mdsdb.sys_user_final LOKP
+ on LOKP.sys_id=SRC.opened_by
+ JOIN mercuryinsurance_mdwdb.f_incident_asc_c TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
-LEFT JOIN  mercuryinsurance_mdwdb.d_internal_contact LKP1 
- ON ( concat('INTERNAL_CONTACT~',SRC.opened_by)= LKP1.row_id 
- AND SRC.sourceinstance= LKP1.source_id )
+
  
  LEFT JOIN   mercuryinsurance_mdwdb.d_internal_organization LKP
- ON ( concat('DEPARTMENT~',LKP1.department_code)= LKP.row_id 
- AND LKP1.source_id= LKP.source_id )
+ ON ( concat('DEPARTMENT~',LOKP.department)= LKP.row_id 
+ AND SRC.sourceinstance= LKP.source_id )
 
-JOIN   mercuryinsurance_mdwdb.d_internal_organization LKP2
- ON ( concat('DEPARTMENT~',SRC.opened_by)= LKP2.row_id 
- AND SRC.sourceinstance= LKP2.source_id )
- and LKP.row_id  is null 
+
  
- WHERE COALESCE(LKP.row_key,LKP2.row_key,CASE WHEN (SRC.opened_by is not null and LKP1.department_code IS NULL 
+ WHERE COALESCE(LKP.row_key,CASE WHEN (SRC.opened_by is not null and LOKP.department IS NULL 
  or SRC.opened_by is  null)
- THEN 0 else -1 end)<> (TRGT.opened_by_department_key)
+ THEN 0 else -1 end)<> (TRGT.asc_incident_opened_by_department_c_key)

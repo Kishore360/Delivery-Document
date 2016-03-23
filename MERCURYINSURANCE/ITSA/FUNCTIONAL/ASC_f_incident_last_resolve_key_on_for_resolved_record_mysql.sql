@@ -15,7 +15,7 @@ FROM mercuryinsurance_mdsdb.u_asc_ticket_final
 
 )A
  JOIN  
-(SELECT  f.last_resolved_on_key,f.source_id,f.ROW_ID FROM  mercuryinsurance_mdwdb.f_incident f
+(SELECT  f.last_resolved_on_key,f.source_id,f.ROW_ID FROM  mercuryinsurance_mdwdb.f_incident_asc_c f
 join mercuryinsurance_mdwdb.d_lov_map dlm ON f.state_src_key = dlm.src_key and f.state_src_code=dlm.dimension_code 
 where dlm.dimension_class = 'STATE~INCIDENT'
 AND dlm.dimension_wh_code IN('RESOLVED','CLOSED')and state_src_code>4
