@@ -7,4 +7,4 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  LEFT JOIN <<tenant>>_mdwdb.d_lov_map br 
  ON TRGT.state_src_key = br.src_key
 WHERE   br.dimension_wh_code IN ('RESOLVED')
-AND TIMESTAMPDIFF(SECOND,SRC.opened_at,coalesce(SRC.resolved_at,SRC.closed_at)) END <> TRGT.open_to_resolve_duration;
+AND TIMESTAMPDIFF(SECOND,SRC.opened_at,coalesce(SRC.resolved_at,SRC.closed_at)) <> TRGT.open_to_resolve_duration;
