@@ -11,5 +11,5 @@ left join  mercuryinsurance_mdwdb.d_calendar_date c
 on 
 DATE_FORMAT(CONVERT_TZ(a.u_resolved,'GMT','America/Los_Angeles'),'%Y%m%d') = c.row_id
 where 
-0<>  b.last_resolved_on_key
+0<>  b.asc_incident_last_resolved_on_c_key
 AND a.state NOT IN (6,7))b

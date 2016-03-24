@@ -14,4 +14,4 @@ where
 case when a.u_call_back_for_ticket is null then 0
 when  a.u_call_back_for_ticket is not null and c.row_key is null then -1
 else 
-c.row_key end <>b.call_back_for_ticket_c_key )b
+c.row_key end <>b.asc_incident_call_back_for_incident_c_key )b

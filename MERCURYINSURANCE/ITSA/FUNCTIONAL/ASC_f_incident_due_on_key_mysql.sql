@@ -7,4 +7,4 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 LEFT JOIN mercuryinsurance_mdwdb.d_calendar_date LKP 
 on (LKP.row_id = date_format(convert_tz(SRC.due_date,'GMT','America/Los_Angeles'),'%Y%m%d')  and LKP.source_id=0
 )
-WHERE coalesce(LKP.row_key,-99) <> coalesce(TRGT.due_on_key,-99)
+WHERE (LKP.row_key) <> (TRGT.asc_incident_due_on_c_key)

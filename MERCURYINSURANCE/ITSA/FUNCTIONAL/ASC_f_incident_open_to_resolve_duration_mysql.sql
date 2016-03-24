@@ -5,6 +5,6 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
  LEFT JOIN mercuryinsurance_mdwdb.d_lov_map br 
- ON TRGT.state_src_key = br.src_key
+ ON TRGT.asc_incident_state_c_key = br.src_key
 WHERE   br.dimension_wh_code IN ('RESOLVED')
 AND TIMESTAMPDIFF(SECOND,SRC.opened_at,coalesce(SRC.u_resolved,SRC.closed_at))  <> TRGT.open_to_resolve_duration;

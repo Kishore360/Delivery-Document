@@ -6,4 +6,4 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  LEFT JOIN mercuryinsurance_mdwdb.f_incident_asc_c TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
- WHERE COALESCE( SRC.subcategory,'')<> COALESCE(TRGT.sub_category_src_code ,'')
+ WHERE ( SRC.subcategory)<> (TRGT.asc_incident_sub_category_src_code_c )

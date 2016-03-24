@@ -5,6 +5,7 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
  JOIN mercuryinsurance_mdwdb.d_incident_asc_c LKP 
- ON ( SRC.parent_incident= LKP.row_id 
+ ON ( SRC.parent= LKP.row_id 
 AND SRC.sourceinstance= LKP.source_id )
- WHERE COALESCE(LKP.row_key,CASE WHEN SRC.parent_incident IS NULL THEN 0 else -1 end)<>(TRGT.parent_incident_key)
+ WHERE COALESCE(LKP.row_key,CASE WHEN SRC.parent IS NULL THEN 0 else -1 end)<>(TRGT.parent_incident_key)
+

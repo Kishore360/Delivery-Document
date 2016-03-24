@@ -12,4 +12,4 @@ a.sys_id=b.row_id AND a.sourceinstance=b.source_id
 LEFT  JOIN  mercuryinsurance_mdwdb.d_calendar_date c
 on DATE_FORMAT(CONVERT_TZ(a.u_next_action_due_date,'GMT','America/Los_Angeles'),'%Y%m%d')= c.row_id
 
- where  c.row_key<>b.next_action_due_c_key )b
+ where  c.row_key<>b.asc_incident_next_action_due_c_key )b
