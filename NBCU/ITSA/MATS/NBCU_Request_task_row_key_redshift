@@ -1,0 +1,40 @@
+CREATE OR REPLACE VIEW ldb.f_request AS 
+ SELECT req.soft_deleted_flag, req.opened_time_key, req.configuration_item_key, req.priority_src_code, req.closed_by_key, req.opened_by_department_key, req.closed_on_key, req.changed_by, req.hr_change_key, req.age, req.age_key, req.impact_src_key, req.state_src_code, req.assigned_to_key, req.created_on, req.priority_src_key, req.urgency_src_key, req.row_id, req.company_key, req.time_worked, req.secondary2_changed_on, req.request_key, req.reassignment_count, req.opened_by_key, req.hr_category_src_key, req.etl_run_number, req.approval_state_src_code, req.domain_key, req.secondary1_changed_on, req.open_to_close_duration, req.source_id, req.assignment_group_key, req.dw_updated_on, req.stage_src_code, req.requested_for_key, req.stage_src_key, req.opened_on_key, req.urgency_src_code, req.location_key, req.dw_inserted_on, req.created_by, req.pivot_date, req.due_on_key, req.row_key, req.state_src_key, req.impact_src_code, req.changed_on, req.approval_state_src_key, req.cdctype
+   FROM nbcu_mdwdb.f_request req
+  WHERE req.soft_deleted_flag = 'N'::bpchar;
+
+select  'ldb.d_request_task' as tablename,  case when a.cnt = 2 then 'SUCCESS' else 'FAILURE'end as Result
+from (
+select count(row_key) as cnt  from ldb.d_request_task where row_key in (0,-1))a 
+Union
+select  'ldb.d_internal_contact' as tablename,  case when a.cnt = 2 then 'SUCCESS' else 'FAILURE'end as Result
+from (
+select count(row_key) as cnt  from ldb.d_internal_contact where row_key in (0,-1))a 
+Union
+select  'ldb.d_request_item' as tablename,  case when a.cnt = 2 then 'SUCCESS' else 'FAILURE'end as Result
+from (
+select count(row_key) as cnt  from ldb.d_request_item where row_key in (0,-1))a 
+Union
+select  'ldb.d_request' as tablename,  case when a.cnt = 2 then 'SUCCESS' else 'FAILURE'end as Result
+from (
+select count(row_key) as cnt  from ldb.d_request where row_key in (0,-1))a 
+Union
+select  'ldb.d_internal_contact_assigned_to' as tablename,  case when a.cnt = 2 then 'SUCCESS' else 'FAILURE'end as Result
+from (
+select count(row_key) as cnt  from ldb.d_internal_contact_assigned_to where row_key in (0,-1))a 
+Union
+select  'ldb.d_internal_organization_group' as tablename,  case when a.cnt = 2 then 'SUCCESS' else 'FAILURE'end as Result
+from (
+select count(row_key) as cnt  from ldb.d_internal_organization_group where row_key in (0,-1))a 
+Union
+select  'ldb.d_configuration_item' as tablename,  case when a.cnt = 2 then 'SUCCESS' else 'FAILURE'end as Result
+from (
+select count(row_key) as cnt  from ldb.d_configuration_item where row_key in (0,-1))a 
+Union
+select  'ldb.d_internal_contact_mdm' as tablename,  case when a.cnt = 2 then 'SUCCESS' else 'FAILURE'end as Result
+from (
+select count(row_key) as cnt  from ldb.d_internal_contact_mdm where row_key in (0,-1))a 
+Union
+select  'ldb.d_sc_task_state' as tablename,  case when a.cnt = 2 then 'SUCCESS' else 'FAILURE'end as Result
+from (
+select count(row_key) as cnt  from ldb.d_sc_task_state where row_key in (0,-1))a 
