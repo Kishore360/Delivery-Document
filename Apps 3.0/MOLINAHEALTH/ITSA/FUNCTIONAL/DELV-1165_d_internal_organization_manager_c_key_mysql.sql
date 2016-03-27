@@ -13,5 +13,5 @@ left join molinahealth_mdwdb.d_internal_contact c
 
 on c.row_id=concat('INTERNAL_CONTACT~',b.manager)
 
-where a.group_manager_c_key<>c.row_key
+where a.manager_c_key<>c.row_key
 ) a;

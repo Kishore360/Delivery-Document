@@ -9,13 +9,14 @@ when timestampdiff(second,opened_at,resolved_at)<=259200 and  LKP.dimension_code
 else 'N' end met_sla_flag_src, met_sla_flag
  FROM molinahealth_mdsdb.incident_final SRC
 LEFT JOIN molinahealth_mdwdb.d_lov LKP 
-ON  concat('PRIORITY_WH~INCIDENT~~~SEV',priority)= LKP.row_id 
+ON  concat('PRIORITY_WH~TASK~~~SEV',priority)= LKP.row_id 
 AND SRC.sourceinstance= LKP.source_id 
 LEFT JOIN molinahealth_mdwdb.d_lov_map LKP_MAP 
- ON LKP.dimension_class='PRIORITY_WH~INCIDENT' and 
+ ON LKP.dimension_class='PRIORITY_WH~TASK' and 
 ( LKP_MAP.dimension_wh_code=LKP.dimension_code 
 AND SRC.sourceinstance= LKP.source_id ) 
  LEFT JOIN molinahealth_mdwdb.d_incident TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
- )a
+ )a where met_sla_flag_src<>met_sla_flag
+

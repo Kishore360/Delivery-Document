@@ -7,4 +7,4 @@ on a.sys_id=b.row_id and a.sourceinstance=b.source_id
 LEFT JOIN molinahealth_mdwdb.d_internal_contact c
 ON concat('INTERNAL_CONTACT~',a.u_fulfilled_by)=c.row_id
 AND c.source_id=a.sourceinstance
-where coalesce(c.row_key,case when a.u_fulfilled_by is null then 0 else -1 )<>fulfilled_by_c_key
+where coalesce(c.row_key,case when a.u_fulfilled_by is null then 0 else -1 end )<>fulfilled_by_c_key

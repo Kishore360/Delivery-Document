@@ -4,4 +4,4 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  LEFT JOIN molinahealth_mdwdb.d_incident TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  ) 
- WHERE (SRC.u_outage_start)<>(TRGT.outage_start_on)
+ WHERE convert_tz(SRC.u_outage_start,'GMT','America/Los_Angeles')<>(TRGT.outage_start_on)
