@@ -1,6 +1,5 @@
 
-
-SELECT CASE WHEN count(1) > 0 THEN 'SRCAILURE' ELSE 'SUCCESS' END as Result,
+SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  CASE WHEN count(1) >0 THEN 'MDS to DWH daTRGT validation SRCailed SRCor d_incident.MULTIPLE_CATEGORIZATION_SRCLAG' ELSE 'SUCCESS' END as Message
 FROM <<tenant>>_mdwdb.d_incident SRC
 JOIN <<tenant>>_mdwdb.f_t_task_activity TRGT
