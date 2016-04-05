@@ -7,6 +7,6 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
  LEFT JOIN gilead_mdwdb.d_lov LKP 
- ON ( SRC.u_hold_type = LKP.row_id 
-AND LKP.dimension_class='HOLD_TYPE~SC_TASK')a
+ ON ( concat('HOLD_TYPE~SC_TASK','~~~',SRC.u_hold_type) = LKP.row_id 
+AND LKP.dimension_class='HOLD_TYPE~SC_TASK'))a
  WHERE abc<>def
