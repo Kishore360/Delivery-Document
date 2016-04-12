@@ -5,4 +5,4 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  ) LEFT JOIN molinahealth_mdwdb.d_location LKP 
 on (LKP.row_id = SRC.u_affected_location )
- WHERE (LKP.row_key,case when SRC.u_affected_location is null then 0 else -1 )<>(TRGT.location_key)
+ WHERE coalesce(LKP.row_key,case when SRC.u_affected_location is null then 0 else -1 end )<>(TRGT.location_key)

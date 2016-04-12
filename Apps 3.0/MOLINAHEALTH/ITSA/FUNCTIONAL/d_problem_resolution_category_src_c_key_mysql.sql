@@ -6,5 +6,4 @@
  AND SRC.sourceinstance= TRGT.source_id  )
 LEFT JOIN molinahealth_mdwdb.d_lov LKP 
  ON ( concat('RESOLUTION_CATEGORY_C~PROBLEM~~~',SRC.u_resolution_category))= LKP.src_rowid 
-AND SRC.sourceinstance= LKP.source_id 
  WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_resolution_category IS NULL THEN 0 else -1 end)<> (TRGT.resolution_category_src_c_key)

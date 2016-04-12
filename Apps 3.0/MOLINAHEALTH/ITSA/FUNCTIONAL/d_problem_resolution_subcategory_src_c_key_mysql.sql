@@ -5,6 +5,6 @@
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
 LEFT JOIN molinahealth_mdwdb.d_lov LKP 
- ON ( concat('RESOLUTION_SUBCATEGORY_C~PROBLEM~~~',SRC.u_resolution_subcategory))= LKP.src_rowid 
+ ON ( concat('RESOLUTION_SUBCATEGORY_C~PROBLEM~',SRC.u_resolution_category,'~~',SRC.u_resolution_subcategory))= LKP.src_rowid 
 AND SRC.sourceinstance= LKP.source_id 
  WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_resolution_subcategory IS NULL THEN 0 else -1 end)<> (TRGT.resolution_subcategory_src_c_key)
