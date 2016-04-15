@@ -1,15 +1,15 @@
 SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for f_incident.state_src_key' ELSE 'SUCCESS' END as Message from (
  select 
-case when timestampdiff(second,opened_at,coalesce(resolved_at,closed_at))>=LKP.lower_range_value AND timestampdiff(second,opened_at,coalesce(resolved_at,closed_at))<=LKP.upper_range_value 
+case when timestampdiff(second,opened_at,coalesce(resolved_at,closed_at))>=coalesce(LKP.lower_range_value,-99) AND timestampdiff(second,opened_at,coalesce(resolved_at,closed_at))<=coalesce(LKP.upper_range_value,-99) 
  and  LKP.dimension_code='Sev1' then  'Y'
-when timestampdiff(second,opened_at,coalesce(resolved_at,closed_at))>=LKP.lower_range_value AND timestampdiff(second,opened_at,coalesce(resolved_at,closed_at))<=LKP.upper_range_value 
+when timestampdiff(second,opened_at,coalesce(resolved_at,closed_at))>=coalesce(LKP.lower_range_value,-99) AND timestampdiff(second,opened_at,coalesce(resolved_at,closed_at))<=coalesce(LKP.upper_range_value,-99) 
 AND LKP.dimension_code='Sev2' then  'Y'
-when timestampdiff(second,opened_at,coalesce(resolved_at,closed_at))>=LKP.lower_range_value AND timestampdiff(second,opened_at,coalesce(resolved_at,closed_at))<=LKP.upper_range_value 
+when timestampdiff(second,opened_at,coalesce(resolved_at,closed_at))>=coalesce(LKP.lower_range_value,-99) AND timestampdiff(second,opened_at,coalesce(resolved_at,closed_at))<=coalesce(LKP.upper_range_value,-99) 
  AND  LKP.dimension_code='Sev3' then  'Y'
-when timestampdiff(second,opened_at,coalesce(resolved_at,closed_at))>=LKP.lower_range_value AND timestampdiff(second,opened_at,coalesce(resolved_at,closed_at))<=LKP.upper_range_value 
+when timestampdiff(second,opened_at,coalesce(resolved_at,closed_at))>=coalesce(LKP.lower_range_value,-99) AND timestampdiff(second,opened_at,coalesce(resolved_at,closed_at))<=coalesce(LKP.upper_range_value,-99) 
  and  LKP.dimension_code='Sev4' then  'Y'
-when timestampdiff(second,opened_at,coalesce(resolved_at,closed_at))>=LKP.lower_range_value AND timestampdiff(second,opened_at,coalesce(resolved_at,closed_at))<=LKP.upper_range_value 
+when timestampdiff(second,opened_at,coalesce(resolved_at,closed_at))>=coalesce(LKP.lower_range_value,-99) AND timestampdiff(second,opened_at,coalesce(resolved_at,closed_at))<=coalesce(LKP.upper_range_value,-99) 
  and  LKP.dimension_code='Sev5' then  'Y'
 else 'N' end met_sla_flag_src, met_sla_flag
 
