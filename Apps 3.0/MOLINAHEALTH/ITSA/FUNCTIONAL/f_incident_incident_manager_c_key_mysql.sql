@@ -3,8 +3,8 @@
  FROM molinahealth_mdsdb.incident_final SRC1 left join
 molinahealth_mdsdb.u_major_incident_final SRC on SRC1.sys_id =SRC.sys_id and SRC.sourceinstance=SRC1.sourceinstance
  LEFT JOIN molinahealth_mdwdb.f_incident TRGT 
- ON (SRC.sys_id =TRGT.row_id  
- AND SRC.sourceinstance= TRGT.source_id  )
+ ON (SRC1.sys_id =TRGT.row_id  
+ AND SRC1.sourceinstance= TRGT.source_id  )
 LEFT JOIN molinahealth_mdwdb.d_internal_contact LKP 
  ON ( concat('INTERNAL_CONTACT~',SRC.u_incident_manager)= LKP.row_id 
 AND SRC.sourceinstance= LKP.source_id ) 
