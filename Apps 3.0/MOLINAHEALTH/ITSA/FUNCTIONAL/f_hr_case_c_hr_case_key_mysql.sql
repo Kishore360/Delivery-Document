@@ -7,6 +7,6 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 LEFT JOIN molinahealth_mdwdb.f_hr_case_c LKP 
  ON (SRC.sys_id =LKP.row_id  
  AND SRC.sourceinstance= LKP.source_id  )
-WHERE (TRGT.row_key ) <> (LKP.hr_case_key) 
+WHERE (TRGT.row_key ) <> (LKP.hr_case_c_key) 
 
 

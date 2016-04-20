@@ -3,7 +3,7 @@
 select count(1) as cnt   
 FROM molinahealth_mdsdb.u_hr_case_final SRC 
 LEFT JOIN molinahealth_mdwdb.d_internal_organization LKP 
- ON   concat('DEPARTMENT~',upper(u_department ))=  LKP.src_rowid 
+ ON   concat('DEPARTMENT~',upper(u_department ))=  LKP.row_id 
 AND SRC.sourceinstance= LKP.source_id 
  LEFT JOIN molinahealth_mdwdb.f_hr_case_c TRGT 
  ON (SRC.sys_id =TRGT.row_id  

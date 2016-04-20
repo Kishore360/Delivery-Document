@@ -5,6 +5,6 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
  where
-CONCAT('<a href=\"https://molina.service-now.comhr_case.do?sys_id=',i.sys_id,'\" target=\"_blank\">',i.number,'</a>') <>source_url
+CONCAT('<a href=\"https://molina.service-now.com/hr_case.do?sys_id=',sys_id,'\" target=\"_blank\">',number,'</a>') <>source_url
 
 
