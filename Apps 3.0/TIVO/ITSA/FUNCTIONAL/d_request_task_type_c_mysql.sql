@@ -8,6 +8,6 @@ select count(1) as cnt
 from tivo_mdsdb.u_tech_ops_request_final s
 left join tivo_mdwdb.d_request t
 on s.sys_id=t.row_id and s.sourceinstance=t.source_id
-WHERE t.task_type_c <> 'IT-request' ) temp
+WHERE t.task_type_c <> 'IT-Requests' ) temp
 
 
