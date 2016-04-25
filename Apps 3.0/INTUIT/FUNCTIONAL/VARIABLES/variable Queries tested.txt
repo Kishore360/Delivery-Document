@@ -1,0 +1,163 @@
+Passthrough  column:
+----------------------
+ SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+ CASE WHEN cnt>0 THEN 'PASSTHROUGH NOT MATCHING ON DATA' ELSE 'SUCCESS' END as Message
+ FROM(
+select count(1) as cnt from 
+intuit_mdsdb.question_final a
+join intuit_workdb.lsm_ls_variable_list b on a.sys_id=b.row_id
+left join intuit_mdsdb.sys_choice_final t  on t.name='question' and a.type=t.value
+left join intuit_mdwdb.d_variable c
+on a.sys_id=c.row_id and a.sourceinstance=c.source_id where a.question_text<>c.question_text or 
+a.name<>c.name or
+a.Reference<>c.Reference or
+a.Choice_table<>c.Choice_table or
+a.Choice_field<>c.choice_column or 
+t.label<>c.variable_type)temp
+
+
+
+Fact key columns for LOV :
+--------------------------
+ SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+ CASE WHEN cnt>0 THEN 'PASSTHROUGH NOT MATCHING ON DATA' ELSE 'SUCCESS' END as Message
+ FROM(
+select count(1) as cnt from
+(select a.reference_c_key aa,b.value,c.row_key bb
+from intuit_mdwdb.f_incident_variable_c a
+inner join intuit_mdsdb.question_answer_final b
+on a.row_id=b.sys_id
+and a.source_id=b.sourceinstance
+left join intuit_mdwdb.d_variable_lov_c c
+on b.value=c.value
+and b.question=c.variable_id
+join intuit_workdb.lsm_ls_variable_list aaa on  b.question=aaa.row_id and aaa.table_name ='incident'
+and aaa.variable_type='Select Box'
+)asd
+where aa<>bb )temp
+
+
+Keys for Fact tables:(SYS_USER_KEY)
+---------------------
+
+select a.sys_user_key,b.value,c.name,c.reference,d.row_key
+from intuit_mdwdb.f_incident_variable_c a
+inner join intuit_mdsdb.question_answer_final b
+on a.row_id=b.sys_id
+and a.source_id=b.sourceinstance
+inner join intuit_mdwdb.d_variable c
+on b.question=c.row_id
+and b.sourceinstance=c.source_id
+inner join intuit_mdwdb.d_internal_contact d
+on concat('INTERNAL_CONTACT~',b.value)=d.row_id
+and b.sourceinstance=d.source_id
+where c.reference='sys_user' AND a.sys_user_key<>d.row_key
+
+Keys for Fact tables:(CONFIG_APPLICATION_KEY)
+-----------------------------------
+select a.sys_user_key,b.value,c.name,c.reference,c.row_key
+from intuit_mdwdb.f_incident_variable_c a
+inner join intuit_mdsdb.question_answer_final b
+on a.row_id=b.sys_id
+and a.source_id=b.sourceinstance
+inner join intuit_mdwdb.d_variable c
+on b.question=c.row_id
+and b.sourceinstance=c.source_id
+inner join intuit_mdwdb.d_configuration_application_c d
+on b.value=d.row_id
+and b.sourceinstance=d.source_id
+where c.reference='cmdb_ci_appl' AND a.configuration_application_key<>d.row_key
+
+Keys for Fact tables:(VARIABLE_KEY)
+----------------------
+select a.variable_key,b.value,c.name,c.reference,c.row_key
+from intuit_mdwdb.f_incident_variable_c a
+inner join intuit_mdsdb.question_answer_final b
+on a.row_id=b.sys_id
+and a.source_id=b.sourceinstance
+inner join intuit_mdwdb.d_variable c
+on b.question=c.row_id
+and b.sourceinstance=c.source_id
+where  a.variable_key<>c.row_key
+
+Keys for Fact tables:(INCIDENT_KEY)
+-------------------------------
+select a.incident_key,b.value,c.row_key
+from intuit_mdwdb.f_incident_variable_c a
+inner join intuit_mdsdb.question_answer_final b
+on a.row_id=b.sys_id
+and a.source_id=b.sourceinstance
+inner join intuit_mdwdb.d_incident c
+on b.table_sys_id=c.row_id
+and b.sourceinstance=c.source_id
+where  a.incident_key<>c.row_key
+
+test for -1 :since there is no reference -1 is appearing (why this reference is missing.. ? ask aparna)
+---------------------------------------------------------
+select b.table_sys_id,c.row_id,a.row_id,b.sys_id,c.row_key,a.incident_key
+from intuit_mdsdb.question_answer_final b
+left join intuit_mdwdb.d_incident c
+on b.table_sys_id=c.row_id
+and b.sourceinstance=c.source_id
+left join intuit_mdwdb.f_incident_variable_c a
+on a.row_id=b.sys_id
+and a.source_id=b.sourceinstance
+where  a.incident_key<0
+
+
+Duplicates in LOV :
+-------------------
+select row_id,text,value,count(1) from intuit_mdwdb.d_variable_lov_c 
+group by 1,2,3
+having count(1)>1
+
+LOV AND LOV MAP RELATED :
+------------------------
+NEED TO CHECK WITH APARNA IF LOV_MAP TABLE IS PRESENT
+
+
+DIRECT PASSTHROUGH FOR D_VARIABLE_LOV :
+-------------------------------------
+ select a.value,c.value,
+a.text,c.text,
+a.question,c.variable_id from 
+intuit_mdsdb.question_choice_final a
+join intuit_workdb.lsm_ls_variable_list b on a.sys_id=b.row_id
+left join intuit_mdwdb.d_variable_lov_c c
+on a.sys_id=c.row_id and a.sourceinstance=c.source_id where 
+a.value<>c.value or 
+a.text<>c.text or 
+a.question<>c.variable_id
+
+-1 in all the fact keys :
+--------------------------
+
+
+SELECT VARIABLE_KEY,INCIDENT_KEY,SYS_USER_KEY,configuration_application_key,c.reference FROM intuit_mdwdb.f_incident_variable_c b
+JOIN intuit_mdwdb.d_variable c
+on b.variable_key=c.row_key and c.reference='sys_user'
+WHERE VARIABLE_KEY<0 OR INCIDENT_KEY<0 OR SYS_USER_KEY<0 OR configuration_application_key <0
+
+duplicate issue in d_variable row_key  :
+-------------------------------------------
+
+SELECT c.row_key,c.row_id,VARIABLE_KEY,INCIDENT_KEY,SYS_USER_KEY,configuration_application_key,c.reference FROM intuit_mdwdb.f_incident_variable_c b
+JOIN intuit_mdwdb.d_variable c
+on b.variable_key=c.row_key and c.reference='sys_user'
+WHERE VARIABLE_KEY<0 OR INCIDENT_KEY<0 OR SYS_USER_KEY<0 OR configuration_application_key <0
+
+OVERALL CONCEPT:
+------------------
+
+ONE QUESTION FIND OUT THE ANSWER(VALUE)
+WHAT INFOR IS PRESENT FOR THE PARTICULAR INCIDENT
+WHAT ARE THE CHOICES AVAILABLE IN THE CHOICE TABLE
+
+ select d.text,d.value,d.question,a.question_text,b.value ,aaa.variable_type   from  
+intuit_mdsdb.question_final a inner join intuit_mdsdb.question_answer_final b
+on b.question=a.sys_id
+join intuit_mdsdb.incident_final c
+on b.table_sys_id=c.sys_id and c.sys_id='e66f15776f8c310051a1da0cbb3ee4b0'
+left join intuit_mdsdb.question_choice_final d 
+on b.question=d.question
+join intuit_workdb.lsm_ls_variable_list aaa on  b.question=aaa.row_id 
