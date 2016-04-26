@@ -8,6 +8,6 @@ select CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 	where case when lm.dimension_wh_code in ('OPEN') 
 				then 0
                 else  COALESCE(CASE WHEN  SRC.WORK_END <  SRC.WORK_START THEN NULL 
-                                WHEN TIMESTAMPDIFF(SECOND,SRC.WORK_START, SRC.WORK_END) > 214748364 
-THEN NULL ELSE TIMESTAMPDIFF(SECOND,SRC.WORK_START, SRC.WORK_END) end ,0)
+                                -- WHEN TIMESTAMPDIFF(SECOND,SRC.WORK_START, SRC.WORK_END) > 214748364 THEN NULL 
+								ELSE TIMESTAMPDIFF(SECOND,SRC.WORK_START, SRC.WORK_END) end ,0)
             end  <> fi.actual_duration
