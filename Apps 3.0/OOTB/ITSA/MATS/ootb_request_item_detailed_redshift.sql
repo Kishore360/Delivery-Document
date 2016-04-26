@@ -6,6 +6,47 @@
 left outer join  ldb.d_calendar_date         a12
 on (a11.opened_on_key = a12.row_key)
 union
+ select'd_calendar_week' as Table_Name, count(a11.row_key) Row_Count
+ from  ldb.f_request_item             a11 
+left outer join  ldb.d_calendar_date         a12
+on (a11.opened_on_key = a12.row_key)
+left outer join  ldb.d_calendar_month         a14
+on (a12.week_start_date_key  = a14.row_key)
+ union
+  select'd_calendar_quarter' as Table_Name, count(a11.row_key) Row_Count
+ from  ldb.f_request_item             a11 
+left outer join  ldb.d_calendar_date         a12
+on (a11.opened_on_key = a12.row_key)
+left outer join  ldb.d_calendar_quarter                         a14
+on (a12.quarter_start_date_key  = a14.row_key)
+union
+  select'd_calendar_year' as Table_Name, count(a11.row_key) Row_Count
+ from  ldb.f_request_item             a11 
+left outer join  ldb.d_calendar_date         a12
+on (a11.opened_on_key = a12.row_key)
+left outer join  ldb.d_calendar_year                         a14
+on (a12.year_start_date_key  = a14.row_key)
+union
+ select'd_change_request' as Table_Name, count(a11.row_key) Row_Count
+ from  ldb.f_request_item             a11 
+left outer join  ldb.d_change_request         a12
+on (a11.change_c_key  = a12.row_key)
+union
+ select'd_hr_change_category' as Table_Name, count(a11.row_key) Row_Count
+ from  ldb.f_request_item             a11 
+left outer join  ldb.d_hr_change_category                  a12
+on (a11.hr_category_src_key   = a12.row_key)
+union
+ select'd_sc_req_item_approval' as Table_Name, count(a11.row_key) Row_Count
+ from  ldb.f_request_item             a11 
+left outer join  ldb.d_sc_req_item_approval                       a12
+on (a11.approval_state_src_key    = a12.row_key)
+union
+ select'd_hr_change' as Table_Name, count(a11.row_key) Row_Count
+ from  ldb.f_request_item             a11 
+left outer join  ldb.d_hr_change                  a12
+on (a11.hr_change_key    = a12.row_key)
+union
  select'd_calendar_date_closed' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_request_item             a11 
 left outer join  ldb.d_calendar_date_closed         a13
@@ -46,6 +87,11 @@ select'd_internal_contact_task_closed_by' as Table_Name, count(a11.row_key) Row_
  from  ldb.f_request_item             a11 
  left outer join  ldb.d_internal_contact_task_closed_by         a19
 on (a11.closed_by_key = a19.row_key)
+union
+select'd_internal_organization_department' as Table_Name, count(a11.row_key) Row_Count
+ from  ldb.f_request_item             a11 
+ left outer join  ldb.d_internal_organization_department         a110
+on (a11.opened_by_department_key  = a110.row_key)
 union
 select'd_internal_organization_group' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_request_item             a11 
