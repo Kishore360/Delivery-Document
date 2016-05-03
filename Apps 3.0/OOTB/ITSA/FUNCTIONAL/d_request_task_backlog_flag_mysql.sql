@@ -9,6 +9,6 @@
  ON (TRGTF.request_task_key =TRGT.row_key
  AND TRGTF.source_id =TRGT.source_id)
 LEFT JOIN <<tenant>>_mdwdb.d_lov_map LM
- on TRGTF.state_src_key = LM.src_key  AND LM.dimension_class='STATE~TASK' )a
+ on TRGTF.state_src_key = LM.src_key  AND LM.dimension_class='STATE~SC_TASK' )a
 WHERE abc<>def
 
