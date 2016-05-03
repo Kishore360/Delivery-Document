@@ -14,7 +14,12 @@ select     'ldb.d_change_request' as Table_Name, count(a11.row_key) Row_Count
 join ldb.d_change_request     a13
 on  (a11.change_request_key=a13.row_key)
 union
-select     'ldb.d_internal_organization_group' as Table_Name, count(a11.row_key) Row_Count
+select     'ldb.d_internal_organization_group1' as Table_Name, count(a11.row_key) Row_Count
+ from  ldb.f_change_request             a11 
+join ldb.d_internal_organization_group     a13
+on  (a11.causal_assignment_group_c_key=a13.row_key)
+union
+select     'ldb.d_internal_organization_group2' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_change_request             a11 
 join ldb.d_internal_organization_group     a14
 on  (a11.assignment_group_key=a14.row_key)
