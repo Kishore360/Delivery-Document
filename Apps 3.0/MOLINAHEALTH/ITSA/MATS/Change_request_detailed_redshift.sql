@@ -6,6 +6,21 @@ select'f_change_request' as Table_Name, count(a11.row_key) Row_Count
 				    join          ldb.d_internal_contact_requested_by_c               a122
                   on          (a11.requested_by_c_key = a122.row_key)
 				  union
+				   select'd_incident' as Table_Name, count(a11.row_key) Row_Count
+ from  ldb.f_change_request             a11 
+				    join          ldb.d_incident	               a122
+                  on          (a11.incident_c_key = a122.row_key)
+				    union
+				   select'd_internal_contact' as Table_Name, count(a11.row_key) Row_Count
+ from  ldb.f_change_request             a11 
+				    join          ldb.d_internal_contact	               a122
+                  on          (a11.approved_by_c_key = a122.row_key)
+				  	    union
+				   select'd_change_request' as Table_Name, count(a11.row_key) Row_Count
+ from  ldb.f_change_request             a11 
+				    join          ldb.d_change_request   a122
+                  on          (a11.change_c_key = a122.row_key)
+				  union
 				  select'd_internal_contact_manager_c' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_change_request             a11 
 				  				      join          ldb.d_internal_organization_group        a14
