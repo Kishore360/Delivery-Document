@@ -6,5 +6,5 @@ select count(1) as cnt
 from cardinalhealth_mdsdb.rm_enhancement_final a
  left  JOIN  cardinalhealth_mdwdb.d_enhancement_rm_c b
 on  b.ROW_ID = a.SYS_ID and a.sourceinstance=b.source_id
-where case when (extract(month from a.opened_at)>6) then CONCAT('FY','-', (extract(year from a.opened_at)+1)) else 
-CONCAT('FY','-', (extract(year from a.opened_at))) end<>b.fiscal_year_opened_at_fy)c
+where case when (extract(month from a.opened_at)>6) then (extract(year from a.opened_at)+1) else 
+ (extract(year from a.opened_at)) end<>b.fiscal_year_opened_at)c
