@@ -9,8 +9,8 @@ B.  last_resolved_on_key B_last_resolved_on_key ,
 case when year <2000 then A.last_resolved_on_key+20000000 else A.last_resolved_on_key 
 end as  A_last_resolved_on_key from
 (SELECT SYS_ID,sourceinstance, 
-DATE_FORMAT(CONVERT_TZ(coalesce(resolved_at,sys_updated_on),<<TENANT_SSI_TIME_ZONE>>,<<DW_TARGET_TIME_ZONE>>),'%Y')  AS   year,
-DATE_FORMAT(CONVERT_TZ(coalesce(resolved_at,sys_updated_on),<<TENANT_SSI_TIME_ZONE>>,<<DW_TARGET_TIME_ZONE>>),'%Y%m%d')  AS   last_resolved_on_key
+DATE_FORMAT(CONVERT_TZ(coalesce(resolved_at,closed_at,sys_updated_on),<<TENANT_SSI_TIME_ZONE>>,<<DW_TARGET_TIME_ZONE>>),'%Y')  AS   year,
+DATE_FORMAT(CONVERT_TZ(coalesce(resolved_at,closed_at,sys_updated_on),<<TENANT_SSI_TIME_ZONE>>,<<DW_TARGET_TIME_ZONE>>),'%Y%m%d')  AS   last_resolved_on_key
 FROM <<tenant>>_mdsdb.incident_final 
 
 )A

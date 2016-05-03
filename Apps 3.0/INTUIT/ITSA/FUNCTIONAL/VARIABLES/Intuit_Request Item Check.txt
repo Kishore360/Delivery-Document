@@ -1,0 +1,164 @@
+
+Keys for Fact tables:(SYS_USER_KEY)
+---------------------
+
+select a.sys_user_key,b.value,c.name,c.reference,d.row_key
+from intuit_mdwdb.f_request_item_variable_c a
+inner join intuit_mdsdb.sc_item_option_final b
+on a.row_id=b.sys_id
+and a.source_id=b.sourceinstance
+inner join intuit_mdwdb.d_variable c
+on b.item_option_new=c.row_id
+and b.sourceinstance=c.source_id
+inner join intuit_mdwdb.d_internal_contact d
+on concat('INTERNAL_CONTACT~',b.value)=d.row_id
+and b.sourceinstance=d.source_id
+where c.reference='sys_user' AND a.sys_user_key<>d.row_key
+
+configuration_application_key:
+-----------------------------
+
+select a.sys_user_key,b.value,c.name,c.reference,c.row_key
+from intuit_mdwdb.f_request_item_variable_c a
+inner join intuit_mdsdb.sc_item_option_final b
+on a.row_id=b.sys_id
+and a.source_id=b.sourceinstance
+inner join intuit_mdwdb.d_variable c
+on b.item_option_new=c.row_id
+and b.sourceinstance=c.source_id
+inner join intuit_mdwdb.d_configuration_application_c d
+on b.value=d.row_id
+and b.sourceinstance=d.source_id
+where c.reference='cmdb_ci_appl' AND a.configuration_application_key<>d.row_key
+
+Keys for Fact tables:(VARIABLE_KEY)
+-----------------------------------
+
+select a.variable_key,b.value,c.name,c.reference,c.row_key
+from intuit_mdwdb.f_request_item_variable_c a
+inner join intuit_mdsdb.sc_item_option_final b
+on a.row_id=b.sys_id
+and a.source_id=b.sourceinstance
+inner join intuit_mdwdb.d_variable c
+on b.item_option_new=c.row_id
+and b.sourceinstance=c.source_id
+where  a.variable_key<>c.row_key
+
+access_application_key:
+------------------------
+select a.sys_user_key,b.value,c.name,c.reference,c.row_key
+from intuit_mdwdb.f_request_item_variable_c a
+inner join intuit_mdsdb.sc_item_option_final b
+on a.row_id=b.sys_id
+and a.source_id=b.sourceinstance
+inner join intuit_mdwdb.d_variable c
+on b.item_option_new=c.row_id
+and b.sourceinstance=c.source_id
+inner join intuit_mdwdb.d_access_application_c d
+on b.value=d.row_id
+and b.sourceinstance=d.source_id
+where c.reference='u_access_application' AND a.access_application_key<>d.row_key
+
+access_environment_key:
+-----------------------
+select a.sys_user_key,b.value,c.name,c.reference,c.row_key
+from intuit_mdwdb.f_request_item_variable_c a
+inner join intuit_mdsdb.sc_item_option_final b
+on a.row_id=b.sys_id
+and a.source_id=b.sourceinstance
+inner join intuit_mdwdb.d_variable c
+on b.item_option_new=c.row_id
+and b.sourceinstance=c.source_id
+inner join intuit_mdwdb.d_access_environments_c d
+on b.value=d.row_id
+and b.sourceinstance=d.source_id
+where c.reference='u_access_environments' AND a.access_environment_key<>d.row_key
+
+
+access_l1_key:
+--------------
+select access_l1_key,d.row_key
+from intuit_mdwdb.f_request_item_variable_c a
+inner join intuit_mdsdb.sc_item_option_final b
+on a.row_id=b.sys_id
+and a.source_id=b.sourceinstance
+inner join intuit_mdwdb.d_variable c
+on b.item_option_new=c.row_id
+and b.sourceinstance=c.source_id
+inner join intuit_mdwdb.d_access_l1_c d
+on b.value=d.row_id
+and b.sourceinstance=d.source_id
+where c.choice_table='u_access_l1' AND a.access_l1_key<>d.row_key;
+
+
+bufg_key:
+----------
+select a.bufg_key,d.row_key
+from intuit_mdwdb.f_request_item_variable_c a
+inner join intuit_mdsdb.sc_item_option_final b
+on a.row_id=b.sys_id
+and a.source_id=b.sourceinstance
+inner join intuit_mdwdb.d_variable c
+on b.item_option_new=c.row_id
+and b.sourceinstance=c.source_id
+inner join intuit_mdwdb.d_bufg_c d
+on b.value=d.row_id
+and b.sourceinstance=d.source_id
+where c.reference='u_bufg' AND a.bufg_key<>d.row_key
+
+
+service_delivery_team_l4s_key:
+---------------------------------
+select a.service_delivery_team_l4s_key,d.row_key
+from intuit_mdwdb.f_request_item_variable_c a
+inner join intuit_mdsdb.sc_item_option_final b
+on a.row_id=b.sys_id
+and a.source_id=b.sourceinstance
+inner join intuit_mdwdb.d_variable c
+on b.item_option_new=c.row_id
+and b.sourceinstance=c.source_id
+inner join intuit_mdwdb.d_service_delivery_team_l4s_c d
+on b.value=d.row_id
+and b.sourceinstance=d.source_id
+where c.reference='u_service_delivery_team_l4s' AND a.service_delivery_team_l4s_key<>d.row_key
+
+reference_c_key:
+----------------
+select * from 
+(select a.reference_c_key aa,b.value,c.row_key bb
+from intuit_mdwdb.f_request_item_variable_c a
+inner join intuit_mdsdb.sc_item_option_final b
+on a.row_id=b.sys_id
+and a.source_id=b.sourceinstance
+left join intuit_mdwdb.d_variable_lov_c c
+on b.value=c.value
+and b.item_option_new=c.variable_id
+)asd
+where aa<>bb 
+
+request_item_key:
+------------------
+
+select count(1) from 
+(select a.request_item_key aa,c.row_key bb
+from intuit_mdwdb.f_request_item_variable_c a
+inner join intuit_mdsdb.sc_item_option_final b
+on a.row_id=b.sys_id
+and a.source_id=b.sourceinstance
+inner join intuit_mdsdb.sc_item_option_mtom_final d
+on d.sc_item_option=b.sys_id
+inner join intuit_mdwdb.d_request_item c
+on d.request_item=c.row_id and c.source_id=d.sourceinstance
+)asd
+where aa<>bb ;
+
+-1 validations :
+---------------
+select * from intuit_mdwdb.f_request_item_variable_c where SYS_USER_KEY<0 
+select * from intuit_mdwdb.f_request_item_variable_c where  configuration_application_key<0
+select * from intuit_mdwdb.f_request_item_variable_c where  VARIABLE_KEY<0 
+select * from intuit_mdwdb.f_request_item_variable_c where  access_l1_key<0 
+select * from intuit_mdwdb.f_request_item_variable_c where  bufg_key<0 
+select * from intuit_mdwdb.f_request_item_variable_c where  service_delivery_team_l4s_key<0 
+select * from intuit_mdwdb.f_request_item_variable_c where  reference_c_key<0
+select * from intuit_mdwdb.f_request_item_variable_c where  request_item_key<0 

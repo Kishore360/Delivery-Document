@@ -4,16 +4,9 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  LEFT JOIN weillcornell_mdwdb.f_incident TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
+  JOIN weillcornell_mdwdb.d_lov_map dlm 
+ON TRGT.state_src_key = dlm.src_key   
 LEFT JOIN weillcornell_mdwdb.d_calendar_date LKP 
-on (LKP.row_id = date_format(convert_tz(SRC.closed_at,'GMT','America/New_York'),'%Y%m%d')  and LKP.source_id=0
+on (LKP.row_id = date_format(convert_tz(coalesce(SRC.closed_at,sys_updated_on),'GMT','America/New_York'),'%Y%m%d') and LKP.source_id=0
 )
-WHERE COALESCE(LKP.row_key,'') <> COALESCE(TRGT.closed_on_key,'') 
- and    SRC.sys_id not in (select B.sys_id
-from
-weillcornell_mdsdb.incident_final B
-join weillcornell_mdsdb.sys_user_final C
-on C.sys_id = B.caller_id
-join weillcornell_mdsdb.cmdb_ci_final D
-on D.sys_id = B.u_business_service
-where UPPER(C.user_name) = 'GUEST'
-and UPPER(D.name) = 'ONLINE DIRECTORY' ) 
+WHERE  case when dlm.dimension_wh_code = 'CLOSED' then (LKP.row_key) else null end <> (TRGT.closed_on_key)
