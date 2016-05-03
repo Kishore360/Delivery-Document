@@ -9,5 +9,5 @@ svb_mdsdb.incident_final a
 left outer join svb_mdwdb.d_incident b on
 a. u_resolved_by=b.row_id
 left join svb_mdwdb. f_incident c 
-on b.row_id=c.row_id and b.source_id=c.source_id
+on a.sys_id=c.row_id and a.sourceinstance=c.source_id
 where b.row_key<>c.  last_resolved_by_key)c
