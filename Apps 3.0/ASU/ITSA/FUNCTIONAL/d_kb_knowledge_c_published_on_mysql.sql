@@ -6,4 +6,4 @@ select count(1) as cnt
 FROM asu_mdsdb.kb_knowledge_final A
 left join  asu_mdwdb.d_kb_knowledge_c B on A.sourceinstance=B.source_id 
 AND B.ROW_ID=SYS_ID
-WHERE A.published <> B.published_on)A
+WHERE convert_tz(A.published,'GMT','US/Mountain') <> B.published_on)A
