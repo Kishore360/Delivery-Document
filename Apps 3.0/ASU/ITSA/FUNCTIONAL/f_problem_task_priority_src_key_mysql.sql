@@ -9,7 +9,7 @@ left join asu_mdwdb.f_problem_task   t
 on s.sys_id=t.row_id and s.sourceinstance=t.source_id
 
 LEFT JOIN asu_mdwdb.d_lov LKP 
- ON ( concat('PRIORITY','~','TASK','~','~','~',upper(priority))= LKP.src_rowid 
+ ON ( concat('PRIORITY','~','PROBLEM_TASK','~','~','~',upper(priority))= LKP.src_rowid 
 AND s.sourceinstance= LKP.source_id )
  WHERE COALESCE(LKP.row_key,CASE WHEN s.priority IS NULL THEN 0 else '-1' end)<> COALESCE(t.priority_src_key,'')
 ) temp
