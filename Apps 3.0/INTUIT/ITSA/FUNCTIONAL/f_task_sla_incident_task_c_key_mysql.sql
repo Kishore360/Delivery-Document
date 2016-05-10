@@ -5,6 +5,5 @@ LEFT JOIN intuit_mdsdb.task_final t ON tsd.task = t.sys_id
 LEFT JOIN intuit_mdwdb.f_task_sla dfts on tsd.sys_id=dfts.row_id 
   AND tsd.sourceinstance=dfts.source_id
 LEFT JOIN intuit_mdwdb.d_incident_task_c b ON tsd.task = b.row_id and b.source_id = tsd.sourceinstance
-  
-where coalesce(b.row_Key,case when tsd.task is null
-then 0 else -1 end)<>dfts.incident_task_c_key
+
+WHERE COALESCE(b.row_key,CASE WHEN tsd.task IS NULL THEN 0 else -1 end)<> (dfts.incident_task_c_key)

@@ -8,5 +8,4 @@ ON (SRC.sys_id =TRGT1.row_id   AND SRC.sourceinstance= TRGT1.source_id  )
   left join <<tenant>>_mdwdb.d_lov_map lm 
  ON (lm.src_key = TRGT.state_src_key)
  where  lm.dimension_wh_code = 'CLOSED' 
- and convert_tz(SRC.closed_at,"GMT","America/New_York") <> TRGT1.closed_on 
-
+ and convert_tz(SRC.closed_at,<<TENANT_SSI_TIME_ZONE>>,<<DW_TARGET_TIME_ZONE>>) <> TRGT1.closed_on 
