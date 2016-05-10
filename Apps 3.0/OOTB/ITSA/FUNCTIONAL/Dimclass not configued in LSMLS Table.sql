@@ -6,4 +6,15 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 select distinct dimension_class,class_value,source_id
 from <<tenant>>_mdwdb.d_lov lov
 left join <<tenant>>_workdb.lsm_ls_system_variables conf on dimension_class=class_value
-where class_value is null and source_id=2)a
+where class_value is null and source_id=2 and dimension_class not in (
+
+'ASSET',
+'ASSET_AGE',
+'CITY~GEO',
+'COUNTRY~GEO',
+'CURRENCY',
+'EXPENSE_ITEM',
+'GENDER',
+'STATE~GEO',
+'WARRANTY')
+)a
