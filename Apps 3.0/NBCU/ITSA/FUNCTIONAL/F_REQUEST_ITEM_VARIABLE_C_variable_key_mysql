@@ -4,7 +4,7 @@ FROM
 	nbcu_mdsdb.sc_item_option_final SRC
 LEFT JOIN 
 	nbcu_mdwdb.f_request_item_variable_c TRGT 
-	ON (SRC.sys_id =TRGT.row_id AND SRC.sourceinstance= TRGT.source_id  )
+	ON (concat(SRC.sys_id,'~',SRC1.request_item =TRGT.row_id) AND SRC.sourceinstance= TRGT.source_id  )
 LEFT JOIN 
 	nbcu_mdwdb.d_variable_c LKP 
 	ON (SRC.item_option_new =LKP.row_id AND SRC.sourceinstance= LKP.source_id  )
