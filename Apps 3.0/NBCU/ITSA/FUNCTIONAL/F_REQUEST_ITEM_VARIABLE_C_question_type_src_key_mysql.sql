@@ -7,7 +7,7 @@ LEFT join
 	on SRC1.item_option_new=SRC.sys_id
 LEFT JOIN 
 	nbcu_mdwdb.f_request_item_variable_c TRGT 
-	ON (SRC1.sys_id =TRGT.row_id AND SRC1.sourceinstance= TRGT.source_id  )
+	ON (concat(SRC.sys_id,'~',SRC1.request_item =TRGT.row_id)AND SRC.sourceinstance= TRGT.source_id  )
 LEFT JOIN 
 	nbcu_mdwdb.d_lov LKP 
 	ON (concat('TYPE~QUESTION~~~',SRC.type) =LKP.row_id 
