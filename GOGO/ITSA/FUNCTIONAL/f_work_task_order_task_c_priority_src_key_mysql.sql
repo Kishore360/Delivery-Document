@@ -7,5 +7,5 @@
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  ) LEFT JOIN gogo_mdwdb.d_lov LKP 
 on (LKP.row_id = concat('PRIORITY','~','TASK','~','~','~',upper(priority)) )
- WHERE COALESCE(LKP.row_key,case when SRC.work_end is null then 0 else -1 end )<>(TRGT.priority_src_key)
+ WHERE COALESCE(LKP.row_key,case when SRC.priority is null then 0 else -1 end )<>(TRGT.priority_src_key)
  

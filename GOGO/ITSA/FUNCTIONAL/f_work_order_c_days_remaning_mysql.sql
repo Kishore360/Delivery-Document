@@ -4,6 +4,6 @@ ELSE 'Data Matched' END AS Message
 FROM (
 select count(1) cnt from gogo_mdsdb.wm_order_final a
 left join gogo_mdwdb.f_work_order_c b on a.sourceinstance=b.source_id and a.sys_id=b.row_id
-where a.days_remaning <>b.days_remaning
+where TIMESTAMPDIFF(SECOND,'1970-01-01 00:00:00',a.u_days_remaning )<>b.days_remaining
 
 )i;

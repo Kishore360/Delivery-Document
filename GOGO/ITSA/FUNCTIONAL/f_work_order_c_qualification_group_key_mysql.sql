@@ -5,7 +5,7 @@
  LEFT JOIN gogo_mdwdb.f_work_order_c TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
- LEFT JOIN gogo_mdwdb.d_internal_organization_group LKP 
+ LEFT JOIN gogo_mdwdb.d_internal_organization LKP 
  ON ( concat('GROUP~',SRC.qualification_group )= LKP.row_id
 AND SRC.sourceinstance= LKP.source_id )
  WHERE COALESCE(LKP.row_key,CASE WHEN SRC.qualification_group IS NULL THEN 0 else -1 end)<> (TRGT.qualification_group_key)

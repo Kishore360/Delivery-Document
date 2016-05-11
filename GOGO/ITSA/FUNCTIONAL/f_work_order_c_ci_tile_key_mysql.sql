@@ -7,4 +7,4 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  LEFT JOIN gogo_mdwdb.d_configuration_item LKP 
  ON ( SRC.u_cmdb_ci_tail= LKP.row_id 
 AND SRC.sourceinstance= LKP.source_id )
- WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_cmdb_ci_tail IS NULL THEN 0 else -1 end)<> (TRGT.ci_tile_key)
+ WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_cmdb_ci_tail IS NULL THEN 0 else -1 end)<> (TRGT.ci_tail_key)

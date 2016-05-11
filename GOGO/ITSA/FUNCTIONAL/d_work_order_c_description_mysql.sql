@@ -4,6 +4,6 @@ ELSE 'Data Matched' END AS Message
 FROM (
 select count(1) cnt from gogo_mdsdb.wm_order_final a
 left join gogo_mdwdb.d_work_order_c b on a.sourceinstance=b.source_id and a.sys_id=b.row_id
-where a.description end <>b.description
+where a.description  <>b.description
 
 )i; 

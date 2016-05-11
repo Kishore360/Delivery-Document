@@ -4,7 +4,7 @@
 ELSE 'Data Matched' END AS Message 
 FROM (
 select count(1) cnt from gogo_mdsdb.wm_task_final a
-left join gogo_mdwdb.d_work_order_task_c b on a.sourceinstance=b.source_id and a.sys_id=b.row_id
+left join gogo_mdwdb.f_work_order_task_c b on a.sourceinstance=b.source_id and a.sys_id=b.row_id
 where a.reassignment_count  <>b. reassignment_count
 
 

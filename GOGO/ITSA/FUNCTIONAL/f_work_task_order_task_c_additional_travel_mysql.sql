@@ -6,7 +6,7 @@
  LEFT JOIN gogo_mdwdb.f_work_order_task_c TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
- WHERE COALESCE( TIMESTAMPDIFF(SECOND,'1970-01-01 00:00:00',SRC.u_additional_travel),'')<> COALESCE(TRGT.additional_travel ,'')
+ WHERE COALESCE( TIMESTAMPDIFF(SECOND,'1970-01-01 00:00:00',SRC.u_additional_travel),'')<> COALESCE(TRGT.additional_travel_duration ,'')
  
  
  

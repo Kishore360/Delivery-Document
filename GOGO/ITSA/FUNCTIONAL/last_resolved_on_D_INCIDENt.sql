@@ -4,6 +4,8 @@ ELSE 'Data Matched' END AS Message
 FROM ( select count(1) as cnt from gogo_mdsdb.incident_final s
 inner join gogo_mdwdb.d_incident i on s.sys_id =i.row_id 
 and s.sourceinstance=i.source_id
-where  coalesce(s.u_resolved,' ')<>coalesce(CONVERT_TZ(i.last_resolved_on,'GMT','America/Chicago'),' ')
+where  coalesce(i.last_resolved_on,' ')<>coalesce(CONVERT_TZ( s.u_resolved,'GMT','America/Chicago'),' ')
 ) c;
  
+ 
+
