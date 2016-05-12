@@ -4,4 +4,4 @@ FROM <<tenant>>_mdsdb.change_request_final SRC
 LEFT JOIN <<tenant>>_mdwdb.f_change_request TRGT 
 ON (SRC.sys_id =TRGT.row_id  
 AND SRC.sourceinstance= TRGT.source_id  )
-WHERE COALESCE( SRC.state,'')<> COALESCE(TRGT.state_src_code ,'')
+WHERE COALESCE( SRC.u_change_state,'')<> COALESCE(TRGT.state_src_code ,'')
