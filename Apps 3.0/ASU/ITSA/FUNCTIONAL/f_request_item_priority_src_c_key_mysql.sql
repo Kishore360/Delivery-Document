@@ -8,7 +8,7 @@ from asu_mdsdb.sc_req_item_final s
 left join asu_mdwdb.f_request_item   t
 on s.sys_id=t.row_id and s.sourceinstance=t.source_id
 LEFT JOIN asu_mdwdb.d_lov l 
- ON ( CONCAT('PRIORITY','~','TASK~~~',UPPER(s.priority))= l.src_rowid 
+ ON ( CONCAT('PRIORITY','~','SC_REQ_ITEM~~~',UPPER(s.priority))= l.src_rowid 
  AND s.sourceinstance= l.source_id )
 WHERE l.row_key <> t.priority_src_key
 ) temp

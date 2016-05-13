@@ -7,4 +7,4 @@ from <<tenant>>_workdb.lsm_ls_system_variables conf
 where conf.enable_flag = 'Y') SRC
 left join <<tenant>>_mdwdb.d_lov TGT
 ON TGT.dimension_class = SRC.dimension_class
-where TGT.row_id is null and SRC.dimension_class not like '%CALL%')a;
+where TGT.row_id is null and SRC.dimension_class not like '%CALL%' and SRC.dimension_class not like '%FACILITIES%')a;

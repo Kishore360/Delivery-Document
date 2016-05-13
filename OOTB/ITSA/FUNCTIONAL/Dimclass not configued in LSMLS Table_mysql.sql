@@ -20,4 +20,7 @@ not in (select class_value from <<tenant>>_workdb.lsm_ls_system_variables where 
 'EXPENSE_ITEM',
 'GENDER',
 'STATE~GEO',
-'WARRANTY') )a;
+'WARRANTY',
+'CRITICALITY~BUSINESS_SERVICE'
+
+) )a;

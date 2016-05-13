@@ -16,5 +16,7 @@ where class_value is null and source_id=2 and dimension_class not in (
 'EXPENSE_ITEM',
 'GENDER',
 'STATE~GEO',
-'WARRANTY')
+'WARRANTY',
+'CRITICALITY~BUSINESS_SERVICE'
+)
 )a
