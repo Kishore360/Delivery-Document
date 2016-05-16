@@ -28,6 +28,7 @@ inner join asu_mdwdb.d_variable_c g on b.item_option_new=g.row_id and g.source_i
 inner join asu_mdwdb.d_variable_lov_c f on f.variable_id=g.row_id and f.value=b.value
 join asu_mdsdb.sys_choice_final t  on t.name like 'question' and e.type=t.value and
  t.label='Select Box' and t.element='type' and t.label!='Reference'
-inner join (SELECT substring(row_id,1,32) as r1, SUBSTRING(row_id,34,32) as r2, reference_c_key  FROM asu_mdwdb.f_request_item_variable_c) a 
+inner join (SELECT substring(row_id,1,32) as r1, SUBSTRING(row_id,34,32) as r2, reference_c_key  FROM asu_mdwdb.f_request_item_variable_c
+where soft_deleted_flag='N') a 
 on  a.r1= b.sys_id and a.r2=d.request_item
  where f.row_key <>a.reference_c_key)A ;
