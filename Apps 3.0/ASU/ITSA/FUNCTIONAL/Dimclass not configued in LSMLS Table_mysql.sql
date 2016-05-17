@@ -8,8 +8,8 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  FROM(
 
 select distinct dimension_class,source_id
-from <<tenant>>_mdwdb.d_lov lov where  source_id=2 and dimension_class 
-not in (select class_value from <<tenant>>_workdb.lsm_ls_system_variables where enable_flag='Y'  )  and dimension_class 
+from asu_mdwdb.d_lov lov where  source_id=2 and dimension_class 
+not in (select class_value from asu_workdb.lsm_ls_system_variables where enable_flag='Y'  )  and dimension_class 
  like '%~%' and  (dimension_class NOT LIKE '%GEO%') and dimension_class not in (
 
 'ASSET',
