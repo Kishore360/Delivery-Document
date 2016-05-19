@@ -27,11 +27,6 @@ on (a11.opened_on_key = a12.row_key)
 left outer join  ldb.d_calendar_year                         a14
 on (a12.year_start_date_key  = a14.row_key)
 union
- select'd_change_request' as Table_Name, count(a11.row_key) Row_Count
- from  ldb.f_request_item             a11 
-left outer join  ldb.d_change_request         a12
-on (a11.change_c_key  = a12.row_key)
-union
  select'd_hr_change_category' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_request_item             a11 
 left outer join  ldb.d_hr_change_category                  a12
@@ -130,5 +125,5 @@ on (a11.approval_state_src_key = a115.row_key)
 union
  select'd_internal_contact_assigned' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_request_item             a11 
-left outer join  ldb.d_internal_contact         a116
+left outer join  ldb.d_internal_contact_assigned_to         a116
 on (a11.assigned_to_key = a116.row_key)

@@ -1,6 +1,7 @@
-SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
- CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for f_problem.opened_by_department_key' ELSE 'SUCCESS' END as Message
-  FROM (select  count(1)
+SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
+,CASE WHEN cnt > 0 THEN 'Data did not Match.' 
+ELSE 'Data Matched' END AS Message 
+  FROM (select  count(1) as cnt
   FROM <<tenant>>_mdsdb.problem_final p 
  LEFT JOIN <<tenant>>_mdsdb.sys_user_final su 
 ON p.opened_by=su.sys_id AND p.SourceInstance=su.SourceInstance

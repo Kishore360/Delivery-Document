@@ -40,28 +40,38 @@ on (a11.incident_key = a17.row_key)
 union
 select'd_incident_category' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_incident             a11 
+join ldb.d_incident       a17
+on (a11.incident_key = a17.row_key)
 join ldb.d_incident_category       a18
-on (a11.category_src_key = a18.row_key)
+on (a17.category_src_key = a18.row_key)
 union
 select'd_incident_close_code' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_incident             a11 
+join ldb.d_incident       a17
+on (a11.incident_key = a17.row_key)
 join ldb.d_incident_close_code       a19
-on (a11.close_code_src_key = a19.row_key)
+on (a17.close_code_src_key = a19.row_key)
 union
 select'd_incident_severity' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_incident             a11 
+join ldb.d_incident       a17
+on (a11.incident_key = a17.row_key)
 join ldb.d_incident_severity       a110
-on (a11.severity_src_key = a110.row_key)
+on (a17.severity_src_key = a110.row_key)
 union
 select'd_incident_state' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_incident             a11 
+join ldb.d_incident       a17
+on (a11.incident_key = a17.row_key)
 join ldb.d_incident_state       a111
-on (a11.state_src_key = a111.row_key)
+on (a17.state_src_key = a111.row_key)
 union
 select'd_incident_subcategory' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_incident             a11 
+join ldb.d_incident       a17
+on (a11.incident_key = a17.row_key)
 join ldb.d_incident_subcategory       a112
-on (a11.sub_category_src_key = a112.row_key)
+on (a17.sub_category_src_key = a112.row_key)
 union
 select'd_internal_contact' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_incident             a11 
@@ -125,9 +135,9 @@ from  ldb.f_incident             a11
 join ldb.dh_assignment_group_type_hierarchy       a122
 on (a11.assignment_group_key = a122.user_group_type_key)
 union
-select'd_internal_contact_assignment' as Table_Name, count(a11.row_key) Row_Count
+select'd_internal_contact_assigned_to' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_incident             a11 
-join ldb.d_internal_contact       a123
+join ldb.d_internal_contact_assigned_to       a123
 on (a11.assigned_to_key = a123.row_key)
  union
  select'd_calendar_month' as Table_Name, count(a11.row_key) Row_Count
@@ -136,3 +146,15 @@ join ldb.d_calendar_date         a12
 on (a11.opened_on_key = a12.row_key)
 join ldb.d_calendar_month        a124
 on (a12.month_start_date_key = a124.row_key)
+union
+select'd_internal_contact_assigned_to' as Table_Name, count(a11.row_key) Row_Count
+from  ldb.f_incident             a11 
+join ldb.d_change_request_caused_by       a125
+on (a11.caused_by_change_key = a125.row_key)
+union
+select'd_calendar_time_hour' as Table_Name, count(a11.row_key) Row_Count
+from  ldb.f_incident             a11 
+join ldb.d_calendar_time      a15
+on   (a11.opened_time_key = a15.row_key)
+join ldb.d_calendar_time_hour       a126
+on  (a15.hour_24_format_num = a126.hour_24_format_num)
