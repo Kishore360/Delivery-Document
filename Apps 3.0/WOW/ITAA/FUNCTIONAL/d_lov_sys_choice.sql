@@ -11,13 +11,13 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 ,'Y' as current_flag
 
 from
- #MDS_TABLE_SCHEMA.sys_choice_final SRC
-join #STG_TABLE_SCHEMA.lsm_ls_system_variables LSM
+ wow_mdsdb.sys_choice_final SRC
+join wow_mdsdb.lsm_ls_system_variables LSM
 on (LSM.table_value=SRC.name
 and LSM.column_value=SRC.element)
 where language='en'
 ) SRC
-left join #DWH_TABLE_SCHEMA.d_lov TRGT
+left join wow_mdwdb.d_lov TRGT
 on(SRC.row_id=TRGT.row_id
 and TRGT.source_id = 2)
 where (SRC.dimension_class<>TRGT.dimension_class
