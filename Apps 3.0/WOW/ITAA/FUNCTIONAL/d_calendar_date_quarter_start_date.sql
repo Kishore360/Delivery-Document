@@ -1,6 +1,6 @@
 SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for d_calendar_date.' ELSE 'SUCCESS' END as Message
-FROM  wow_workdb.DS_DATE_SEED SRC
+FROM  wow_workdb.D_DATE_SEED SRC
 LEFT OUTER JOIN(SELECT MAX(DATE(DATE)) AS QUARTER_END_DATE,
                           MIN(DATE(DATE)) AS QUARTER_START_DATE
     FROM wow_workdb.DS_DATE_SEED

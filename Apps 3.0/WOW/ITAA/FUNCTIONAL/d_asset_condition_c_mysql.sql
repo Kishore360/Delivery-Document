@@ -3,6 +3,6 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  FROM wow_mdsdb.alm_asset_final  SRC 
  LEFT JOIN wow_mdwdb.d_asset TRGT 
  ON SRC.sourceinstance=TRGT.source_id 
- AND SRC.sys_id=TRGT.row_id 
+ AND concat('ASSET~',SRC.sys_id)=TRGT.row_id 
  WHERE COALESCE(SRC.u_condition,'')<> TRGT.condition_c;
 

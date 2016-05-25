@@ -1,6 +1,6 @@
 SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for d_calendar_date.lagging_count_of_year' ELSE 'SUCCESS' END as Message
-FROM  wow_workdb.DS_DATE_SEED SRC
+FROM  wow_workdb.D_DATE_SEED SRC
 JOIN (SELECT MAX(lastupdated) AS tz_sys_val,  
 DATE(MAX(lastupdated)) AS z_dat_val  FROM wow_workdb.o_data_freshness) s1
 LEFT OUTER JOIN(SELECT MAX(DATE(DATE)) AS YEAR_END_DATE,MIN(DATE(DATE)) AS YEAR_START_DATE) SRC2   
