@@ -1,6 +1,6 @@
 SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for d_calendar_date.' ELSE 'SUCCESS' END as Message
-FROM  wow_workdb.D_DATE_SEED SRC
+FROM  wow_workdb.DS_DATE_SEED SRC
 LEFT OUTER JOIN(SELECT DATE AS WCALENDAR_DATE,
                           DATE_SUB(DATE,INTERVAL WEEKDAY(DATE) DAY) AS WEEK_START_DATE,
                           DATE_ADD(DATE,INTERVAL 6 - WEEKDAY(DATE) DAY) AS WEEK_END_DATE
