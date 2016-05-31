@@ -14,6 +14,6 @@ on (concat('CATEGORY~INCIDENT~~~',upper(uc.u_name))= l.row_id
 inner join wow_mdsdb.incident_final src 
  on t.row_id = src.sys_id
  and t.source_id = src.sourceinstance
-WHERE COALESCE(l.row_key,CASE WHEN src.u_category IS NULL THEN 0 else -1 end) <> (t.category_src_key)
+WHERE COALESCE(l.row_key,CASE WHEN uc.u_name IS NULL THEN 0 else -1 end) <> (t.category_src_key)
 )
 temp;

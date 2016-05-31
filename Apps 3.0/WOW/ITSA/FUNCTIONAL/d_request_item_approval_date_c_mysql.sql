@@ -6,5 +6,5 @@ select count(1) as cnt
 from wow_mdsdb.sc_req_item_final s
 left join wow_mdwdb.d_request_item t
 on s.sys_id=t.row_id and s.sourceinstance=t.source_id
-where t.approval_date_c <> CONVERT_TZ(s.u_approval_date,'GMT','US/Mountain')
+where t.approval_date_c <> CONVERT_TZ(s.u_approval_date,'GMT','MST')
 )temp

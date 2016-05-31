@@ -12,7 +12,7 @@ select distinct LSM.class_value as dimension_class
 ,LSM.`type` as dimension_type
 ,LSM.`sub_type` as dimension_subtype
 from wow_mdsdb.wf_stage_final SRC
-join wow_mdsdb.lsm_ls_system_variables LSM
+join wow_workdb.lsm_ls_system_variables LSM
 on (LSM.column_value ='stage')
 join  wow_mdsdb.wf_workflow_version_final SRC2
 on (LSM.table_value=SRC2.`table`
@@ -20,7 +20,7 @@ and SRC2.sys_id=SRC.workflow_version)
 where SRC.value not in (
 	select SRC.value as dimension_code
 	from wow_mdsdb.sys_choice_final SRC
-	join wow_mdsdb.lsm_ls_system_variables LSM
+	join wow_workdb.lsm_ls_system_variables LSM
 	on (LSM.table_value=SRC.name
 	and LSM.column_value=SRC.element)
 	where language='en'

@@ -1,39 +1,25 @@
+
 SELECT case when count(1)> 0 then 'FAILURE' else 'SUCCESS' end as Result,
 case when count(1)> 0 then 'MDS to DWH fact validation failed between cmdb_ci_final and d_configuration_item' else 'SUCCESS' end as Message
-
 FROM wow_mdsdb.cmdb_ci_final S
-join app_test.lsm_ls_source_timezone L
-on ((S.sourceinstance ) = (L.sourceid ))
-
 left join wow_mdsdb.cmn_department_final CDF
 on ((CDF.sys_id ) = (S.department ))
-
-
 left join wow_mdsdb.cmn_location_final CLF
 on ((CLF.sys_id ) = (S.location ))
-
 left join wow_mdsdb.core_company_final CCF
 on ((CCF.sys_id ) = (S.company ))
-
 left join wow_mdsdb.sys_user_group_final SYG
 on ((SYG.sys_id ) = (S.support_group ))
-
 left join wow_mdsdb.core_company_final CCF_VEN
 on ((CCF_VEN.sys_id ) = (S.vendor ))
-
 left join wow_mdsdb.core_company_final CCF_COM
 on ((CCF_COM.sys_id ) = (S.company ))
-
 left join wow_mdwdb.d_domain DMN
 on ((DMN.row_id ) = (S.sys_domain )
 and (DMN.source_id ) = ((case when S.sys_domain is null then 0 else S.sourceinstance end) ))
-
 left join wow_mdwdb.d_internal_organization DIO_C
 on ((DIO_C.row_id ) = (concat('SUBSIDIARY~',S.company) )
-and (DIO_C.source_id ) = ((case when S.company is null then 0 else S.sourceinstance end) )) 
-
-
-
+and (DIO_C.source_id ) = ((case when S.company is null then 0 else S.sourceinstance end) ))
 where CRC32((concat(
 ifnull(S.sys_id,''),
 ifnull(S.sourceinstance,''),
@@ -51,8 +37,8 @@ ifnull(S.sys_class_name,''),
 coalesce(CCF_VEN.name,S.vendor,''),
 ifnull(S.sys_created_by,''),
 ifnull(S.sys_updated_by,''),
-ifnull(_tz(S.sys_created_on,source_time_zone,target_time_zone,''),
-ifnull(_tz(S.sys_updated_on,source_time_zone,target_time_zone,''),
+ifnull(CONVERT_TZ(S.sys_created_on,'GMT','MST'),''),
+ifnull(CONVERT_TZ(S.sys_updated_on,'GMT','MST'),''),
 ifnull(CCF_COM.name,''),
 ifnull(DIO_C.row_key, case when S.company is null then 0 else -1 end),
 ifnull(DMN.row_key, case when S.sys_domain is null then 0 else -1 end))

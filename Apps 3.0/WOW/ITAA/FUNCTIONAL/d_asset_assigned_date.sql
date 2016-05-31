@@ -4,4 +4,5 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  LEFT JOIN wow_mdwdb.d_asset TRGT 
  ON (concat('ASSET~',SRC.sys_id)=TRGT.row_id 
  AND SRC.sourceinstance=TRGT.source_id )
-WHERE COALESCE( (_tz(SRC.assigned,'GMT','America/Los_Angeles') ,'')<> COALESCE(TRGT.assigned_date ,'')
+WHERE COALESCE(CONVERT_TZ(SRC.assigned,'GMT','MST') ,'')<> COALESCE(TRGT.assigned_date ,'')
+

@@ -12,7 +12,7 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 
 from
  wow_mdsdb.sys_choice_final SRC
-join wow_mdsdb.lsm_ls_system_variables LSM
+join wow_workdb.lsm_ls_system_variables LSM
 on (LSM.table_value=SRC.name
 and LSM.column_value=SRC.element)
 where language='en'

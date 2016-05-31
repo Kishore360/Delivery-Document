@@ -1,6 +1,6 @@
 select  CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for d_location' ELSE 'SUCCESS' END as Message
-from app_test.ds_location SRC
+from wow_workdb.ds_location SRC
 left join wow_mdwdb.d_geography SRC2
 on(SRC2.row_id=SRC.geo_id
 and SRC2.source_id=SRC.source_id)

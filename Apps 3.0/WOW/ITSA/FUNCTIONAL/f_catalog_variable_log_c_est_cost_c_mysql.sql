@@ -24,5 +24,5 @@ SELECT u_est_cost AS est_cost_c,sourceinstance,concat(sys_id,'~1') AS sys_id
    ORDER BY sys_id,sourceinstance) SRC
 LEFT JOIN wow_mdwdb.f_catalog_variable_log_c TRGT ON TRGT.row_id = SRC.sys_id
 AND TRGT.source_id = SRC.sourceinstance
-WHERE TRGT.est_cost_c <> SRC.est_cost_c
+WHERE TRGT.est_cost_c <> round(SRC.est_cost_c,2) 
 ) temp

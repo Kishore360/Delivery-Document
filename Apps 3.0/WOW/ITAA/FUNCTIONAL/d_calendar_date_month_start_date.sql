@@ -1,9 +1,9 @@
 SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for d_calendar_date.' ELSE 'SUCCESS' END as Message
-FROM  wow_mdsdb.DS_DATE_SEED SRC
+FROM  wow_workdb.DS_DATE_SEED SRC
 LEFT OUTER JOIN(SELECT MAX(DATE(DATE)) AS MONTH_END_DATE,
                           MIN(DATE(DATE)) AS MONTH_START_DATE
-                   FROM wow_mdsdb.DS_DATE_SEED
+                   FROM wow_workdb.DS_DATE_SEED
                    WHERE DATE BETWEEN '1970-01-01 00:00:00' AND '2030-12-31 00:00:00'
                    GROUP BY CAST(CONCAT(DATE_FORMAT(DATE,'%Y'),DATE_FORMAT(DATE,'%m')) AS SIGNED)) SRC5 
 ON CAST(CONCAT(DATE_FORMAT(SRC.`DATE`,'%Y'),DATE_FORMAT(SRC.`DATE`,'%m')) AS SIGNED) 
