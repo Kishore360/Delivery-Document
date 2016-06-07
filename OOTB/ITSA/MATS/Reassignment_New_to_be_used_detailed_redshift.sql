@@ -1,11 +1,6 @@
 
 select'f_incident_activity' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_incident_activity             a11 
- union
-select'd_trouble_c' as Table_Name, count(a11.row_key) Row_Count
-from  ldb.f_incident_activity              a11 
-join ldb.d_trouble_c         a12
-on (a11.trouble_c_key  = a12.row_key)
 union
 select'd_task_priority' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_incident_activity              a11 
@@ -41,11 +36,6 @@ select'd_incident' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_incident_activity              a11 
 join ldb.d_incident         a12
 on (a11.incident_key = a12.row_key)
-union
-select'd_configuration_item_business_service_c' as Table_Name, count(a11.row_key) Row_Count
-from  ldb.f_incident_activity              a11 
-join ldb.d_configuration_item_business_service_c         a12
-on (a11.business_service_c_key = a12.row_key)
 union
 select'd_calendar_month' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_incident_activity              a11 
