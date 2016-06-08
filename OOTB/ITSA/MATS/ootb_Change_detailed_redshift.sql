@@ -104,22 +104,22 @@ select'd_location' as Table_Name, count(a11.row_key) Row_Count
  join ldb.d_location         a120
 on (a11.location_key = a120.row_key)
 union
-select'd_task_contacttype' as Table_Name, count(a11.row_key) Row_Count
+select'd_change_request_reported_type' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_change_request             a11
  join ldb.d_change_request_reported_type         a121
 on (a11.reported_type_src_key = a121.row_key)
 union
-select'd_task_impact' as Table_Name, count(a11.row_key) Row_Count
+select'd_change_request_impact' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_change_request             a11
  join ldb.d_change_request_impact         a122
 on (a11.impact_src_key = a122.row_key)
 union
-select'd_task_priority' as Table_Name, count(a11.row_key) Row_Count
+select'd_change_request_priority' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_change_request             a11
  join ldb.d_change_request_priority         a123
 on (a11.priority_src_key = a123.row_key)
 union
-select'd_task_urgency' as Table_Name, count(a11.row_key) Row_Count
+select'd_change_request_urgency' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_change_request             a11
  join ldb.d_change_request_urgency         a124
 on (a11.urgency_src_key = a124.row_key)
