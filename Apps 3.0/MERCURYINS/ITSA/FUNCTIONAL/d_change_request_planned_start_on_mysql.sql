@@ -3,8 +3,8 @@ SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
 ELSE 'Data Matched' END AS Message 
 FROM (
 select count(1) as cnt  
-from mercuryinsurance_mdsdb.change_request_final s
-left join mercuryinsurance_mdwdb.d_change_request  t
+from mercuryins_mdsdb.change_request_final s
+left join mercuryins_mdwdb.d_change_request  t
 on s.sys_id=t.row_id and s.sourceinstance=t.source_id
 WHERE convert_tz(s.start_date,'GMT','America/Los_Angeles')<> t.planned_start_on
 ) c

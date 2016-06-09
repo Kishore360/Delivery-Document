@@ -4,10 +4,10 @@ SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
 ELSE 'Data Matched' END AS Message 
 FROM (
 select count(1) cnt
- from mercuryinsurance_mdsdb.u_asc_ticket_final a 
-left join  mercuryinsurance_mdwdb.f_incident_asc_c b
+ from mercuryins_mdsdb.u_asc_ticket_final a 
+left join  mercuryins_mdwdb.f_incident_asc_c b
 on (a.sys_id=b.row_id and a.sourceinstance=b.source_id)
-left join  mercuryinsurance_mdwdb.d_calendar_date c
+left join  mercuryins_mdwdb.d_calendar_date c
 on 
 DATE_FORMAT(CONVERT_TZ(a.u_resolved,'GMT','America/Los_Angeles'),'%Y%m%d') = c.row_id
 where 

@@ -3,11 +3,11 @@ SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
 ELSE 'Data Matched' END AS Message 
 FROM (
 select  count(1) cnt 
-from mercuryinsurance_mdsdb.incident_final a
-left JOIN mercuryinsurance_mdwdb.f_incident b
+from mercuryins_mdsdb.incident_final a
+left JOIN mercuryins_mdwdb.f_incident b
 on 
 a.sys_id=b.row_id AND a.sourceinstance=b.source_id
-LEFT  JOIN  mercuryinsurance_mdwdb.d_internal_contact c
+LEFT  JOIN  mercuryins_mdwdb.d_internal_contact c
 on CONCAT('INTERNAL_CONTACT~',a.U_RESOLVED_BY)= c.ROW_ID 
 AND c.source_id = a.sourceinstance
 where 

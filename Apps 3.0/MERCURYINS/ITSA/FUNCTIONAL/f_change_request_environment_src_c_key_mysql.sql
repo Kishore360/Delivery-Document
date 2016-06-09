@@ -3,10 +3,10 @@ SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
 ELSE 'Data Matched' END AS Message 
 FROM (
 select count(1) as cnt
-from mercuryinsurance_mdsdb.change_request_final s
-left  JOIN mercuryinsurance_mdwdb.f_change_request t 
+from mercuryins_mdsdb.change_request_final s
+left  JOIN mercuryins_mdwdb.f_change_request t 
 on  t.ROW_ID=s.SYS_ID and s.sourceinstance=t.source_id 
-left join mercuryinsurance_mdwdb.d_lov l
+left join mercuryins_mdwdb.d_lov l
 on concat('ENVIRONMENT_C~CHANGE_REQUEST~~~',upper(s.u_environment))=l.row_id and s.sourceinstance=l.source_id
 WHERE COALESCE(l.row_key,CASE WHEN s.u_environment IS NULL THEN 0 else -1 end)<> (t.environment_src_c_key)
  ) temp
