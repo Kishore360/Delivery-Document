@@ -37,16 +37,7 @@ select'd_request_item' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_request_task             a11 
 join ldb.d_request_item         a12
 on (a11.request_item_key = a12.row_key)
-union
- select'd_task_priority' as Table_Name, count(a11.row_key) Row_Count
- from  ldb.f_request_task             a11 
-join ldb.d_task_priority         a12
-on (a11.priority_src_key = a12.row_key)
-union
- select'd_task_state' as Table_Name, count(a11.row_key) Row_Count
- from  ldb.f_request_task             a11 
-join ldb.d_task_state         a12
-on (a11.state_src_key = a12.row_key)
+
 
 
 
