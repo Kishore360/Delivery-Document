@@ -1,10 +1,13 @@
-SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
-,CASE WHEN cnt > 0 THEN 'Data did not Match.' 
-ELSE 'Data Matched' END AS Message 
-FROM (select
-count(*) as cnt
-from  nbcu_mdwdb.d_internal_contact a11
-left join nbcu_mdsdb.sys_user_final a12 
-on concat('INTERNAL_CONTACT~',a12.sys_id )= a11.row_id 
-and a11.source_id=a12.sourceinstance
-where a12.u_organization_name <> a11.organization_name_c)a
+SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+ CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for service desk attribute' ELSE 'SUCCESS' END as Message
+ 
+ 
+ FROM   nbcu_mdsdb.sys_user_final scu 
+ LEFT JOIN    nbcu_mdwdb.d_internal_contact TRGT
+ ON ( concat('INTERNAL_CONTACT~',scu.sys_id)= TRGT.row_id 
+ AND scu.sourceinstance= TRGT.source_id )
+
+ WHERE u_organization_name<> (TRGT.organization_name_c) 
+
+ 
+ 
