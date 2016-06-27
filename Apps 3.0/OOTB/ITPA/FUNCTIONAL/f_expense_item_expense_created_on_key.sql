@@ -4,10 +4,9 @@
  LEFT JOIN <<tenant>>_mdwdb.f_expense_item TRGT 
  ON (SRC.sys_id=TRGT.row_id 
  AND SRC.sourceinstance=TRGT.source_id )
- LEFT JOIN  app_test.lsm_ls_source_timezone L 
-ON (SRC.sourceinstance=L.sourceid )
+ 
  LEFT JOIN <<tenant>>_mdwdb.d_calendar_date LKP 
- ON(date_format(convert_tz(SRC.sys_created_on,source_time_zone,target_time_zone),'%Y%m%d') =LKP.row_id
+ ON(date_format(convert_tz(SRC.sys_created_on,<<TENANT_SSI_TIME_ZONE>>,<<DW_TARGET_TIME_ZONE>>),'%Y%m%d') =LKP.row_id
 AND 0 =LKP.source_id)
  WHERE COALESCE(LKP.row_key,CASE WHEN SRC.sys_created_on IS NULL THEN NULL else '-1' end) <> COALESCE(TRGT.expense_created_on_key,'')
  AND SRC.asset is not null;

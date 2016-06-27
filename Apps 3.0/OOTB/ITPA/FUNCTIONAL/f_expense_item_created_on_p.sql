@@ -8,7 +8,6 @@ JOIN <<tenant>>_mdsdb.pm_project_final SRC_P ON (SRC_P.sys_id = SRC.task)
  LEFT JOIN <<tenant>>_mdwdb.f_expense_item TRGT 
  ON (SRC.sys_id=TRGT.row_id 
  AND SRC.sourceinstance=TRGT.source_id )
-JOIN  app_test.lsm_ls_source_timezone L 
-ON (SRC.sourceinstance   = L.sourceid )
+
  WHERE SRC.asset Is Null 
-AND convert_tz(SRC.sys_created_on,source_time_zone,target_time_zone) <> TRGT.created_on 
+AND convert_tz(SRC.sys_created_on,<<TENANT_SSI_TIME_ZONE>>,<<DW_TARGET_TIME_ZONE>>) <> TRGT.created_on 
