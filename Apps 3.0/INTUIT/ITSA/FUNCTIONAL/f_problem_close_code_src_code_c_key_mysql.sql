@@ -11,4 +11,4 @@ on TRG.row_id=b.sys_id   and b.SourceInstance =TRG.source_id
 left join intuit_mdwdb.d_lov c
 on c.src_rowid =  CASE WHEN b.u_close_code IS NULL THEN 'UNSPECIFIED' ELSE UPPER(CONCAT('CLOSE_CODE~PROBLEM','~','~','~',COALESCE(b.u_close_code,''))) end 
 AND c.source_id = CASE WHEN b.u_close_code IS NULL THEN 0 ELSE TRG.source_id end 
-where TRG.close_code_src_c_key <> COALESCE(c.row_key,-1)) temp
+where TRG.close_code_src_c_key <> COALESCE(c.row_key,-1)) temp 
