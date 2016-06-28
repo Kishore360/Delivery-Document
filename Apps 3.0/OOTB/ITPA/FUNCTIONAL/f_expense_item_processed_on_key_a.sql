@@ -5,6 +5,6 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  ON (SRC.sys_id=TRGT.row_id 
  AND SRC.sourceinstance=TRGT.source_id )
  LEFT JOIN <<tenant>>_mdwdb.d_calendar_date LKP 
- ON ( SRC.process_date = LKP.row_id 
-AND SRC.sourceinstance = LKP.source_id )
+ ON ( date_format(CONVERT_TZ(SRC.process_date,<<TENANT_SSI_TIME_ZONE>>,<<DW_TARGET_TIME_ZONE>>),'%Y%m%d') = LKP.row_id 
+ )
  WHERE COALESCE(LKP.row_key,CASE WHEN SRC.process_date IS NULL THEN NULL else '-1' end)<> COALESCE(TRGT.processed_on_key,'')and SRC.asset is not null;
