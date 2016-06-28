@@ -7,5 +7,5 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  ON (SRC.sys_id=TRGT.row_id 
  AND SRC.sourceinstance=TRGT.source_id )
  WHERE case when (timestampdiff(hour,'1970-01-01 00:00:00',COALESCE(SRC.work_effort,'1970-01-01 00:00:00')) - 
- (timestampdiff(hour,'1970-01-01 00:00:00',COALESCE(SRC.effort,'1970-01-01 00:00:00')) 1 TRGT.planned_percent_complete)) > 0 then 'N' else 'Y' end
+ (timestampdiff(hour,'1970-01-01 00:00:00',COALESCE(SRC.effort,'1970-01-01 00:00:00')) * TRGT.planned_percent_complete)) > 0 then 'N' else 'Y' end
  <> COALESCE(TRGT.is_in_effort ,'')

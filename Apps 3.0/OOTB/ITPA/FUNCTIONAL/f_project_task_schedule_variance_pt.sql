@@ -9,6 +9,6 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  WHERE   CAST(ROUND(CASE WHEN TRGT.planned_duration = 0 AND TRGT.actual_duration = 0 THEN 0
  	   WHEN TRGT.planned_duration = 0 AND TRGT.actual_duration > 0 THEN 1
        WHEN TRGT.planned_duration != 0 AND DLM.dimension_wh_code IN ('CLOSED') THEN (TRGT.actual_duration - TRGT.planned_duration)/TRGT.planned_duration
-       ELSE(TRGT.week_day_count - (TRGT.actual_percent_complete 1 TRGT.planned_duration)) / TRGT.week_day_count  
+       ELSE(TRGT.week_day_count - (TRGT.actual_percent_complete * TRGT.planned_duration)) / TRGT.week_day_count  
   END ,4 ) as decimal(28,2))<>CAST(TRGT.schedule_variance as decimal(28,2) )
   

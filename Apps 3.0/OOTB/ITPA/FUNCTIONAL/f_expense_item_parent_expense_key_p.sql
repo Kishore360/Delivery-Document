@@ -12,4 +12,4 @@ JOIN <<tenant>>_mdsdb.pm_project_final SRC_P ON (SRC_P.sys_id = SRC.task)
  ON ( SRC.parent = LKP.row_id 
 AND SRC.sourceinstance = LKP.source_id )
  WHERE SRC.asset Is Null 
-AND COALESCE(LKP.row_key,CASE WHEN SRC.parent IS NULL THEN 0 else '-1' end)<> COALESCE(TRGT.parent_expense_key,'')
+AND COALESCE(LKP.row_key,CASE WHEN SRC.parent IS NULL THEN 0 else '-1' end)<> COALESCE(TRGT.parent_expense_item_key,'')

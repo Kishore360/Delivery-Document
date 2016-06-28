@@ -16,7 +16,7 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 WHERE CASE WHEN TRGT.planned_duration = 0 AND TRGT.actual_duration = 0 THEN 'Y'
 							WHEN TRGT.planned_duration = 0 AND TRGT.actual_duration > 0 THEN 'N'
 							WHEN LM.dimension_wh_code IN ('CLOSED') AND (TRGT.actual_duration - TRGT.planned_duration) > 0 THEN 'N'
-							WHEN LM.dimension_wh_code NOT IN ('CLOSED') AND TRGT.week_day_count - (TRGT.actual_percent_complete 1 TRGT.planned_duration) > 0 THEN 'N' 
+							WHEN LM.dimension_wh_code NOT IN ('CLOSED') AND TRGT.week_day_count - (TRGT.actual_percent_complete * TRGT.planned_duration) > 0 THEN 'N' 
 							ELSE 'Y' 
                         END
 <> COALESCE(TRGT.is_in_schedule ,'')

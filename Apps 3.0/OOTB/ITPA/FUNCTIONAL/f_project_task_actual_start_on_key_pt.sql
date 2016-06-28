@@ -6,7 +6,6 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 LEFT JOIN <<tenant>>_mdwdb.f_project_task TRGT 
  ON (SRC.sys_id=TRGT.row_id 
  AND SRC.sourceinstance=TRGT.source_id )
-LEFT 
 LEFT JOIN <<tenant>>_mdwdb.d_calendar_date LKP 
 on (LKP.row_id  = date_format(convert_tz(SRC.work_start,<<TENANT_SSI_TIME_ZONE>>,<<DW_TARGET_TIME_ZONE>>),'%Y%m%d')  and LKP.source_id=0
 )

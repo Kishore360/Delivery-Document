@@ -12,8 +12,8 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  else (
   case when DLM.dimension_wh_code=  'CLOSED' then timestampdiff(hour,effort,work_effort)/timestampdiff(hour,'1970-01-01 00:00:00',effort) 
     else
-   (( timestampdiff(hour,'1970-01-01 00:00:00',work_effort) -  (timestampdiff(hour,'1970-01-01 00:00:00',effort) 1 planned_percent_complete))
-   /(timestampdiff(hour,'1970-01-01 00:00:00',effort) 1 planned_percent_complete)
+   (( timestampdiff(hour,'1970-01-01 00:00:00',work_effort) -  (timestampdiff(hour,'1970-01-01 00:00:00',effort) * planned_percent_complete))
+   /(timestampdiff(hour,'1970-01-01 00:00:00',effort) * planned_percent_complete)
    )  
   end  
   ) 

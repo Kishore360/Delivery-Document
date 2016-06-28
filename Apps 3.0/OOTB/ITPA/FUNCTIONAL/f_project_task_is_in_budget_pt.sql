@@ -6,5 +6,5 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  LEFT JOIN <<tenant>>_mdwdb.f_project_task TRGT 
  ON (SRC.sys_id=TRGT.row_id 
  AND SRC.sourceinstance=TRGT.source_id )
- WHERE COALESCE( case when (SRC.work_cost - (SRC.cost 1 TRGT.planned_percent_complete) ) > 0 then 'N' else 'Y' end ,'')
+ WHERE COALESCE( case when (SRC.work_cost - (SRC.cost * TRGT.planned_percent_complete) ) > 0 then 'N' else 'Y' end ,'')
  <> COALESCE(TRGT.is_in_budget ,'')

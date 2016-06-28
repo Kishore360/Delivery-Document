@@ -9,5 +9,5 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  AND SRC.sourceinstance=TRGT.source_id )
  WHERE CAST(CASE WHEN estimated_doc_cost=0 AND total_actual_doc_cost=0 THEN 0
                    WHEN estimated_doc_cost=0 AND total_actual_doc_cost>0 THEN 1
-       ELSE  ROUND( (total_actual_doc_cost- (estimated_doc_cost 1 planned_percent_complete)) /(estimated_doc_cost 1 planned_percent_complete) , 4) END
+       ELSE  ROUND( (total_actual_doc_cost- (estimated_doc_cost * planned_percent_complete)) /(estimated_doc_cost * planned_percent_complete) , 4) END
 	   as decimal(28,2) )<>CAST(TRGT.cost_variance as decimal(28,2) )
