@@ -1,6 +1,22 @@
 
 select'ldb.f_incident' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_incident       a11 
+
+union
+select 'ldb.d_internal_contact_opened_by_c' as Table_Name, count(a11.row_key) Row_Count
+from  ldb.f_incident       a11 
+join ldb.d_internal_contact_opened_by_c       a12
+on (a11.opened_by_c_key =a12.row_key)
+
+
+union
+select 'ldb.d_location_site_c ' as Table_Name, count(a11.row_key) Row_Count
+from  ldb.f_incident       a11 
+join        ldb.d_location   a14
+on         (a11.location_key = a14.row_key)
+join ldb.d_location_site_c        a12
+on (a14.site_c_key =a12.row_key)
+
 union
 select 'ldb.d_internal_organization_legalentity' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_incident       a11 
@@ -47,6 +63,21 @@ from  ldb.f_incident       a11
 join ldb.d_calendar_date       a110
 on (a11.opened_on_key=a110.row_key)
 union
+select 'ldb.d_calendar_week' as Table_Name, count(a11.row_key) Row_Count
+from  ldb.f_incident       a11 
+join ldb.d_calendar_date       a110
+on (a11.opened_on_key=a110.row_key)
+join ldb.d_calendar_week      a1100
+on (a110.week_start_date_key=a1100.row_key)
+union
+select 'ldb.d_calendar_year' as Table_Name, count(a11.row_key) Row_Count
+from  ldb.f_incident       a11 
+join ldb.d_calendar_date       a110
+on (a11.opened_on_key=a110.row_key)
+join ldb.d_calendar_year      a1100
+on (a110.year_start_date_key =a1100.row_key)
+
+union
 select 'ldb.d_application_c' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_incident       a11 
 join ldb.d_application_c       a111
@@ -55,6 +86,11 @@ union
 select 'ldb.d_internal_contact' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_incident       a11 
 join ldb.d_internal_contact       a112
+on (a11.assigned_to_key=a112.row_key)
+union
+select 'ldb.d_internal_contact_assigned_to' as Table_Name, count(a11.row_key) Row_Count
+from  ldb.f_incident       a11 
+join ldb.d_internal_contact_assigned_to       a112
 on (a11.assigned_to_key=a112.row_key)
 union
 select 'ldb.d_internal_organization_group' as Table_Name, count(a11.row_key) Row_Count
