@@ -3,8 +3,8 @@ select'ldb.f_change_request' as Table_Name, count(a11.row_key) Row_Count
 union
 select'ldb.d_task_contacttype' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_change_request       a11 
-join ldb.d_task_contacttype       a13
-on a11.reported_type_src_code=a13.row_key
+join ldb.d_change_request_reported_type       a13
+on a11.reported_type_src_key=a13.row_key
 union
 select'ldb.d_internal_contact' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_change_request       a11 
