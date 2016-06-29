@@ -7,6 +7,7 @@ from intuit_mdsdb.change_task_final a
 left join intuit_mdwdb.f_change_task_c c 
 on  a.sys_id = c.ROW_ID and a.sourceinstance=c.source_id
 left join intuit_mdwdb.d_lov b
-on concat('CONTACT_TYPE','~','TASK','~','~','~',upper(a.contact_type ))= b.src_rowid 
+on  b.src_rowid =CONCAT('CONTACT_TYPE','~','CHANGE_TASK','~','~','~',UPPER(a.CONTACT_TYPE))
  AND a.sourceinstance= b.source_id  
-where dimension_class='CONTACT_TYPE~TASK' and b.row_key <> c.reported_type_src_key) g
+
+where  COALESCE(b.row_key,CASE WHEN a.CONTACT_TYPE IS NULL THEN 0 else -1 end)<>c.reported_type_src_key)x

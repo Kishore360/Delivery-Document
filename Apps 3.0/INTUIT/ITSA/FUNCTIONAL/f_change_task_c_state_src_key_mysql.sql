@@ -9,4 +9,6 @@ on  a.sys_id = c.ROW_ID and a.sourceinstance=c.source_id
 left join intuit_mdwdb.d_lov b
 on concat('STATE','~','CHANGE_TASK','~','~','~',upper(a.state))= b.src_rowid 
  AND a.sourceinstance= b.source_id  
-where dimension_class='STATE~CHANGE_TASK' and b.row_key <> c.state_src_key) g
+ 
+where COALESCE(b.row_key,CASE WHEN a.state IS NULL THEN 0 else -1 end) <> c.state_src_key
+) g

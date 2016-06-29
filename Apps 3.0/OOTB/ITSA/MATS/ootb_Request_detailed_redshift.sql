@@ -69,7 +69,7 @@ on (a18.reported_type_src_key = a112.row_key)
 union*/
 select'd_task_priority' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_request             a11
- join ldb.d_request         a113
+ join ldb.d_sc_request_priority         a113
 on (a11.priority_src_key = a113.row_key)
 union
 select'd_internal_contact' as Table_Name, count(a11.row_key) Row_Count

@@ -7,7 +7,8 @@ from intuit_mdsdb.change_task_final a
 left join intuit_mdwdb.f_change_task_c c 
 on  a.sys_id = c.ROW_ID and a.sourceinstance=c.source_id
 left join intuit_mdwdb.d_lov b
-on concat('IMPACT','~','TASK','~','~','~',upper(a.impact))= b.src_rowid 
+on concat('IMPACT','~','CHANGE_TASK','~','~','~',upper(a.impact))= b.src_rowid 
  AND a.sourceinstance= b.source_id  
-where dimension_class='IMPACT~TASK' and b.row_key <> c.impact_src_key) g
 
+where  COALESCE(b.row_key,CASE WHEN a.impact IS NULL THEN 0 else -1 end)<> c.impact_src_key
+) g

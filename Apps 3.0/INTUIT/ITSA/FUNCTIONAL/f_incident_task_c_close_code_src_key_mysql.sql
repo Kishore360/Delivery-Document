@@ -8,7 +8,7 @@ left join intuit_mdwdb.f_incident_task_c t
 on s.sys_id=t.row_id and s.sourceinstance = t.source_id
 left join intuit_mdwdb.d_lov lkp
 on 
-COALESCE(CONCAT('CLOSE_CODE','~','INCIDENT','~','~','~',UPPER(u_close_code)),'UNSPECIFIED')
+CONCAT('CLOSE_CODE','~','INCIDENT_TASK','~','~','~',UPPER(s.u_close_code))
 =lkp.row_id and t.source_id = lkp.source_id
-where lkp.row_key <> t. close_code_src_key
+where COALESCE(lkp.row_key,CASE WHEN s.u_close_code IS NULL THEN 0 else -1 end) <> t. close_code_src_key
 ) temp

@@ -7,6 +7,6 @@ from intuit_mdsdb.change_task_final a
 left join intuit_mdwdb.f_change_task_c c 
 on  a.sys_id = c.ROW_ID and a.sourceinstance=c.source_id
 left join intuit_mdwdb.d_lov b
-on concat('URGENCY','~','TASK','~','~','~',upper(a.urgency))= b.src_rowid 
+on concat('URGENCY','~','CHANGE_TASK','~','~','~',upper(a.urgency))= b.src_rowid 
  AND a.sourceinstance= b.source_id  
-where dimension_class='URGENCY~TASK' and b.row_key <> c.urgency_src_key) g
+where COALESCE(b.row_key,CASE WHEN a.urgency IS NULL THEN 0 else -1 end) <>c.urgency_src_key) g

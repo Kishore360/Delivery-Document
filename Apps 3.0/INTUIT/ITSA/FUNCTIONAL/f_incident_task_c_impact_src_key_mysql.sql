@@ -8,7 +8,6 @@ left join intuit_mdwdb.f_incident_task_c t
 on s.sys_id=t.row_id and s.sourceinstance = t.source_id
 left join intuit_mdwdb.d_lov lkp
 on 
-COALESCE(CONCAT('IMPACT','~','TASK','~','~','~',UPPER(s.impact)),'UNSPECIFIED')
-=lkp.row_id and t.source_id = lkp.source_id
-where lkp.row_key <> t.impact_src_key 
+CONCAT('IMPACT','~','INCIDENT_TASK','~','~','~',UPPER(s.impact))=lkp.row_id and t.source_id = lkp.source_id
+where  COALESCE(lkp.row_key,CASE WHEN s.impact IS NULL THEN 0 else -1 end)<>t.impact_src_key 
 ) temp

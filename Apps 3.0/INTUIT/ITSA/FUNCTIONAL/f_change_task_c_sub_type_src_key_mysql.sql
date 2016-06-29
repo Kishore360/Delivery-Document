@@ -9,4 +9,4 @@ on  a.sys_id = c.ROW_ID and a.sourceinstance=c.source_id
 left join intuit_mdwdb.d_lov b
 on concat('SUB_TYPE','~','CHANGE_TASK','~','~','~',upper(a.u_sub_type))= b.src_rowid 
  AND a.sourceinstance= b.source_id  
-where dimension_class='SUB_TYPE~CHANGE_TASK' and b.row_key <> c.sub_type_src_key) g
+where COALESCE(b.row_key,CASE WHEN a.u_sub_type IS NULL THEN 0 else -1 end) <> c.sub_type_src_key) g
