@@ -11,4 +11,4 @@ on
 (CONCAT('PRIORITY','~','INCIDENT_TASK','~','~','~',UPPER(s.priority))
 =lkp.row_id and t.source_id = lkp.source_id)
 where COALESCE(lkp.row_key,CASE WHEN s.priority IS NULL THEN 0 else -1 end) <> t.priority_src_key 
-) temp
+) x
