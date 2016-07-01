@@ -71,9 +71,9 @@ select 'ldb.d_configuration_item' as Table_Name, count(a11.row_key) Row_Count
 join ldb.d_configuration_item         a114
 on (a11.business_service_key = a114.row_key)
 union
-select 'ldb.d_task_contacttype_req_item_c' as Table_Name, count(a11.row_key) Row_Count
+select 'ldb.d_task_contacttype_incident_task_c' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_incident_task_c             a11 
-join ldb.d_task_contacttype_req_item_c         a115
+join ldb.d_task_contacttype_incident_task_c         a115
 on (a11.reported_type_src_c_key = a115.row_key)
 union
 select 'ldb.d_internal_contact_mdm' as Table_Name, count(a11.row_key) Row_Count
