@@ -88,9 +88,9 @@ select 'ldb.d_incident' as Table_Name, count(a11.row_key) Row_Count
 join ldb.d_incident         a117
 on (a11.incident_key = a117.row_key)
 union
-select 'ldb.d_incident_close_code' as Table_Name, count(a11.row_key) Row_Count
+select 'ldb.d_incident_close_code_incident_task_c' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_incident_task_c             a11 
-join ldb.d_incident_close_code         a118
+join ldb.d_incident_close_code_incident_task_c         a118
 on (a11.close_code_src_key = a118.row_key)
 union
 select 'ldb.d_incident_task_pending_code_c' as Table_Name, count(a11.row_key) Row_Count
@@ -108,19 +108,19 @@ select 'ldb.d_internal_contact_opened_by_key_c' as Table_Name, count(a11.row_key
 join ldb.d_internal_contact_opened_by_key_c         a121
 on (a11.opened_by_c_key = a121.row_key)
 union
-select 'ldb.d_task_impact' as Table_Name, count(a11.row_key) Row_Count
+select 'ldb.d_task_impact_incident_task_c' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_incident_task_c             a11 
-join ldb.d_task_impact         a122
+join ldb.d_task_impact_incident_task_c         a122
 on (a11.impact_src_key = a122.row_key)
 union
-select 'ldb.d_task_priority' as Table_Name, count(a11.row_key) Row_Count
+select 'ldb.d_task_priority_incident_task_c' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_incident_task_c             a11 
-join ldb.d_task_priority         a123
+join ldb.d_task_priority_incident_task_c         a123
 on (a11.priority_src_key = a123.row_key)
 union
-select 'ldb.d_task_urgency' as Table_Name, count(a11.row_key) Row_Count
+select 'ldb.d_task_urgency_incident_task_c' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_incident_task_c             a11 
-join ldb.d_task_urgency         a124
+join ldb.d_task_urgency_incident_task_c         a124
 on (a11.urgency_src_key = a124.row_key)
 union
 select 'ldb.d_internal_contact_manager_c' as Table_Name, count(a11.row_key) Row_Count
