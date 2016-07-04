@@ -115,7 +115,7 @@ join        ldb.d_task_priority         a123
 union
 select 'd_task_contacttype' as Table_name, count(a11.row_key) Row_count
 from      ldb.f_change_request  a11	
-join        ldb.d_task_contacttypea124
+join        ldb.d_task_contacttype a124
   on         (a11.reported_type_src_key = a124.row_key)
 union
 select 'd_task_urgency' as Table_name, count(a11.row_key) Row_count
@@ -141,7 +141,7 @@ select 'd_calendar_quarter' as Table_name, count(a11.row_key) Row_count
 from      ldb.f_change_request  a11	
 join        ldb.d_calendar_date      a14
   on         (a11.opened_on_key = a14.row_key)
-join        ldb.d_calendar_quartera128
+join        ldb.d_calendar_quarter a128
   on         (a14.quarter_start_date_key = a128.row_key)
 union
 select 'd_calendar_year' as Table_name, count(a11.row_key) Row_count
@@ -150,3 +150,9 @@ join        ldb.d_calendar_date      a14
 on         (a11.opened_on_key = a14.row_key)
 join        ldb.d_calendar_year      a129
 on         (a14.year_start_date_key = a129.row_key)
+union 
+select 'd_change_request_emergency_reason_c' as Table_name, 
+count(a11.row_key) Row_count from ldb.f_change_request a11
+join ldb.d_change_request_emergency_reason_c a133
+on a133.row_key=a11.emergency_reason_src_c_key
+
