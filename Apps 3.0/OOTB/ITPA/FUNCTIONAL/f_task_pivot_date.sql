@@ -1,0 +1,10 @@
+SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+ CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for f_task.pivot_date' ELSE 'SUCCESS' END as Message
+FROM <<tenant>>_mdsdb.task_final SRC 
+LEFT JOIN <<tenant>>_mdwdb.f_task TRGT 
+	ON (SRC.sys_id =TRGT.row_id 
+	AND SRC.sourceinstance =TRGT.source_id )
+JOIN  app_test.lsm_ls_source_timezone L 
+ON (SRC.sourceinstance   = L.sourceid )
+WHERE 
+ COALESCE( convert_tz(SRC.opened_at,L.source_time_zone,L.target_time_zone) ,'') <> COALESCE(TRGT.pivot_date,'')
