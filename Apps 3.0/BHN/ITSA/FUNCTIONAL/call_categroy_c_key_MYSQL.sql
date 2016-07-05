@@ -8,5 +8,5 @@ AND SRC.sourceinstance= LKP.source_id )
  LEFT JOIN bhn_mdwdb.f_incident TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
- WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_call_category IS NULL THEN 0 else -1 end)<> COALESCE(TRGT.call_categroy_c_key,'')
+ WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_call_category IS NULL THEN 0 else -1 end)<> (TRGT.call_categroy_c_key)
  
