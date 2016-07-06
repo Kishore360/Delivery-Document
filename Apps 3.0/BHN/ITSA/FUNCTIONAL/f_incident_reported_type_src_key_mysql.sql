@@ -10,4 +10,4 @@ LEFT JOIN bhn_mdwdb.d_lov LKP
  ON ( concat('CONTACT_TYPE','~','INCIDENT','~','~','~',upper(contact_type))= LKP.src_rowid 
 AND SRC.sourceinstance= LKP.source_id )
  WHERE COALESCE(LKP.row_key,CASE WHEN SRC.contact_type IS NULL THEN 0 else '-1' end)<> 
-(TRGT.reported_type_src_key
+(TRGT.reported_type_src_key)
