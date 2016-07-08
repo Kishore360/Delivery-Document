@@ -118,9 +118,9 @@ select'd_request_item_state' as Table_Name, count(a11.row_key) Row_Count
  left outer join  ldb.d_request_item_state         a115
 on (a11.state_src_key = a115.row_key)
 union
-select'd_task_approval' as Table_Name, count(a11.row_key) Row_Count
+select'd_sc_req_item_approval' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_request_item             a11 
- left outer join  ldb.d_task_approval         a115
+ left outer join  ldb.d_sc_req_item_approval         a115
 on (a11.approval_state_src_key = a115.row_key)
 union
  select'd_internal_contact_assigned' as Table_Name, count(a11.row_key) Row_Count
