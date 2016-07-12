@@ -5,7 +5,7 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
   JOIN weillcornell_mdwdb.d_lov_map dlm 
-ON TRGT.state_src_key = dlm.src_key   
+ON TRGT.state_src_key = dlm.src_key   and dlm.dimension_wh_code = 'CLOSED'
 LEFT JOIN weillcornell_mdwdb.d_calendar_date LKP 
 on (LKP.row_id = date_format(convert_tz(coalesce(SRC.closed_at,sys_updated_on),'GMT','America/New_York'),'%Y%m%d') and LKP.source_id=0
 )

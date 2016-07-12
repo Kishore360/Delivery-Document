@@ -6,3 +6,6 @@ from <<tenant>>_mdwdb.d_lov
 where row_id not  in ('STATE~GEO~~~~VA') AND current_flag='Y'
 group by 1,2,3
 having count(1)>1)a;
+
+
+
