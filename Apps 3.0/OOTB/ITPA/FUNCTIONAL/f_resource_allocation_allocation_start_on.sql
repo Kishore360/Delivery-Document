@@ -1,7 +1,7 @@
 
 SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for f_resource_allocation.allocation_start_on' ELSE 'SUCCESS' END as Message
-FROM (select S.1,cd.calendar_date,cd.calendar_date as allocation_start_on
+FROM (select S.*,cd.calendar_date,cd.calendar_date as allocation_start_on
 from <<tenant>>_mdsdb.resource_allocation_final S 
 JOIN <<tenant>>_mdwdb.d_calendar_date cd ON cd.calendar_date BETWEEN S.start_date AND S.end_date
 WHERE cd.week_day_flag = 'Y' AND  cd.source_id=0) SRC
