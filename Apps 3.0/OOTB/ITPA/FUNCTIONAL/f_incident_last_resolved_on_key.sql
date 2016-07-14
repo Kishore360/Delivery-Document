@@ -6,16 +6,15 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  LEFT JOIN <<tenant>>_mdwdb.f_incident TRGT 
  ON (SRC.sys_id=TRGT.row_id 
  AND SRC.sourceinstance=TRGT.source_id )
-LEFT JOIN  app_test.lsm_ls_source_timezone L 
-ON (SRC.sourceinstance   = L.sourceid )
+
 LEFT JOIN <<tenant>>_mdwdb.d_calendar_date LKP 
-on (LKP.row_id  = date_format(convert_tz(SRC.resolved_at,source_time_zone,target_time_zone),'%Y%m%d')  and LKP.source_id=0
+on (LKP.row_id  = date_format(convert_tz(SRC.resolved_at,'GMT','America/Los_Angeles'),'%Y%m%d')  and LKP.source_id=0
 )
 LEFT JOIN <<tenant>>_mdwdb.d_calendar_date LKP1 
-on (LKP1.row_id  = date_format(convert_tz(SRC.closed_at,source_time_zone,target_time_zone),'%Y%m%d')  and LKP1.source_id=0
+on (LKP1.row_id  = date_format(convert_tz(SRC.closed_at,'GMT','America/Los_Angeles'),'%Y%m%d')  and LKP1.source_id=0
 )
 LEFT JOIN <<tenant>>_mdwdb.d_calendar_date LKP2
-on (LKP2.row_id  = date_format(convert_tz(SRC.sys_updated_on,source_time_zone,target_time_zone),'%Y%m%d')  and LKP2.source_id=0
+on (LKP2.row_id  = date_format(convert_tz(SRC.sys_updated_on,'GMT','America/Los_Angeles'),'%Y%m%d')  and LKP2.source_id=0
 )
 
 LEFT JOIN <<tenant>>_mdwdb.d_lov_map LKP3

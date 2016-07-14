@@ -8,8 +8,7 @@ LEFT JOIN <<tenant>>_mdwdb.f_t_task_activity TRGT
 ON (SRC.sys_id=TRGT.row_id 
 AND SRC.sourceinstance=TRGT.source_id  AND  coalesce(TRGT.primary_sequence_id,-1) <>0
  )
-LEFT JOIN app_test.lsm_ls_source_timezone tz 
-		ON (tz.sourceid = 999)
+
 WHERE  CONCAT(COALESCE(SRC.tablename,''),COALESCE(SRC.fieldname,''))  
 IN ( SELECT CONCAT(COALESCE(t.source_table_name,''),COALESCE(TRIM(' ' FROM SUBSTRING_INDEX(SUBSTRING_INDEX(t.audit_columns, ',', n.n), ',', -1)),''))
  FROM app_test.lsm_ls_entity_audit_enable_table t CROSS JOIN
@@ -22,4 +21,4 @@ IN ( SELECT CONCAT(COALESCE(t.source_table_name,''),COALESCE(TRIM(' ' FROM SUBST
  ) n
  WHERE n.n <= 1 + (LENGTH(t.audit_columns) - LENGTH(REPLACE(t.audit_columns, ',', '')))
 )
-AND COALESCE(convert_tz(SRC.sys_created_on,source_time_zone,target_time_zone),'') <> COALESCE(TRGT.created_on,'') 
+AND COALESCE(convert_tz(SRC.sys_created_on,'GMT','America/Los_Angeles'),'') <> COALESCE(TRGT.created_on,'') 

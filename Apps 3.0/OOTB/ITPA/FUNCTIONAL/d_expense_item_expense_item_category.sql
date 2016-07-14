@@ -12,7 +12,6 @@ FROM (SELECT S.sys_id,S.sourceinstance,S.category
 JOIN <<tenant>>_mdwdb.d_expense_item TRGT 
  ON (SRC.sys_id=TRGT.row_id 
  AND SRC.sourceinstance=TRGT.source_id )
-JOIN  app_test.lsm_ls_source_timezone L 
-ON (SRC.sourceinstance  = L.sourceid)
+
 WHERE COALESCE(SRC.category,'')<> COALESCE(TRGT.expense_item_category ,'')
 

@@ -16,10 +16,9 @@ select TGT.row_id
 from <<tenant>>_mdsdb.sys_audit_final SRC
 left join <<tenant>>_mdwdb.f_change_request_activity TGT
 on (SRC.sys_id=TGT.row_id AND SRC.sourceinstance=TGT.source_id)
-LEFT JOIN  app_test.lsm_ls_source_timezone L 
-ON (SRC.sourceinstance  = L.sourceid)
+
 left join <<tenant>>_mdwdb.d_calendar_time CAL
-on CAL.row_id = date_format(convert_tz(SRC.sys_created_on,L.source_time_zone,L.target_time_zone),'%H%i') and CAL.source_id=0
+on CAL.row_id = date_format(convert_tz(SRC.sys_created_on,'GMT','America/Los_Angeles'),'%H%i') and CAL.source_id=0
 where TGT.primary_sequence_id <> 0 
 and COALESCE(CAL.row_key,'') <> COALESCE(TGT.created_time_key,'')
 ) SQ;

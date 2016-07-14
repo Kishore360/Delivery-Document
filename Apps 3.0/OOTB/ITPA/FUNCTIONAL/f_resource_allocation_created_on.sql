@@ -7,6 +7,5 @@ WHERE cd.week_day_flag = 'Y') SRC
 LEFT JOIN <<tenant>>_mdwdb.f_resource_allocation TRGT 
 ON (concat(SRC.sys_id,'~', date_format(SRC.calendar_date,'%Y%m%d'))  =TRGT.row_id  
  AND SRC.sourceinstance=TRGT.source_id )
-JOIN  app_test.lsm_ls_source_timezone L 
-ON (SRC.sourceinstance   = L.sourceid )
- WHERE convert_tz(SRC.sys_created_on,source_time_zone,target_time_zone) <> TRGT.created_on 
+
+ WHERE convert_tz(SRC.sys_created_on,'GMT','America/Los_Angeles') <> TRGT.created_on 

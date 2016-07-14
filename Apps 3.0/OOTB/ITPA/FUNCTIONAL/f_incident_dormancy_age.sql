@@ -10,8 +10,7 @@ FROM  <<tenant>>_mdsdb.incident_final SRC
     
     left join <<tenant>>_mdwdb.d_lov_map lm 
   ON (lm.src_key = TRGT.state_src_key)
-    left join app_test.lsm_ls_source_timezone tz 
-  ON (tz.sourceid = SRC.sourceinstance)
+    
     
   
  LEFT JOIN (
@@ -23,5 +22,5 @@ FROM  <<tenant>>_mdsdb.incident_final SRC
  )
 where lm.dimension_class = 'STATE~INCIDENT'
 
-AND  CASE WHEN lm.dimension_wh_code = 'OPEN' THEN TIMESTAMPDIFF( DAY,coalesce(SRC.sys_updated_on,0),convert_tz(df.lastupdated, tz.target_time_zone, tz.source_time_zone) )  
+AND  CASE WHEN lm.dimension_wh_code = 'OPEN' THEN TIMESTAMPDIFF( DAY,coalesce(SRC.sys_updated_on,0),convert_tz(df.lastupdated, 'America/Los_Angeles','GMT') )  
 	ELSE 0 END <> TRGT.dormancy_age

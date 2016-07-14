@@ -2,8 +2,6 @@ SELECT case when count(1)> 0 then 'FAILURE' else 'SUCCESS' end as Result,
 case when count(1)> 0 then 'MDS to DWH fact validation failed between cmdb_ci_final and d_configuration_item' else 'SUCCESS' end as Message
 
 FROM <<tenant>>_mdsdb.cmdb_ci_final S
-join app_test.lsm_ls_source_timezone L
-on (S.sourceinstance  = L.sourceid )
 
 left join <<tenant>>_mdsdb.cmn_department_final CDF
 on (CDF.sys_id  = S.department )
@@ -51,8 +49,8 @@ ifnull(S.sys_class_name,''),
 coalesce(CCF_VEN.name,S.vendor,''),
 ifnull(S.sys_created_by,''),
 ifnull(S.sys_updated_by,''),
-ifnull(convert_tz(S.sys_created_on,source_time_zone,target_time_zone),''),
-ifnull(convert_tz(S.sys_updated_on,source_time_zone,target_time_zone),''),
+ifnull(convert_tz(S.sys_created_on,'GMT','America/Los_Angeles'),''),
+ifnull(convert_tz(S.sys_updated_on,'GMT','America/Los_Angeles'),''),
 ifnull(CCF_COM.name,''),
 ifnull(DIO_C.row_key, case when S.company is null then 0 else -1 end),
 ifnull(DMN.row_key, case when S.sys_domain is null then 0 else -1 end))

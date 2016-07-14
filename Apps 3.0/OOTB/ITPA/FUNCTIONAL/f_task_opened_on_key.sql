@@ -5,8 +5,7 @@ FROM <<tenant>>_mdsdb.task_final SRC
 LEFT JOIN <<tenant>>_mdwdb.f_task TRGT 
 	ON (SRC.sys_id =TRGT.row_id 
 	AND SRC.sourceinstance =TRGT.source_id )
-LEFT JOIN  app_test.lsm_ls_source_timezone L 
-	ON (SRC.sourceinstance = L.sourceid)
+LEFT 
 LEFT JOIN <<tenant>>_mdwdb.d_calendar_date LKP 
-	ON(LKP.row_id = date_format(convert_tz(SRC.opened_at,source_time_zone,target_time_zone),'%Y%m%d') and LKP.source_id=0)
+	ON(LKP.row_id = date_format(convert_tz(SRC.opened_at,'GMT','America/Los_Angeles'),'%Y%m%d') and LKP.source_id=0)
 WHERE COALESCE(LKP.row_key,CASE WHEN SRC.opened_at IS NULL THEN 0 else '-1' end)  <> COALESCE(TRGT.opened_on_key,'') 

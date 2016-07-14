@@ -4,8 +4,7 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for d_problem.over_due_flag' ELSE 'SUCCESS' END as Message
  FROM <<tenant>>_mdsdb.problem_final SRC
  
-  left join app_test.lsm_ls_source_timezone tz 
-  ON (tz.sourceid = SRC.sourceinstance)
+  
    
  LEFT JOIN <<tenant>>_mdwdb.d_problem TRGT 
  ON (SRC.sys_id=TRGT.row_id 
@@ -16,6 +15,6 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  ) FRESH  ON(FRESH.source_id=SRC.sourceinstance
  -- AND FRESH.etl_run_number = TRGT.etl_run_number
  )
- WHERE COALESCE( CASE WHEN SRC.active = 1 and coalesce( SRC.due_date,0) < convert_tz(FRESH.lastupdated , tz.target_time_zone, tz.source_time_zone)
+ WHERE COALESCE( CASE WHEN SRC.active = 1 and coalesce( SRC.due_date,0) < convert_tz(FRESH.lastupdated , 'America/Los_Angeles','GMT')
   then 'Y' else 'N' END ,'')<> COALESCE(TRGT.over_due_flag ,'')
 

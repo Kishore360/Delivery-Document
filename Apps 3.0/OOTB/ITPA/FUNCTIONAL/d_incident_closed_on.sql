@@ -7,8 +7,7 @@ FROM <<tenant>>_mdsdb.incident_final SRC
  LEFT JOIN <<tenant>>_mdwdb.d_incident TRGT 
  ON (SRC.sys_id=TRGT.row_id 
  AND SRC.sourceinstance=TRGT.source_id )
-LEFT JOIN  app_test.lsm_ls_source_timezone L 
-ON (SRC.sourceinstance   = L.sourceid )
-WHERE case when L.dimension_wh_code='CLOSED' then convert_tz(COALESCE( SRC.closed_at,SRC.sys_updated_on),source_time_zone,target_time_zone) 
+
+WHERE case when L.dimension_wh_code='CLOSED' then convert_tz(COALESCE( SRC.closed_at,SRC.sys_updated_on),'GMT','America/Los_Angeles') 
 else '' end
  <> COALESCE(TRGT.closed_on,'')

@@ -7,8 +7,7 @@ select CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  ON (SRC.sys_id=TRGT.row_id 
  AND SRC.sourceinstance=TRGT.source_id )
  
- LEFT JOIN  app_test.lsm_ls_source_timezone L 
-ON (SRC.sourceinstance   = L.sourceid )  
+   
 
  left join <<tenant>>_mdwdb.d_lov_map LKP 
 on  SRC.state=LKP.dimension_code  
@@ -22,8 +21,8 @@ and LKP.dimension_class = 'STATE~CHANGE_REQUEST'
   -- AND TRGT.etl_run_number = df.etl_run_number)
  
 	where  case when LKP.dimension_wh_code in ('OPEN') 
-			then case when TIMESTAMPDIFF(DAY,coalesce(SRC.end_date,0), convert_tz(df.lastupdated, L.source_time_zone, L.target_time_zone)) > 0 
-				then TIMESTAMPDIFF(DAY,coalesce(SRC.end_date,0), , convert_tz(df.lastupdated, L.target_time_zone, L.source_time_zone)) 
+			then case when TIMESTAMPDIFF(DAY,coalesce(SRC.end_date,0), convert_tz(df.lastupdated, 'GMT','America/Los_Angeles')) > 0 
+				then TIMESTAMPDIFF(DAY,coalesce(SRC.end_date,0), , convert_tz(df.lastupdated, 'America/Los_Angeles','GMT')) 
 				else 0 end
 		else case when TIMESTAMPDIFF(DAY,coalesce(SRC.end_date,0),coalesce(SRC.work_end,SRC.closed_at,0)) > 0 
 				then TIMESTAMPDIFF(DAY,coalesce(SRC.end_date,0), coalesce(SRC.work_end,SRC.closed_at,0))

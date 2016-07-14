@@ -4,10 +4,9 @@ FROM <<tenant>>_mdsdb.task_final SRC
 LEFT JOIN <<tenant>>_mdwdb.f_task TRGT 
 	ON (SRC.sys_id =TRGT.row_id 
 	AND SRC.sourceinstance =TRGT.source_id )
-LEFT JOIN  app_test.lsm_ls_source_timezone L 
-	ON (SRC.sourceinstance = L.sourceid)
+LEFT 
 LEFT JOIN <<tenant>>_mdwdb.d_calendar_date LKP 
-	ON(LKP.row_id = date_format(convert_tz(SRC.closed_at,source_time_zone,target_time_zone),'%Y%m%d') and LKP.source_id=0)
+	ON(LKP.row_id = date_format(convert_tz(SRC.closed_at,'GMT','America/Los_Angeles'),'%Y%m%d') and LKP.source_id=0)
 LEFT JOIN <<tenant>>_mdwdb.d_lov_map LM
  ON (SRC.state=LM.dimension_code
  AND SRC.sourceinstance=LM.source_id AND LM.dimension_class = 'STATE~TASK' )

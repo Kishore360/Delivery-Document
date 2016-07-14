@@ -7,8 +7,7 @@ fROM <<tenant>>_mdsdb.facilities_request_final S
 
 -- AND S.source_instance = DWH.source_id 
 
-JOIN app_test.lsm_ls_source_timezone L
-ON(S.sourceinstance   =   L.sourceid )
+
 
 LEFT JOIN <<tenant>>_mdwdb.d_internal_contact DPV
 ON ((DPV.row_id    =  CONCAT('INTERNAL_CONTACT~',S.assigned_to) )
@@ -51,7 +50,7 @@ COALESCE(LKP1.row_key-- ,DIO_D.row_key
 COALESCE(DCI.row_key,CASE WHEN S.cmdb_ci IS NOT NULL THEN -1 ELSE 0 END),
 COALESCE(DD.row_key,CASE WHEN S.sys_domain IS NOT NULL THEN -1 ELSE 0 END),
 COALESCE(DL.row_key,CASE WHEN S.location IS NOT NULL THEN -1 ELSE 0 END),
-IFNULL(TIMESTAMPDIFF(DAY,convert_tz(S.opened_at,source_time_zone,target_time_zone),Null),''),
+IFNULL(TIMESTAMPDIFF(DAY,convert_tz(S.opened_at,'GMT','America/Los_Angeles'),Null),''),
 IFNULL(DFR.row_key,''),
 IFNULL(S.approval,''),
 IFNULL(S.category,''),
@@ -62,10 +61,10 @@ IFNULL(S.sourceinstance,''),
 IFNULL(S.state,''),
 IFNULL(null,''),
 IFNULL(S.sys_created_by,''),
-IFNULL(convert_tz(S.sys_created_on,source_time_zone,target_time_zone),''),
+IFNULL(convert_tz(S.sys_created_on,'GMT','America/Los_Angeles'),''),
 IFNULL(S.sys_id,''),
 IFNULL(S.sys_updated_by,''),
-IFNULL(convert_tz(S.sys_updated_on,source_time_zone,target_time_zone),''),
+IFNULL(convert_tz(S.sys_updated_on,'GMT','America/Los_Angeles'),''),
 IFNULL(S.urgency,''),
 
 IFNULL(TIMESTAMPDIFF(SECOND,S.opened_at,S.closed_at),''), 

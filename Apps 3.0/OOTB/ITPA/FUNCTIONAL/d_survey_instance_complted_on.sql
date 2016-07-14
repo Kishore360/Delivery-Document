@@ -4,6 +4,5 @@
  LEFT JOIN <<tenant>>_mdwdb.d_survey_instance TRGT 
  ON (SRC.sys_id=TRGT.row_id 
  AND SRC.sourceinstance=TRGT.source_id )
-JOIN  app_test.lsm_ls_source_timezone L 
-ON (SRC.sourceinstance   = L.sourceid )
- WHERE convert_tz(SRC.sys_updated_on ,source_time_zone,target_time_zone) <> TRGT.completed_on 
+
+ WHERE convert_tz(SRC.sys_updated_on ,'GMT','America/Los_Angeles') <> TRGT.completed_on 

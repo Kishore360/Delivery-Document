@@ -7,11 +7,10 @@ LEFT JOIN <<tenant>>_mdwdb.f_t_task_activity TRGT
 ON (SRC.sys_id=TRGT.row_id 
 AND SRC.sourceinstance=TRGT.source_id  AND  coalesce(TRGT.primary_sequence_id,-1) <>0
  )
-JOIN  app_test.lsm_ls_source_timezone L 
-ON (SRC.sourceinstance   = L.sourceid )
+
 
 JOIN  <<tenant>>_mdwdb.d_calendar_time CT 
-ON (date_format(convert_tz(SRC.sys_created_on,source_time_zone,target_time_zone),'%H%i')   
+ON (date_format(convert_tz(SRC.sys_created_on,'GMT','America/Los_Angeles'),'%H%i')   
 = CT.row_id 
 AND CT.source_id=0)
 

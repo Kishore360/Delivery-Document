@@ -6,8 +6,7 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  ON (SRC.sys_id=TRGT.row_id 
  AND SRC.sourceinstance=TRGT.source_id )
 
-  left join app_test.lsm_ls_source_timezone tz 
-  ON (tz.sourceid = SRC.sourceinstance)
+  
    
   
 LEFT JOIN <<tenant>>_mdwdb.d_lov_map LM
@@ -21,7 +20,7 @@ LEFT JOIN (
  -- AND FRESH.etl_run_number = TRGT.etl_run_number
  ) 
 WHERE CASE WHEN (LM.dimension_wh_code  IN('CLOSED') and coalesce( SRC.closed_at,0)>coalesce( SRC.due_Date,0) and SRC.due_date is not null)
-or (LM.dimension_wh_code  IN ('OPEN') and coalesce( SRC.due_date,0) < convert_tz(FRESH.lastupdated,tz.target_time_zone , tz.source_time_zone)
+or (LM.dimension_wh_code  IN ('OPEN') and coalesce( SRC.due_date,0) < convert_tz(FRESH.lastupdated,'America/Los_Angeles','GMT')
 and SRC.due_date is not null)
  THEN 'Y' ELSE 'N' END <> TRGT.overdue_flag 
 

@@ -2,8 +2,7 @@
 select case when count(1) > 0 then 'FAILURE' else 'SUCCESS' end as Result,
 case when count(1) > 0 then 'MDS to DWH data validation failed for contract_sla_final to d_task_sla' else 'SUCCESS' end as Message
 from <<tenant>>_mdsdb.task_sla_final S
-join app_test.lsm_ls_source_timezone L  
-on (S.sourceinstance = L.sourceid)
+
 
 left join <<tenant>>_mdsdb.task_final task ON S.task = task.sys_id 
 
@@ -57,8 +56,8 @@ ifnull(CASE WHEN S.pause_duration is null  THEN NULL
 	 ELSE TIMESTAMPDIFF(SECOND,'1970-01-01 00:00:00', S.pause_duration) end,''),
 ifnull(S.sys_created_by,''),
 ifnull(S.sys_updated_by,''),
-ifnull(convert_tz(S.sys_created_on,source_time_zone,target_time_zone),''),
-ifnull(convert_tz(S.sys_updated_on,source_time_zone,target_time_zone),''),
+ifnull(convert_tz(S.sys_created_on,'GMT','America/Los_Angeles'),''),
+ifnull(convert_tz(S.sys_updated_on,'GMT','America/Los_Angeles'),''),
 ifnull('N','')
 )) not in (
 select (concat(

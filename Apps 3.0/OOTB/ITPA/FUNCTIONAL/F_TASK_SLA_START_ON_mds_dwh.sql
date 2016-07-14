@@ -3,6 +3,5 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  FROM <<tenant>>_mdsdb.task_sla_final SRC
  LEFT JOIN <<tenant>>_mdwdb.f_task_sla TRGT 
  ON (SRC.sys_id=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id)
-LEFT JOIN  app_test.lsm_ls_source_timezone L 
-ON (SRC.sourceinstance  = L.sourceid)
-WHERE COALESCE(convert_tz(SRC.start_time,source_time_zone,target_time_zone),'') <> COALESCE(TRGT.start_on,'')
+
+WHERE COALESCE(convert_tz(SRC.start_time,'GMT','America/Los_Angeles'),'') <> COALESCE(TRGT.start_on,'')

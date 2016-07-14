@@ -1,2 +1,0 @@
-
-SELECT rai.task_key AS incident_key, rai.secondary_sequence_id AS sequence_id, rai.created_on AS reopened_on, rai.created_time_key AS reopened_time_key, rai.created_on_key AS reopened_on_key, rai.updated_by, rai.secondary_duration AS elapsed_duration FROM <<tenant>>_mdwdb.f_incident_activity rai WHERE ((((rai.task_wh_type) = 'incident') AND (rai.reopened_flag = 'Y')) AND (rai.soft_deleted_flag = 'N'));

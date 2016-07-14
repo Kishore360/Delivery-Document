@@ -6,7 +6,5 @@ FROM <<tenant>>_mdsdb.task_survey_final SRC
  LEFT JOIN <<tenant>>_mdwdb.d_survey_instance TRGT 
  ON (sif.sys_id  =TRGT.row_id  
  AND sif.sourceinstance = TRGT.source_id  )
--- JOIN  app_test.lsm_ls_source_timezone L 
--- ON (sif.sourceinstance   = L.sourceid )
 where COALESCE(CONVERT_TZ(SRC.requested_date,'GMT','America/Los_Angeles'),'00-00-1900 00:00:00')
   <> (TRGT.requested_on);

@@ -2,8 +2,7 @@
 SELECT  CASE WHEN COUNT(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result,
 CASE WHEN COUNT(1) > 0 THEN 'MDS to DWH data validation failed between facilities_request_final and d_facilty_request' ELSE 'SUCCESS - Dormant key is disabled in SQLCODE' END AS Message
 FROM <<tenant>>_mdsdb.facilities_request_final S
-JOIN  app_test.lsm_ls_source_timezone L
-ON(S.sourceinstance   =   L.sourceid )
+
 left join <<tenant>>_mdwdb.d_facility_request TRGT
 on S.sys_id=TRGT.row_id
 LEFT JOIN  <<tenant>>_mdwdb.f_facility_request TRGTF 
@@ -30,9 +29,9 @@ WHERE CRC32(CONCAT(
 IFNULL(S.sys_id,''),
 IFNULL(S.sourceinstance,''),
 IFNULL(S.number,''),
-IFNULL(convert_tz(S.opened_at,source_time_zone,target_time_zone),''),
-IFNULL(convert_tz(S.closed_at,source_time_zone,target_time_zone),''),
-IFNULL(convert_tz(S.due_date,source_time_zone,target_time_zone),''),
+IFNULL(convert_tz(S.opened_at,'GMT','America/Los_Angeles'),''),
+IFNULL(convert_tz(S.closed_at,'GMT','America/Los_Angeles'),''),
+IFNULL(convert_tz(S.due_date,'GMT','America/Los_Angeles'),''),
 'N',
 CASE WHEN TA.row_id IS NOT NULL THEN 'Y' ELSE 'N' END,
 CASE WHEN TIMESTAMPDIFF(MINUTE,S.opened_at,S.closed_at)<30 THEN 'Y' ELSE 'N' END,
@@ -46,16 +45,16 @@ IFNULL(S.reassignment_count,''),
 IFNULL(S.short_description,''),
 IFNULL(S.description,''),
 CASE WHEN S.knowledge=1 then 'Y'  else 'N' END,
-IFNULL(convert_tz(S.expected_start,source_time_zone,target_time_zone),''),
-IFNULL(convert_tz(S.work_start,source_time_zone,target_time_zone),''),
-IFNULL(convert_tz(S.work_end,source_time_zone,target_time_zone),''),
+IFNULL(convert_tz(S.expected_start,'GMT','America/Los_Angeles'),''),
+IFNULL(convert_tz(S.work_start,'GMT','America/Los_Angeles'),''),
+IFNULL(convert_tz(S.work_end,'GMT','America/Los_Angeles'),''),
 IFNULL(fpv.name,''),
 IFNULL(cmn.name,''),
 COALESCE( CASE WHEN LM.dimension_wh_code NOT IN('RESOLVED','CLOSED') THEN 'Y' ELSE 'N' END ,''),
 IFNULL(S.sys_created_by,''),
 IFNULL(S.sys_updated_by,''),
-IFNULL(convert_tz(S.sys_created_on,source_time_zone,target_time_zone),''),
-IFNULL(convert_tz(S.sys_updated_on,source_time_zone,target_time_zone),'')
+IFNULL(convert_tz(S.sys_created_on,'GMT','America/Los_Angeles'),''),
+IFNULL(convert_tz(S.sys_updated_on,'GMT','America/Los_Angeles'),'')
 ) ) 
  NOT IN (
 SELECT CRC32(CONCAT(

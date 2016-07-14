@@ -15,8 +15,7 @@ ON (SRC.sys_id=TRGT.row_id
 AND SRC.sourceinstance=TRGT.source_id  AND  coalesce(TRGT.primary_sequence_id,-1) <>0
 )
  
-LEFT JOIN app_test.lsm_ls_source_timezone tz 
-		ON (tz.sourceid = 999)
+
 WHERE  CONCAT(COALESCE(SRC.tablename,''),COALESCE(SRC.fieldname,''))  
 IN ( SELECT CONCAT(COALESCE(t.source_table_name,''),COALESCE(TRIM(' ' FROM SUBSTRING_INDEX(SUBSTRING_INDEX(t.audit_columns, ',', n.n), ',', -1)),''))
  FROM app_test.lsm_ls_entity_audit_enable_table t CROSS JOIN

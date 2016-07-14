@@ -1,8 +1,7 @@
 select case when count(1)> 0 then 'FAILURE' else 'SUCCESS' end as Result,
 case when count(1)> 0 then 'MDS to DWH fact validation failed between task_survey_final and f_task_survey' else 'SUCCESS' end as Message
 from <<tenant>>_mdsdb.task_survey_final S
-join app_test.lsm_ls_source_timezone L 
-on(S.sourceinstance   = L.sourceid )
+
 
 left join <<tenant>>_mdsdb.task_final TF
 on (TF.sys_id  = S.task 
@@ -41,11 +40,11 @@ on (DPV.row_id  = concat('INTERNAL_CONTACT~',S.sent_to)
 and DPV.source_id  = S.sourceinstance )
 
 left join d_calendar_date DCD_REQ
-on (DCD_REQ.row_id  = date_format(convert_tz(S.requested_date,source_time_zone,target_time_zone),'%Y%m%d') 
+on (DCD_REQ.row_id  = date_format(convert_tz(S.requested_date,'GMT','America/Los_Angeles'),'%Y%m%d') 
 and DCD_REQ.source_id  =0)
 
 left join d_calendar_time DCT_REQ
-on (DCT_REQ.row_id  = date_format(convert_tz(S.requested_date,source_time_zone,target_time_zone),'%H%i') 
+on (DCT_REQ.row_id  = date_format(convert_tz(S.requested_date,'GMT','America/Los_Angeles'),'%H%i') 
 and DCT_REQ.source_id  =0)
 
 left join d_internal_contact DPV_TKN
@@ -53,7 +52,7 @@ on (DPV_TKN.row_id  = concat('INTERNAL_CONTACT~',S.taken_by)
 and DPV_TKN.source_id  = S.sourceinstance )
 
 left join d_calendar_date DCD_COM
-on (DCD_COM.row_id  = date_format(convert_tz(S.completed_date,source_time_zone,target_time_zone),'%Y%m%d') 
+on (DCD_COM.row_id  = date_format(convert_tz(S.completed_date,'GMT','America/Los_Angeles'),'%Y%m%d') 
 and DCD_COM.source_id  = 0)
 
 left join d_survey_instance DSI
@@ -89,8 +88,8 @@ coalesce(DSI.row_key,case when S.instance is not null then -1 else 0 end),
 ifnull(S.sys_mod_count,''),
 ifnull(S.sys_created_by,''),
 ifnull(S.sys_updated_by,''),
-ifnull(convert_tz(S.sys_created_on,source_time_zone,target_time_zone),''),
-ifnull(convert_tz(S.sys_updated_on,source_time_zone,target_time_zone),''))
+ifnull(convert_tz(S.sys_created_on,'GMT','America/Los_Angeles'),''),
+ifnull(convert_tz(S.sys_updated_on,'GMT','America/Los_Angeles'),''))
 
 not in ( 
 select concat( 
