@@ -8,5 +8,5 @@ select CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  ON (lm.src_key = TRGT.state_src_key)
  where lm.dimension_class = 'STATE~INCIDENT'
 AND  lm.dimension_wh_code = 'OPEN'  
-AND COALESCE(TIMESTAMPDIFF(DAY,CONVERT_TZ(SRC.sys_updated_on,'GMT','MST'),(SELECT MAX(lastupdated) AS lastupdated
+AND COALESCE(TIMESTAMPDIFF(DAY,CONVERT_TZ(SRC.sys_updated_on,'GMT','US/Central'),(SELECT MAX(lastupdated) AS lastupdated
 FROM wow_mdwdb.d_o_data_freshness WHERE sourcename like 'ServiceNow%')),0) <> TRGT.dormant_age_c ;
