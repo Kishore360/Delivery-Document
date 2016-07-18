@@ -6,5 +6,5 @@ from wow_mdwdb.d_internal_contact a
 left join wow_mdsdb.sys_user_final b
 on a.row_id=CONCAT('INTERNAL_CONTACT~',b.sys_id) 
 and a.source_id=b.sourceinstance
-where a.start_date_c<>CONVERT_TZ(b.u_start_date,'GMT','MST')) a
+where a.start_date_c<>CONVERT_TZ(b.u_start_date,'GMT','US/Central')) a
 ;
