@@ -1,15 +1,19 @@
-SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
- CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for d_incident.first_call_resolution_flag' ELSE 'SUCCESS' END as Message
- FROM
-<<tenant>>_mdwdb.f_incident f
-JOIN <<tenant>>_mdwdb.d_lov_map br ON f.state_src_key = br.src_key 
-AND br.dimension_class = 'STATE~INCIDENT'
-AND br.dimension_wh_code = 'OPEN'
+/*If there is a data mismatch failure , please check for the Daylight Savings time of the particular year  and if it falls then 
+this is not an issue or data mismatch else investigate.
+*/
+ select CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+ CASE WHEN cnt >0 THEN 'MDS to DWH data validation failed for f_incident.age' ELSE 'SUCCESS' END as Message
+from
+(
+select count(1) as cnt FROM (select * from <<tenant>>_mdsdb.incident_final where opened_at < coalesce(resolved_at,closed_at)) SRC 
+  join <<tenant>>_mdwdb.f_incident f ON (SRC.sys_id =f.row_id  
+ AND SRC.sourceinstance= f.source_id  )
+JOIN <<tenant>>_mdwdb.d_lov_map br ON f.state_src_key = br.src_key
+AND br.dimension_wh_code IN ('RESOLVED','CLOSED')
 JOIN <<tenant>>_mdwdb.d_incident a ON a.row_key = f.incident_key
 AND f.source_id = a.source_id
-JOIN (SELECT source_id,max(lastupdated) AS lastupdated
-  from <<tenant>>_mdwdb.d_o_data_freshness
-  GROUP BY 1) df ON f.source_id = df.source_id
-  WHERE
-if(timestampdiff(DAY, CONVERT_TZ(a.opened_on,<<TENANT_SSI_TIME_ZONE>>,<<DW_TARGET_TIME_ZONE>>), CONVERT_TZ(df.lastupdated,<<TENANT_SSI_TIME_ZONE>>,<<DW_TARGET_TIME_ZONE>>))>0,
-timestampdiff(DAY, CONVERT_TZ(a.opened_on,<<TENANT_SSI_TIME_ZONE>>,<<DW_TARGET_TIME_ZONE>>), CONVERT_TZ(df.lastupdated,<<TENANT_SSI_TIME_ZONE>>,<<DW_TARGET_TIME_ZONE>>)),0) <> f.age
+WHERE
+timestampdiff(DAY, SRC.opened_at, coalesce(SRC.resolved_at, SRC.closed_at)) <> f.age
+  )a
+  
+  
