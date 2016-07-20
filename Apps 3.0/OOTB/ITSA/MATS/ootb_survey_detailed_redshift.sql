@@ -71,3 +71,15 @@ select'd_internal_contact' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_incident_response             a11 
 join ldb.d_internal_contact         a113
 on (a11.sent_to_key = a113.row_key)
+union
+select'd_survey_state' as Table_Name, count(a11.row_key) Row_Count
+ from  ldb.f_incident_response             a11 
+join ldb.d_survey_state         a113
+on (a11.survey_state_src_key = a113.row_key)
+union
+ select'd_calendar_week' as Table_Name, count(a11.row_key) Row_Count
+ from  ldb.f_incident_response             a11 
+join ldb.d_calendar_date         a15
+on (a11.requested_on_key = a15table_name, .row_key)
+join  ldb.d_calendar_week             a115
+on (a15.week_start_date_key = a115.row_key)
