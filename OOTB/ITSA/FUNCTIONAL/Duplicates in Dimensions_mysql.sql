@@ -1,6 +1,16 @@
 select case when count(1) > 1 then 'FAILURE' else 'SUCCESS' end as Result,
 case when count(1) > 1 then 'Duplicates exists in Dimensions' else 'SUCCESS' end as Message
 from (
+select 'd_lov_map',row_key,row_id,count(1)
+from <<tenant>>_mdwdb.d_lov_map
+group by 1,2,3
+having count(1) > 1
+union
+select 'd_lov',row_key,row_id,count(1)
+from <<tenant>>_mdwdb.d_lov
+group by 1,2,3
+having count(1) > 1
+union
 select 'd_configuration_item',row_id,source_id,count(1)
 from <<tenant>>_mdwdb.d_configuration_item
 group by 1,2
