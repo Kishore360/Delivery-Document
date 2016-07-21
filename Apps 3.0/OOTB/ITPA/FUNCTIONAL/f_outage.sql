@@ -1,3 +1,0 @@
-
-SELECT row_id,source_id,outage_number,outage_key,start_on_key,start_time_key,end_on_key,configuration_item_key,business_service_key,application_key,task_key,incident_key,problem_key,change_request_key,domain_key,caused_by_change_key,outage_duration,updates_count,created_by,changed_by,created_on,changed_on FROM <<tenant>>_mdwdb.f_outage 
-ORDER BY row_id,source_id,outage_number,outage_key,start_on_key,start_time_key,end_on_key,configuration_item_key,business_service_key,application_key,task_key,incident_key,problem_key,change_request_key,domain_key,caused_by_change_key,outage_duration,updates_count,created_by,changed_by,created_on,changed_on
