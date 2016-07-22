@@ -1,2 +1,11 @@
-SELECT CASE WHEN count(1) = 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
- CASE WHEN count(1) =0 THEN 'MDS to DWH data validation failed for d_problem_task.active_flag' ELSE 'SUCCESS' END as Message
+SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
+,CASE WHEN cnt > 0 THEN 'Data did not Match.' 
+ELSE 'Data Matched' END AS Message 
+FROM (
+select count(1) as cnt  
+from homedepot_mdsdb.u_problem_task_final a
+ left  JOIN   homedepot_mdwdb.d_problem_task b
+on  b.ROW_ID=a.SYS_ID and a.sourceinstance=b.source_id
+ where a.description <> b.description) temp;
+
+ 

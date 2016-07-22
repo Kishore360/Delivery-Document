@@ -3,9 +3,7 @@ SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
 ELSE 'Data Matched' END AS Message 
 FROM (
 select count(1) as cnt  
-from homedepot_mdsdb.u_problem_task_final a
- left  JOIN   homedepot_mdwdb.d_problem_task b
+from homedepot_mdsdb.incident_final a
+ left  JOIN   homedepot_mdwdb.d_incident b
 on  b.ROW_ID=a.SYS_ID and a.sourceinstance=b.source_id
- where a.short_description <> b.short_description) temp;
-
- 
+ where case when a.u_canada_impacting = '1' then 'Y' else 'N' end <> b.canada_impacting_c_flag)temp; 
