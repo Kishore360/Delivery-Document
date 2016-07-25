@@ -8,7 +8,7 @@ LEFT JOIN <<tenant>>_mdwdb.f_expense_item TRGT
 ON (SRC.sys_id=TRGT.row_id
 AND SRC.sourceinstance=TRGT.source_id )
 LEFT JOIN <<tenant>>_mdwdb.d_calendar_date LKP
-ON COALESCE(DATE_FORMAT(convert_tz(SRC.date,'GMT','America/Los_Angeles'),'%Y%m%d')) = LKP.row_id
+ON COALESCE(DATE_FORMAT(convert_tz(SRC.date,<<TENANT_SSI_TIME_ZONE>>,<<DW_TARGET_TIME_ZONE>>),'%Y%m%d')) = LKP.row_id
 -- AND SRC.sourceinstance = LKP.source_id )
 WHERE SRC.asset Is Null 
 AND COALESCE(LKP.row_key,CASE WHEN SRC.date IS NULL THEN NULL else '-1' end)<> COALESCE(TRGT.generated_on_key,'')
