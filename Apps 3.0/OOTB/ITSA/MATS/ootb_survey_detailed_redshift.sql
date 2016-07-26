@@ -80,6 +80,6 @@ union
  select'd_calendar_week' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_incident_response             a11 
 join ldb.d_calendar_date         a15
-on (a11.requested_on_key = a15table_name, .row_key)
+on (a11.requested_on_key = a15.row_key)
 join  ldb.d_calendar_week             a115
 on (a15.week_start_date_key = a115.row_key)
