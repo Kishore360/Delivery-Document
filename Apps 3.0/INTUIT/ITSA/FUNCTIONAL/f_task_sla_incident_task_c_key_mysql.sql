@@ -6,4 +6,5 @@ LEFT JOIN intuit_mdwdb.f_task_sla dfts on tsd.sys_id=dfts.row_id
   AND tsd.sourceinstance=dfts.source_id
 LEFT JOIN intuit_mdwdb.d_incident_task_c b ON tsd.task = b.row_id and b.source_id = tsd.sourceinstance
 
-WHERE COALESCE(b.row_key,CASE WHEN tsd.task IS NULL THEN 0 else -1 end)<> (dfts.incident_task_c_key)
+WHERE CASE WHEN upper(t.sys_class_name) ='U_INCIDENT_TASK' THEN b.row_key
+ELSE 0 end <> (dfts.incident_task_c_key)

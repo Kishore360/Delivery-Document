@@ -10,5 +10,5 @@ left join intuit_mdwdb.d_calendar_date lkp
 on lkp.row_id = COALESCE(DATE_FORMAT(CONVERT_TZ(s.u_actual_resolve_date,'GMT' ,'America/Los_Angeles'),'%Y%m%d'),'UNSPECIFIED')
 LEFT JOIN intuit_mdwdb.d_lov_map br 
  ON t.state_src_key = br.src_key
-WHERE  case when br.dimension_wh_code IN ('OPEN') THEN 0 ELSE 
- lkp.row_key end  <> t.last_resolved_on_key) temp
+WHERE  br.dimension_wh_code IN ('RESOLVED','CLOSED') and
+ lkp.row_key <> t.last_resolved_on_key) temp

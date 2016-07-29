@@ -6,4 +6,4 @@ select count(1) as cnt
 from intuit_mdsdb.change_task_final a
 left join intuit_mdwdb.f_change_task_c c 
 on  a.sys_id = c.ROW_ID and a.sourceinstance=c.source_id
-where convert_tz(a.time_worked,'GMT','America/los_Angeles')<>c.time_worked) g
+where TIMESTAMPDIFF(SECOND,'1970/01/01 00:00:00',a.time_worked)<>c.time_worked) g

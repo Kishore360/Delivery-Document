@@ -7,9 +7,6 @@ left outer join intuit_mdsdb.sys_user_final usr on usr.sys_id =tsd.taken_by
 left join intuit_workdb.f_task_survey dfts
 on tsd.sys_id=dfts.row_id AND tsd.sourceinstance=dfts.source_id
 LEFT JOIN intuit_workdb.d_incident_task_c b ON 
-case when upper(t.sys_class_name)  ='U_INCIDENT_TASK' 
-then COALESCE(tsd.task,'UNSPECIFIED') else 'UNSPECIFIED' END
-=b.row_id and b.source_id = if (case when upper(t.sys_class_name)  ='U_INCIDENT_TASK' 
-then COALESCE(tsd.task,'UNSPECIFIED') else 'UNSPECIFIED' END ='UNSPECIFIED',0,tsd.sourceinstance)
-
-where  dfts.incident_task_c_key <> b.row_key;
+tsd.task=b.row_id and tsd.sourceinstance=b.source_id
+where  CASE WHEN upper(t.sys_class_name) ='U_INCIDENT_TASK' THEN b.row_key
+ELSE 0 END and dfts.incident_task_c_key <> b.row_key;
