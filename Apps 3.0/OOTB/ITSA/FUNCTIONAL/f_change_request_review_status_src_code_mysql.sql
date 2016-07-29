@@ -6,4 +6,4 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
   JOIN <<tenant>>_mdwdb.f_change_request TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
- WHERE COALESCE( SRC.review_status,'')<> COALESCE(TRGT.review_status_src_code ,'')
+ WHERE COALESCE( SRC.review_status,'')<> TRGT.review_status_src_code
