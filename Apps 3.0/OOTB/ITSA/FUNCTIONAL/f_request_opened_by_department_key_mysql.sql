@@ -11,4 +11,4 @@ left join  <<tenant>>_mdsdb.sys_user_final scu on SRC.opened_by = scu.sys_id
  ON ( concat('DEPARTMENT~',scu.department)= LKP.row_id 
  AND scu.sourceinstance= LKP.source_id )
 
- WHERE COALESCE(LKP.row_key,CASE WHEN (scu.department is  null ) THEN 0 else -1 end)= (TRGT.opened_by_department_key)
+ WHERE COALESCE(LKP.row_key,CASE WHEN (scu.department is  null ) THEN 0 else -1 end)<> (TRGT.opened_by_department_key)

@@ -6,7 +6,7 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 
  inner JOIN <<tenant>>_mdwdb.f_change_request TRGT 
 
- INNER JOIN <<tenant>>_mdwdb.f_change_request TRGT 
+ 
 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )

@@ -6,7 +6,6 @@
  join  ldb.d_calendar_date         a12
 on (a11.opened_on_key = a12.row_key)
 union
-
   select'd_calendar_quarter' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_request_item             a11 
  join  ldb.d_calendar_date         a12
