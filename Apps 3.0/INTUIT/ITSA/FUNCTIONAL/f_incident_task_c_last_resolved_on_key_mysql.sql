@@ -11,5 +11,4 @@ on lkp.row_id = COALESCE(DATE_FORMAT(CONVERT_TZ(s.u_actual_resolve_date,'GMT' ,'
 '%Y%m%d'),'UNSPECIFIED')
 LEFT JOIN intuit_mdwdb.d_lov_map br 
  ON t.state_src_key = br.src_key
-WHERE  case when br.dimension_wh_code IN ('OPEN') THEN 0
-ELSE lkp.row_key  END   <> t.last_resolved_on_key) temp
+WHERE  coalesce(lkp.row_key,case when u_actual_resolve_date is null  THEN 0 else -1 end )<> t.last_resolved_on_key) temp
