@@ -3,8 +3,8 @@ case when count(1) > 0 then 'Distinct dimension classes which are not loaded int
 from (
 select TGT.dimension_class as d1 , SRC.dimension_class as d2
 from (select class_value as dimension_class
-from <<tenant>>_workdb.lsm_ls_system_variables conf
+from molinahealth_workdb.lsm_ls_system_variables conf
 where conf.enable_flag = 'Y') SRC
-left join <<tenant>>_mdwdb.d_lov TGT
+left join molinahealth_mdwdb.d_lov TGT
 ON TGT.dimension_class = SRC.dimension_class
 where TGT.row_id is null and SRC.dimension_class not in ('CATEGORY~FACILITIES','CATEGORY~HR_CHANGE','STATE~HR_CHANGE'))a;
