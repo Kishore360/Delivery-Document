@@ -33,7 +33,7 @@ union
  select'd_sc_req_item_urgency' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_request_item             a11 
  join  ldb.d_sc_req_item_urgency                       a12
-on (a11.urgency_state_src_key    = a12.row_key)
+on (a11.urgency_src_key    = a12.row_key)
 union
  select'd_hr_change' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_request_item             a11 
