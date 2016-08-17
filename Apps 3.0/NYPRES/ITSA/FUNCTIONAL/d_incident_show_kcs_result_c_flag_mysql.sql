@@ -4,6 +4,6 @@
  LEFT JOIN nypres_mdwdb.d_incident TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
- WHERE ( CASE WHEN u_show_kcs_result = 1 then 'Y' else 'N' END)<> (TRGT.show_kcs_result_c_flag ) 
+ WHERE ( CASE WHEN u_show_kcs_results = 1 then 'Y' else 'N' END)<> (TRGT.show_kcs_results_c_flag ) 
  
  
