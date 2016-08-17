@@ -7,9 +7,9 @@ ELSE 'Data Matched' END AS Message
 
 from(select count(1) as cnt
  
-from rambus_mdwdb.f_change_request a 
+from rambus_mdsdb.change_request_final b
 
-left outer join rambus_mdsdb.change_request_final b 
+left outer join  rambus_mdwdb.f_change_request a 
 
 on a.row_id =b.sys_id 
 

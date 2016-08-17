@@ -17,6 +17,6 @@ rambus_mdsdb.u_ad_hoc_request_final) as RES3,
 
 
 (select count(row_id) as cntt 
-from rambus_mdwdb.d_incident) RES2
+from rambus_mdwdb.d_incident where row_key not in (-1,0)) RES2
 
 ) a;
