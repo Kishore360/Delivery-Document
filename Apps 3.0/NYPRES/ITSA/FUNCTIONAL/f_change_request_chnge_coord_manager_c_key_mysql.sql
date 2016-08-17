@@ -8,6 +8,6 @@
  ON ( CONCAT('INTERNAL_CONTACT~',u_chnge_coord_manager )= LKP.row_id 
  AND SRC.sourceinstance= LKP.source_id
 AND COALESCE(CONVERT_TZ (SRC.opened_at,'GMT','America/New_york'), CONVERT_TZ (coalesce(SRC.closed_at,SRC.sys_updated_on),'GMT','America/New_york')BETWEEN LKP.effective_from AND LKP.effective_to) )
-where COALESCE(LKP.row_key,CASE WHEN SRC.u_chnge_coord_manager  IS NULL THEN 0 else -1 end) <> (TRGT.chnge_coord_manager_c_key) ;
+where COALESCE(LKP.row_key,CASE WHEN SRC.u_chnge_coord_manager  IS NULL THEN 0 else -1 end) <> (TRGT.change_coord_manager_c_key) ;
 
 	

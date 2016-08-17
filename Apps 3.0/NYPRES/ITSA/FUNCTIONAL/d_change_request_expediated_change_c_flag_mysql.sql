@@ -4,6 +4,6 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  LEFT JOIN nypres_mdwdb.d_change_request TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
- WHERE ( CASE WHEN u_expediated_change = 1 then 'Y' else 'N' END)<> (TRGT.expediated_change_c_flag ) 
+ WHERE ( CASE WHEN u_expedited_change = 1 then 'Y' else 'N' END)<> (TRGT.expedited_change_c_flag ) 
  
  

@@ -7,6 +7,6 @@
  AND SRC.sourceinstance= TRGT.source_id  )
 LEFT JOIN nypres_mdwdb.d_lov LKP 
  ON ( concat('U_PROBLEM_CAUSE~PROBLEM',upper(u_problem_cause))= LKP.row_id )
- WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_problem_cause IS NULL THEN 0 else -1 end)<> COALESCE(TRGT.problem_cause_src_c_key)
+ WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_problem_cause IS NULL THEN 0 else -1 end)<> COALESCE(TRGT.problem_key)
  
  

@@ -6,6 +6,6 @@ join nypres_mdwdb.f_change_request b
 on a.sys_id=b.row_id and a.sourceinstance=b.source_id
 left join nypres_mdwdb.d_configuration_item c
 on COALESCE(a.u_affected_configuration_item,'UNSPECIFIED')=c.row_id and a.sourceinstance=c.source_id
-where c.row_key<>b.affected_configuration_item_c_key; 
+where c.row_key<>b.configuration_item_key; 
 
 
