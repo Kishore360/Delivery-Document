@@ -6,5 +6,5 @@ ELSE 'Data Matched' END aS Message  from (
 select (case when first_call_resolution_flag = 'Y' then 'SUCCESS' else 'FAILURE' end) result from rambus_mdwdb.d_incident where
 opened_on >= last_resolved_on - interval 1 hour and multiple_assignment_flag = 'N' 
 and if(DAYNAME(opened_on) = 'saturday',0, if(DAYNAME(opened_on) = 'sunday' 
-and cast(opened_on as time) < '18:00:00',0,if(DAYNAME(closed_on) = 'friday' and cast(closed_on as time) > '18:00:00',0,1))) = 1
+and cast(opened_on as time) < '18:00:00',0,if(DAYNAME(last_resolved_on) = 'friday' and cast(last_resolved_on as time) > '18:00:00',0,1))) = 1
 ) res where res.result = 'FAILURE';
