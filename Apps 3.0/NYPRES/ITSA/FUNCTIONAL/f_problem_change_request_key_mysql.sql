@@ -5,6 +5,6 @@ join nypres_mdwdb.f_problem b
 on a.sys_id=b.row_id and a.sourceinstance=b.source_id
 left join nypres_mdwdb.d_change_request c
 on a.u_change_request=c.row_id and a.sourceinstance=c.source_id
-where coalesce(c.row_key,case when u_change_request is null then 0 else -1 end) <>b.change_request_c_key;
+where coalesce(c.row_key,case when u_change_request is null then 0 else -1 end) <>b.change_request_key;
 
 
