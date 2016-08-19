@@ -6,7 +6,7 @@
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
 LEFT JOIN nypres_mdwdb.d_lov LKP 
- ON ( concat('U_WING~INCIDENT',upper(u_wing))= LKP.row_id )
+ ON ( concat('U_WING~INCIDENT~~~',upper(u_wing))= LKP.row_id )
  WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_wing IS NULL THEN 0 else -1 end)<> COALESCE(TRGT.wing_c_key)  
  
  

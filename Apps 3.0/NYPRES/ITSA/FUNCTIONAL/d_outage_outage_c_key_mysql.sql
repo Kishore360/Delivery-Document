@@ -5,7 +5,7 @@
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
 LEFT JOIN nypres_mdwdb.d_lov LKP 
- ON ( concat('U_OUTAGE~CMDB_CI_OUTAGE',upper(u_outage))= LKP.row_id )
+ ON ( concat('U_OUTAGE~CMDB_CI_OUTAGE~~~',upper(u_outage))= LKP.row_id )
  WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_outage IS NULL THEN 0 else -1 end)<> COALESCE(TRGT.outage_c_key)  
  
  
