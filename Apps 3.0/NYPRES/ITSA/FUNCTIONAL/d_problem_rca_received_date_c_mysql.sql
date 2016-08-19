@@ -7,7 +7,5 @@ from nypres_mdsdb.problem_final s
 left  JOIN nypres_mdwdb.d_problem t 
 on  t.ROW_ID=s.SYS_ID and s.sourceinstance=t.source_id 
 where  
-convert_tz(s.u_rca_received_date,'GMT','America/Los_Angeles')
+convert_tz(s.u_rca_received_date,'GMT','America/New_york')
 <> t.rca_received_date_c) temp
-
-
