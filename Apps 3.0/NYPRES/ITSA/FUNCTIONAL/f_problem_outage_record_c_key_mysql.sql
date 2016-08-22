@@ -4,7 +4,7 @@
  JOIN nypres_mdwdb.f_problem TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
- JOIN nypres_mdsdb.d_outage	 LKP 
+ JOIN nypres_mdwdb.d_outage	 LKP 
  ON ( (u_outage_record))= LKP.row_id 
   WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_outage_record IS NULL THEN 0 else -1 end)<> COALESCE(TRGT.outage_record_c_key)  ;
   
