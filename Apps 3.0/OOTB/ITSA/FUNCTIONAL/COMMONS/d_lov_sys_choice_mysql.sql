@@ -14,7 +14,8 @@ from
 join <<tenant>>_workdb.lsm_ls_system_variables LSM
 on (LSM.table_value=SRC.name
 and LSM.column_value=SRC.element )
-where language='en' and enable_flag='Y' and inactive=0
+where language='en' and enable_flag='Y' and inactive=0 and sys_created_on= (select max(sys_created_on) from <<tenant>>_mdsdb.sys_choice_final) 
+
 ) SRC
 left join <<tenant>>_mdwdb.d_lov TRGT
 on(SRC.row_id=TRGT.row_id
@@ -22,7 +23,7 @@ and TRGT.source_id = 2)
 where SRC.dimension_class<>TRGT.dimension_class
 or SRC.dimension_code<>TRGT.dimension_code
 or SRC.dimension_name<>TRGT.dimension_name
-or SRC.src_rowid<>TRGT.src_rowid
+or UPPER(SRC.src_rowid)<>TRGT.src_rowid
 or SRC.soft_deleted_flag<>TRGT.soft_deleted_flag
 or SRC.current_flag<>TRGT.current_flag
 
