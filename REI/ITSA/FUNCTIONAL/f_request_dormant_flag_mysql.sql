@@ -17,7 +17,7 @@ ON (TRGTF.request_key =TRGT.row_key
 LEFT JOIN rei_mdwdb.d_lov_map LM 
 ON TRGTF.state_src_key=LM.src_key
 
-WHERE 
+WHERE  LM.dimension_class= 'REQUEST_STATE~SC_REQUEST' AND  LM.dimension_wh_code='OPEN' and 
 CASE WHEN timestampdiff(DAY,TRGT.changed_on,(SELECT MAX(lastupdated) AS lastupdated
 FROM rei_mdwdb.d_o_data_freshness WHERE sourcename like 'ServiceNow%'))>14 
-AND LM.dimension_class= 'REQUEST_STATE~SC_REQUEST' AND  LM.dimension_wh_code='OPEN' THEN 'Y' ELSE 'N' END <> COALESCE(TRGT.dormant_flag ,'');
+ THEN 'Y' ELSE 'N' END <> COALESCE(TRGT.dormant_flag ,'');
