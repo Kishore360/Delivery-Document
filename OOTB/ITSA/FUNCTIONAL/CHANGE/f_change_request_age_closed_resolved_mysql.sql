@@ -14,6 +14,6 @@ AND br.dimension_wh_code in ('CLOSED','RESOLVED') and br.dimension_class = 'STAT
 JOIN <<tenant>>_mdwdb.d_change_request a ON a.row_key = f.change_request_key
 AND f.source_id = a.source_id 
 
-WHERE TIMESTAMPDIFF(DAY,SRC.opened_at,SRC.closed_at)<> f.change_request_age
+WHERE TIMESTAMPDIFF(DAY,a.opened_on,a.closed_on)<> f.change_request_age
 
  
