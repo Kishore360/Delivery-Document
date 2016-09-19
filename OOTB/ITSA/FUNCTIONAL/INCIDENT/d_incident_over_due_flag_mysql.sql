@@ -9,7 +9,7 @@ FROM <<tenant>>_mdwdb.d_o_data_freshness WHERE sourcename like 'ServiceNow%'),<<
 LEFT JOIN <<tenant>>_mdwdb.d_incident TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
- WHERE due_date is not null
+ WHERE due_date is not null and active_flag='Y'
  )a
  WHERE abc<>def
 
