@@ -158,3 +158,42 @@ join ldb.d_calendar_time      a15
 on   (a11.opened_time_key = a15.row_key)
 join ldb.d_calendar_time_hour       a126
 on  (a15.hour_24_format_num = a126.hour_24_format_num)
+union
+select 'ldb.dh_user_group_hierarchy a16 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_incident a11 
+join ldb.d_internal_organization_group a15 
+on (a11.assignment_group_key = a15.row_key) 
+join ldb.dh_user_group_hierarchy a16 
+on (a15.row_dn_key = a16.lev_0_key) 
+union
+select 'ldb.dh_user_group_level1 a128 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_incident a11 
+join ldb.d_internal_organization_group a15 
+on (a11.assignment_group_key = a15.row_key) join ldb.dh_user_group_hierarchy a16 
+on (a15.row_dn_key = a16.lev_0_key) 
+join ldb.dh_user_group_level1 a128 
+on (a16.lev_1_key = a128.row_key) 
+union
+select 'ldb.dh_user_group_level2 a132 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_incident a11 
+join ldb.d_internal_organization_group a15 
+on (a11.assignment_group_key = a15.row_key) join ldb.dh_user_group_hierarchy a16 
+on (a15.row_dn_key = a16.lev_0_key) 
+join ldb.dh_user_group_level2 a132 
+on (a16.lev_2_key = a132.row_key) 
+union
+select 'ldb.dh_user_group_level3 a134 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_incident a11 
+join ldb.d_internal_organization_group a15 
+on (a11.assignment_group_key = a15.row_key) join ldb.dh_user_group_hierarchy a16 
+on (a15.row_dn_key = a16.lev_0_key) 
+join ldb.dh_user_group_level3 a134 
+on (a16.lev_3_key = a134.row_key) 
+union
+select 'ldb.dh_user_group_level4 a135 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_incident a11 
+join ldb.d_internal_organization_group a15 
+on (a11.assignment_group_key = a15.row_key) join ldb.dh_user_group_hierarchy a16 
+on (a15.row_dn_key = a16.lev_0_key) 
+join ldb.dh_user_group_level4 a135 
+on (a16.lev_4_key = a135.row_key)

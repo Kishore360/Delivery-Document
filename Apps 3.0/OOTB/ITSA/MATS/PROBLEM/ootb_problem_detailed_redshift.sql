@@ -52,17 +52,17 @@ on (a11.state_src_key = a19.row_key)
 union
 select'd_task_contacttype' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_problem             a11 
-join ldb.d_task_contacttype        a110
+join ldb.d_problem_reported_type        a110
 on (a11.reported_type_src_key= a110.row_key)
 union
 select'd_task_priority' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_problem             a11 
-join ldb.d_task_priority         a111
+join ldb.d_problem_priority         a111
 on (a11.priority_src_key= a111.row_key)
 union
 select'd_task_urgency' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_problem             a11 
-join ldb.d_task_urgency         a112
+join ldb.d_problem_urgency         a112
 on (a11.urgency_src_key= a112.row_key)
 union
 select'd_internal_contact_assign' as Table_Name, count(a11.row_key) Row_Count
