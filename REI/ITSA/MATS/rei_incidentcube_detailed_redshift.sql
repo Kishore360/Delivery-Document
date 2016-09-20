@@ -61,7 +61,7 @@ SELECT 'd_assignment_group_director_c',count(*) as cnt from ldb.f_incident a11 j
 
 SELECT 'd_assignment_group_manager_c',count(*) as cnt from ldb.f_incident a11 join ldb.d_internal_organization_group_c a111  on (a11.assignment_group_key = a111.row_key) join ldb.d_assignment_group_manager_c a132  on (a111.manager_c_key = a132.manager_c_key) union all 
 
-SELECT 'd_calendar_month',count(*) as cnt from ldb.f_incident a11 join ldb.d_calendar_date a110  on (a11.opened_on_key = a110.row_key) join ldb.d_calendar_month a133  on (a110.month_start_date_key = a133.row_key);
+SELECT 'd_calendar_month',count(*) as cnt from ldb.f_incident a11 join ldb.d_calendar_date a110  on (a11.opened_on_key = a110.row_key) join ldb.d_calendar_month a133  on (a110.month_start_date_key = a133.row_key)
 union
 select 'ldb.dh_user_group_hierarchy a16 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11 
