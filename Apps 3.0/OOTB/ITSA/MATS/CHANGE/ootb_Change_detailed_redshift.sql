@@ -101,3 +101,48 @@ select'ldb.d_calendar_month' as Table_Name, count(a11.row_key) Row_Count
 on (a11.opened_on_key=a16.row_key)
 join ldb.d_calendar_month       a132
 on (a16.month_start_date_key=a132.row_key)
+union 
+   select'd_business_service' as Table_Name, count(a11.row_key) Row_Count
+  from         ldb.f_change_request         a11
+	  join        ldb.d_business_service a12
+  on         (a11.business_service_key = a12.row_key)
+	union 
+   select'd_business_service_criticality' as Table_Name, count(a11.row_key) Row_Count
+  from         ldb.f_change_request         a11
+	  join        ldb.d_business_service a12
+  on         (a11.business_service_key = a12.row_key)
+  join        ldb.d_business_service_criticality             a13
+  on         (a12.criticality_key = a13.row_key)
+  union
+	 select'd_business_service_used_for' as Table_Name, count(a11.row_key) Row_Count
+  from         ldb.f_change_request         a11
+	  join        ldb.d_business_service a12
+  on         (a11.business_service_key = a12.row_key)
+  join        ldb.d_business_service_used_for             a14
+  on         (a12.used_for_src_key = a14.row_key)
+  union
+   select'd_incident' as Table_Name, count(a11.row_key) Row_Count
+  from         ldb.f_change_request         a11
+  join        ldb.d_incident   a12
+  on         (a11.incident_c_key = a12.row_key)
+  union
+  select'd_change_request_approval' as Table_Name, count(a11.row_key) Row_Count
+  from         ldb.f_change_request         a11
+  join        ldb.d_change_request_approval               a12
+  on         (a11.approval_state_src_key = a12.row_key)
+  union
+  select'd_change_request_impact' as Table_Name, count(a11.row_key) Row_Count
+  from         ldb.f_change_request         a11
+  join        ldb.d_change_request_impact  a12
+  on         (a11.impact_src_key = a12.row_key)
+  union
+  select'd_change_request_priority' as Table_Name, count(a11.row_key) Row_Count
+  from         ldb.f_change_request         a11
+  join        ldb.d_change_request_priority  a12
+  on         (a11.priority_src_key = a12.row_key)
+  union
+  select'd_change_request_urgency' as Table_Name, count(a11.row_key) Row_Count
+  from         ldb.f_change_request         a11
+  join        ldb.d_change_request_urgency  a12
+  on         (a11.urgency_src_key = a12.row_key)
+  

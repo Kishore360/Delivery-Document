@@ -49,3 +49,13 @@ select'f_change_request' as Table_Name, count(a11.row_key) Row_Count
                   on          (a11.configuration_item_key = a17.row_key)
                 join          ldb.d_business_unit_c           a130
                   on          (a17.business_unit_c_key = a130.row_key)
+				  union
+				  select'd_internal_contact_approved_by_c' as Table_Name, count(a11.row_key) Row_Count
+ from  ldb.f_change_request             a11 
+				    join          ldb.d_internal_contact_approved_by_c	               a122
+                  on          (a11.approved_by_c_key = a122.row_key)
+				   union
+				   select'd_change_request_change_c' as Table_Name, count(a11.row_key) Row_Count
+ from  ldb.f_change_request             a11 
+				    join          ldb.d_change_request_change_c	               a122
+                  on          (a11.change_c_key = a122.row_key)
