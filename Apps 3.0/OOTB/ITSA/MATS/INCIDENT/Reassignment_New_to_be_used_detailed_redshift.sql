@@ -16,6 +16,7 @@ select'd_internal_organization_group_to' as Table_Name, count(a11.row_key) Row_C
 from  ldb.f_incident_activity              a11 
 join ldb.d_internal_organization_group_to         a12
 on (a11.to_assignment_group_key  = a12.row_key)
+on (a11.to_assignment_group_key  = a12.row_key)
 union
 select'd_internal_organization_group_from' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_incident_activity              a11 

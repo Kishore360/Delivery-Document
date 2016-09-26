@@ -121,11 +121,6 @@ union
   join        ldb.d_business_service_used_for             a14
   on         (a12.used_for_src_key = a14.row_key)
   union
-   select'd_incident' as Table_Name, count(a11.row_key) Row_Count
-  from         ldb.f_change_request         a11
-  join        ldb.d_incident   a12
-  on         (a11.incident_c_key = a12.row_key)
-  union
   select'd_change_request_approval' as Table_Name, count(a11.row_key) Row_Count
   from         ldb.f_change_request         a11
   join        ldb.d_change_request_approval               a12

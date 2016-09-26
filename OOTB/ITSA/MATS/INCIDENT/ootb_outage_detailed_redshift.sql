@@ -1,26 +1,3 @@
-d_application
-d_application_tier
-d_application_used_for
-d_business_service
-d_business_service_criticality
-d_business_service_used_for
-d_change_request_caused_by
-d_configuration_item
-d_configuration_item_incident
-d_incident
-d_incident_category
-d_incident_subcategory
-d_internal_contact_assigned_to
-d_internal_organization_group
-d_outage
-d_outage_type
-d_task_contacttype
-d_task_impact
-d_task_priority
-d_task_urgency
-f_incident_outage
-
-
 select 'ldb.f_incident_outage    a11 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident_outage       a11 
 union
@@ -122,11 +99,11 @@ from ldb.f_incident_outage       a11
                   on         (a12.category_src_key = a132.row_key)
 				  union
 				  
-				       select 'ldb.d_incident_category' as Table_name, count(a11.row_key) Row_Count
+				       select 'ldb.d_incident_subcategory' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident_outage       a11 
 				   join        ldb.d_incident  a12
 				  on         (a11.incident_key= a12.row_key)
-				  				  join        ldb.d_incident_category               a132
+				  				  join        ldb.d_incident_subcategory               a132
                   on         (a12.sub_category_src_key = a132.row_key)
 				  union
 				        select 'ldb.d_internal_contact_assigned_to' as Table_name, count(a11.row_key) Row_Count
