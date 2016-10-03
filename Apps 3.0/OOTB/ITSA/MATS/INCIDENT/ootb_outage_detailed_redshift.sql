@@ -60,7 +60,7 @@ from ldb.f_incident_outage       a11
 				     join        ldb.d_business_service_criticality             a14
                   on         (a13.criticality_key = a14.row_key)
 				  union
-				     select 'ldb.d_business_service_criticality' as Table_name, count(a11.row_key) Row_Count
+				     select 'ldb.d_business_service_used_for' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident_outage       a11 
 				  join        ldb.d_business_service a13
                   on         (a11.business_service_key = a13.row_key)
