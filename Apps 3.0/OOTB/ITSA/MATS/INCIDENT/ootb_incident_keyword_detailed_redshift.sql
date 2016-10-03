@@ -1,4 +1,8 @@
- select'f_incident' as Table_Name, count(a11.row_key) Row_Count
+
+select'f_incident_keyword' as Table_Name, count(table_row_key) Row_Count
+from  ldb.f_incident_keyword             a11 
+union
+select'f_incident' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_incident             a11 
  union
  select'd_calendar_date' as Table_Name, count(a11.row_key) Row_Count
@@ -37,41 +41,32 @@ select'd_incident' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_incident             a11 
 join ldb.d_incident       a17
 on (a11.incident_key = a17.row_key)
+
+ union
+select'd_incident_category' as Table_Name, count(table_row_key) Row_Count
+from  ldb.f_incident_keyword             a11 
+join ldb.d_incident_category         a12
+on (a11.category_src_key = a12.row_key)
 union
-select'd_incident_category' as Table_Name, count(a11.row_key) Row_Count
-from  ldb.f_incident             a11 
-join ldb.d_incident       a17
-on (a11.incident_key = a17.row_key)
-join ldb.d_incident_category       a18
-on (a17.category_src_key = a18.row_key)
+select'd_incident_close_code' as Table_Name, count(table_row_key) Row_Count
+from  ldb.f_incident_keyword             a11
+join ldb.d_incident_close_code         a12
+on (a11.close_code_src_key = a12.row_key)
 union
-select'd_incident_close_code' as Table_Name, count(a11.row_key) Row_Count
-from  ldb.f_incident             a11 
-join ldb.d_incident       a17
-on (a11.incident_key = a17.row_key)
-join ldb.d_incident_close_code       a19
-on (a17.close_code_src_key = a19.row_key)
+select'd_incident_severity' as Table_Name, count(table_row_key) Row_Count
+from  ldb.f_incident_keyword             a11 
+join ldb.d_incident_severity       a13
+on (a11.severity_src_key = a13.row_key)
 union
-select'd_incident_severity' as Table_Name, count(a11.row_key) Row_Count
-from  ldb.f_incident             a11 
-join ldb.d_incident       a17
-on (a11.incident_key = a17.row_key)
-join ldb.d_incident_severity       a110
-on (a17.severity_src_key = a110.row_key)
+select'd_incident_state' as Table_Name, count(table_row_key) Row_Count
+from  ldb.f_incident_keyword             a11 
+join ldb.d_incident_state     a14
+on (a11.state_src_key = a14.row_key)
 union
-select'd_incident_state' as Table_Name, count(a11.row_key) Row_Count
-from  ldb.f_incident             a11 
-join ldb.d_incident       a17
-on (a11.incident_key = a17.row_key)
-join ldb.d_incident_state       a111
-on (a17.state_src_key = a111.row_key)
-union
-select'd_incident_subcategory' as Table_Name, count(a11.row_key) Row_Count
-from  ldb.f_incident             a11 
-join ldb.d_incident       a17
-on (a11.incident_key = a17.row_key)
-join ldb.d_incident_subcategory       a112
-on (a17.sub_category_src_key = a112.row_key)
+select'd_incident_subcategory' as Table_Name, count(table_row_key) Row_Count
+from  ldb.f_incident_keyword             a11
+join ldb.d_incident_subcategory       a14
+on (a11.sub_category_src_key = a14.row_key)
 union
 select'd_internal_contact' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_incident             a11 
@@ -150,7 +145,7 @@ union
 select'd_change_request' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_incident             a11 
 join ldb.d_change_request      a125
-on (a11.change_request_key = a125.row_key)
+on (a11.change_c_key = a125.row_key)
 union
 select'd_change_request_caused_by' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_incident             a11 
