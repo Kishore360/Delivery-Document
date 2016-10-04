@@ -86,3 +86,55 @@ from  ldb.f_incident             a11
 join ldb.d_internal_contact_service_owner_c       a116
 on (a11.service_owner_c_key = a116.row_key) 
 
+union
+select'd_lov_incident_ci_type_c' as Table_Name, count(a11.row_key) Row_Count
+ from  ldb.f_incident             a11 
+ join        ldb.d_incident   a110
+                  on         (a11.incident_key = a110.row_key)
+   join        ldb.d_lov_incident_ci_type_c  a134
+                  on         (a110.ci_type_c_key = a134.row_key)
+				  union
+				  select'd_lov_incident_incident_category_c' as Table_Name, count(a11.row_key) Row_Count
+ from  ldb.f_incident             a11 
+ join        ldb.d_incident   a110
+                  on         (a11.incident_key = a110.row_key)
+   join        ldb.d_lov_incident_incident_category_c  a134
+                  on         (a110.incident_category_c_key = a134.row_key)
+				  union
+				  			  select'd_lov_incident_incident_subcategory_c' as Table_Name, count(a11.row_key) Row_Count
+ from  ldb.f_incident             a11 
+ join        ldb.d_incident   a110
+                  on         (a11.incident_key = a110.row_key)
+   join        ldb.d_lov_incident_incident_subcategory_c  a134
+                  on         (a110.incident_subcategory_c_key = a134.row_key)
+				  union
+				    select'd_internal_organization_incident_vendor_c' as Table_Name, count(a11.row_key) Row_Count
+ from  ldb.f_incident             a11 
+   join        ldb.d_internal_organization_incident_vendor_c  a134
+                  on         (a11.vendor_c_key = a134.row_key)
+				  
+				  union
+				  select'd_lov_incident_escalation_c' as Table_Name, count(a11.row_key) Row_Count
+ from  ldb.f_incident             a11 
+ join        ldb.d_incident   a110
+                  on         (a11.incident_key = a110.row_key)
+   join        ldb.d_lov_incident_escalation_c  a134
+                  on         (a110.escalation_c_key = a134.row_key)
+				  union
+		select'd_lov_incident_outage_type_c' as Table_Name, count(a11.row_key) Row_Count
+ from  ldb.f_incident             a11 
+ join        ldb.d_incident   a110
+                  on         (a11.incident_key = a110.row_key)
+   join        ldb.d_lov_incident_outage_type_c  a134
+                  on         (a110.outage_type_c_key = a134.row_key)			  
+				  union
+				  select'd_task_incident_parent_c' as Table_Name, count(a11.row_key) Row_Count
+ from  ldb.f_incident             a11 
+   join        ldb.d_task_incident_parent_c  a134
+                  on         (a11.parent_c_key = a134.row_key)	
+				  union
+				  select'd_configuration_item_incident_so_c' as Table_Name, count(a11.row_key) Row_Count
+ from  ldb.f_incident             a11 
+   join        ldb.d_configuration_item_incident_so_c  a134
+                  on         (a11.service_offering_c_key = a134.row_key)	
+				  
