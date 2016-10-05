@@ -9,6 +9,6 @@ select count(1) as cnt FROM (select opened_at,  closed_at,sourceinstance,sys_id 
 AND br.dimension_wh_code IN ('RESOLVED','CLOSED') and br.dimension_class = 'STATE~HR_TASK'
 
 WHERE
-timestampdiff(DAY, SRC.opened_at,  SRC.closed_at) <> coalesce(f.age,-99)
+timestampdiff(second, SRC.opened_at,  SRC.closed_at) <> coalesce(f.age,-99)
 
 )a

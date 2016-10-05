@@ -9,7 +9,7 @@ JOIN molinahealth_mdwdb.d_lov_map br ON f.state_src_key = br.src_key
 AND br.dimension_wh_code IN ('RESOLVED','CLOSED')
 and br.dimension_class = 'STATE~HR_CASE'
 WHERE
-timestampdiff(DAY, SRC.opened_at,  SRC.closed_at) <> f.age
+timestampdiff(second, SRC.opened_at,  SRC.closed_at) <> f.age
   )a
   
   
