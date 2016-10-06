@@ -149,3 +149,22 @@ select'd_location' as Table_Name, count(a11.row_key) Row_Count
                   on         (a15.row_dn_key = a16.lev_0_key)
 		         join        ldb.dh_user_group_level2           a126
                  on         (a16.lev_2_key = a126.row_key)
+				 
+				 union
+				  select'dh_user_group_level3' as Table_Name, count(a11.row_key) Row_Count
+ from  ldb.f_problem             a11
+				 join        ldb.d_internal_organization_group         a15
+                  on         (a11.assignment_group_key = a15.row_key)
+            join        ldb.dh_user_group_hierarchy    a16
+                  on         (a15.row_dn_key = a16.lev_0_key)
+                join        ldb.dh_user_group_level3           a122
+                  on         (a16.lev_3_key = a122.row_key)
+				  union
+				    select'dh_user_group_level4' as Table_Name, count(a11.row_key) Row_Count
+ from  ldb.f_problem             a11
+				 join        ldb.d_internal_organization_group         a15
+                  on         (a11.assignment_group_key = a15.row_key)
+                 join        ldb.dh_user_group_hierarchy    a16
+                  on         (a15.row_dn_key = a16.lev_0_key)
+		         join        ldb.dh_user_group_level4           a126
+                 on         (a16.lev_4_key = a126.row_key)

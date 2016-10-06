@@ -9,5 +9,5 @@ FROM molinahealth_mdsdb.u_hr_task_final SRC
  JOIN molinahealth_mdwdb.f_hr_task_c LKP2 
  ON (SRC.sys_id =LKP2.row_id  
  AND SRC.sourceinstance= LKP2.source_id  )
-WHERE LKP2.hr_case_c_key<>TRGT.row_key
+WHERE LKP2.hr_case_c_key<>coalesce(TRGT.row_key,case when SRC.parent is null then 0 else -1 end)
 

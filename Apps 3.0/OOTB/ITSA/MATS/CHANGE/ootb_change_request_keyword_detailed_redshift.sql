@@ -1,6 +1,18 @@
 select 'ldb.f_change_request a11 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_change_request a11 
 union
+select 'd_calendar_time' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_change_request a11 
+join	ldb.d_calendar_time	a14
+	  on 	(a11.opened_time_key = a14.row_key)
+union
+select 'd_calendar_time_hour' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_change_request a11
+join	ldb.d_calendar_time	a14
+	  on 	(a11.opened_time_key = a14.row_key)
+join	ldb.d_calendar_time_hour	a110
+	  on 	(a14.hour_24_format_num = a110.hour_24_format_num)
+union
 select 'ldb.f_change_request_keyword a12 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_change_request a11 
 join ldb.f_change_request_keyword a12 

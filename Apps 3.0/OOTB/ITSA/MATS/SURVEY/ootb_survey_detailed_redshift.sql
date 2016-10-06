@@ -67,10 +67,10 @@ select'd_survey_instance' as Table_Name, count(a11.row_key) Row_Count
 join ldb.d_survey_instance         a112
 on (a11.survey_instance_key = a112.row_key)
 union
-select'd_internal_contact' as Table_Name, count(a11.row_key) Row_Count
+select'd_internal_contact_assigned_to' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_incident_response             a11 
-join ldb.d_internal_contact         a113
-on (a11.sent_to_key = a113.row_key)
+join ldb.d_internal_contact_assigned_to         a113
+on (a11.assigned_to_key = a113.row_key)
 union
 select'd_survey_state' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_incident_response             a11 

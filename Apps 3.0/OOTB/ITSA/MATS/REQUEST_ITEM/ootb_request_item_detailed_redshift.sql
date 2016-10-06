@@ -18,6 +18,13 @@ on (a11.opened_on_key = a12.row_key)
  join  ldb.d_calendar_quarter                         a14
 on (a12.quarter_start_date_key  = a14.row_key)
 union
+  select'd_calendar_week' as Table_Name, count(a11.row_key) Row_Count
+ from  ldb.f_request_item             a11 
+ join  ldb.d_calendar_date         a12
+on (a11.opened_on_key = a12.row_key)
+ join  ldb.d_calendar_week                         a14
+on (a12.week_start_date_key  = a14.row_key)
+union
   select'd_calendar_year' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_request_item             a11 
  join  ldb.d_calendar_date         a12
@@ -56,6 +63,11 @@ union
  from  ldb.f_request_item             a11 
  join  ldb.d_internal_contact         a16
 on (a11.opened_by_key = a16.row_key)
+union
+ select'd_internal_contact_assigned_to' as Table_Name, count(a11.row_key) Row_Count
+ from  ldb.f_request_item             a11 
+ join  ldb.d_internal_contact_assigned_to         a16
+on (a11.assigned_to_key = a16.row_key)
 union
 select'd_internal_contact_mdm' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_request_item             a11 

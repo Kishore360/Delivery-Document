@@ -7,5 +7,5 @@ on a.row_id=concat('GROUP~',b.sys_id)
 and a.source_id=b.sourceinstance
 left join molinahealth_mdwdb.d_internal_contact c
 on c.row_id=concat('INTERNAL_CONTACT~',b.manager)
-where a.manager_c_key<>c.row_key
+where a.manager_c_key<> coalesce(c.row_key,case when b.manager is null then 0 else -1 end  ) 
 ) a;	

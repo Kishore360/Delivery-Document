@@ -7,5 +7,5 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 LEFT JOIN molinahealth_mdwdb.f_hr_task_c LKP 
  ON (SRC.sys_id =LKP.row_id  
  AND SRC.sourceinstance= LKP.source_id  )
-WHERE (TRGT.row_key ) <> (LKP.hr_task_c_key) 
+WHERE coalesce(TRGT.row_key,case when SRC.sys_id is null then 0 else -1 end  ) <> (LKP.hr_task_c_key) 
 

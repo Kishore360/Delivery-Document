@@ -1,7 +1,7 @@
 select'ldb.f_change_request' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_change_request       a11 
 union
-select'ldb.d_task_contacttype' as Table_Name, count(a11.row_key) Row_Count
+select'ldb.d_change_request_reported_type' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_change_request       a11 
 join ldb.d_change_request_reported_type       a13
 on a11.reported_type_src_key=a13.row_key
@@ -101,7 +101,21 @@ select'ldb.d_calendar_month' as Table_Name, count(a11.row_key) Row_Count
 on (a11.opened_on_key=a16.row_key)
 join ldb.d_calendar_month       a132
 on (a16.month_start_date_key=a132.row_key)
-union 
+union
+select'ldb.d_calendar_quarter' as Table_Name, count(a11.row_key) Row_Count
+ from  ldb.f_change_request       a11 
+ join ldb.d_calendar_date       a16
+on (a11.opened_on_key=a16.row_key)
+join ldb.d_calendar_quarter       a132
+on (a16.quarter_start_date_key=a132.row_key) 
+union
+select'ldb.d_calendar_week' as Table_Name, count(a11.row_key) Row_Count
+ from  ldb.f_change_request       a11 
+ join ldb.d_calendar_date       a16
+on (a11.opened_on_key=a16.row_key)
+join ldb.d_calendar_week      a132
+on (a16.week_start_date_key=a132.row_key) 
+union
    select'd_business_service' as Table_Name, count(a11.row_key) Row_Count
   from         ldb.f_change_request         a11
 	  join        ldb.d_business_service a12
