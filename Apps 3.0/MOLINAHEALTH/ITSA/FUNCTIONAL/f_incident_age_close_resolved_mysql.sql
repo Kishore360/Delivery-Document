@@ -13,8 +13,10 @@ JOIN molinahealth_mdwdb.d_lov_map br ON f.state_src_key = br.src_key
 AND br.dimension_wh_code IN ('RESOLVED','CLOSED')
 JOIN molinahealth_mdwdb.d_incident a ON a.row_key = f.incident_key
 AND f.source_id = a.source_id
-WHERE timestampdiff(second,timestampdiff(second, SRC.opened_at, coalesce(SRC.resolved_at, SRC.closed_at)),f.age) not in(3600) 
-and timestampdiff(second, SRC.opened_at, coalesce(SRC.resolved_at, SRC.closed_at)) <> f.age
+WHERE 
+-- timestampdiff(second,timestampdiff(second, SRC.opened_at, coalesce(SRC.resolved_at, SRC.closed_at)),f.age) not in(3600) 
+-- and 
+timestampdiff(second, SRC.opened_at, coalesce(SRC.resolved_at, SRC.closed_at)) <> f.age
   )a
   
   

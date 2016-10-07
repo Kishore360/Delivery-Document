@@ -23,6 +23,7 @@ not in (select class_value from molinahealth_workdb.lsm_ls_system_variables wher
 'WARRANTY',
 'CRITICALITY~BUSINESS_SERVICE',
 'CI_TYPE_C~INCIDENT', 
-'CI_TYPE_C~REQUEST_ITEM '
+'CI_TYPE_C~REQUEST_ITEM ',
+'CI_TYPE_C~HR_CASE_C'
 
 ) )a;
