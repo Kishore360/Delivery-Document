@@ -13,4 +13,4 @@ where su.tablename = 'sc_req_item' and su.fieldname = 'state' and sc.name = 'sc_
 and sc.label = 'Fulfilled'
 group by ri.sys_id,ri.sourceinstance) tmp on ri_final.sys_id = tmp.sys_id and ri_final.sourceinstance = tmp.sourceinstance ) src
 left join molinahealth_mdwdb.f_request_item f_trgt on f_trgt.row_id = src.sys_id and f_trgt.source_id = src.sourceinstance ) fnl
-where src_fulfilled_on_c_key = trgt_fulfilled_on_c_key;
+where src_fulfilled_on_c_key <> trgt_fulfilled_on_c_key;

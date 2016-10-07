@@ -11,5 +11,5 @@ AND br.dimension_wh_code = 'OPEN' and br.dimension_class = 'STATE~HR_TASK'
 
 WHERE TIMESTAMPDIFF(second,SRC.opened_at,(SELECT CONVERT_TZ(MAX(lastupdated),'America/Los_Angeles','GMT') AS lastupdated
 
-FROM molinahealth_mdwdb.d_o_data_freshness WHERE sourcename like 'ServiceNow%'))<>coalesce(f.age,-99)
+FROM molinahealth_mdwdb.d_o_data_freshness WHERE sourcename like 'ServiceNow%'))<>(f.age)
 )a
