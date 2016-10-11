@@ -9,7 +9,7 @@ when sum(warnings_cnt) > 0 and length(group_concat(distinct failures)) >= 1024 t
 
 when sum(warnings_cnt) > 0 and length(group_concat(distinct warnings)) < 1024 then concat('Warning. Look up does not exists for ',sum(warnings_cnt),' records. (sys_id || cat_item) : ',substring_index(group_concat(distinct warnings),',',-sum(warnings_cnt)))
 
-else 'Success. All warehouse records are matching with source.' end status
+else 'Success. All warehouse records are matching with source.' end Result
 
 from 
 

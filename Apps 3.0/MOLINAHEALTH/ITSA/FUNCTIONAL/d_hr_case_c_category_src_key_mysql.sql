@@ -5,11 +5,11 @@ when sum(failures_cnt) > 0 and length(group_concat(distinct failures)) >= 1024 t
 when sum(failures_cnt) > 0 and length(group_concat(distinct failures)) < 1024
 then concat('Failed. Data does not match for ',sum(failures_cnt),' records. Sys Ids : ',substring_index(group_concat(distinct failures),',',-sum(failures_cnt)))
 
-when sum(warnings_cnt) > 0 and length(group_concat(distinct failures)) >= 1024 then concat('Warning. Look up does not exists for ',sum(warnings_cnt),' records. Few (sys_id || u_category) - ',group_concat(distinct warnings))
+when sum(warnings_cnt) > 0 and length(group_concat(distinct warnings)) >= 1024 then concat('Warning. Look up does not exists for ',sum(warnings_cnt),' records. Few (sys_id || u_category) - ',substring_index(group_concat(distinct warnings),',',-sum(warnings_cnt)))
 
 when sum(warnings_cnt) > 0 and length(group_concat(distinct warnings)) < 1024 then concat('Warning. Look up does not exists for ',sum(warnings_cnt),' records. (sys_id || u_category) : ',substring_index(group_concat(distinct warnings),',',-sum(warnings_cnt)))
 
-else 'Success. All warehouse records are matching with source.' end status
+else 'Success. All warehouse records are matching with source.' end Result
 
 from  
 (select   

@@ -5,7 +5,7 @@ when sum(failures_cnt) > 0 and length(group_concat(distinct failures)) >= 1024 t
 when sum(failures_cnt) > 0 and length(group_concat(distinct failures)) < 1024
 then concat('Failed. Data does not match for ',sum(failures_cnt),' records. Sys Ids : ',substring_index(group_concat(distinct failures),',',-sum(failures_cnt)))
 
-else 'Success. All warehouse records are matching with source.' end status
+else 'Success. All warehouse records are matching with source.' end Result
 from 
 (select 
 case when COALESCE(DATE_FORMAT(CONVERT_TZ(src.u_submitted,'UTC','America/Los_Angeles'),'%Y%m%d'),'19700101') <> COALESCE(trgt.submitted_on_c_key,'19700101') then src.sys_id else '' end as failures,
