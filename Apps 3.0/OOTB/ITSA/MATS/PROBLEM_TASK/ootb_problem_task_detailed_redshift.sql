@@ -15,5 +15,5 @@ on (a12.month_start_date_key = a13.row_key)
 union
 select'd_task_contacttype' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_problem_task             a11 
-join ldb.d_task_contacttype         a14
+join ldb.d_problem_task_reported_type         a14
 on (a11.reported_type_src_key= a14.row_key)

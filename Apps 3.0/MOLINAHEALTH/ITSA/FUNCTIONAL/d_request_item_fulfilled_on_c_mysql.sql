@@ -9,9 +9,9 @@ else 'Success. All warehouse records are matching with source.' end Result
 from 
 (select 
 
-case when COALESCE(CONVERT_TZ(lkp.fulfilled_on,'UTC','America/Los_Angeles'),'1970-01-01 00:00:00') <> COALESCE(trgt.fulfilled_on_c,'1970-01-01 00:00:00') then src.sys_id else '' end as failures,
+case when COALESCE(CONVERT_TZ(lkp.fulfilled_on,'UTC','America/Los_Angeles'),'1970-01-01 00:00:00') <> (TRGT.fulfilled_on_c,'1970-01-01 00:00:00') then src.sys_id else '' end as failures,
 
-case when COALESCE(CONVERT_TZ(lkp.fulfilled_on,'UTC','America/Los_Angeles'),'1970-01-01 00:00:00') <> COALESCE(trgt.fulfilled_on_c,'1970-01-01 00:00:00') then 1 else 0 end as failures_cnt
+case when COALESCE(CONVERT_TZ(lkp.fulfilled_on,'UTC','America/Los_Angeles'),'1970-01-01 00:00:00') <> (TRGT.fulfilled_on_c,'1970-01-01 00:00:00') then 1 else 0 end as failures_cnt
 
 from molinahealth_mdsdb.sc_req_item_final src
 left join molinahealth_mdwdb.d_request_item trgt on trgt.row_id = src.sys_id and trgt.source_id = src.sourceinstance 
