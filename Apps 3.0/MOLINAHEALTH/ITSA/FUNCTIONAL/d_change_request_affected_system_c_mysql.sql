@@ -1,10 +1,15 @@
+select 
+case 
+when sum(failures_cnt) > 0 and length(group_concat(distinct failures)) >= 1024 then concat('Failed. Data does not match for ',sum(failures_cnt),' records. Few sys ids are : ',substring_index(group_concat(distinct failures),',',31))
 
-SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
- CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for d_change_request.production_change_flag' ELSE 'SUCCESS' END as Message
- FROM molinahealth_mdsdb.change_request_final SRC 
- LEFT JOIN molinahealth_mdwdb.d_change_request TRGT 
- ON (SRC.sys_id =TRGT.row_id  
- AND SRC.sourceinstance= TRGT.source_id  )
- WHERE SRC.u_affected_sys<> (TRGT.affected_system_c )
- 
- 
+when sum(failures_cnt) > 0 and length(group_concat(distinct failures)) < 1024
+then concat('Failed. Data does not match for ',sum(failures_cnt),' records. Sys Ids : ',substring_index(group_concat(distinct failures),',',-sum(failures_cnt)))
+
+else 'Success. All warehouse records are matching with source.' end status
+from 
+(select 
+case when COALESCE(src.u_affected_sys,'UNSPECIFIED') <> COALESCE(trgt.affected_system_c,'UNSPECIFIED') then src.sys_id else '' end as failures,
+case when COALESCE(src.u_affected_sys,'UNSPECIFIED') <> COALESCE(trgt.affected_system_c,'UNSPECIFIED') then 1 else 0 end as failures_cnt
+from molinahealth_mdsdb.change_request_final src
+left join molinahealth_mdwdb.d_change_request trgt on trgt.row_id = src.sys_id and trgt.source_id = src.sourceinstance 
+) fnl ;
