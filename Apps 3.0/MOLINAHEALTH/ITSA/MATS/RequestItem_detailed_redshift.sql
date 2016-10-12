@@ -1,10 +1,33 @@
  select'f_request_item' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_request_item             a11 
  union
+  select'f_request_item_fulfilled_c' as Table_Name, count(a11.row_key) Row_Count
+ from  ldb.f_request_item             a11 
+ join ldb.f_request_item_fulfilled_c a12 on a11.request_item_key=a12.request_item_key
+ union
  select'd_internal_contact_fulfilled_by_c' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_request_item             a11 
 join        ldb.d_internal_contact_fulfilled_by_c   a111
                   on         (a11.fulfilled_by_c_key = a111.row_key)
+				   union
+ select'd_hr_case_c' as Table_Name, count(a11.row_key) Row_Count
+ from  ldb.f_request_item             a11 
+join        ldb.d_hr_case_c   a111
+                  on         (a11.hr_case_c_key = a111.row_key)
+				    union
+ select'd_internal_contact_manager_c' as Table_Name, count(a11.row_key) Row_Count
+ from  ldb.f_request_item             a11 
+ join        ldb.d_internal_organization_group         a12
+                  on         (a11.assignment_group_key = a12.row_key)
+                join        ldb.d_internal_contact_manager_c         a13
+                  on         (a12.manager_c_key = a13.row_key)
+				  union
+				   select'd_internal_organization_gp_depart_c' as Table_Name, count(a11.row_key) Row_Count
+ from  ldb.f_request_item             a11 
+ join        ldb.d_internal_organization_group         a12
+                  on         (a11.assignment_group_key = a12.row_key)
+				     join        ldb.d_internal_organization_gp_depart_c            a14
+                  on         (a12.department_c_key = a14.row_key)
 union
  select'd_request_item_hr_category_src_c' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_request_item             a11 
