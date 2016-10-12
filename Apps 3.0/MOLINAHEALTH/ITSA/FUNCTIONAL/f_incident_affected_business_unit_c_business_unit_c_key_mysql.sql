@@ -18,9 +18,9 @@ case when src.business_unit is not null and lkp.row_id is null then concat(src.r
 
 case when src.business_unit is not null and lkp.row_id is null then 1 else 0 end as warnings_cnt,
 
-case when COALESCE(lkp.row_key,case when src.business_unit is null then 0 else -1 end) <> COALESCE(trgt.business_unit_c_key,0) then src.row_id else '' end as failures,
+case when COALESCE(lkp.row_key,case when src.business_unit = 'UNSPECIFIED' then 0 else -1 end) <> COALESCE(trgt.business_unit_c_key,0) then src.row_id else '' end as failures,
 
-case when COALESCE(lkp.row_key,case when src.business_unit is null then 0 else -1 end) <> COALESCE(trgt.business_unit_c_key,0) then 1 else 0 end as failures_cnt
+case when COALESCE(lkp.row_key,case when src.business_unit = 'UNSPECIFIED' then 0 else -1 end) <> COALESCE(trgt.business_unit_c_key,0) then 1 else 0 end as failures_cnt
 
 from 
 ( SELECT CONCAT(inc.sys_id,'~',COALESCE(SUBSTRING_INDEX(SUBSTRING_INDEX(TRIM(inc.u_affected_business_unit), ',', n.n), ',', -1),'UNSPECIFIED')) AS row_id, inc.sourceinstance AS source_id,	 COALESCE(SUBSTRING_INDEX(SUBSTRING_INDEX(TRIM(inc.u_affected_business_unit), ',', n.n), ',', -1),'UNSPECIFIED') AS business_unit
