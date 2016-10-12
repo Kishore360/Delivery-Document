@@ -6,4 +6,4 @@ select count(1) as cnt
 from homedepot_mdsdb.incident_final a
  left  JOIN   homedepot_mdwdb.d_incident b
 on  b.ROW_ID=a.SYS_ID and a.sourceinstance=b.source_id
- where case when a.u_dc_impacting = '0' then 'N' else 'Y' end <> b.dc_impacting_c_flag)temp; 
+ where case when a.u_dc_impacting = '1' then 'Y' else 'N' end <> b.dc_impacting_c_flag)temp; 
