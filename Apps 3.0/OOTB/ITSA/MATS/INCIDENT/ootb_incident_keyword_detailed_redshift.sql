@@ -1,4 +1,3 @@
-
 select'f_incident_keyword' as Table_Name, count(table_row_key) Row_Count
 from  ldb.f_incident_keyword             a11 
 union
@@ -145,7 +144,7 @@ union
 select'd_change_request' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_incident             a11 
 join ldb.d_change_request      a125
-on (a11.change_c_key = a125.row_key)
+on (a11.change_request_key = a125.row_key)
 union
 select'd_change_request_caused_by' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_incident             a11 
