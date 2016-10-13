@@ -6,5 +6,5 @@ LEFT JOIN homedepot_mdwdb.f_change_request TRGT
  AND SRC.sourceinstance= TRGT.source_id  )
 LEFT JOIN homedepot_mdwdb.d_lov LKP 
  ON ( CONCAT('APPROVAL~CHANGE_REQUEST~~~',approval)= LKP.row_id 
- AND SRC.sourceinstance= LKP.source_id
+ AND SRC.sourceinstance= LKP.source_id)
 where COALESCE(LKP.row_key,CASE WHEN SRC.approval IS NULL THEN 0 else -1 end) <> (TRGT.approval_state_src_key) ;
