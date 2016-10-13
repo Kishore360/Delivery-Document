@@ -11,4 +11,4 @@ SELECT count(1) cnt
 left  JOIN  svb_mdwdb.d_lov LKP  
  ON ( concat('CATEGORY~CHANGE_REQUEST~~~',upper(category))= LKP.src_rowid 
 AND SRC.sourceinstance= LKP.source_id )
- WHERE COALESCE(LKP.row_key,CASE WHEN type is null  THEN 0 else -1 end)<>(TRGT.category_src_key))x
+ WHERE COALESCE(LKP.row_key,CASE WHEN category is null  THEN 0 else -1 end)<>(TRGT.category_src_key))x
