@@ -8,8 +8,6 @@ from
 
 JOIN <<tenant>>_mdwdb.d_lov_map br ON f.state_src_key = br.src_key
 AND br.dimension_wh_code = 'OPEN' and br.dimension_class = 'STATE~INCIDENT'
-JOIN <<tenant>>_mdwdb.d_incident a ON a.row_key = f.incident_key
-AND f.source_id = a.source_id 
 
 WHERE TIMESTAMPDIFF(DAY,SRC.opened_at,(SELECT CONVERT_TZ(MAX(lastupdated),<<DW_TARGET_TIME_ZONE>>,<<TENANT_SSI_TIME_ZONE>>) AS lastupdated
 
