@@ -10,10 +10,9 @@ select count(1) as cnt FROM (select sourceinstance,sys_id,opened_at,resolved_at,
  AND SRC.sourceinstance= f.source_id  )
 JOIN <<tenant>>_mdwdb.d_lov_map br ON f.state_src_key = br.src_key
 AND br.dimension_wh_code IN ('RESOLVED','CLOSED')
-JOIN <<tenant>>_mdwdb.d_incident a ON a.row_key = f.incident_key
-AND f.source_id = a.source_id
+
 WHERE
-timestampdiff(DAY, SRC.opened_at, coalesce(SRC.resolved_at, SRC.closed_at)) <> f.age
+timestampdiff(DAY, convert_tz(convert_tz(SRC.opened_at,'<<TENANT_SSI_TIME_ZONE>>','<<DW_TARGET_TIME_ZONE>>'),'<<DW_TARGET_TIME_ZONE>>','<<TENANT_SSI_TIME_ZONE>>'), coalesce(convert_tz(convert_tz(SRC.resolved_at,'<<TENANT_SSI_TIME_ZONE>>','<<DW_TARGET_TIME_ZONE>>'),'<<DW_TARGET_TIME_ZONE>>','<<TENANT_SSI_TIME_ZONE>>'), convert_tz(convert_tz(SRC.closed_at,'<<TENANT_SSI_TIME_ZONE>>','<<DW_TARGET_TIME_ZONE>>'),'<<DW_TARGET_TIME_ZONE>>','<<TENANT_SSI_TIME_ZONE>>'))) <> f.age
   )a
   
-  
+ 

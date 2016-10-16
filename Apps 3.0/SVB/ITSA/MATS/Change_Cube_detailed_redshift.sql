@@ -20,12 +20,7 @@ select  'd_calendar_date' as Table_Name,count(a11.row_key) Row_Count
 from 	ldb.f_change_request a11 
 join  	ldb.d_calendar_date  a15
 on      (a11.opened_on_key = a15.row_key)
-union
 
-select  'd_internal_contact' as Table_Name,count(a11.row_key) Row_Count 
-from 	ldb.f_change_request a11 
-join 	ldb.d_internal_contact  a16
-on      (a11.assigned_to_key = a16.row_key)
 union	
 
 select  'd_internal_organization_group' as Table_Name,count(a11.row_key) Row_Count 
@@ -113,9 +108,9 @@ join 	ldb.d_change_request_priority  a120
 on      (a11.priority_src_key = a120.row_key)
 union
 
-select  'd_change_request_contacttype' as Table_Name,count(a11.row_key) Row_Count 
+select  'd_change_request_reported_type' as Table_Name,count(a11.row_key) Row_Count 
 from 	ldb.f_change_request a11 
-join 	ldb.d_change_request_contacttype  a121
+join 	ldb.d_change_request_reported_type  a121
 on      (a11.reported_type_src_key = a121.row_key)
 union
 

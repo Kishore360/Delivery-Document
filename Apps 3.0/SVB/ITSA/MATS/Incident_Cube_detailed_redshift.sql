@@ -30,18 +30,18 @@ ldb.f_incident a11
 join ldb.d_incident_outage_type_c a123
 on (a11.outage_type_c_key = a123.row_key)
 union all
-select'd_incident_close_code_c' as Table_Name, count(a11.row_key) Row_Count
+select'd_incident_close_code_c' as Table_Name, count(a11.row_key) cnt
 from  ldb.f_incident             a11 
 join ldb.d_incident_close_code_c a12
 on  (a11.close_code_src_key = a12.row_key)
 
 union
-select 'ldb.d_escalation_c a118 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_escalation_c a118 ' as Table_name, count(a11.row_key) cnt
 from ldb.f_incident a11 
 join ldb.d_escalation_c a118 
 on (a11.escalate_c_key = a118.row_key) 
 union
-select 'ldb.d_lov_incident_type_incident_c a125 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_lov_incident_type_incident_c a125 ' as Table_name, count(a11.row_key) cnt
 from ldb.f_incident a11 
 join ldb.d_lov_incident_type_incident_c a125 
 on (a11.incident_type_src_c_key = a125.row_key) 

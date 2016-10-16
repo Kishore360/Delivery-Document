@@ -8,8 +8,6 @@ from
 
 JOIN molinahealth_mdwdb.d_lov_map br ON f.state_src_key = br.src_key
 AND br.dimension_wh_code = 'OPEN' and br.dimension_class = 'STATE~INCIDENT'
-JOIN molinahealth_mdwdb.d_incident a ON a.row_key = f.incident_key
-AND f.source_id = a.source_id 
 
 WHERE TIMESTAMPDIFF(second,SRC.opened_at,(SELECT CONVERT_TZ(MAX(lastupdated),'America/Los_Angeles','GMT') AS lastupdated
 

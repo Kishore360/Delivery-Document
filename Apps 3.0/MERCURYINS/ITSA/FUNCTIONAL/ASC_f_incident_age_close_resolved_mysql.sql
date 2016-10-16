@@ -7,8 +7,7 @@ select count(1) as cnt FROM (select * from mercuryins_mdsdb.u_asc_ticket_final w
  AND SRC.sourceinstance= f.source_id  )
 JOIN mercuryins_mdwdb.d_lov_map br ON f.asc_incident_state_c_key = br.src_key
 AND br.dimension_wh_code IN ('RESOLVED')
-JOIN mercuryins_mdwdb.d_incident_asc_c a ON a.row_key = f.incident_asc_c_key
-AND f.source_id = a.source_id
+
 WHERE
 timestampdiff(DAY, SRC.opened_at, coalesce(SRC.u_resolved, SRC.closed_at)) <> f.age
   )a
