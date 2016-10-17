@@ -1,7 +1,9 @@
-SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
- CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for d_incident.caused_by_change_flag' ELSE 'SUCCESS' END as Message
- FROM homedepot_mdsdb.incident_final SRC 
- LEFT JOIN homedepot_mdwdb.d_incident TRGT 
- ON (SRC.sys_id =TRGT.row_id  
- AND SRC.sourceinstance= TRGT.source_id  )
- WHERE ( CASE WHEN SRC.caused_by is not null then 'Y' else 'N' END)<> (TRGT.caused_by_change_flag )
+SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
+,CASE WHEN cnt > 0 THEN 'Data did not Match.' 
+ELSE 'Data Matched' END AS Message 
+FROM (
+select count(1) as cnt 
+from homedepot_mdsdb.incident_final a
+ left JOIN  homedepot_mdwdb.d_incident b
+on  b.ROW_ID=a.SYS_ID and a.sourceinstance=b.source_id
+ where (case when a.caused_by is not null then 'Y' else 'N' END)  <> b.caused_by_change_flag)b
