@@ -8,4 +8,4 @@ left  JOIN coach_mdwdb.d_incident b
 on  b.ROW_ID=a.SYS_ID and a.sourceinstance=b.source_id 
 left join coach_mdsdb.sys_user_final c
 on a.u_affected_user=c.sys_id
-where COALESCE(c.u_brand_affiliation,'UNSPECIFIED') = b.brand_affiliation_c ) tmp
+where COALESCE(c.u_brand_affiliation,'UNSPECIFIED') <> b.brand_affiliation_c ) tmp;
