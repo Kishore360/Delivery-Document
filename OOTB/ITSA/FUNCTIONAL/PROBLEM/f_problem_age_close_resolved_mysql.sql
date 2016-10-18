@@ -6,7 +6,7 @@ this is not an issue or data mismatch else investigate.
  CASE WHEN cnt >0 THEN 'MDS to DWH data validation failed for PROBLEM' ELSE 'SUCCESS' END as Message
 
 from
-(select count(1) cnt FROM (select * from <<tenant>>_mdsdb.problem_final where opened_at < closed_at) SRC 
+(select count(1) cnt FROM (select sys_id,sourceinstance,opened_at,closed_at from <<tenant>>_mdsdb.problem_final where opened_at < closed_at) SRC 
   join <<tenant>>_mdwdb.f_problem f ON (SRC.sys_id =f.row_id  
  AND SRC.sourceinstance= f.source_id and f.soft_deleted_flag='N' )
 

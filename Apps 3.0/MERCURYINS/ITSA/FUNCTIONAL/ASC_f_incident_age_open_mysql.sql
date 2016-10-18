@@ -8,8 +8,6 @@ from
 
 JOIN mercuryins_mdwdb.d_lov_map br ON f.asc_incident_state_c_key = br.src_key
 AND br.dimension_wh_code = 'OPEN' and br.dimension_class = 'STATE~INCIDENT'
-JOIN mercuryins_mdwdb.d_incident_asc_c a ON a.row_key = f.incident_asc_c_key
-AND f.source_id = a.source_id 
 
 WHERE TIMESTAMPDIFF(DAY,SRC.opened_at,(SELECT CONVERT_TZ(MAX(lastupdated),'America/Los_Angeles','GMT') AS lastupdated
 

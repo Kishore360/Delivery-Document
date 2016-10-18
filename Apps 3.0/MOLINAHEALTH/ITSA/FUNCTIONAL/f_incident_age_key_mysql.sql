@@ -7,4 +7,3 @@ ON ((f.age div 86400 BETWEEN L.lower_range_value AND L.upper_range_value)
 	AND L.dimension_class = 'AGEBUCKET_WH~INCIDENT' )
 WHERE coalesce(L.row_key,-1 )  <> f.age_key
 
--- case when f.age div 86400 is null then 0 else -1 end

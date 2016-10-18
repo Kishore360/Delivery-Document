@@ -5,7 +5,7 @@ this is not an issue or data mismatch else investigate.
  SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for f_change_request.closed_by_key' ELSE 'SUCCESS' END as Message
   FROM 
-(select * from <<tenant>>_mdsdb.change_request_final where opened_at < closed_at) SRC 
+(select sys_id,sourceinstance from <<tenant>>_mdsdb.change_request_final where opened_at < closed_at) SRC 
   join <<tenant>>_mdwdb.f_change_request f ON (SRC.sys_id =f.row_id  
  AND SRC.sourceinstance= f.source_id and f.soft_deleted_flag='N' )
 

@@ -5,5 +5,6 @@ cardinalhealth_mdsdb.sc_req_item_final a
 join cardinalhealth_mdwdb.f_request_item b
 on a.sys_id=b.row_id and a.sourceinstance=b.source_id
 left join cardinalhealth_mdwdb.d_lov c
-on c.row_id=COALESCE( CONCAT('CATALOG_ITEM_C','~','SC_REQ_ITEM','~','~','~',UPPER(a.u_new_catalog_item )),'UNSPECIFIED') and c.source_id=a.sourceinstance
-where c.row_key<>b.catalog_item_c_key;
+on c.row_id=COALESCE( CONCAT('CATALOG_ITEM_C','~','SC_REQ_ITEM','~','~','~',UPPER(a.u_new_catalog_item )),'UNSPECIFIED') 
+and c.source_id=a.sourceinstance
+where COALESCE(c.row_key,CASE WHEN a.u_new_catalog_item IS NULL THEN 0 else -1 end)<>b.catalog_item_c_key;
