@@ -1,6 +1,6 @@
 select 
     case
-        when count(1) > 0 then 'FAILURE'
+        when count(1) > 0 then 'WARNING'
         else 'SUCCESS'
     end as Result,
     case
