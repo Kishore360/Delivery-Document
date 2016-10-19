@@ -8,4 +8,4 @@ on SRC2.sc_item_option = SRC.sys_id and SRC.sourceinstance=SRC2.sourceinstance
 join
 	nbcu_mdwdb.f_request_item_variable_c TRGT 
 	ON ((concat(SRC.sys_id,'~',SRC2.request_item) =TRGT.row_id) AND SRC.sourceinstance= TRGT.source_id  )
-WHERE  SRC.sys_id<> TRGT.row_id
+WHERE  (concat(SRC.sys_id,'~',SRC2.request_item))<> TRGT.row_id
