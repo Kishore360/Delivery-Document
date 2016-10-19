@@ -6,4 +6,5 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  AND SRC.sourceinstance= TRGT.source_id  )
 JOIN homedepot_mdwdb.d_incident d ON d.row_key = TRGT.incident_key
 WHERE   
- TIMESTAMPDIFF(MINUTE,d.opened_on,d.last_resolved_on)  <> TRGT.open_to_resolve_duration;
+ TIMESTAMPDIFF(second,d.opened_on,d.last_resolved_on)  <> TRGT.open_to_resolve_duration
+ and d.last_resolved_on is null;
