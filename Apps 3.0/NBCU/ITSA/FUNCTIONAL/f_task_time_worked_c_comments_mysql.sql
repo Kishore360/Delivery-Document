@@ -5,4 +5,4 @@ from
 nbcu_mdsdb.task_time_worked_final a
 join nbcu_mdwdb.f_task_time_worked_c b
 on a.sys_id=b.row_id and a.sourceinstance=b.source_id
-where b.comments<> a.comments;
+where b.comments<> substring(a.comments,1,100);
