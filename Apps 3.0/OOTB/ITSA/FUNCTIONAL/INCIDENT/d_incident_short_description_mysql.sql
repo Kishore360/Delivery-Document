@@ -6,4 +6,4 @@
  LEFT JOIN <<tenant>>_mdwdb.d_incident TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
- WHERE char_length(SRC.short_description)<=255 and SRC.short_description<>TRGT.short_description
+ WHERE length(SRC.short_description)<=255 and SRC.short_description<>TRGT.short_description
