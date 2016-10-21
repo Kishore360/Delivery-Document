@@ -1,4 +1,3 @@
-
 SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
 ,CASE WHEN cnt > 0 THEN 'Data did not Match.' 
 ELSE 'Data Matched' END AS Message 
@@ -6,8 +5,7 @@ FROM (
 select COUNT(*) cnt from(
 SELECT A.SYS_ID,B.ROW_ID,
 B.  last_resolved_on_key B_last_resolved_on_key ,
-case when year <2000 then A.last_resolved_on_key+20000000 else A.last_resolved_on_key 
-end as  A_last_resolved_on_key from
+A.last_resolved_on_key  as  A_last_resolved_on_key from
 (SELECT SYS_ID,sourceinstance, 
 DATE_FORMAT(CONVERT_TZ(u_resolved_date,'GMT','America/Los_Angeles'),'%Y')  AS   year,
 DATE_FORMAT(CONVERT_TZ(u_resolved_date,'GMT','America/Los_Angeles'),'%Y%m%d')  AS   last_resolved_on_key
