@@ -4,6 +4,6 @@ from rei_mdsdb.pm_portfolio_final s
 left join rei_mdwdb.d_portfolio_c   t
 on s.sys_id=t.row_id and s.sourceinstance=t.source_id
 left join rei_mdwdb.d_internal_contact l
-on  concat('INTERNAL_CONTACT~',s.u_portfolio_owner )= l.row_id
- and s.sourceinstance=l.source_id and (s.sys_created_on between l.effective_to and l.effective_from)
+on  COALESCE(CONCAT('INTERNAL_CONTACT~',u_portfolio_owner),'UNSPECIFIED')= l.row_id
+ and s.sourceinstance=l.source_id
 WHERE t.portfolio_owner_key <> l.row_key

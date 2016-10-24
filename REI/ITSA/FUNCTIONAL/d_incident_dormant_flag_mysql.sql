@@ -11,4 +11,4 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 LEFT JOIN rei_mdwdb.d_lov_map LM ON TRGTF.state_src_key=LM.src_key
  WHERE  CASE WHEN timestampdiff(DAY,TRGT.changed_on,(SELECT MAX(lastupdated) AS lastupdated
 FROM rei_mdwdb.d_o_data_freshness WHERE sourcename like 'ServiceNow%'))>14
-AND  LM.dimension_wh_code='OPEN' THEN 'Y' ELSE 'N' END <> (TRGT.dormant_flag )
+AND  LM.dimension_wh_code='OPEN' and LM.dimension_class = 'STATE~INCIDENT' THEN 'Y' ELSE 'N' END <> (TRGT.dormant_flag )
