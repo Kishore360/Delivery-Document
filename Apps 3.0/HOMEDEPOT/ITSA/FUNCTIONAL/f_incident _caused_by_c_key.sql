@@ -6,4 +6,4 @@ select count(1) as cnt
 from homedepot_mdsdb.incident_final a
  left JOIN  homedepot_mdwdb.d_incident b
 on  b.ROW_ID=a.SYS_ID and a.sourceinstance=b.source_id
- where (case when a.u_change_related = 1 then 'Y' else 'N' END)  <> b.caused_by_change_flag)b
+ where (case when a.caused_by is not null then 'Y' else 'N' END)  <> b.caused_by_change_flag)b

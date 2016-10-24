@@ -5,15 +5,17 @@ this is not an issue or data mismatch else investigate.
  CASE WHEN cnt >0 THEN 'MDS to DWH data validation failed for f_incident.age' ELSE 'SUCCESS' END as Message
 from
 (
-select count(1) as cnt FROM (select * from rei_mdsdb.incident_final where opened_at < coalesce(u_last_resolution_date,closed_at)) SRC 
-  join rei_mdwdb.f_incident f ON (SRC.sys_id =f.row_id  
- AND SRC.sourceinstance= f.source_id  )
+select count(1) as cnt FROM 
+ rei_mdwdb.f_incident f 
 JOIN rei_mdwdb.d_lov_map br ON f.state_src_key = br.src_key
 AND br.dimension_wh_code IN ('RESOLVED','CLOSED')
 JOIN rei_mdwdb.d_incident a ON a.row_key = f.incident_key
 AND f.source_id = a.source_id
 WHERE
-timestampdiff(second, SRC.opened_at, coalesce(SRC.u_last_resolution_date, SRC.closed_at)) <> f.age
+if(timestampdiff(second, CONVERT_TZ(a.opened_on,'America/Los_Angeles','GMT'),
+ CONVERT_TZ(coalesce(a.last_resolved_on, a.closed_on),'America/Los_Angeles','GMT'
+))>0,timestampdiff(second, CONVERT_TZ(a.opened_on,'America/Los_Angeles','GMT'), 
+CONVERT_TZ(coalesce(a.last_resolved_on, a.closed_on),'America/Los_Angeles','GMT')),0) <> f.age
   )a
   
   
