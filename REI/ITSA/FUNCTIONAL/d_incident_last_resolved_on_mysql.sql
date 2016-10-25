@@ -8,5 +8,5 @@ JOIN rei_mdwdb.d_lov_map dlm
 ON f.state_src_key = dlm.src_key
  WHERE 
 case when
- dlm.dimension_wh_code = 'RESOLVED' then 
+ dlm.dimension_wh_code in( 'RESOLVED','CLOSED') then 
  convert_tz(SRC.u_last_resolution_date,'GMT','America/Los_Angeles') else null end<> TRGT.last_resolved_on)x
