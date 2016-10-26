@@ -5,3 +5,4 @@ LEFT JOIN bhn_mdwdb.d_incident TRGT
 ON (SRC.sys_id =TRGT.row_id  
 AND SRC.sourceinstance= TRGT.source_id  )
 WHERE COALESCE( u.u_product_description,'')<> COALESCE(TRGT.upc_ean_c,'')	
+

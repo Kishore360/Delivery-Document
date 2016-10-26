@@ -5,3 +5,6 @@
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
  WHERE COALESCE( SRC.u_reference_no,'')<> COALESCE(TRGT.reference_no_c,'')
+
+ 
+ 

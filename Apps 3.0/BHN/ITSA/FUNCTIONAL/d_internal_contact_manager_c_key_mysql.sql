@@ -5,4 +5,5 @@ join bhn_mdwdb.d_internal_contact a
 on b.manager = right(a.row_id,32)
 join bhn_mdwdb.d_internal_contact c
 on b.sys_id =right(c.row_id,32) and c.source_id=b.sourceinstance
-where a.row_key <> c.manager_c_key
+where coalesce(a.row_key,case when manager is null then 0 else -1 end)  <> c.manager_c_key
+

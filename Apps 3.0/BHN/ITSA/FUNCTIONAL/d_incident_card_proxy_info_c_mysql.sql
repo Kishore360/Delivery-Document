@@ -6,3 +6,5 @@
  AND SRC.sourceinstance= TRGT.source_id  )
  WHERE COALESCE( SRC.u_card_proxy_info,'')<> COALESCE(TRGT.card_proxy_info_c,'')
  
+ 
+ 

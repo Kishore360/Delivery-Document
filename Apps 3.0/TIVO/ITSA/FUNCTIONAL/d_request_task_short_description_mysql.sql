@@ -6,5 +6,5 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  LEFT JOIN tivo_mdwdb.d_request_task TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
- WHERE char_length(SRC.short_description)<=255 and SRC.short_description<>TRGT.short_description
+ WHERE char_length(SRC.short_description)<=255 AND  replace(convert(SRC.short_description using ASCII),'?',' ')   and SRC.short_description<>TRGT.short_description
  

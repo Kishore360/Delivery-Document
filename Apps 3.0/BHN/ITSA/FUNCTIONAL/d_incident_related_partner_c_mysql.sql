@@ -9,3 +9,6 @@ AND SRC.sourceinstance= LKP.sourceinstance )
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
  WHERE  LKP.u_name <> related_partner_c
+ 
+ 
+ 
