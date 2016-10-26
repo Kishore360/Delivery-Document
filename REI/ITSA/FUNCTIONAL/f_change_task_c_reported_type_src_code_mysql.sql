@@ -3,4 +3,4 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE 
  JOIN rei_mdwdb.f_change_task_c TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
- WHERE SRC.contact_type= TRGT.reported_type_src_code
+ WHERE SRC.contact_type<>TRGT.reported_type_src_code

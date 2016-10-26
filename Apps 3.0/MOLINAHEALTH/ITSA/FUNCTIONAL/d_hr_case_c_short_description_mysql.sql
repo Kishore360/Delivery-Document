@@ -1,12 +1,17 @@
- SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
- CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for d_incident.short_description' ELSE 'SUCCESS' END as Message
- FROM (
- select case when COALESCE( char_length(replace(SRC.short_description,' ','')),'')>255 then '' else
- COALESCE( char_length(replace(SRC.short_description,' ','')),'') end as short_description_src,TRGT.short_description TRGT_short_description from 
- molinahealth_mdsdb.u_hr_case_final SRC 
- LEFT JOIN molinahealth_mdwdb.d_hr_case_c TRGT 
- ON (SRC.sys_id =TRGT.row_id  
- AND SRC.sourceinstance= TRGT.source_id  ))a
- WHERE short_description_src<> COALESCE(char_length(replace(TRGT_short_description,' ','')),'')
- 
- 
+select 
+case 
+when sum(failures_cnt) > 0 and length(group_concat(distinct failures)) >= 1024 then concat('Failed. Data does not match for ',sum(failures_cnt),' records. Few sys ids are : ',substring_index(group_concat(distinct failures),',',-31))
+
+when sum(failures_cnt) > 0 and length(group_concat(distinct failures)) < 1024
+then concat('Failed. Data does not match for ',sum(failures_cnt),' records. Sys Ids : ',substring_index(group_concat(distinct failures),',',-sum(failures_cnt)))
+
+else 'Success. All warehouse records are matching with source.' end Result
+from 
+(select 
+
+case when COALESCE(replace(src.short_description,'|','[@]'),'UNSPECIFIED') <> COALESCE(trgt.short_description,'UNSPECIFIED') then src.sys_id else '' end as failures,
+
+case when COALESCE(replace(src.short_description,'|','[@]'),'UNSPECIFIED') <> COALESCE(trgt.short_description,'UNSPECIFIED') then 1 else 0 end as failures_cnt
+
+from molinahealth_mdsdb.u_hr_case_final src
+left join molinahealth_mdwdb.d_hr_case_c trgt on trgt.row_id = src.sys_id and trgt.source_id = src.sourceinstance) fnl ;

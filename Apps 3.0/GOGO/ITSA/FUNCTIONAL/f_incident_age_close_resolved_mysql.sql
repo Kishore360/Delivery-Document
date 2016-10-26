@@ -10,14 +10,7 @@ select count(1) as cnt FROM (select * from gogo_mdsdb.incident_final where opene
  AND SRC.sourceinstance= f.source_id  )
 JOIN gogo_mdwdb.d_lov_map br ON f.state_src_key = br.src_key
 AND br.dimension_wh_code IN ('RESOLVED','CLOSED')
-<<<<<<< HEAD
 JOIN gogo_mdwdb.d_incident a ON a.row_key = f.incident_key
 AND f.source_id = a.source_id
-=======
-
->>>>>>> 564debcc25aa13a30462bda479fd42ec75ac9bec
 WHERE
-timestampdiff(DAY, SRC.opened_at, coalesce(SRC.u_resolved, SRC.closed_at)) <> f.age
-  )a
-  
-  
+timestampdiff(DAY, SRC.opened_at, coalesce(SRC.u_resolved, SRC.closed_at)) <> f.age)a
