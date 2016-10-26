@@ -3,5 +3,5 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE 
  LEFT JOIN rei_mdwdb.d_change_task_c TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
- WHERE COALESCE(CONVERT_TZ(SRC.opened_at,'GMT','America/Los_Angeles'))  = COALESCE(TRGT.opened_on ,'')
+ WHERE COALESCE(CONVERT_TZ(SRC.opened_at,'GMT','America/Los_Angeles'))  <> COALESCE(TRGT.opened_on ,'')
 
