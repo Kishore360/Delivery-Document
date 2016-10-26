@@ -14,11 +14,10 @@ AND f.source_id = a.source_id
 join
 rei_mdwdb.d_o_data_freshness df ON f.source_id = df.source_id
 WHERE
-if(timestampdiff(second, CONVERT_TZ(a.opened_on,'America/Los_Angeles','GMT'), 
-CONVERT_TZ(df.lastupdated,'America/Los_Angeles','GMT'))>0,
-timestampdiff(second, CONVERT_TZ(a.opened_on,'America/Los_Angeles','GMT'), 
-CONVERT_TZ(df.lastupdated,'America/Los_Angeles','GMT')),0)
+if(timestampdiff(second, CONVERT_TZ(a.opened_on,'GMT','America/Los_Angeles'), 
+CONVERT_TZ(df.lastupdated,'GMT','America/Los_Angeles'))>0,
+timestampdiff(second, CONVERT_TZ(a.opened_on,'GMT','America/Los_Angeles'), 
+CONVERT_TZ(df.lastupdated,'GMT','America/Los_Angeles')),0)
 <> f.age
   )a
-  
   

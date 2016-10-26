@@ -10,4 +10,4 @@ AND TGT.source_id = SRC.sourceinstance
 JOIN rei_mdwdb.d_internal_contact lkp
 ON COALESCE(CONCAT('INTERNAL_CONTACT~',SRC.u_business_analyst),'UNSPECIFIED')= lkp.row_id
  and SRC.sourceinstance = lkp.source_id
-where  COALESCE(lkp.row_key,case when SRC.u_business_analyst is null then 0 else -1 end ) <>TGT.)c
+where  COALESCE(lkp.row_key,case when SRC.u_business_analyst is null then 0 else -1 end ) <>TGT.business_analyst_c_key)c
