@@ -7,6 +7,11 @@ FROM usf_mdsdb.incident_final SRC
 left OUTER join usf_mdsdb.sc_category_final c
 on (SRC.u_csi_category=c.sys_id)
 LEFT JOIN usf_mdwdb.d_lov LKP 
- ON CASE WHEN SRC.opened_at<'2014-08-14 00:00:00'  THEN COALESCE( CONCAT('CATEGORY','~','INCIDENT','~','~','~',UPPER(SRC.u_csi_category)),'UNSPECIFIED')  ELSE COALESCE( CONCAT('CATEGORY','~','INCIDENT','~','~','~',UPPER(c.u_csi_category)),'UNSPECIFIED') END= LKP.src_rowid 
+ ON CASE WHEN SRC.opened_at<'2014-08-14 00:00:00'  THEN 
+COALESCE( CONCAT('CATEGORY','~','INCIDENT','~','~','~',UPPER(SRC.u_csi_category)),'UNSPECIFIED') 
+ ELSE COALESCE( CONCAT('CATEGORY','~','INCIDENT','~','~','~',UPPER(SRC.u_csi_category)),'UNSPECIFIED') END= LKP.src_rowid 
 AND SRC.sourceinstance= LKP.source_id 
- WHERE COALESCE(LKP.row_key,CASE WHEN (CASE WHEN SRC.opened_at<'2014-08-14 00:00:00'  THEN CONCAT('CATEGORY','~','INCIDENT','~','~','~',UPPER(SRC.u_csi_category))  ELSE CONCAT('CATEGORY','~','INCIDENT','~','~','~',UPPER(c.u_csi_category)) end ) IS NULL THEN 0 else -1 end)<>(TRGT.category_src_key) 
+ WHERE COALESCE(LKP.row_key,CASE WHEN (CASE WHEN SRC.opened_at<'2014-08-14 00:00:00'  
+THEN CONCAT('CATEGORY','~','INCIDENT','~','~','~',UPPER(SRC.u_csi_category)) 
+ ELSE CONCAT('CATEGORY','~','INCIDENT','~','~','~',UPPER(SRC.u_csi_category)) end ) 
+IS NULL THEN 0 else -1 end)<>(TRGT.category_src_key) 
