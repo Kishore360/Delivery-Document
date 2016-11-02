@@ -10,7 +10,8 @@ left join pgi_mdsdb.u_external_incident_final  c
 on  a.u_incident=c.sys_id
 left join pgi_mdwdb.d_incident d
 on coalesce(c.u_parent_ticket,'UNSPECIFIED')= d.row_id
-where  d.row_key<>b.parent_external_incident_c_key )c
+where  d.row_key<>b.parent_external_incident_c_key 
+and d.external_flag='Y')c
 
 
 

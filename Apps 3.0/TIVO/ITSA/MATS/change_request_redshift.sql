@@ -98,9 +98,9 @@ join        ldb.d_internal_contact  a13
  join        ldb.d_internal_contact_mdm    a120
   on         (a13.row_current_key = a120.row_current_key)
 union
-select 'd_task_impact' as Table_name, count(a11.row_key) Row_count
+select 'd_change_request_impact' as Table_name, count(a11.row_key) Row_count
 from      ldb.f_change_request  a11	
-join        ldb.d_task_impact          a121
+join        ldb.d_change_request_impact          a121
   on         (a11.impact_src_key = a121.row_key)
 union
 select 'd_location' as Table_name, count(a11.row_key) Row_count
@@ -108,19 +108,19 @@ from      ldb.f_change_request  a11
 join        ldb.d_location   a122
   on         (a11.location_key = a122.row_key)
 union
-select 'd_task_priority' as Table_name, count(a11.row_key) Row_count
+select 'd_change_request_priority' as Table_name, count(a11.row_key) Row_count
 from      ldb.f_change_request  a11	
-join        ldb.d_task_priority         a123
+join        ldb.d_change_request_priority         a123
   on         (a11.priority_src_key = a123.row_key)
 union
-select 'd_task_contacttype' as Table_name, count(a11.row_key) Row_count
+select 'd_change_request_contacttype' as Table_name, count(a11.row_key) Row_count
 from      ldb.f_change_request  a11	
-join        ldb.d_task_contacttype a124
+join        ldb.d_change_request_reported_type a124
   on         (a11.reported_type_src_key = a124.row_key)
 union
-select 'd_task_urgency' as Table_name, count(a11.row_key) Row_count
+select 'd_change_request_urgency' as Table_name, count(a11.row_key) Row_count
 from      ldb.f_change_request  a11	
-join        ldb.d_task_urgency        a125
+join        ldb.d_change_request_urgency        a125
   on         (a11.urgency_src_key = a125.row_key)
 union
 select 'd_calendar_month' as Table_name, count(a11.row_key) Row_count

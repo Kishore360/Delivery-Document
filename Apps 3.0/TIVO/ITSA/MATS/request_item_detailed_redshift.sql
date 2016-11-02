@@ -73,12 +73,12 @@ from ldb.f_request_item a11
 join ldb.d_internal_contact_requested_for a115 
 on (a11.requested_for_key = a115.row_key) 
 union
-select 'ldb.d_task_approval a116 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_request_item_approval a116 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_request_item a11 
-join ldb.d_task_approval a116 
+join ldb.d_sc_req_item_approval a116 
 on (a11.approval_state_src_key = a116.row_key) 
 union
-select 'ldb.d_internal_contact_task_closed_by a117 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_internal_contact_request_item_closed_by a117 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_request_item a11 
 join ldb.d_internal_contact_task_closed_by a117 
 on (a11.closed_by_key = a117.row_key) 

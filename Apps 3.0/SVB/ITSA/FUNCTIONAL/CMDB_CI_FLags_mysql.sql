@@ -13,5 +13,5 @@ short_description<>short_description_c or
 u_environment<>environment_c or
 case when u_glba=1 then 'Y' else 'N'END <>glba_c_flag or
 case when u_pci=1 then 'Y' else 'N'END <>pci_c_flag or
-case when u_pii then'Y' else 'N'END<>pii_c_flag or
-case when u_sox then'Y' else 'N'END <>sox_c_flag
+case when u_pii=1 then'Y' else 'N'END<>pii_c_flag or
+case when u_sox=1 then'Y' else 'N'END <>sox_c_flag
