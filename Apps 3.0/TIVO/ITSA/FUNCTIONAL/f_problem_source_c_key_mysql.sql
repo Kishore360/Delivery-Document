@@ -8,5 +8,5 @@ left join tivo_mdwdb.f_problem t
 on s.sys_id=t.row_id and s.sourceinstance=t.source_id
 left join tivo_mdwdb.d_lov l
 on concat('SOURCE_C~PROBLEM~~~',u_source)=l.row_id and s.sourceinstance=t.source_id
- WHERE t.source_c_key <> l.row_key
+ WHERE t.source_c_key <> coalesce(l.row_key,case when u_source is null then 0 else -1 end)
 ) temp
