@@ -5,7 +5,7 @@ FROM (
 select count(1) as cnt 
 from pgi_mdsdb.u_problem_report_request_final a
 left join pgi_mdwdb.d_incident c
-on a.u_incident=c.row_id
+on a.u_incident=c.row_id and c.external_flag='Y'
 left JOIN  pgi_mdwdb.f_problem_report_c b
 on  b.ROW_ID = a.SYS_ID and a.sourceinstance=b.source_id
 where  c.row_key<>b.external_incident_c_key )c
