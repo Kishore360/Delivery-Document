@@ -9,6 +9,6 @@ from
 JOIN tesm_mdwdb.d_lov_map br ON f.state_src_key = br.src_key
 AND br.dimension_wh_code = 'OPEN' and br.dimension_class = 'STATE~INCIDENT'
 
-WHERE TIMESTAMPDIFF(DAY,SRC.opened_at,(SELECT CONVERT_TZ(MAX(lastupdated),'GMT','America/Los_Angeles') AS lastupdated FROM tesm_mdwdb.d_o_data_freshness WHERE sourcename like 'ServiceNow%'))<> f.age
+WHERE TIMESTAMPDIFF(SECOND,SRC.opened_at,(SELECT CONVERT_TZ(MAX(lastupdated),'GMT','America/Los_Angeles') AS lastupdated FROM tesm_mdwdb.d_o_data_freshness WHERE sourcename like 'ServiceNow%'))<> f.age
 
  )A
