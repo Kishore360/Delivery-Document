@@ -112,9 +112,9 @@ from      ldb.f_problem   a11
   join        ldb.d_lov_problem_subcategory_c         a122
   on         (a11.sub_category_src_key = a122.row_key)
 union
-select 'd_task_impact' as Table_name, count(a11.row_key) Row_count
+select 'd_problem_impact' as Table_name, count(a11.row_key) Row_count
 from      ldb.f_problem   a11
-  join        ldb.d_task_impact          a123
+  join        ldb.d_problem_impact          a123
   on         (a11.impact_src_key = a123.row_key)
 union
 select 'd_location' as Table_name, count(a11.row_key) Row_count
@@ -122,20 +122,21 @@ from      ldb.f_problem   a11
   join        ldb.d_location   a124
   on         (a11.location_key = a124.row_key)
 union
-select 'd_task_priority' as Table_name, count(a11.row_key) Row_count
+select 'd_problem_priority' as Table_name, count(a11.row_key) Row_count
 from      ldb.f_problem   a11
-  join        ldb.d_task_priority         a125
+  join        ldb.d_problem_priority         a125
   on         (a11.priority_src_key = a125.row_key)
 union
-select 'd_task_contacttype' as Table_name, count(a11.row_key) Row_count
+select 'd_problem_reported_type' as Table_name, count(a11.row_key) Row_count
 from      ldb.f_problem   a11
-  join        ldb.d_task_contacttype a126
+  join        ldb.d_problem_reported_type a126
   on         (a11.reported_type_src_key = a126.row_key)
 union
-select 'd_task_urgency' as Table_name, count(a11.row_key) Row_count
+select 'd_problem_urgency' as Table_name, count(a11.row_key) Row_count
 from      ldb.f_problem   a11
-  join        ldb.d_task_urgency        a127
+  join        ldb.d_problem_urgency        a127
   on         (a11.urgency_src_key = a127.row_key)
+
 union
 select 'd_location_assigned_to' as Table_name, count(a11.row_key) Row_count
 from      ldb.f_problem   a11

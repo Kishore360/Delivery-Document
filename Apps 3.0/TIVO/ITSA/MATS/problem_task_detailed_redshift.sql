@@ -65,9 +65,9 @@ from      ldb.f_problem_task        a11
                 join        ldb.d_lov_problem_task_state_c            a113
                   on         (a11.state_src_key = a113.row_key)
 union
-select 'd_task_contacttype' as Table_Name, count(a11.row_key) Row_Count
+select 'd_problem_task_reported_type' as Table_Name, count(a11.row_key) Row_Count
 from      ldb.f_problem_task        a11				  
-                join        ldb.d_task_contacttype                a114
+                join        ldb.d_problem_task_reported_type                a114
                   on         (a11.reported_type_src_key = a114.row_key)
 union
 select 'd_lov_problem_task_type_c' as Table_Name, count(a11.row_key) Row_Count
