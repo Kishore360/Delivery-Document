@@ -3,4 +3,4 @@ CASE WHEN count(1) >0 THEN 'MDS TO MDW DATA VALIDATION FAILED' ELSE 'SUCCESS' EN
 FROM cardinalhealth_mdsdb.rm_enhancement_final i
 LEFT JOIN cardinalhealth_mdwdb.f_enhancement_rm f ON i.sys_id=f.row_id
                 AND i.sourceinstance=f.source_id
-COALESCE(DATE_FORMAT(CONVERT_TZ(i.due_date,'GMT','America/New_York'),'%Y%m%d'),'UNSPECIFIED')<>f.due_c_key
+where COALESCE(DATE_FORMAT(CONVERT_TZ(i.due_date,'GMT','America/New_York'),'%Y%m%d'),'UNSPECIFIED')<>f.due_c_key

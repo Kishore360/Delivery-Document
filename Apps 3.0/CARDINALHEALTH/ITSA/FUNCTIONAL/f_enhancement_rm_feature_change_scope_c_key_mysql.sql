@@ -1,10 +1,14 @@
-SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
-CASE WHEN count(1) >0 THEN 'MDS TO MDW DATA VALIDATION FAILED' ELSE 'SUCCESS' END as Message
-FROM cardinalhealth_mdsdb.rm_enhancement_final SRC
- LEFT JOIN cardinalhealth_mdwdb.f_enhancement_rm TRGT
- ON (SRC.sys_id =TRGT.row_id 
- AND SRC.sourceinstance= TRGT.source_id  )
-LEFT JOIN cardinalhealth_mdwdb.d_lov LKP
-on (LKP.src_rowid = CONCAT('CHANGE_SCOPE_C~RM_FEATURE~~~',UPPER(SRC.u_change_scope))
-AND SRC.sourceinstance= LKP.source_id )
-WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_change_scope IS NULL THEN 0 else -1 end)<> (TRGT.feature_change_scope_c_key)
+SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
+,CASE WHEN cnt > 0 THEN 'Data did not Match.' 
+ELSE 'Data Matched' END AS Message 
+FROM (
+select Count(1) as cnt
+FROM cardinalhealth_mdsdb.rm_enhancement_final i 
+JOIN cardinalhealth_mdwdb.f_enhancement_rm f 
+ON i.sys_id=f.row_id 	AND i.sourceinstance=f.source_id 
+join
+cardinalhealth_mdsdb.rm_feature_final l ON i.sys_id=l.sys_id 
+and i.sourceinstance=l.sourceinstance
+join cardinalhealth_mdwdb.d_lov d
+on COALESCE(CONCAT('CHANGE_SCOPE_C~RM_FEATURE~~~',UPPER(l.u_change_scope)),'UNSPECIFIED') =d.row_id      --  AND i.sourceinstance=d.source_id 
+where coalesce(d.row_key,case when l.u_change_scope is null then 0 else -1 end)<>f.feature_change_scope_c_key)a

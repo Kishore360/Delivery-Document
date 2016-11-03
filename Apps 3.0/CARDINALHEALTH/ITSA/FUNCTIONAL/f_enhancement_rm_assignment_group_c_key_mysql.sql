@@ -1,12 +1,13 @@
-	SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
-CASE WHEN count(1) >0 THEN 'Failure' ELSE 'Data Matched' END as Message
-from
-cardinalhealth_mdsdb.rm_enhancement_final a
-join cardinalhealth_mdsdb.sys_user_final b
-on b.sys_id=a.opened_by and a.sourceinstance=b.sourceinstance
-left join cardinalhealth_mdwdb.f_enhancement_rm c
-on a.sys_id=c.row_id and a.sourceinstance=c.source_id
-left join cardinalhealth_mdwdb.d_internal_organization d
-on d.row_id=case when coalesce(a.assignment_group,'UNSPECIFIED')='UNSPECIFIED' then 'UNSPECIFIED' else 
-concat('GROUP~',a.assignment_group)end
-and d.source_id=b.sourceinstance where d.row_key<>c.assignment_group_c_key;
+SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
+,CASE WHEN cnt > 0 THEN 'Data did not Match.' 
+ELSE 'Data Matched' END AS Message 
+FROM (
+select Count(1) as cnt
+FROM cardinalhealth_mdsdb.rm_enhancement_final i 
+JOIN cardinalhealth_mdwdb.f_enhancement_rm f ON i.sys_id=f.row_id 	AND i.sourceinstance=f.source_id 
+join cardinalhealth_mdwdb.d_internal_organization d
+ON CASE
+		   WHEN i.assignment_group IS NULL THEN 'UNSPECIFIED'
+		   ELSE CONCAT('GROUP~',i.assignment_group)
+		END=d.row_id  	 AND i.sourceinstance=d.source_id 
+where coalesce(d.row_key,case when i.assignment_group is null then 0 else -1 end)<>f.assignment_group_c_key)a

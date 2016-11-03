@@ -1,12 +1,11 @@
-
-SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
- CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for f_enhancement_rm.status_rm_src_c_key' ELSE 'SUCCESS' END as Message
- FROM cardinalhealth_mdsdb.rm_enhancement_final SRC 
- LEFT JOIN cardinalhealth_mdwdb.f_enhancement_rm TRGT 
- ON (SRC.sys_id =TRGT.row_id  
- AND SRC.sourceinstance= TRGT.source_id)
-LEFT JOIN cardinalhealth_mdwdb.d_lov LKP
- ON (CONCAT('STATUS_C~TASK~~~',UPPER(SRC.u_status))= LKP.src_rowid 
-AND SRC.sourceinstance= LKP.source_id )
- WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_status IS NULL THEN 0 else -1 end)<>TRGT.status_rm_src_c_key
- 
+SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
+,CASE WHEN cnt > 0 THEN 'Data did not Match.' 
+ELSE 'Data Matched' END AS Message 
+FROM (
+select Count(1) as cnt
+FROM cardinalhealth_mdsdb.rm_enhancement_final i 
+JOIN cardinalhealth_mdwdb.f_enhancement_rm f 
+ON i.sys_id=f.row_id 	AND i.sourceinstance=f.source_id 
+join cardinalhealth_mdwdb.d_lov d
+on COALESCE(CONCAT('STATUS_C~TASK~~~',UPPER(i.u_status)),'UNSPECIFIED') =d.row_id      --  AND i.sourceinstance=d.source_id 
+where coalesce(d.row_key,case when i.u_status is null then 0 else -1 end)<>f.status_rm_src_c_key)a
