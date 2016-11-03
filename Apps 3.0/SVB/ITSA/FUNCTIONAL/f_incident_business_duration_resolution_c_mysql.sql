@@ -26,5 +26,5 @@ LEFT JOIN (
 				   GROUP BY f_sla.incident_key) latest ON latest.incident_key=f_sla.incident_key
 				AND latest.due_on_c=f_sla.due_on_c
 			GROUP BY f_sla.incident_key )tmp ON f_inc.incident_key  = tmp.incident_key  
-where  f_inc.business_duration_resolution_c=tmp.business_duration,
+where  f_inc.business_duration_resolution_c<>tmp.business_duration
 

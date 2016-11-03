@@ -3,7 +3,7 @@
    FROM tivo_mdsdb.change_task_final i
  join tivo_mdwdb.d_calendar_date d on 
    COALESCE(DATE_FORMAT(CONVERT_TZ(i.opened_at,'GMT','America/Los_Angeles'),'%Y%m%d'),'UNSPECIFIED') 
-   =f.row_id
+   =d.row_id
  join tivo_mdwdb.f_change_task_c f on sys_id=f.row_id and sourceinstance=f.source_id
  where opened_on_key<>coalesce(d.row_key,case when opened_at is null then 0 else -1 end)
  

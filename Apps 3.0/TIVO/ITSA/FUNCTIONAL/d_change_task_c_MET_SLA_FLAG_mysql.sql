@@ -5,7 +5,7 @@ FROM (
 select count(1) as cnt from 
  (select 
 
-		case when i.MADE_SLA= 1 then 'Y' else 'N' end  AS MET_SLA_FLAG,trgt.MET_SLA_FLAG trgt_MET_SLA_FLAG,
+		case when i.MADE_SLA= 1 then 'Y' else 'N' end  AS MET_SLA_FLAG,trgt.MET_SLA_FLAG trgt_MET_SLA_FLAG
 		
 FROM tivo_mdsdb.change_task_final i
 join tivo_mdwdb.d_change_task_c trgt on sys_id=row_id and sourceinstance=source_id

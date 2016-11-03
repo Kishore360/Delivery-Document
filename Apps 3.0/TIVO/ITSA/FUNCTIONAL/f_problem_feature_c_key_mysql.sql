@@ -4,8 +4,8 @@ ELSE 'Data Matched' END AS Message
 FROM (
 SELECT count(1) as cnt 
 FROM 
- (select src.sys_id,src.sourceinstance ,src.u_features
-  from  (select substring_index( substring_index(u_features,',',x),',','-1') as u_features,
+ (select src.number,src.sys_id,src.sourceinstance ,src.u_features
+  from  (select s.number,substring_index( substring_index(u_features,',',x),',','-1') as u_features,
    length(u_features)-length(replace(u_features,',',''))+1 as count ,
    sys_id,sourceinstance
    from tivo_mdsdb.problem_final s
@@ -22,4 +22,4 @@ left join tivo_mdwdb.f_cmdb_ci_features_c t
 on CONCAT(srca.sys_id,'~',srca.u_features)=t.row_id  and srca.sourceinstance=t.source_id
 left join tivo_mdwdb.d_lov lkp2
 on concat('FEATURES_C~PROBLEM~~~',srca.u_features)= lkp2.row_id and srca.sourceinstance = lkp2.source_id
-where lkp2.row_key <> t.problem_features_c_key or s.number <> problem_number) temp
+where lkp2.row_key <> t.problem_features_c_key or srca.number <> problem_number) temp

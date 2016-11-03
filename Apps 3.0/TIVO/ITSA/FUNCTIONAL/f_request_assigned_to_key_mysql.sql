@@ -11,5 +11,5 @@ select sys_id,assigned_to,sourceinstance from tivo_mdsdb.sc_req_item_final
  LEFT JOIN tivo_mdwdb.d_internal_contact LKP 
  ON ( concat('INTERNAL_CONTACT~',s.assigned_to)= LKP.row_id 
 AND s.sourceinstance= LKP.source_id )
- WHERE COALESCE(LKP.row_key,CASE WHEN s.assigned_to IS NULL THEN 0 else -1 end)=
+ WHERE COALESCE(LKP.row_key,CASE WHEN s.assigned_to IS NULL THEN 0 else -1 end)<>
  (TRGT.assigned_to_key)

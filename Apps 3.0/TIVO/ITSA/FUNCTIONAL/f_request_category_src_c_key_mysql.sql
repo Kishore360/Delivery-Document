@@ -21,4 +21,4 @@ on s.sys_id=t.row_id and s.sourceinstance=t.source_id
 join tivo_mdwdb.d_request c on c.row_key=t.request_key
 left join tivo_mdwdb.d_lov l
 on COALESCE(CONCAT('CATEGORY_C~TECH_OPS_REQUEST~~~',s.category),'UNSPECIFIED')=l.row_id and s.sourceinstance=l.source_id
-WHERE coalesce(l.row_key,case when s.category is null then 0 else -1 end) = t.category_src_c_key)temp
+WHERE coalesce(l.row_key,case when s.category is null then 0 else -1 end) <> t.category_src_c_key)temp
