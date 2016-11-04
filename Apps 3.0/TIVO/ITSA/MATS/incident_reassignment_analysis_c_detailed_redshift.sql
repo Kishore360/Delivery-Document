@@ -43,12 +43,12 @@ on (a11.parent_type_src_c_key = a19.row_key)
 union
 select 'ldb.d_task_priority a110 ' as Table_name, count(1) Row_Count
 from ldb.f_incident_reassignment_analysis_c a11 
-join ldb.d_task_priority a110 
+join ldb.d_incident_priority a110 
 on (a11.priority_src_key = a110.row_key) 
 union
-select 'ldb.d_task_contacttype a111 ' as Table_name, count(1) Row_Count
+select 'ldb.d_incident_reported_type a111 ' as Table_name, count(1) Row_Count
 from ldb.f_incident_reassignment_analysis_c a11 
-join ldb.d_task_contacttype a111 
+join ldb.d_incident_reported_type a111 
 on (a11.reported_type_src_key = a111.row_key) 
 union
 select 'ldb.d_calendar_week a112 ' as Table_name, count(1) Row_Count
