@@ -4,4 +4,4 @@ from
 wow_mdsdb.u_incident_outage_final a
 left join wow_mdwdb.d_incident b
 on a.sys_id=b.row_id and a.sourceinstance=b.source_id
-where CONVERT_TZ(a.u_end_time,'GMT','US/Mountain')<>b.end_time_c;
+where CONVERT_TZ(a.u_end_time,'GMT','US/Central')<>b.end_time_c;
