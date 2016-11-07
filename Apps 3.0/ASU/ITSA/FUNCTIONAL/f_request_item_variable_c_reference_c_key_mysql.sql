@@ -32,3 +32,6 @@ t.element='type' and t.label!='Reference'
 inner join (SELECT substring(row_id,1,32) as r1, SUBSTRING(row_id,34,32) as r2, reference_c_key  FROM asu_mdwdb.f_request_item_variable_c) a 
 on  a.r1= b.sys_id and a.r2=d.request_item
  where f.row_key <>a.reference_c_key ;
+ 
+ 
+ 

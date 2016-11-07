@@ -11,3 +11,4 @@ left join asu_mdwdb.d_internal_contact l
 on concat('INTERNAL_CONTACT~',(s.u_requester))=l.row_id and s.sourceinstance=l.source_id
 WHERE  l.row_key <> t.req_task_requester_c_key
 ) temp
+
