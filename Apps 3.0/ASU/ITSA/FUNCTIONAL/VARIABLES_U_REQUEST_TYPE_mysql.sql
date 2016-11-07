@@ -22,12 +22,12 @@ CASE WHEN lvl.variable_type!='Reference' AND c.label='Select Box' then COALESCE 
 			
 				
 from
-(SELECT qa.sys_id,case when qa.cdctype='D' then 'Y' else 'N' end as soft_deleted_flag, b.request_item from asu_mdsdb.sc_item_option_delta qa 
+(SELECT qa.sys_id,case when qa.cdctype='D' then 'Y' else 'N' end as soft_deleted_flag, b.request_item from asu_mdsdb.sc_item_option_final qa 
 inner join  asu_mdsdb.sc_item_option_mtom_final b
 on qa.sys_id=b.sc_item_option and qa.sourceinstance = b.sourceinstance
 UNION
 SELECT qa.sys_id, 'N' as soft_deleted_flag, b.request_item from asu_mdsdb.sc_item_option_final qa 
-inner join  asu_mdsdb.sc_item_option_mtom_delta b
+inner join  asu_mdsdb.sc_item_option_mtom_final b
 on qa.sys_id=b.sc_item_option and qa.sourceinstance = b.sourceinstance
 )X
 join asu_mdsdb.sc_item_option_final qa
@@ -47,9 +47,8 @@ on c.label = lvd.variable_type
 where lvl.table_name='request_item') dd ) fs 
 join asu_mdwdb.f_request_item_variable_c f
 on fs.fs_row_id=f.row_id 
-join asu_workdb.fs_request_item_variable_c fs2
-on fs2.row_id=f.row_id and fs2.source_id=f.source_id
 join asu_mdwdb.d_variable_lov_c lkp
 on fs2.reference_c_id=lkp.row_id and fs2.source_id=lkp.source_id
 where lkp.row_key<>f.reference_c_key 
 )A ;
+
