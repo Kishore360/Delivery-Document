@@ -9,9 +9,9 @@ else 'Success. All warehouse records are matching with source.' end Result
 from 
 (select 
 
-case when CONVERT_TZ(src.start_date,'UTC','America/Los_Angeles') <> trgt.employee_start_date then src.record_id else '' end as failures,
+case when src.start_date <> trgt.employee_start_date then src.record_id else '' end as failures,
 
-case when CONVERT_TZ(src.start_date,'UTC','America/Los_Angeles') <> trgt.employee_start_date then 1 else 0 end as failures_cnt
+case when src.start_date <> trgt.employee_start_date then 1 else 0 end as failures_cnt
 
 from molinahealth_mdsdb.u_hr_case_ext_final src
 left join molinahealth_mdwdb.d_hr_case_c trgt on trgt.row_id = src.record_id and trgt.source_id = src.sourceinstance) fnl ;
