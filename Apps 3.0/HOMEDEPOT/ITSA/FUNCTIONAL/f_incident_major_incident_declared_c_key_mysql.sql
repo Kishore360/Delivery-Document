@@ -1,9 +1,11 @@
-SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
- CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for f_problem.opened_by_department_key' ELSE 'SUCCESS' END as Message
- FROM homedepot_mdsdb.incident_final SRC 
- JOIN homedepot_mdwdb.f_incident TRGT 
- ON (SRC.sys_id =TRGT.row_id  
- AND SRC.sourceinstance= TRGT.source_id  )
-join homedepot_mdwdb.d_calendar_date LKP
-on COALESCE(DATE_FORMAT(CONVERT_TZ(SRC.u_major_incident_declared,'GMT','America/New_York'),'%Y%m%d'),'UNSPECIFIED') = LKP.row_id
-WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_major_incident_declared IS NULL THEN 0 else -1 end)<> TRGT.major_incident_declared_c_key
+SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
+,CASE WHEN cnt > 0 THEN 'Data did not Match.' 
+ELSE 'Data Matched' END AS Message 
+FROM (
+select count(1) as cnt  
+from homedepot_mdsdb.incident_final a
+ left  JOIN   homedepot_mdwdb.f_incident b
+on  b.ROW_ID=a.SYS_ID and a.sourceinstance=b.source_id
+LEFT JOIN homedepot_mdwdb.d_calendar_date LKP
+on LKP.row_id = DATE_FORMAT(CONVERT_TZ(a.u_major_incident_declared,'GMT','America/New_York'),'%Y%m%d')
+WHERE COALESCE(LKP.row_key,CASE WHEN a.u_major_incident_declared IS NULL THEN 0 else -1 end)<> (b.major_incident_declared_c_key))a;

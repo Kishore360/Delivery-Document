@@ -4,7 +4,7 @@ ELSE 'Data Matched' END AS Message
 FROM (
 select count(1) cnt  from homedepot_mdsdb.incident_final b
 left join homedepot_mdwdb.d_internal_contact a
-on a.row_id=concat('INTERNAL_CONTACT~',b.u_current_incident_manager) and b.sourceinstance=a.source_id
+on a.row_id=concat('INTERNAL_CONTACT~',b.opened_by) and b.sourceinstance=a.source_id
 left join  homedepot_mdwdb.f_incident c
 on  c.row_id=b.sys_id  and b.sourceinstance=c.source_id
-WHERE COALESCE(a.row_key,CASE WHEN b.u_current_incident_manager IS NULL THEN 0 else -1 end)<>c.current_incident_manager_c_key) temp;
+WHERE COALESCE(a.row_key,CASE WHEN b.opened_by IS NULL THEN 0 else -1 end)<>c.opened_by_c_key) temp;

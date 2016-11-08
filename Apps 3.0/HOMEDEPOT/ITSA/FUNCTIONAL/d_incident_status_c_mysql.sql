@@ -6,4 +6,4 @@ select count(1) as cnt
 from homedepot_mdsdb.incident_final a
  left  JOIN   homedepot_mdwdb.d_incident b
 on  b.ROW_ID=a.SYS_ID and a.sourceinstance=b.source_id
- where CASE WHEN a.u_war_room = 1 THEN 'Y' ELSE 'N' END <> b.war_room_c_flag)temp;
+where a.u_status <> b.status_c) temp;
