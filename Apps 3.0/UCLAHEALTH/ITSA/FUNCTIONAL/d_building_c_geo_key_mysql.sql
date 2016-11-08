@@ -13,7 +13,7 @@ LEFT OUTER JOIN uclahealth_mdsdb.sys_user_final B ON c.contact = B.sys_id AND c.
 join uclahealth_mdwdb.d_geography d on Driver.sys_id=d.row_id and c.sourceinstance=d.source_id
 join uclahealth_mdwdb.d_building_c f on  c.sys_id=d.row_id and c.sourceinstance=d.source_id
 where 
-coalesce(d.row_key,case when Driver.sys_id is null then 0 else -1 end )= f.geo_key 
+coalesce(d.row_key,case when Driver.sys_id is null then 0 else -1 end )<>f.geo_key 
  )a
  
  

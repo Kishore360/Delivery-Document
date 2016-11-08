@@ -4,31 +4,29 @@ select
 fs_row_id,
 f.row_id
 fs_reference_c_id,
-lkp.row_key,
+lov.row_key,
 f.reference_c_key 
 from
 (
 select 
 concat(row_id,reference_c_id) fs_row_id,
 
-dd.reference_c_id fs_reference_c_id
+dd.reference_c_id fs_reference_c_id,item_option_new,source_id,value
 
 from
 (
-select concat(X.sys_id,'~',X.request_item) as row_id,
+select qa.value,item_option_new,concat(X.sys_id,'~',X.request_item) as row_id,
 qa.sourceinstance as source_id,
 CASE WHEN lvl.variable_type!='Reference' AND c.label='Select Box' then COALESCE (qc.sys_id,'UNSPECIFIED')
-                when lvl.variable_type='Reference' AND q.reference not in ('sys_user','cmn_location','cmn_department') then coalesce(qa.value,'UNSPECIFIED') ELSE 'UNSPECIFIED' end  as reference_c_id
+                when lvl.variable_type='Reference' AND q.reference not in ('sys_user','cmn_location','cmn_department') 
+then coalesce(qa.value,'UNSPECIFIED') ELSE 'UNSPECIFIED' end  as reference_c_id
 			
 				
 from
-(SELECT qa.sys_id,case when qa.cdctype='D' then 'Y' else 'N' end as soft_deleted_flag, b.request_item from asu_mdsdb.sc_item_option_delta qa 
+(SELECT qa.sys_id, b.request_item from asu_mdsdb.sc_item_option_final qa 
 inner join  asu_mdsdb.sc_item_option_mtom_final b
 on qa.sys_id=b.sc_item_option and qa.sourceinstance = b.sourceinstance
-UNION
-SELECT qa.sys_id, 'N' as soft_deleted_flag, b.request_item from asu_mdsdb.sc_item_option_final qa 
-inner join  asu_mdsdb.sc_item_option_mtom_delta b
-on qa.sys_id=b.sc_item_option and qa.sourceinstance = b.sourceinstance
+
 )X
 join asu_mdsdb.sc_item_option_final qa
 on X.sys_id=qa.sys_id
@@ -47,9 +45,11 @@ on c.label = lvd.variable_type
 where lvl.table_name='request_item') dd ) fs 
 join asu_mdwdb.f_request_item_variable_c f
 on fs.fs_row_id=f.row_id 
-join asu_workdb.fs_request_item_variable_c fs2
-on fs2.row_id=f.row_id and fs2.source_id=f.source_id
-join asu_mdwdb.d_variable_lov_c lkp
-on fs2.reference_c_id=lkp.row_id and fs2.source_id=lkp.source_id
-where lkp.row_key<>f.reference_c_key 
+inner join asu_mdwdb.d_variable_c g on fs.item_option_new=g.row_id and g.source_id=fs.source_id
+
+inner join asu_mdwdb.d_variable_lov_c lov on fs.fs_reference_c_id=g.row_id and lov.value=fs.value
+-- join asu_mdwdb.d_variable_lov_c lkp
+-- on fs2.reference_c_id=lkp.row_id and fs2.source_id=lkp.source_id
+where lov.row_key<>f.reference_c_key 
 )A ;
+
