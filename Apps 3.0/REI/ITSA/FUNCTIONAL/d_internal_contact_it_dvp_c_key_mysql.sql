@@ -7,8 +7,8 @@ rei_mdwdb.d_internal_contact finc
 join
 rei_mdsdb.sys_user_final inc
 ON finc.row_id =  CONCAT('INTERNAL_CONTACT~',inc.sys_id) and finc.source_id=inc.sourceinstance
-JOIN pgi_mdwdb.d_internal_contact lkp 
+JOIN rei_mdwdb.d_internal_contact lkp 
 ON  COALESCE(CONCAT('INTERNAL_CONTACT~',inc.manager),'UNSPECIFIED')= lkp.row_id
- -- and finc.source_id=lkp.source_id
+ and finc.source_id=lkp.source_id
 where coalesce(lkp.row_key,case when inc.manager  is null then 0 else -1 end)<> finc.it_dvp_c_key)a
 

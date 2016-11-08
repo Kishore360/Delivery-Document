@@ -6,4 +6,4 @@ from rei_mdwdb.d_project a  join
 rei_mdsdb.pm_project_final c on a.row_id=c.sys_id and a.source_id=c.sourceinstance
  join rei_mdwdb.d_lov b
  on coalesce(c.priority,'UNSPECIFIED') =b.row_id
-and a.priority_src_c_key <>coalesce(b.row_key,case when c.priority is null then 0 else -1 end) )c
+and a.project_priority_src_key <>coalesce(b.row_key,case when c.priority is null then 0 else -1 end) )c

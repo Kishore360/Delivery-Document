@@ -4,6 +4,6 @@ FROM( Select count(cnt) as cnt
 from( 
 select row_id,source_id,count(1) as cnt 
 from  
-<<tenant>>_mdwdb.d_natural_account  
+rei_mdwdb.d_natural_account  
 group by 1,2 
 having count(1)>1)c )a 

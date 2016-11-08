@@ -9,4 +9,4 @@ on TGT.row_id = SRC.sys_id
 AND TGT.source_id = SRC.sourceinstance
 LEFT JOIN rei_mdwdb.d_portfolio_c lkp
 ON COALESCE(pm_portfolio, 'UNSPECIFIED')=lkp.row_id
-where  TGT.portfolio_c_key <> COALESCE(lkp.row_key,case when SRC.pm_portfolio is null then 0 else -1 end ) )c
+where  TGT.portfolio_key <> COALESCE(lkp.row_key,case when SRC.pm_portfolio is null then 0 else -1 end ) )c
