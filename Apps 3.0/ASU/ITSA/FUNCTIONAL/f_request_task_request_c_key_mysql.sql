@@ -11,5 +11,5 @@ LEFT JOIN asu_mdsdb.sc_req_item_final l
 ON s.request_item=l.sys_id and s.sourceinstance=l.sourceinstance  
 left join asu_mdwdb.d_request l1
 on COALESCE(l.request,'UNSPECIFIED')=l1.row_id and l.sourceinstance=l1.source_id
-WHERE COALESCE(l1.row_key,CASE WHEN l.request IS NULL THEN 0 else '-1' end)<> COALESCE(t.request_c_key,'') 
+WHERE COALESCE(l1.row_key,CASE WHEN l.request IS NULL THEN 0 else -1 end)<> (t.request_c_key) 
 ) temp

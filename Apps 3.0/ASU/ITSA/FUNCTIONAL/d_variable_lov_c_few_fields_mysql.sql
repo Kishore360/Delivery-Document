@@ -8,7 +8,7 @@ and qc.sourceinstance=b.sourceinstance
 inner join asu_workdb.lsm_ls_variable_list lvl 
 on b.name=lvl.variable_name 
 and b.sys_id=lvl.row_id
-left join asu_mdsdb.d_variable_lov_c d on qc.sys_id=d.row_id and qc.sourceinstance=d.row_id
-where qc.value <> value or  qc.text <> text or qc.question <> variable_id
+left join asu_mdwdb.d_variable_lov_c d on qc.sys_id=d.row_id and qc.sourceinstance=d.row_id
+where qc.value <> d.value or  qc.text <> d.text or qc.question <> d.variable_id
 
 

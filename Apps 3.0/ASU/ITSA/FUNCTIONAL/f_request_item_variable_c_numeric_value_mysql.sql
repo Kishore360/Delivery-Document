@@ -2,7 +2,7 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for Variables_u_room' ELSE 'SUCCESS' END as Message from   (
 select 
 -- from (select count(1)
-a.DECIMAL_value aa ,
+a.numeric_value aa ,
  Case when lvd.data_type ='DECIMAL' THEN left(b.value,255)   else null end as bb 
  from 
 (select type,sourceinstance,sys_id,name  from asu_mdsdb.item_option_new_final  where name='u_room_number'
@@ -24,7 +24,7 @@ on d.request_item=c.row_id and c.source_id=d.sourceinstance
 join asu_workdb.lsm_ls_variable_list z on e.sys_id=z.row_id and z.table_name='request_item' and z.variable_type!='Reference'
 join asu_mdsdb.sys_choice_final t  on t.name='question' and e.type=t.value
 join asu_workdb.lsm_ls_variable_datatype lvd on t.label = lvd.variable_type 
-join (SELECT substring(row_id,1,32) as r1, SUBSTRING(row_id,34,32) as r2, DECIMAL_value  FROM asu_mdwdb.f_request_item_variable_c) a 
+join (SELECT substring(row_id,1,32) as r1, SUBSTRING(row_id,34,32) as r2, numeric_value  FROM  asu_mdwdb.f_request_item_variable_c) a 
 on  a.r1= b.sys_id and a.r2=d.request_item)v
 where aa<>bb
 
