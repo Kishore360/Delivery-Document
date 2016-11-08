@@ -11,7 +11,7 @@ mac_address<>mac_address_c or
 serial_number<>serial_number_c or
 short_description<>short_description_c or
 u_environment<>environment_c or
-case when u_glba=1 then 'Y' else 'N'END <>glba_c_flag or
-case when u_pci=1 then 'Y' else 'N'END <>pci_c_flag or
-case when u_pii=1 then'Y' else 'N'END<>pii_c_flag or
-case when u_sox=1 then'Y' else 'N'END <>sox_c_flag
+case when u_glba=0 then 'N' else 'Y'END <>glba_c_flag or
+case when u_pci=0 then 'N' else 'Y'END <>pci_c_flag or
+case when u_pii=0 then'N' else 'Y'END<>pii_c_flag or
+case when u_sox=0 then'N' else 'Y'END <>sox_c_flag
