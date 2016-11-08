@@ -1,16 +1,16 @@
-  SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
- CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for d_incident.first_call_resolution_flag' ELSE 'SUCCESS' END as Message
- FROM rei_mdsdb.incident_final SRC 
-  JOIN rei_mdwdb.d_incident TRGT 
- ON (SRC.sys_id =TRGT.row_id  
- AND SRC.sourceinstance= TRGT.source_id  
- and  SRC.opened_by=SRC.u_original_resolver AND SRC.u_original_resolver =SRC.u_last_resolver AND
- DATE(SRC.opened_at) = DATE(u_last_resolution_date) AND DATE(SRC.opened_at) = DATE(SRC.u_original_resolution_date)) 
-  join rei_mdsdb.sys_user_final s
- on SRC.opened_by=s.sys_id
- and SRC.sourceinstance= s.sourceinstance
- and s.manager= '0e039e450a0a3c1f00ab757f305c61bf'
-JOIN  rei_mdwdb.f_incident TRGTF 
- ON (TRGTF.incident_key =TRGT.row_key
- AND TRGTF.source_id =TRGT.source_id)
- WHERE  COALESCE(TRGT.first_call_resolution_flag ,'')<>'Y';
+SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
+,CASE WHEN cnt > 0 THEN 'Data did not Match.' 
+ELSE 'Data Matched' END AS Message 
+from(
+
+select count(1) as cnt
+from rei_mdsdb.incident_final b
+inner join rei_mdwdb.d_incident a
+on
+(a.row_id = b.sys_id AND a.source_id=b.sourceinstance AND b.opened_by=b.u_original_resolver AND b.u_original_resolver =b.u_last_resolver AND
+ DATE(b.opened_at) = DATE(u_last_resolution_date) AND DATE(b.opened_at) = DATE(b.u_original_resolution_date)) 
+join
+rei_mdsdb.sys_user_final s
+ on b.opened_by=s.sys_id  and b.sourceinstance= s.sourceinstance 
+where case when s.manager= '0e039e450a0a3c1f00ab757f305c61bf' then 'Y' else 'N' end<> a.first_call_resolution_flag)a;
+
