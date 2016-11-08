@@ -6,8 +6,9 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  svb_mdwdb.d_incident SRC
  LEFT join svb_mdwdb.d_lov_map dlm 
 	ON SRC.close_code_src_key = dlm.src_key
-	where   dlm.dimension_wh_code = 'INVALID INCIDENT')a
+	where   dlm.dimension_wh_code <> 'INVALID INCIDENT')a
  where src1<>trgt; 
  
+
  
  
