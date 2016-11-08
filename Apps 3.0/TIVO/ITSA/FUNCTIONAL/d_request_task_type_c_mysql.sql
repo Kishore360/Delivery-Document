@@ -16,5 +16,5 @@ tivo_mdsdb.sc_request_final b
 )
 s left join tivo_mdwdb.d_request t
 on s.sys_id=t.row_id and s.sourceinstance=t.source_id
-WHERE t.task_type_c <> task_type
+WHERE t.task_type_c <> COALESCE(task_type,'UNSPECIFIED')
 ) temp;

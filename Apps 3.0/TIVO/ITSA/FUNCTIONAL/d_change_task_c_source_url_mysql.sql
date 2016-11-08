@@ -5,7 +5,7 @@ FROM (
 select count(1) as cnt from 
  (select 
 
-		CONCAT('<a href=\"','https://tivo.service-now.com/navpage.do/','change_task.do?sys_id=',i.sys_id,'\" target=\"_blank\">',i.number,'</a>') AS source_url,
+		CONCAT('<a href=\"','https://tivo.service-now.com/nav_to.do','?uri=change_task.do?sys_id=',i.sys_id,'\" target=\"_blank\">',i.number,'</a>') AS source_url,
 trgt.source_url  trgt_source_url
 		
 FROM tivo_mdsdb.change_task_final i

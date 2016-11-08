@@ -96,6 +96,7 @@ from ldb.f_change_request a11
 join ldb.d_change_request_state a118 
 on (a11.state_src_key = a118.row_key) 
 union
+-- There is a view filter applied @ MSTR level -Rejected and Cancelled .Hence records would be less here.
 select 'ldb.d_change_request_closure_status_c a119 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_change_request a11 
 join ldb.d_change_request_closure_status_c a119 

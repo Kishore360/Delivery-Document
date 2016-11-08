@@ -6,4 +6,4 @@
  LEFT JOIN tivo_mdwdb.d_incident TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
- WHERE length(SRC.short_description)<=255 AND  replace(convert(SRC.short_description using ASCII),'?',' ')    and SRC.short_description<>TRGT.short_description
+ WHERE replace(convert(SRC.short_description using ASCII),'?',' ') <>TRGT.short_description

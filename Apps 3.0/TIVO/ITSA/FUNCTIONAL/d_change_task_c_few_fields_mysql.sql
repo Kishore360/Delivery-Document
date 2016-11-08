@@ -10,7 +10,7 @@ CONVERT_TZ(i.DUE_DATE,'GMT','America/Los_Angeles') AS DUE_ON, trgt.DUE_ON trgt_D
 CONVERT_TZ(i.CLOSED_AT,'GMT','America/Los_Angeles') AS CLOSED_ON,trgt.CLOSED_ON trgt_CLOSED_ON,
 CONVERT_TZ(i.expected_start,'GMT','America/Los_Angeles') AS expected_start,trgt.expected_start trgt_expected_start,
 i.short_description AS SHORT_DESCRIPTION,trgt.SHORT_DESCRIPTION trgt_SHORT_DESCRIPTION,
-		CONCAT('<a href=\"','https://tivo.service-now.com/navpage.do/','change_task.do?sys_id=',i.sys_id,'\" target=\"_blank\">',i.number,'</a>') AS source_url,
+		CONCAT('<a href=\"','https://tivo.service-now.com/nav_to.do','?uri=change_task.do?sys_id=',i.sys_id,'\" target=\"_blank\">',i.number,'</a>') AS source_url,
 trgt.source_url  trgt_source_url,
 		i.DESCRIPTION AS DESCRIPTION,trgt.DESCRIPTION trgt_DESCRIPTION,
 		CONVERT_TZ(i.OPENED_AT,'GMT','America/Los_Angeles') AS OPENED_ON,trgt.OPENED_ON trgt_OPENED_ON,

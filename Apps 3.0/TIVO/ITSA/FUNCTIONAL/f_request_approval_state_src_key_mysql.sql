@@ -13,7 +13,7 @@ select sys_id,approval as approval,sourceinstance from tivo_mdsdb.sc_request_fin
  ON (s.sys_id =TRGT.row_id  
  AND s.sourceinstance= TRGT.source_id  )
 LEFT JOIN tivo_mdwdb.d_lov LKP 
- ON (COALESCE( concat('APPROVAL','~','TASK','~','~','~',upper(s.approval)),'UNSPECIFIED')= LKP.src_rowid 
+ ON (COALESCE( concat('APPROVAL','~','TASK','~','~','~',upper(s.approval)),'UNSPECIFIED')= LKP.row_id 
 AND s.sourceinstance= LKP.source_id )
  WHERE COALESCE(LKP.row_key,CASE WHEN s.approval IS NULL THEN 0 else -1 end)<> 
 (TRGT.approval_state_src_key);
