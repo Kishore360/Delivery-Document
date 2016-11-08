@@ -11,8 +11,7 @@ inner join wow_mdsdb.u_resolution_subcategory_final b
 on src.u_res_code=b.sys_id
 left join wow_mdwdb.d_lov c
 on c.dimension_class like '%RESOLUTION_CODE~INCIDENT_OUTAGE%'
-and CONCAT('RESOLUTION_CODE~INCIDENT_OUTAGE~~~',b.sys_id)=c.row_id
+and CONCAT('RESOLUTION_CODE~INCIDENT_OUTAGE~~~',b.sys_id)=c.src_rowid
 where c.row_key<>a.resolution_code_c_key
 )a;
-
 
