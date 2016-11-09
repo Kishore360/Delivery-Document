@@ -10,5 +10,5 @@ LEFT JOIN <<tenant>>_mdwdb.d_lov LKP
 AND SRC.sourceinstance= LKP.source_id 
  LEFT JOIN <<tenant>>_mdwdb.f_incident TRGT 
  ON (SRC.sys_id =TRGT.row_id  
- AND SRC.sourceinstance= TRGT.source_id  )
+ AND SRC.sourceinstance= TRGT.source_id  ) and TRGT.pivot_date between effective_from and effective_to
  WHERE COALESCE(LKP.row_key,CASE WHEN SRC.category IS NULL THEN 0 else -1 end)<> (TRGT.category_src_key))a
