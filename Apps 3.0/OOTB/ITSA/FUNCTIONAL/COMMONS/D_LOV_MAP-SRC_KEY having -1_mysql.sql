@@ -7,7 +7,7 @@ lov.row_id,SRC.column_value,SRC.table_value,lov.row_key lov_row_key,map.src_key 
 lov.dimension_class as lov_dimension_class,
 map.dimension_class as map_dimension_class
 from  <<tenant>>_mdwdb.d_lov_map map
- join <<tenant>>_mdwdb.d_lov lov on lov.src_rowid=map.src_rowid 
+ join <<tenant>>_mdwdb.d_lov lov on lov.src_rowid=map.src_rowid and lov.source_id=map.source_id
 left join
 (select conf.table_value table_value,conf.column_value column_value,UPPER(concat(conf.class_value,'~~~',scf.value)) as 
 row_id,scf.sourceinstance AS source_id

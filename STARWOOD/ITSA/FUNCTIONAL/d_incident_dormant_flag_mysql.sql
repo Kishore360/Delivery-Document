@@ -2,7 +2,8 @@
  CASE WHEN cnt >0 THEN 'MDS to DWH data validation failed for d_incident.active_flag' ELSE 'SUCCESS' END as Message
  FROM
 (
-select count(1) as cnt from(SELECT SRC.sys_id,TRGT.row_id, CASE WHEN timestampdiff(DAY,TRGT.changed_on,FRESH.lastupdated)>30
+select count(1) as cnt from(SELECT SRC.sys_id,TRGT.row_id, CASE WHEN timestampdiff(DAY,TRGT.changed_on,(SELECT MAX(lastupdated) AS lastupdated
+FROM starwood_mdwdb.d_o_data_freshness WHERE sourcename like 'ServiceNow%'))>30
 AND  LM.dimension_wh_code='OPEN' THEN 'Y' ELSE 'N' END as abc, COALESCE(TRGT.dormant_flag ,'')as def
 
 
