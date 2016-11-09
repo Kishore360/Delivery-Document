@@ -17,7 +17,7 @@ and a.source_id=b.sourceinstance
 
 LEFT JOIN pgi_mdsdb.u_pgi_product_list_final c
 
-on b.u_product=c.sys_id
+on left(b.u_product,32)=c.sys_id
 
 where  
 
