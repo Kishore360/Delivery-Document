@@ -12,6 +12,6 @@ company_name <> coalesce(a.u_company_name,'UNSPECIFIED') or
 enterprise_name  <> coalesce(a.u_enterprise_name,'UNSPECIFIED') or
 source_channel <> coalesce(a.u_ticket_initiated_from,'UNSPECIFIED') or
 b.symptom_sub_category <> coalesce(a.u_symptom_sub_category,'UNSPECIFIED') OR
-b.ticket_type <>coalesce(a.u_ticket_type,'UNSPECIFIED') or 
+b.ticket_type <>coalesce(a.u_trouble_ticket_type,'UNSPECIFIED') or 
 b.external_flag <>'Y' or
 service_restoration_flag <> case when u_service_restored = 1 then 'Y' else 'N' end)c
