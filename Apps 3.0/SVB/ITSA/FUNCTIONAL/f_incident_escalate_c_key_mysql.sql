@@ -1,10 +1,14 @@
-SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
-,CASE WHEN count(1) > 0 THEN 'Data did not Match.' 
-ELSE 'Data Matched' END AS Message 
-FROM  svb_mdsdb.incident_final a
-left join svb_mdwdb.d_lov c
-on concat('ESCALATION~INCIDENT~~~',a.escalation)=c.row_id
-and a.sourceinstance=c.source_id
- left JOIN  
-  svb_mdwdb.f_incident b on b.source_id=a.sourceinstance AND  b.row_id=a.sys_id
-where b.escalate_c_key<>c.row_key
+
+
+SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+ CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for f_incident_asc_c.reported_type_src_key' ELSE 'SUCCESS' END as Message
+ FROM   svb_mdsdb.incident_final SRC 
+ LEFT JOIN  svb_mdwdb.f_incident TRGT 
+ ON (SRC.sys_id =TRGT.row_id  
+ AND SRC.sourceinstance= TRGT.source_id  )
+LEFT JOIN svb_mdwdb.d_lov LKP 
+ ON ( concat('ESCALATION~INCIDENT~~~',upper(escalation))= LKP.row_id 
+ )
+ WHERE COALESCE(LKP.row_key,CASE WHEN SRC.escalation IS NULL THEN 0 else -1 end)<> (TRGT.escalate_c_key);
+ 
+ 

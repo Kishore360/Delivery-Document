@@ -88,9 +88,9 @@ select'ldb.d_internal_contact_submitted_by_c' as Table_Name, count(a11.row_key) 
 join ldb.d_internal_contact_submitted_by_c         a118
 on (a11.submitted_by_c_key = a118.row_key)
 union
-select'ldb.d_task_priority' as Table_Name, count(a11.row_key) Row_Count
+select'ldb.d_problem_priority' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_problem             a11 
-join ldb.d_task_priority         a119
+join ldb.d_problem_priority         a119
 on (a11.priority_src_key = a119.row_key)
 union
 select'ldb.d_task_contacttype' as Table_Name, count(a11.row_key) Row_Count
@@ -98,7 +98,7 @@ select'ldb.d_task_contacttype' as Table_Name, count(a11.row_key) Row_Count
 join ldb.d_task_contacttype         a120
 on (a11.reported_type_src_key = a120.row_key)
 union
-select'ldb.d_task_urgency' as Table_Name, count(a11.row_key) Row_Count
+select'ldb.d_problem_urgency' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_problem             a11 
-join ldb.d_task_urgency         a121
+join ldb.d_problem_urgency         a121
 on (a11.urgency_src_key = a121.row_key)
