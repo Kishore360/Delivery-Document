@@ -8,5 +8,5 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  AND SRC.sourceinstance= TRGT.source_id  )
 LEFT JOIN <<tenant>>_mdwdb.d_lov LKP 
  ON ( concat('IMPACT','~','TASK','~','~','~',upper(impact))= LKP.src_rowid 
-AND SRC.sourceinstance= LKP.source_id )
+AND SRC.sourceinstance= LKP.source_id ) and TRGT.pivot_date between effective_from and effective_to
  WHERE COALESCE(LKP.row_key,CASE WHEN SRC.impact IS NULL THEN 0 else -1 end)<> (TRGT.impact_src_key)
