@@ -12,7 +12,7 @@ SRC.sourceinstance= TRGT.source_id
  
 LEFT JOIN rei_mdwdb.d_lov LKP 
 
- ON concat('STATE','~','TASK','~','~','~',upper(state))= LKP.src_rowid 
+ ON concat('STATE','~','SC_TASK','~','~','~',upper(state))= LKP.src_rowid 
 
 AND SRC.sourceinstance= LKP.source_id 
 
