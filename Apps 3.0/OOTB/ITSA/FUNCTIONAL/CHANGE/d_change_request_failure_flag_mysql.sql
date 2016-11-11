@@ -14,8 +14,9 @@ FROM   <<tenant>>_mdsdb.change_request_final SRC
        JOIN <<tenant>>_mdwdb.d_lov_map br 
          ON (SRC.review_status = br.dimension_code 
             )
-WHERE  CASE 
+WHERE   br.dimension_class = 'REVIEW_STATUS~CHANGE_REQUEST' AND
+CASE 
          WHEN br.dimension_wh_code = 'FAIL' 
-              AND br.dimension_class = 'REVIEW_STATUS~CHANGE_REQUEST' THEN 'Y' 
+               THEN 'Y' 
          ELSE 'N' 
        END <> TRGT.failure_flag 

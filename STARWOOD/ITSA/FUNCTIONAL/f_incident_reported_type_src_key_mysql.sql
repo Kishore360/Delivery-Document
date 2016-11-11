@@ -1,6 +1,4 @@
-
- 
- select  CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+select  CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for f_incident.resolve_to_close_duration' ELSE 'SUCCESS' END as Message from 
 (select a.sys_id,e.row_id,c.severity AS SEVERITY_a_CODE ,COALESCE(LKP.row_key,CASE WHEN c.contact_type IS NULL THEN 0 else '-1' end) abc, COALESCE(e.reported_type_src_key,'') def
 from starwood_mdsdb.task_final a
@@ -14,8 +12,8 @@ LEFT join starwood_mdwdb.f_incident e on
   c.sys_id=e.row_id
   AND c.sourceinstance = e.source_id
   LEFT JOIN starwood_mdwdb.d_lov LKP 
- ON ( concat('CONTACT_TYPE','~','TASK','~','~','~',upper(c.contact_type))= LKP.src_rowid 
-AND c.sourceinstance= LKP.source_id )
+ ON ( concat('CONTACT_TYPE','~','TASK','~','~','~',upper(c.contact_type))= LKP.row_id 
+ )
 where d.name IN ('Booking.com','Central
 Reservation','DirectConnect','EZYield','HBSi','Hotwire','Orbitz','Priceline/Travelweb','PRSnet','Rational Dynamic Pricing','Saratoga',
 'Valhalla','Valhalla Availability','Valhalla Booking Engine','Valhalla Data Quality Engine(DQE)','Valhalla Inventory',
