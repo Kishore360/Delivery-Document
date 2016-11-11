@@ -6,7 +6,7 @@ FROM rei_mdsdb.change_task_final SRC
   JOIN rei_mdwdb.f_change_task_c TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
-JOIN rei_mdwdb.d_lov_map br ON TGT.state_src_key = br.src_key
+JOIN rei_mdwdb.d_lov_map br ON TRGT.state_src_key = br.src_key
 AND br.dimension_wh_code IN ('CLOSED','RESOLVED') 
 JOIN rei_mdwdb.d_calendar_date LKP 
 on (COALESCE(date_format(convert_tz(SRC.closed_at,'GMT','America/Los_Angeles'),'%Y%m%d'),'UNSPECIFIED') = LKP.row_id )
