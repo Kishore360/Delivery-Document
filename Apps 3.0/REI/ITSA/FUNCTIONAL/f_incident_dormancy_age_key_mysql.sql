@@ -1,14 +1,13 @@
-SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
-,CASE WHEN cnt > 0 THEN 'Data did not Match.' 
-ELSE 'Data Matched' END AS Message 
-FROM(select count(*) as cnt 
-from
-rei_mdwdb.f_incident a 
- JOIN 
-rei_mdwdb.d_lov b 
-ON (a.dormancy_age div 86400) 
-where (a.dormancy_age_key IS NULL
-       OR a.dormancy_age_key <> b.row_key)
-                   AND 
-                   (b.dimension_class = 'DORMANCYBUCKET_WH~INCIDENT'
-                   OR b.row_key in (0,-1)) and coalesce(b.row_key,-1)<> a.dormancy_age_key)a
+ select COALESCE(TIMESTAMPDIFF(second,SRC.sys_updated_on,CONVERT_TZ((SELECT MAX(lastupdated) AS lastupdated
+FROM rei_mdwdb.d_o_data_freshness WHERE sourcename like 'ServiceNow%'),"America/Los_Angeles","GMT")),0), TRGT.dormancy_age 
+ FROM rei_mdsdb.incident_final SRC 
+ LEFT JOIN rei_mdwdb.f_incident TRGT 
+ ON (SRC.sys_id =TRGT.row_id 
+ AND SRC.sourceinstance= TRGT.source_id )
+ left join rei_mdwdb.d_lov_map lm 
+ ON (lm.src_key = TRGT.state_src_key)
+ where lm.dimension_class = 'STATE~INCIDENT'
+AND  lm.dimension_wh_code = 'OPEN'  
+AND COALESCE(TIMESTAMPDIFF(second,SRC.sys_updated_on,CONVERT_TZ((SELECT MAX(lastupdated) AS lastupdated
+FROM rei_mdwdb.d_o_data_freshness WHERE sourcename like 'ServiceNow%'),"America/Los_Angeles","GMT")),0)<> TRGT.dormancy_age 
+; 
