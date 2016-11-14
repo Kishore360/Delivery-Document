@@ -110,7 +110,7 @@ on (a11.priority_src_key = a122.row_key)
 union
 select'ldb.d_task_contacttype' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_change_request_closed             a11 
-join ldb.d_task_contacttype         a123
+join ldb.d_change_request_reported_type         a123
 on (a11.reported_type_src_key = a123.row_key)
 union
 select'ldb.d_change_request_urgency' as Table_Name, count(a11.row_key) Row_Count

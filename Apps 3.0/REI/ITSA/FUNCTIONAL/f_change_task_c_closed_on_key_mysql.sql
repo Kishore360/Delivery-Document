@@ -5,7 +5,9 @@ CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed ' ELSE 'SUCCESS' E
 FROM rei_mdsdb.change_task_final SRC
   JOIN rei_mdwdb.f_change_task_c TRGT 
  ON (SRC.sys_id =TRGT.row_id  
- AND SRC.sourceinstance= TRGT.source_id  ) 
+ AND SRC.sourceinstance= TRGT.source_id  )
+JOIN rei_mdwdb.d_lov_map br ON TRGT.state_src_key = br.src_key
+AND br.dimension_wh_code IN ('CLOSED','RESOLVED') 
 JOIN rei_mdwdb.d_calendar_date LKP 
 on (COALESCE(date_format(convert_tz(SRC.closed_at,'GMT','America/Los_Angeles'),'%Y%m%d'),'UNSPECIFIED') = LKP.row_id )
 WHERE COALESCE(LKP.row_key,case when SRC.closed_at is null then 0 else -1 end )<> TRGT.closed_on_key;
