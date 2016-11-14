@@ -3,7 +3,7 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  
  FROM rambus_mdsdb.incident_final SRC 
 left join  rambus_mdsdb.sys_user_final scu on SRC.u_affected_client  = scu.sys_id
- JOIN rambus_mdwdb.f_incident TRGT 
+ JOIN rambus_mdwdb.f_problem TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
  LEFT JOIN   rambus_mdwdb.d_internal_organization LKP
