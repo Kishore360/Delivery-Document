@@ -1,6 +1,3 @@
-SELECT CASE WHEN max_count<>min_count THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
- CASE WHEN  max_count<>min_count THEN 'OOTB has Keys Dropped' ELSE 'SUCCESS'  END as Message FROM (
- select max(Row_Count) max_count,Min(Row_Count) min_count from (
 select'ldb.f_incident_keyword' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_incident_keyword             a11 
 union
@@ -204,5 +201,3 @@ join ldb.d_calendar_date_fiscal         a113
 on (a112.fiscal_key=a113.row_key) 
 join ldb.d_calendar_fiscal_year         a134
 on (a113.year_start_date_key=a134.row_key)
-)A
-)B
