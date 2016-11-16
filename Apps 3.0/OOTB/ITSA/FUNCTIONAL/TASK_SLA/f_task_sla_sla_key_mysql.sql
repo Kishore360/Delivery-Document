@@ -13,7 +13,7 @@ from
     <<tenant>>_mdwdb.d_task_sla d ON task_sla.sla = d.row_id
         and task_sla.sourceinstance = d.source_id
         join
-    <<tenant>>_mdwdb.f_task_sla a ON task_sla.sys_id = task_sla.sys_id
+    <<tenant>>_mdwdb.f_task_sla a ON task_sla.sys_id = a.row_id
         and a.source_id = task_sla.sourceinstance
 where
     a.sla_key <> coalesce(d.row_key,case

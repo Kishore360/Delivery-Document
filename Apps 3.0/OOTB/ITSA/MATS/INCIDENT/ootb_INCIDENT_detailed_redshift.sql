@@ -174,7 +174,8 @@ union
 select 'dh_user_group_level1' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11 
 join ldb.d_internal_organization_group a15 
-on (a11.assignment_group_key = a15.row_key) join ldb.dh_user_group_hierarchy a16 
+on (a11.assignment_group_key = a15.row_key) 
+join ldb.dh_user_group_hierarchy a16 
 on (a15.row_dn_key = a16.lev_0_key) 
 join ldb.dh_user_group_level1 a128 
 on (a16.lev_1_key = a128.row_key) 

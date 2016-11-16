@@ -1,3 +1,4 @@
+
 select 'f_incident' as table_name , count(a11.row_key) as Row_Count 
 from ldb.f_incident a11
 union all
