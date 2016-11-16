@@ -1,14 +1,5 @@
-SELECT CASE WHEN max_count<>min_count THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
- CASE WHEN  max_count<>min_count THEN 'OOTB has Keys Dropped' ELSE 'SUCCESS'  END as Message FROM (
- select max(Row_Count) max_count,Min(Row_Count) min_count from (
 select'ldb.f_problem_task' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_problem_task          a11 
-union
-select'ldb.f_problem_task_keyword_c' as Table_Name, count(a11.row_key) Row_Count
- from  ldb.f_problem_task          a11 
-join ldb.f_problem_task_keyword_c  a12
-on (a11.assignment_group_key = a12.assignment_group_key and a11.opened_on_key = a12.opened_on_key and 
-    a11.problem_key = a12.problem_key and a11.problem_task_key = a12.problem_task_key)
 union
 select'ldb.d_problem_task' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_problem_task          a11 
@@ -73,5 +64,3 @@ join ldb.d_calendar_date_fiscal         a16
 on (a15.fiscal_key=a16.row_key) 
 join ldb.d_calendar_fiscal_year        a112
 on (a16.year_start_date_key=a112.row_key)
-)A
-)B

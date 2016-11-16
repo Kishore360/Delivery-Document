@@ -1,6 +1,3 @@
-SELECT CASE WHEN max_count<>min_count THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
- CASE WHEN  max_count<>min_count THEN 'OOTB has Keys Dropped' ELSE 'SUCCESS'  END as Message FROM (
- select max(Row_Count) max_count,Min(Row_Count) min_count from (
 select'ldb.f_request_item' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_request_item             a11 
 union
@@ -14,7 +11,7 @@ select'ldb.d_internal_contact' as Table_Name, count(a11.row_key) Row_Count
 join ldb.d_internal_contact         a13
 on (a11.opened_by_key=a13.row_key)
 union
-select'ldb.d_internal_organization_group' as Table_Name, count(a11.row_key) Row_Count
+select'ldb.d_internal_organization_group' as Tabletable_name, _Name, count(a11.row_key) Row_Count
  from  ldb.f_request_item             a11 
 join ldb.d_internal_organization_group         a14
 on (a11.assignment_group_key=a14.row_key)
@@ -178,5 +175,3 @@ join ldb.d_calendar_date_fiscal        a110
 on (a19.fiscal_key=a110.row_key) 
 join ldb.d_calendar_fiscal_year        a130
 on (a110.year_start_date_key=a130.row_key)
-)A
-)B

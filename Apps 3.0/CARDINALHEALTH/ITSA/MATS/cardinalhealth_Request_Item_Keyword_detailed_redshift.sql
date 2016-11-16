@@ -1,13 +1,5 @@
-SELECT CASE WHEN max_count<>min_count THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
- CASE WHEN  max_count<>min_count THEN 'OOTB has Keys Dropped' ELSE 'SUCCESS'  END as Message FROM (
- select max(Row_Count) max_count,Min(Row_Count) min_count from (
 select'ldb.f_request_item' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_request_item          a11 
-union
-select'ldb.f_request_item_keyword' as Table_Name, count(a11.row_key) Row_Count
- from  ldb.f_request_item          a11
- join ldb.f_request_item_keyword a12
-on (a11.approval_state_src_key = a12.approval_state_src_key and  a11.assigned_to_key = a12.assigned_to_key and                 a11.assignment_group_key = a12.assignment_group_key and  a11.catalog_item_key = a12.catalog_item_key and                a11.closed_by_key = a12.closed_by_key and                a11.closed_on_key = a12.closed_on_key and                 a11.domain_key = a12.domain_key and                a11.impact_src_key = a12.impact_src_key and                a11.opened_by_key = a12.opened_by_key and                 a11.opened_on_key = a12.opened_on_key and                 a11.priority_src_key = a12.priority_src_key and                a11.request_item_key = a12.request_item_key and                 a11.request_key = a12.request_key and                 a11.requested_for_key = a12.requested_for_key and                 a11.stage_src_key = a12.stage_src_key and                a11.state_src_key = a12.state_src_key and                 a11.urgency_src_key = a12.urgency_src_key) 
 union
 select'ldb.d_internal_contact' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_request_item          a11 
@@ -23,11 +15,6 @@ select'ldb.d_request_item' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_request_item          a11 
 join ldb.d_request_item         a15
 on (a11.request_item_key=a15.row_key)
-union
-select'ldb.d_calendar_date_closed' as Table_Name, count(a11.row_key) Row_Count
- from  ldb.f_request_item          a11 
-join ldb.d_calendar_date_closed         a16
-on (a11.closed_on_key=a16.row_key)
 union
 select'ldb.d_calendar_date' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_request_item          a11 
@@ -75,12 +62,5 @@ select'ldb.d_internal_contact_task_closed_by' as Table_Name, count(a11.row_key) 
  from  ldb.f_request_item          a11 
 join ldb.d_internal_contact_task_closed_by        a115
 on (a11.closed_by_key=a115.row_key)
-union
-select'ldb.d_calendar_month_closed' as Table_Name, count(a11.row_key) Row_Count
- from  ldb.f_request_item          a11 
- join ldb.d_calendar_date_closed         a16
-on (a11.closed_on_key=a16.row_key)
-join ldb.d_calendar_month_closed        a116
-on (a16.month_start_date_key=a116.row_key)
-)A
-)B
+
+

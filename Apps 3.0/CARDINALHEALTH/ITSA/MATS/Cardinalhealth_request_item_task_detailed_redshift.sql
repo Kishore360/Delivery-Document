@@ -1,11 +1,6 @@
 select'ldb.f_request_item_task_c' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_request_item_task_c       a11 
 union
-select'ldb.d_calendar_date_closed' as Table_Name, count(a11.row_key) Row_Count
- from  ldb.f_request_item_task_c       a11 
-join ldb.d_calendar_date_closed       a12
-on (a11.ritm_closed_on_key=a12.row_key)
-union
 select'ldb.d_internal_contact' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_request_item_task_c       a11 
 join ldb.d_internal_contact       a13
@@ -15,11 +10,7 @@ select'ldb.d_master_item' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_request_item_task_c       a11 
 join ldb.d_master_item       a14
 on (a11.ritm_catalog_item_key=a14.row_key)
-union
-select'ldb.d_calendar_date_closed_rt_c' as Table_Name, count(a11.row_key) Row_Count
- from  ldb.f_request_item_task_c       a11 
-join ldb.d_calendar_date_closed_rt_c       a15
-on (a11.closed_on_key=a15.row_key)
+
 union
 select'ldb.d_internal_contact_rt_c' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_request_item_task_c       a11 

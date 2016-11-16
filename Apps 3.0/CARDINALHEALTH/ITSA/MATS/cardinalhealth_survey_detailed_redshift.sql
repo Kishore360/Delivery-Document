@@ -175,7 +175,7 @@ union
 select'ldb.d_survey_state' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_incident_response       a11 
 join ldb.d_survey_state       a123
-on (a11.survey_state_src_keyr=a123.row_key)
+on (a11.survey_state_src_key=a123.row_key)
 union
 select'ldb.d_task_contacttype' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_incident_response       a11 
