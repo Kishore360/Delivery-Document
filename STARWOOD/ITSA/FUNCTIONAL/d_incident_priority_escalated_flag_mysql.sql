@@ -13,9 +13,9 @@ AND fieldname =  'priority' and oldvalue is not null and newvalue is not null
 )a group by a.documentkey
 )b
  join starwood_mdsdb.incident_final c on b.documentkey=c.sys_id
- join  starwood_mdsdb.task_final a on a.sys_id=c.sys_id
- inner join starwood_mdsdb.cmdb_ci_service_final d on a.u_service=d.sys_id 
-inner  JOIN  starwood_mdsdb.request_category_final b on b.sys_id=c.u_request_category 
+ join  starwood_mdsdb.task_final a on a.sys_id=c.sys_id and a.sourceinstance=SRC.sourceinstance
+ inner join starwood_mdsdb.cmdb_ci_service_final d on a.u_service=d.sys_id and a.sourceinstance=d.sourceinstance
+inner  JOIN  starwood_mdsdb.request_category_final b on b.sys_id=c.u_request_category and c.sourceinstance=b.sourceinstance
 join starwood_mdwdb.d_incident e on c.sys_id = e.row_id and c.sourceinstance = e. source_id
 where 
 d.name IN ('Booking.com','Central 
