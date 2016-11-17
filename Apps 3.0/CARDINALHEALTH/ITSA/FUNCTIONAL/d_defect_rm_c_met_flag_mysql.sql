@@ -3,7 +3,12 @@ SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
 ELSE 'Data Matched' END AS Message 
 FROM (
 select count(1) as cnt 
-from cardinalhealth_mdsdb.rm_defect a
+from cardinalhealth_mdsdb.rm_defect_final a
 left  JOIN  cardinalhealth_mdwdb.d_defect_rm_c b
 on  b.ROW_ID = a.SYS_ID and a.sourceinstance=b.source_id
-where CASE WHEN (a.due_date IS NOT NULL AND a.due_date >= a.closed_at) THEN 'Y' ELSE 'N' END <>b.met_flag)c
+where 
+case WHEN a.due_date IS NOT NULL
+AND DATE(CONVERT_TZ(a.due_date,'GMT','America/New_York')) >= 
+DATE(CONVERT_TZ(a.closed_at,'GMT','America/New_York')) THEN 'Y'
+           ELSE 'N'
+       END <>b.met_flag)c

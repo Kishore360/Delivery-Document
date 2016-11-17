@@ -1,8 +1,6 @@
-SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
-,CASE WHEN cnt > 0 THEN 'Data did not Match.' 
-ELSE 'Data Matched' END AS Message 
-FROM (
-select count(1) as cnt from cardinalhealth_mdsdb.sys_user_group_final a
- left  JOIN  cardinalhealth_mdwdb.d_internal_organization b
-on  a.SYS_ID= b.ROW_ID and a.sourceinstance=b.source_id
-where a.u_segment<>b.segment_c)b
+SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+CASE WHEN count(1) >0 THEN 'Failure' ELSE 'Data Matched' END as Message
+from cardinalhealth_mdwdb.d_internal_organization a
+JOIN cardinalhealth_mdsdb.sys_user_group_final b
+ ON a.row_id=CONCAT('GROUP~',b.sys_id) AND a.source_id=b.sourceinstance
+ where COALESCE(b.u_segment,'UNSPECIFIED')<> a.segment_c ;

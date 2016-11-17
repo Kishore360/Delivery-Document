@@ -12,11 +12,8 @@ FROM
         count(1) as cnt
     from
        
-     cardinalhealth_mdwdb.d_defect_rm_c b  JOIN
- cardinalhealth_mdsdb.rm_defect_final a ON 
-b.row_id = a.sys_id AND a.sourceinstance = b.source_id
-    
+     cardinalhealth_mdwdb.d_enhancement_rm_c b      
     where
-        NULL <> b.sla_status) c
+        'Y' <> b.current_flag) c
 
 

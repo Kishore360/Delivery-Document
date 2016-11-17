@@ -3,7 +3,7 @@
 ELSE 'Data Matched' END AS Message 
 FROM (
 select count(1) as cnt 
-from cardinalhealth_mdsdb.rm_enhancement a
+from cardinalhealth_mdsdb.rm_enhancement_final a
  left  JOIN  cardinalhealth_mdwdb.d_enhancement_rm_c b
 on  b.ROW_ID = a.SYS_ID and a.sourceinstance=b.source_id
 where CASE WHEN (month(a.opened_at) > 6) THEN YEAR(a.opened_at)+1 ELSE YEAR(a.opened_at) END <>b.fiscal_year_opened_at )c

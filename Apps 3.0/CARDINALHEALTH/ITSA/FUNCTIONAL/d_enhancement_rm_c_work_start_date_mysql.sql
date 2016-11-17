@@ -3,7 +3,7 @@
 ELSE 'Data Matched' END AS Message 
 FROM (
 select count(1) as cnt 
-from cardinalhealth_mdsdb.rm_enhancement a
+from cardinalhealth_mdsdb.rm_enhancement_final a
  left  JOIN  cardinalhealth_mdwdb.d_enhancement_rm_c b
 on  b.ROW_ID = a.SYS_ID and a.sourceinstance=b.source_id
 where  CONVERT_TZ(a.work_start,'GMT','America/New_York')<>b.work_start_date )c
