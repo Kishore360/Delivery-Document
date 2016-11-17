@@ -5,13 +5,14 @@ FROM (
 select count(1) as cnt  
 FROM  starwood_mdsdb.task_final a
 inner join starwood_mdsdb.incident_final c 
-on a.sys_id=c.sys_id
+on a.sys_id=c.sys_id and a.sourceinstance=c.sourceinstance
 inner  JOIN  starwood_mdsdb.request_category_final b
-on b.sys_id=c.u_request_category   
+on b.sys_id=c.u_request_category   and b.sourceinstance=c.sourceinstance
 left JOIN  starwood_mdwdb.d_incident b
 on c.sys_id=b.row_id and c.sourceinstance=b.source_id
 inner join starwood_mdsdb.cmdb_ci_service_final d
-on a.u_service=d.sys_id and name IN ('Booking.com','Central 
+on a.u_service=d.sys_id and a.sourceinstance=d.sourceinstance
+and name IN ('Booking.com','Central 
 Reservation','DirectConnect','EZYield','HBSi','Hotwire','Orbitz','Priceline/Travelweb','PRSnet',
 'Rational Dynamic Pricing','Saratoga','Valhalla','Valhalla Availability','Valhalla Booking Engine','Valhalla Data Quality Engine(DQE)','Valhalla Inventory',
 'Valhalla Availability','Wholesaler Direct Connect (WDC)','Agoda','ISAC - Integrated Sales & Catering')
