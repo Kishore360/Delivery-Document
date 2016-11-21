@@ -10,8 +10,10 @@ COALESCE((CASE WHEN COALESCE(CONCAT('GROUP~',i.change_control),'UNSPECIFIED') = 
 						THEN 0
 						ELSE (
  (j.row_key) 	)	END	), -1) AS change_control_key 
-FROM intuit_mdsdb.cmdb_ci_appl_final i left join intuit_mdwdb.d_internal_organization  j
+FROM intuit_mdsdb.cmdb_ci_appl_final i 
+left join intuit_mdwdb.d_internal_organization  j
 on j.row_id =COALESCE(CONCAT('GROUP~',i.change_control),'UNSPECIFIED') AND i.sourceinstance=j.source_id
 left join intuit_mdwdb.d_configuration_item d on i.sys_id=d.row_id AND i.sourceinstance=d.source_id
 )a
-where a.change_control_c_key<>COALESCE(a.change_control_key,0))temp
+where a.change_control_c_key<>COALESCE(a.change_control_key,0)
+)temp
