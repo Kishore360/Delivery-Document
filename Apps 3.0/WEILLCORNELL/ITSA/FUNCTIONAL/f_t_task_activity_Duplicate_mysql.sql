@@ -4,6 +4,6 @@ FROM( Select count(cnt) as cnt
 from( 
 select row_id,source_id,count(1) as cnt 
 from  
-<<tenant>>_mdwdb.f_t_task_activity  
+weillcornell_mdwdb.f_t_task_activity  
 group by 1,2 
 having count(1)>1)c )a 
