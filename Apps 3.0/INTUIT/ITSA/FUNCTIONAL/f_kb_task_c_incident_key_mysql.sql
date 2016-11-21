@@ -11,6 +11,6 @@ left join intuit_mdwdb.f_kb_task_c tgt
 on src.sys_id=tgt.row_id and src.sourceinstance=tgt.source_id
 left join intuit_mdwdb.d_incident lkp
 on src.task = lkp.row_id and src.sourceinstance=lkp.source_id
-where coalesce(lkp.row_Key,case when lkp1.sys_class_name <>'incident
+where coalesce(lkp.row_Key,case when lkp1.sys_class_name <>'incident'
 then 0 else -1 end) <> tgt.incident_key
 ) temp
