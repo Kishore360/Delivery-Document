@@ -1,6 +1,3 @@
-SELECT CASE WHEN max_count<>min_count THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
-CASE WHEN  max_count<>min_count THEN 'OOTB has Keys Dropped' ELSE 'SUCCESS'  END as Message FROM (
-select max(Row_Count) max_count,Min(Row_Count) min_count from (
 select'f_incident_response' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_incident_response a11 
 UNION
@@ -79,9 +76,3 @@ join	ldb.dh_user_group_classification_hierarchy	a112
 on 	(a11.assignment_group_key = a112.user_group_key)
 	  	left outer join	ldb.dh_user_group_classification_hierarchy_level1	a17
 	  on 	(a112.user_group_classification_level1 = a17.user_group_level1_key)
-)a
-)b
-
-
-
-
