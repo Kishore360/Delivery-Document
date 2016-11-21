@@ -4,6 +4,6 @@ FROM( Select count(cnt) as cnt
 from( 
 select row_id,source_id,count(1) as cnt 
 from  
-<<tenant>>_mdwdb.d_fiscal_period  
+uclahealth_mdwdb.d_fiscal_period  
 group by 1,2 
 having count(1)>1)c )a 

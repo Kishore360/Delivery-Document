@@ -1,6 +1,3 @@
-SELECT CASE WHEN max_count<>min_count THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
- CASE WHEN  max_count<>min_count THEN 'OOTB has Keys Dropped' ELSE 'SUCCESS'  END as Message FROM (
- select max(Row_Count) max_count,Min(Row_Count) min_count from (
  select 'ldb.f_problem' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_problem             a11 
 union
@@ -244,19 +241,17 @@ select 'ldb.d_internal_organization_group' as Table_Name, count(a11.row_key) Row
 join ldb.d_internal_organization_group         a119
 on (a11.assignment_group_key = a119.row_key)
 union
-select 'ldb.d_task_contacttype' as Table_Name, count(a11.row_key) Row_Count
+select 'ldb.d_problem_reported_type' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_problem             a11 
-join ldb.d_task_contacttype         a119
+join ldb.d_problem_reported_type         a119
 on (a11.reported_type_src_key = a119.row_key)
 union
-select 'ldb.d_task_priority' as Table_Name, count(a11.row_key) Row_Count
+select 'ldb.d_problem_priority' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_problem             a11 
-join ldb.d_task_priority         a119
+join ldb.d_problem_priority         a119
 on (a11.priority_src_key = a119.row_key)
 union
-select 'ldb.d_task_urgency' as Table_Name, count(a11.row_key) Row_Count
+select 'ldb.d_problem_urgency' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_problem             a11 
-join ldb.d_task_urgency         a119
+join ldb.d_problem_urgency         a119
 on (a11.urgency_src_key = a119.row_key)
-)a
-)b
