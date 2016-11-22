@@ -6,11 +6,6 @@ from  ldb.f_problem_task             a11
 join ldb.d_configuration_item_problem_incident_c         a16
 on (a11.incident_configuration_item_key = a16.row_key)
 union
-select 'ldb.d_problem_task' as Table_Name, count(a11.row_key) Row_Count
-from  ldb.f_problem_task             a11 
-join ldb.d_problem_task         a17
-on (a11.problem_task_key = a17.row_key)
-union
 select 'ldb.d_incident_infrastructure_category_c' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_problem_task             a11 
 join ldb.d_incident_infrastructure_category_c         a112
