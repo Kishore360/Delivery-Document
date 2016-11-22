@@ -1,4 +1,4 @@
-create table wow_workdb.one2manytech(row_id varchar(1000),tech_id varchar (1000),index abc(row_id,source_id),index efg (tech_id))
+ create table wow_workdb.one2manytech(row_id varchar(1000),tech_id varchar (1000),index abc(row_id,source_id),index efg (tech_id))
 SELECT CONCAT(inc.sys_id,'~',COALESCE(SUBSTRING_INDEX(SUBSTRING_INDEX(TRIM(inc.u_tech), ',', n.n), ',', -1),'UNSPECIFIED')) AS row_id,
        inc.sourceinstance AS source_id,
        COALESCE(SUBSTRING_INDEX(SUBSTRING_INDEX(TRIM(inc.u_tech), ',', n.n), ',', -1),'UNSPECIFIED') AS tech_id

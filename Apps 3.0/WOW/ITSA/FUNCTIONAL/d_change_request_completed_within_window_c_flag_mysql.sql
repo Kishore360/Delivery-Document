@@ -1,7 +1,11 @@
-SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
-CASE WHEN count(1) >0 THEN 'Failure' ELSE 'Data Matched' END as Message
-from
-wow_mdsdb.change_request_final a
-join wow_mdwdb.d_change_request b
-on a.sys_id=b.row_id and a.sourceinstance=b.source_id
-where b.completed_within_window_c_flag<> case when a.u_completed_within_window='0' then 'N' else 'Y' end;
+SELECT CASE WHEN count(1) > 0 THEN 'FaILURE' ELSE 'SUCCESS' END aS Result
+,CASE WHEN count(1) > 0 THEN 'Data did not Match.' 
+ELSE 'Data Matched' END aS Message  from 
+wow_mdwdb.d_change_request  trgt
+ JOIN wow_mdsdb.change_request_final src
+on trgt.row_id= src.sys_id and trgt.source_id = src.sourceinstance
+ where  trgt.completed_within_window_c_flag<>case when src.u_completed_within_window=1 then 'Y' else 'N' end;
+ 
+ 
+
+
