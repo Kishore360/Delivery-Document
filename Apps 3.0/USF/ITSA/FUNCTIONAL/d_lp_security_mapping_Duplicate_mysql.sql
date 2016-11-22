@@ -4,6 +4,6 @@ FROM( Select count(cnt) as cnt
 from( 
 select row_id,source_id,count(1) as cnt 
 from  
-<<tenant>>_mdwdb.d_lp_security_mapping  
+usf_mdwdb.d_lp_security_mapping  
 group by 1,2 
 having count(1)>1)c )a 
