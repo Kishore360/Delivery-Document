@@ -4,7 +4,7 @@ FROM (
 select count(1) as cnt
 from tivo_mdwdb.d_lov
 where 
-row_id <> concat(dimension_class,'~',dimension_type,'~',dimension_code)
-and dimension_class <>'LANDING_PAGE'
+row_id <> concat(dimension_class,'~',dimension_type,'~','~',dimension_code)
+and dimension_class NOT IN ('LANDING_PAGE','PROJECT','WH~PROJECT')
 and row_key not in (-1,0)
 )a;
