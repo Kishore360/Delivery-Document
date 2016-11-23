@@ -111,3 +111,17 @@ on (a11.assignment_group_key = a13.row_key) join ldb.dh_user_group_hierarchy a14
 on (a13.row_dn_key = a14.lev_0_key) 
 join ldb.dh_user_group_level5 a119 
 on (a14.lev_5_key = a119.row_key) 
+union
+select 'ldb.d_task_ra_c a120 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_request_task a11 
+join ldb.d_task_ra_c a120
+on (a11.parent_task_c_key = a120.row_key)
+union
+select 'ldb.d_task_parent_c a121 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_request_task a11 
+join ldb.d_task_ra_c a120
+on (a11.parent_task_c_key = a120.row_key)
+join ldb.d_task_parent_c a121
+on (a120.parent_task_key = a121.row_key)
+
+
