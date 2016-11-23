@@ -354,4 +354,16 @@ join ldb.d_internal_organization_resolver_group_c a116
 on (a11.resolver_group_c_key = a116.row_key) join ldb.dh_resolver_group_hierarchy_c a117 
 on (a116.row_dn_key = a117.lev_0_key) 
 join ldb.dh_user_resolver_group_level5_c a159 
-on (a117.lev_5_key = a159.row_key) 
+on (a117.lev_5_key = a159.row_key)
+union
+select 'ldb.d_task_ra_c a160 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_incident a11 
+join ldb.d_task_ra_c a160
+on (a11.parent_task_c_key = a160.row_key)
+union
+select 'ldb.d_task_ra_c a161 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_incident a11 
+join ldb.d_task_ra_c a160
+on (a11.parent_task_c_key = a160.row_key)
+join ldb.d_task_parent_c a161
+on (a160.parent_task_key = a161.row_key)
