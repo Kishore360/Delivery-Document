@@ -21,4 +21,4 @@ convert_tz(convert_tz(SRC.closed_at,<<TENANT_SSI_TIME_ZONE>>,<<DW_TARGET_TIME_ZO
   
   
   
-  ,
+  

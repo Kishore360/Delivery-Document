@@ -11,7 +11,7 @@ select'ldb.d_internal_contact' as Table_Name, count(a11.row_key) Row_Count
 join ldb.d_internal_contact         a13
 on (a11.opened_by_key=a13.row_key)
 union
-select'ldb.d_internal_organization_group' as Tabletable_name, _Name, count(a11.row_key) Row_Count
+select'ldb.d_internal_organization_group' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_request_item             a11 
 join ldb.d_internal_organization_group         a14
 on (a11.assignment_group_key=a14.row_key)

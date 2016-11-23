@@ -17,6 +17,6 @@ CROSS JOIN
 ON n.n <= 1 + (LENGTH(COALESCE(TRIM(b.u_hardware_platform),'UNSPECIFIED')) - LENGTH(REPLACE(COALESCE(TRIM(b.u_hardware_platform),'UNSPECIFIED'), ',', '')))
 left join  tivo_mdwdb.f_hardware_platform_c c
 on  c.row_id=CONCAT(b.sys_id,'~',COALESCE(SUBSTRING_INDEX(SUBSTRING_INDEX(TRIM(b.u_hardware_platform), ',', n.n), ',', -1),'UNSPECIFIED'))  and b.sourceinstance=c.source_id
-WHERE COALESCE(a.row_key,CASE WHEN b.sys_id IS NULL THEN 0 else -1 end)<>c.incident_key ) temp;v
+WHERE COALESCE(a.row_key,CASE WHEN b.sys_id IS NULL THEN 0 else -1 end)<>c.incident_key ) temp;
 
 
