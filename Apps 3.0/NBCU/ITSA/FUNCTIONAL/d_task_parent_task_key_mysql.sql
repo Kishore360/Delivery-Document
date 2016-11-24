@@ -6,4 +6,6 @@ join nbcu_mdwdb.d_task b
 on a.sys_id=b.row_id and a.sourceinstance=b.source_id
 join nbcu_mdwdb.d_task c
 on a.parent=c.row_id and a.sourceinstance=c.source_id
-where coalesce(c.row_key, case when a.parent is null then 0 else -1 end)<> c.parent_task_key;
+where coalesce(c.row_key, -1 )<> c.parent_task_key;
+
+
