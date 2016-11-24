@@ -5,5 +5,6 @@ from(
 select row_id,source_id,count(1) as cnt 
 from  
 rei_mdwdb.d_lov  
+where dimension_code is not null
 group by 1,2 
 having count(1)>1)c )a 
