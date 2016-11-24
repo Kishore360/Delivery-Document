@@ -4,4 +4,4 @@ FROM rei_mdsdb.incident_final SRC
  LEFT JOIN rei_mdwdb.d_incident TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
- WHERE CASE WHEN substring(SRC.u_original_resolution_date,1,10)<>substring(SRC.u_last_resolution_date,1,10) then 'Y' else 'N' END <> TRGT.reopened_flag 
+ WHERE CASE WHEN date(SRC.u_original_resolution_date)<>date(SRC.u_last_resolution_date) then 'Y' else 'N' END <> TRGT.reopened_flag 
