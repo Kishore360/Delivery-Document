@@ -5,6 +5,6 @@ FROM (
 select count(1) as cnt from uclahealth_mdwdb.f_incident dfi
 join uclahealth_mdsdb.incident_final incf
 on dfi.row_id = incf.sys_id and dfi.source_id= incf.sourceinstance
-where  dfi.outage_type_src_code_c= incf.u_outage_type )a;
+where  dfi.outage_type_src_code_c<> incf.u_outage_type )a;
 
 

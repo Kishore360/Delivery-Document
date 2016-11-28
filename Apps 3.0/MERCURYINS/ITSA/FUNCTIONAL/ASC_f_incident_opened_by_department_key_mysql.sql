@@ -15,6 +15,6 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 
 
  
- WHERE COALESCE(LKP.row_key,CASE WHEN (SRC.opened_by is not null and LOKP.department IS NULL 
+ WHERE COALESCE(LKP.row_key,CASE WHEN ( LOKP.department IS NULL 
  or SRC.opened_by is  null)
  THEN 0 else -1 end)<> (TRGT.asc_incident_opened_by_department_c_key)

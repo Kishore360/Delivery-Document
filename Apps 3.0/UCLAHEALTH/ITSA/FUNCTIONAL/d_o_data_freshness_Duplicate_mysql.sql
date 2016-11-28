@@ -2,7 +2,7 @@ SELECT CASE WHEN cnt  THEN 'FAILURE' ELSE 'SUCCESS' END AS Result ,CASE WHEN cnt
 ELSE 'Data Matched' END AS Message   
 FROM( Select count(cnt) as cnt 
 from( 
-select row_id,source_id,count(1) as cnt 
+select row_key,source_id,count(1) as cnt 
 from  
 uclahealth_mdwdb.d_o_data_freshness  
 group by 1,2 

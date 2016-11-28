@@ -1,6 +1,7 @@
 select case when cnt > 1 then 'FAILURE' else 'SUCCESS' end as Result,
 case when cnt > 1 then 'Duplicates exists in Dimensions' else 'SUCCESS' end as Message
 from (
+select count(1) as cnt from(
 select 'd_configuration_item',row_id,source_id,count(1) cnt
 from <<tenant>>_mdwdb.d_configuration_item
 where soft_deleted_flag='N' group by 1,2
@@ -66,5 +67,5 @@ from <<tenant>>_mdwdb.d_master_item
 where soft_deleted_flag='N' group by 1,2
 having count(1) > 1
 
-
+)b
 )a
