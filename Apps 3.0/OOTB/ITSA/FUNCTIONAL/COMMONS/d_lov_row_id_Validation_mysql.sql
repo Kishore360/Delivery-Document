@@ -5,6 +5,6 @@ select count(1) as cnt
 from <<tenant>>_mdwdb.d_lov
 where 
 row_id <> concat(dimension_class,'~',dimension_type,'~',dimension_subtype,'~',dimension_code)
-and dimension_class <>'LANDING_PAGE'
+and dimension_class not in ('LANDING_PAGE','TENANT_INFORMATION')
 and row_key not in (-1,0)
 )a;
