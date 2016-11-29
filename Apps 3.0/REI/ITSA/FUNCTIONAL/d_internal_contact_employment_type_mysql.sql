@@ -6,4 +6,5 @@ FROM
 from rei_mdwdb.d_internal_contact a 
 join rei_mdsdb.sys_user_final b 
 ON a.row_id = CONCAT('INTERNAL_CONTACT~',b.sys_id) AND a.source_id = b.sourceinstance
+AND a.current_flag='Y'
 where b.u_resource_cost_component<> a.employment_type)c ;

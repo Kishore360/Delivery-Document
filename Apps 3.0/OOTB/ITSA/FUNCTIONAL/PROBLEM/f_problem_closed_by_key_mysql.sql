@@ -9,6 +9,7 @@ on TRGT.state_src_key=p.src_key and dimension_wh_code='CLOSED'
 LEFT JOIN <<tenant>>_mdwdb.d_internal_contact LKP 
  ON ( concat('INTERNAL_CONTACT~',closed_by)= LKP.row_id 
 AND SRC.sourceinstance= LKP.source_id
-AND COALESCE(CONVERT_TZ (SRC.opened_at,<<TENANT_SSI_TIME_ZONE>>,<<DW_TARGET_TIME_ZONE>>), CONVERT_TZ (coalesce(SRC.closed_at,SRC.sys_updated_on),<<TENANT_SSI_TIME_ZONE>>,<<DW_TARGET_TIME_ZONE>>)BETWEEN LKP.effective_from AND LKP.effective_to) )
+AND TRGT.pivot_date
+ BETWEEN LKP.effective_from AND LKP.effective_to)
  WHERE COALESCE(LKP.row_key,CASE WHEN SRC.closed_by IS NULL THEN 0 else -1 end)<> (TRGT.closed_by_key) ;
 

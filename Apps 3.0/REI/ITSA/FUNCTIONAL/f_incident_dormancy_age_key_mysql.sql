@@ -1,5 +1,5 @@
- select COALESCE(TIMESTAMPDIFF(second,SRC.sys_updated_on,CONVERT_TZ((SELECT MAX(lastupdated) AS lastupdated
-FROM rei_mdwdb.d_o_data_freshness WHERE sourcename like 'ServiceNow%'),"America/Los_Angeles","GMT")),0), TRGT.dormancy_age 
+ select CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result, 
+ CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for f_incident.dormancy_age_key' ELSE 'SUCCESS' END as Message  
  FROM rei_mdsdb.incident_final SRC 
  LEFT JOIN rei_mdwdb.f_incident TRGT 
  ON (SRC.sys_id =TRGT.row_id 

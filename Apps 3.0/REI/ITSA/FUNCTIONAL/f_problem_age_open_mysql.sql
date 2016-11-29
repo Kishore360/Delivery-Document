@@ -15,7 +15,7 @@ AND br.dimension_wh_code = 'OPEN' and br.dimension_class = 'STATE~PROBLEM'
 JOIN rei_mdwdb.d_problem a ON a.row_key = f.problem_key
 AND f.source_id = a.source_id 
 
-WHERE TIMESTAMPDIFF(second,SRC.opened_at,(SELECT CONVERT_TZ(MAX(lastupdated),'GMT','America/Los_Angeles') AS lastupdated
+WHERE TIMESTAMPDIFF(second,SRC.opened_at,(SELECT CONVERT_TZ(MAX(lastupdated),'America/Los_Angeles','GMT') AS lastupdated
 
 FROM rei_mdwdb.d_o_data_freshness WHERE sourcename like 'ServiceNow%'))<> f.age
 
