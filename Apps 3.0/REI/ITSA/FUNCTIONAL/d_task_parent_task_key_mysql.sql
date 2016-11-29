@@ -6,6 +6,6 @@ join rei_mdwdb.d_task b
 on a.sys_id=b.row_id and a.sourceinstance=b.source_id
 join rei_mdwdb.d_task c
 on a.parent=c.row_id and a.sourceinstance=c.source_id
-where coalesce(c.row_key, -1 )<> c.parent_task_key;
+where coalesce(c.row_key, -1 )<> b.parent_task_key;
 
 
