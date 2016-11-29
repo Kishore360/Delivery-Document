@@ -14,7 +14,8 @@ having count(1) > 1
 union
 select 'd_internal_contact',row_id,source_id,count(1) cnt
 from <<tenant>>_mdwdb.d_internal_contact
-where soft_deleted_flag='N' group by 1,2
+where soft_deleted_flag='N'
+and current_flag='Y' group by 1,2
 having count(1) > 1
 union
 select 'd_internal_organization',row_id,source_id,count(1) cnt
