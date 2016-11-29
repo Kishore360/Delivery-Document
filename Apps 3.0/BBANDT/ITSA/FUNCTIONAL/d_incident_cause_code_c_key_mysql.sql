@@ -4,7 +4,7 @@ ELSE 'Data Matched' END AS Message
 FROM (
 select count(1) as cnt
 from bbandt_mdsdb.incident_final a
-left JOIN bbandt_mdwdb.d_incident b
+JOIN bbandt_mdwdb.d_incident b
 on a.sys_id= b.row_id and a.sourceinstance=b.source_id
 LEFT JOIN bbandt_mdwdb.d_lov LKP 
  ON ( concat('CAUSE_CODE_C~INCIDENT~~~',u_cause_code)= LKP.row_id 
