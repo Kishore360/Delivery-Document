@@ -1,15 +1,15 @@
 select 'ldb.f_change_request a11 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_change_request a11 
 union
-select 'ldb.d_change_request a12 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_internal_contact a12 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_change_request a11 
-join ldb.d_change_request a12 
-on (a11.change_request_key = a12.row_key) 
+left outer join ldb.d_internal_contact a12 
+on (a11.opened_by_key = a12.row_key) 
 union
-select 'ldb.d_internal_contact a13 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_change_request a13 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_change_request a11 
-left outer join ldb.d_internal_contact a13 
-on (a11.opened_by_key = a13.row_key) 
+left outer join ldb.d_change_request a13 
+on (a11.change_request_key = a13.row_key) 
 union
 select 'ldb.d_calendar_date a14 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_change_request a11 
@@ -113,10 +113,10 @@ on (a11.domain_key = a123.row_key)
 union
 select 'ldb.d_internal_contact_mdm a124 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_change_request a11 
-left outer join ldb.d_internal_contact a13 
-on (a11.opened_by_key = a13.row_key) 
+left outer join ldb.d_internal_contact a12 
+on (a11.opened_by_key = a12.row_key) 
 left outer join ldb.d_internal_contact_mdm a124 
-on (a13.row_current_key = a124.row_current_key) 
+on (a12.row_current_key = a124.row_current_key) 
 union
 select 'ldb.d_incident a125 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_change_request a11 
