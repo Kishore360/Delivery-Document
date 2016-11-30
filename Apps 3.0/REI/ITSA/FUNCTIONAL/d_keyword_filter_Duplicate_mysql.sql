@@ -4,6 +4,7 @@ FROM( Select count(cnt) as cnt
 from( 
 select row_id,source_id,count(1) as cnt 
 from  
-rei_mdwdb.d_keyword_filter  
+rei_mdwdb.d_keyword_filter
+where soft_deleted_flag='Y'  
 group by 1,2 
 having count(1)>1)c )a 
