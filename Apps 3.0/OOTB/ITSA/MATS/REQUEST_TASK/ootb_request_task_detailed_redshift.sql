@@ -1,71 +1,75 @@
-select case when cnt > 1 then 'FAILURE' else 'SUCCESS' end as Result,
-case when cnt > 1 then 'Duplicates exists in Dimensions' else 'SUCCESS' end as Message
-from (
-select count(1)as cnt from (
-select 'd_configuration_item',row_id,source_id,count(1) Row_Count
-from <<tenant>>_mdwdb.d_configuration_item
-where soft_deleted_flag='N' group by 1,2
-having count(1) > 1
+select 'ldb.f_request_task a11 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_request_task a11 
 union
-select 'd_incident',row_id,source_id,count(1) Row_Count
-from <<tenant>>_mdwdb.d_incident
-where soft_deleted_flag='N' group by 1,2
-having count(1) > 1
+select 'ldb.d_internal_organization_department a12 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_request_task a11 
+join ldb.d_internal_organization_department a12 
+on (a11.opened_by_department_key = a12.row_key) 
 union
-select 'd_internal_contact',row_id,source_id,count(1) Row_Count
-from <<tenant>>_mdwdb.d_internal_contact
-where soft_deleted_flag='N' group by 1,2
-having count(1) > 1
+select 'ldb.d_master_item a13 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_request_task a11 
+join ldb.d_master_item a13 
+on (a11.catalog_item_key = a13.row_key) 
 union
-select 'd_internal_organization',row_id,source_id,count(1) Row_Count
-from <<tenant>>_mdwdb.d_internal_organization
-where soft_deleted_flag='N' group by 1,2
-having count(1) > 1
+select 'ldb.d_calendar_date a14 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_request_task a11 
+join ldb.d_calendar_date a14 
+on (a11.opened_on_key = a14.row_key) 
 union
-select 'd_location',row_id,source_id,count(1) Row_Count
-from <<tenant>>_mdwdb.d_location
-where soft_deleted_flag='N' group by 1,2
-having count(1) > 1
+select 'ldb.d_request_task a15 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_request_task a11 
+join ldb.d_request_task a15 
+on (a11.request_task_key = a15.row_key) 
 union
-select 'd_problem',row_id,source_id,count(1) Row_Count
-from <<tenant>>_mdwdb.d_problem
-where soft_deleted_flag='N' group by 1,2
-having count(1) > 1
+select 'ldb.d_internal_contact a17 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_request_task a11 
+join ldb.d_internal_contact a17 
+on (a11.assigned_to_key = a17.row_key) 
 union
-select 'd_problem_task',row_id,source_id,count(1) Row_Count
-from <<tenant>>_mdwdb.d_problem_task
-where soft_deleted_flag='N' group by 1,2
-having count(1) > 1
+select 'ldb.d_internal_organization_group a18 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_request_task a11 
+join ldb.d_internal_organization_group a18 
+on (a11.assignment_group_key = a18.row_key) 
 union
-select 'd_request',row_id,source_id,count(1) Row_Count
-from <<tenant>>_mdwdb.d_request
-where soft_deleted_flag='N' group by 1,2
-having count(1) > 1
+select 'ldb.d_request_item a19 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_request_task a11 
+join ldb.d_request_item a19 
+on (a11.request_item_key = a19.row_key) 
 union
-select 'd_request_item',row_id,source_id,count(1) Row_Count
-from <<tenant>>_mdwdb.d_request_item
-where soft_deleted_flag='N' group by 1,2
-having count(1) > 1
+select 'ldb.d_task_priority a110 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_request_task a11 
+join ldb.d_task_priority a110 
+on (a11.priority_src_key = a110.row_key) 
 union
-select 'd_request_task',row_id,source_id,count(1) Row_Count
-from <<tenant>>_mdwdb.d_request_task
-where soft_deleted_flag='N' group by 1,2
-having count(1) > 1
+select 'ldb.d_task_state a111 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_request_task a11 
+join ldb.d_task_state a111 
+on (a11.state_src_key = a111.row_key) 
 union
-select 'd_task',row_id,source_id,count(1) Row_Count
-from <<tenant>>_mdwdb.d_task
-where soft_deleted_flag='N' group by 1,2
-having count(1) > 1
+select 'ldb.d_calendar_month a112 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_request_task a11 
+join ldb.d_calendar_date a14 
+on (a11.opened_on_key = a14.row_key) 
+join ldb.d_calendar_month a112 
+on (a14.month_start_date_key = a112.row_key) 
 union
-select 'd_task_sla',row_id,source_id,count(1) Row_Count
-from <<tenant>>_mdwdb.d_task_sla
-where soft_deleted_flag='N' group by 1,2
-having count(1) > 1
+select 'ldb.d_calendar_week a113 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_request_task a11 
+join ldb.d_calendar_date a14 
+on (a11.opened_on_key = a14.row_key) 
+join ldb.d_calendar_week a113 
+on (a14.week_start_date_key = a113.row_key) 
 union
-select 'd_master_item',row_id,source_id,count(1) Row_Count
-from <<tenant>>_mdwdb.d_master_item
-where soft_deleted_flag='N' group by 1,2
-having count(1) > 1
-
-)b
-)a
+select 'ldb.d_calendar_quarter a114 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_request_task a11 
+join ldb.d_calendar_date a14 
+on (a11.opened_on_key = a14.row_key) 
+join ldb.d_calendar_quarter a114 
+on (a14.quarter_start_date_key = a114.row_key) 
+union
+select 'ldb.d_calendar_year a115 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_request_task a11 
+join ldb.d_calendar_date a14 
+on (a11.opened_on_key = a14.row_key) 
+join ldb.d_calendar_year a115 
+on (a14.year_start_date_key = a115.row_key) 
