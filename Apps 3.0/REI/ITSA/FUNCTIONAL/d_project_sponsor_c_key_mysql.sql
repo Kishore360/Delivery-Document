@@ -9,4 +9,7 @@ on TGT.row_id = SRC.sys_id
 AND TGT.source_id = SRC.sourceinstance
 LEFT JOIN rei_mdwdb.d_internal_contact lkp
 ON COALESCE(CONCAT('INTERNAL_CONTACT~',u_project_sponsor),'UNSPECIFIED')=lkp.row_id
+ AND SRC.sourceinstance= lkp.source_id
+AND TGT.changed_on
+ BETWEEN lkp.effective_from AND lkp.effective_to
 where  TGT.sponsor_c_key <> COALESCE(lkp.row_key,case when SRC.u_project_sponsor is null then 0 else -1 end ) )c
