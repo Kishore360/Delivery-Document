@@ -9,4 +9,6 @@ ON a.row_id = CONCAT('GROUP~',b.sys_id) AND a.source_id = b.sourceinstance
 join
 rei_mdwdb.d_internal_contact  lkp
  ON COALESCE(CONCAT('INTERNAL_CONTACT~',b.manager),'UNSPECIFIED') = lkp.row_id AND lkp.source_id = a.source_id
+ AND a.changed_on
+ BETWEEN lkp.effective_from AND lkp.effective_to
 where COALESCE(lkp.row_key,case when b.manager is null then 0 else -1 end)<> a.manager_c_key)c ;
