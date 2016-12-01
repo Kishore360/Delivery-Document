@@ -6,4 +6,5 @@ on s.sys_id=t.row_id and s.sourceinstance=t.source_id
 left join rei_mdwdb.d_internal_contact l
 on  COALESCE(CONCAT('INTERNAL_CONTACT~',u_portfolio_owner),'UNSPECIFIED')= l.row_id
  and s.sourceinstance=l.source_id
+ and t.changed_on between l.effective_from and l.effective_to
 WHERE t.portfolio_owner_key <> l.row_key
