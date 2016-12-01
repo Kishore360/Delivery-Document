@@ -13,4 +13,4 @@ tivo_mdsdb.sc_req_item_final b
 union 
 select b.sys_id as sys_id,b.sourceinstance as sourceinstance,'Request' as task_type from 
 tivo_mdsdb.sc_request_final b) b on a.row_id=b.sys_id AND a.source_id=b.sourceinstance
-WHERE a.task_type_c<>coalesce(task_type,'UNSPECIFIED')
+WHERE a.task_type_c<>coalesce(task_type,'UNSPECIFIED') and a.soft_deleted_flag='N'
