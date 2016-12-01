@@ -1,14 +1,12 @@
-SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
-,CASE WHEN cnt > 0 THEN 'Data did not Match.' 
-ELSE 'Data Matched' END AS Message 
-FROM(select count(*) as cnt 
-from
-rei_mdwdb.f_problem TGT
-JOIN rei_mdsdb.problem_final SRC
-on TGT.row_id = SRC.sys_id
-AND TGT.source_id = SRC.sourceinstance
-JOIN rei_mdwdb.d_lov_map br ON TGT.state_src_key = br.src_key
-AND br.dimension_wh_code IN ('CLOSED','RESOLVED')
-JOIN rei_mdwdb.d_calendar_date lkp
-ON  COALESCE(DATE_FORMAT(CONVERT_TZ(SRC.closed_at,'GMT','America/Los_Angeles'),'%Y%m%d'),'UNSPECIFIED') = lkp.row_id
-where  COALESCE(lkp.row_key,case when SRC.closed_at is null then 0 else -1 end ) <>TGT.closed_on_key)c
+SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+ CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for f_problem.closed_on_key' ELSE 'SUCCESS' END as Message
+ FROM rei_mdsdb.problem_final SRC
+ LEFT JOIN rei_mdwdb.f_problem TRGT 
+ ON (SRC.sys_id =TRGT.row_id  
+ AND SRC.sourceinstance= TRGT.source_id  )
+  JOIN rei_mdwdb.d_lov_map dlm 
+ON TRGT.state_src_key = dlm.src_key   and dlm.dimension_wh_code = 'CLOSED' and dimension_class ='STATE~PROBLEM'
+LEFT JOIN rei_mdwdb.d_calendar_date LKP 
+on (LKP.row_id = date_format(convert_tz(coalesce(SRC.closed_at,sys_updated_on),"GMT","America/Los_Angeles"),'%Y%m%d') and LKP.source_id=0
+)
+WHERE  case when dlm.dimension_wh_code = 'CLOSED' then (LKP.row_key) else null end <> (TRGT.closed_on_key)
