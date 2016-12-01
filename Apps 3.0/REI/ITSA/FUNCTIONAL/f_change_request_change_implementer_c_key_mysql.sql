@@ -10,5 +10,7 @@ and a.sys_id = b.row_id
 join
 rei_mdwdb.d_internal_contact c
 on COALESCE(CONCAT('INTERNAL_CONTACT~',a.u_change_implementer),'UNSPECIFIED') = c.row_id and b.source_id=c.source_id
+AND b.pivot_date
+ BETWEEN c.effective_from AND c.effective_to
 where coalesce(c.row_key,case when a.u_change_implementer is null then 0 else -1 end )  <>b.change_implementer_c_key
 )a;

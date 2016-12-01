@@ -3,13 +3,14 @@ SELECT CASE WHEN cnt<>cntt THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  FROM
 (
 
-select RES1.cnt+2 as cnt, RES2.cntt from
+select RES1.cnt as cnt, RES2.cntt from
 
 (select count(sys_id) as cnt from
 rei_mdsdb.pm_project_final) as RES1,
 
 (select count(row_id) as cntt 
-from rei_mdwdb.f_project_c) RES2
+from rei_mdwdb.f_project_c
+where soft_deleted_flag='N') RES2
 
 )a;
 
