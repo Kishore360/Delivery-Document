@@ -38,12 +38,12 @@ on (a11.request_item_key = a19.row_key)
 union
 select 'ldb.d_task_priority a110 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_request_task a11 
-join ldb.d_task_priority a110 
+join ldb.d_sc_task_priority a110 
 on (a11.priority_src_key = a110.row_key) 
 union
 select 'ldb.d_task_state a111 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_request_task a11 
-join ldb.d_task_state a111 
+join ldb.d_sc_task_state a111 
 on (a11.state_src_key = a111.row_key) 
 union
 select 'ldb.d_calendar_month a112 ' as Table_name, count(a11.row_key) Row_Count
