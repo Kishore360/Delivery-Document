@@ -9,8 +9,10 @@ AND br.dimension_wh_code = 'OPEN'
 JOIN rei_mdwdb.d_request_task a ON a.row_key = f.request_task_key
 AND f.source_id = a.source_id
 JOIN rei_mdwdb.d_o_data_freshness df ON f.source_id = df.source_id
+and df.etl_run_number=(SELECT MAX(etl_run_number) AS lastupdated
+FROM rei_mdwdb.d_o_data_freshness WHERE sourcename like 'ServiceNow%')
 where 
-if(timestampdiff(second, CONVERT_TZ(a.opened_on,'GMT','America/Los_Angeles'), 
-CONVERT_TZ(df.lastupdated,'GMT','America/Los_Angeles'))>0,
-timestampdiff(second, CONVERT_TZ(a.opened_on,'GMT','America/Los_Angeles'), 
-CONVERT_TZ(df.lastupdated,'GMT','America/Los_Angeles')),0) <> f.age_c)c
+if(timestampdiff(second, CONVERT_TZ(a.opened_on,'America/Los_Angeles','GMT'), 
+CONVERT_TZ(df.lastupdated,'America/Los_Angeles','GMT'))>0,
+timestampdiff(second, CONVERT_TZ(a.opened_on,'America/Los_Angeles','GMT'), 
+CONVERT_TZ(df.lastupdated,'America/Los_Angeles','GMT')),0) <> f.age_c)c
