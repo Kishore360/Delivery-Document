@@ -64,10 +64,8 @@ from ldb.f_incident_outage       a11
 from ldb.f_incident_outage       a11 
 				  join        ldb.d_business_service a13
                   on         (a11.business_service_key = a13.row_key)
-				     join        ldb.d_business_service_criticality             a14
-                  on         (a13.criticality_key = a14.row_key)
-				  join        ldb.d_business_service_used_for             a131
-                  on         (a14.row_key = a131.row_key)
+				      join        ldb.d_business_service_used_for             a131
+                  on         (a13.used_for_src_key = a131.row_key)
 				  union
 				  
 				      select 'ldb.d_change_request_caused_by' as Table_name, count(a11.row_key) Row_Count
