@@ -4,7 +4,7 @@ CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for f_customer_ser
 FROM tjx_mdsdb.u_customer_service_final SRC
 LEFT JOIN tjx_mdwdb.d_lov LKP 
  ON LKP.dimension_class like '%U_SUBCATEGORY_US_C~U_CUSTOMER_SERVICE%' and 
-(CONCAT('U_SUBCATEGORY_US_C~U_CUSTOMER_SERVICE','~',UPPER(cfid.u_category_us),'~~',UPPER(cfid.u_subcategory_us))= LKP.row_id 
+(CONCAT('U_SUBCATEGORY_US_C~U_CUSTOMER_SERVICE','~',UPPER(SRC.u_category_us),'~~',UPPER(SRC.u_subcategory_us))= LKP.row_id 
 AND SRC.sourceinstance= LKP.source_id ) 
  LEFT JOIN tjx_mdwdb.f_customer_service_c TRGT 
  ON (SRC.sys_id =TRGT.row_id  
