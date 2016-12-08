@@ -6,4 +6,4 @@ count(*) as cnt
 from  nbcu_mdwdb.d_incident a11
 left join nbcu_mdsdb.incident_final a12
 on a11.row_id=a12.sys_id and a11.source_id=a12.sourceinstance
-where coalesce(u_other1,'') <>coalesce(a11.other1_c,''))a
+where u_other1 <>a11.other1_c)a
