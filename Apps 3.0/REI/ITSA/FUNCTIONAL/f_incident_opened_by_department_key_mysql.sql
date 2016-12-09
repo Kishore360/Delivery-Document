@@ -8,6 +8,7 @@ left join  rei_mdsdb.sys_user_final scu on SRC.caller_id = scu.sys_id
  AND SRC.sourceinstance= TRGT.source_id  )
  LEFT JOIN   rei_mdwdb.d_internal_organization LKP
  ON ( concat('DEPARTMENT~',scu.department)= LKP.row_id 
- AND scu.sourceinstance= LKP.source_id )
+ AND scu.sourceinstance= LKP.source_id
+AND TRGT.pivotdate between LKP.effective_from and LKP.effective_to )
 
  WHERE COALESCE(LKP.row_key,CASE WHEN (scu.department is  null ) THEN 0 else -1 end)<> (TRGT.opened_by_department_key) 
