@@ -16,6 +16,7 @@ and name not like 'ITSM-LOB-LoanServices%' and name not like 'ITSM-LOB-Wealth%')
  ) as RES1,
 
 (select count(row_id)-2 as cntt 
-from bbandt_mdwdb.d_incident where soft_deleted_flag='N') RES2
+from bbandt_mdwdb.d_incident where soft_deleted_flag='N'
+and exclude_incident_c_flag = 'N') RES2
 
 )a
