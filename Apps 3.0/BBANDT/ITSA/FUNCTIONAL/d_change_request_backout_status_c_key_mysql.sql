@@ -11,6 +11,5 @@ on a.sys_id=b.row_id and
 a.sourceinstance=b.source_id
 
 left join bbandt_mdwdb.d_lov d
-on a.u_backout_status=d.row_id and dimension_class='U_BACKOUT_STATUS~CHANGE_REQUEST'
-where coalesce(d.row_key,case when u_backout_status is null then 0 else -1 end) <>b.backout_status_c_key) a;
-
+on concat('U_BACKOUT_STATUS~CHANGE_REQUEST~~~',a.u_backout_status)=d.row_id and dimension_class='U_BACKOUT_STATUS~CHANGE_REQUEST'
+where coalesce(d.row_key,case when u_backout_status is null then 0 else -1 end) <>b.backout_status_c_key) a; 
