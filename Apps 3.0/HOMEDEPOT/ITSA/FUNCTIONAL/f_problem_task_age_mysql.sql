@@ -12,5 +12,6 @@ join homedepot_mdwdb.d_lov_map br ON f.state_src_key = br.src_key
 and br.dimension_wh_code='OPEN'
 where f.age_c<>timestampdiff(hour,d.opened_on,df.lastupdated)
 and
-f.age_c+1<>timestampdiff(hour,d.opened_on,df.lastupdated)
+f.age_c-1<>timestampdiff(hour,d.opened_on,df.lastupdated)
 )tmp
+ 

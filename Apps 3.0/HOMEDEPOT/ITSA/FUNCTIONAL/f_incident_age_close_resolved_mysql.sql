@@ -1,3 +1,4 @@
+
 select CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 CASE WHEN cnt >0 THEN 'MDS to DWH data validation failed for f_incident.age' ELSE 'SUCCESS' END as Message
 from
@@ -10,5 +11,5 @@ AND br.dimension_wh_code IN ('RESOLVED','CLOSED')
 JOIN homedepot_mdwdb.d_incident a ON a.row_key = f.incident_key
 AND f.source_id = a.source_id
 WHERE
-timestampdiff(DAY, convert_tz(convert_tz(SRC.opened_at,'GMT','America/New_York'),'America/New_York','GMT'), 
+timestampdiff(SECOND, convert_tz(convert_tz(SRC.opened_at,'GMT','America/New_York'),'America/New_York','GMT'), 
 coalesce(convert_tz(convert_tz(SRC.u_incident_resolved_date_time,'GMT','America/New_York'),'America/New_York','GMT'), convert_tz(convert_tz(SRC.closed_at,'GMT','America/New_York'),'America/New_York','GMT'))) <> f.age)a
