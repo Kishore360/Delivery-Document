@@ -1,28 +1,27 @@
-select 'ldb.f_incident' as Table_name, count(a11.row_key) Row_Count
-from      ldb.f_incident    a11
+select'ldb.d_customer' as Table_Name, count(a11.row_key) Row_Count
+ from  ldb.f_incident             a11 
+join ldb.d_customer         a12
+on (a11.customer_key = a12.row_key)
 union
-select 'ldb.d_assignment_group_manager_c' as Table_name, count(a11.row_key) Row_Count
-from      ldb.f_incident    a11
-join        ldb.d_internal_organization_group         a12
-                  on         (a11.assignment_group_key = a12.row_key)
-                join        ldb.d_assignment_group_manager_c     a13
-                  on         (a12.manager_c_key = a13.row_key)
-				  union
-				  select 'd_incident_cause_code_c' as Table_name, count(a11.row_key) Row_Count
-				  from      ldb.f_incident    a11
-				     join        ldb.d_incident   a12
-                  on         (a11.incident_key = a12.row_key)
-                join        ldb.d_incident_cause_code_c    a13
-                  on         (a12.cause_code_c_key = a13.row_key)
-				  union
-				  select 'd_incident_resolution_code_c' as Table_name, count(a11.row_key) Row_Count
-				  from      ldb.f_incident    a11
-				     join        ldb.d_incident   a12
-                  on         (a11.incident_key = a12.row_key)
-				   join        ldb.d_incident_resolution_code_c           a19
-                  on         (a12.resolution_code_c_key = a19.row_key)
-				  union
-				  select 'd_incident_resolution_ci_c' as Table_name, count(a11.row_key) Row_Count
-				  from      ldb.f_incident    a11
-				  join        ldb.d_incident_resolution_ci_c a12
-                  on         (a11.resolution_ci_c_key = a12.row_key)
+select'ldb.d_internal_contact' as Table_Name, count(a11.row_key) Row_Count
+ from  ldb.f_incident             a11 
+join ldb.d_internal_contact         a13
+on (a11.opened_by_key = a13.row_key)
+union
+select'ldb.d_calendar_time' as Table_Name, count(a11.row_key) Row_Count
+ from  ldb.f_incident             a11 
+join ldb.d_calendar_time         a14
+on (a11.opened_time_key = a14.row_key)
+union
+select'ldb.d_calendar_date' as Table_Name, count(a11.row_key) Row_Count
+ from  ldb.f_incident             a11 
+join ldb.d_calendar_date         a15
+on (a11.opened_on_key = a15.row_key)
+union
+select'ldb.d_calendar_month' as Table_Name, count(a11.row_key) Row_Count
+ from  ldb.f_incident             a11
+join ldb.d_calendar_date         a15
+on (a11.opened_on_key = a15.row_key) 
+join ldb.d_calendar_month         a16
+on (a15.month_start_date_key = a16.row_key)
+
