@@ -1,18 +1,11 @@
-
-
-SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
- CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for f_incident.state_src_code' ELSE 'SUCCESS' END as Message
- FROM weillcornell_mdsdb.incident_final SRC 
- LEFT JOIN weillcornell_mdwdb.f_incident TRGT 
- ON (SRC.sys_id =TRGT.row_id  
- AND SRC.sourceinstance= TRGT.source_id  )
- WHERE COALESCE( SRC.incident_state,'')<> COALESCE(TRGT.state_src_code ,'')
-  and    SRC.sys_id not in (select B.sys_id
-from
-weillcornell_mdsdb.incident_final B
-join weillcornell_mdsdb.sys_user_final C
-on C.sys_id = B.caller_id
-join weillcornell_mdsdb.cmdb_ci_final D
-on D.sys_id = B.u_business_service
-where UPPER(C.user_name) = 'GUEST'
-and UPPER(D.name) = 'ONLINE DIRECTORY' ) 
+  SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
+,CASE WHEN cnt > 0 THEN 'Data did not Match.' 
+ELSE 'Data Matched' END AS Message 
+FROM ( select count(1) as cnt
+from weillcornell_mdsdb.incident_final a
+inner join weillcornell_mdwdb.f_incident b on a.sys_id =b.row_id  and b.row_key <100
+where a.incident_state<>b.state_src_code
+ ) c;
+ 
+ 
+ 
