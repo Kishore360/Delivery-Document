@@ -3,7 +3,7 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  
  FROM mercuryins_mdsdb.u_asc_ticket_final SRC 
  LEFT JOIN mercuryins_mdsdb.sys_user_final LOKP
- on LOKP.sys_id=SRC.opened_by
+ on LOKP.sys_id=SRC.u_caller
  JOIN mercuryins_mdwdb.f_incident_asc_c TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
@@ -16,5 +16,5 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 
  
  WHERE COALESCE(LKP.row_key,CASE WHEN ( LOKP.department IS NULL 
- or SRC.opened_by is  null)
+ or SRC.u_caller is  null)
  THEN 0 else -1 end)<> (TRGT.asc_incident_opened_by_department_c_key)
