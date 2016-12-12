@@ -31,6 +31,8 @@ not in (select class_value from molinahealth_workdb.lsm_ls_system_variables wher
 'NICE_ACCESS_TYPE~HR_CASE_C',
 'NICE_RECORDING_TYPE~HR_CASE_C',
 'COMPUTER_TYPE~HR_CASE_C',
-'MOLINA_COMPUTER_TYPE~HR_CASE_C' 
+'MOLINA_COMPUTER_TYPE~HR_CASE_C' ,
+'GENRE~KB_KNOWLEDGE',
+'KB_CATEGORY~KB_KNOWLEDGE'
 
 ) )a;
