@@ -16,9 +16,9 @@ case when src.overdue_duration is not null then 1 else 0 end as src_not_null_cou
 
 case when trgt.overdue_duration is not null then 1 else 0 end as trgt_not_null_count,
 
-case when COALESCE(src.overdue_duration,0) = COALESCE(trgt.overdue_duration,0) then src.sys_id else '' end as failures,
+case when COALESCE(src.overdue_duration,0) <> COALESCE(trgt.overdue_duration,0) then src.sys_id else '' end as failures,
 
-case when COALESCE(src.overdue_duration,0) = COALESCE(trgt.overdue_duration,0) then 1 else 0 end as failures_cnt
+case when COALESCE(src.overdue_duration,0) <> COALESCE(trgt.overdue_duration,0) then 1 else 0 end as failures_cnt
 from 
 (select 
 ri.sys_id,ri.sourceinstance,
