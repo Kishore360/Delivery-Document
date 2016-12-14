@@ -1,3 +1,6 @@
+select'ldb.f_incident' as Table_Name, count(a11.row_key) Row_Count
+ from  ldb.f_incident             a11 
+ union
 select'ldb.d_customer' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_incident             a11 
 join ldb.d_customer         a12

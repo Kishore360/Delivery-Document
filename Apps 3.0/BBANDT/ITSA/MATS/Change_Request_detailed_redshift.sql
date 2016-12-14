@@ -1,3 +1,6 @@
+select'ldb.f_change_request' as Table_Name, count(a11.row_key) Row_Count
+ from  ldb.f_change_request             a11 
+ union
 select'ldb.d_change_request' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_change_request             a11 
 join ldb.d_change_request         a12
