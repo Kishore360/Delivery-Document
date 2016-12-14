@@ -15,8 +15,8 @@ and SRC.sourceinstance = lkp.sourceinstance
 and name not like 'ITSM-LOB-LoanServices%' and name not like 'ITSM-LOB-Wealth%') or lkp.name is null)
  ) as RES1,
 
-(select count(row_id)-2 as cntt 
+(select count(row_id) as cntt 
 from bbandt_mdwdb.d_incident where soft_deleted_flag='N'
-and exclude_incident_c_flag = 'N') RES2
+and exclude_incident_c_flag = 'N' and row_key not in (0,-1)) RES2
 
 )a
