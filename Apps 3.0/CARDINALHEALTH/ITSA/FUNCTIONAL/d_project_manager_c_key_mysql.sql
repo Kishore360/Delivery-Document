@@ -1,4 +1,4 @@
-  SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed' ELSE 'SUCCESS' END as Message
  FROM cardinalhealth_mdsdb.pm_project_final SRC 
  LEFT JOIN cardinalhealth_mdwdb.d_project TRGT 

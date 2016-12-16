@@ -1,9 +1,10 @@
 SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
-CASE WHEN count(1) >0 THEN 'Failure' ELSE 'Data Matched' END as Message
-from cardinalhealth_mdsdb.change_request a
-join cardinalhealth_mdwdb.f_change_request b
-on a.sys_id=b.row_id and a.sourceinstance=b.source_id
-left join cardinalhealth_mdwdb.d_lov c
-on COALESCE(CONCAT('STAGE_C','~','CHANGE_REQUEST','~','~','~',UPPER(a.u_stage )),'UNSPECIFIED')=c.row_id 
-and a.sourceinstance=c.source_id
-where c.row_key <> b.stage_src_c_key;
+ CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed' ELSE 'SUCCESS' END as Message
+ FROM cardinalhealth_mdsdb.change_request_final SRC 
+ LEFT JOIN cardinalhealth_mdwdb.d_lov LKP
+ on LKP.row_id = COALESCE( CONCAT('STAGE_C','~','CHANGE_REQUEST','~','~','~',UPPER(SRC.u_stage )),'UNSPECIFIED') and LKP.source_id = SRC.sourceinstance
+ LEFT JOIN cardinalhealth_mdwdb.f_change_request TRGT 
+  
+ ON (SRC.sys_id =TRGT.row_id  
+ AND SRC.sourceinstance= TRGT.source_id  )
+ WHERE COALESCE(LKP.row_key , CASE WHEN SRC.u_stage is null then 0 else -1 END) <> TRGT.stage_src_c_key ;
