@@ -1,5 +1,6 @@
 -- If the query FAILs, please check DST
 
+
 SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for f_incident.open_to_resolve_duration' ELSE 'SUCCESS' END as Message
  FROM uclahealth_mdsdb.incident_final SRC
@@ -9,4 +10,7 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  LEFT JOIN uclahealth_mdwdb.d_lov_map br 
  ON TRGT.state_src_key = br.src_key
 WHERE   br.dimension_wh_code IN ('CLOSED','RESOLVED')
-AND TIMESTAMPDIFF(SECOND,SRC.opened_at,coalesce(SRC.u_resolved_date,SRC.closed_at,SRC.sys_updated_on))  <> TRGT.open_to_resolve_duration
+AND CASE WHEN TIMESTAMPDIFF(SECOND,
+                SRC.opened_at,
+                SRC.u_resolved_date) < 0 THEN NULL    
+                ELSE TIMESTAMPDIFF(SECOND,SRC.opened_at,coalesce(SRC.u_resolved_date,SRC.closed_at,SRC.sys_updated_on)) END <> TRGT.open_to_resolve_duration
