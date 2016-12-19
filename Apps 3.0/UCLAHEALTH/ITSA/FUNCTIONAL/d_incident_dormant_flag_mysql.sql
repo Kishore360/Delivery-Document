@@ -10,6 +10,6 @@
  
 LEFT JOIN uclahealth_mdwdb.d_lov_map LM ON TRGTF.state_src_key=LM.src_key and  LM.dimension_class = 'STATE~INCIDENT'
 AND  LM.dimension_wh_code='OPEN'
- WHERE  CASE WHEN timestampdiff(DAY,TRGT.changed_on,(SELECT MAX(lastupdated) AS lastupdated
-FROM uclahealth_mdwdb.d_o_data_freshness WHERE sourcename like 'ServiceNow%'))>15 AND LM.dimension_class = 'STATE~INCIDENT'
+ WHERE  CASE WHEN timestampdiff(DAY,TRGT.changed_on,(SELECT (lastupdated) AS lastupdated
+FROM uclahealth_mdwdb.d_o_data_freshness WHERE sourcename like 'ServiceNow%') and etl_run_number=TRGTF.etl_run_number)>15 AND LM.dimension_class = 'STATE~INCIDENT'
 AND  LM.dimension_wh_code='OPEN' THEN 'Y' ELSE 'N' END <> COALESCE(TRGT.dormant_flag ,'')
