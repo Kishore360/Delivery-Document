@@ -15,5 +15,4 @@ JOIN gogo_mdwdb.d_lov_map br
 ON (SRC.review_status = br.dimension_code
 )
 WHERE CASE when
-u_closure_code IN ('Successful', 'Partially Successful') THEN 'N' ELSE 'Y' END
-END <> TRGT.failure_flag
+u_closure_code IN ('Successful', 'Partially Successful') THEN 'N' ELSE 'Y' END <> TRGT.failure_flag

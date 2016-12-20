@@ -6,7 +6,7 @@
  LEFT JOIN gogo_mdwdb.f_work_order_c TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  ) LEFT JOIN gogo_mdwdb.d_internal_contact LKP 
-on (LKP.row_id = COALESCE(SRC.closed_by,'UNSPECIFIED') ) )
+on (LKP.row_id = COALESCE(SRC.closed_by,'UNSPECIFIED') ) 
  WHERE COALESCE(LKP.row_key,case when SRC.closed_by is null then 0 else -1 end )<>(TRGT.closed_by_key)
  
  
