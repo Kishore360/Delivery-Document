@@ -6,5 +6,5 @@ select count(1) as cnt
 from jnj_mdsdb.incident_final a
 JOIN jnj_mdwdb.d_incident b
 on a.sys_id= b.row_id and a.sourceinstance=b.source_id
-WHERE case when u_reliability=1 then 'Y' else 'N' end<>b.reliability_flag_c)temp; 
+WHERE case when u_reliability=1 then 'Y' else 'N' end<>b.reliability_c_flag)temp; 
 

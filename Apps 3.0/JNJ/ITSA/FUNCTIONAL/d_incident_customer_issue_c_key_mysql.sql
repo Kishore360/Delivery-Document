@@ -5,7 +5,7 @@ LEFT JOIN jnj_mdwdb.d_lov LKP
  ON LKP.dimension_class like '%STATE~INCIDENT%' and 
 ( concat('STATE~INCIDENT~~~',u_customer_issue)= LKP.src_rowid 
 AND SRC.sourceinstance= LKP.source_id ) 
- LEFT JOIN jnj_mdwdb.f_incident TRGT 
+ LEFT JOIN jnj_mdwdb.d_incident TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
  WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_customer_issue IS NULL THEN 0 else -1 end)<> (TRGT.customer_issue_c_key)
