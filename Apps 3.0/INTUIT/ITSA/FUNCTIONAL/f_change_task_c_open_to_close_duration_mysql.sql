@@ -10,7 +10,4 @@ SELECT CASE
 FROM     intuit_mdwdb.f_change_task_c  trgt
 JOIN intuit_mdsdb.change_task_final src
 ON trgt.source_id = src.sourceinstance and trgt.row_id = src.sys_id
-WHERE COALESCE(TIMESTAMPDIFF(SECOND,CONVERT_TZ(src.opened_at,'GMT','America/Los_Angeles'),CONVERT_TZ(src.closed_at,'GMT','America/Los_Angeles')),0)<>
- trgt.open_to_close_duration;
-
-
+WHERE TIMESTAMPDIFF(SECOND,src.opened_at,src.closed_at)<> trgt.open_to_close_duration;
