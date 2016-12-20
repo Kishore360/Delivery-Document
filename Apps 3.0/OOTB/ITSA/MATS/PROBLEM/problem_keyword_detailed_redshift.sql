@@ -1,11 +1,6 @@
 select 'ldb.f_problem a11 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_problem a11 
 union
-select 'ldb.f_problem_keyword a12 ' as Table_name, count(a11.row_key) Row_Count
-from ldb.f_problem a11 
-join ldb.f_problem_keyword a12 
-on (a11.assigned_to_key = a12.assigned_to_key and a11.assignment_group_key = a12.assignment_group_key and a11.configuration_item_key = a12.configuration_item_key and a11.domain_key = a12.domain_key and a11.impact_src_key = a12.impact_src_key and a11.opened_by_key = a12.opened_by_key and a11.opened_on_key = a12.opened_on_key and a11.opened_time_key = a12.opened_time_key and a11.priority_src_key = a12.priority_src_key and a11.problem_key = a12.problem_key and a11.reported_type_src_key = a12.reported_type_src_key and a11.state_src_key = a12.state_src_key and a11.urgency_src_key = a12.urgency_src_key) 
-union
 select 'ldb.d_internal_contact a13 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_problem a11 
 join ldb.d_internal_contact a13 

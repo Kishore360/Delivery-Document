@@ -1,11 +1,6 @@
 select 'ldb.f_request_item a11 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_request_item a11 
 union
-select 'ldb.f_request_item_keyword a12 ' as Table_name, count(a11.row_key) Row_Count
-from ldb.f_request_item a11 
-join ldb.f_request_item_keyword a12 
-on (a11.approval_state_src_key = a12.approval_state_src_key and a11.assigned_to_key = a12.assigned_to_key and a11.assignment_group_key = a12.assignment_group_key and a11.catalog_item_key = a12.catalog_item_key and a11.closed_by_key = a12.closed_by_key and a11.domain_key = a12.domain_key and a11.impact_src_key = a12.impact_src_key and a11.opened_by_key = a12.opened_by_key and a11.opened_on_key = a12.opened_on_key and a11.priority_src_key = a12.priority_src_key and a11.request_item_key = a12.request_item_key and a11.request_key = a12.request_key and a11.requested_for_key = a12.requested_for_key and a11.stage_src_key = a12.stage_src_key and a11.state_src_key = a12.state_src_key and a11.urgency_src_key = a12.urgency_src_key) 
-union
 select 'ldb.d_internal_contact a13 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_request_item a11 
 join ldb.d_internal_contact a13 
