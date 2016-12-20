@@ -6,7 +6,7 @@
  LEFT JOIN gogo_mdwdb.f_work_order_task_c TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  ) LEFT JOIN gogo_mdwdb.d_calendar_date LKP 
-on (LKP.row_id = DATE_FORMAT(CONVERT_TZ(SRC.dispatched_on,'GMT','America/Chicago'),'%Y%m%d') ) )
+on (LKP.row_id = DATE_FORMAT(CONVERT_TZ(SRC.dispatched_on,'GMT','America/Chicago'),'%Y%m%d') ) 
  WHERE COALESCE(LKP.row_key,case when SRC.dispatched_on is null then 0 else -1 end )<>(TRGT.dispatched_on_key)
  
  

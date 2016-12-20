@@ -5,7 +5,7 @@ JOIN jnj_mdwdb.d_incident TRGT
 ON (SRC.sys_id = TRGT.row_id  
 AND SRC.sourceinstance = TRGT.source_id )  
 LEFT JOIN jnj_mdwdb.d_lov LKP 
-ON ( concat( 'U_REASON_C~INCIDENT~~~' ,upper( SRC.u_status)) = LKP.row_id  
+ON ( concat( 'STATUS_C~INCIDENT~~~' ,upper( SRC.u_status)) = LKP.row_id  
 AND SRC.sourceinstance = LKP.source_id )  
 WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_status IS NULL THEN 0 else -1 end)<> (TRGT.incident_status_src_c_key) 
 

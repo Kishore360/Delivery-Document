@@ -7,9 +7,7 @@
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  ) 
  LEFT JOIN gogo_mdwdb.d_task LKP 
-on (LKP.row_id =  COALESCE(SRC.parent,'UNSPECIFIED'))) )
+on (LKP.row_id =  COALESCE(SRC.parent,'UNSPECIFIED')) 
  WHERE COALESCE(LKP.row_key,case when SRC.parent is null then 0 else -1 end )<>(TRGT.parent_task_key)
- AND DATE_FORMAT(TRGT.pivot_date, '%Y-%m-%d %H:%i:%s') 
-									BETWEEN effective_from AND effective_to
- 
+
  

@@ -7,7 +7,7 @@
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  ) 
  LEFT JOIN gogo_mdwdb.d_internal_organization LKP 
-on (LKP.row_id =  concat('SUBSIDIARY~',SRC.company)) )
+on (LKP.row_id =  concat('SUBSIDIARY~',SRC.company)) 
  WHERE COALESCE(LKP.row_key,case when SRC.company is null then 0 else -1 end )<>(TRGT.company_key)
  AND DATE_FORMAT(TRGT.pivot_date, '%Y-%m-%d %H:%i:%s') 
 									BETWEEN effective_from AND effective_to
