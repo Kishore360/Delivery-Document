@@ -6,7 +6,7 @@
  LEFT JOIN gogo_mdwdb.f_work_order_task_c TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  ) LEFT JOIN gogo_mdwdb.d_work_order_c LKP 
-on (LKP.row_id = SRC.parent ) )
+on (LKP.row_id = SRC.parent ) 
  WHERE COALESCE(LKP.row_key,case when SRC.parent is null then 0 else -1 end )<>(TRGT.work_order_key)
  
  

@@ -6,7 +6,7 @@
  LEFT JOIN gogo_mdwdb.f_work_order_task_c TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  ) LEFT JOIN gogo_mdwdb.d_configuration_item LKP 
-on (LKP.row_id = COALESCE(SRC.cmdb_ci,'UNSPECIFIED')) )
+on (LKP.row_id = COALESCE(SRC.cmdb_ci,'UNSPECIFIED')) 
  WHERE COALESCE(LKP.row_key,case when SRC.cmdb_ci is null then 0 else -1 end )<>(TRGT.configuration_item_key)
  
  
