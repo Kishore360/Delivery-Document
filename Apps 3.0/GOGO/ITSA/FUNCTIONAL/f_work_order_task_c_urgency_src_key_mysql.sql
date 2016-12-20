@@ -6,7 +6,7 @@
  LEFT JOIN gogo_mdwdb.f_work_order_task_c TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  ) LEFT JOIN gogo_mdwdb.d_lov LKP 
-on (LKP.row_id = concat('URGENCY','~','TASK','~','~','~',UPPER(i.urgency)) )
+on (LKP.row_id = concat('URGENCY','~','TASK','~','~','~',UPPER(i.urgency)) 
  WHERE COALESCE(LKP.row_key,case when SRC.urgency is null then 0 else -1 end )<>(TRGT.urgency_src_key)
  
  
