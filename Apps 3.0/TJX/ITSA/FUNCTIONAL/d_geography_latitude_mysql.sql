@@ -4,4 +4,4 @@
 join tjx_mdwdb.d_geography TRGT
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
-where SRC.latitude<>TRGT.latitude
+where cast(SRC.latitude as decimal(28,10))<>TRGT.latitude
