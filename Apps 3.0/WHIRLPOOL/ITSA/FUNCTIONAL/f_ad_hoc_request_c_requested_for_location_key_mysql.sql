@@ -1,0 +1,12 @@
+SELECT CASE WHEN count(1)  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)  THEN 'MDS to DWH data validation failed for f_ad_hoc_request_c.business_duration' ELSE 'SUCCESS' END as Message FROM whirlpool_mdwdb.f_ad_hoc_request_c a
+join whirlpool_mdsdb.u_ad_hoc_request_final b
+on a.row_id=b.sys_id
+and a.source_id=b.sourceinstance
+left join whirlpool_mdsdb.sys_user_final c
+on b.requested_for=c.sys_id and b.sourceinstance=c.sourceinstance
+left join whirlpool_mdsdb.cmn_location_final d
+on c.location=d.sys_id and c.sourceinstance=d.sourceinstance
+join
+whirlpool_mdwdb.d_location LKP
+on COALESCE(concat('COUNTRIES~U_AD_HOC_REQUEST','~~~',upper(d.country)),'UNSPECIFIED')=LKP.row_id
+where coalesce(LKP.row_key,case when d.country is null then 0 else -1 end ) <> a.requested_for_location_key
