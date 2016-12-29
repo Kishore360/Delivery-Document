@@ -6,11 +6,6 @@ from ldb.f_request_task a11
 join ldb.d_internal_organization_department a12 
 on (a11.opened_by_department_key = a12.row_key) 
 union
-select 'ldb.d_master_item a13 ' as Table_name, count(a11.row_key) Row_Count
-from ldb.f_request_task a11 
-join ldb.d_master_item a13 
-on (a11.catalog_item_key = a13.row_key) 
-union
 select 'ldb.d_calendar_date a14 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_request_task a11 
 join ldb.d_calendar_date a14 

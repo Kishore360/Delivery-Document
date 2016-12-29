@@ -11,7 +11,6 @@ where fieldname = ('assignment_group') and tablename='incident' group by documen
 inner join ( select documentkey,user,max(sys_created_on) as sys_created_on,newvalue,oldvalue , fieldname from tjx_mdsdb.sys_audit_final  
 where fieldname in ('priority') and tablename='incident' group by documentkey) asg
 on asg.documentkey=src.documentkey 
-where priority_change_by_assignment_group_c_key <> coalesce(TGT.row_key,case when coalesce(src.oldvalue,incf.assignment_group) is null then 0 else -1 end  ) 
+where priority_change_by_use_c_key <> coalesce(TGT.row_key,case when coalesce(src.oldvalue,incf.assigned_to) is null then 0 else -1 end  ) 
 and src.sys_created_on <= asg.sys_created_on )b
-
 
