@@ -9,7 +9,7 @@
  where lm.dimension_class = 'STATE~INCIDENT'
 AND  lm.dimension_wh_code = 'OPEN'  
 AND COALESCE(TIMESTAMPDIFF(day,SRC.sys_updated_on,CONVERT_TZ((SELECT MAX(lastupdated) AS lastupdated
-FROM molinahealth_mdwdb.d_o_data_freshness WHERE sourcename like 'ServiceNow%'),'America/Los_Angeles','GMT')),0)<> TRGT.dormancy_age 
+FROM molinahealth_mdwdb.d_o_data_freshness WHERE sourcename like 'ServiceNow%' and etl_run_number=TRGT.etl_run_number),'America/Los_Angeles','GMT')),0)<> TRGT.dormancy_age 
  
  
 
