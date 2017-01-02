@@ -19,7 +19,7 @@ join
 usf_mdwdb.f_request_item_variable_c trgt
 on qa.sys_id=trgt.row_id and qa.sourceinstance=trgt.source_id
 join
-usf_mdwdb.d_variable lkp
+usf_mdwdb.d_variable_c lkp
 on qa.item_option_new = lkp.row_id 
 where coalesce(lkp.row_key,case when qa.item_option_new is null then 0 else -1 end) <> trgt.variable_c_key)c
 
