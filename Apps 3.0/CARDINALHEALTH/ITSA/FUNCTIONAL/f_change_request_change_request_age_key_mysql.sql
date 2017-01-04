@@ -1,11 +1,9 @@
-SELECT CASE WHEN cnt > 0 THEN 'FaILURE' ELSE 'SUCCESS' END aS Result
-,CaSE WHEN cnt > 0 THEN 'Data did not Match.' 
-ELSE 'Data Matched' END aS Message 
-FROM (
-select count(1) as cnt  from
-cardinalhealth_mdwdb.f_change_request a
-LEFT JOIN cardinalhealth_mdwdb.d_lov x ON (x.dimension_class = 'AGEBUCKET_WH~CHANGE_REQUEST'
-                                                              OR x.row_key IN (0,-1))
-AND a.change_request_age >= x.lower_range_value
-AND a.change_request_age <= x.upper_range_value
-WHERE a.change_request_age_key <> x.row_key)a;
+
+ select CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+ CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for f_incident.age_key' ELSE 'SUCCESS' END as Message
+from cardinalhealth_mdwdb.f_change_request f  
+LEFT JOIN cardinalhealth_mdwdb.d_lov L
+ON (L.dimension_class = 'AGEBUCKET_WH~CHANGE_REQUEST' OR L.row_key IN (0,-1))
+AND  floor(f.change_request_age/(24*3600)) >= L.lower_range_value
+AND  floor(f.change_request_age/(24*3600)) <= L.upper_range_value
+WHERE (L.row_key )<>f.change_request_age_key OR f.change_request_age_key IS NULL;
