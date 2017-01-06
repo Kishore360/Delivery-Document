@@ -7,7 +7,7 @@ ON (SRC.sys_id =TRGT.row_id
 
 where case when time(CONVERT_TZ(SRC.opened_at,
 		'GMT',
-		'America/New_York'))  between '08-00-00' and  '18-00-00' 
+		'America/New_York'))  between time('08:00:00') and  time('18:00:00') 
 		 and DAYNAME(DATE(CONVERT_TZ(SRC.opened_at,
 		'GMT',
 		'America/New_York'))) in('Monday' ,'Tuesday','Wednesday','Thursday','Friday') then 'Y' else 'N' end
