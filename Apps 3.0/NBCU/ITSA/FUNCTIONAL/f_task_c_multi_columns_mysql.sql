@@ -3,12 +3,13 @@ CASE WHEN count(1) >0 THEN 'Failure' ELSE 'Data Matched' END as Message
 from
 
 nbcu_mdsdb.task_final a
+join nbcu_mdsdb.sc_request_final c on a.sys_id=c.sys_id and a.sourceinstance=c.sourceinstance
 join nbcu_mdwdb.f_task_c d
 on a.sys_id=d.row_id and a.sourceinstance=d.source_id
 where CASE 
-		WHEN a.sys_class_name ='sc_request' then sc.request_state 
+		WHEN a.sys_class_name ='sc_request' then c.request_state 
 		else 
-	a.state end as STATE_SRC_CODE<>f.STATE_SRC_CODE or 
+	a.state end <>STATE_SRC_CODE or 
 	a.priority <> PRIORITY_SRC_CODE or 
 	a.number <> task_number or 
 	 a.sys_class_name <> task_type or

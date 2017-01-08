@@ -8,9 +8,9 @@ then concat('Failed. Data does not match for ',sum(failures_cnt),' records. Sys 
 else 'Success. All warehouse records are matching with source.' end Result
 from
 (select 
-case when src.cnt <> trgt.reassignment_count_numerify_c then src.documentkey else '' end as failures,
+case when src.cnt <> trgt.reassignment_count_numerify then src.documentkey else '' end as failures,
 
-case when src.cnt <> trgt.reassignment_count_numerify_c  then 1 else 0 end as failures_cnt
+case when src.cnt <> trgt.reassignment_count_numerify  then 1 else 0 end as failures_cnt
 
 from 
 (select documentkey,sourceinstance,count(sys_id) as cnt
