@@ -8,4 +8,4 @@ left join nbcu_mdsdb.sc_req_item_final a12
 on a11.row_id=a12.sys_id and a11.source_id=a12.sourceinstance
 left join nbcu_mdwdb.d_lov a13
 on concat('CATEGORY_C~SC_REQ_ITEM~~~',a12.u_category)=a13.row_id
-where coalesce(a13.row_key, case when a12.u_category is Null  then 0 else -1 end )<>a11.category_src_c_key)a
+where coalesce(a13.row_key, case when a12.u_category is Null  then 0 else -1 end )<>a11.category_src_c_key and a11.soft_deleted_flag='N')a
