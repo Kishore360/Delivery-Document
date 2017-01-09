@@ -1,4 +1,8 @@
- SELECT *
+
+SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
+,CASE WHEN cnt > 0 THEN 'Data did not Match.' 
+ELSE 'Data Matched' END AS Message 
+FROM (SELECT count(1) as cnt
  FROM nbcu_mdsdb.sc_task_final SRC
  LEFT JOIN nbcu_mdwdb.f_request_task TRGT 
  ON (SRC.sys_id ) =(TRGT.row_id ) 

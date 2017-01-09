@@ -1,14 +1,23 @@
-SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
-,CASE WHEN cnt > 0 THEN 'Data did not Match.' 
-ELSE 'Data Matched' END AS Message 
-FROM (
-select count(1) as cnt
-from intuit_mdsdb.change_task_final b
-left join intuit_mdsdb.sys_audit_final a
-on  b.sys_id =a.documentkey
-left  JOIN  (select ROW_ID , source_id, time_to_assign_change_task,created_on
-from intuit_mdwdb.d_change_task_c) c
-on  b.sys_id = c.ROW_ID and b.sourceinstance=c.source_id
-where  (tablename='change_task'and fieldname='assigned_to' and a.oldvalue is null) 
-and c.time_to_assign_change_task <> coalesce(convert_tz(a.sys_created_on,'GMT','America/Los_Angeles'),c.created_on)
-) temp
+ select CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+ CASE WHEN cnt >0 THEN 'MDS to DWH data validation failed'  ELSE 'SUCCESS' END as Message
+
+from
+(
+SELECT  count(1) as cnt from   intuit_mdwdb.d_change_task_c dct
+   JOIN 
+	(
+	SELECT saf.documentkey, saf.sys_created_on as sys_created_on
+    FROM  intuit_mdsdb.sys_audit_final saf
+    JOIN ( 
+		SELECT documentkey,max(cdctime) as cdctime
+		FROM intuit_mdsdb.sys_audit_final b 
+		WHERE  b.tablename='change_task' AND b.fieldname='assigned_to' AND b.oldvalue IS NULL 
+		group by 1
+		) latest ON saf.documentkey = latest.documentkey and saf.cdctime = latest.cdctime
+        
+	 WHERE  saf.tablename='change_task' AND saf.fieldname='assigned_to' AND saf.oldvalue IS NULL 
+     group by 1
+	) tmp ON dct.row_id = tmp.documentkey 
+WHERE
+    dct.time_to_assign_change_task <>
+	COALESCE(CONVERT_TZ(tmp.sys_created_on,'GMT','America/Los_Angeles'),dct.created_on))a;

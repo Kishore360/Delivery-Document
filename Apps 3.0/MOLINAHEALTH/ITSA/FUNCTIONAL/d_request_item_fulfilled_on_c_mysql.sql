@@ -9,16 +9,15 @@ else 'Success. All warehouse records are matching with source.' end Result
 from 
 (select 
 
-case when COALESCE(CONVERT_TZ(COALESCE(lkp.fulfilled_on,src.closed_at),'UTC','America/Los_Angeles'),'1970-01-01 00:00:00') <> COALESCE(trgt.fulfilled_on_c,'1970-01-01 00:00:00') then src.sys_id else '' end as failures,
+case when COALESCE(case when lv_mp.dimension_wh_code = 'OPEN' then null else CONVERT_TZ(COALESCE(lkp.fulfilled_on,coalesce(src.closed_at,src.sys_updated_on)),'UTC','America/Los_Angeles') end ,'1970-01-01 00:00:00') <> COALESCE(trgt.fulfilled_on_c,'1970-01-01 00:00:00') then src.sys_id else '' end as failures,
 
-case when COALESCE(CONVERT_TZ(COALESCE(lkp.fulfilled_on,src.closed_at),'UTC','America/Los_Angeles'),'1970-01-01 00:00:00') <> COALESCE(trgt.fulfilled_on_c,'1970-01-01 00:00:00') then 1 else 0 end as failures_cnt
+case when COALESCE(case when lv_mp.dimension_wh_code = 'OPEN' then null else CONVERT_TZ(COALESCE(lkp.fulfilled_on,coalesce(src.closed_at,src.sys_updated_on)),'UTC','America/Los_Angeles') end ,'1970-01-01 00:00:00') <> COALESCE(trgt.fulfilled_on_c,'1970-01-01 00:00:00')  then 1 else 0 end as failures_cnt
 
 from molinahealth_mdsdb.sc_req_item_final src
-left join molinahealth_mdwdb.d_request_item trgt on trgt.row_id = src.sys_id and trgt.source_id = src.sourceinstance 
+inner join molinahealth_mdwdb.d_request_item trgt on trgt.source_id = src.sourceinstance and trgt.row_id = src.sys_id  
+inner join molinahealth_mdwdb.f_request_item f_trgt on trgt.row_key = f_trgt.request_item_key
+inner join molinahealth_mdwdb.d_lov_map lv_mp on f_trgt.state_src_key =  lv_mp.src_key and lv_mp.dimension_class = 'STATE~SC_REQ_ITEM'
 left join 
-(select ri.sys_id,ri.sourceinstance,max(su.sys_created_on) as fulfilled_on
-from molinahealth_mdsdb.sc_req_item_final ri
-join molinahealth_mdsdb.sys_audit_final su on ri.sys_id = su.documentkey 
-join molinahealth_mdsdb.sys_choice_final sc on su.newvalue = sc.value
-where su.tablename = 'sc_req_item' and su.fieldname = 'state' and sc.name = 'sc_req_item' and sc.element = 'state' and sc.label = 'Fulfilled'
-group by ri.sys_id,ri.sourceinstance ) lkp on src.sys_id = lkp.sys_id and src.sourceinstance = lkp.sourceinstance ) fnl ;
+(select su.documentkey,su.sourceinstance,max(su.sys_created_on) as fulfilled_on
+from molinahealth_mdsdb.sys_audit_final su where su.tablename = 'sc_req_item' and su.fieldname = 'state' and su.newvalue = 12
+group by su.documentkey,su.sourceinstance ) lkp on src.sys_id = lkp.documentkey and src.sourceinstance = lkp.sourceinstance ) fnl ;
