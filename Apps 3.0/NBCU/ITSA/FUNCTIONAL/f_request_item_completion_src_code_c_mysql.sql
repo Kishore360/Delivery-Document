@@ -6,7 +6,7 @@ select count(1) as cnt
 from nbcu_mdsdb.sc_req_item_final s
 left  JOIN nbcu_mdwdb.f_request_item t 
 on  t.ROW_ID=s.SYS_ID and s.sourceinstance=t.source_id 
-WHERE s.u_completion_code<>t.completion_src_code_c
+WHERE s.u_close_code<>t.completion_src_code_c
  ) temp
 
  

@@ -5,7 +5,7 @@ FROM (
 select count(1) as cnt 
 from nbcu_mdsdb.task_final a
  join nbcu_mdwdb.d_service c 
-on coalesce(concat('BUSINESS_SERVICE~',a.u_business_service),'UNSPECIFIED')=c.row_id
+on coalesce(concat('BUSINESS_SERVICE~',a.business_service),'UNSPECIFIED')=c.row_id
 and a.sourceinstance=c.source_id
  join nbcu_mdwdb.f_task_c b 
 on a.sourceinstance=b.source_id and a.sys_id=b.row_id

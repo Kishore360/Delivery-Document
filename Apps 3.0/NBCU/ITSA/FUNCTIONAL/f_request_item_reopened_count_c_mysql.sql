@@ -6,5 +6,5 @@ count(*) as cnt
 from  nbcu_mdwdb.f_request_item a11
 left join nbcu_mdsdb.sc_req_item_final a12
 on a11.row_id=a12.sys_id and a11.source_id=a12.sourceinstance
-where a12.u_reopen_count<>a11.reopen_count_c)a
+where a12.u_reopen_count<>a11.reopened_count_c)a
 
