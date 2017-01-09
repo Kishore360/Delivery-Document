@@ -205,3 +205,10 @@ join	ldb.d_calendar_date	a12
 on (a11.opened_on_key = a12.row_key) 
 join	ldb.d_calendar_month	a138 
 on (a12.month_start_date_key = a138.row_key) 
+union
+select 'd_business_service_used_for' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_incident a11 
+join	ldb.d_business_service	a12
+	  on 	(a11.business_service_key = a12.row_key)
+join	ldb.d_business_service_used_for	a14
+on 	(a12.used_for_src_key = a14.row_key)
