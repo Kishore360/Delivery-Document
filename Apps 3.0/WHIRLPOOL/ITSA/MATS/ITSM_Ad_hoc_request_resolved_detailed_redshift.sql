@@ -48,8 +48,8 @@ on (a11.cost_center_key=a110.row_key)
 union
 select'ldb.d_location' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_ad_hoc_request_resolved_c       a11 
-join ldb.d_location       a111
-on (a11.requested_for_location_key=a111.row_key)
+join ldb.d_adhoc_requested_for_location_c       a111
+on (a11.adhoc_requested_for_location_key=a111.row_key)
 union
 select'ldb.d_internal_contact_opened_by_c' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_ad_hoc_request_resolved_c       a11 

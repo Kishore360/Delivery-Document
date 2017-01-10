@@ -157,12 +157,10 @@ select'ldb.d_task_urgency' as Table_Name, count(a11.row_key) Row_Count
 join ldb.d_task_urgency       a131
 on (a11.urgency_src_key=a131.row_key)
 union
-select'ldb.d_business_service_criticality' as Table_Name, count(a11.row_key) Row_Count
+select'd_business_criticality_incident_c' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_incident_resolved       a11 
- join ldb.d_business_service       a15
-on (a11.business_service_key=a15.row_key)
-join ldb.d_business_service_criticality       a132
-on (a15.criticality_key=a132.row_key)
+join ldb.d_business_criticality_incident_c       a132
+on (a11.business_service_criticality_src_c_key=a132.row_key)
 union
 select'ldb.d_business_service_used_for' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_incident_resolved       a11 

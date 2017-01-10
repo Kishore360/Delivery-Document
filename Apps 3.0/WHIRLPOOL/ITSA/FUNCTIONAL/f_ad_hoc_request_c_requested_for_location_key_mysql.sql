@@ -6,7 +6,9 @@ left join whirlpool_mdsdb.sys_user_final c
 on b.requested_for=c.sys_id and b.sourceinstance=c.sourceinstance
 left join whirlpool_mdsdb.cmn_location_final d
 on c.location=d.sys_id and c.sourceinstance=d.sourceinstance
+left join whirlpool_mdsdb.u_countries_final e
+d.country=e.sys_id and d.sourceinstance=e.sourceinstance
 join
-whirlpool_mdwdb.d_location LKP
-on COALESCE(concat('COUNTRIES~U_AD_HOC_REQUEST','~~~',upper(d.country)),'UNSPECIFIED')=LKP.row_id
-where coalesce(LKP.row_key,case when d.country is null then 0 else -1 end ) <> a.requested_for_location_key
+whirlpool_mdwdb.d_lov LKP
+on COALESCE(concat('COUNTRIES~U_AD_HOC_REQUEST','~~~',upper(e.sys_id)),'UNSPECIFIED')=LKP.row_id
+where coalesce(LKP.row_key,case when e.sys_id is null then 0 else -1 end ) <> a.adhoc_requested_for_location_key
