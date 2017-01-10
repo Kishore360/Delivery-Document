@@ -24,7 +24,7 @@ on d.request_item=c.row_id and c.source_id=d.sourceinstance
 inner join asu_mdwdb.d_variable_c g on b.item_option_new=g.row_id and g.source_id=d.sourceinstance
 -- inner join  temp_substrin   temp_substrin on b.sys_id=part1 and part2=  d.request_item
 
-inner join asu_mdwdb.d_variable_lov_c f on f.variable_id=g.row_id and f.value=b.value
+inner join (select variable_id,value,max(row_key) row_key from asu_mdwdb.d_variable_lov_c group by 1,2 having count(1)>1) f on f.variable_id=g.row_id and f.value=b.value
 join asu_mdsdb.sys_choice_final t  on t.name like 'question' and e.type=t.value and
  t.label='Select Box' and t.element='type' and t.label!='Reference'
 inner join (SELECT substring(row_id,1,32) as r1, SUBSTRING(row_id,34,32) as r2, reference_c_key  FROM asu_mdwdb.f_request_item_variable_c) a 

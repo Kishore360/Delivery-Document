@@ -6,4 +6,4 @@ select count(1) as cnt
 from asu_mdsdb.hr_case_final s
 left  JOIN asu_mdwdb.d_hr_case_c t 
 on  t.ROW_ID=s.SYS_ID and s.sourceinstance=t.source_id 
-where s.short_description<> t.short_description ) b
+where s.description<> t.description ) b

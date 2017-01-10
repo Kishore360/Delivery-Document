@@ -11,9 +11,7 @@ AND f.source_id = a.source_id
 JOIN asu_mdwdb.d_lov_map br ON a.state_src_key = br.src_key
 AND br.dimension_wh_code = 'OPEN'
 WHERE a.backlog_flag <> 'Y'
-
 union
-
 select count(1) 
 FROM asu_mdsdb.hr_case_final SRC 
   join asu_mdwdb.f_hr_case_c f ON (SRC.sys_id =f.row_id  
