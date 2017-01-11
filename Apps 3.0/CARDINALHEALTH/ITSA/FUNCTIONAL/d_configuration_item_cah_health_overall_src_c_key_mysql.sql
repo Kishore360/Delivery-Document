@@ -13,8 +13,8 @@ LEFT JOIN cardinalhealth_mdsdb.sys_user_final suo ON t.owned_by=suo.sys_id
 LEFT JOIN cardinalhealth_mdsdb.sys_user_final svp ON suo.u_vp=svp.sys_id
 	AND svp.sourceinstance=suo.sourceinstance
 join cardinalhealth_mdwdb.d_lov lkp
-on lkp.src_rowid=COALESCE(CONCAT('U_CAH_LEVEL_2~CMDB_CI_APPLICATION','~','','~','','~',COALESCE(ccaf.u_cah_level_2,'')),'UNSPECIFIED')
-where  coalesce(lkp.row_key,case when ccaf.u_cah_level_2 is null then 0 else -1 end) <> d.cah_support_grp_src_code_c_key)c
+on lkp.src_rowid=COALESCE(CONCAT('U_CAH_HEALTH_OVERALL~CMDB_CI_APPLICATION','~','','~','','~',COALESCE(ccaf.u_cah_health_overall,'')),'UNSPECIFIED')
+where  coalesce(lkp.row_key,case when ccaf.u_cah_health_overall is null then 0 else -1 end) <> d.cah_health_overall_src_c_key)c
 
 
 

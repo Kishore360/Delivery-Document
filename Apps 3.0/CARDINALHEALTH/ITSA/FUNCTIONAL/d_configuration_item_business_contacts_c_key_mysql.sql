@@ -12,9 +12,11 @@ LEFT JOIN cardinalhealth_mdsdb.sys_user_final suo ON t.owned_by=suo.sys_id
 	AND t.sourceinstance=suo.sourceinstance
 LEFT JOIN cardinalhealth_mdsdb.sys_user_final svp ON suo.u_vp=svp.sys_id
 	AND svp.sourceinstance=suo.sourceinstance
-join cardinalhealth_mdwdb.d_lov lkp
-on lkp.src_rowid=COALESCE(CONCAT('U_CAH_LEVEL_2~CMDB_CI_APPLICATION','~','','~','','~',COALESCE(ccaf.u_cah_level_2,'')),'UNSPECIFIED')
-where  coalesce(lkp.row_key,case when ccaf.u_cah_level_2 is null then 0 else -1 end) <> d.cah_support_grp_src_code_c_key)c
-
-
-
+join cardinalhealth_mdwdb.d_internal_contact lkp
+on lkp.row_id=COALESCE(concat('INTERNAL_CONTACT~',ccaf.u_business_contacts),'UNSPECIFIED')
+where  coalesce(lkp.row_key,case when ccaf.u_business_contacts is null then 0 else -1 end) <>
+ d.business_contacts_c_key)c
+ 
+ 
+ 
+ 

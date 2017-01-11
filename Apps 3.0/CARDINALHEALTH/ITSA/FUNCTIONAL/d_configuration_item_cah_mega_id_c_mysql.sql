@@ -8,6 +8,4 @@ JOIN cardinalhealth_mdsdb.cmdb_ci_final t ON d.row_id = t.sys_id
 	AND d.source_id=t.sourceinstance
 LEFT JOIN cardinalhealth_mdsdb.cmdb_ci_application_final ccaf ON d.row_id = ccaf.sys_id
 	AND d.source_id=ccaf.sourceinstance
-where   ccaf.u_cah_level_2 <> d.cah_support_grp_src_code_c)c
-
-
+where d.cah_mega_id_c<>ccaf.u_cah_mega_id)a   
