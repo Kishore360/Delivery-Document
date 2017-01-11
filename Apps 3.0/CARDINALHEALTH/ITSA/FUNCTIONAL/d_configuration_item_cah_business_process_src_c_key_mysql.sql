@@ -14,6 +14,6 @@ LEFT JOIN cardinalhealth_mdsdb.sys_user_final svp ON suo.u_vp=svp.sys_id
 	AND svp.sourceinstance=suo.sourceinstance
 join cardinalhealth_mdwdb.d_lov lkp
 on lkp.src_rowid=COALESCE(CONCAT('U_CAH_BUSINESS_PROCESS_L1~CMDB_CI_APPLICATION','~','','~','','~',COALESCE(ccaf.u_cah_business_process_l1,'')),'UNSPECIFIED')
-where  coalesce(lkp.row_key,case when ccaf.u_cah_business_process_l1 is null then 0 else -1 end) = d.cah_business_process_src_c_key)c
+where  coalesce(lkp.row_key,case when ccaf.u_cah_business_process_l1 is null then 0 else -1 end) <> d.cah_business_process_src_c_key)c
 
 	
