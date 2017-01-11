@@ -1,4 +1,5 @@
-select TGT.row_id a1 , SRC.row_id a2
+SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+ CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for f_problem_task.problem_key' ELSE 'SUCCESS' END as Message
 from (select UPPER(concat(conf.class_value,'~~~',scf.value)) as row_id,scf.sourceinstance AS source_id
 from whirlpool_workdb.lsm_ls_system_variables conf
 join whirlpool_mdsdb.sys_choice_final scf on conf.table_value= scf.name and conf.column_value = scf.element

@@ -7,7 +7,7 @@ on b.requested_for=c.sys_id and b.sourceinstance=c.sourceinstance
 left join whirlpool_mdsdb.cmn_location_final d
 on c.location=d.sys_id and c.sourceinstance=d.sourceinstance
 left join whirlpool_mdsdb.u_countries_final e
-d.country=e.sys_id and d.sourceinstance=e.sourceinstance
+on d.country=e.sys_id and d.sourceinstance=e.sourceinstance
 join
 whirlpool_mdwdb.d_lov LKP
 on COALESCE(concat('COUNTRIES~U_AD_HOC_REQUEST','~~~',upper(e.sys_id)),'UNSPECIFIED')=LKP.row_id
