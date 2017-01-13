@@ -1,11 +1,20 @@
-SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
-CASE WHEN count(1) >0 THEN 'Failure' ELSE 'Data Matched' END as Message
-from
-cardinalhealth_mdwdb.d_configuration_item a
-join cardinalhealth_mdsdb.cmdb_ci_application_final b
-on a.row_id=b.sys_id and a.source_id=b.sourceinstance
-left join cardinalhealth_mdwdb.d_lov c
-on c.row_id = CONCAT('U_CAH_LEVEL_2~CMDB_CI_APPLICATION','~','','~','','~',COALESCE(UPPER(b.u_cah_level_2),'')) 
-AND c.source_id = CASE WHEN b.u_cah_level_2 IS NULL THEN 0 ELSE b.sourceinstance END
+ SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
+,CASE WHEN cnt > 0 THEN 'Data did not Match.' 
+ELSE 'Data Matched' END AS Message 
+FROM (
+select count(1) as cnt from
+cardinalhealth_mdwdb.d_configuration_item d
+JOIN cardinalhealth_mdsdb.cmdb_ci_final t ON d.row_id = t.sys_id
+	AND d.source_id=t.sourceinstance
+LEFT JOIN cardinalhealth_mdsdb.cmdb_ci_application_final ccaf ON d.row_id = ccaf.sys_id
+	AND d.source_id=ccaf.sourceinstance
+LEFT JOIN cardinalhealth_mdsdb.sys_user_final suo ON t.owned_by=suo.sys_id
+	AND t.sourceinstance=suo.sourceinstance
+LEFT JOIN cardinalhealth_mdsdb.sys_user_final svp ON suo.u_vp=svp.sys_id
+	AND svp.sourceinstance=suo.sourceinstance
+join cardinalhealth_mdwdb.d_lov lkp
+on lkp.src_rowid=COALESCE(CONCAT('U_CAH_LEVEL_2~CMDB_CI_APPLICATION','~','','~','','~',COALESCE(ccaf.u_cah_level_2,'')),'UNSPECIFIED')
+where  coalesce(lkp.row_key,case when ccaf.u_cah_level_2 is null then 0 else -1 end) <> d.cah_support_grp_src_code_c_key)c
 
-where a.cah_support_grp_src_code_c_key<>coalesce(c.row_key,CASE WHEN b.u_cah_level_2 IS NULL THEN 0 ELSE -1 end)
+
+

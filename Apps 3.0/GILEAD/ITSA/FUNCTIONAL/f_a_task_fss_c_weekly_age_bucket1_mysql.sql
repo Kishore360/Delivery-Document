@@ -4,7 +4,7 @@ ELSE 'Data Matched' END AS Message
 FROM (
 select count(*) as cnt
 from
- 
+
 (SELECT  mon.row_key as week_start_date_key,
        open_task_fss.assignment_group_key,
        open_task_fss.assigned_to_key,

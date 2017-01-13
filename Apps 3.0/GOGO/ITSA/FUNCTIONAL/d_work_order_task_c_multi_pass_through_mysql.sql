@@ -13,5 +13,6 @@ a.wo_log_field <> b.u_wo_log_field or
 case when u_preventative_maintenance=1 then 'Y' else 'N' end <>PREVENTATIVE_MAINTENANCE_FLAG or 
 case when is_fixed_window=1 then 'Y' else 'N' end <>is_fixed_window_flag or
 a.acknowledged_on <>b.acknowledged_on or
-CONCAT('<a href=\"','https://gogo.service-now.com/nav_to.do?uri=','wm_task.do?sys_id=',b.sys_id,'\" target=\"_blank\">',b.number,'</a>') <> source_url or
-case when first_time_fix_c_flag=1 then 'Y' else 'N' end <>first_time_fix_c_flag ;
+CONCAT('<a href=\"','https://gogo.service-now.com/nav_to.do?uri=','wm_task.do?sys_id=',b.sys_id,'\" target=\"_blank\">',b.number,'</a>') 
+<> source_url;
+

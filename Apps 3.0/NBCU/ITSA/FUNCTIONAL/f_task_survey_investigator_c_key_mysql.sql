@@ -1,4 +1,6 @@
-SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+SELECT 
+CASE WHEN count(1) >0 and  TRGT.dw_inserted_on>LKP.dw_inserted_on THEN 'Warning'  else 'SUCCESS' END as Result,
+CASE WHEN count(1) >0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for f_incident.opened_on_key' ELSE 'SUCCESS' END as Message
 FROM 
 	nbcu_mdsdb.task_survey_final a11
