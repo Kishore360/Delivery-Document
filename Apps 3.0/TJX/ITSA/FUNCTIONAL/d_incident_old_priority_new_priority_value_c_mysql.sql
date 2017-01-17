@@ -3,13 +3,25 @@ SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
 ELSE 'Data Matched' END AS Message 
 FROM (select count(*) as cnt from tjx_mdwdb.d_incident TGT
 inner join  tjx_mdsdb.incident_final incf
-on TGT.row_id=incf.sys_id
-inner join (select documentkey,user,max(sys_created_on) as sys_created_on,newvalue,oldvalue , fieldname from tjx_mdsdb.sys_audit_final  
-where fieldname = ('assigned_to') and tablename='incident' group by documentkey) src1 on src1.documentkey=incf.sys_id
-inner join (select documentkey,user,max(sys_created_on) as sys_created_on,newvalue,oldvalue , fieldname from tjx_mdsdb.sys_audit_final  
-where fieldname = ('assignment_group') and tablename='incident' group by documentkey) src on src.documentkey=incf.sys_id
-inner join ( select documentkey,user,max(sys_created_on) as sys_created_on,newvalue,oldvalue , fieldname from tjx_mdsdb.sys_audit_final  
-where fieldname in ('priority') and tablename='incident' group by documentkey) asg
-on asg.documentkey=src.documentkey 
-where TGT.new_priority_value_c <> asg.newvalue or
-TGT.old_priority_value_c <>asg.oldvalue and src.sys_created_on <= asg.sys_created_on)b
+on TGT.row_id=incf.sys_id and TGT.source_id=incf.sourceinstance
+left join (select a.documentkey,user,newvalue,oldvalue , fieldname,a.sys_created_on from  tjx_mdsdb.sys_audit_final a 
+ join (select documentkey , max(sys_created_on) as sys_created_on
+from tjx_mdsdb.sys_audit_final 
+ where fieldname in ('assignment_group') and tablename='incident'
+group by 1) max
+on max.sys_created_on = a.sys_created_on and a.documentkey = max.documentkey
+where  fieldname in ('assignment_group') and tablename='incident') src on src.documentkey=incf.sys_id
+left join ( select a.documentkey,user,newvalue,oldvalue , fieldname,a.sys_created_on from  tjx_mdsdb.sys_audit_final a 
+ join (select documentkey , max(sys_created_on) as sys_created_on
+from tjx_mdsdb.sys_audit_final 
+ where fieldname in ('priority') and tablename='incident'
+group by 1) max
+on max.sys_created_on = a.sys_created_on and a.documentkey = max.documentkey
+where  fieldname in ('priority') and tablename='incident') asg
+on asg.documentkey=src.documentkey
+ 
+where TGT.new_priority_value_c <>  COALESCE(asg.newvalue,incf.priority,'UNSPECIFIED') or
+TGT.old_priority_value_c <>COALESCE(asg.oldvalue,'UNSPECIFIED') )b
+
+
+
