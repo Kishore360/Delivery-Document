@@ -9,5 +9,5 @@ AND br.dimension_wh_code='CLOSED'
 JOIN cardinalhealth_mdwdb.d_change_request a ON a.row_key = f.change_request_key
                           
 WHERE f.change_request_age <> (CASE
-                               WHEN a.opened_on<a.closed_on THEN timestampdiff(DAY, a.opened_on,a.closed_on)
+                               WHEN a.opened_on<a.closed_on THEN timestampdiff(SECOND, a.opened_on,a.closed_on)
                                ELSE 0  END))a

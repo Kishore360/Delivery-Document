@@ -103,4 +103,14 @@ join ldb.d_calendar_date a14
 on (a11.opened_on_key = a14.row_key) 
 join ldb.d_calendar_month a120 
 on (a14.month_start_date_key = a120.row_key) 
+union
+select 'ldb.d_lov_customer_service_closed_code_c a117 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_customer_service_c a11 
+join ldb.d_lov_customer_service_closed_code_c a117 
+on (a11.closed_code_c_key = a117.row_key) 
+union
+select 'ldb.d_lov_customer_service_source_c a117 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_customer_service_c a11 
+join ldb.d_lov_customer_service_source_c a117 
+on (a11.source_c_key  = a117.row_key) 
 
