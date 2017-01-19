@@ -8,7 +8,7 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  ON (TRGTF.ad_hoc_request_c_key =TRGT.row_key
  AND TRGTF.source_id =TRGT.source_id)
   LEFT JOIN whirlpool_mdwdb.d_lov_map LM
- on TRGTF.state_src_key = LM.src_key and LM.dimension_class='REQUEST_STATE~SC_REQUEST'
+ on TRGTF.state_src_key = LM.src_key and LM.dimension_class='STATE~U_AD_HOC_REQUEST'
 WHERE ( CASE WHEN LM.dimension_wh_code IN ('OPEN') THEN 'Y' ELSE 'N' END)<> (TRGT.backlog_flag)
 
 
