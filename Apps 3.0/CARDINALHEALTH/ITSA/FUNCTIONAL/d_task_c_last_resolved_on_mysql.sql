@@ -14,4 +14,4 @@ where CASE
 		   WHEN src.sys_class_name='incident' THEN 
 CONVERT_TZ(inc.u_resolved_at,'GMT','America/New_York')
 		   ELSE CONVERT_TZ(src.closed_at,'GMT','America/New_York')
-	   END=stg.last_resolved_on)c
+	   END<>stg.last_resolved_on)c
