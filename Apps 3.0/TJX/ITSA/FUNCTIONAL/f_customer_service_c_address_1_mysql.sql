@@ -1,6 +1,6 @@
 SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
 ,CASE WHEN cnt > 0 THEN 'Data did not Match.' 
-ELSE 'Data Matched' END AS Message, cnt
+ELSE 'Data Matched' END AS Message
 FROM (
 select count(1) as cnt
 from tjx_mdsdb.u_customer_service_final src
