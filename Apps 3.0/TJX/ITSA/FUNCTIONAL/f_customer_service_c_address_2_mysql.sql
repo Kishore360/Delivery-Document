@@ -5,7 +5,7 @@ FROM (
 select count(1) as cnt
 from tjx_mdsdb.u_customer_service_final src
 join tjx_mdwdb.f_customer_service_c trt
-on trt.row_id=src.sys_id and trt.row_id=src.sourceinstance
+on trt.row_id=src.sys_id and trt.source_id=src.sourceinstance
 where trt.address_2 <> trim(src.u_address_2) ) g; 
 
 

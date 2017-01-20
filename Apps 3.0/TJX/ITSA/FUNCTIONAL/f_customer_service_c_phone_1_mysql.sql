@@ -5,6 +5,6 @@ FROM (
 select count(1) as cnt
 from tjx_mdsdb.u_customer_service_final src
 join tjx_mdwdb.f_customer_service_c trt
-on trt.row_id=src.sys_id and trt.row_id=src.sourceinstance
+on trt.row_id=src.sys_id and trt.source_id=src.sourceinstance
 where trt.phone_1 <> trim(src.u_home_phone) ) g; 
 
