@@ -8,7 +8,7 @@ ON (SRC.sys_id =TRGT.row_id
 where case when SRC.contact_type in ('event') THEN 'IT'
  when SRC.contact_type in ('email') and SRC.u_reported_by in
  ('Email Alert - US','Email Alert - CA') THEN 'IT'
- when SRC.contact_type in ('phone','self-service','walk-in','email') and SRC.u_reported_by  not in
+ when SRC.contact_type in ('phone','self-service','walk-in','email') and coalesce(SRC.u_reported_by,'UNSPECIFIED')  not in
  ('Email Alert - US','Email Alert - CA') THEN 'Customer'
 else 'UNSPECIFIED' end  <> TRGT.source_of_ticket_c; 
 
