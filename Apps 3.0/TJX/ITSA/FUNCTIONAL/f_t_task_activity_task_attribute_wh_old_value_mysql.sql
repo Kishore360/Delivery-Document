@@ -11,4 +11,3 @@ left join
 (select row_id,source_id,task_key,task_attribute_wh_old_value
 from tjx_mdwdb.f_t_task_activity where task_wh_type = 'problem' and task_attribute_wh_name = 'assigned_to') trgt on src.sys_id = trgt.row_id 
 where src.oldvalue <> (trgt.task_attribute_wh_old_value))b;
-
