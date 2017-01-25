@@ -8,10 +8,9 @@ FROM cardinalhealth_mdsdb.incident_final SRC
   ON (lm.src_key = TRGT.state_src_key)
 where lm.dimension_class = 'STATE~INCIDENT'
 AND   lm.dimension_wh_code = 'OPEN' and
-<<<<<<< HEAD
-timestampdiff(SECOND,CONVERT_TZ(TRGT.changed_on,'America/New_York','GMT'),convert_tz((SELECT MAX(lastupdated) AS lastupdated
-=======
-timestampdiff(second,CONVERT_TZ(TRGT.changed_on,'America/New_York','GMT'),convert_tz((SELECT MAX(lastupdated) AS lastupdated
->>>>>>> 092f8e770d12ce85db1cfafbeac384a242fb277b
-FROM cardinalhealth_mdwdb.d_o_data_freshness WHERE sourcename like 'ServiceNow%'),'America/New_York','GMT')) <> 
+COALESCE(timestampdiff(second,CONVERT_TZ(TRGT.changed_on,'America/New_York','GMT'),convert_tz((SELECT MAX(lastupdated) AS lastupdated
+FROM cardinalhealth_mdwdb.d_o_data_freshness df WHERE  df.sourcename  like 'ServiceNow%'and df.etl_run_number=TRGT.etl_run_number),'America/New_York','GMT'))) <> 
 TRGT.dormancy_age; 
+
+
+
