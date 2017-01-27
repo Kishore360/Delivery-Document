@@ -13,13 +13,10 @@ LEFT JOIN tivo_mdwdb.d_lov_map incident_state ON f.state_src_key = incident_stat
 AND incident_state.dimension_class = 'STATE~INCIDENT'
 where 
    d.client_caused_incidents_c_flag <> CASE
-										  WHEN disposition.dimension_wh_code <> 'DUPLICATE'
-										       AND disposition.dimension_wh_code NOT LIKE 'NOT RESTORED%'
+										  WHEN coalesce(disposition.dimension_wh_code,'UNSPECIFIED') <> 'DUPLICATE'
+										       AND coalesce(disposition.dimension_wh_code,'UNSPECIFIED') NOT LIKE 'NOT RESTORED%'
 											   AND incident_state.dimension_wh_code <> 'CANCELLED'
 											   AND priority.dimension_wh_code <> 'N/A'
 											   AND issue_type.dimension_wh_code = 'CLIENT BUG' THEN 'Y'
 										  ELSE 'N'
 									  END
-									  
-									  
-									  
