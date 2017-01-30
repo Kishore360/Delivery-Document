@@ -13,7 +13,7 @@ AND incident_state.dimension_class = 'STATE~INCIDENT'
 where 				  							  
   	d.non_sla_incidents_c_flag <> CASE
 									 WHEN coalesce(disposition.dimension_wh_code,'UNSPECIFIED') <> 'DUPLICATE'
-										  AND incident_state.dimension_wh_code <> 'CANCELLED'
-										  AND priority.dimension_wh_code = 'N/A' THEN 'Y'
+										  AND coalesce(incident_state.dimension_wh_code,'UNSPECIFIED') <> 'CANCELLED'
+										  AND coalesce(priority.dimension_wh_code,'UNSPECIFIED') = 'N/A' THEN 'Y'
 									 ELSE 'N'
 								 END
