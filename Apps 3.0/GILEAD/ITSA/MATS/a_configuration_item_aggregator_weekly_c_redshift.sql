@@ -1,4 +1,3 @@
-
 select 'ldb.a_configuration_item_aggregator_weekly_c a11 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.a_configuration_item_aggregator_weekly_c a11 
 union
