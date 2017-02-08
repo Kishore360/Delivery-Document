@@ -6,5 +6,5 @@ FROM pan_mdsdb.u_service_request_final	 SRC
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
  where
-CONCAT('<a href=\"https://panservicedesk.service-now.com/u_service_request.do?sys_id=',SRC.sys_id,'\" target=\"_blank\">',SRC.number,'</a>')
-<>TRGT.source_url
+CONCAT('<a href=\"https://panservicedesk.service-now.com/nav_to.do?uri=u_service_request.do?sys_id=',SRC.sys_id,'\" target=\"_blank\">',SRC.number,'</a>')
+<>TRGT.source_url 
