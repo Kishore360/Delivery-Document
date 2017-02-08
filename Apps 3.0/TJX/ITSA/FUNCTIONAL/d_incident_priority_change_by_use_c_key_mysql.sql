@@ -22,4 +22,4 @@ where  fieldname in ('priority') and tablename='incident') asg
 on asg.documentkey=src.documentkey left 
 join (select sys_id,user_name,sourceinstance from tjx_mdsdb.sys_user_final) sf on  sf.user_name = asg.user 
 join tjx_mdwdb.d_internal_contact dic on  coalesce(concat('INTERNAL_CONTACT~',sf.sys_id),'UNSPECIFIED') =dic.row_id and sf.sourceinstance=dic.source_id
-where priority_change_by_use_c_key <> TGT.row_key)b
+where priority_change_by_use_c_key <> coalesce(dic.row_key,case when sf.sys_id is null then 0 else -1 end) )b

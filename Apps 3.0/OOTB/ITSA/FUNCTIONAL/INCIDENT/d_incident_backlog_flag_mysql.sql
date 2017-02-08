@@ -1,6 +1,6 @@
-SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
- CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for d_incident.backlog_flag' ELSE 'SUCCESS' END as Message
- FROM <<tenant>>_mdsdb.incident_final SRC 
+SELECT CASE WHEN cnt THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+ CASE WHEN cnt THEN 'MDS to DWH data validation failed for d_incident.backlog_flag' ELSE 'SUCCESS' END as Message 
+ FROM (select count(1) cnt from <<tenant>>_mdsdb.incident_final SRC 
  LEFT JOIN <<tenant>>_mdwdb.d_incident TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
@@ -10,4 +10,4 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 LEFT JOIN <<tenant>>_mdwdb.d_lov_map LM
  on TRGTF.state_src_key = LM.src_key 
 WHERE LM.dimension_class = 'STATE~INCIDENT' and 
-( CASE WHEN LM.dimension_wh_code NOT IN('RESOLVED','CLOSED') THEN 'Y' ELSE 'N' END)<> (TRGT.backlog_flag)
+( CASE WHEN LM.dimension_wh_code NOT IN('RESOLVED','CLOSED') THEN 'Y' ELSE 'N' END)<> (TRGT.backlog_flag))b
