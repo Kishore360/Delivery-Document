@@ -4,4 +4,14 @@
  LEFT JOIN cardinalhealth_mdwdb.f_outage_c TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
- WHERE SRC.type <> TRGT.outage_type_src_code ;
+where  SRC.type<> TRGT.outage_type_src_code
+
+
+
+
+
+
+
+
+
+
