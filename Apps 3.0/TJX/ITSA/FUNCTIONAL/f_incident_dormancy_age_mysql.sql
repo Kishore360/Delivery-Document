@@ -15,4 +15,3 @@ FROM tjx_mdwdb.d_o_data_freshness WHERE sourcename like 'ServiceNow%'
 and etl_run_number=TRGT.etl_run_number),'America/New_York','GMT')),0)<> TRGT.dormancy_age)temp;
  
  
-
