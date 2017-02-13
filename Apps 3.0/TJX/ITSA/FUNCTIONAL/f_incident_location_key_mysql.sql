@@ -1,6 +1,7 @@
 
 
-SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+SELECT 
+CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  CASE WHEN cnt >0 THEN 'MDS to DWH data validation failed for f_incident.location_key' ELSE 'SUCCESS' END as Message
  FROM (select count(1)cnt from tjx_mdsdb.incident_final SRC 
  LEFT JOIN tjx_mdwdb.f_incident TRGT 
