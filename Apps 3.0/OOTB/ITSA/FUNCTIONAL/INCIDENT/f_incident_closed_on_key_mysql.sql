@@ -1,7 +1,7 @@
-SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
- CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for f_incident.closed_on_key' ELSE 'SUCCESS' END as Message
+SELECT CASE WHEN cnt THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+ CASE WHEN cnt THEN 'MDS to DWH data validation failed for f_incident.closed_on_key' ELSE 'SUCCESS' END as Message from (select count(1) cnt 
  FROM <<tenant>>_mdsdb.incident_final SRC
- LEFT JOIN <<tenant>>_mdwdb.f_incident TRGT 
+  JOIN <<tenant>>_mdwdb.f_incident TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
   JOIN <<tenant>>_mdwdb.d_lov_map dlm 
@@ -9,7 +9,7 @@ ON TRGT.state_src_key = dlm.src_key   and dlm.dimension_wh_code = 'CLOSED' and d
 LEFT JOIN <<tenant>>_mdwdb.d_calendar_date LKP 
 on (LKP.row_id = date_format(convert_tz(coalesce(SRC.closed_at,sys_updated_on),<<TENANT_SSI_TIME_ZONE>>,<<DW_TARGET_TIME_ZONE>>),'%Y%m%d') and LKP.source_id=0
 )
-WHERE  case when dlm.dimension_wh_code = 'CLOSED' then (LKP.row_key) else null end <> (TRGT.closed_on_key)
+WHERE  case when dlm.dimension_wh_code = 'CLOSED' then (LKP.row_key) else null end <> (TRGT.closed_on_key))b
 
 
 

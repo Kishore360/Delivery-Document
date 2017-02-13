@@ -1,8 +1,7 @@
 
 SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
- CASE WHEN cnt >0 THEN 'MDS to DWH data validation failed for d_incident.grand_parent_incident_key' ELSE 'SUCCESS' END as Message
+ CASE WHEN cnt >0 THEN 'MDS to DWH data validation failed for d_incident.grand_parent_incident_key' ELSE 'SUCCESS' END as Message from (select count(1) cnt 
 from (
-select count(1)cnt from(
 SELECT CASE
               WHEN si.grand_parent_incident_id ='UNSPECIFIED' THEN 0
               ELSE (di.row_key)

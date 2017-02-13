@@ -1,6 +1,6 @@
 
-SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
- CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for d_incident.grand_parent_incident_key' ELSE 'SUCCESS' END as Message
+SELECT CASE WHEN cnt THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+ CASE WHEN cnt THEN 'MDS to DWH data validation failed for d_incident.grand_parent_incident_key' ELSE 'SUCCESS' END as Message from (select count(1) cnt 
 from (
 SELECT CASE
               WHEN si.grand_parent_incident_id ='UNSPECIFIED' THEN 0
@@ -21,6 +21,6 @@ ON i.parent_incident=parent_i.sys_id)si
                           WHEN si.grand_parent_incident_id = 'UNSPECIFIED' THEN 0
                           ELSE si.source_id
                       END)A  
-       LEFT JOIN <<tenant>>_mdwdb.f_incident d1 ON d1.row_id = A.row_id
+        JOIN <<tenant>>_mdwdb.f_incident d1 ON d1.row_id = A.row_id
 AND d1.source_id = A.source_id
-where  d1.grand_parent_incident_key <> A.row_key
+where  d1.grand_parent_incident_key <> A.row_key)b

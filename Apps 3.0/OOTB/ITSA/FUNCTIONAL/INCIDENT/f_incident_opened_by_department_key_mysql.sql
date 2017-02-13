@@ -1,7 +1,7 @@
 SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
- CASE WHEN cnt >0 THEN 'MDS to DWH data validation failed for f_problem.opened_by_department_key' ELSE 'SUCCESS' END as Message
+ CASE WHEN cnt >0 THEN 'MDS to DWH data validation failed for f_problem.opened_by_department_key' ELSE 'SUCCESS' END as Message from (select count(1) cnt 
  
- FROM (select count(1) cnt from  <<tenant>>_mdsdb.incident_final SRC 
+ FROM   <<tenant>>_mdsdb.incident_final SRC 
 left join  <<tenant>>_mdsdb.sys_user_final scu on SRC.caller_id = scu.sys_id and SRC.sourceinstance=scu.sourceinstance
  JOIN <<tenant>>_mdwdb.f_incident TRGT 
  ON (SRC.sys_id =TRGT.row_id  
