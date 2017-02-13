@@ -3,7 +3,7 @@ CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result,
 CASE WHEN cnt > 0 THEN 'Data did not Match.'
 ELSE 'Data Matched' END AS Message ,cnt
 FROM (
-select count(*) as cnt
+select count(1) as cnt
 from tjx_mdwdb.d_incident TGT
 inner join  tjx_mdsdb.incident_final incf on TGT.row_id=incf.sys_id and TGT.source_id = incf.sourceinstance
 left join (select saf.documentkey,saf.sourceinstance,saf.newvalue,saf.oldvalue,saf.sys_created_on

@@ -20,4 +20,4 @@ on CASE
 		WHEN SRC.sys_class_name ='CHANGE_TASK' THEN COALESCE( CONCAT('STATE','~','CHANGE_TASK','~','~','~',UPPER(SRC.state)),'UNSPECIFIED')
 
 	END= LKP.row_id and TRGT.source_id=LKP.source_id
-where coalesce(LKP.row_key,case when SRC.state is null then 0 else -1 end<>TRGT.state_src_key
+where coalesce(LKP.row_key,case when SRC.state is null then 0 else -1 end)<>TRGT.state_src_key
