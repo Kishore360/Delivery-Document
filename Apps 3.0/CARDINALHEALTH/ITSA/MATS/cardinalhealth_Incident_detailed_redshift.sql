@@ -329,3 +329,8 @@ join ldb.d_calendar_date_fiscal        a112
 on (a111.fiscal_key=a112.row_key)
 join ldb.d_calendar_fiscal_year        a154
 on (a112.year_start_date_key=a154.row_key)
+union
+select'ldb.d_internal_contact_incident_srt_owner_c' as Table_Name, count(a11.row_key) Row_Count
+ from  ldb.f_incident             a11 
+join ldb.d_internal_contact_incident_srt_owner_c a14
+on a11.incident_srt_owner_c_key=a14.row_key
