@@ -31,17 +31,15 @@ from ldb.f_incident_tasks_c a11
 join ldb.d_internal_contact_assigned_to a17 
 on (a11.assigned_to_c_key = a17.row_key) 
 union
-select 'ldb.d_internal_contact_mdm a18 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_internal_contact_opened_by_c a18 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident_tasks_c a11 
-join ldb.d_internal_contact a12 
-on (a11.opened_by_c_key = a12.row_key) 
-join ldb.d_internal_contact_mdm a18 
-on (a12.row_current_key = a18.row_current_key) 
+join ldb.d_internal_contact_opened_by_c a18 
+on (a11.opened_by_c_key = a18.row_key) 
 union
-select 'ldb.d_internal_contact_opened_by_c a19 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_duration_c a19 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident_tasks_c a11 
-join ldb.d_internal_contact_opened_by_c a19 
-on (a11.opened_by_c_key = a19.row_key) 
+join ldb.d_duration_c a19 
+on (a11.opened_by_employee_duration = a19.duration_c_key) 
 union
 select 'ldb.d_lov_employee_type_c a110 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident_tasks_c a11 

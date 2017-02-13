@@ -11,3 +11,5 @@ on SRC.sys_id=b.row_id and SRC.sourceinstance=b.source_id
 WHERE br.dimension_wh_code IN ('CLOSED')
 AND TIMESTAMPDIFF(SECOND,SRC.opened_at,SRC.closed_at) <> TRGT.open_to_close_duration;
 
+
+

@@ -4,8 +4,11 @@
  LEFT JOIN cardinalhealth_mdwdb.f_outage_c TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
-join cardinalhealth_mdwdb.d_incident lkp
-on lkp.row_id=COALESCE(SRC.task_number,'UNSPECIFIED')
-where TIMESTAMPDIFF(SECOND,'1970-01-01 00:00:00',SRC.duration) <> TRGT.outage_duration
-
-
+join cardinalhealth_mdwdb.d_calendar_date lkp
+on lkp.row_id=COALESCE(DATE_FORMAT(CONVERT_TZ(SRC.begin,'GMT','America/New_York'),'%Y%m%d'),
+COALESCE(DATE_FORMAT(CONVERT_TZ(SRC.sys_created_on,'GMT','America/New_York'),'%Y%m%d'),
+'UNSPECIFIED'))
+ where COALESCE(lkp.row_key) <> TRGT.outage_start_key
+ 
+ 
+ 

@@ -3,5 +3,5 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  FROM
   tjx_mdsdb.u_customer_service_final join
  tjx_mdwdb.f_customer_service_c on sys_id=row_id and sourceinstance=source_id
-where (company_organization_c)<>(u_company_organization)
+where (company_organization_c)<>trim(u_company_organization)
 
