@@ -1,12 +1,7 @@
-SELECT CASE 
-         WHEN Count(1) > 0 THEN 'FAILURE' 
-         ELSE 'SUCCESS' 
-       END AS Result, 
-       CASE 
-         WHEN Count(1) > 0 THEN 
-         'MDS to DWH data validation failed for f_change_request.failure_flag' 
-         ELSE 'SUCCESS' 
-       END AS Message 
+SELECT 
+CASE WHEN CNT > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result, 
+ CASE WHEN CNT > 0 THEN 'MDS to DWH data validation failed for f_change_request.failure_flag' ELSE 'SUCCESS' END AS Message
+FROM (SELECT count(1) as CNT
 FROM   <<tenant>>_mdsdb.change_request_final SRC 
        LEFT JOIN <<tenant>>_mdwdb.d_change_request TRGT 
               ON ( SRC.sys_id = TRGT.row_id 
@@ -19,4 +14,4 @@ CASE
          WHEN br.dimension_wh_code = 'FAIL' 
                THEN 'Y' 
          ELSE 'N' 
-       END <> TRGT.failure_flag 
+       END <> TRGT.failure_flag)temp;

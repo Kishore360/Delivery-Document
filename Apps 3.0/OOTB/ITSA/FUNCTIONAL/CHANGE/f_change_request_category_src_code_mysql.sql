@@ -1,7 +1,9 @@
 
 
-SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
- CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for f_change_request.category_src_code' ELSE 'SUCCESS' END as Message
+SELECT 
+CASE WHEN CNT > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+ CASE WHEN CNT >0 THEN 'MDS to DWH data validation failed for f_change_request.category_src_code' ELSE 'SUCCESS' END as Message
+ FROM (SELECT count(1) as CNT 
  FROM <<tenant>>_mdsdb.change_request_final SRC 
 
  inner JOIN <<tenant>>_mdwdb.f_change_request TRGT 
@@ -10,4 +12,4 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
- WHERE coalesce( SRC.category,'')<> coalesce(TRGT.category_src_code,'')
+ WHERE coalesce( SRC.category,'')<> coalesce(TRGT.category_src_code,''))temp; 
