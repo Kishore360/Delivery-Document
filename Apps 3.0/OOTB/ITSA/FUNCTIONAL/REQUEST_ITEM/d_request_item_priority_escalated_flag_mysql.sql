@@ -1,6 +1,7 @@
-
-	SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
-	 CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for d_request_item.priority_escalated_flag' ELSE 'SUCCESS' END as Message from (
+SELECT 
+CASE WHEN CNT > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+CASE WHEN CNT >0 THEN 'MDS to DWH data validation failed for d_request_item.priority_escalated_flag' ELSE 'SUCCESS' END as Message from (
+	 FROM (SELECT count(1) as CNT 
 	select case when locate('Y',b.res)>0 then 'Y' else 'N' end as priority_escalation,c.sys_id,
 	d.priority_escalated_flag as target from (
 	select group_concat(a.flag) as res,a.documentkey from (
@@ -12,5 +13,6 @@
 	)b
 	 join <<tenant>>_mdsdb.sc_req_item_final c on b.documentkey=c.sys_id
 	join <<tenant>>_mdwdb.d_request_item d on c.sys_id = d.row_id and c.sourceinstance = d. source_id
-	) e where priority_escalation<>target
+	) e where priority_escalation<>target;
+	
 
