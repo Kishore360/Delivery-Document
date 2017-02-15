@@ -1,7 +1,9 @@
 
 
-SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
- CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for f_request_task.opened_by_department_key' ELSE 'SUCCESS' END as Message
+SELECT 
+CASE WHEN CNT > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+ CASE WHEN CNT >0 THEN 'MDS to DWH data validation failed for f_request_task.opened_by_department_key' ELSE 'SUCCESS' END as Message
+ FROM (SELECT count(1) as CNT
  
  
  FROM <<tenant>>_mdsdb.sc_task_final SRC 
@@ -22,4 +24,5 @@ JOIN   <<tenant>>_mdwdb.d_internal_organization LKP2
  and LKP.row_id  is null 
  
  WHERE COALESCE(LKP.row_key,LKP2.row_key,CASE WHEN (SRC.opened_by is not null and LKP1.department_code IS NULL 
- or SRC.opened_by is  null) THEN 0 else -1 end)<> (TRGT.opened_by_department_key)
+ or SRC.opened_by is  null) THEN 0 else -1 end)<> (TRGT.opened_by_department_key))temp;
+  
