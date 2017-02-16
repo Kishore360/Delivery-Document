@@ -1,5 +1,6 @@
-SELECT CASE WHEN cnt > 0 THEN 'FaILURE' ELSE 'SUCCESS' END aS Result
-,CaSE WHEN cnt > 0 THEN 'Data did not Match.' 
+SELECT 
+CASE WHEN cnt > 0 THEN 'FaILURE' ELSE 'SUCCESS' END aS Result,
+CaSE WHEN cnt > 0 THEN 'Data did not Match.' 
 ELSE 'Data Matched' END aS Message 
 FROM (select count(1) as cnt from
 (select sys_id,sourceinstance,opened_at,closed_at from cardinalhealth_mdsdb.change_request_final SRC where opened_at <closed_at) SRC 

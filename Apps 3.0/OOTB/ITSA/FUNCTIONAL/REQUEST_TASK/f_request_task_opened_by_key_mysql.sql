@@ -1,5 +1,7 @@
-SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
- CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for f_request_task.opened_by_key' ELSE 'SUCCESS' END as Message
+SELECT 
+CASE WHEN CNT > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+CASE WHEN CNT >0 THEN 'MDS to DWH data validation failed for f_request_task.opened_by_key' ELSE 'SUCCESS' END as Message
+FROM (SELECT count(1) as CNT 
  FROM <<tenant>>_mdsdb.sc_task_final SRC 
  LEFT JOIN <<tenant>>_mdwdb.f_request_task TRGT 
  ON (SRC.sys_id =TRGT.row_id  
@@ -9,4 +11,5 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 AND SRC.sourceinstance= LKP.source_id ) and COALESCE(CONVERT_TZ (SRC.opened_at,<<TENANT_SSI_TIME_ZONE>>,<<DW_TARGET_TIME_ZONE>>), 
 CONVERT_TZ (coalesce(SRC.closed_at,SRC.sys_updated_on),<<TENANT_SSI_TIME_ZONE>>,<<DW_TARGET_TIME_ZONE>>),'UNSPECIFIED') 
 BETWEEN effective_from AND effective_to
- WHERE COALESCE(LKP.row_key,CASE WHEN SRC.opened_by IS NULL THEN 0 else -1 end)<> (TRGT.opened_by_key)
+ WHERE COALESCE(LKP.row_key,CASE WHEN SRC.opened_by IS NULL THEN 0 else -1 end)<> (TRGT.opened_by_key))temp;
+ 

@@ -1,4 +1,5 @@
-SELECT CASE WHEN cnt > 0 THEN 'FaILURE' ELSE 'SUCCESS' END aS Result
+SELECT 
+CASE WHEN cnt > 0 THEN 'FaILURE' ELSE 'SUCCESS' END aS Result
 ,CaSE WHEN cnt > 0 THEN 'Data did not Match.' 
 ELSE 'Data Matched' END aS Message 
 FROM (
