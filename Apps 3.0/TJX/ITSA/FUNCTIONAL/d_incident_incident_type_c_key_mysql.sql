@@ -7,7 +7,7 @@ LEFT JOIN tjx_mdwdb.d_lov LKP
  ON LKP.dimension_class like '%INCIDENT_TYPE~INCIDENT%' and 
 ( concat('INCIDENT_TYPE~INCIDENT~~~',u_incident_type)= LKP.row_id 
 AND SRC.sourceinstance= LKP.source_id ) 
- LEFT JOIN tjx_mdwdb.d_incident TRGT 
+  JOIN tjx_mdwdb.d_incident TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
  WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_incident_type IS NULL THEN 0 else -1 end)<> (TRGT.incident_type_c_key))temp;

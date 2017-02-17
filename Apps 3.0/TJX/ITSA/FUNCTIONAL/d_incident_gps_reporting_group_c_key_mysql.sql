@@ -7,7 +7,7 @@ LEFT JOIN tjx_mdwdb.d_lov LKP
  ON LKP.dimension_class like '%GPS_REPORTING_GROUP~INCIDENT%' and 
 ( concat('GPS_REPORTING_GROUP~INCIDENT~~~',u_gps_reporting_group)= LKP.row_id 
 AND SRC.sourceinstance= LKP.source_id ) 
- LEFT JOIN tjx_mdwdb.d_incident TRGT 
+  JOIN tjx_mdwdb.d_incident TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
  WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_gps_reporting_group IS NULL THEN 0 else -1 end)<> (TRGT.gps_reporting_group_c_key))temp;

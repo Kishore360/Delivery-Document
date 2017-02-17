@@ -6,10 +6,31 @@
 join ldb.d_calendar_date         a12
 on (a11.opened_on_key = a12.row_key)
 union
+select'd_calendar_quarter' as Table_Name, count(a11.row_key) Row_Count
+from  ldb.f_incident             a11 
+join ldb.d_calendar_date         a12
+on (a11.opened_on_key = a12.row_key)
+join ldb.d_calendar_quarter         a13
+on (a12.quarter_start_date_key = a13.row_key)
+union
+select'd_calendar_week' as Table_Name, count(a11.row_key) Row_Count
+from  ldb.f_incident             a11 
+join ldb.d_calendar_date         a12
+on (a11.opened_on_key = a12.row_key)
+join ldb.d_calendar_week         a13
+on (a12.week_start_date_key = a13.row_key)
+union
+select'd_calendar_year' as Table_Name, count(a11.row_key) Row_Count
+from  ldb.f_incident             a11 
+join ldb.d_calendar_date         a12
+on (a11.opened_on_key = a12.row_key)
+join ldb.d_calendar_year         a13
+on (a12.year_start_date_key = a13.row_key)
+union
 select'd_calendar_time' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_incident             a11 
-join ldb.d_calendar_time         a12
-on (a11.opened_time_key = a12.row_key)
+join ldb.d_calendar_time         a13
+on (a11.opened_time_key = a13.row_key)
 union
 select'd_configuration_item' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_incident             a11 
@@ -222,3 +243,17 @@ join	ldb.d_business_service	a12
 	  on 	(a11.business_service_key = a12.row_key)
 join	ldb.d_business_service_used_for	a14
 on 	(a12.used_for_src_key = a14.row_key)	  
+union 
+select 'd_problem' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_incident a11 
+join ldb.d_problem a12 on a11.problem_key=a12.row_key
+union
+select'd_task_priority' as Table_Name, count(a11.row_key) Row_Count
+from  ldb.f_incident             a11 
+join ldb.d_task_priority       a121
+on (a11.priority_src_key = a121.row_key)
+union
+select'd_incident_agebucket' as Table_Name, count(a11.row_key) Row_Count
+from  ldb.f_incident             a11 
+   join          ldb.d_incident_agebucket      a125
+                  on          (a11.age_key = a125.row_key)

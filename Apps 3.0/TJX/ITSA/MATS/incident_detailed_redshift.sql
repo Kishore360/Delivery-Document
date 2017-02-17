@@ -42,3 +42,8 @@ union
    join ldb.d_incident a12 on a11.incident_key=a12.row_key
  join ldb.d_incident_type_c a13
    on  (a12.Incident_Type_c_key = a13.row_key)
+   union
+      select  'd_internal_contact_mi_primary_owner_c' as Table_Name,count(a11.row_key) Row_Count     
+   from ldb.f_incident a11
+   join ldb.d_internal_contact_mi_primary_owner_c a12 on a11.mi_primary_owner_c_key=a12.row_key
+   
