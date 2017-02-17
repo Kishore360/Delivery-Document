@@ -1,5 +1,7 @@
-SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
- CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed' ELSE 'SUCCESS' END as Message
+SELECT 
+CASE WHEN CNT > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+CASE WHEN CNT >0 THEN 'MDS to DWH data validation failed' ELSE 'SUCCESS' END as Message
+FROM (SELECT count(1) as CNT 
  FROM cardinalhealth_mdsdb.time_card_final SRC
  JOIN cardinalhealth_mdwdb.d_calendar_date b ON SRC.week_starts_on = b.week_start_date
 	AND b.source_id=2 
@@ -14,4 +16,5 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 			 WHEN b.day_name ='Thursday' THEN thursday
 			 WHEN b.day_name ='Friday' THEN friday
 			 WHEN b.day_name ='Saturday' THEN saturday
-			 ELSE 0		 END <> effort_duration;
+			 ELSE 0		 END <> effort_duration)temp;
+			 
