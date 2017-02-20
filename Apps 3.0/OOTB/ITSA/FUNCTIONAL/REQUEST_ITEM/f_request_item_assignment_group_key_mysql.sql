@@ -1,8 +1,7 @@
 SELECT 
 CASE WHEN CNT > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
- CASE WHEN CNT >0 THEN 'MDS to DWH data validation failed for f_request_item.assignment_group_key' ELSE 'SUCCESS'
+ CASE WHEN CNT >0 THEN 'MDS to DWH data validation failed for f_request_item.assignment_group_key' ELSE 'SUCCESS' END as Message
 FROM (SELECT count(1) as CNT  
-END as Message
 from  <<tenant>>_mdsdb.sc_req_item_final src
 left JOIN <<tenant>>_mdwdb.f_request_item trgt
 on (src.sys_id =trgt.row_id AND src.sourceinstance= trgt.source_id)

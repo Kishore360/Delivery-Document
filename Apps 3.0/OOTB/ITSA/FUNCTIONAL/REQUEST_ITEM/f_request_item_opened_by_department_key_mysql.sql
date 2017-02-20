@@ -1,7 +1,7 @@
  SELECT 
 CASE WHEN CNT > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 CASE WHEN CNT >0 THEN 'MDS to DWH data validation failed for d_request.priority_escalated_flag' ELSE 'SUCCESS' END as Message from
-FROM (SELECT count(1) as CNT 
+ (SELECT count(1) as CNT FROM
 <<tenant>>_mdsdb.sc_req_item_final SRC
 left join <<tenant>>_mdsdb.sys_user_final scu
 on SRC.opened_by = scu.sys_id

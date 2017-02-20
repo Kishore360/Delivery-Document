@@ -1,6 +1,6 @@
 SELECT 
-CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
-CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for d_problem_task.backlog_flag' ELSE 'SUCCESS' END as Message
+CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+CASE WHEN cnt >0 THEN 'MDS to DWH data validation failed for d_problem_task.backlog_flag' ELSE 'SUCCESS' END as Message
  FROM 
  (SELECT count(1) as CNT
  FROM <<tenant>>_mdsdb.problem_task_final SRC 

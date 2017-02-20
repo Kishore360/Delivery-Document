@@ -10,5 +10,5 @@ AND TGT.source_id = SRC.sourceinstance
 JOIN <<tenant>>_mdwdb.d_lov lkp
 ON COALESCE(CONCAT('REVIEW_STATUS','~','CHANGE_REQUEST','~','~','~',UPPER(SRC.review_status)),'UNSPECIFIED') = lkp.row_id
  and SRC.sourceinstance = lkp.source_id
-where  soft_deleted_flag='N' and COALESCE(lkp.row_key,case when SRC.review_status is null then 0 else -1 end )<>TGT.REVIEW_STATUS_src_key)c
+where  TGT.soft_deleted_flag='N' and COALESCE(lkp.row_key,case when SRC.review_status is null then 0 else -1 end )<>TGT.REVIEW_STATUS_src_key)c
 
