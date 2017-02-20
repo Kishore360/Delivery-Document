@@ -28,7 +28,7 @@ select'ldb.d_internal_contact_mdm' as Table_Name, count(a11.row_key) Row_Count
 join ldb.d_internal_contact       a15
 on (a11.employee_key = a15.row_key)
 join ldb.d_internal_contact_mdm       a16
-on (a16.row_current_key = a16.row_current_key)
+on (a15.row_current_key = a16.row_current_key)
 union
 select'ldb.d_internal_organization_department' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_time_card       a11 

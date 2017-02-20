@@ -223,7 +223,7 @@ select'ldb.d_internal_contact_manager_c' as Table_Name, count(a11.row_key) Row_C
  from  ldb.f_incident       a11 
  join ldb.d_internal_organization_group       a112
 on (a11.assignment_group_key=a112.row_key)
-join ldb.d_internal_contact_manager_c       a138
+join ldb.d_internal_contact_assignment_group_manager_c       a138
 on (a112.manager_c_key=a138.row_key)
 union
 select'ldb.d_calendar_month' as Table_Name, count(a11.row_key) Row_Count
