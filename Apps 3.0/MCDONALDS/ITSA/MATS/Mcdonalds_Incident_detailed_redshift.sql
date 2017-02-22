@@ -184,13 +184,6 @@ on (a11.incident_key=a12.row_key)
 join ldb.d_incident_state       a135
 on (a12.state_src_key=a135.row_key)
 union
-select'ldb.d_incident_subcategory' as Table_Name, count(a11.row_key) Row_Count
- from  ldb.f_incident       a11 
- join ldb.d_incident       a12
-on (a11.incident_key=a12.row_key)
-join ldb.d_incident_subcategory       a136
-on (a12.sub_category_src_key=a136.row_key)
-union
 select'ldb.d_incident_type_lov_c' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_incident       a11 
  join ldb.d_incident       a12
