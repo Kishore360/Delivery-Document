@@ -1,7 +1,6 @@
 SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
 ,CASE WHEN cnt > 0 THEN 'Data did not Match.' 
-ELSE 'Data Matched' END AS Message from (select count(1) cnt  
-FROM (
+ELSE 'Data Matched' END AS Message from (
 select count(1) as cnt from <<tenant>>_mdsdb.incident_final x  
 left outer join <<tenant>>_mdwdb.d_internal_contact y on 
 CONCAT('INTERNAL_CONTACT~',x.resolved_by)=y.row_id  AND sourceinstance= source_id 

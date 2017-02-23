@@ -9,17 +9,17 @@ union
 select'ldb.d_calendar_date' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_problem_task_closed_c          a11 
 join ldb.d_calendar_date         a14
-on (a11.closeded_on_key=a14.row_key)
+on (a11.closed_on_key=a14.row_key)
 union
 select'ldb.d_calendar_greg_fiscal_c' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_problem_task_closed_c          a11 
 join ldb.d_calendar_greg_fiscal_c         a15
-on (a11.closeded_on_key=a15.greogrian_calendar_key)
+on (a11.closed_on_key=a15.greogrian_calendar_key)
 union
 select'ldb.d_calendar_date_fiscal' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_problem_task_closed_c          a11
 join ldb.d_calendar_greg_fiscal_c         a15
-on (a11.closeded_on_key=a15.greogrian_calendar_key) 
+on (a11.closed_on_key=a15.greogrian_calendar_key) 
 join ldb.d_calendar_date_fiscal         a16
 on (a15.fiscal_key=a16.row_key)
 union
@@ -41,7 +41,7 @@ union
 select'ldb.d_calendar_fiscal_period' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_problem_task_closed_c          a11
 join ldb.d_calendar_greg_fiscal_c         a15
-on (a11.closeded_on_key=a15.greogrian_calendar_key) 
+on (a11.closed_on_key=a15.greogrian_calendar_key) 
 join ldb.d_calendar_date_fiscal         a16
 on (a15.fiscal_key=a16.row_key) 
 join ldb.d_calendar_fiscal_period        a110
@@ -50,7 +50,7 @@ union
 select'ldb.d_calendar_fiscal_quarter' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_problem_task_closed_c          a11
 join ldb.d_calendar_greg_fiscal_c         a15
-on (a11.closeded_on_key=a15.greogrian_calendar_key) 
+on (a11.closed_on_key=a15.greogrian_calendar_key) 
 join ldb.d_calendar_date_fiscal         a16
 on (a15.fiscal_key=a16.row_key) 
 join ldb.d_calendar_fiscal_quarter        a111
@@ -59,7 +59,7 @@ union
 select'ldb.d_calendar_fiscal_year' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_problem_task_closed_c          a11
 join ldb.d_calendar_greg_fiscal_c         a15
-on (a11.closeded_on_key=a15.greogrian_calendar_key) 
+on (a11.closed_on_key=a15.greogrian_calendar_key) 
 join ldb.d_calendar_date_fiscal         a16
 on (a15.fiscal_key=a16.row_key) 
 join ldb.d_calendar_fiscal_year        a112

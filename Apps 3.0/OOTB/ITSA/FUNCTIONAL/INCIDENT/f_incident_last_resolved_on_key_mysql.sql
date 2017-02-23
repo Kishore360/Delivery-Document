@@ -1,7 +1,7 @@
 
 SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
 ,CASE WHEN cnt > 0 THEN 'Data did not Match.' 
-ELSE 'Data Matched' END AS Message from 
+ELSE 'Data Matched' END AS Message from (
 select COUNT(1) cnt from(
 SELECT A.SYS_ID,B.ROW_ID,
 B.  last_resolved_on_key B_last_resolved_on_key ,

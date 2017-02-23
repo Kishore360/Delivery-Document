@@ -1,5 +1,7 @@
- SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
- CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for f_problem.opened_by_department_key' ELSE 'SUCCESS' END as Message
+ SELECT 
+ CASE WHEN CNT > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+ CASE WHEN CNT >0 THEN 'MDS to DWH data validation failed for f_problem.opened_by_department_key' ELSE 'SUCCESS' END as Message
+FROM (SELECT count(1) as CNT 
   FROM    cardinalhealth_mdsdb.change_request_final su 
  LEFT JOIN (
 select a.rfc,SourceInstance,u_causal_assignment_group 
@@ -15,4 +17,4 @@ on concat('GROUP~',left(p.u_causal_assignment_group,32))=c.row_id
  left join cardinalhealth_mdwdb.f_change_request a on a.row_id =su.sys_id 
 and a.source_id =su.sourceinstance 
  where  coalesce(c.row_key,case when p.u_causal_assignment_group is null then 0 else -1  end )
-<> a.causal_assignment_group_c_key;
+<> a.causal_assignment_group_c_key)temp;

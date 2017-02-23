@@ -1,6 +1,8 @@
-
-SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
-CASE WHEN count(1) >0 THEN 'Failure' ELSE 'Data Matched' END as Message from
+SELECT 
+CASE WHEN CNT > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+CASE WHEN CNT >0 THEN 'Failure' ELSE 'Data Matched' END as Message 
+FROM (SELECT count(1) as CNT
+from
 cardinalhealth_mdwdb.d_request_task d_request_task 
 JOIN (
 			SELECT f_sla.request_task_key,
@@ -24,5 +26,6 @@ JOIN (
 				   GROUP BY f_sla.request_task_key) latest ON latest.request_task_key=f_sla.request_task_key
 				AND latest.due_on_c=f_sla.due_on_c
 			GROUP BY f_sla.request_task_key )tmp ON d_request_task.row_key = tmp.request_task_key  
-WHERE d_request_task.days_to_breach_sla_c <> tmp.actual_time_left_c 
+WHERE d_request_task.days_to_breach_sla_c <> tmp.actual_time_left_c)temp;
+ 
 

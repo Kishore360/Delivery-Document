@@ -18,5 +18,6 @@ not in (select class_value from whirlpool_workdb.lsm_ls_system_variables where e
 'WARRANTY',
 'CRITICALITY~BUSINESS_SERVICE',
 'CI_CLASS_AUTOFILL_C~INCIDENT',
-'LKP_REGION_C~INCIDENT'
+'LKP_REGION_C~INCIDENT',
+'COUNTRIES~U_AD_HOC_REQUEST'
 ) )a;

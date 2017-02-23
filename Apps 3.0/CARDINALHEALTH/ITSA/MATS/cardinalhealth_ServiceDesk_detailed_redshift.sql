@@ -1,3 +1,6 @@
+select'ldb.f_call' as Table_Name, count(a11.row_key) Row_Count
+ from  ldb.f_call             a11 
+ union
 select'ldb.d_internal_contact' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_call             a11 
 join ldb.d_internal_contact         a12

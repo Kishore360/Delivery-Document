@@ -184,13 +184,6 @@ on (a11.incident_key=a12.row_key)
 join ldb.d_incident_state       a135
 on (a12.state_src_key=a135.row_key)
 union
-select'ldb.d_incident_subcategory' as Table_Name, count(a11.row_key) Row_Count
- from  ldb.f_incident       a11 
- join ldb.d_incident       a12
-on (a11.incident_key=a12.row_key)
-join ldb.d_incident_subcategory       a136
-on (a12.sub_category_src_key=a136.row_key)
-union
 select'ldb.d_incident_type_lov_c' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_incident       a11 
  join ldb.d_incident       a12
@@ -223,7 +216,7 @@ select'ldb.d_internal_contact_manager_c' as Table_Name, count(a11.row_key) Row_C
  from  ldb.f_incident       a11 
  join ldb.d_internal_organization_group       a112
 on (a11.assignment_group_key=a112.row_key)
-join ldb.d_internal_contact_manager_c       a138
+join ldb.d_internal_contact_assignment_group_manager_c       a138
 on (a112.manager_c_key=a138.row_key)
 union
 select'ldb.d_calendar_month' as Table_Name, count(a11.row_key) Row_Count

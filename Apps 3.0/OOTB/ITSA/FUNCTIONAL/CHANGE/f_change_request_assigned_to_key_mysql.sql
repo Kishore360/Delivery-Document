@@ -1,7 +1,9 @@
 
 
-SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
- CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for f_change_request.assigned_to_key' ELSE 'SUCCESS' END as Message
+SELECT 
+CASE WHEN CNT > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+ CASE WHEN CNT >0 THEN 'MDS to DWH data validation failed for f_change_request.assigned_to_key' ELSE 'SUCCESS' END as Message
+ FROM (SELECT count(1) as CNT
  FROM <<tenant>>_mdsdb.change_request_final SRC
  LEFT JOIN <<tenant>>_mdwdb.f_change_request TRGT 
  ON (SRC.sys_id =TRGT.row_id  
@@ -11,4 +13,4 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  
 AND SRC.sourceinstance= LKP.source_id )
 AND TRGT.pivot_date between LKP.effective_from and LKP.effective_to
- WHERE COALESCE(LKP.row_key,CASE WHEN SRC.assigned_to IS NULL THEN 0 else -1 end)<> TRGT.assigned_to_key
+ WHERE COALESCE(LKP.row_key,CASE WHEN SRC.assigned_to IS NULL THEN 0 else -1 end)<> TRGT.assigned_to_key)temp;
