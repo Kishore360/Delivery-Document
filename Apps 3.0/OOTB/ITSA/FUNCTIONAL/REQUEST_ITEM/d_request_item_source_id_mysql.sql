@@ -4,5 +4,5 @@ CASE WHEN CNT >0 THEN 'MDS to DWH data validation failed for d_request_item.sour
 FROM (SELECT count(1) as CNT
  FROM <<tenant>>_mdsdb.sc_req_item_final SRC 
  LEFT JOIN <<tenant>>_mdwdb.d_request_item TRGT 
- ON SRC.sys_id =TRGT.row_id  WHERE ( SRC.sourceinstance)<> (TRGT.source_id ))temp;
+ ON SRC.sys_id =TRGT.row_id  WHERE TRGT.soft_deleted_flag ='N' and ( SRC.sourceinstance)<> (TRGT.source_id ))temp;
  

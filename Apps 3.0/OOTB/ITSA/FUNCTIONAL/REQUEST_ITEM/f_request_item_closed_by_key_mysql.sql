@@ -18,6 +18,6 @@ CONVERT_TZ (coalesce(SRC.closed_at,SRC.sys_updated_on),<<TENANT_SSI_TIME_ZONE>>,
 BETWEEN LKP.effective_from AND LKP.effective_to
 
 )
- WHERE  COALESCE(LKP.row_key,CASE WHEN SRC.closed_by  IS NULL THEN 0 ELSE -1 END )<> (TRGT.closed_by_key))temp;
+ WHERE TRGT.soft_deleted_flag ='N' and COALESCE(LKP.row_key,CASE WHEN SRC.closed_by  IS NULL THEN 0 ELSE -1 END )<> (TRGT.closed_by_key))temp;
  
  

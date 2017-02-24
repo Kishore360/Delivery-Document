@@ -9,7 +9,7 @@ CASE WHEN cnt >0 THEN 'MDS to DWH data validation failed for d_problem_task.back
  AND SRC.sourceinstance= TRGT.source_id  )
   JOIN  <<tenant>>_mdwdb.f_problem_task TRGTF 
  ON (TRGTF.problem_task_key =TRGT.row_key
- AND TRGTF.source_id =TRGT.source_id)
+ AND TRGTF.source_id =TRGT.source_id and TRGTF.soft_deleted_flag='N')
   LEFT JOIN <<tenant>>_mdwdb.d_lov_map LM
  on TRGTF.state_src_key = LM.src_key 
  WHERE LM.dimension_class='STATE~PROBLEM_TASK' and  

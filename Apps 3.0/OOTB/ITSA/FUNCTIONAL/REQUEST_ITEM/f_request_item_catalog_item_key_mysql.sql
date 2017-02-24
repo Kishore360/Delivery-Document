@@ -5,7 +5,7 @@ FROM (SELECT count(1) as CNT
  FROM <<tenant>>_mdsdb.sc_req_item_final SRC 
  LEFT JOIN <<tenant>>_mdwdb.f_request_item TRGT 
  ON (SRC.sys_id =TRGT.row_id  
- AND SRC.sourceinstance= TRGT.source_id  )
+ AND SRC.sourceinstance= TRGT.source_id and TRGT.soft_deleted_flag='N' )
  LEFT JOIN <<tenant>>_mdwdb.d_master_item LKP 
  ON ( SRC.cat_item= LKP.row_id 
 AND SRC.sourceinstance= LKP.source_id )

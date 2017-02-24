@@ -5,6 +5,6 @@ CASE WHEN CNT >0 THEN 'MDS to DWH data validation failed for f_request_item.urge
  FROM <<tenant>>_mdsdb.sc_req_item_final SRC 
  LEFT JOIN <<tenant>>_mdwdb.f_request_item TRGT 
  ON (SRC.sys_id =TRGT.row_id  
- AND SRC.sourceinstance= TRGT.source_id  )
+ AND SRC.sourceinstance= TRGT.source_id AND TRGT.soft_deleted_flag = 'N'  )
  WHERE COALESCE( SRC.urgency,'')<> COALESCE(TRGT.urgency_src_code ,''))temp;
  

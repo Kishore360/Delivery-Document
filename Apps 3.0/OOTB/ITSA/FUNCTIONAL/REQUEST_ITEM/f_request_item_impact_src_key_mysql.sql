@@ -4,7 +4,7 @@ SELECT CASE WHEN CNT > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  FROM <<tenant>>_mdsdb.sc_req_item_final SRC 
  LEFT JOIN <<tenant>>_mdwdb.f_request_item TRGT 
  ON (SRC.sys_id =TRGT.row_id  
- AND SRC.sourceinstance= TRGT.source_id  )
+ AND SRC.sourceinstance= TRGT.source_id AND TRGT.soft_deleted_flag = 'N'  )
 LEFT JOIN <<tenant>>_mdwdb.d_lov LKP 
  ON ( concat('IMPACT','~','SC_REQ_ITEM','~','~','~',upper(impact))= LKP.src_rowid 
 AND SRC.sourceinstance= LKP.source_id )

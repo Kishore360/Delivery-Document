@@ -7,7 +7,7 @@ CASE WHEN CNT > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  FROM <<tenant>>_mdsdb.change_request_final SRC
  LEFT JOIN <<tenant>>_mdwdb.f_change_request TRGT 
  ON (SRC.sys_id =TRGT.row_id  
- AND SRC.sourceinstance= TRGT.source_id  )
+ AND SRC.sourceinstance= TRGT.source_id and TRGT.soft_deleted_flag='N'  )
  LEFT JOIN <<tenant>>_mdwdb.d_internal_organization LKP 
  ON ( COALESCE(CONCAT('GROUP','~',SRC.ASSIGNMENT_GROUP),0)= LKP.row_id 
  
