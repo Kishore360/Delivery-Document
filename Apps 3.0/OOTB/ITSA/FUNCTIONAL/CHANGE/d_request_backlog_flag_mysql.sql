@@ -5,12 +5,12 @@ CASE WHEN CNT > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  FROM <<tenant>>_mdsdb.sc_request_final SRC 
  LEFT JOIN <<tenant>>_mdwdb.d_request TRGT 
  ON (SRC.sys_id =TRGT.row_id  
- AND SRC.sourceinstance= TRGT.source_id  )
+ AND SRC.sourceinstance= TRGT.source_id AND TRGT.soft_deleted_flag='N' )
   JOIN  <<tenant>>_mdwdb.f_request TRGTF 
  ON (TRGTF.request_key =TRGT.row_key
  AND TRGTF.source_id =TRGT.source_id)
   LEFT JOIN <<tenant>>_mdwdb.d_lov_map LM
- on TRGTF.state_src_key = LM.src_key and LM.dimension_class='REQUEST_STATE~SC_REQUEST'
+ on TRGTF.state_src_key = LM.src_key and LM.dimension_class='REQUEST_STATE~SC_REQUEST' AND TRGT.soft_deleted_flag='N'
 WHERE ( CASE WHEN LM.dimension_wh_code IN ('OPEN') THEN 'Y' ELSE 'N' END)<> (TRGT.backlog_flag))temp;
 
 

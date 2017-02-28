@@ -14,12 +14,12 @@ on (a11.incident_key=a12.row_key)
 join ldb.d_lov_situation_c       a13
 on (a12.situation_c_key=a13.row_key)
 union
-select'ldb.d_lov_subcategory_c' as Table_Name, count(a11.row_key) Row_Count
+select'ldb.d_lov_u_subcategory_incident_c' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_incident       a11 
  join ldb.d_incident       a12
 on (a11.incident_key=a12.row_key)
-join ldb.d_lov_subcategory_c       a14
-on (a12.subcategory_c_key=a14.row_key)
+join ldb.d_lov_u_subcategory_incident_c       a14
+on (a12.sub_category_src_key=a14.row_key)
 union
 select'ldb.d_service_c' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_incident       a11 

@@ -4,5 +4,6 @@ from (
 select row_id,source_id,dimension_class,count(1)
 from pan_mdwdb.d_lov 
 where dimension_class not  like '%ASSET%' and dimension_class not like '%WARRANTY%' AND current_flag='Y'
+AND dimension_class <>'CURRENCY' 
 group by 1,2,3
 having count(1)>1)a; 
