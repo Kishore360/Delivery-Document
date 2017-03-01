@@ -133,7 +133,7 @@ on (a17.level0_manager_c_key=a125.level0_manager_c_key)
 union
 select'ldb.d_internal_contact_emp_seniors_assigned_to_c' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_response_question_keyword_c       a11
-join  ldb.d_internal_contacrow_count, t_assigned_to       a19
+join  ldb.d_internal_contact_assigned_to       a19
 on (a11.assigned_to_key=a19.row_key)
 join  ldb.d_internal_contact_emp_seniors_assigned_to_c       a125
 on (a19.manager_c_key=a125.row_key)
