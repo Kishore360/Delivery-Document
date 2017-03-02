@@ -1,4 +1,3 @@
-
 select 'ldb.f_sr_task_c a11 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_sr_task_c a11 
 union
@@ -80,12 +79,12 @@ on (a11.service_request_c_key = a14.row_key)
 join ldb.d_lov_service_request_priority_c a115 
 on (a14.priority_src_key = a115.row_key) 
 union
-select 'ldb.d_lov_service_request_state_c a116 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_lov_sr_task_state_c a116 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_sr_task_c a11 
-join ldb.d_service_request_c a14 
-on (a11.service_request_c_key = a14.row_key) 
-join ldb.d_lov_service_request_state_c a116 
-on (a14.state_src_key = a116.row_key) 
+join ldb.d_sr_task_c a15 
+on (a11.sr_task_c_key = a15.row_key) 
+join ldb.d_lov_sr_task_state_c a116 
+on (a15.state_src_key = a116.row_key) 
 union
 select 'ldb.d_lov_service_request_subcategory_c a117 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_sr_task_c a11 
@@ -113,4 +112,5 @@ from ldb.f_sr_task_c a11
 join ldb.d_calendar_date a13 
 on (a11.opened_on_key = a13.row_key) 
 join ldb.d_calendar_year a120 
-on (a13.year_start_date_key = a120.row_key)
+on (a13.year_start_date_key = a120.row_key) 
+
