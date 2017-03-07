@@ -1,19 +1,22 @@
-
-
-
-SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
-,CASE WHEN cnt > 0 THEN 'Data did not Match.' 
-ELSE 'Data Matched' END AS Message 
-FROM (
-select Count(1) as cnt
-FROM cardinalhealth_mdsdb.u_enhancement_task_final i 
-JOIN cardinalhealth_mdwdb.d_enhancement_task_c f 
-ON i.sys_id=f.row_id AND i.sourceinstance=f.source_id 
-join cardinalhealth_mdwdb.d_lov d
-on COALESCE(CONCAT('STATE_C','~','ENHANCEMENT_TASK','~','~','~',UPPER(state)),'UNSPECIFIED') =d.row_id    
-where coalesce(d.row_key,case when i.state is null then 0 else -1 end) <> f.state_src_key)a
-
-
-
-
-
+select 
+case 
+when sum(src_not_null_count) = 0 then 'Success. Source does not have any data. All are nulls.'
+when sum(src_not_null_count) <> 0 and sum(lkp_not_null_count) = 0 then 'Failed. Lookup does not have any data.'
+when sum(failures_cnt) > 0 and length(group_concat(distinct failures)) >= 1024 then concat('Failed. Data does not match for ',sum(failures_cnt),' records. Few sys ids are : ',substring_index(group_concat(distinct failures),',',-31))
+when sum(failures_cnt) > 0 and length(group_concat(distinct failures)) < 1024
+then concat('Failed. Data does not match for ',sum(failures_cnt),' records. Sys Ids : ',substring_index(group_concat(distinct failures),',',-sum(failures_cnt)))
+when sum(warnings_cnt) > 0 and length(group_concat(distinct warnings)) >= 1024 then concat('Warning. Look up does not exists for ',sum(warnings_cnt),' records. Few (sys_id || state) - ',group_concat(distinct warnings))
+when sum(warnings_cnt) > 0 and length(group_concat(distinct warnings)) < 1024 then concat('Warning. Look up does not exists for ',sum(warnings_cnt),' records. (sys_id || state) : ',substring_index(group_concat(distinct warnings),',',-sum(warnings_cnt)))
+else CONCAT('Success. All warehouse records are matching with source. Source Count - ',sum(src_not_null_count),' Target Count - ',sum(trgt_not_null_count)) end Result
+from  
+(select 
+case when src.state is not null then 1 else 0 end as src_not_null_count,
+case when trgt.state_src_key is not null and trgt.state_src_key <> 0 then 1 else 0 end as trgt_not_null_count,
+case when lkp.row_key is not null then 1 else 0 end as lkp_not_null_count,
+case when src.state is not null and lkp.row_id is null then concat(src.sys_id,' || ',src.state) else '' end as warnings,
+case when src.state is not null and lkp.row_id is null then 1 else 0 end as warnings_cnt,
+case when COALESCE(lkp.row_key,CASE WHEN src.state IS NULL THEN 0 else -1 end) <> COALESCE(trgt.state_src_key,0)  then src.sys_id else '' end as failures,
+case when COALESCE(lkp.row_key,CASE WHEN src.state IS NULL THEN 0 else -1 end) <> COALESCE(trgt.state_src_key,0) then 1 else 0 end as failures_cnt
+from cardinalhealth_mdsdb.u_enhancement_task_final src 
+left join cardinalhealth_mdwdb.d_enhancement_task_c trgt on src.sys_id = trgt.row_id and src.sourceinstance = trgt.source_id
+left join cardinalhealth_mdwdb.d_lov lkp on lkp.row_id = CONCAT('STATE_C~ENHANCEMENT_TASK~~~',src.state) and lkp.source_id = src.sourceinstance)fnl;
