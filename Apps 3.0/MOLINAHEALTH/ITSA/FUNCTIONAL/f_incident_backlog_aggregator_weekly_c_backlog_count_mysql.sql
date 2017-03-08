@@ -8,7 +8,7 @@ from   molinahealth_mdwdb.f_incident_backlog_aggregator_weekly_c f
 join  molinahealth_mdwdb.d_configuration_item d on d.row_key=configuration_item_key and d.source_id=f.source_id
 join molinahealth_mdwdb.d_calendar_date   cd on aggregate_c_key=cd.row_key
 inner join(select DATE_FORMAT(
-DATE_ADD(SUBDATE(max(lastupdated), WEEKDAY(max(lastupdated))),interval 6  day)
+DATE_ADD(SUBDATE(max(lastupdated), WEEKDAY(max(lastupdated))),interval 5  day)
 ,'%Y%m%d') 
 AS refreshday,max(lastupdated) from molinahealth_mdwdb.d_o_data_freshness as df  ) as df
 on cd.row_id = df.refreshday

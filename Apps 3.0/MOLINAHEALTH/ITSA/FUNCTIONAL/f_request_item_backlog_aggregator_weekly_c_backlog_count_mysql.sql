@@ -7,7 +7,7 @@ catalog_item,aggregate_c_key,sum(backlog_count) trgt
 from   molinahealth_mdwdb.f_request_item_backlog_aggregator_weekly_c f
 join molinahealth_mdwdb.d_calendar_date   cd on aggregate_c_key=cd.row_key
 inner join(select DATE_FORMAT(
-DATE_ADD(SUBDATE(max(lastupdated), WEEKDAY(max(lastupdated))),interval 6  day)
+DATE_ADD(SUBDATE(max(lastupdated), WEEKDAY(max(lastupdated))),interval 5  day)
 ,'%Y%m%d') 
 AS refreshday,max(lastupdated) from molinahealth_mdwdb.d_o_data_freshness as df     ) as df
 on cd.row_id = df.refreshday group by 1,2 order by 1,2
