@@ -39,7 +39,7 @@ union
 select'ldb.d_internal_contact_opened_by_c' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_work_order_task_c              a11 
 join ldb.d_internal_contact_opened_by_c         a12
-on (a11.row_key = a12.row_key)
+on (a11.opened_by_key = a12.row_key)
 union
 select'ldb.d_internal_organization_dispatch_group_c' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_work_order_task_c              a11 
