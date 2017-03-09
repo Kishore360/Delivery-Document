@@ -7,9 +7,9 @@ then concat('Failed. Data does not match for ',sum(failures_cnt),' records. Sys 
 else CONCAT('Success. All warehouse records are matching with source. Source Count : ',sum(src_not_null_count),' ; Target Count : ',sum(trgt_not_null_count)) end Result
 from 
 (select 
-case when src.closed_at is not null then 1 else 0 end as src_not_null_count,
-case when trgt.closed_on is not null then 1 else 0 end as trgt_not_null_count,
-case when COALESCE(convert_tz(src.closed_at,'UTC','America/New_York'),'1970-01-01 00:00:00') <> COALESCE(trgt.closed_on,'1970-01-01 00:00:00') then src.sys_id else '' end as failures,
-case when COALESCE(convert_tz(src.closed_at,'UTC','America/New_York'),'1970-01-01 00:00:00') <> COALESCE(trgt.closed_on,'1970-01-01 00:00:00') then 1 else 0 end as failures_cnt
+case when src.sys_created_on is not null then 1 else 0 end as src_not_null_count,
+case when trgt.created_on is not null then 1 else 0 end as trgt_not_null_count,
+case when COALESCE(convert_tz(src.sys_created_on,'UTC','America/New_York'),'1970-01-01 00:00:00') <> COALESCE(trgt.created_on,'1970-01-01 00:00:00') then src.sys_id else '' end as failures,
+case when COALESCE(convert_tz(src.sys_created_on,'UTC','America/New_York'),'1970-01-01 00:00:00') <> COALESCE(trgt.created_on,'1970-01-01 00:00:00') then 1 else 0 end as failures_cnt
 from cardinalhealth_mdsdb.u_enhancement_task_final src
 left  join cardinalhealth_mdwdb.d_enhancement_task_c trgt on trgt.row_id = src.sys_id and trgt.source_id = src.sourceinstance) fnl ;

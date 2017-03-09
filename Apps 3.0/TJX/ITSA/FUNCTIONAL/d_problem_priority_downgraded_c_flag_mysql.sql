@@ -13,6 +13,7 @@ AND fieldname =  'priority' and oldvalue is not null and newvalue is not null
 )b
 join tjx_mdsdb.problem_final c on b.documentkey=c.sys_id
 join tjx_mdwdb.d_problem d on c.sys_id = d.row_id and c.sourceinstance = d. source_id)h
-) e where priority_downgraded_c_flag <> target;
+where priority_downgraded_c_flag <> target
+) e ;
 
 
