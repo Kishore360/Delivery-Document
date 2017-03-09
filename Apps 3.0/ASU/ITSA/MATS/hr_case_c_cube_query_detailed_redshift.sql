@@ -1,6 +1,11 @@
 select 'f_hr_case_c' as Table_Name,count(a.row_key) Row_Count
 from ldb.f_hr_case_c    a
 union
+select  'd_internal_contact_opened_for_c' as Table_Name,count(a.row_key) Row_Count
+from ldb.f_hr_case_c    a
+join  ldb.d_internal_contact_opened_for_c   b
+on   a.opened_for_key = b.row_key
+union
 select  'd_hr_case_c' as Table_Name,count(a.row_key) Row_Count
 from ldb.f_hr_case_c    a
 join  ldb.d_hr_case_c   b
@@ -40,14 +45,14 @@ from ldb.f_hr_case_c    a
 join  ldb.d_calendar_date   b
 on   a.opened_on_key = b.row_key
 union
-select  'd_lov 3' as Table_Name,count(a.row_key) Row_Count
+select  'ldb.d_lov_hr_case_dormancy_age_c' as Table_Name,count(a.row_key) Row_Count
 from ldb.f_hr_case_c    a
-join  asu_mdwdb.d_lov    b
+join  ldb.d_lov_hr_case_dormancy_age_c    b
 on   a.dormancy_age_key = b.row_key
 union
-select  'd_lov 4' as Table_Name,count(a.row_key) Row_Count
+select  'd_lov_hr_case_age_c' as Table_Name,count(a.row_key) Row_Count
 from ldb.f_hr_case_c    a
-join  asu_mdwdb.d_lov    b
+join  ldb.d_lov_hr_case_age_c    b
 on   a.age_key = b.row_key
 union
 select  'd_internal_contact' as Table_Name,count(a.row_key) Row_Count
