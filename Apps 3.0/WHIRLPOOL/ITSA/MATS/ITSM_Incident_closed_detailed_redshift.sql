@@ -210,6 +210,33 @@ select'ldb.d_incident_subcategory' as Table_Name, count(a11.row_key) Row_Count
 on (a11.incident_key=a18.row_key)
 join ldb.d_incident_subcategory       a138
 on (a18.sub_category_src_key=a138.row_key)
+union
+select'ldb.d_internal_organization_assignment_group_type_c' as Table_Name, count(a11.row_key) Row_Count
+ from  ldb.f_incident_closed       a11 
+join ldb.d_internal_organization_assignment_group_type_c     a139
+on (a11.assignment_group_type_c_key=a139.row_key)
+union
+select'ldb.d_location' as Table_Name, count(a11.row_key) Row_Count
+ from  ldb.f_incident_closed       a11 
+join ldb.d_internal_contact_affected_user_c     a140
+on (a11.affected_user_c_key=a140.row_key)
+join ldb.d_location a141
+on (a140.location_key=a141.row_key)
+union
+select'ldb.d_internal_contact_manager_c' as Table_Name, count(a11.row_key) Row_Count
+ from  ldb.f_incident_closed       a11 
+join ldb.d_internal_contact_manager_c     a142
+on (a11.manager_c_key=a142.row_key)
+union
+select'ldb.d_incident_on_hold_type_c' as Table_Name, count(a11.row_key) Row_Count
+ from  ldb.f_incident_closed       a11 
+join ldb.d_incident_on_hold_type_c     a143
+on (a11.on_hold_type_c_key=a143.row_key)
+union
+select'ldb.d_internal_organization_support_group_c' as Table_Name, count(a11.row_key) Row_Count
+ from  ldb.f_incident_closed       a11 
+join ldb.d_internal_organization_support_group_c     a145
+on (a11.support_group_c_key=a145.row_key)
 
 
 
