@@ -13,14 +13,14 @@ JOIN
 (
 SELECT SRC1.name AS name,date_format(month_end_date,'%Y%m%d') AS month_end_date, count(1) Source
 FROM molinahealth_mdsdb.sc_req_item_final SRC
-JOIN molinahealth_mdsdb.sc_cat_item_final  SRC1 
-ON(SRC.cat_item=SRC1.sys_id AND SRC.sourceinstance=SRC1.sourceinstance)
+left JOIN molinahealth_mdsdb.sc_cat_item_final  SRC1 
+ON(coalesce(SRC.cat_item,'-99')=coalesce(SRC1.sys_id,'-99') AND SRC.sourceinstance=SRC1.sourceinstance)
 JOIN molinahealth_mdwdb.d_calendar_date d 
-on d.row_id=(select distinct aggregate_c_key from molinahealth_mdwdb.f_request_item_backlog_aggregator_monthly_c)
-join molinahealth_mdwdb.d_lov_map LOV
+on d.row_id in (select distinct aggregate_c_key from molinahealth_mdwdb.f_request_item_backlog_aggregator_monthly_c)
+left join molinahealth_mdwdb.d_lov_map LOV
 on COALESCE(CONCAT('STATE~sc_req_item~~~' ,UPPER(SRC.state)),'UNSPECIFIED') = LOV.src_rowid
-AND LOV.dimension_wh_code = 'OPEN' group by 1,2 order by 1,2
+where LOV.dimension_wh_code = 'OPEN' group by 1,2 order by 1,2
 ) b 
-on a.catalog_item=b.name and a.aggregate_c_key=b.month_end_date
+on coalesce(a.catalog_item,'UNSPECIFIED')=coalesce(b.name,'UNSPECIFIED') and a.aggregate_c_key=b.month_end_date
 where b.Source<>a.trgt
 

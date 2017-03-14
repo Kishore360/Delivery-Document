@@ -13,4 +13,4 @@ WHERE sjf.name = 'task'
 				jf.customer_service_c_key<>jd.customer_service_c_key)a;
 
 
-				
+		
