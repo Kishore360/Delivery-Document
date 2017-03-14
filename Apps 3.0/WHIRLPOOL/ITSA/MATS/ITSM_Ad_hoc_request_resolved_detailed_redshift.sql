@@ -102,5 +102,21 @@ select'ldb.d_internal_organization_vendor_c' as Table_Name, count(a11.row_key) R
  from  ldb.f_ad_hoc_request_resolved_c       a11 
 join ldb.d_internal_organization_vendor_c       a121
 on (a11.vendor_key=a121.row_key)
+union
+select'ldb.d_ad_hoc_request_on_hold_type_c' as Table_Name, count(a11.row_key) Row_Count
+ from  ldb.f_ad_hoc_request_resolved_c       a11 
+join ldb.d_ad_hoc_request_on_hold_type_c a122
+on (a11.on_hold_type_key=a122.row_key)
+union
+select'ldb.d_internal_organization_support_group_c' as Table_Name, count(a11.row_key) Row_Count
+ from  ldb.f_ad_hoc_request_resolved_c       a11 
+join ldb.d_internal_organization_support_group_c       a123
+on (a11.support_group_key=a123.row_key)
+union
+select'ldb.d_internal_organization_vendor_c' as Table_Name, count(a11.row_key) Row_Count
+ from  ldb.f_ad_hoc_request_resolved_c       a11 
+join ldb.d_business_service      a124
+on (a11.business_service_key=a124.row_key)
+
 
 
