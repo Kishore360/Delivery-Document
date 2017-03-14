@@ -192,6 +192,11 @@ select'ldb.d_calendar_quarter' as Table_Name, count(a11.row_key) Row_Count
 on (a11.closed_on_key=a14.row_key)
 join ldb.d_calendar_quarter       a137
 on (a14.quarter_start_date_key=a137.row_key)
+union
+select'ldb.d_change_request_region_c' as Table_Name, count(a11.row_key) Row_Count
+ from  ldb.f_change_request_closed       a11 
+ join ldb.d_change_request_region_c       a14
+on (a11.region_c_key=a14.row_key)
 
 
 
