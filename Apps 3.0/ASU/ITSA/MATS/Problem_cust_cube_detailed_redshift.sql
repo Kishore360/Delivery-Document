@@ -53,8 +53,9 @@ on  (a.problem_key = b.row_key)
 UNION 
 select  'd_location_assigned_to' as Table_Name,count(a.row_key) Row_Count
 from ldb.f_problem    a
-join  ldb.d_location_assigned_to  b
-on  (a.assigned_to_key = b.row_key)
+join  ldb.d_internal_contact  b
+on  (a.prob_requester_c_key = b.row_key)
+JOIN ldb.d_location_assigned_to c ON (b.location_key =c.row_key)
 UNION 
 select  'd_location' as Table_Name,count(a.row_key) Row_Count
 from ldb.f_problem    a
