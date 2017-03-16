@@ -64,3 +64,9 @@ select  'd_incident_level_3_c' as Table_Name,count(a11.row_key) Row_Count
 from ldb.f_incident	a11
    join        ldb.d_incident_level_3_c	a12
    on       	(a11.level_3_src_c_key = a12.row_key)
+   
+   union
+   select  'd_incident_airline_c' as Table_Name,count(a11.row_key) Row_Count
+from ldb.f_incident	a11
+   join        ldb.d_incident_airline_c	a12
+   on       	(a11.airline_src_c_key = a12.row_key)
