@@ -1,4 +1,5 @@
-select CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+select 
+CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 CASE WHEN cnt >0 THEN 'MDS to DWH data validation failed for f_incident.age' ELSE 'SUCCESS' END as Message
 from
 (
@@ -11,7 +12,7 @@ JOIN asu_mdwdb.d_lov_map br ON a.state_src_key = br.src_key
 AND br.dimension_wh_code IN ('CLOSED','RESOLVED')
 JOIN ( select source_id,max(lastupdated) as lastupdated,soft_deleted_flag from asu_mdwdb.d_o_data_freshness group by 1) as df 
 ON f.source_id = df.source_id and df.soft_deleted_flag='N'  
-where timestampdiff(day,
+where timestampdiff(second,
 convert_tz(SRC.opened_at,'GMT','US/Mountain'),
 convert_tz(SRC.closed_at,'GMT','US/Mountain'))<> f.age
 OR f.age IS NULL
