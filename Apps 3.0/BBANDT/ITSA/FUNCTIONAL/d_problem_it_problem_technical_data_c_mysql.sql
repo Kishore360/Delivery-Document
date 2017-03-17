@@ -5,7 +5,7 @@
  ON (SRC.sys_id =TRGT.row_id  
  
  AND SRC.sourceinstance= TRGT.source_id  )
- WHERE SRC.u_it_problem_technical_data  TRGT.it_problem_technical_data_c
+ WHERE SRC.u_it_problem_technical_data  <>TRGT.it_problem_technical_data_c
  
  
  
