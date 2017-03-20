@@ -5,7 +5,7 @@ FROM (
 select count(1) as cnt
 from asu_mdsdb.task_final t 
 JOIN asu_mdsdb.task_survey_final tsd ON tsd.task = t.sys_id
-join asu_mdwdb.d_hr_case_c d on 
+join asu_mdwdb.d_hr_case d on 
  d.row_id=(CASE WHEN upper(t.sys_class_name) ='HR_CASE' THEN COALESCE(tsd.task,'UNSPECIFIED')
                         ELSE 'UNSPECIFIED'
                     END)
