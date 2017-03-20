@@ -7,7 +7,7 @@
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  ) 
  LEFT JOIN gogo_mdwdb.d_lov LKP 
-on (LKP.row_id =  CONCAT('STATE','~','TASK','~','~','~',UPPER(SRC.state)))
+on (LKP.row_id =  CONCAT('STATE','~','WM_TASK_C','~','~','~',UPPER(SRC.state)))
  WHERE COALESCE(LKP.row_key,case when SRC.state is null then 0 else -1 end )<>(TRGT.state_src_key)
  AND DATE_FORMAT(TRGT.pivot_date, '%Y-%m-%d %H:%i:%s') 
 									BETWEEN effective_from AND effective_to

@@ -4,5 +4,5 @@
  LEFT JOIN gogo_mdwdb.f_work_order_task_c TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  ) LEFT JOIN gogo_mdwdb.d_lov LKP 
-on (LKP.row_id = concat('IMPACT','~','TASK','~','~','~',UPPER(SRC.impact)) )
+on (LKP.row_id = concat('IMPACT','~','WM_TASK_C','~','~','~',UPPER(SRC.impact)) )
  WHERE COALESCE(LKP.row_key,case when SRC.impact is null then 0 else -1 end )<>(TRGT.impact_src_key)

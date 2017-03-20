@@ -13,4 +13,4 @@ AND br.dimension_wh_code IN ('RESOLVED','CLOSED')
 JOIN gogo_mdwdb.d_incident a ON a.row_key = f.incident_key
 AND f.source_id = a.source_id
 WHERE
-timestampdiff(DAY, SRC.opened_at, coalesce(SRC.u_resolved, SRC.closed_at)) <> f.age)a
+timestampdiff(SECOND, SRC.opened_at, coalesce(SRC.u_resolved, SRC.closed_at)) <> f.age)a

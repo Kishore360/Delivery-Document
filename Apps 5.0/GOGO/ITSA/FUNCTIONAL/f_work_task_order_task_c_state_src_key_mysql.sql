@@ -5,5 +5,5 @@
  LEFT JOIN gogo_mdwdb.f_work_order_task_c TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  ) LEFT JOIN gogo_mdwdb.d_lov LKP 
-on (LKP.row_id = concat('STATE~TASK~~~',upper(SRC.state)) )
+on (LKP.row_id = concat('STATE~WM_TASK_C~~~',upper(SRC.state)) )
  WHERE COALESCE(LKP.row_key,case when SRC.state is null then 0 else -1 end )<>(TRGT.state_src_key)

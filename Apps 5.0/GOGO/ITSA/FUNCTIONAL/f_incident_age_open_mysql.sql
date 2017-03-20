@@ -13,7 +13,7 @@ JOIN gogo_mdwdb.d_lov_map br ON f.state_src_key = br.src_key
 AND br.dimension_wh_code = 'OPEN'
  and br.dimension_class = 'STATE~INCIDENT'
 
-WHERE TIMESTAMPDIFF(DAY,SRC.opened_at,(SELECT CONVERT_TZ(max(lastupdated),"America/Chicago","GMT") 
+WHERE TIMESTAMPDIFF(SECOND,SRC.opened_at,(SELECT CONVERT_TZ(max(lastupdated),"America/Chicago","GMT") 
 AS lastupdated FROM gogo_mdwdb.d_o_data_freshness WHERE sourcename like 'ServiceNow%' and etl_run_number=f.etl_run_number))<> f.age
 
  )A 
