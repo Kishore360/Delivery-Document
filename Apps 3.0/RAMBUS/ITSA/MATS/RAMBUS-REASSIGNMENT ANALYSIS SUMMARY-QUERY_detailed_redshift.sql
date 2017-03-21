@@ -1,6 +1,3 @@
-SELECT CASE WHEN max_count<>min_count THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
- CASE WHEN  max_count<>min_count THEN 'OOTB has Keys Dropped' ELSE 'SUCCESS'  END as Message FROM (
- select max(Row_Count) max_count,Min(Row_Count) min_count from (
 select'ldb.f_incident_reassignment_analysis_summary_c' as Table_Name, count(a11.incident_key) Row_Count
  from  ldb.f_incident_reassignment_analysis_summary_c       a11 
 union

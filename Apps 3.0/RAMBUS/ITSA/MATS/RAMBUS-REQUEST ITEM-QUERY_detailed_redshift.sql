@@ -1,6 +1,3 @@
-SELECT CASE WHEN max_count<>min_count THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
- CASE WHEN  max_count<>min_count THEN 'OOTB has Keys Dropped' ELSE 'SUCCESS'  END as Message FROM (
- select max(Row_Count) max_count,Min(Row_Count) min_count from (
 select'ldb.f_request_item' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_request_item       a11 
 union
@@ -60,9 +57,9 @@ select'ldb.d_internal_contact_requested_for' as Table_Name, count(a11.row_key) R
 join ldb.d_internal_contact_requested_for       a113
 on (a11.requested_for_key = a113.row_key)
 union
-select'ldb.d_task_approval' as Table_Name, count(a11.row_key) Row_Count
+select'ldb.d_sc_req_item_approval' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_request_item       a11 
-join ldb.d_task_approval       a114
+join ldb.d_sc_req_item_approval       a114
 on (a11.approval_state_src_key = a114.row_key)
 union
 select'ldb.d_internal_contact_task_closed_by' as Table_Name, count(a11.row_key) Row_Count
@@ -76,4 +73,4 @@ join ldb.d_calendar_date	       a16	on (a11.opened_on_key = a16.row_key)
 join ldb.d_calendar_month       a116
 on (a16.month_start_date_key = a116.row_key)
 
-)a)b
+

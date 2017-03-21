@@ -1,6 +1,3 @@
-SELECT CASE WHEN max_count<>min_count THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
- CASE WHEN  max_count<>min_count THEN 'OOTB has Keys Dropped' ELSE 'SUCCESS'  END as Message FROM (
- select max(Row_Count) max_count,Min(Row_Count) min_count from (
 select'ldb.f_change_request_closed' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_change_request_closed       a11 
 union
@@ -106,9 +103,9 @@ select'ldb.d_change_request_subcategory' as Table_Name, count(a11.row_key) Row_C
 join ldb.d_change_request_subcategory       a121
 on (a11.sub_category_src_c_key = a121.row_key)
 union
-select'ldb.d_task_impact' as Table_Name, count(a11.row_key) Row_Count
+select'ldb.d_change_request_impact' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_change_request_closed       a11 
-join ldb.d_task_impact       a122
+join ldb.d_change_request_impact       a122
 on (a11.impact_src_key = a122.row_key)
 union
 select'ldb.d_location' as Table_Name, count(a11.row_key) Row_Count
@@ -116,19 +113,19 @@ select'ldb.d_location' as Table_Name, count(a11.row_key) Row_Count
 join ldb.d_location       a123
 on (a11.location_key = a123.row_key)
 union
-select'ldb.d_task_priority' as Table_Name, count(a11.row_key) Row_Count
+select'ldb.d_change_request_priority' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_change_request_closed       a11 
-join ldb.d_task_priority       a124
+join ldb.d_change_request_priority       a124
 on (a11.priority_src_key = a124.row_key)
 union
-select'ldb.d_task_contacttype' as Table_Name, count(a11.row_key) Row_Count
+select'ldb.d_change_request_reported_type' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_change_request_closed       a11 
-join ldb.d_task_contacttype       a125
+join ldb.d_change_request_reported_type       a125
 on (a11.reported_type_src_key = a125.row_key)
 union
-select'ldb.d_task_urgency' as Table_Name, count(a11.row_key) Row_Count
+select'ldb.d_change_request_urgency' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_change_request_closed       a11 
-join ldb.d_task_urgency       a126
+join ldb.d_change_request_urgency       a126
 on (a11.urgency_src_key = a126.row_key)
 union
 select'ldb.d_calendar_month' as Table_Name, count(a11.row_key) Row_Count
@@ -148,5 +145,3 @@ select'ldb.d_calendar_year' as Table_Name, count(a11.row_key) Row_Count
  JOIN ldb.d_calendar_date	       a15 ON	(a11.closed_on_key = a15.row_key)
 join ldb.d_calendar_year       a129
 on (a15.year_start_date_key = a129.row_key)
-)a
-)b
