@@ -3,7 +3,7 @@ SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
 ELSE 'Data Matched' END AS Message 
 FROM(select count(*) as cnt 
 from
-rei_mdwdb.d_task_c TGT
+rei_mdwdb.d_task TGT
 JOIN rei_mdsdb.task_final SRC
 on TGT.row_id = SRC.sys_id
 AND TGT.source_id = SRC.sourceinstance
