@@ -1,3 +1,4 @@
+/*This validation had a source data issue .Kindly check the DELV-4737 last comment for more details */
 SELECT
 CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 CASE WHEN count(1) >0  THEN 'MDS to DWH data validation failed for f_incident_backlog_aggregator_weekly_c' ELSE 'SUCCESS' END as Message 
