@@ -78,25 +78,26 @@ from  ldb.f_work_order_c              a11
 join ldb.d_location         a12
 on (a11.location_key = a12.row_key)
 union
-select'd_task_priority' as Table_Name, count(a11.row_key) Row_Count
+select'd_work_order_priority_c' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_work_order_c              a11 
-join ldb.d_task_priority         a12
+join ldb.d_work_order_priority_c         a12
 on (a11.priority_src_key = a12.row_key)
 union
-select'd_task_state' as Table_Name, count(a11.row_key) Row_Count
+select'd_work_order_state_c' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_work_order_c              a11 
-join ldb.d_task_state         a12
+join  ldb.d_work_order_state_c         a12
 on (a11.state_src_key = a12.row_key)
+
 union
-select'd_task_state' as Table_Name, count(a11.row_key) Row_Count
+select'd_work_order_urgency_c' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_work_order_c              a11 
-join ldb.d_task_state         a12
-on (a11.state_src_key = a12.row_key)
-union
-select'd_task_urgency' as Table_Name, count(a11.row_key) Row_Count
-from  ldb.f_work_order_c              a11 
-join ldb.d_task_urgency         a12
+join ldb.d_work_order_urgency_c         a12
 on (a11.urgency_src_key = a12.row_key)
+union
+select'd_work_order_impact_c' as Table_Name, count(a11.row_key) Row_Count
+from  ldb.f_work_order_c              a11 
+join ldb.d_work_order_impact_c         a12
+on (a11.impact_src_key = a12.row_key)
 union
 select'd_configuration_item_ci_primary_c' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_work_order_c              a11 
