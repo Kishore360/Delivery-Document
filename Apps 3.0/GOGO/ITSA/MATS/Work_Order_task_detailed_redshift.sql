@@ -53,7 +53,7 @@ on (a11.closed_by_key = a12.row_key)
 union
 select'ldb.d_task_impact' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_work_order_task_c              a11 
-join ldb.d_work_order_task_impact_c         a12
+join ldb.d_task_impact         a12
 on (a11.impact_src_key = a12.row_key)
 union
 select'ldb.d_task_wm_c' as Table_Name, count(a11.row_key) Row_Count
@@ -68,12 +68,12 @@ on (a11.location_key = a12.row_key)
 union
 select'ldb.d_task_priority' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_work_order_task_c              a11 
-join ldb.d_work_order_task_priority_c         a12
+join ldb.d_task_priority         a12
 on (a11.priority_src_key = a12.row_key)
 union
 select'ldb.d_task_urgency' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_work_order_task_c              a11 
-join ldb.d_work_order_task_urgency_c         a12
+join ldb.d_task_urgency         a12
 on (a11.urgency_src_key = a12.row_key)
 union
 select'ldb.d_work_order_c' as Table_Name, count(a11.row_key) Row_Count
@@ -91,4 +91,3 @@ from  ldb.f_work_order_task_c              a11
 
 
 
- 
