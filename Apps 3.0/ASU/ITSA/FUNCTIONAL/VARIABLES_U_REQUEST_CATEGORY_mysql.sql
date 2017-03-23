@@ -1,18 +1,14 @@
-SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
- CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for Variables_u_room' ELSE 'SUCCESS' END as Message from 
--- f.row_key ,a.reference_c_key from 
--- (select b.value as asd,e.name,concat(b.sys_id,'~',d.request_item) as rowid,f.row_key,t.label,f.value,b.item_option_new,g.row_id,
--- 
+SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+ CASE WHEN cnt >0 THEN 'MDS to DWH data validation failed for Variables_u_room' ELSE 'SUCCESS' END as Message from 
+ (select count(1) as cnt from 
 (select type,sourceinstance,sys_id,name  from asu_mdsdb.item_option_new_final  where name='u_request_category'
-and  
-
-sys_id  in 
+and sys_id  in 
 (select  row_id from  asu_workdb.lsm_ls_variable_list lvl where 
 lvl.table_name='request_item' and lvl.variable_type!='Reference') 
  ) e
 inner join asu_mdsdb.sc_item_option_final b 
 on e.sys_id=b.item_option_new
-and b.sourceinstance=e.sourceinstance  -- and b.sys_id='0385358131098640c50b53f329f9bd4c'
+and b.sourceinstance=e.sourceinstance 
 inner join asu_mdsdb.sc_item_option_mtom_final d
 on d.sc_item_option=b.sys_id
 and b.sourceinstance=d.sourceinstance
@@ -24,4 +20,4 @@ t.element='type' and t.label!='Reference'
 inner join (SELECT SUBSTRING(row_id,1,32) as r1, SUBSTRING(row_id,34,32) as r2, reference_c_key  
 FROM asu_mdwdb.f_request_item_variable_c)a 
 on  a.r1= b.sys_id and a.r2=d.request_item
- where f.row_key <>a.reference_c_key ;
+ where f.row_key <>a.reference_c_key)tmp ; 

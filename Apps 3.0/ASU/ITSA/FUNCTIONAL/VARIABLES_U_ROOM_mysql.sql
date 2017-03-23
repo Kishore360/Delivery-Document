@@ -1,7 +1,7 @@
-SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
- CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for Variables_u_room' ELSE 'SUCCESS' END as Message from   (
+SELECT CASE WHEN ccnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+ CASE WHEN ccnt >0 THEN 'MDS to DWH data validation failed for Variables_u_room' ELSE 'SUCCESS' END as Message from ( select count(1) as ccnt from (
 select 
--- from (select count(1)
+
 a.longtext_value aa ,
  Case when lvd.data_type ='LONGTEXT' THEN left(b.value,255)   else null end as bb 
  from 
@@ -14,7 +14,7 @@ lvl.table_name='request_item' and lvl.variable_type!='Reference')
  ) e
 inner join asu_mdsdb.sc_item_option_final b 
 on e.sys_id=b.item_option_new
-and b.sourceinstance=e.sourceinstance  -- and b.sys_id='0385358131098640c50b53f329f9bd4c'
+and b.sourceinstance=e.sourceinstance 
 
 inner join asu_mdsdb.sc_item_option_mtom_final d
 on d.sc_item_option=b.sys_id and b.sourceinstance=d.sourceinstance
@@ -26,4 +26,6 @@ join asu_mdsdb.sys_choice_final t  on t.name='question' and e.type=t.value
 join asu_workdb.lsm_ls_variable_datatype lvd on t.label = lvd.variable_type 
 join (SELECT substring(row_id,1,32) as r1, SUBSTRING(row_id,34,32) as r2, longtext_value  FROM asu_mdwdb.f_request_item_variable_c) a 
 on  a.r1= b.sys_id and a.r2=d.request_item)v
-where aa<>bb
+where aa<>bb )temp
+
+

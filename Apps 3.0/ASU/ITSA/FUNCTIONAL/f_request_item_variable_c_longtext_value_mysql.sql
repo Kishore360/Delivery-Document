@@ -1,5 +1,7 @@
-SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
- CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for Variables_u_room' ELSE 'SUCCESS' END as Message from   (
+
+
+SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+ CASE WHEN cnt >0 THEN 'MDS to DWH data validation failed for Variables_u_room' ELSE 'SUCCESS' END as Message from( select count(1) as cnt from   (
 select 
 -- from (select count(1)
 a.longtext_value aa ,
@@ -26,6 +28,5 @@ join asu_mdsdb.sys_choice_final t  on t.name='question' and e.type=t.value
 join asu_workdb.lsm_ls_variable_datatype lvd on t.label = lvd.variable_type 
 join (SELECT substring(row_id,1,32) as r1, SUBSTRING(row_id,34,32) as r2, longtext_value  FROM asu_mdwdb.f_request_item_variable_c) a 
 on  a.r1= b.sys_id and a.r2=d.request_item)v
-where aa<>bb
-
-
+where aa<>bb)temp
+	
