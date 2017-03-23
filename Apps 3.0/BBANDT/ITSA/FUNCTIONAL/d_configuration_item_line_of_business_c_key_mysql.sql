@@ -8,8 +8,8 @@ left join bbandt_mdsdb.cmdb_ci_spkg_final ccsd on src.u_cmdb_sys_id=ccsd.sys_id 
  join bbandt_mdwdb.d_configuration_item trgt
 on trgt.row_id = src.sys_id and trgt.source_id = src.sourceinstance
  join bbandt_mdwdb.d_line_of_business_c lkp
-  ON (COALESCE(ccsd.u_line_of_business,'UNSPECIFIED') =trgt.row_id  
- AND ccsd.sourceinstance= trgt.source_id)
+  ON (COALESCE(ccsd.u_line_of_business,'UNSPECIFIED') =lkp.row_id  
+ AND ccsd.sourceinstance= lkp.source_id)
  WHERE COALESCE(lkp.row_key,case when ccsd.u_line_of_business is null then 0 else -1 end) <> COALESCE(trgt.line_of_business_c_key)
  
  
