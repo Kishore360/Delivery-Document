@@ -10,7 +10,7 @@
 JOIN gogo_mdwdb.f_work_order_task_c TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
- WHERE COALESCE( TIMESTAMPDIFF(SECOND,'1970-01-01 00:00:00',SRC.u_actual_work_duration),'')<> COALESCE(TRGT.actual_work_duration ,''))a;
+ WHERE  TIMESTAMPDIFF(SECOND,'1970-01-01 00:00:00',SRC.u_actual_work_duration)<> (TRGT.actual_work_duration ))a;
  
  
  
