@@ -15,4 +15,10 @@ and TGT.source_id = SRC.source_id
 where coalesce(TGT.row_id,-99)  <> coalesce(SRC.row_id,-99)
 and SRC.row_id not like '%GOAL~~~%'
 and SRC.row_id not like '%PROJECT~~~%'
-and SRC.row_id not like '%PORTFOLIO~~~%' )a;
+and SRC.row_id not like '%PORTFOLIO~~~%'
+and SRC.row_id not like '%EXPENSE~~~~%'
+and SRC.row_id not like '%ASSET~~~%'
+and SRC.row_id not like 'EXPENSE_ITEM~~~%' )a;
+
+
+
