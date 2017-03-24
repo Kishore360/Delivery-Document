@@ -21,7 +21,7 @@ from  ldb.f_work_order_c              a11
 join ldb.d_calendar_date         a12
 on (a11.opened_on_key = a12.row_key)
 union
-select'd_internal_contact' as Table_Name, count(a11.row_key) Row_Count
+select'd_internal_contact_assigned_to' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_work_order_c              a11 
 join ldb.d_internal_contact         a12
 on (a11.assigned_to_key = a12.row_key)
@@ -122,5 +122,27 @@ from  ldb.f_work_order_c              a11
 				    join        ldb.d_calendar_month  a116
                   on         (a14.month_start_date_key = a116.row_key)
 
+union
+select'd_calendar_quarter' as Table_Name, count(a11.row_key) Row_Count
+from  ldb.f_work_order_c              a11 
+  join        ldb.d_calendar_date      a14
+                  on         (a11.opened_on_key = a14.row_key)
+				    join        ldb.d_calendar_quarter  a116
+                  on         (a14.quarter_start_date_key = a116.row_key)
+				  union
+select'd_calendar_week' as Table_Name, count(a11.row_key) Row_Count
+from  ldb.f_work_order_c              a11 
+  join        ldb.d_calendar_date      a14
+                  on         (a11.opened_on_key = a14.row_key)
+				    join        ldb.d_calendar_week  a116
+                  on         (a14.week_start_date_key = a116.row_key)
+				  				  union
+select'd_calendar_year' as Table_Name, count(a11.row_key) Row_Count
+from  ldb.f_work_order_c              a11 
+  join        ldb.d_calendar_date      a14
+                  on         (a11.opened_on_key = a14.row_key)
+				    join        ldb.d_calendar_year  a116
+                  on         (a14.year_start_date_key = a116.row_key)
 
 
+				  

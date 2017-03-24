@@ -16,7 +16,7 @@ from  ldb.f_work_order_task_c             a11
 join ldb.d_internal_organization_legalentity         a12
 on (a11.company_key = a12.row_key)
 union
-select'ldb.d_internal_contact' as Table_Name, count(a11.row_key) Row_Count
+select'ldb.d_internal_contact_assigned_to' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_work_order_task_c              a11 
 join ldb.d_internal_contact         a12
 on (a11.assigned_to_key = a12.row_key)
@@ -51,7 +51,7 @@ from  ldb.f_work_order_task_c              a11
 join ldb.d_internal_contact_task_closed_by         a12
 on (a11.closed_by_key = a12.row_key)
 union
-select'ldb.d_task_impact' as Table_Name, count(a11.row_key) Row_Count
+select'ldb.d_work_order_task_impact_c' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_work_order_task_c              a11 
 join ldb.d_work_order_task_impact_c         a12
 on (a11.impact_src_key = a12.row_key)
@@ -71,10 +71,15 @@ from  ldb.f_work_order_task_c              a11
 join ldb.d_work_order_task_priority_c         a12
 on (a11.priority_src_key = a12.row_key)
 union
-select'ldb.d_task_urgency' as Table_Name, count(a11.row_key) Row_Count
+select'ldb.d_work_order_task_urgency_c' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_work_order_task_c              a11 
 join ldb.d_work_order_task_urgency_c         a12
 on (a11.urgency_src_key = a12.row_key)
+union
+select'ldb.d_work_order_task_state_c' as Table_Name, count(a11.row_key) Row_Count
+from  ldb.f_work_order_task_c              a11 
+join ldb.d_work_order_task_state_c         a12
+on (a11.state_src_key = a12.row_key)
 union
 select'ldb.d_work_order_c' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_work_order_task_c              a11 
