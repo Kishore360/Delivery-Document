@@ -1,6 +1,7 @@
 
 
-SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+SELECT 
+CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  CASE WHEN cnt >0 THEN 'MDS to DWH data validation failed for VARIABLES_V_REQUEST_CATEGORY' ELSE 'SUCCESS' END as Message 
  from
 (select count(1) as cnt from (select type,sourceinstance,sys_id,name  from asu_mdsdb.item_option_new_final  where name='v_request_category'
