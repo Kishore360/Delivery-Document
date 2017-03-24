@@ -126,24 +126,24 @@ from  ldb.f_incident             a11
 join ldb.d_location       a117
 on (a11.location_key = a117.row_key)
 union
-select'd_task_contacttype' as Table_Name, count(a11.row_key) Row_Count
+select'd_incident_contacttype' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_incident             a11 
-join ldb.d_task_contacttype       a118
+join ldb.d_incident_contacttype       a118
 on (a11.reported_type_src_key = a118.row_key)
 union
-select'd_task_impact' as Table_Name, count(a11.row_key) Row_Count
+select'd_incident_impact' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_incident             a11 
-join ldb.d_task_impact       a119
+join ldb.d_incident_impact       a119
 on (a11.impact_src_key = a119.row_key)
 union
-select'd_task_priority' as Table_Name, count(a11.row_key) Row_Count
+select'd_incident_priority' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_incident             a11 
-join ldb.d_task_priority       a120
+join ldb.d_incident_priority       a120
 on (a11.priority_src_key = a120.row_key)
 union
-select'd_task_urgency' as Table_Name, count(a11.row_key) Row_Count
+select'd_incident_urgency' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_incident             a11 
-join ldb.d_task_urgency       a121
+join ldb.d_incident_urgency       a121
 on (a11.urgency_src_key = a121.row_key)
 union
 select'dh_assignment_group_tier_hierarchy' as Table_Name, count(a11.row_key) Row_Count
@@ -248,9 +248,9 @@ select 'd_problem' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11 
 join ldb.d_problem a12 on a11.problem_key=a12.row_key
 union
-select'd_task_priority' as Table_Name, count(a11.row_key) Row_Count
+select'd_incident_priority' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_incident             a11 
-join ldb.d_task_priority       a121
+join ldb.d_incident_priority       a121
 on (a11.priority_src_key = a121.row_key)
 union
 select'd_incident_agebucket' as Table_Name, count(a11.row_key) Row_Count
