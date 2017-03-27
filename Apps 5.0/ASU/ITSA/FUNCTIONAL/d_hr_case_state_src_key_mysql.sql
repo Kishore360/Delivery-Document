@@ -8,5 +8,5 @@ from asu_mdsdb.hr_case_final s
 left  JOIN asu_mdwdb.d_hr_case t 
 on  t.ROW_ID=s.SYS_ID and s.sourceinstance=t.source_id 
 left join asu_mdwdb.d_lov l
-on concat('STATE_C~HRCASE~~~',upper(s.state))=l.row_id and s.sourceinstance=l.source_id
+on concat('STATE~HR_CASE~~~',upper(s.state))=l.row_id and s.sourceinstance=l.source_id
 where l.row_key <> t.state_src_key) temp
