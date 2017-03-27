@@ -7,4 +7,7 @@ from gogo_workdb.lsm_ls_system_variables conf
 where conf.enable_flag = 'Y') SRC
 left join gogo_mdwdb.d_lov TGT
 ON TGT.dimension_class = SRC.dimension_class
-where TGT.row_id is null and SRC.dimension_class not like '%CALL%' and SRC.dimension_class not like '%HR%')a;
+where TGT.row_id is null and SRC.dimension_class not like '%CALL%' and SRC.dimension_class not like '%HR%'
+and SRC.dimension_class not like '%SECURITY%' and  SRC.dimension_class not like '%CASE%'  
+and SRC.dimension_class not like '%UNIT~SERVICE_ENTITLEMENT%'
+)a;
