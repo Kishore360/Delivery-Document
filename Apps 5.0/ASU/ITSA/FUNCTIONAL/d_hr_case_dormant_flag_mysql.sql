@@ -8,7 +8,7 @@ select count(1) as cnt
  FROM asu_mdsdb.hr_case_final SRC 
   join asu_mdwdb.f_hr_case f ON (SRC.sys_id =f.row_id  
  AND SRC.sourceinstance= f.source_id  )
-JOIN asu_mdwdb.d_hr_case a ON a.row_key = f.hr_case_c_key
+JOIN asu_mdwdb.d_hr_case a ON a.row_key = f.hr_case_key
 AND f.source_id = a.source_id
 JOIN asu_mdwdb.d_lov_map br ON a.state_src_key = br.src_key
 AND br.dimension_wh_code = 'OPEN'
@@ -20,7 +20,7 @@ union
 select count(1) cnt FROM asu_mdsdb.hr_case_final SRC 
   join asu_mdwdb.f_hr_case f ON (SRC.sys_id =f.row_id  
  AND SRC.sourceinstance= f.source_id  )
-JOIN asu_mdwdb.d_hr_case a ON a.row_key = f.hr_case_c_key
+JOIN asu_mdwdb.d_hr_case a ON a.row_key = f.hr_case_key
 AND f.source_id = a.source_id
 JOIN asu_mdwdb.d_lov_map br ON a.state_src_key = br.src_key
 AND br.dimension_wh_code IN ('CLOSED','RESOLVED')

@@ -9,5 +9,5 @@ left join asu_mdwdb.d_hr_case d
 on s.sys_id=d.row_id and s.sourceinstance=d.source_id
 left join  asu_mdwdb.f_hr_case f 
 on  s.sourceinstance=f.source_id and s.sys_id=f.row_id
-WHERE d.row_key <> f.hr_case_c_key
+WHERE d.row_key <> f.hr_case_key
 ) temp
