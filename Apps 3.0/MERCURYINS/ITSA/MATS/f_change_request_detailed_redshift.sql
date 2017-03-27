@@ -139,3 +139,8 @@ join ldb.d_calendar_date a13
 on (a11.opened_on_key = a13.row_key) 
 join ldb.d_calendar_month a128 
 on (a13.month_start_date_key = a128.row_key) 
+union
+select 'ldb.ldb.d_lov_includes_data_change_c a129 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_change_request a11 
+join ldb.d_lov_includes_data_change_c a129
+on a11.includes_data_change_c_key=a129.row_key
