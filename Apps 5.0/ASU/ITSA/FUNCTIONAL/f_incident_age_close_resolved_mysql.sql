@@ -1,8 +1,5 @@
-
-
-
-
- select CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+select 
+CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  CASE WHEN cnt >0 THEN 'MDS to DWH data validation failed for f_incident.age' ELSE 'SUCCESS' END as Message
 from
 (
@@ -15,10 +12,10 @@ AND br.dimension_wh_code IN ('RESOLVED','CLOSED')
 JOIN asu_mdwdb.d_incident a ON a.row_key = f.incident_key
 AND f.source_id = a.source_id
 WHERE
-timestampdiff(Day, convert_tz(convert_tz(SRC.opened_at,"GMT","America/New_York"),"America/New_York","GMT"), 
-coalesce(convert_tz(convert_tz(SRC.resolved_at,"GMT","America/New_York"),"America/New_York","GMT"), 
-convert_tz(convert_tz(SRC.closed_at,"GMT","America/New_York"),"America/New_York","GMT"),
-convert_tz(convert_tz(SRC.sys_updated_on,"GMT","America/New_York"),"America/New_York","GMT"))) <> f.age
+timestampdiff(Second, convert_tz(convert_tz(SRC.opened_at,"GMT","US/Mountain"),"US/Mountain","GMT"), 
+coalesce(convert_tz(convert_tz(SRC.resolved_at,"GMT","US/Mountain"),"US/Mountain","GMT"), 
+convert_tz(convert_tz(SRC.closed_at,"GMT","US/Mountain"),"US/Mountain","GMT"),
+convert_tz(convert_tz(SRC.sys_updated_on,"GMT","US/Mountain"),"US/Mountain","GMT"))) <> f.age
   )a
   
   
