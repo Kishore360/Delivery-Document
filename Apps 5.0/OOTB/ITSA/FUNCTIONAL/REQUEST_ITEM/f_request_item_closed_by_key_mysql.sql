@@ -1,23 +1,20 @@
- 
-
-SELECT 
-CASE WHEN CNT > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+ SELECT 
+ CASE WHEN CNT > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  CASE WHEN CNT >0 THEN 'MDS to DWH data validation failed for f_request_item.closed_by_key' ELSE 'SUCCESS' END as Message
- FROM (SELECT count(1) as CNT 
- FROM <<tenant>>_mdsdb.sc_req_item_final SRC 
- LEFT JOIN <<tenant>>_mdwdb.f_request_item TRGT
+ FROM (SELECT  count(1) as CNT 
+ FROM <<tenant>>_mdsdb.sc_req_item_final SRC
+ JOIN <<tenant>>_mdwdb.f_request_item TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
-  left join <<tenant>>_mdwdb.d_lov_map p
-on TRGT.state_src_key=p.src_key and dimension_wh_code='CLOSED'
+	JOIN <<tenant>>_mdwdb.d_lov_map dlm 
+ON TRGT.state_src_key = dlm.src_key AND dlm.dimension_wh_code = 'CLOSED'
  LEFT JOIN <<tenant>>_mdwdb.d_internal_contact LKP 
- ON ( concat('INTERNAL_CONTACT~',SRC.closed_by)= LKP.row_id
-AND SRC.sourceinstance= LKP.source_id 
-AND COALESCE(CONVERT_TZ (SRC.opened_at,<<TENANT_SSI_TIME_ZONE>>,<<DW_TARGET_TIME_ZONE>>), 
-CONVERT_TZ (coalesce(SRC.closed_at,SRC.sys_updated_on),<<TENANT_SSI_TIME_ZONE>>,<<DW_TARGET_TIME_ZONE>>)) 
-BETWEEN LKP.effective_from AND LKP.effective_to
-
-)
- WHERE TRGT.soft_deleted_flag ='N' and COALESCE(LKP.row_key,CASE WHEN SRC.closed_by  IS NULL THEN 0 ELSE -1 END )<> (TRGT.closed_by_key))temp;
+ ON ( CONCAT('INTERNAL_CONTACT~',closed_by)= LKP.row_id 
+ AND SRC.sourceinstance= LKP.source_id
+AND TRGT.pivot_date
+ BETWEEN LKP.effective_from AND LKP.effective_to)
+LEFT JOIN <<tenant>>_mdwdb.d_internal_contact ic ON (SRC.sys_updated_by = ic.user_name AND SRC.sourceinstance = ic.source_id)
+ WHERE 
+ COALESCE(LKP.row_key,ic.row_key,CASE WHEN SRC.closed_by IS NULL THEN 0 else -1 end)<> (TRGT.closed_by_key)) temp;
  
  
