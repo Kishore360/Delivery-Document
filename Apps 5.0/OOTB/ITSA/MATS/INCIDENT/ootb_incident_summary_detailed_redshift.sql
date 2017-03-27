@@ -76,9 +76,9 @@ from  ldb.f_incident             a11
 join ldb.d_location       a114
 on (a11.location_key = a114.row_key)
 union
-select'd_task_contacttype' as Table_Name, count(a11.row_key) Row_Count
+select'd_incident_contacttype' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_incident             a11 
-join ldb.d_task_contacttype       a115
+join ldb.d_incident_contacttype       a115
 on (a11.reported_type_src_key = a115.row_key)
 union
 select'd_task_impact' as Table_Name, count(a11.row_key) Row_Count

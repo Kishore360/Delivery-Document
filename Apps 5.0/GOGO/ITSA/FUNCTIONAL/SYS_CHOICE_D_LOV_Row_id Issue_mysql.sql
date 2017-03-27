@@ -17,7 +17,8 @@ and SRC.row_id not like '%GOAL~~~%'
 and SRC.row_id not like '%PROJECT~~~%'
 and SRC.row_id not like '%PORTFOLIO~~~%'
 and SRC.row_id not like '%EXPENSE~~~~%'
- )a;
+and SRC.row_id not like '%ASSET~~~%'
+and SRC.row_id not like 'EXPENSE_ITEM~~~%' )a;
 
 
 

@@ -126,9 +126,9 @@ from ldb.f_incident_outage       a11
 				   join        ldb.d_outage_type         a15
                   on         (a14.outage_type_src_key = a15.row_key)
 				  union
-				     select 'ldb.d_task_contacttype' as Table_name, count(a11.row_key) Row_Count
+				     select 'ldb.d_incident_contacttype' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident_outage       a11 				  
-				  join        ldb.d_task_contacttype     a14
+				  join        ldb.d_incident_contacttype     a14
                   on         (a11.reported_type_src_key = a14.row_key)
 				  union
 				   select 'ldb.d_task_impact' as Table_name, count(a11.row_key) Row_Count
