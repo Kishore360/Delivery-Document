@@ -257,3 +257,12 @@ select'd_incident_agebucket' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_incident             a11 
    join          ldb.d_incident_agebucket      a125
                   on          (a11.age_key = a125.row_key)
+				    union
+				  select'd_employee_location' as Table_Name, count(a11.row_key) Row_Count
+from  ldb.f_incident             a11
+join ldb.d_internal_contact       a113
+on (a11.opened_by_key = a113.row_key)
+join ldb.d_internal_contact_mdm       a114
+on (a113.row_current_key = a114.row_current_key)
+				    join	ldb.d_employee_location	a13
+	  on 	(a114.location_key = a13.row_key)

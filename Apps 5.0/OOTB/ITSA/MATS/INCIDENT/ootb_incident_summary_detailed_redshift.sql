@@ -81,22 +81,86 @@ from  ldb.f_incident             a11
 join ldb.d_incident_contacttype       a115
 on (a11.reported_type_src_key = a115.row_key)
 union
-select'd_task_impact' as Table_Name, count(a11.row_key) Row_Count
+select'd_incident_impact' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_incident             a11 
-join ldb.d_task_impact       a116
+join ldb.d_incident_impact       a116
 on (a11.impact_src_key = a116.row_key)
 union
-select'd_task_priority' as Table_Name, count(a11.row_key) Row_Count
+select'd_incident_priority' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_incident             a11 
-join ldb.d_task_priority       a117
+join ldb.d_incident_priority       a117
 on (a11.priority_src_key = a117.row_key)
 union
-select'd_task_urgency' as Table_Name, count(a11.row_key) Row_Count
+select'd_incident_urgency' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_incident             a11 
-join ldb.d_task_urgency       a118
+join ldb.d_incident_urgency       a118
 on (a11.urgency_src_key = a118.row_key)
 union
 select'd_internal_contact' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_incident             a11 
 join ldb.d_internal_contact       a119
 on (a11.assigned_to_key = a119.row_key)
+
+union
+select'd_customer' as Table_Name, count(a11.row_key) Row_Count
+from  ldb.f_incident             a11 
+join ldb.d_customer       a14
+on (a11.customer_key = a14.row_key)
+union
+select'd_customer_mdm' as Table_Name, count(a11.row_key) Row_Count
+from  ldb.f_incident             a11
+join ldb.d_customer       a14
+on (a11.customer_key = a14.row_key)
+join ldb.d_customer_mdm      a15
+on (a14.row_current_key = a15.row_current_key)
+union
+select'd_domain' as Table_Name, count(a11.row_key) Row_Count
+from  ldb.f_incident             a11 
+join ldb.d_domain       a16
+on (a11.domain_key = a16.row_key)
+
+union
+select'd_internal_contact_assigned_to' as Table_Name, count(a11.row_key) Row_Count
+from  ldb.f_incident             a11 
+join ldb.d_internal_contact_assigned_to       a123
+on (a11.assigned_to_key = a123.row_key)
+union
+select 'dh_user_group_hierarchy' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_incident a11 
+join ldb.d_internal_organization_group a15 
+on (a11.assignment_group_key = a15.row_key) 
+join ldb.dh_user_group_hierarchy a16 
+on (a15.row_dn_key = a16.lev_0_key) 
+union
+select 'dh_user_group_level1' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_incident a11 
+join ldb.d_internal_organization_group a15 
+on (a11.assignment_group_key = a15.row_key) 
+join ldb.dh_user_group_hierarchy a16 
+on (a15.row_dn_key = a16.lev_0_key) 
+join ldb.dh_user_group_level1 a128 
+on (a16.lev_1_key = a128.row_key) 
+union
+select 'dh_user_group_level2' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_incident a11 
+join ldb.d_internal_organization_group a15 
+on (a11.assignment_group_key = a15.row_key) join ldb.dh_user_group_hierarchy a16 
+on (a15.row_dn_key = a16.lev_0_key) 
+join ldb.dh_user_group_level2 a132 
+on (a16.lev_2_key = a132.row_key) 
+union
+select 'dh_user_group_level3' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_incident a11 
+join ldb.d_internal_organization_group a15 
+on (a11.assignment_group_key = a15.row_key) join ldb.dh_user_group_hierarchy a16 
+on (a15.row_dn_key = a16.lev_0_key) 
+join ldb.dh_user_group_level3 a134 
+on (a16.lev_3_key = a134.row_key) 
+union
+select 'dh_user_group_level4' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_incident a11 
+join ldb.d_internal_organization_group a15 
+on (a11.assignment_group_key = a15.row_key) join ldb.dh_user_group_hierarchy a16 
+on (a15.row_dn_key = a16.lev_0_key) 
+join ldb.dh_user_group_level4 a135 
+on (a16.lev_4_key = a135.row_key)
