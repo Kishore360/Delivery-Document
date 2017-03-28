@@ -102,7 +102,7 @@ on (a11.stage_src_key = a120.row_key)
 union
 select 'ldb.d_location_variable_building a121 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_request_task a11 
-join ldb.d_location_variable_building a121 
+join ldb.d_location_variable_building_c a121 
 on (a11.building = a121.row_key) 
 union
 select 'ldb.d_variable_lov_c_u_request_type a122 ' as Table_name, count(a11.row_key) Row_Count
