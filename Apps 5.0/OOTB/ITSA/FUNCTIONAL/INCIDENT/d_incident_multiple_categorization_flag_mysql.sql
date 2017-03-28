@@ -14,6 +14,6 @@ AND SRC.sourceinstance=TA.sourceinstance )
 AND TA.tablename = 'incident' 
 AND TA.fieldname = 'category' 
 WHERE CASE WHEN TA.newvalue <> TA.oldvalue THEN 'Y' ELSE 'N' END 
-= COALESCE(TRGT.multiple_categorization_flag ,''))b
+<> COALESCE(TRGT.multiple_categorization_flag ,''))b
 
 
