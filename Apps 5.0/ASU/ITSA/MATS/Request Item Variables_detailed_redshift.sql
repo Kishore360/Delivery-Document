@@ -15,17 +15,12 @@ on (a11.campus= a12.row_key)
  from  ldb.f_request_item             a11 
 left outer join  ldb.d_request_item_variable_v_department       a12
 on (a11.v_department = a12.row_key)
-
- union
+union
  select'd_variable_lov_c_u_request_type' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_request_item             a11 
 left join  ldb.d_variable_lov_c_u_request_type        a12
 on (a11. u_request_type = a12.row_key)
-
-
-
-
- union
+union
  select'd_request_item_variable_requested_for' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_request_item             a11 
 left outer join  ldb.d_request_item_variable_requested_for        a12
@@ -51,3 +46,13 @@ union
  from  ldb.f_request_item             a11 
 left outer join  ldb.d_variable_lov_c_u_request_category         a12
 on (a11. u_request_category = a12.row_key)
+UNION 
+select'd_internal_contact_variable_requested_for_c' as Table_Name, count(a11.row_key) Row_Count
+from  ldb.f_request_item             a11 
+left outer join  ldb.d_internal_contact_variable_requested_for_c a12
+on (a11.requested_for_c = a12.row_key)
+UNION 
+select'd_location_variable_campus_c' as Table_Name, count(a11.row_key) Row_Count
+from  ldb.f_request_item             a11 
+left outer join  ldb.d_location_variable_campus_c a12
+on (a11.campus = a12.row_key)
