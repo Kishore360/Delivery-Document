@@ -12,3 +12,4 @@ ON f.source_id = df.source_id and df.soft_deleted_flag='N'
 where timestampdiff(second,convert_tz(convert_tz(SRC.opened_at,'GMT','US/Mountain'),'US/Mountain','GMT'),df.lastupdated)<>f.age)a;
 
 
+
