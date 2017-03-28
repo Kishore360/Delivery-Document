@@ -49,7 +49,7 @@ UNION
 select 'd_hr_case' as Table_Name, count(a11.row_key) Row_Count				
 from  ldb.f_hr_case_response_c a11
 join ldb.d_hr_case a12
-on (a11.hr_case_c_key = a12.row_key)
+on (a11.hr_case_key = a12.row_key)
 UNION 
 select'd_calendar_month' as Table_Name, count(a11.row_key) Row_Count				
 from ldb.f_hr_case_response_c a11
