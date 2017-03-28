@@ -4,4 +4,4 @@ CASE WHEN cnt THEN 'MDS to DWH data validation failed for d_incident.opened_on' 
  FROM  usf_mdsdb.alm_asset_final SRC   
  JOIN usf_mdwdb.d_asset TRGT  
  ON (SRC.sys_id =TRGT.row_id   AND SRC.sourceinstance= TRGT.source_id  ) 
- WHERE convert_tz(SRC.order_date,'GMT'','US/Pacific')<> TRGT.order_date)b;
+ WHERE convert_tz(SRC.order_date,'GMT','US/Pacific')<> TRGT.order_date)b;
