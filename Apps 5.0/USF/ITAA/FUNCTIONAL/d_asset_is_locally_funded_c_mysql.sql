@@ -3,6 +3,6 @@ CASE WHEN cnt THEN 'MDS to DWH data validation failed for d_asset.computer_usage
 (select count(1) as cnt
  FROM usf_mdsdb.alm_asset_final SRC 
  LEFT JOIN usf_mdwdb.d_asset TRGT 
- ON ( SRC.sys_id=TRGT.row_id 
+ ON ( CONCAT('ASSET~',SRC.sys_id)=TRGT.row_id 
  AND SRC.sourceinstance=TRGT.source_id) 
-  WHERE SRC.u_locally_funded<> TRGT.is_locally_funded_c)t;
+  WHERE ( CASE WHEN SRC.u_locally_funded= 1 then 'Y' else 'N' END)<> TRGT.is_locally_funded_c)t;

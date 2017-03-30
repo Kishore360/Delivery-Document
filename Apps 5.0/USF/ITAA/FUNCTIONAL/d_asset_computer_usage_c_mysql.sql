@@ -3,6 +3,6 @@ CASE WHEN cnt THEN 'MDS to DWH data validation failed for d_asset.computer_usage
 (select count(1) as cnt
  FROM usf_mdsdb.alm_asset_final SRC 
  LEFT JOIN usf_mdwdb.d_asset TRGT 
- ON ( SRC.sys_id=TRGT.row_id 
+ ON ( CONCAT('ASSET~',SRC.sys_id)=TRGT.row_id 
  AND SRC.sourceinstance=TRGT.source_id) 
   WHERE SRC.u_computer_usage<> TRGT.computer_usage_c)t;
