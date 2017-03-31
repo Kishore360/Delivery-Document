@@ -13,9 +13,10 @@ left join usf_mdsdb.question_choice_final SRC4
 on SRC.value=SRC4.value and SRC.item_option_new=SRC4.question 
 and SRC.sourceinstance=SRC4.sourceinstance 
 left join usf_workdb.lsm_ls_variable_list SRC5
-on SRC2.sys_id=SRC5.row_id and  SRC2.sourceinstance=SRC5.source_id
-join usf_workdb.lsm_ls_variable_datatype SRC6 
-on SRC3.label = SRC6.variable_type  
+on SRC2.sys_id=SRC5.row_id and  SRC2.sourceinstance=SRC5.source_id 
  LEFT JOIN usf_mdwdb.f_request_item_variable_c TRGT 
  ON concat(SRC.sys_id,'~',SRC1.request_item)=TRGT.row_id 
-  WHERE CASE WHEN SRC5.variable_type!='Reference' AND SRC6.data_type ='LONGTEXT' THEN SRC.value else null end<> TRGT.longtext_value)t;
+join usf_mdwdb.d_internal_contact LKP
+on Case when SRC5.variable_type='Reference' AND SRC2.reference='sys_user'  then concat('INTERNAL_CONTACT~',SRC.value) else 'UNSPECIFIED' end =  LKP.row_id
+  WHERE COALESCE(LKP.row_key,
+CASE WHEN SRC.value is null then  0 else '-1' end)<> TRGT.assigned_to_c_key)t;

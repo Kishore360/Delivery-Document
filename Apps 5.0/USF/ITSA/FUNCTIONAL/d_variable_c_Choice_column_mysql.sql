@@ -4,4 +4,4 @@ CASE WHEN cnt THEN 'MDS to DWH data validation failed for d_asset.computer_usage
 FROM usf_mdsdb.question_final SRC 
 LEFT JOIN usf_mdwdb.d_variable_c TRGT 
  ON SRC.sys_id=TRGT.row_id 
-WHERE SRC.Question_text<> TRGT.Question_text)t;
+WHERE SRC.choice_field<> TRGT.Choice_column)t;

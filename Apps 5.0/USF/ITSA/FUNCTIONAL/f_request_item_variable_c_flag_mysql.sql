@@ -18,4 +18,6 @@ join usf_workdb.lsm_ls_variable_datatype SRC6
 on SRC3.label = SRC6.variable_type  
  LEFT JOIN usf_mdwdb.f_request_item_variable_c TRGT 
  ON concat(SRC.sys_id,'~',SRC1.request_item)=TRGT.row_id 
-  WHERE CASE WHEN SRC5.variable_type!='Reference' AND SRC6.data_type ='LONGTEXT' THEN SRC.value else null end<> TRGT.longtext_value)t;
+  WHERE  CASE WHEN SRC5.variable_type!='Reference' AND SRC6.data_type ='FLAG' AND SRC.value='Yes' THEN 'Y' 
+     WHEN SRC5.variable_type!='Reference' AND SRC6.data_type ='FLAG' AND SRC.value='No' THEN 'N' 
+	 ELSE null end <> TRGT.flag )t;
