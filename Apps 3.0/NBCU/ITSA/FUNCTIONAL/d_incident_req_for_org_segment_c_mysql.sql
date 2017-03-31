@@ -1,9 +1,8 @@
-SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
-,CASE WHEN cnt > 0 THEN 'Data did not Match.' 
-ELSE 'Data Matched' END AS Message 
-FROM (select
-count(*) as cnt
-from  nbcu_mdwdb.d_incident a11
-left join nbcu_mdsdb.incident_final a12
-on a11.row_id=a12.sys_id and a11.source_id=a12.sourceinstance
-where coalesce(u_req_for_org_segment,'') <>coalesce(a11.req_for_org_segment_c,''))a
+SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+CASE WHEN count(1) >0 THEN 'Failure' ELSE 'Data Matched' END as Message
+from
+nbcu_mdwdb.d_incident a
+join nbcu_mdsdb.incident_final b
+ON a.row_id=b.sys_id
+AND a.source_id=b.sourceinstance
+where b.u_req_for_org_segment<>a.req_for_org_segment_c;
