@@ -1,7 +1,14 @@
-
-SELECT CASE WHEN count(1)  THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
-CASE WHEN count(1)  THEN 'MDS to DWH data validation failed for d_incident.csi_item_ref_c ' ELSE 'SUCCESS' END as Message
-FROM usf_mdsdb.incident_final  SRC
-JOIN usf_mdwdb.d_incident TRGT ON (SRC.sys_id = TRGT.row_id  AND SRC.sourceinstance = TRGT.source_id )
-LEFT JOIN usf_mdsdb.u_csi_category_final LKP ON SRC.u_csi_item_ref  = LKP.sys_id
-WHERE COALESCE(LKP.u_name,'UNSPECIFIED')<>(TRGT.csi_item_ref_c) ;
+SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
+,CASE WHEN cnt > 0 THEN 'Data did not Match' 
+ELSE 'Data Matched' END AS Message 
+FROM (
+select count(1) as cnt
+from  usf_mdsdb.incident_final s
+left  JOIN usf_mdwdb.d_incident t 
+on  t.ROW_ID=s.SYS_ID and s.sourceinstance=t.source_id
+join
+usf_mdsdb.u_csi_category_final lkp
+ON s.u_csi_item_ref=lkp.sys_id
+WHERE lkp.u_name<>
+ t.csi_item_ref_c
+) temp

@@ -6,6 +6,6 @@ select count(1) as cnt
 from  usf_mdsdb.incident_final s
 left  JOIN usf_mdwdb.d_incident t 
 on  t.ROW_ID=s.SYS_ID and s.sourceinstance=t.source_id  
-WHERE s.u_type<>
- t.incident_type
+WHERE s.u_campus<>
+ t.caller_region
 ) temp
