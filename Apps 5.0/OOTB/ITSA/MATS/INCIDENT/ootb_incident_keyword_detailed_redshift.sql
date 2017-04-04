@@ -38,9 +38,9 @@ join ldb.d_internal_organization_department a19
 on (a11.opened_by_department_key = a19.row_key) 
 
 union
-select 'ldb.d_task_priority a112 ' as Table_name, count(1) Row_Count
+select 'ldb.d_incident_priority a112 ' as Table_name, count(1) Row_Count
 from ldb.f_incident_keyword a11 
-join ldb.d_task_priority a112 
+join ldb.d_incident_priority a112 
 on (a11.priority_src_key = a112.row_key) 
 union
 select 'ldb.d_calendar_month a113 ' as Table_name, count(1) Row_Count
