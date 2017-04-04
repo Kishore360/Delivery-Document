@@ -77,24 +77,24 @@ from ldb.f_incident a
 join ldb.d_incident_category_c    b
 on (a.category_src_c_key = b.row_key)
 union 
-select 'd_change_request' as Table_Name,count(a.row_key) as Row_Count
+select 'd_incident_category_c' as Table_Name,count(a.row_key) as Row_Count
 from ldb.f_incident a
 join ldb.d_change_request    b
 on (a.change_request_key = b.row_key)
 union 
-select 'd_customer' as Table_Name,count(a.row_key) as Row_Count
+select 'd_incident_category_c' as Table_Name,count(a.row_key) as Row_Count
 from ldb.f_incident a
 join ldb.d_customer       b
 on a.customer_key = b.row_key
--- join ldb.d_customer_mdm   c
--- on (b.row_current_key = c.row_current_key)
+join ldb.d_customer_mdm   c
+on (b.row_current_key = c.row_current_key)
 union 
-select 'd_internal_organization_department' as Table_Name,count(a.row_key) as Row_Count
+select 'd_incident_category_c' as Table_Name,count(a.row_key) as Row_Count
 from ldb.f_incident a
 join ldb.d_internal_organization_department    b
 on (a.opened_by_department_key = b.row_current_key)
 union 
-select 'd_domain' as Table_Name,count(a.row_key) as Row_Count
+select 'd_incident_category_c' as Table_Name,count(a.row_key) as Row_Count
 from ldb.f_incident a
 join ldb.d_domain    b
 on (a.domain_key = b.row_current_key)
@@ -103,8 +103,8 @@ select 'd_internal_contact_mdm' as Table_Name,count(a.row_key) as Row_Count
 from ldb.f_incident a
 join ldb.d_internal_contact            b
 on  (a.opened_by_key = b.row_key)
--- join ldb.d_internal_contact_mdm    c
--- on (b.row_current_key = c.row_current_key)
+join ldb.d_internal_contact_mdm    c
+on (b.row_current_key = c.row_current_key)
 union 
 select 'd_calendar_time_hour' as Table_Name,count(a.row_key) as Row_Count
 from ldb.f_incident a
@@ -168,9 +168,9 @@ from ldb.f_incident a
 join ldb.d_task_priority    b
 on  (a.priority_src_key = b.row_key) 
 union 
-select 'd_incident_contacttype' as Table_Name,count(a.row_key) as Row_Count
+select 'd_task_contacttype' as Table_Name,count(a.row_key) as Row_Count
 from ldb.f_incident a
-join ldb.d_incident_contacttype    b
+join ldb.d_task_contacttype    b
 on  (a.reported_type_src_key = b.row_key) 
 union 
 select 'd_task_urgency' as Table_Name,count(a.row_key) as Row_Count
