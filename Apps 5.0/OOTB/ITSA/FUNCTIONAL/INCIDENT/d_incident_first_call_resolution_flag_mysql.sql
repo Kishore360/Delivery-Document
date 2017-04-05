@@ -19,4 +19,4 @@ ON (TRGT.source_id = FRESH.source_id)
  CASE WHEN
  LM.dimension_wh_code IN('RESOLVED','CLOSED') 
  AND TIMESTAMPDIFF(MINUTE,coalesce(SRC.opened_at,'1970-01-01 00:00:00'), coalesce(SRC.resolved_at,SRC.closed_at,SRC.sys_updated_on))<30
-  THEN 'Y' ELSE 'N' END  <> COALESCE(TRGT.first_call_resolution_flag ,''))
+  THEN 'Y' ELSE 'N' END  <> COALESCE(TRGT.first_call_resolution_flag ,''))temp;

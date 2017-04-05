@@ -133,7 +133,7 @@ from ldb.f_incident a
 join ldb.d_incident_severity    b
 on  (a.severity_src_key = b.row_key)               
 union 
-select 'd_incident_severity' as Table_Name,count(a.row_key) as Row_Count
+select 'd_incident_state' as Table_Name,count(a.row_key) as Row_Count
 from ldb.f_incident a
 join ldb.d_incident_state    b
 on  (a.state_src_key = b.row_key)  			   
