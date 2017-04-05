@@ -91,8 +91,8 @@ on (b.row_current_key = c.row_current_key)
 union 
 select 'd_internal_organization_department' as Table_Name,count(a.row_key) as Row_Count
 from ldb.f_incident a
-join ldb.d_internal_organization_department    b
-on (a.opened_by_department_key = b.row_current_key)
+JOIN ldb.d_internal_contact b ON (a.opened_by_key=b.row_key)
+JOIN ldb.d_internal_organization_department c on (b.department_key = c.row_key)
 union 
 select 'd_domain' as Table_Name,count(a.row_key) as Row_Count
 from ldb.f_incident a

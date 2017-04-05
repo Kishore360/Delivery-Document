@@ -8,7 +8,7 @@ on  (a.approval_state_src_key = b.row_key)
 UNION
 select  'd_internal_contact' as Table_Name,count(a.row_key) Row_Count
 from ldb.f_change_request    a
-join  asu_mdwdb.d_internal_contact  b
+join  ldb.d_internal_contact  b
 on  (a.change_requester_c_key = b.row_key)
 UNION 
 select  'd_lov1' as Table_Name,count(a.row_key) Row_Count
@@ -76,7 +76,7 @@ join ldb.d_change_request_urgency a14 on (a11.urgency_src_key = a14.row_key)
 UNION 
 select 'd_change_request_type' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_change_request a11 
-join ldb.d_change_request_type a14 on (a11.change_request_key = a14.row_key)
+join ldb.d_change_request_type a14 on (a11.type_src_key = a14.row_key)
 UNION 
 select 'd_change_request_state' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_change_request a11 
