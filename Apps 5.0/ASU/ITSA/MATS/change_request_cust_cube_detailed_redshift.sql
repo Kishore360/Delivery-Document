@@ -40,9 +40,9 @@ join  ldb.d_internal_organization_group  b
 on  (a.assignment_group_key = b.row_key)
 UNION 
 select  'd_internal_organization_department' as Table_Name,count(a.row_key) Row_Count
-from ldb.f_change_request    a
-join ldb.d_internal_organization_department  b
-on  (a.requested_by_department_key = b.row_key)
+from ldb.f_change_request a
+JOIN ldb.d_internal_contact b ON (a.requested_by_key =b.row_key)
+join ldb.d_internal_organization_department c on  (b.department_key = c.row_key)
 UNION 
 select  'd_internal_contact_requester_c' as Table_Name,count(a.row_key) Row_Count
 from ldb.f_change_request    a
