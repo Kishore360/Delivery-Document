@@ -34,8 +34,9 @@ on (a11.assignment_group_key = a18.row_key)
 union
 select 'ldb.d_internal_organization_department a19 ' as Table_name, count(1) Row_Count
 from ldb.f_incident_keyword a11 
+join ldb.d_internal_contact a123 on a11.opened_by_key=a123.row_key
 join ldb.d_internal_organization_department a19 
-on (a11.opened_by_department_key = a19.row_key) 
+on (a123.department_key = a19.row_key) 
 
 union
 select 'ldb.d_incident_priority a112 ' as Table_name, count(1) Row_Count
