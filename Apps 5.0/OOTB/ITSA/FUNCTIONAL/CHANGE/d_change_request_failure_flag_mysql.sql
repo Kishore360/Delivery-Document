@@ -6,10 +6,10 @@ FROM   <<tenant>>_mdsdb.change_request_final SRC
         JOIN <<tenant>>_mdwdb.d_change_request TRGT 
               ON ( SRC.sys_id = TRGT.row_id 
                    AND SRC.sourceinstance = TRGT.source_id )
-			JOIN <<tenant>>mdwdb.f_change_request f
+			JOIN <<tenant>>_mdwdb.f_change_request f
 on f.change_request_key=TRGT.row_key			
        JOIN <<tenant>>_mdwdb.d_lov_map br 
-         ON (SRC.review_status_src_code = br.dimension_code and f.source_id=br.source_id 
+         ON (SRC.review_status = br.dimension_code and f.source_id=br.source_id 
             )
 WHERE   br.dimension_class = 'REVIEW_STATUS~CHANGE_REQUEST' AND
 CASE 
