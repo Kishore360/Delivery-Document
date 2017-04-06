@@ -37,12 +37,12 @@ from ldb.f_incident a
 join ldb.d_location    b
 on (a.location_key = b.row_key)
 union 
-select 'd_location' as Table_Name,count(a.row_key) as Row_Count
+select 'd_incident' as Table_Name,count(a.row_key) as Row_Count
 from ldb.f_incident a
 join ldb.d_incident    b
 on (a.incident_key = b.row_key)
 union 
-select 'd_location' as Table_Name,count(a.row_key) as Row_Count
+select 'd_configuration_item' as Table_Name,count(a.row_key) as Row_Count
 from ldb.f_incident a
 join ldb.d_configuration_item    b
 on (a.configuration_item_key = b.row_key)
@@ -158,7 +158,7 @@ from ldb.f_incident a
 join ldb.d_internal_contact_requester_c    b
 on  (a.requester_c_key = b.row_key)
 union 
-select 'd_internal_contact_requester_c' as Table_Name,count(a.row_key) as Row_Count
+select 'd_task_impact' as Table_Name,count(a.row_key) as Row_Count
 from ldb.f_incident a
 join ldb.d_task_impact    b
 on  (a.impact_src_key = b.row_key)            
@@ -191,3 +191,30 @@ join ldb.d_calendar_date b
 on (a.opened_on_key = b.row_key)
 join ldb.d_calendar_month    c
 on  (b.month_start_date_key = c.row_key) 
+UNION 
+select 'ldb.dh_user_group_level1 a124 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_incident a11 
+join ldb.d_internal_organization_group a13 
+on (a11.assignment_group_key = a13.row_key) join ldb.dh_user_group_hierarchy a14 
+on (a13.row_dn_key = a14.lev_0_key) 
+join ldb.dh_user_group_level1 a124 
+on (a14.lev_1_key = a124.row_key)
+UNION 
+select 'd_internal_contact_assigned_to' as Table_Name,count(a.row_key) as Row_Count
+from ldb.f_incident a
+join ldb.d_internal_contact_assigned_to b on (a.assigned_to_key = b.row_key)
+UNION 
+select 'd_change_request' as Table_Name,count(a.row_key) as Row_Count
+from ldb.f_incident a
+join ldb.d_change_request b on (a.change_request_key = b.row_key)
+UNION 
+select 'd_change_request_caused_by' as Table_Name,count(a.row_key) as Row_Count
+from ldb.f_incident a
+join ldb.d_change_request_caused_by b on (a.change_request_key = b.row_key)
+UNION
+select 'd_business_service' as Table_Name,count(a.row_key) as Row_Count
+from ldb.f_incident a
+join ldb.d_business_service b on (a.business_service_key = b.row_key)
+
+  
+
