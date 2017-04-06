@@ -1,14 +1,11 @@
-SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
-,CASE WHEN cnt > 0 THEN 'Data did not Match.' 
-ELSE 'Data Matched' END AS Message 
-FROM ( select count(1) as cnt from gogo_mdsdb.incident_final a
-inner join gogo_mdwdb.f_incident  b on a.sys_id=b.row_id and a.sourceinstance=b.source_id 
-left outer join gogo_mdwdb.d_internal_contact c on 
-CONCAT('INTERNAL_CONTACT~',a.u_resolved_by)=c.row_id #where a.u_resolved_by is not null
- where case when  a.u_resolved_by is null then 0 
- else case when c.row_key is null then '-1' else c.row_key end end <>b.last_resolved_by_key
-) c;
- 
-
- 
- 
+select 
+CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result,
+CASE WHEN cnt > 0 THEN 'f_incident.u_resolved_by failed' ELSE 'Data Matched' END AS Message
+FROM (SELECT count(1) as CNT
+from gogo_mdsdb.incident_final x  
+left outer join gogo_mdwdb.d_internal_contact y on 
+CONCAT('INTERNAL_CONTACT~',x.u_resolved_by)=y.row_id  AND sourceinstance= source_id 
+ JOIN   gogo_mdwdb.f_incident B on B.ROW_ID=SYS_ID and x.sourceinstance=B.source_id  
+left join gogo_mdwdb.d_lov_map map on B.state_src_key = map.src_key
+left join gogo_mdwdb.d_lov lov on B.state_src_key = lov.row_key
+WHERE last_resolved_by_key<> coalesce(y.row_key,case when u_resolved_by is null then 0 else -1 end) )a;

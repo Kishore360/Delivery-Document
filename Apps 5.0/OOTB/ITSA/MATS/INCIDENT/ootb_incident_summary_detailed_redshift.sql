@@ -63,8 +63,9 @@ on (a110.row_current_key = a111.row_current_key)
 union
 select'd_internal_organization_department' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_incident             a11 
+join ldb.d_internal_contact a123 on a11.opened_by_key=a123.row_key
 join ldb.d_internal_organization_department       a112
-on (a11.opened_by_department_key = a112.row_key)
+on (a123.department_key = a112.row_key)
 union
 select'd_internal_organization_group' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_incident             a11 

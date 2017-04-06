@@ -29,8 +29,9 @@ on (a11.configuration_item_key = a12.row_key)
 union
 select 'ldb.d_internal_organization_department a12 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_task a11 
+join ldb.d_internal_contact a123 on a11.opened_by_key=a123.row_key
 join ldb.d_internal_organization_department a12 
-on (a11.opened_by_department_key = a12.row_key) 
+on (a123.department_key = a12.row_key) 
 union
 select 'ldb.d_calendar_date a14 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_task a11 

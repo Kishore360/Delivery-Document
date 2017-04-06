@@ -11,9 +11,9 @@ AND SRC.sourceinstance=TRGT.source_id )
 LEFT JOIN <<tenant>>_mdsdb.sys_audit_final TA 
 ON (SRC.sys_id =TA.documentkey 
 AND SRC.sourceinstance=TA.sourceinstance )
-AND TA.tablename = 'incident' 
-AND TA.fieldname = 'category' 
-WHERE CASE WHEN TA.newvalue <> TA.oldvalue THEN 'Y' ELSE 'N' END 
+
+WHERE  TA.tablename = 'incident' 
+AND TA.fieldname = 'category' AND CASE WHEN TA.newvalue <> TA.oldvalue THEN 'Y' ELSE 'N' END 
 = COALESCE(TRGT.multiple_categorization_flag ,''))b
 
 

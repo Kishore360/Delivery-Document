@@ -9,7 +9,11 @@ JOIN asu_mdwdb.d_hr_case a ON (a.row_key = f.hr_case_key AND f.source_id = a.sou
 JOIN asu_mdwdb.d_lov_map br ON a.state_src_key = br.src_key AND br.dimension_wh_code = 'OPEN'
 JOIN (select source_id,max(lastupdated) as lastupdated,soft_deleted_flag from asu_mdwdb.d_o_data_freshness group by 1) as df 
 ON f.source_id = df.source_id and df.soft_deleted_flag='N'  
-where timestampdiff(second,convert_tz(convert_tz(SRC.opened_at,'GMT','US/Mountain'),'US/Mountain','GMT'),df.lastupdated)<>f.age)a;
+where timestampdiff(second,convert_tz(convert_tz(SRC.opened_at,'GMT','US/Mountain'),'US/Mountain','GMT'),convert_tz(df.lastupdated,'US/Mountain','GMT'))<>f.age)a;
+
+
+
+
 
 
 
