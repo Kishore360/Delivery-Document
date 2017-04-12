@@ -3,6 +3,5 @@ CASE WHEN cnt >0 THEN 'MDS to DWH data validation failed for d_incident.u_status
 (select count(1) cnt  
  FROM  aon_mdsdb.incident_final SRC   JOIN  aon_mdwdb.d_incident TRGT  
  ON (SRC.sys_id =TRGT.row_id   AND SRC.sourceinstance= TRGT.source_id  ) 
- WHERE COALESCE(CASE WHEN SRC.u_status_update_count=1 THEN 'Y' ELSE 'N' END)<> (TRGT.u_status_update_count_c))b;
- 
- 
+ WHERE  coalesce(SRC.u_status_update_count,'') <> (TRGT.u_status_update_count_c))b;
+
