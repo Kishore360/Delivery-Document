@@ -11,7 +11,7 @@
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
  LEFT JOIN aon_mdwdb.d_lov LKP 
- ON (coalesce(CONCAT('DURATION_IMPLEMENTATION_C~CHANGE_REQUEST~~~',change_request.u_duration_of_implementation),'UNSPECIFIED')=LKP.row_id 
+ ON (coalesce(CONCAT('DURATION_IMPLEMENTATION_C~CHANGE_REQUEST~~~',SRC.u_duration_of_implementation),'UNSPECIFIED')=LKP.row_id 
 AND SRC.sourceinstance= LKP.source_id )
  WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_service_impact IS NULL THEN 0 else -1 end) 
 <> (TRGT.duration_of_implementation_src_c_key
