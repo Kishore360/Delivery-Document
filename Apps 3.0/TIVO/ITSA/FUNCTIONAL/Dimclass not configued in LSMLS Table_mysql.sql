@@ -24,5 +24,6 @@ not in (select class_value from tivo_workdb.lsm_ls_system_variables where enable
 'CRITICALITY~BUSINESS_SERVICE',
 'CATEGORY_C~TECH_OPS_REQUEST',
 'FEATURES_C~PROBLEM',
-'REGION~INCIDENT'
+'REGION~INCIDENT',
+'REQUEST_TYPE_C~TECH_OPS_REQUEST'
 ) )a;

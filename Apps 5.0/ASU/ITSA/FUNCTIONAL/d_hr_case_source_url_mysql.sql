@@ -6,7 +6,8 @@ FROM asu_mdsdb.hr_case_final SRC
 JOIN asu_mdwdb.d_hr_case TRGT
 ON (TRGT.row_id=SRC.sys_id and TRGT.source_id=SRC.sourceinstance)
 WHERE 
-CONCAT('<a href=\"','https://asu.service-now.com/nav_to.do?uri=','hr_case.do?sys_id=',SRC.sys_id,'\" target=\"_blank\">',SRC.number,'</a>')<>TRGT.source_url)temp;
+CONCAT('<a href=\"','https://asu.service-now.com/nav_to.do?uri=/','hr_case.do?sys_id=',SRC.sys_id,'\" target=\"_blank\" title=\"Check in ServiceNow\"><img src=../images/Numerify/snow_url_image.png></a>')
+<>TRGT.source_url)temp;
 
 
 
