@@ -8,3 +8,4 @@ CASE WHEN CNT > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  AND SRC.sourceinstance= TRGT.source_id  )
 where SRC.u_back_out_utility
 <> TRGT.u_back_out_utility_c)temp;
+
