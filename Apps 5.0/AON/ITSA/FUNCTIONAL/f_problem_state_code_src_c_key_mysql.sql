@@ -6,7 +6,7 @@
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
  LEFT JOIN aon_mdwdb.d_lov LKP 
- ON ( COALESCE(CONCAT('STATE_CODE_C~PROBLEM',SRC.u_state_code),'UNSPECIFIED') = LKP.row_id 
+ ON ( COALESCE(CONCAT('STATE_CODE_C~PROBLEM~~~',SRC.u_state_code),'UNSPECIFIED') = LKP.row_id 
 AND SRC.sourceinstance= LKP.source_id )
  WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_state_code IS NULL THEN 0 else -1 end) 
 <> (TRGT.state_code_src_c_key))b;

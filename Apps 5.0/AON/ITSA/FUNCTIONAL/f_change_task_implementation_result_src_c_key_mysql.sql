@@ -8,7 +8,7 @@
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
  LEFT JOIN aon_mdwdb.d_lov LKP 
- ON (coalesce(CONCAT('IMPLEMENTATION_RESULT_C~CHANGE_TASK',SRC.u_implementation_result),'UNSPECIFIED')=LKP.row_id 
+ ON (coalesce(CONCAT('IMPLEMENTATION_RESULT_C~CHANGE_TASK~~~',SRC.u_implementation_result),'UNSPECIFIED')=LKP.row_id 
 AND SRC.sourceinstance= LKP.source_id )
  WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_implementation_result  IS NULL THEN 0 else -1 end) 
 <> (TRGT.implementation_result_src_c_key
