@@ -4,8 +4,6 @@ SELECT CASE WHEN cnt THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
   JOIN svb_mdwdb.f_incident TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
- LEFT JOIN svb_mdwdb.d_lov_map br 
- ON TRGT.state_src_key = br.src_key
-WHERE   br.dimension_wh_code IN ('RESOLVED')
-AND TIMESTAMPDIFF(SECOND,SRC.opened_at,SRC.u_resolved)  <> TRGT.open_to_resolve_duration)b
+ WHERE TIMESTAMPDIFF(SECOND,SRC.opened_at,coalesce(SRC.u_acknowledged_at,SRC.u_assignment_group_changed))  <> TRGT.open_to_acknowledge_duration_c)b
+
 
