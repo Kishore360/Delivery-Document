@@ -3,4 +3,4 @@ CASE WHEN cnt THEN 'MDS to DWH data validation failed for d_incident.opened_on' 
  FROM  svb_mdsdb.problem_final SRC
  JOIN svb_mdwdb.d_problem TRGT  
  ON (SRC.sys_id =TRGT.row_id   AND SRC.sourceinstance= TRGT.source_id  ) 
- WHERE SRC.close_notes<> TRGT.close_notes )b
+ WHERE SRC.u_root_cause<> TRGT.root_cause_c )b
