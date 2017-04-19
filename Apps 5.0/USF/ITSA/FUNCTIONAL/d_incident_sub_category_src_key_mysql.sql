@@ -8,6 +8,5 @@ left  JOIN usf_mdwdb.d_incident t
 on  t.ROW_ID=s.SYS_ID and s.sourceinstance=t.source_id  
 join usf_mdwdb.d_lov l
 on COALESCE( CONCAT('SUBCATEGORY','~','INCIDENT','~','~','~',UPPER(s.u_service_desk )),'UNSPECIFIED')= l.row_id
-WHERE COALESCE(l.row_key,CASE WHEN s.u_service_desk IS NULL THEN 0 else '-1' end)=
- t.sub_category_src_key
+WHERE COALESCE(l.row_key,CASE WHEN s.u_service_desk IS NULL THEN 0 else '-1' end)<>t.sub_category_src_key
 ) temp
