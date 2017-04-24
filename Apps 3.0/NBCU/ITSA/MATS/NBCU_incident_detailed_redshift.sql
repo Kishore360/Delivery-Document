@@ -367,3 +367,10 @@ join ldb.d_task_ra_c a160
 on (a11.parent_task_c_key = a160.row_key)
 join ldb.d_task_parent_c a161
 on (a160.parent_task_key = a161.row_key)
+union
+select 'ldb.d_internal_contact_executive_supervisor_c a162' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_incident a11 
+join  ldb.d_configuration_item a19 
+on (a11.configuration_item_key = a19.row_key) 
+join ldb.d_internal_contact_executive_supervisor_c a162
+on 	(a19.executive_sponsor_c_key = a162.row_key)
