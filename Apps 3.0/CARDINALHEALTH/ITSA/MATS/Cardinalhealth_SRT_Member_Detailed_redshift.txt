@@ -25,3 +25,8 @@ select 'ldb.d_internal_organization_team_c	a16 ' as Table_name, count(a11.row_ke
 from ldb.f_srt_members_c	a11 
 join	ldb.d_internal_organization_team_c	a16 
 on (a11.team_c_key = a16.row_key) 
+union
+select 'ldb.d_srt_members_lov_health_check_c	a16 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_srt_members_c	a11 
+join	ldb.d_srt_members_lov_health_check_c	a16 
+on (a11.health_check_src_c_key = a16.row_key)
