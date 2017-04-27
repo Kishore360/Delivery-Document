@@ -141,237 +141,242 @@ from ldb.f_incident a11
 join ldb.d_problem a127 
 on (a11.problem_key = a127.row_key) 
 union
-select 'ldb.d_internal_contact_incident_srt_owner_c a128 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_internal_organization_srt_assignment_group_c a128 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11 
-join ldb.d_internal_contact_incident_srt_owner_c a128 
-on (a11.incident_srt_owner_c_key = a128.row_key) 
+join ldb.d_internal_organization_srt_assignment_group_c a128 
+on (a11.srt_assignment_group_c_key = a128.row_key) 
 union
-select 'ldb.d_incident_impact_c a129 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_internal_contact_incident_srt_owner_c a129 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11 
-join ldb.d_incident_impact_c a129 
-on (a11.u_impact_src_c_key = a129.row_key) 
+join ldb.d_internal_contact_incident_srt_owner_c a129 
+on (a11.incident_srt_owner_c_key = a129.row_key) 
 union
-select 'ldb.d_configuration_item a130 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_incident_impact_c a130 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11 
-join ldb.d_configuration_item a130 
-on (a11.u_system_name_c_key = a130.row_key) 
+join ldb.d_incident_impact_c a130 
+on (a11.u_impact_src_c_key = a130.row_key) 
 union
-select 'ldb.d_internal_contact_task_closed_by a131 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_configuration_item a131 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11 
-join ldb.d_internal_contact_task_closed_by a131 
-on (a11.closed_by_key = a131.row_key) 
+join ldb.d_configuration_item a131 
+on (a11.u_system_name_c_key = a131.row_key) 
 union
-select 'ldb.d_task_impact a132 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_internal_contact_task_closed_by a132 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11 
-join ldb.d_task_impact a132 
-on (a11.impact_src_key = a132.row_key) 
+join ldb.d_internal_contact_task_closed_by a132 
+on (a11.closed_by_key = a132.row_key) 
 union
-select 'ldb.d_task_priority a133 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_task_impact a133 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11 
-join ldb.d_task_priority a133 
-on (a11.priority_src_key = a133.row_key) 
+join ldb.d_task_impact a133 
+on (a11.impact_src_key = a133.row_key) 
 union
-select 'ldb.d_task_contacttype a134 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_task_priority a134 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11 
-join ldb.d_task_contacttype a134 
-on (a11.reported_type_src_key = a134.row_key) 
+join ldb.d_task_priority a134 
+on (a11.priority_src_key = a134.row_key) 
 union
-select 'ldb.d_task_urgency a135 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_task_contacttype a135 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11 
-join ldb.d_task_urgency a135 
-on (a11.urgency_src_key = a135.row_key) 
+join ldb.d_task_contacttype a135 
+on (a11.reported_type_src_key = a135.row_key) 
 union
-select 'ldb.d_assignment_group_level0_manager_c a136 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_task_urgency a136 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_incident a11 
+join ldb.d_task_urgency a136 
+on (a11.urgency_src_key = a136.row_key) 
+union
+select 'ldb.d_assignment_group_level0_manager_c a137 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11 
 join ldb.d_assignment_group_level0_manager_c_relation a17 
 on (a11.assignment_group_key = a17.level0_assigment_group_key) 
-join ldb.d_assignment_group_level0_manager_c a136 
-on (a17.level0_manager_c_key = a136.level0_manager_c_key) 
+join ldb.d_assignment_group_level0_manager_c a137 
+on (a17.level0_manager_c_key = a137.level0_manager_c_key) 
 union
-select 'ldb.d_config_item_cah_ci_type_c a137 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_config_item_cah_ci_type_c a138 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11 
 join ldb.d_configuration_item a18 
 on (a11.configuration_item_key = a18.row_key) 
-join ldb.d_config_item_cah_ci_type_c a137 
-on (a18.cah_ci_type_src_code_c_key = a137.row_key) 
+join ldb.d_config_item_cah_ci_type_c a138 
+on (a18.cah_ci_type_src_code_c_key = a138.row_key) 
 union
-select 'ldb.d_config_item_cah_bus_criticl_c a138 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_config_item_cah_bus_criticl_c a139 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11 
 join ldb.d_configuration_item a18 
 on (a11.configuration_item_key = a18.row_key) 
-join ldb.d_config_item_cah_bus_criticl_c a138 
-on (a18.cah_bus_criticl_src_code_c_key = a138.row_key) 
+join ldb.d_config_item_cah_bus_criticl_c a139 
+on (a18.cah_bus_criticl_src_code_c_key = a139.row_key) 
 union
-select 'ldb.d_config_item_cah_bus_segment_c a139 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_config_item_cah_bus_segment_c a140 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11 
 join ldb.d_configuration_item a18 
 on (a11.configuration_item_key = a18.row_key) 
-join ldb.d_config_item_cah_bus_segment_c a139 
-on (a18.cah_bus_segment_src_code_c_key = a139.row_key) 
+join ldb.d_config_item_cah_bus_segment_c a140 
+on (a18.cah_bus_segment_src_code_c_key = a140.row_key) 
 union
-select 'ldb.d_config_item_cah_bus_unit_c a140 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_config_item_cah_bus_unit_c a141 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11 
 join ldb.d_configuration_item a18 
 on (a11.configuration_item_key = a18.row_key) 
-join ldb.d_config_item_cah_bus_unit_c a140 
-on (a18.cah_bus_unit_src_code_c_key = a140.row_key) 
+join ldb.d_config_item_cah_bus_unit_c a141 
+on (a18.cah_bus_unit_src_code_c_key = a141.row_key) 
 union
-select 'ldb.d_internal_contact_causal_assignment_group_director_c a141 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_internal_contact_causal_assignment_group_director_c a142 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11 
 join ldb.d_internal_organization_causal_assignment_group_c a110 
 on (a11.causal_assignment_group_c_key = a110.row_key) 
-join ldb.d_internal_contact_causal_assignment_group_director_c a141 
-on (a110.director_c_key = a141.row_key) 
+join ldb.d_internal_contact_causal_assignment_group_director_c a142 
+on (a110.director_c_key = a142.row_key) 
 union
-select 'ldb.d_internal_contact_assignment_grp_manager_c a142 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_internal_contact_assignment_grp_manager_c a143 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11 
 join ldb.d_internal_organization_causal_assignment_group_c a110 
 on (a11.causal_assignment_group_c_key = a110.row_key) 
-join ldb.d_internal_contact_assignment_grp_manager_c a142 
-on (a110.manager_c_key = a142.row_key) 
+join ldb.d_internal_contact_assignment_grp_manager_c a143 
+on (a110.manager_c_key = a143.row_key) 
 union
-select 'ldb.d_internal_contact_causal_assignment_group_vp_c a143 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_internal_contact_causal_assignment_group_vp_c a144 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11 
 join ldb.d_internal_organization_causal_assignment_group_c a110 
 on (a11.causal_assignment_group_c_key = a110.row_key) 
-join ldb.d_internal_contact_causal_assignment_group_vp_c a143 
-on (a110.vp_c_key = a143.row_key) 
+join ldb.d_internal_contact_causal_assignment_group_vp_c a144 
+on (a110.vp_c_key = a144.row_key) 
 union
-select 'ldb.d_internal_organization_ci_assignment_group_c a144 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_internal_organization_ci_assignment_group_c a145 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11 
 join ldb.d_configuration_item a18 
 on (a11.configuration_item_key = a18.row_key) 
-join ldb.d_internal_organization_ci_assignment_group_c a144 
-on (a18.assignment_group_c_key = a144.row_key) 
+join ldb.d_internal_organization_ci_assignment_group_c a145 
+on (a18.assignment_group_c_key = a145.row_key) 
 union
-select 'ldb.d_internal_contact_ci_director_c a145 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_internal_contact_ci_director_c a146 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11 
 join ldb.d_configuration_item a18 
 on (a11.configuration_item_key = a18.row_key) 
-join ldb.d_internal_contact_ci_director_c a145 
-on (a18.director_c_key = a145.row_key) 
+join ldb.d_internal_contact_ci_director_c a146 
+on (a18.director_c_key = a146.row_key) 
 union
-select 'ldb.d_internal_contact_ci_manager_c a146 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_internal_contact_ci_manager_c a147 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11 
 join ldb.d_configuration_item a18 
 on (a11.configuration_item_key = a18.row_key) 
-join ldb.d_internal_contact_ci_manager_c a146 
-on (a18.manager_c_key = a146.row_key) 
+join ldb.d_internal_contact_ci_manager_c a147 
+on (a18.manager_c_key = a147.row_key) 
 union
-select 'ldb.d_internal_contact_ci_vp_c a147 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_internal_contact_ci_vp_c a148 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11 
 join ldb.d_configuration_item a18 
 on (a11.configuration_item_key = a18.row_key) 
-join ldb.d_internal_contact_ci_vp_c a147 
-on (a18.vp_c_key = a147.row_key) 
+join ldb.d_internal_contact_ci_vp_c a148 
+on (a18.vp_c_key = a148.row_key) 
 union
-select 'ldb.d_internal_contact a148 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_internal_contact a149 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11 
 join ldb.d_configuration_item a18 
 on (a11.configuration_item_key = a18.row_key) 
-join ldb.d_internal_contact a148 
-on (a18.eit_sup_leader_c_key = a148.row_key) 
+join ldb.d_internal_contact a149 
+on (a18.eit_sup_leader_c_key = a149.row_key) 
 union
-select 'ldb.d_incident_category a149 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_incident_category a150 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11 
 join ldb.d_incident a14 
 on (a11.incident_key = a14.row_key) 
-join ldb.d_incident_category a149 
-on (a14.category_src_key = a149.row_key) 
+join ldb.d_incident_category a150 
+on (a14.category_src_key = a150.row_key) 
 union
-select 'ldb.d_incident_close_code a150 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_incident_close_code a151 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11 
 join ldb.d_incident a14 
 on (a11.incident_key = a14.row_key) 
-join ldb.d_incident_close_code a150 
-on (a14.close_code_src_key = a150.row_key) 
+join ldb.d_incident_close_code a151 
+on (a14.close_code_src_key = a151.row_key) 
 union
-select 'ldb.d_incident_severity a151 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_incident_severity a152 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11 
 join ldb.d_incident a14 
 on (a11.incident_key = a14.row_key) 
-join ldb.d_incident_severity a151 
-on (a14.severity_src_key = a151.row_key) 
+join ldb.d_incident_severity a152 
+on (a14.severity_src_key = a152.row_key) 
 union
-select 'ldb.d_incident_state a152 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_incident_state a153 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11 
 join ldb.d_incident a14 
 on (a11.incident_key = a14.row_key) 
-join ldb.d_incident_state a152 
-on (a14.state_src_key = a152.row_key) 
+join ldb.d_incident_state a153 
+on (a14.state_src_key = a153.row_key) 
 union
-select 'ldb.d_incident_subcategory a153 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_incident_subcategory a154 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11 
 join ldb.d_incident a14 
 on (a11.incident_key = a14.row_key) 
-join ldb.d_incident_subcategory a153 
-on (a14.sub_category_src_key = a153.row_key) 
+join ldb.d_incident_subcategory a154 
+on (a14.sub_category_src_key = a154.row_key) 
 union
-select 'ldb.d_lov_incident_opened_by_language_c a154 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_lov_incident_opened_by_language_c a155 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11 
 join ldb.d_internal_contact_mdm a114 
 on (a11.opened_by_c_key = a114.row_current_key) 
-join ldb.d_lov_incident_opened_by_language_c a154 
-on (a114.language_c_key = a154.row_key) 
+join ldb.d_lov_incident_opened_by_language_c a155 
+on (a114.language_c_key = a155.row_key) 
 union
-select 'ldb.d_lov_incident_opened_on_behalf_of_language_c a155 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_lov_incident_opened_on_behalf_of_language_c a156 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11 
 join ldb.d_internal_contact a115 
 on (a11.opened_on_behalf_of_c_key = a115.row_key) 
-join ldb.d_lov_incident_opened_on_behalf_of_language_c a155 
-on (a115.language_c_key = a155.row_key) 
+join ldb.d_lov_incident_opened_on_behalf_of_language_c a156 
+on (a115.language_c_key = a156.row_key) 
 union
-select 'ldb.d_config_item_cah_support_grp_c a156 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_config_item_cah_support_grp_c a157 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11 
 join ldb.d_configuration_item a18 
 on (a11.configuration_item_key = a18.row_key) 
-join ldb.d_config_item_cah_support_grp_c a156 
-on (a18.cah_support_grp_src_code_c_key = a156.row_key) 
+join ldb.d_config_item_cah_support_grp_c a157 
+on (a18.cah_support_grp_src_code_c_key = a157.row_key) 
 union
-select 'ldb.d_internal_contact_director a157 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_internal_contact_director a158 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11 
 join ldb.d_internal_contact a12 
 on (a11.opened_by_key = a12.row_key) join ldb.d_internal_contact_mdm a117 
 on (a12.row_current_key = a117.row_current_key) 
-join ldb.d_internal_contact_director a157 
-on (a117.director_c_key = a157.row_key) 
+join ldb.d_internal_contact_director a158 
+on (a117.director_c_key = a158.row_key) 
 union
-select 'ldb.d_internal_contact_manager a158 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_internal_contact_manager a159 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11 
 join ldb.d_internal_contact a12 
 on (a11.opened_by_key = a12.row_key) join ldb.d_internal_contact_mdm a117 
 on (a12.row_current_key = a117.row_current_key) 
-join ldb.d_internal_contact_manager a158 
-on (a117.manager_c_key = a158.row_key) 
+join ldb.d_internal_contact_manager a159 
+on (a117.manager_c_key = a159.row_key) 
 union
-select 'ldb.d_internal_contact_vp a159 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_internal_contact_vp a160 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11 
 join ldb.d_internal_contact a12 
 on (a11.opened_by_key = a12.row_key) join ldb.d_internal_contact_mdm a117 
 on (a12.row_current_key = a117.row_current_key) 
-join ldb.d_internal_contact_vp a159 
-on (a117.vp_c_key = a159.row_key) 
+join ldb.d_internal_contact_vp a160 
+on (a117.vp_c_key = a160.row_key) 
 union
-select 'ldb.d_calendar_fiscal_period a160 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_calendar_fiscal_period a161 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11 
 join ldb.d_calendar_greg_fiscal_c a111 
 on (a11.opened_on_key = a111.greogrian_calendar_key) join ldb.d_calendar_date_fiscal a112 
 on (a111.fiscal_key = a112.row_key) 
-join ldb.d_calendar_fiscal_period a160 
-on (a112.period_start_date_key = a160.row_key) 
+join ldb.d_calendar_fiscal_period a161 
+on (a112.period_start_date_key = a161.row_key) 
 union
-select 'ldb.d_calendar_fiscal_quarter a161 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_calendar_fiscal_quarter a162 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11 
 join ldb.d_calendar_greg_fiscal_c a111 
 on (a11.opened_on_key = a111.greogrian_calendar_key) join ldb.d_calendar_date_fiscal a112 
 on (a111.fiscal_key = a112.row_key) 
-join ldb.d_calendar_fiscal_quarter a161 
-on (a112.quarter_start_date_key = a161.row_key) 
+join ldb.d_calendar_fiscal_quarter a162 
+on (a112.quarter_start_date_key = a162.row_key) 
 union
-select 'ldb.d_calendar_fiscal_year a162 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_calendar_fiscal_year a163 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11 
 join ldb.d_calendar_greg_fiscal_c a111 
 on (a11.opened_on_key = a111.greogrian_calendar_key) join ldb.d_calendar_date_fiscal a112 
 on (a111.fiscal_key = a112.row_key) 
-join ldb.d_calendar_fiscal_year a162 
-on (a112.year_start_date_key = a162.row_key) 
+join ldb.d_calendar_fiscal_year a163 
+on (a112.year_start_date_key = a163.row_key) 
