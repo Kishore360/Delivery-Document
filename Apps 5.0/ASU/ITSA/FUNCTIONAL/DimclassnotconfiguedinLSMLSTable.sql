@@ -17,4 +17,12 @@ and dimension_class not like ('%STATE~GEO%')
 and dimension_class not like ('%WARRANTY%')
 and dimension_class not like ('%CRITICALITY~BUSINESS_SERVICE%')
 and dimension_class not like ('%U_CATEGORY~INCIDENT%')
+and dimension_class not like ('%STATE_C~HRCASE%')
+and dimension_class not like ('%TENANT_INFORMATION%')
+and dimension_class not like ('%NAME~TASK_SLA%')
+and dimension_class not like ('%TASK_TYPE~TASK%')
+
  )a
+ 
+ 
+ 
