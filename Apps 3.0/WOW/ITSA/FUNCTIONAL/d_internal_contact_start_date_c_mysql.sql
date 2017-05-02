@@ -1,10 +1,8 @@
-SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
-,CASE WHEN cnt > 0 THEN 'Data did not Match.' 
-ELSE 'Data Matched' END AS Message 
-from(select count(1) as cnt
-from wow_mdwdb.d_internal_contact a
-left join wow_mdsdb.sys_user_final b
-on a.row_id=CONCAT('INTERNAL_CONTACT~',b.sys_id) 
-and a.source_id=b.sourceinstance
-where a.start_date_c<>CONVERT_TZ(b.u_start_date,'GMT','US/Central')) a
+
+SELECT CASE WHEN count(1)  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, 
+CASE WHEN count(1)  THEN 'MDS to DWH data validation failed for d_internal_contact.start_date_c' ELSE 'SUCCESS' END as Message 
+FROM wow_mdwdb.d_internal_contact trgt
+RIGHT JOIN wow_mdsdb.sys_user_final src
+on CONCAT('INTERNAL_CONTACT~',src.sys_id) = trgt.row_id and src.sourceinstance = trgt.source_id
+WHERE CONVERT_TZ(src.u_start_date,'GMT','US/Central')<>start_date_c
 ;
