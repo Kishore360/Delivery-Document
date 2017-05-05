@@ -158,14 +158,14 @@ from ldb.f_incident a
 join ldb.d_internal_contact_requester_c    b
 on  (a.requester_c_key = b.row_key)
 union 
-select 'd_task_impact' as Table_Name,count(a.row_key) as Row_Count
+select 'd_incident_impact' as Table_Name,count(a.row_key) as Row_Count
 from ldb.f_incident a
-join ldb.d_task_impact    b
+join ldb.d_incident_impact    b
 on  (a.impact_src_key = b.row_key)            
 union 
-select 'd_task_priority' as Table_Name,count(a.row_key) as Row_Count
+select 'd_incident_priority' as Table_Name,count(a.row_key) as Row_Count
 from ldb.f_incident a
-join ldb.d_task_priority    b
+join ldb.d_incident_priority    b
 on  (a.priority_src_key = b.row_key) 
 union 
 select 'd_incident_contacttype' as Table_Name,count(a.row_key) as Row_Count
@@ -173,9 +173,9 @@ from ldb.f_incident a
 join ldb.d_incident_contacttype    b
 on  (a.reported_type_src_key = b.row_key) 
 union 
-select 'd_task_urgency' as Table_Name,count(a.row_key) as Row_Count
+select 'd_incident_urgency' as Table_Name,count(a.row_key) as Row_Count
 from ldb.f_incident a
-join ldb.d_task_urgency    b
+join ldb.d_incident_urgency    b
 on  (a.urgency_src_key = b.row_key) 
 union 
 select 'd_incident_parent_c' as Table_Name,count(a.row_key) as Row_Count
@@ -215,6 +215,11 @@ UNION
 select 'd_business_service' as Table_Name,count(a.row_key) as Row_Count
 from ldb.f_incident a
 join ldb.d_business_service b on (a.business_service_key = b.row_key)
+UNION 
+select'd_incident_contacttype' as Table_Name, count(a11.row_key) Row_Count
+from  ldb.f_incident             a11 
+join ldb.d_incident_contacttype       a118
+on (a11.reported_type_src_key = a118.row_key)
 
   
 

@@ -37,12 +37,12 @@ from ldb.f_incident_closed a
 join ldb.d_location    b
 on (a.location_key = b.row_key)
 union 
-select 'd_location' as Table_Name,count(a.row_key) as Row_Count
+select 'd_incident' as Table_Name,count(a.row_key) as Row_Count
 from ldb.f_incident_closed a
 join ldb.d_incident    b
 on (a.incident_key = b.row_key)
 union 
-select 'd_location' as Table_Name,count(a.row_key) as Row_Count
+select 'd_configuration_item' as Table_Name,count(a.row_key) as Row_Count
 from ldb.f_incident_closed a
 join ldb.d_configuration_item    b
 on (a.configuration_item_key = b.row_key)
@@ -141,12 +141,7 @@ union
 select 'd_incident_subcategory' as Table_Name,count(a.row_key) as Row_Count
 from ldb.f_incident_closed a
 join ldb.d_incident_subcategory    b
-on  (a.sub_category_src_key = b.row_key)   
-union 
-select 'd_incident_subcategory' as Table_Name,count(a.row_key) as Row_Count
-from ldb.f_incident_closed a
-join ldb.d_task    b
-on  (a.parent_inc_c_key = b.row_key)   
+on  (a.sub_category_src_key = b.row_key)      
 union 
 select 'd_task' as Table_Name,count(a.row_key) as Row_Count
 from ldb.f_incident_closed a
@@ -158,14 +153,14 @@ from ldb.f_incident_closed a
 join ldb.d_internal_contact_requester_c    b
 on  (a.requester_c_key = b.row_key)
 union 
-select 'd_internal_contact_requester_c' as Table_Name,count(a.row_key) as Row_Count
+select 'd_incident_impact' as Table_Name,count(a.row_key) as Row_Count
 from ldb.f_incident_closed a
-join ldb.d_task_impact    b
+join ldb.d_incident_impact    b
 on  (a.impact_src_key = b.row_key)            
 union 
-select 'd_task_priority' as Table_Name,count(a.row_key) as Row_Count
+select 'd_incident_priority' as Table_Name,count(a.row_key) as Row_Count
 from ldb.f_incident_closed a
-join ldb.d_task_priority    b
+join ldb.d_incident_priority    b
 on  (a.priority_src_key = b.row_key) 
 union 
 select 'd_incident_contacttype' as Table_Name,count(a.row_key) as Row_Count
@@ -173,9 +168,9 @@ from ldb.f_incident_closed a
 join ldb.d_incident_contacttype    b
 on  (a.reported_type_src_key = b.row_key) 
 union 
-select 'd_task_urgency' as Table_Name,count(a.row_key) as Row_Count
+select 'd_incident_urgency' as Table_Name,count(a.row_key) as Row_Count
 from ldb.f_incident_closed a
-join ldb.d_task_urgency    b
+join ldb.d_incident_urgency    b
 on  (a.urgency_src_key = b.row_key) 
 union 
 select 'd_incident_parent_c' as Table_Name,count(a.row_key) as Row_Count
