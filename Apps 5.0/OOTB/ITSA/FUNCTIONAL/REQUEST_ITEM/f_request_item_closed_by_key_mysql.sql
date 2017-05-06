@@ -15,6 +15,6 @@ AND TRGT.pivot_date
  BETWEEN LKP.effective_from AND LKP.effective_to)
 LEFT JOIN <<tenant>>_mdwdb.d_internal_contact ic ON (SRC.sys_updated_by = ic.user_name AND SRC.sourceinstance = ic.source_id)
  WHERE 
- COALESCE(LKP.row_key,ic.row_key,CASE WHEN SRC.closed_by IS NULL THEN 0 else -1 end)<> (TRGT.closed_by_key)) temp;
+ COALESCE(LKP.row_key,ic.row_key,CASE WHEN COALESCE(SRC.closed_by,ic.user_name) IS NULL THEN 0 else -1 end)<> (TRGT.closed_by_key)) temp;
  
  

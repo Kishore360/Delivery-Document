@@ -8,7 +8,7 @@ LEFT JOIN usf_mdsdb.sys_user_final LKP
  ON SRC.owned_by= LKP.sys_id 
 AND SRC.sourceinstance = LKP.sourceinstance 
 LEFT JOIN usf_mdwdb.d_internal_organization LKP1
-on LKP1.row_id=COALESCE(CONCAT('DEPARTMENT~',LKP.department),CONCAT('DEPARTMENT~',SRC.department),'UNSPECIFIED')
- WHERE COALESCE(LKP1.row_key,CASE WHEN COALESCE(SRC.department, LKP.department)IS NULL then 0 else '-1' end)<> TRGT.department_key
+on LKP1.row_id=COALESCE(CONCAT('DEPARTMENT~',SRC.department),CONCAT('DEPARTMENT~',LKP.department))
+ WHERE COALESCE(LKP1.row_key,CASE WHEN COALESCE(SRC.department, LKP.department)IS NULL then 0 else '-1' end)<> COALESCE(TRGT.department_key,'')
  
  
