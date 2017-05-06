@@ -1,4 +1,4 @@
- select'f_incident' as Table_Name, count(a11.row_key) Row_Count
+select'f_incident' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_incident             a11 
  union
  select'd_calendar_date' as Table_Name, count(a11.row_key) Row_Count
@@ -106,18 +106,16 @@ on (a11.opened_by_key = a113.row_key)
 join ldb.d_internal_contact_mdm       a114
 on (a113.row_current_key = a114.row_current_key)
 union
-<<<<<<< HEAD
 select'd_internal_organization_department' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_incident             a11 
 join ldb.d_internal_contact a113 on (a11.opened_by_key=a113.row_key)
 join ldb.d_internal_organization_department       a115
 on (a113.department_key = a115.row_key)
-=======
+union
 select 'd_internal_organization_department' as Table_Name,count(a.row_key) as Row_Count
 from ldb.f_incident a
 JOIN ldb.d_internal_contact b ON (a.opened_by_key=b.row_key)
 JOIN ldb.d_internal_organization_department c on (b.department_key = c.row_key)
->>>>>>> bc68bc8f428ec8c2e5616878c34b996c0f7a586a
 union
 select'd_internal_organization_group' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_incident             a11 
