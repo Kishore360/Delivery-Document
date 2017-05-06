@@ -9,5 +9,5 @@ JOIN <<tenant>>_mdwdb.d_lov_map br ON f.state_src_key = br.src_key
 AND br.dimension_wh_code = 'OPEN'
 WHERE REQ_TSK.soft_deleted_flag ='N' and  
 REQ_TSK.over_due_flag <> CASE WHEN (REQ_TSK.active_flag = 'Y' and REQ_TSK.soft_deleted_flag ='N') && 
-(REQ_TSK.due_on < (SELECT max(lastupdated) AS lastupdated FROM asu_mdwdb.d_o_data_freshness 
+(REQ_TSK.due_on < (SELECT max(lastupdated) AS lastupdated FROM <<tenant>>_mdwdb.d_o_data_freshness 
 WHERE sourcename like 'ServiceNow%'and etl_run_number=REQ_TSK.etl_run_number)) THEN 'Y' ELSE 'N' END)temp;
