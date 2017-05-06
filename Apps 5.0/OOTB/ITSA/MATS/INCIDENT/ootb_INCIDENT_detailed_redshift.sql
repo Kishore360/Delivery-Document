@@ -111,19 +111,13 @@ from  ldb.f_incident             a11
 join ldb.d_internal_contact a113 on (a11.opened_by_key=a113.row_key)
 join ldb.d_internal_organization_department       a115
 on (a113.department_key = a115.row_key)
-<<<<<<< HEAD
-
-=======
 union
->>>>>>> b8503ce63c1827f1a8b1d2583877fac63a5ba93d
+
 select 'd_internal_organization_department' as Table_Name,count(a.row_key) as Row_Count
 from ldb.f_incident a
 JOIN ldb.d_internal_contact b ON (a.opened_by_key=b.row_key)
 JOIN ldb.d_internal_organization_department c on (b.department_key = c.row_key)
-<<<<<<< HEAD
 
-=======
->>>>>>> b8503ce63c1827f1a8b1d2583877fac63a5ba93d
 union
 select'd_internal_organization_group' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_incident             a11 
