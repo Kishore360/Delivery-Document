@@ -8,5 +8,5 @@ LEFT JOIN usf_mdwdb.f_asset TRGT
  ON SRC.owned_by= LKP.sys_id 
 AND SRC.sourceinstance = LKP.sourceinstance 
 LEFT JOIN usf_mdwdb.d_cost_center LKP1
-on LKP1.row_id=COALESCE( LKP.cost_center,'UNSPECIFIED')
- WHERE COALESCE(LKP1.row_key,CASE WHEN LKP.cost_center IS NULL THEN 0 else '-1' end)<> TRGT.cost_center_key
+on COALESCE( SRC.cost_center,LKP.cost_center,'UNSPECIFIED') =LKP1.row_id
+ WHERE COALESCE(LKP1.row_key,CASE WHEN COALESCE(SRC.cost_center,LKP.cost_center) IS NULL THEN 0  else '-1' end)<> TRGT.cost_center_key
