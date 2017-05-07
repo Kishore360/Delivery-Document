@@ -4,6 +4,8 @@ FROM( Select count(cnt) as cnt
 from( 
 select row_id,source_id,count(1) as cnt 
 from  
-usf_mdwdb.d_lov_map  
+usf_mdwdb.d_lov_map 
+where row_id not  like '%ROLE_C~INTERNAL_CONTACT%' 
+and row_id not like '%STAGE~sc_req_item%' 
 group by 1,2 
 having count(1)>1)c )a 

@@ -1,11 +1,11 @@
-SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
- CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for f_incident.open_to_resolve_duration' ELSE 'SUCCESS' END as Message
- FROM usf_mdsdb.incident_final SRC
-  JOIN usf_mdwdb.f_incident TRGT 
- ON (SRC.sys_id =TRGT.row_id  
- AND SRC.sourceinstance= TRGT.source_id  )
- LEFT JOIN usf_mdwdb.d_lov_map br 
- ON TRGT.state_src_key = br.src_key
-WHERE   br.dimension_wh_code IN ('RESOLVED')
-AND TIMESTAMPDIFF(SECOND,SRC.opened_at,coalesce(SRC.resolved_at,SRC.closed_at))  <> TRGT.open_to_resolve_duration;
+SELECT CASE WHEN cnt THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+ CASE WHEN cnt THEN 'MDS to DWH data validation failed for f_incident.open_to_resolve_duration' ELSE 'SUCCESS' END as Message from (select count(1) cnt 
+ FROM usf_mdwdb.d_incident a
+JOIN  usf_mdwdb.f_incident f ON a.row_key = f.incident_key
+JOIN usf_mdwdb.d_lov_map lov_map
+ ON (f.state_src_key = lov_map.src_key and lov_map.dimension_class = 'STATE~INCIDENT' )
+and lov_map.dimension_wh_code in ('RESOLVED','CLOSED')
 
+where 
+f.open_to_resolve_duration<>case when coalesce(a.last_resolved_on,a.closed_on,a.changed_on)<a.opened_on then null else TIMESTAMPDIFF(SECOND,CONVERT_TZ(a.opened_on,'US/Pacific','GMT'),
+CONVERT_TZ(coalesce(a.last_resolved_on,a.closed_on,a.changed_on),'US/Pacific','GMT')) end)temp
