@@ -11,7 +11,7 @@ AND br.dimension_wh_code IN ('RESOLVED','CLOSED')
 JOIN bhn_mdwdb.d_incident a ON a.row_key = f.incident_key
 AND f.source_id = a.source_id
 WHERE
-timestampdiff(day, convert_tz(convert_tz(SRC.opened_at,'GMT','America/Los_Angeles'),'America/Los_Angeles','GMT'), 
+timestampdiff(SECOND, convert_tz(convert_tz(SRC.opened_at,'GMT','America/Los_Angeles'),'America/Los_Angeles','GMT'), 
 coalesce(convert_tz(convert_tz(SRC.resolved_at,'GMT','America/Los_Angeles'),'America/Los_Angeles','GMT'), 
 convert_tz(convert_tz(SRC.closed_at,'GMT','America/Los_Angeles'),'America/Los_Angeles','GMT'))) <> f.age
   )a
