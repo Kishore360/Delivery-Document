@@ -1,10 +1,4 @@
-SELECT 
-CASE WHEN max_count<>min_count THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
-CASE WHEN  max_count<>min_count THEN 'f_incident_closed has drops' ELSE 'SUCCESS'  END as Message 
-FROM 
-(
-select max(Row_Count) max_count,Min(Row_Count) min_count from
-(select  'f_incident_closed' as Table_Name,count(a.row_key) as Row_Count
+select  'f_incident_closed' as Table_Name,count(a.row_key) as Row_Count
 from ldb.f_incident_closed a
 UNION
 select 'd_calendar_date' as Table_Name,count(a.row_key) as Row_Count
@@ -183,5 +177,3 @@ UNION
 select 'dh_assignment_group_tier_hierarchy' as Table_Name,count(a.row_key) as Row_Count
 from ldb.f_incident_closed a
 join ldb.dh_assignment_group_tier_hierarchy b on (a.assignment_group_key = b.user_group_tier_key)
-)a
-)b;
