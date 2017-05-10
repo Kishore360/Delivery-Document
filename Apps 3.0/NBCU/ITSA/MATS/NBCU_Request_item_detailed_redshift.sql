@@ -218,4 +218,11 @@ join ldb.d_task_ra_c a139
 on (a11.parent_task_c_key = a139.row_key)
 join ldb.d_task_parent_c      a140
 on (a139.parent_task_key = a140.row_key)
+union
+select 'ldb.d_sc_req_item_priority a141 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_request_item a11 
+join ldb.d_sc_req_item_priority a141
+on (a11.priority_src_key = a141.row_key)
+
+
 
