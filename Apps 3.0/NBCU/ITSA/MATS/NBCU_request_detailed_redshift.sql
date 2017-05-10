@@ -123,5 +123,10 @@ join ldb.d_task_ra_c a120
 on (a11.parent_task_c_key = a120.row_key)
 join ldb.d_task_parent_c a121
 on (a120.parent_task_key = a121.row_key)
+union
+select 'ldb.d_sc_task_priority a122 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_request_task a11 
+join ldb.d_sc_task_priority a122
+on (a11.priority_src_key = a122.row_key)
 
 
