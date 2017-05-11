@@ -14,5 +14,5 @@ AND SRC.sourceinstance = TRGT.source_id )
 JOIN gogo_mdwdb.d_lov_map br
 ON (SRC.review_status = br.dimension_code
 )
-WHERE CASE when
+WHERE br.dimension_class = 'REVIEW_STATUS~CHANGE_REQUEST' AND CASE when
 u_closure_code IN ('Successful', 'Partially Successful') THEN 'N' ELSE 'Y' END <> TRGT.failure_flag
