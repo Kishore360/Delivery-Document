@@ -38,9 +38,9 @@ SELECT 'd_request_item' AS Table_name,count(a.row_key) AS Row_count
 FROM ldb.f_request_item a 
 JOIN ldb.d_request_item b ON a.request_item_key=b.row_key
 UNION 
-SELECT 'd_request_item' AS Table_name,count(a.row_key) AS Row_count
+SELECT 'd_request' AS Table_name,count(a.row_key) AS Row_count
 FROM ldb.f_request_item a 
-JOIN ldb.d_request_item b ON a.request_key=b.row_key
+JOIN ldb.d_request b ON a.request_key=b.row_key
 UNION 
 SELECT 'd_master_item' AS Table_name,count(a.row_key) AS Row_count
 FROM ldb.f_request_item a 
