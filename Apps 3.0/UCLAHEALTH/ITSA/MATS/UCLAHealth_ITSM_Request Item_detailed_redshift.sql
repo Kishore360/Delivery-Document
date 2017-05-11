@@ -62,7 +62,7 @@ SELECt 'd_hr_change_category' AS Table_name,count(a.row_key) as Row_count
 FROM ldb.f_request_item a 
 JOIN ldb.d_hr_change_category b ON a.hr_category_src_key=b.row_key
 UNION 
-SELECT 'd_hr_change' AS Table_name,count(a.row_key) as row_count
+SELECT 'd_hr_change' AS Table_name,count(a.row_key) as Row_count
 FROM ldb.f_request_item a 
 JOIN ldb.d_hr_change b ON a.hr_change_key=b.row_key
 UNION 
@@ -71,7 +71,7 @@ FROM ldb.f_request_item a
 JOIN ldb.d_calendar_date b ON a.opened_by_key=b.row_key
 JOIN ldb.d_calendar_week c on b.week_start_date_key=c.row_key
 UNION 
-SELECT 'd_calendar_quarter' AS Table_name,count(a.row_count) as Row_count 
+SELECT 'd_calendar_quarter' AS Table_name,count(a.row_key) as Row_count 
 FROM ldb.f_request_item a 
 JOIN ldb.d_calendar_date b ON a.opened_by_key=b.row_key
 JOIN ldb.d_calendar_quarter c on b.quarter_start_date_key=c.row_key
