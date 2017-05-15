@@ -5,7 +5,7 @@
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
 LEFT JOIN weillcornell_mdwdb.d_lov LKP 
- ON ( concat('URGENCY','~','TASK','~','~','~',upper(urgency))= LKP.src_rowid 
+ ON ( concat('URGENCY','~','INCIDENT','~','~','~',upper(urgency))= LKP.src_rowid 
 AND SRC.sourceinstance= LKP.source_id )
  WHERE COALESCE(LKP.row_key,CASE WHEN SRC.urgency IS NULL THEN 0 else '-1' end)<> COALESCE(TRGT.urgency_src_key,'') 
 and    SRC.sys_id not in (select B.sys_id
