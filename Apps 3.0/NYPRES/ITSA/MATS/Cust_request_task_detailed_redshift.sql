@@ -1,6 +1,15 @@
 select 'ldb.f_request_task a11 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_request_task a11 
 union
+select 'ldb.d_location_parent_request_c a11 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_request_task a11 
+ join ldb.d_request a12
+on a11.request_key=a12.row_key
+ join ldb.d_location a13
+on a13.row_key=a12.opened_by_location_c_key
+ join ldb.d_location_parent_request_c a14
+on a13.parent_location_c_key=a14.row_key
+union
 select 'ldb.d_internal_contact a12 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_request_task a11 
 join ldb.d_internal_contact a12 
