@@ -1,13 +1,16 @@
+
+
 SELECT 
-CASE WHEN CNT > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
-CASE WHEN CNT >0 THEN 'MDS to DWH data validation failed' ELSE 'SUCCESS' END as Message
-FROM (SELECT count(1) as CNT
- FROM cardinalhealth_mdsdb.task_final SRC 
- LEFT JOIN cardinalhealth_mdwdb.d_task_c TRGT 
- ON (SRC.sys_id =TRGT.row_id  
- AND SRC.sourceinstance= TRGT.source_id  )
-LEFT JOIN cardinalhealth_mdwdb.d_task LKP 
- ON (COALESCE(SRC.parent,'UNSPECIFIED')= LKP.row_id 
-AND SRC.sourceinstance= LKP.source_id )
- WHERE COALESCE(LKP.row_key,CASE WHEN SRC.parent IS NULL THEN 0 else -1 end)<> (TRGT.parent_task_key))temp;
- 
+CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+CASE WHEN count(1) >0 THEN 'Failure' ELSE 'Data Matched' END as Message
+from
+cardinalhealth_mdsdb.task_final a
+join cardinalhealth_mdwdb.d_task_c b
+on a.sys_id=b.row_id and a.sourceinstance=b.source_id
+join cardinalhealth_mdwdb.d_task_c c
+on  COALESCE(a.parent,'UNSPECIFIED')=c.row_id and a.sourceinstance=c.source_id
+where coalesce(c.row_key,case when a.parent is null then 0 else -1 end ) <> b.parent_task_key;
+
+
+
+

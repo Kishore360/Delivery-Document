@@ -128,9 +128,6 @@ select 'ldb.d_sc_task_priority a122 ' as Table_name, count(a11.row_key) Row_Coun
 from ldb.f_request_task a11 
 join ldb.d_sc_task_priority a122
 on (a11.priority_src_key = a122.row_key)
-<<<<<<< HEAD
-=======
 
->>>>>>> 39c8cda8447444a933c1dd91c2d2b299392318b8
 
 
