@@ -5,7 +5,7 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
 LEFT JOIN weillcornell_mdwdb.d_lov LKP 
- ON ( concat('TROUBLE','~','INCIDENT','~','~','~',upper(subcategory))= LKP.src_rowid 
+ ON ( concat('TROUBLE','~','INCIDENT','~','~','~',upper(u_trouble))= LKP.src_rowid 
 AND SRC.sourceinstance= LKP.source_id )
  WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_trouble IS NULL THEN 0 else '-1' end)<> COALESCE(TRGT.trouble_c_key,'')
   and    SRC.sys_id not in (select B.sys_id
