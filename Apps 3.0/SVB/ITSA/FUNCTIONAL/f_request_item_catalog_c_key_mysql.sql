@@ -5,6 +5,6 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
  LEFT JOIN svb_mdwdb.d_master_item LKP 
- ON ( SRC.cat_item= LKP.row_id 
+ ON ( COALESCE(SRC.cat_item,'UNSPECIFIED')= LKP.row_id 
 AND SRC.sourceinstance= LKP.source_id )
- WHERE COALESCE(LKP.row_key,CASE WHEN SRC.cat_item IS NULL THEN 0 else '-1' end)<> COALESCE(TRGT.catalog_item_c_key,'')
+ WHERE COALESCE(LKP.row_key,CASE WHEN SRC.cat_item IS NULL THEN 0 else '-1' end)<> TRGT.catalog_item_c_key

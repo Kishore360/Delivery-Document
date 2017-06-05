@@ -7,7 +7,7 @@ FROM (SELECT count(1) as CNT
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
  LEFT JOIN svb_mdwdb.d_lov LKP 
- ON ( concat('CONTACT_TYPE','~','SC_TASK',contact_type)= LKP.row_id
+ ON (COALESCE(CONCAT('CONTACT_TYPE~SC_TASK~~~',SRC.contact_type),'UNSPECIFIED')= LKP.row_id
 AND SRC.sourceinstance= LKP.source_id ) 
  WHERE COALESCE(LKP.row_key,CASE WHEN SRC.contact_type IS NULL THEN 0 else -1 end)<> (TRGT.contact_type_src_c_key))temp;
  
