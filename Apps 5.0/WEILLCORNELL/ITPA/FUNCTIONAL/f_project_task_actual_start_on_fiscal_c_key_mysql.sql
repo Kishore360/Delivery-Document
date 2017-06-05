@@ -5,6 +5,5 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  ON (SRC.sys_id=TRGT.row_id 
  AND SRC.sourceinstance=TRGT.source_id )
  LEFT JOIN weillcornell_mdwdb.d_calendar_date LKP 
-on (LKP.row_id  = date_format(convert_tz(SRC.work_start,'GMT','America/New_York'),'%Y%m%d')  and LKP.source_id=2
-)
-WHERE COALESCE(LKP.row_key,CASE WHEN SRC.work_start IS NULL THEN 0 else '-1' end)  <> COALESCE(TRGT.actual_start_on_fiscal_c_key,'') 
+on LKP.row_id  = CONCAT(date_format(convert_tz(SRC.work_start,'GMT','America/New_York'),'%Y%m%d'),'~2')
+WHERE COALESCE(LKP.row_key,CASE WHEN SRC.work_start IS NULL THEN 0 else '-1' end)  <> TRGT.actual_start_on_fiscal_c_key
