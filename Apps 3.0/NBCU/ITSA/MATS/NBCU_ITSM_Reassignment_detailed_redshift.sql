@@ -1,3 +1,6 @@
+select'ldb.f_t_task_activity_reassignment_c' as Table_Name, count(a11.row_key) Row_Count
+ from  ldb.f_t_task_activity_reassignment_c             a11 
+union
 select'ldb.d_task_ra_c' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_t_task_activity_reassignment_c             a11 
 join ldb.d_task_ra_c         a12

@@ -8,7 +8,7 @@ when sum(failures_cnt) > 0 and length(group_concat(distinct failures)) >= 1024 t
 when sum(failures_cnt) > 0 and length(group_concat(distinct failures)) < 1024
 then concat('Failed. Data does not match for ',sum(failures_cnt),' records. Sys Ids : ',substring_index(group_concat(distinct failures),',',-sum(failures_cnt)))
 
-else CONCAT('Success. All warehouse records are matching with source. Source Count : ',sum(src_not_null_count),' ; Target Count : ',sum(trgt_not_null_count)) end Result
+else CONCAT('Success. All warehouse records are matching with source. Source Count : ',sum(src_not_null_count),'  Target Count : ',sum(trgt_not_null_count)) end Result
 
 from 
 (select 
