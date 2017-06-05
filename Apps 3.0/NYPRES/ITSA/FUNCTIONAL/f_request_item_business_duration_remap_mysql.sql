@@ -8,4 +8,3 @@ ON (SRC_1.row_id = REQ.sys_id and SRC_1.source_id = REQ.sourceinstance)
 WHERE TRGT.business_duration <> CASE WHEN REQ.business_duration is NULL  THEN NULL
 				WHEN TIMESTAMPDIFF(SECOND,'1970-01-01 00:00:00',REQ.business_duration) < 0 THEN NULL
 				ELSE TIMESTAMPDIFF(SECOND,'1970-01-01 00:00:00',REQ.business_duration) END;
-;

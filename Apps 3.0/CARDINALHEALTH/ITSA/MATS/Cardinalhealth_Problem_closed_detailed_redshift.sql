@@ -4,7 +4,35 @@ union
 select'ldb.d_problem' as Table_Name, count(a11.row_key) Row_Count	
  from  ldb.f_problem_closed_c       a11 	
 join ldb.d_problem       a12	
-on (a11.problem_key=a12.row_key)	
+on (a11.problem_key=a12.row_key)
+union	
+select'ldb.d_lov_problem_root_cause_subcategory_c' as Table_Name, count(a11.row_key) Row_Count	
+ from  ldb.f_problem_closed_c       a11 	
+join ldb.d_problem       a12	
+on (a11.problem_key=a12.row_key)
+join ldb.d_lov_problem_root_cause_subcategory_c a1112
+on ( a12.root_cause_subcategory_src_c_key=a1112.row_key)
+union	
+select'ldb.d_problem' as Table_Name, count(a11.row_key) Row_Count	
+ from  ldb.f_problem_closed_c       a11 	
+join ldb.d_problem       a12	
+on (a11.problem_key=a12.row_key)
+join ldb.d_lov_problem_external_impact_c a1113
+on (a12.external_impact_src_c_key=a1113.row_key)
+union	
+select'ldb.d_problem' as Table_Name, count(a11.row_key) Row_Count	
+ from  ldb.f_problem_closed_c       a11 	
+join ldb.d_problem       a12	
+on (a11.problem_key=a12.row_key)
+join ldb.d_lov_problem_cause_unplanned_delivery_c a1114
+on (a12.cause_unplanned_delivery_src_c_key=a1114.row_key)
+union	
+select'ldb.d_problem' as Table_Name, count(a11.row_key) Row_Count	
+ from  ldb.f_problem_closed_c       a11 	
+join ldb.d_problem       a12	
+on (a11.problem_key=a12.row_key)
+join ldb.d_lov_problem_root_cause_code_c a1115
+on(a12.root_cause_code_src_c_key=a1115.row_key)	
 union	
 select'ldb.d_internal_contact' as Table_Name, count(a11.row_key) Row_Count	
  from  ldb.f_problem_closed_c       a11 	
@@ -205,3 +233,4 @@ join ldb.d_calendar_date_fiscal       a113
 on (a112.fiscal_key=a113.row_key)	
 join ldb.d_calendar_fiscal_year       a125	
 on (a113.year_start_date_key=a125.row_key)	
+

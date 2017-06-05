@@ -14,4 +14,4 @@ when SRC.WORK_END<=end_date  and stat.label in ('Closed','Completed','Closed Inc
 else 'N/A'end 
 <>on_time_closure_c_flag
 and TRGT.soft_deleted_flag='N';
-#and  stat.name='change_request' and stat.element='state'
+-- and  stat.name='change_request' and stat.element='state'

@@ -7,5 +7,5 @@ select count(1) as cnt
 from pan_mdsdb.u_walk_up_final s
 left  JOIN pan_mdwdb.d_walk_up_c t 
 on  t.ROW_ID=s.SYS_ID and s.sourceinstance=t.source_id 
-WHERE t.closed_on <> convert_tz(l.closed_at,'GMT','America/Los_Angeles')) temp
+WHERE t.closed_on <> convert_tz(s.closed_at,'GMT','America/Los_Angeles')) temp
 
