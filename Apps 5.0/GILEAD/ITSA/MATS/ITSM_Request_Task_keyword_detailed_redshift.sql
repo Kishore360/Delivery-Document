@@ -45,11 +45,11 @@ JOIN ldb.d_internal_contact_assigned_to a12 ON (a11.assigned_to_key=a12.row_key)
 UNION 
 select 'd_calendar_date' as Table_Name, count(a11.row_key) Row_Count
 FROM ldb.f_request_task_c_keyword a11
-JOIN ldb.d_calendar_date a12  on (a11.opened_on_key = a1222.row_key)
+JOIN ldb.d_calendar_date a12  on (a11.opened_on_key = a12.row_key)
 UNION 
 select 'd_calendar_year' as Table_Name, count(a11.row_key) Row_Count
 FROM ldb.f_request_task_c_keyword a11
-JOIN ldb.d_calendar_date a12  on (a11.opened_on_key = a1222.row_key)
+JOIN ldb.d_calendar_date a12  on (a11.opened_on_key = a12.row_key)
 JOIN ldb.d_calendar_year a13 on (a12.year_start_date_key = a13.row_key)
 UNION 
 Select 'd_calendar_week' as Table_Name, count(a11.row_key) as Row_count
