@@ -8,5 +8,5 @@ JOIN <<tenant>>_mdwdb.f_problem_task TRGT ON PRB_TSK.row_key=TRGT.problem_task_k
 JOIN <<tenant>>_mdwdb.d_lov_map LKP ON TRGT.state_src_key=LKP.row_key AND LKP.dimension_wh_code='OPEN'
 WHERE PRB_TSK.soft_deleted_flag='N' AND 
 PRB_TSK.over_due_flag <> CASE WHEN(PRB_TSK.active_flag='Y') &&
-(PRB_TSK.due_on < (SELECT MAX(lastupdated) AS lastupdated FROM asu_mdwdb.d_o_data_freshness
+(PRB_TSK.due_on < (SELECT MAX(lastupdated) AS lastupdated FROM <<tenant>>_mdwdb.d_o_data_freshness
 WHERE sourcename like 'ServiceNow%' and etl_run_number=PRB_TSK.etl_run_number)) THEN 'Y' ELSE 'N' END)temp;
