@@ -25,9 +25,9 @@ select 'ldb.d_incident_impact' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_incident_closed a11 
 join ldb.d_incident_impact a17 on (a11.impact_src_key=a17.row_key)
 UNION 
-select 'ldb.d_task_contacttype' as Table_Name, count(a11.row_key) Row_Count
+select 'ldb.d_incident_contacttype' as Table_Name, count(a11.row_key) Row_Count
 from ldb.f_incident_closed a11 
-join ldb.d_task_contacttype a18 on (a11.reported_type_src_key=a18.row_key)
+join ldb.d_incident_contacttype a18 on (a11.reported_type_src_key=a18.row_key)
 UNION 
 select 'ldb.d_location' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_incident_closed a11 
@@ -52,8 +52,8 @@ join ldb.d_internal_organization_group a22 on (a11.assignment_group_key=a22.row_
 join ldb.d_internal_organization_escalation_gp_c a23 on (a22.escalation_group_c_key = a23.row_key)
 UNION 
 select 'd_internal_organization_department' as Table_Name,count(a.row_key) as Row_Count
-from ldb.f_incident a
-JOIN ldb.d_internal_contact b ON (a.opened_by_key=b.row_key)
+from ldb.f_incident_closed a
+JOIN ldb.d_internal_contact b ON (a.closed_by_key=b.row_key)
 JOIN ldb.d_internal_organization_department c on (b.department_key = c.row_key)
 UNION 
 select  'd_internal_contact_owner_c' as Table_Name,count(a11.row_key) Row_Count     
