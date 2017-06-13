@@ -41,4 +41,4 @@ select'ldb.d_calendar_month_opened' as Table_Name, count(a11.incident_key) Row_C
 JOIN ldb.d_calendar_date_opened	       a13	ON (a11.opened_on_key = a13.row_key)
 join ldb.d_calendar_month_opened       a19
 on (a13.month_start_date_key = a19.row_key)
-)A)B
+
