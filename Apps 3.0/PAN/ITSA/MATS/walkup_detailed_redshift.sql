@@ -78,3 +78,17 @@ on (a11.opened_on_key = a13.greogrian_calendar_key) join ldb.d_calendar_date_fis
 on (a13.fiscal_key = a14.row_key) 
 join ldb.d_calendar_fiscal_year a115 
 on (a14.year_start_date_key = a115.row_key) 
+
+union
+select 'ldb.d_internal_contact_opened_by_c a117 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_walk_up_c a11 
+join ldb.d_internal_contact_opened_by_c a117 
+on (a11.opened_by_key = a117.row_key) 
+union
+select 'ldb.d_lov_employee_type_c a1117 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_walk_up_c a11 
+join ldb.d_internal_contact a19 
+on (a11.opened_by_key = a19.row_key) 
+join ldb.d_lov_employee_type_c a1117 
+on (a19.employee_type_c_key = a1117.row_key) 
+
