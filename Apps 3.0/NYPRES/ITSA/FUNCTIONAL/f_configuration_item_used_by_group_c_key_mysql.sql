@@ -5,7 +5,7 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
 LEFT JOIN nypres_mdwdb.d_internal_organization LKP 
- ON ( u_used_by_group)= right(LKP.row_id,32 )
+ ON concat('INTERNAL_CONTACT~', u_used_by_group)= LKP.row_id 
  WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_used_by_group IS NULL THEN 0 else -1 end)<> (TRGT.used_by_group_c_key) 
  
  
