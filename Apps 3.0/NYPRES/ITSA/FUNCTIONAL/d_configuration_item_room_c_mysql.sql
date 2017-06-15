@@ -5,3 +5,6 @@ join nypres_mdwdb.d_configuration_item trgt on src.sys_id=trgt.row_id and  src.s
 where src.u_room <>trgt.room_c
 
 
+
+
+

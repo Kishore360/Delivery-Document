@@ -5,7 +5,7 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
 LEFT JOIN nypres_mdwdb.d_lov LKP 
- ON ( concat('CATEGORY~INCIDENT~~~',upper(u_vendor_supported))= LKP.row_id )
+ ON  CONCAT('U_VENDOR_SUPPORTED','~','CMDB_CI_APPL','~~~',UPPER(u_vendor_supported))= LKP.row_id 
  WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_vendor_supported IS NULL THEN 0 else -1 end)<> (TRGT.vendor_supported_c_key) 
  
  
