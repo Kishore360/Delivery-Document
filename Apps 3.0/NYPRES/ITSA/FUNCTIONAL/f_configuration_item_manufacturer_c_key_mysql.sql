@@ -3,7 +3,7 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  FROM nypres_mdsdb.cmdb_ci_final SRC 
  LEFT JOIN nypres_mdsdb.core_company_final LKP 
  ON  SRC.manufacturer= LKP.sys_id  AND SRC.sourceinstance= LKP.sourceinstance 
-  JOIN nypres_mdwdb.f_configuration_item TRGT 
+  JOIN nypres_mdwdb.f_configuration_item_c TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
 

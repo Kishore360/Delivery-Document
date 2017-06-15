@@ -9,8 +9,8 @@ join nypres_mdsdb.cmdb_ci_final ser on rel.child=ser.sys_id
 where typ.name = 'Uses::Used by'
 group by 1)src
 join 
-(select row_id,no_of_applications_c  from nypres_mdwdb.f_configuration_item) trgt
-on src.sys_id=tgrt.row_id 
+(select row_id,no_of_applications_c  from nypres_mdwdb.f_configuration_item_c) trgt
+on src.sys_id=trgt.row_id 
 where src.cnt <>trgt.no_of_applications_c
 
 
