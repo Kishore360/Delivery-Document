@@ -5,7 +5,7 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
 LEFT JOIN nypres_mdwdb.d_internal_organization LKP 
- ON ( concat('CATEGORY~INCIDENT~~~',upper(support_group))= LKP.row_id )
+ ON ( concat('GROUP~',upper(support_group))= LKP.row_id )
  WHERE COALESCE(LKP.row_key,CASE WHEN SRC.support_group IS NULL THEN 0 else -1 end)<> (TRGT.support_group_c_key) 
  
  

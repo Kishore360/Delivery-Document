@@ -7,7 +7,7 @@ join nypres_mdsdb.cmdb_ci_final ci on rel.parent=ci.sys_id
 group by 1)src
 join 
 (select row_id,No_of_downstream_relationships_c  from nypres_mdwdb.f_configuration_item_c) trgt
-on src.sys_id=trgt.row_id 
+on src.sys_id=trgt.row_id and src.sourceinstance=trgt.source_id
 where src.cnt <>trgt.No_of_downstream_relationships_c
 
 
