@@ -55,9 +55,9 @@ on (a11.closed_on_key=a17.row_key)
 join ldb.d_calendar_week       a111
 on (a17.week_start_date_key=a111.row_key)
 union
-select'ldb.d_incident_open_to_resolve_duration_agebucket_c' as Table_Name, count(a11.row_key) Row_Count
+select'ldb.d_lov_incident_open_to_resolve_duration_agebucket_c' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_incident_closed       a11 
-join ldb.d_incident_open_to_resolve_duration_agebucket_c       a112
+join ldb.d_lov_incident_open_to_resolve_duration_agebucket_c        a112
 on (a11.open_to_resolve_duration_bucket_c_key=a112.row_key)
 union
 select'ldb.d_internal_contact_assigned_to' as Table_Name, count(a11.row_key) Row_Count
@@ -126,9 +126,9 @@ select'ldb.d_incident_urgency' as Table_Name, count(a11.row_key) Row_Count
 join ldb.d_incident_urgency       a124
 on (a11.urgency_src_key=a124.row_key)
 union
-select'ldb.d_incident_outage_type_c' as Table_Name, count(a11.row_key) Row_Count
+select'ldb.d_lov_incident_outage_type_c ' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_incident_closed       a11 
-join ldb.d_incident_outage_type_c       a125
+join ldb.d_lov_incident_outage_type_c        a125
 on (a11.outage_type_c_key=a125.row_key)
 union
 select'ldb.d_parent_incident' as Table_Name, count(a11.row_key) Row_Count
