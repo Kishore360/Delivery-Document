@@ -1,7 +1,7 @@
 SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for f_change_request.work_start_on_key' ELSE 'SUCCESS' END as Message
  FROM  (
-select max(coalesce(convert_tz(tsla.u_true_breach_time,'GMT','America/Los_Angeles'),
+select max(coalesce(convert_tz(tsla.original_breach_time,'GMT','America/Los_Angeles'),
 convert_tz(tsla.planned_end_time,'GMT','America/Los_Angeles'))) AS BREACHED_TIME,inc.sys_id sys_id,
 inc.sourceinstance sourceinstance
 from   tivo_mdsdb.incident_final inc
