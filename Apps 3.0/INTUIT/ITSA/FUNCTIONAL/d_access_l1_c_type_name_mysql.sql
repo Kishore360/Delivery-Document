@@ -4,7 +4,7 @@ SELECT CASE
        END AS Result, 
        CASE 
          WHEN Count(1) > 0 THEN 
-         'MDS to DWH data validation failed for f_change_request.failure_flag' 
+         'MDS to DWH data validation failed for d_access_l1_c.type.name' 
          ELSE 'SUCCESS' 
        END AS Message 
 FROM     intuit_mdsdb.u_access_l1_final i 

@@ -8,7 +8,7 @@ select (A.src_count - B.tar_count ) As cnt from
 select a.sys_id,number from weillcornell_mdsdb.incident_final a left outer join weillcornell_mdsdb.sys_user_final b
 on b.sys_id=a.caller_id 
 left outer join weillcornell_mdsdb.cmdb_ci_final c on c.sys_id = a.u_business_service
-where (b.name ='Affected Guest' AND c.name='Online Directory')) )B) c
+where (b.user_name ='Guest' AND c.name='Online Directory')) )B) c
 
 
 

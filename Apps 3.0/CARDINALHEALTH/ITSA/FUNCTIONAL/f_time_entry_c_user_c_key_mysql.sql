@@ -3,7 +3,7 @@
  CASE WHEN CNT >0 THEN 'MDS to DWH data validation failed' ELSE 'SUCCESS' END as Message
  FROM (SELECT count(1) as CNT
  FROM cardinalhealth_mdsdb.time_card_final SRC 
- LEFT JOIN cardinalhealth_mdwdb.d_internal_organization LKP
+ LEFT JOIN cardinalhealth_mdwdb.d_internal_contact LKP
  on LKP.row_id = COALESCE(concat('INTERNAL_CONTACT~',SRC.user),'UNSPECIFIED') and LKP.source_id  = SRC.sourceinstance
  LEFT JOIN cardinalhealth_mdwdb.f_time_entry_c TRGT 
  ON (SRC.sys_id =TRGT.row_id  

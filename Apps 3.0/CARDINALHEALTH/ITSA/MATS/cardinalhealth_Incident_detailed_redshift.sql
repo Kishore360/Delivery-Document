@@ -33,10 +33,17 @@ from ldb.f_incident a11
 join ldb.d_assignment_group_level0_manager_c_relation a17 
 on (a11.assignment_group_key = a17.level0_assigment_group_key) 
 union
-select 'ldb.d_configuration_item a18 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_lov_configuration_item_install_status_c a1118 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11 
 join ldb.d_configuration_item a18 
 on (a11.configuration_item_key = a18.row_key) 
+join  ldb.d_lov_configuration_item_install_status_c a1118
+on a18.install_status_src_c_key=a1118.row_key
+union
+select 'ldb.d_configuration_item a18 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_incident a11 
+join ldb.d_configuration_item a18 
+on (a11.configuration_item_key = a18.row_key)
 union
 select 'ldb.d_calendar_date a19 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11 
