@@ -23,6 +23,8 @@ select count(1) as cnt from  nbcu_mdwdb.d_task a
                                 WHEN i.sys_class_name ='CHANGE_TASK' THEN CONVERT_TZ (i.closed_at,'GMT','America/New_York')
                                 WHEN i.sys_class_name ='RM_ENHANCEMENT' THEN CONVERT_TZ (sri.closed_at,'GMT','America/New_York')
                                 WHEN i.sys_class_name ='RM_DEFECT' THEN CONVERT_TZ (sri.closed_at,'GMT','America/New_York')
-        END)
+        END)a
+		
+		
 		
 		
