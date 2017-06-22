@@ -5,7 +5,7 @@
  FROM cardinalhealth_mdsdb.time_card_final SRC 
  JOIN cardinalhealth_mdwdb.d_calendar_date b ON SRC.week_starts_on = b.week_start_date
  LEFT JOIN cardinalhealth_mdwdb.f_time_entry_c TRGT 
- ON (SRC.sys_id =TRGT.row_id  
+ ON (concat(SRC.sys_id,'~',b.day_name) =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
 where CASE
 			 WHEN b.day_name='Sunday' THEN SRC.sunday
