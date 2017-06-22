@@ -1,11 +1,11 @@
 SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 CASE WHEN count(1) >0 THEN 'Failure' ELSE 'Data Matched' END as Message 
 from 
-(select ci.sys_id as CI,count(rel.parent)cnt 
+(select ser.sys_id as sys_id,count(rel.parent)cnt 
 from nypres_mdsdb.cmdb_rel_ci_final rel 
 join nypres_mdsdb.cmdb_rel_type_final typ on rel.type=typ.sys_id
 join nypres_mdsdb.cmdb_ci_final ci on rel.parent=ci.sys_id
-join nypres_mdsdb.cmdb_ci_final ser on rel.child=ser.sys_id
+join nypres_mdsdb.cmdb_ci_appl_final ser on rel.child=ser.sys_id
 where typ.name = 'Uses::Used by'
 group by 1)src
 join 
