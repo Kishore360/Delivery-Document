@@ -8,3 +8,5 @@ JOIN rambus_mdwdb.d_lov_map br ON f.state_src_key = br.src_key and br.dimension_
 join (select max(lastupdated) as last_updated,source_id from rambus_mdwdb.d_o_data_freshness group by 2) dat on f.source_id = dat.source_id
 where f.overdue_duration <> 
 (case when dat.last_updated > d.due_on then TIMESTAMPDIFF(SECOND,d.due_on,dat.last_updated) else 0 end) and f.soft_deleted_flag='N' )temp;
+
+

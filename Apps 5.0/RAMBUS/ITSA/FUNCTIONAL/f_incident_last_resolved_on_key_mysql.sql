@@ -3,25 +3,13 @@ SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
 ELSE 'Data Matched' END AS Message 
 FROM (
 select count(1) as cnt
+from rambus_mdwdb.f_incident f 
+JOIN rambus_mdwdb.d_lov_map lov_map 
+ON f.state_src_key = lov_map.src_key and f.state_src_code=lov_map.dimension_code 
+and lov_map.dimension_class in ('STATE~INCIDENT','STATE~ADHOC_REQ')
+AND lov_map.dimension_wh_code IN('RESOLVED','CLOSED')
+and f.last_resolved_on_key is null
+left join rambus_mdwdb.d_calendar_date cal on cal.row_id = DATE_FORMAT(f.changed_on,'%Y%m%d')
+where coalesce(f.closed_on_key,cal.row_key)<> f.last_resolved_on_key)a
 
 
-from rambus_mdwdb.f_incident AA 
-
-
-INNER JOIN rambus_mdsdb.incident_final BB 
-ON AA.row_id=BB.sys_id
-AND AA.source_id=BB.sourceinstance 
-
-
-INNER JOIN rambus_mdwdb.d_lov_map c
- ON c.dimension_class ='STATE~INCIDENT'
- AND BB.sourceinstance=c.source_id 
- AND c.dimension_code = BB.state 
-AND c.dimension_wh_code IN('RESOLVED','CLOSED')
-
-
-LEFT JOIN rambus_mdwdb.d_calendar_date d 
-ON d.row_id =  
-DATE_FORMAT (CONVERT_TZ (COALESCE(BB.resolved_at,sys_updated_on),'GMT','America/Los_Angeles'),'%Y%m%d')
-
-where AA.last_resolved_on_key <> COALESCE(d.row_key,coalesce(AA.closed_on_key,c.row_key))) a;
