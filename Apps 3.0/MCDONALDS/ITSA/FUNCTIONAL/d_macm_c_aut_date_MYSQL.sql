@@ -10,5 +10,5 @@ FROM mcdonalds_mdsdb.x_scafe_mcdcr_chan_mcdcr_change_request_final  SRC
 JOIN mcdonalds_mdwdb.d_macm_c TRGT 
 ON (SRC.SYS_ID=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id)
 WHERE 
-COALESCE(CONVERT_TZ(SRC.u_aut_date,'GMT','US/Central'),'UNSPECIFIED')<>TRGT.is_comp_date
+COALESCE(CONVERT_TZ(SRC.u_aut_date,'GMT','US/Central'),'UNSPECIFIED')<>TRGT.aut_date
 )a;
