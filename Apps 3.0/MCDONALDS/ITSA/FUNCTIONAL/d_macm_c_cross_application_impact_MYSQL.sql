@@ -9,7 +9,7 @@ FROM mcdonalds_mdsdb.x_scafe_mcdcr_chan_mcdcr_change_request_final SRC
 JOIN mcdonalds_mdwdb.d_macm_c TRGT 
 ON (SRC.SYS_ID=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id) 
 LEFT JOIN mcdonalds_mdwdb.d_lov LKP
-ON COALESCE(CONCAT('CROSS_APPLICATION_IMPACT~MACM','~',UPPER(SRC.u_cross_application_impact)),'UNSPECIFIED')=LKP.row_id
+ON COALESCE(CONCAT('CROSS_APPLICATION_IMPACT~MACM','~~~',UPPER(SRC.u_cross_application_impact)),'UNSPECIFIED')=LKP.row_id
 WHERE COALESCE(LKP.row_key, CASE WHEN SRC.u_cross_application_impact IS NULL THEN 0 ELSE -1 END) <> TRGT.cross_application_impact_src_key
 )a;
 

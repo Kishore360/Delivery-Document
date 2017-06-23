@@ -4,4 +4,4 @@ FROM mcdonalds_mdsdb.incident_final  SRC
 JOIN mcdonalds_mdwdb.d_incident TRGT 
 ON (SRC.sys_id = TRGT.row_id  
 AND SRC.sourceinstance = TRGT.source_id )  
-WHERE COALESCE( convert_tz(SRC.u_vendor_assigned_at , <<TENANT_SSI_TIME_ZONE>>,<<DW_TARGET_TIME_ZONE>> )) <> TRGT.vendor_assigned_at_c 
+WHERE COALESCE( convert_tz(SRC.u_vendor_assigned_at , 'GMT','US/Central')) <> TRGT.vendor_assigned_at_c 

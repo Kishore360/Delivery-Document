@@ -4,4 +4,4 @@ FROM mcdonalds_mdsdb.incident_final  SRC
 JOIN mcdonalds_mdwdb.d_incident TRGT 
 ON (SRC.sys_id = TRGT.row_id  
 AND SRC.sourceinstance = TRGT.source_id )  
-WHERE COALESCE( convert_tz(SRC.u_xerox_last_sync , <<TENANT_SSI_TIME_ZONE>>,<<DW_TARGET_TIME_ZONE>> )) <> TRGT.xerox_last_sync_c 
+WHERE COALESCE( convert_tz(SRC.u_xerox_last_sync , 'GMT','US/Central')) <> TRGT.xerox_last_sync_c 
