@@ -11,6 +11,6 @@ group by 1)src
 join 
 (select row_id,no_of_ci_registered_on_c  from  nypres_mdwdb.f_configuration_item_c) trgt
 on src.sys_id=trgt.row_id 
-where src.cnt =trgt.no_of_ci_registered_on_c
+where src.cnt <>trgt.no_of_ci_registered_on_c
 
 

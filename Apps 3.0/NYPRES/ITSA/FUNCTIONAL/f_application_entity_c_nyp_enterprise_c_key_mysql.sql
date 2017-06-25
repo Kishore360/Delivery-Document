@@ -8,7 +8,7 @@ CROSS JOIN
       (SELECT 0 AS N UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9) b
    ORDER BY n) n
 ON n.n <= 1 + (LENGTH(COALESCE(TRIM(inc.u_entities),'UNSPECIFIED')) - LENGTH(REPLACE(COALESCE(TRIM(inc.u_entities),'UNSPECIFIED'), ',', '')))
-left join nypres_mdwdb.d_nyp_enterprise_c t on  
+ join nypres_mdwdb.d_nyp_enterprise_c t on  
 COALESCE(SUBSTRING_INDEX(SUBSTRING_INDEX(TRIM(inc.u_entities), ',', n.n), ',', -1),'UNSPECIFIED')=t.row_id and inc.sourceinstance=t.source_id
 join nypres_mdwdb.d_configuration_item it
 on inc.sys_id=it.row_id and inc.sourceinstance=it.source_id
