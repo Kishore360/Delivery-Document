@@ -9,5 +9,5 @@ JOIN  svb_mdwdb.f_change_request  trgt
 on  trgt.ROW_ID = src.SYS_ID and src.sourceinstance=trgt.source_id
 join svb_mdwdb.d_lov lkp
 on COALESCE(CONCAT('APPROVAL','~','CHANGE_REQUEST','~','~','~',UPPER(src.APPROVAL)),'UNSPECIFIED')=lkp.row_id
-where  coalesce(lkp.row_key, case when src.APPROVAL is null then 0 else -1 end ) <>trgt.APPROVAL_src_key
+where  coalesce(lkp.row_key, case when src.APPROVAL is null then 0 else -1 end ) <>trgt.approval_state_src_key
  )c
