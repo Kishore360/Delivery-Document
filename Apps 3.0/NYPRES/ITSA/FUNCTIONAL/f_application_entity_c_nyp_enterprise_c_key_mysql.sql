@@ -14,6 +14,7 @@ join nypres_mdwdb.d_configuration_item it
 on inc.sys_id=it.row_id and inc.sourceinstance=it.source_id
 join  nypres_mdwdb.f_application_entity_c as c
                 on concat(inc.sys_id,'~',COALESCE(SUBSTRING_INDEX(SUBSTRING_INDEX(TRIM(inc.u_entities), ',', n.n), ',', -1),'UNSPECIFIED')) = c.row_id
+				and inc.sourceinstance=c.source_id
 where it.row_key <> c.configuration_item_key and c.nyp_enterprise_c_key <> t.row_key
 -- and u_entities in ('0daccdcf6f262100005eaf512e3ee45a,8d7c01436f662100005eaf512e3ee4fa')
 and c.soft_deleted_flag = 'N'
