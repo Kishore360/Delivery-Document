@@ -3,7 +3,7 @@ SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
 ELSE 'Data Matched' END AS Message 
 FROM (
 select count(1) as cnt 
-from wow_mdsdb.u_incident_task_final s
-left join wow_mdwdb.f_incident_task_c t
+from wow_mdsdb.u_cmts_final s
+left join wow_mdwdb.d_cmts_c t
 on s.sys_id=t.row_id and s.sourceinstance = t.source_id
-where CONVERT_TZ(s.sys_updated_on,'GMT','US/Central') <> t.changed_on) temp
+where s.name <> t.name) temp;
