@@ -176,3 +176,8 @@ join ldb.dh_employee_hierarchy         a15
 on (a12.row_current_key=a15.lev_0_key) 
 join ldb.dh_employee_level5         a127
 on (a15.lev_5_key=a127.row_key)
+union
+select'ldb.d_configuration_item_call_center_configuration_item_c' as Table_Name, count(a11.row_key) Row_Count
+ from  ldb.f_call             a11
+join ldb.d_configuration_item_call_center_configuration_item_c a1113
+on a11.configuration_item_c_key=a1113.row_key
