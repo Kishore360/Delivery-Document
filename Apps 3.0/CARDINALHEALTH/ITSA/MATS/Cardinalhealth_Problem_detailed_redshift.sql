@@ -232,4 +232,23 @@ on (a11.opened_on_key=a112.greogrian_calendar_key)
 join ldb.d_calendar_date_fiscal       a113	
 on (a112.fiscal_key=a113.row_key)	
 join ldb.d_calendar_fiscal_year       a125	
-on (a113.year_start_date_key=a125.row_key)	
+on (a113.year_start_date_key=a125.row_key)
+union	
+select'ldb.d_lov_problem_monitoring_c' as Table_Name, count(a11.row_key) Row_Count	
+ from  ldb.f_problem       a11 	
+join ldb.d_problem a12 on a11.problem_key=a12.row_key
+join ldb.d_lov_problem_monitoring_c       a112	
+on (a12.monitoring_src_c_key=a112.row_key)	
+union
+select'ldb.d_lov_problem_logging_c' as Table_Name, count(a11.row_key) Row_Count	
+ from  ldb.f_problem       a11 	
+join ldb.d_problem a12 on a11.problem_key=a12.row_key
+join ldb.d_lov_problem_logging_c       a1112	
+on (a12.logging_src_c_key=a1112.row_key)
+union
+
+select'ldb.d_lov_problem_rc_determined_c' as Table_Name, count(a11.row_key) Row_Count	
+ from  ldb.f_problem       a11 	
+join ldb.d_problem a12 on a11.problem_key=a12.row_key
+join ldb.d_lov_problem_rc_determined_c       a1102	
+on (a12.rc_determined_src_c_key=a1102.row_key)
