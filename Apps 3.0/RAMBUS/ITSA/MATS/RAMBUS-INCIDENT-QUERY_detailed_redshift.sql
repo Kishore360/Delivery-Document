@@ -136,7 +136,7 @@ union
 select 'ldb.d_adhoc_request_c a126 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11 
 join ldb.d_adhoc_request_c a126 
-on (a11.service_request_c_key = a126.row_key) 
+on (a11.adhoc_request_c_key = a126.row_key) 
 union
 select 'ldb.d_task_impact a127 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11 
@@ -153,9 +153,9 @@ from ldb.f_incident a11
 join ldb.d_task_priority a129 
 on (a11.priority_src_key = a129.row_key) 
 union
-select 'ldb.d_task_contacttype a130 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_incident_contacttype a130 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11 
-join ldb.d_task_contacttype a130 
+join ldb.d_incident_contacttype a130 
 on (a11.reported_type_src_key = a130.row_key) 
 union
 select 'ldb.d_task_urgency a131 ' as Table_name, count(a11.row_key) Row_Count

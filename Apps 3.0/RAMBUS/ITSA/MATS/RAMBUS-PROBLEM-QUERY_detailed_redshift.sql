@@ -78,9 +78,9 @@ select'ldb.d_task_priority' as Table_Name, count(a11.row_key) Row_Count
 join ldb.d_task_priority       a116
 on (a11.priority_src_key = a116.row_key)
 union
-select'ldb.d_task_contacttype' as Table_Name, count(a11.row_key) Row_Count
+select'ldb.d_problem_reported_type' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_problem       a11 
-join ldb.d_task_contacttype       a117
+join ldb.d_problem_reported_type       a117
 on (a11.reported_type_src_key = a117.row_key)
 union
 select'ldb.d_task_urgency' as Table_Name, count(a11.row_key) Row_Count
