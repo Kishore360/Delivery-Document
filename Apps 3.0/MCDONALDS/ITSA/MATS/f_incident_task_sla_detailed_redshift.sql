@@ -19,4 +19,8 @@ JOIN ldb.d_business_service b ON a.business_service_key=b.row_key
 UNION 
 SELECT 'd_calendar_date' as Table_Name,count(a.row_key) as Row_count
 FROM ldb.f_incident_task_sla a 
-JOIN ldb.d_calendar_date b ON a.last_resolved_on_key=b.row_key
+JOIN ldb.d_calendar_date b ON a.opened_on_key=b.row_key
+
+
+
+
