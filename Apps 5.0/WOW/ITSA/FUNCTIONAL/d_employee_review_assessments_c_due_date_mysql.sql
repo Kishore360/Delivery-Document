@@ -3,5 +3,5 @@ CASE WHEN count(1)  THEN 'MDS to DWH data validation failed for d_employee_revie
 FROM wow_mdwdb.d_employee_review_assessments_c trgt
 RIGHT JOIN wow_mdsdb.asmt_assessment_instance_final  src
 ON src.sys_id = trgt.row_id and src.sourceinstance = trgt.source_id
-where CONVERT_TZ(src.due_date,'GMT','US/Central') <> trgt.due_date
+where src.due_date <> trgt.due_date
 ;

@@ -8,5 +8,6 @@ left join wow_mdwdb.f_incident b
  on a.sys_id=b.row_id and a.sourceinstance=b.source_id 
   left join wow_mdwdb.d_lov c 
 on  CONCAT('CUSTOMER_IMPACTED~INCIDENT~~~',a.u_customer_impacted )=c.row_id and a.sourceinstance=c.source_id
+and a.opened_at between c.effective_from and c.effective_to
  where 
-c.row_key <> b.customer_impacted_c_key and  dimension_class = 'CUSTOMER_IMPACTED~INCIDENT')g
+c.row_key <> b.customer_impacted_c_key and  dimension_class = 'CUSTOMER_IMPACTED~INCIDENT')g;

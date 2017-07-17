@@ -9,5 +9,6 @@ select count(1) as cnt
 from wow_mdsdb.incident_final src
  join wow_mdwdb.d_incident trgt
  on src.sys_id=trgt.row_id and src.sourceinstance=trgt.source_id where
-trgt.from_rp_c <> src.u_from_rp)a
+   ( CASE WHEN src.u_from_rp then 'Y' else 'N' END) <>  (trgt.from_rp_c_flag ))temp;
+
 
