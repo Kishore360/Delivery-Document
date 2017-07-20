@@ -5,9 +5,5 @@
  join rambus_mdwdb.d_internal_organization TRGT 
  ON (s.sys_id =right(TRGT.row_id,32) 
  AND s.sourceinstance= TRGT.source_id  )
- WHERE coalesce(s.u_level_type,'UNSPECIFIED') <> (TRGT.level_type_c)
- 
- 
- 
- ;
+ WHERE coalesce(s.u_level_type,'UNSPECIFIED') <> (TRGT.level_type_c);
  
