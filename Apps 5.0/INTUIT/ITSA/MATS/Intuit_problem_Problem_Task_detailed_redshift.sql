@@ -88,7 +88,7 @@ union
 select 'ldb.d_problem_reported_type a118 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_problem_task a11 
 join ldb.d_problem_reported_type a118 
-on (a11.reported_type_src_key = a118.row_key) 
+on (a11.problem_reported_type_src_key = a118.row_key) 
 union
 select 'ldb.d_task_priority_problem_incident_c a119 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_problem_task a11 
@@ -123,7 +123,7 @@ union
 select 'ldb.d_problem_urgency a125 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_problem_task a11 
 join ldb.d_problem_urgency a125 
-on (a11.urgency_src_key = a125.row_key) 
+on (a11.problem_urgency_src_key = a125.row_key) 
 union
 select 'ldb.d_problem_state a126 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_problem_task a11 
