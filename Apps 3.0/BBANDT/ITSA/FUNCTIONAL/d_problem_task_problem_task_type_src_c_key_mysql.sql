@@ -5,7 +5,7 @@ ELSE 'Data Matched' END AS Message
 FROM (
 select count(1) as cnt
 from bbandt_mdsdb.problem_task_final s
-left join bbandt_mdwdb.d_problem_task t
+ join bbandt_mdwdb.d_problem_task t
 on s.sys_id=t.row_id and s.sourceinstance=t.source_id
 left join bbandt_mdwdb.d_lov l 
 on concat( 'TASK_TYPE_C~PROBLEM_TASK~~~',upper(s.u_problem_task_type))=l.row_id and 
