@@ -7,7 +7,7 @@ SELECT   trgt.row_id,ser.sys_id,COALESCE(lkp.row_key,CASE WHEN ser.cpu_manufactu
 -- count(1)
  FROM bbandt_mdwdb.d_configuration_item trgt
 -- RIGHT JOIN bbandt_mdsdb.cmdb_ci_final src on src.sys_id = trgt.row_id and src.sourceinstance = trgt.source_id
-LEFT JOIN bbandt_mdsdb.cmdb_ci_server_final ser 
+ JOIN bbandt_mdsdb.cmdb_ci_server_final ser 
 ON trgt.row_id = ser.sys_id AND trgt.source_id = ser.sourceinstance
 LEFT JOIN bbandt_mdwdb.d_internal_organization lkp
 ON COALESCE(CONCAT('SUBSIDIARY~',ser.cpu_manufacturer),'UNSPECIFIED') = lkp.row_id and ser.sourceinstance = lkp.source_id

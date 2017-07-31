@@ -1,7 +1,7 @@
 select 'ldb.f_change_request a11 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_change_request a11 
 union
-select 'ldb.d_internal_contact a12 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_change_request_change_outcome_c' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_change_request a11 
   join	ldb.d_change_request	a116
 	  on 	(a11.change_request_key = a116.row_key)
