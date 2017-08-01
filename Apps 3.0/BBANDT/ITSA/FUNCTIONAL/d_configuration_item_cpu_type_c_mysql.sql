@@ -7,7 +7,7 @@ coalesce(trgt.cpu_type_c,'0') , coalesce(ser.cpu_type,'0')
 FROM bbandt_mdwdb.d_configuration_item trgt
 right JOIN bbandt_mdsdb.cmdb_ci_server_final ser 
 ON trgt.row_id = ser.sys_id AND trgt.source_id = ser.sourceinstance
-WHERE coalesce((trgt.cpu_type_c),'0') <> coalesce(ser.cpu_type,'0');
+WHERE coalesce((trgt.cpu_type_c),'0') <> coalesce(ser.cpu_type,'0')
 
 ) a
 ;

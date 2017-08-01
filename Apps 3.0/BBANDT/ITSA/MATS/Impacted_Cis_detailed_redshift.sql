@@ -21,4 +21,4 @@ union
 select 'ldb.d_problem a15 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_task_ci_c a11 
 join ldb.d_problem a15 
-on (a11.problem_key = a15.row_key) table_name, 
+on (a11.problem_key = a15.row_key) 
