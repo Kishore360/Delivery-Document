@@ -7,4 +7,4 @@ CASE WHEN count(1)  THEN 'MDS to DWH data validation failed for d_configuration_
 FROM bbandt_mdwdb.d_configuration_item trgt
 RIGHT JOIN bbandt_mdsdb.cmdb_ci_server_final src
 on src.sys_id = trgt.row_id and src.sourceinstance = trgt.source_id
-WHERE coalesce(trgt.os_version_c   ,'UNSPECIFIED') <> coalesce(src.os_version,'UNSPECIFIED')
+WHERE trgt.soft_deleted_flag='N' and coalesce(trgt.os_version_c   ,'UNSPECIFIED') <> coalesce(src.os_version,'UNSPECIFIED')
