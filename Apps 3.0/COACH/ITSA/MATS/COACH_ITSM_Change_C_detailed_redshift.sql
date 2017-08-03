@@ -130,7 +130,7 @@ UNION
 SELECT 'd_business_service_used_for' as Table_Name, count(1) as Row_count 
 FROM ldb.f_change_request a 
 JOIN ldb.d_business_service b ON a.business_service_key=b.row_key
-JOIN ldb.d_business_service_used_for c ON b.used_for_src_key=b.row_key
+JOIN ldb.d_business_service_used_for c ON b.used_for_src_key=c.row_key
 UNION 
 SELECT 'd_calendar_date' as Table_Name, count(1) as Row_count 
 FROM ldb.f_change_request a 
