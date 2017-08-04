@@ -5,7 +5,7 @@ ELSE 'Data Matched' END AS Message
 FROM 
 (SELECT COUNT(1) AS CNT 
 FROM rambus_mdsdb.incident_final SRC 
-JOIN rambus_mdwdb.f_task_c TRGT ON (SRC.sys_id =TRGT.row_id  AND SRC.sourceinstance= TRGT.source_id)
+JOIN rambus_mdwdb.d_task TRGT ON (SRC.sys_id =TRGT.row_id  AND SRC.sourceinstance= TRGT.source_id)
 JOIN rambus_mdwdb.d_lov LKP ON 
 (CASE WHEN SRC.sys_class_name='INCIDENT' THEN
 COALESCE(CONCAT('STATE','~','INCIDENT','~','~','~',UPPER(SRC.state)),'UNSPECIFIED') END
