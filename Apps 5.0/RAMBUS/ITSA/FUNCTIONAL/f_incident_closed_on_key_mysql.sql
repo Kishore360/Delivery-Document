@@ -1,5 +1,7 @@
-SELECT CASE WHEN cnt THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
- CASE WHEN cnt THEN 'MDS to DWH data validation failed for f_incident.closed_on_key' ELSE 'SUCCESS' END as Message from (select count(1) cnt 
+SELECT 
+CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+ CASE WHEN cnt > 0 THEN 'MDS to DWH data validation failed for f_incident.closed_on_key' ELSE 'SUCCESS' END as Message 
+ from (select count(1) cnt 
  FROM rambus_mdsdb.incident_final SRC
   JOIN rambus_mdwdb.f_incident TRGT 
  ON (SRC.sys_id =TRGT.row_id  
