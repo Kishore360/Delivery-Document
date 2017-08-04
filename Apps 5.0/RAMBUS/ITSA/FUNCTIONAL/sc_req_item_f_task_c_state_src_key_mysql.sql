@@ -6,7 +6,7 @@ CASE WHEN CNT >0 THEN 'DATA did not Mactch.' ELSE 'DATA Matched' END AS MESSAGE
 FROM 
 (SELECT count(1) as CNT 
 FROM rambus_mdsdb.sc_req_item_final SRC
-JOIN rambus_mdwdb.f_task_c TRGT ON (SRC.sys_id =TRGT.row_id  AND SRC.sourceinstance= TRGT.source_id)
+JOIN rambus_mdwdb.d_task TRGT ON (SRC.sys_id =TRGT.row_id  AND SRC.sourceinstance= TRGT.source_id)
 JOIN rambus_mdwdb.d_lov LKP ON
 (CASE WHEN SRC.sys_class_name='SC_REQ_ITEM' THEN
 COALESCE( CONCAT('STATE','~','SC_REQ_ITEM','~','~','~',UPPER(SRC.state)),'UNSPECIFIED') END
