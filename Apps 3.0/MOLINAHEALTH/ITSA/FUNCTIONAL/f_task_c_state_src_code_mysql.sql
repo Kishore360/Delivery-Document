@@ -5,8 +5,6 @@ join
 molinahealth_mdwdb.f_task_c TRGT
 on SRC.sys_id=TRGT.row_id and SRC.sourceinstance=TRGT.source_id
 join
-molinahealth_mdsdb.sc_request_final sc on sc.sys_id=SRC.sys_id and sc.sourceinstance=SRC.sourceinstance 
-where   CASE 
-		WHEN SRC.sys_class_name ='sc_request' then sc.request_state 
-		else 
-	SRC.state end <>TRGT.state_src_code
+ molinahealth_mdsdb.sc_req_item_final sc on sc.sys_id=SRC.sys_id and sc.sourceinstance=SRC.sourceinstance 
+where    sc.state 
+	 <>TRGT.state_src_code

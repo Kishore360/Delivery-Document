@@ -7,11 +7,11 @@ from molinahealth_mdwdb.f_task_c a
  JOIN molinahealth_mdsdb.task_final src 
 ON a.row_id = src.sys_id
 AND a.source_id = src.sourceinstance
- join molinahealth_mdwdb.d_lov c
-on CONCAT('CONTACT_TYPE_C~TASK_FSS_C~~~',src.contact_type)=c.src_rowid
+ left join molinahealth_mdwdb.d_lov c
+on CONCAT('CONTACT_TYPE~TASK~~~',src.contact_type)=c.src_rowid
 where 
 COALESCE(c.row_key,CASE WHEN src.contact_type IS NULL THEN 0 else -1 end)
-<>a.contact_type_src_key
+<>a.contact_type_c_key
 )a;
 
 

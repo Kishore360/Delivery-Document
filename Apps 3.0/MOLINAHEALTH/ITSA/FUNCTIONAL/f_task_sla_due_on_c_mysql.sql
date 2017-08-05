@@ -8,6 +8,6 @@ FROM
 molinahealth_mdsdb.task_sla_final tsd
 JOIN molinahealth_mdwdb.f_task_sla stg
 ON stg.row_id = tsd.sys_id AND stg.source_id = tsd.sourceinstance
-where stg.due_on_c <> convert_tz(tsd.Planned_end_time,'GMT','America/Los_Angeles')
+where stg.due_on <> convert_tz(tsd.Planned_end_time,'GMT','America/Los_Angeles')
 
 

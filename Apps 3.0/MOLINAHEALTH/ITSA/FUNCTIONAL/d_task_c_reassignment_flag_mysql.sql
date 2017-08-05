@@ -3,7 +3,7 @@ SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
 ELSE 'Data Matched' END AS Message 
 FROM (
 select count(1) as cnt
-from molinahealth_mdwdb.d_task_c stg 
+from molinahealth_mdwdb.d_task stg 
 JOIN molinahealth_mdsdb.task_final src ON src.sys_id=stg.row_id 
 	AND src.sourceinstance=stg.source_id
 where CASE
