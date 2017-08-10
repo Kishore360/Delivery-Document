@@ -140,3 +140,7 @@ join ldb.d_calendar_date a15
 on (a11.start_on_key = a15.row_key) 
 join ldb.d_calendar_year a125 
 on (a15.year_start_date_key = a125.row_key) 
+UNION 
+select 'ldb.d_software_c a11 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_incident_outage a11 
+JOIN ldb.d_software_c b ON a11.archer_id_c_key=b.row_key
