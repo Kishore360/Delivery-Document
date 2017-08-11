@@ -1,3 +1,5 @@
+
+
 select 'ldb.f_task_ci_c a11 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_task_ci_c a11 
 union

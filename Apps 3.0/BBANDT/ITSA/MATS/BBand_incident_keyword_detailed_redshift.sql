@@ -1,3 +1,4 @@
+
 select 'ldb.f_incident_keyword a11 ' as Table_name, count(a11.table_row_key) Row_Count
 from ldb.f_incident_keyword a11 
 union
@@ -118,8 +119,7 @@ join ldb.d_incident_close_code a123
 on (a12.close_code_src_key = a123.row_key) 
 union
 select 'ldb.d_incident_severity a124 ' as Table_name, count(a12.table_row_key) Row_Count
-from 
- ldb.f_incident_keyword a12 
+from ldb.f_incident_keyword a12 
 join ldb.d_incident_severity a124 
 on (a12.severity_src_key = a124.row_key) 
 union
