@@ -4,7 +4,7 @@ ELSE 'Data Matched' END AS Message
 FROM (
 select count(1) as cnt 
 from rambus_mdsdb.task_final a
- join rambus_mdwdb.f_task_c c 
+ join rambus_mdwdb.f_task c 
 on  a.sys_id = c.ROW_ID and a.sourceinstance=c.source_id
  JOIN rambus_mdwdb.d_internal_contact LKP 
  ON   CONCAT('INTERNAL_CONTACT~',a.closed_by) = LKP.row_id 
