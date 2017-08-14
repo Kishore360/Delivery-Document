@@ -72,7 +72,7 @@ from  ldb.f_incident_closed a11
 JOIN ldb.d_incident b ON a11.incident_key=b.row_key  
 join ldb.d_lov_incident_cause_code_c  a12  on (b.cause_code_c_key=a12.row_key)
 UNION 
-SELECT 'ldb.d_incident_cause_code_c' AS Table_Name, count(a11.row_key) as Row_count
+SELECT 'ldb.d_incident_close_code' AS Table_Name, count(a11.row_key) as Row_count
 FROM ldb.f_incident_closed a11
 JOIN ldb.d_incident b ON a11.incident_key=b.row_key
 JOIN ldb.d_incident_close_code c ON b.close_code_src_key=b.row_key
