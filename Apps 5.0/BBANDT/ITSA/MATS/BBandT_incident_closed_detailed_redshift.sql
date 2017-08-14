@@ -75,7 +75,7 @@ UNION
 SELECT 'ldb.d_incident_close_code' AS Table_Name, count(a11.row_key) as Row_count
 FROM ldb.f_incident_closed a11
 JOIN ldb.d_incident b ON a11.incident_key=b.row_key
-JOIN ldb.d_incident_close_code c ON b.close_code_src_key=b.row_key
+JOIN ldb.d_incident_close_code c ON b.close_code_src_key=c.row_key
 UNION 
 select 'ldb.d_incident_category' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_incident_closed a11  
