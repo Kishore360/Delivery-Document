@@ -81,9 +81,9 @@ on (a11.opened_time_key = a15.row_key)
 join ldb.d_calendar_time_hour a116 
 on (a15.hour_24_format_num = a116.hour_24_format_num) 
 union
-select 'ldb.d_task_impact a117 ' as Table_name, count(a11.table_row_key) Row_Count
+select 'ldb.d_incident_impact a117 ' as Table_name, count(a11.table_row_key) Row_Count
 from ldb.f_incident_keyword a11 
-join ldb.d_task_impact a117 
+join ldb.d_incident_impact a117 
 on (a11.impact_src_key = a117.row_key) 
 union
 select 'ldb.d_location a118 ' as Table_name, count(a11.table_row_key) Row_Count
@@ -91,19 +91,19 @@ from ldb.f_incident_keyword a11
 join ldb.d_location a118 
 on (a11.location_key = a118.row_key) 
 union
-select 'ldb.d_task_priority a119 ' as Table_name, count(a11.table_row_key) Row_Count
+select 'ldb.d_incident_priority a119 ' as Table_name, count(a11.table_row_key) Row_Count
 from ldb.f_incident_keyword a11 
-join ldb.d_task_priority a119 
+join ldb.d_incident_priority a119 
 on (a11.priority_src_key = a119.row_key) 
 union
-select 'ldb.d_task_contacttype a120 ' as Table_name, count(a11.table_row_key) Row_Count
+select 'ldb.d_incident_contacttype a120 ' as Table_name, count(a11.table_row_key) Row_Count
 from ldb.f_incident_keyword a11 
-join ldb.d_task_contacttype a120 
+join ldb.d_incident_contacttype a120 
 on (a11.reported_type_src_key = a120.row_key) 
 union
-select 'ldb.d_task_urgency a121 ' as Table_name, count(a11.table_row_key) Row_Count
+select 'ldb.d_incident_urgency a121 ' as Table_name, count(a11.table_row_key) Row_Count
 from ldb.f_incident_keyword a11 
-join ldb.d_task_urgency a121 
+join ldb.d_incident_urgency a121 
 on (a11.urgency_src_key = a121.row_key) 
 union
 select 'ldb.d_incident_category a122 ' as Table_name, count(a12.table_row_key) Row_Count

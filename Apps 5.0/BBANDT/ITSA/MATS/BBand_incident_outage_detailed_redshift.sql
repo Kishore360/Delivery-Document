@@ -51,24 +51,24 @@ from ldb.f_incident_outage a11
 join ldb.d_configuration_item_incident a111 
 on (a11.incident_configuration_item_key = a111.row_key) 
 union
-select 'ldb.d_task_impact a112 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_incident_impact a112 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident_outage a11 
-join ldb.d_task_impact a112 
+join ldb.d_incident_impact a112 
 on (a11.impact_src_key = a112.row_key) 
 union
-select 'ldb.d_task_priority a113 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_incident_priority a113 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident_outage a11 
-join ldb.d_task_priority a113 
+join ldb.d_incident_priority a113 
 on (a11.priority_src_key = a113.row_key) 
 union
-select 'ldb.d_task_contacttype a114 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_incident_contacttype a114 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident_outage a11 
-join ldb.d_task_contacttype a114 
+join ldb.d_incident_contacttype a114 
 on (a11.reported_type_src_key = a114.row_key) 
 union
-select 'ldb.d_task_urgency a115 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_incident_urgency a115 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident_outage a11 
-join ldb.d_task_urgency a115 
+join ldb.d_incident_urgency a115 
 on (a11.urgency_src_key = a115.row_key) 
 union
 select 'ldb.d_application_tier a116 ' as Table_name, count(a11.row_key) Row_Count
