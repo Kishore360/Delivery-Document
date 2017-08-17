@@ -1,26 +1,12 @@
-
-SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
-,
-CASE WHEN cnt > 0 THEN 'Data did not Match.' 
-ELSE 'Data Matched' END AS Message 
-
+SELECT 
+CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result,
+CASE WHEN cnt > 0 THEN 'Data did not Match.' ELSE 'Data Matched' END AS Message 
 from(
-
-select count(1) as cnt 
-from 
-(select sys_id,sourceinstance,u_business_service from rambus_mdsdb.incident_final
-
-union all
-
-select sys_id,sourceinstance,u_business_service from rambus_mdsdb.u_ad_hoc_request_final) a
- 
-inner join rambus_mdwdb.f_incident c on a.sys_id = c.row_id 
-and a.sourceinstance = c.source_id
-
-left outer join rambus_mdwdb.d_configuration_item b
-
-on b.row_id=coalesce(a.u_business_service,'UNSPECIFIED')
-
-and b.source_id=case when a.u_business_service is null then b.source_id else a.sourceinstance end
-
-where  c.business_service_c_key<>coalesce(b.row_key)) z;
+SELECT count(1) as CNT
+FROM rambus_mdsdb.incident_final a 
+JOIN rambus_mdwdb.f_incident b ON a.sys_id =b.row_id  and a.sourceinstance=b.source_id
+JOIN rambus_mdwdb.d_configuration_item c ON COALESCE(a.u_business_service,'UNSPECIFIED')=c.row_id and a.sourceinstance=c.source_id
+WHERE 
+b.soft_deleted_flag='N' and 
+COALESCE(c.row_key,CASE WHEN a.u_business_service IS NULL THEN 0 ELSE -1 END)<>b.business_service_c_key 
+) z;

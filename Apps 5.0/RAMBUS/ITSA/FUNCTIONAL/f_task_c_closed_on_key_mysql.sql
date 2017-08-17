@@ -1,7 +1,7 @@
 SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for f_problem_task.closed_on_key' ELSE 'SUCCESS' END as Message
  FROM rambus_mdsdb.task_final SRC
-  JOIN rambus_mdwdb.f_task_c TRGT 
+  JOIN rambus_mdwdb.f_task TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
 JOIN rambus_mdwdb.d_lov_map dlm 

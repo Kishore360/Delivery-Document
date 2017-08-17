@@ -6,10 +6,12 @@ from  ldb.f_asset a11
 join ldb.d_asset a12
 on (a11.asset_key=a12.row_key)
 union
-select 'ldb.d_asset_class' as Table_Name, count(a11.row_key) Row_Count
+select 'ldb.d_asset_class' as Table_Name, count(a13.row_key) Row_Count
 from  ldb.f_asset a11 
-join ldb.d_asset_class a12
-on (a11.asset_class_key=a12.row_key)
+join ldb.d_asset a12
+on (a11.asset_key=a12.row_key)
+join ldb.d_asset_class a13
+on (a12.asset_class_key=a13.row_key)
 union
 select 'ldb.d_calendar_date' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_asset a11 

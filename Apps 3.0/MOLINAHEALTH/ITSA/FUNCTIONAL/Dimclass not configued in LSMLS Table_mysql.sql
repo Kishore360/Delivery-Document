@@ -11,7 +11,7 @@ select distinct dimension_class,source_id
 from molinahealth_mdwdb.d_lov lov where  source_id=2 and dimension_class 
 not in (select class_value from molinahealth_workdb.lsm_ls_system_variables where enable_flag='Y'  )  and dimension_class 
  like '%~%' and  (dimension_class NOT LIKE '%GEO%') and dimension_class not in (
-
+ 'NAME~TASK_SLA',
 'ASSET',
 'ASSET_AGE',
 'CITY~GEO',
