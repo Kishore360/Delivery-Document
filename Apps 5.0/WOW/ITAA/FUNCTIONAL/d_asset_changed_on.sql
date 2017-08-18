@@ -4,4 +4,4 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  LEFT JOIN wow_mdwdb.d_asset TRGT 
  ON (concat('ASSET~',SRC.sys_id)=TRGT.row_id 
  AND SRC.sourceinstance=TRGT.source_id )
- WHERE CONVERT_TZ(SRC.sys_updated_on,'GMT','MST')<> TRGT.changed_on;
+ WHERE CONVERT_TZ(SRC.sys_updated_on,'GMT','US/Central')<> TRGT.changed_on;
