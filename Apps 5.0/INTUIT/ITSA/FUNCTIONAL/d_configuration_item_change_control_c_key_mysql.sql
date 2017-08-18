@@ -1,19 +1,17 @@
-SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
-,CASE WHEN cnt > 0 THEN 'Data did not Match.' 
-ELSE 'Data Matched' END AS Message 
-FROM (
-select count(1) as cnt 
-from 
-(
-select d.change_control_c_key,
-COALESCE((CASE WHEN COALESCE(CONCAT('GROUP~',i.change_control),'UNSPECIFIED') = 'UNSPECIFIED'
-						THEN 0
-						ELSE (
- (j.row_key) 	)	END	), -1) AS change_control_key 
-FROM intuit_mdsdb.cmdb_ci_appl_final i 
-left join intuit_mdwdb.d_internal_organization  j
-on j.row_id =COALESCE(CONCAT('GROUP~',i.change_control),'UNSPECIFIED') AND i.sourceinstance=j.source_id
-left join intuit_mdwdb.d_configuration_item d on i.sys_id=d.row_id AND i.sourceinstance=d.source_id
-)a
-where a.change_control_c_key<>COALESCE(a.change_control_key,0)
-)temp
+SELECT CASE 
+         WHEN Count(1) > 0 THEN 'FAILURE' 
+         ELSE 'SUCCESS' 
+       END AS Result, 
+       CASE 
+         WHEN Count(1) > 0 THEN 
+         'MDS to DWH data validation failed for f_change_request.failure_flag' 
+         ELSE 'SUCCESS' 
+       END AS Message 
+FROM     
+intuit_mdwdb.d_configuration_item a
+JOIN intuit_mdsdb.cmdb_ci_final b ON a.row_id =b.sys_id
+ AND a.source_id=b.sourceinstance
+join intuit_mdwdb.d_application d
+	on COALESCE(concat('APPLICATION~',b.sys_id) ,'UNSPECIFIED') = d.row_id
+	where
+coalesce(d.row_key,case when b.sys_id is null then 0 else -1 end )<>a.change_control_c_key 
