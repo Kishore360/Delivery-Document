@@ -5,5 +5,5 @@ CASE WHEN CNT > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  from 
 <<tenant>>_mdsdb.task_sla_final task_sla 
 join <<tenant>>_mdwdb.f_task_sla a on a.row_id=task_sla.sys_id and a.source_id=task_sla.sourceinstance
-where (task_sla.start_time) <>a.start_on)temp; 
+where CONVERT_TZ(task_sla.start_time,<<TENANT_SSI_TIME_ZONE>>,<<DW_TARGET_TIME_ZONE>>) <>a.start_on)temp; 
 

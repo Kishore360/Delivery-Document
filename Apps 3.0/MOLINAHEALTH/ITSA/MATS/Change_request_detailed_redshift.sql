@@ -59,3 +59,8 @@ select'f_change_request' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_change_request             a11 
 				    join          ldb.d_change_request_change_c	               a122
                   on          (a11.change_c_key = a122.row_key)
+				  union
+				   select'ldb.d_internal_contact_vp_approver_c' as Table_Name, count(a11.row_key) Row_Count
+ from  ldb.f_change_request             a11 
+				    join          ldb.d_internal_contact_vp_approver_c	               a122
+                  on          (a11.vp_approver_c_key = a122.row_key)
