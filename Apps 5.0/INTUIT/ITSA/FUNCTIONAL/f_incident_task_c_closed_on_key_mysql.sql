@@ -11,4 +11,4 @@ LEFT JOIN intuit_mdwdb.d_lov_map L
 left join intuit_mdwdb.d_calendar_date lkp
 on lkp.row_id = COALESCE(DATE_FORMAT(CONVERT_TZ(s.closed_at,'GMT' ,'America/Los_Angeles'),'%Y%m%d'),'UNSPECIFIED')
 
-WHERE case when L.dimension_wh_code = 'CLOSED' then (lkp.row_key) else null end = t.closed_on_key) temp
+WHERE case when L.dimension_wh_code = 'CLOSED' then (lkp.row_key) else null end <>t.closed_on_key) temp

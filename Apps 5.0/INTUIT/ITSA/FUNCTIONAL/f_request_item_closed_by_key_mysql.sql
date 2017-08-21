@@ -17,4 +17,4 @@ CONVERT_TZ (coalesce(SRC.closed_at,SRC.sys_updated_on),"GMT","America/Los_Angele
 BETWEEN LKP.effective_from AND LKP.effective_to
 
 )
- WHERE TRGT.soft_deleted_flag ='N' and case when p.dimension_wh_code = 'CLOSED' then (lkp.row_key) else null end <> (TRGT.closed_by_key);
+ WHERE TRGT.soft_deleted_flag ='N' and case when p.dimension_wh_code = 'CLOSED' then (LKP.row_key) else null end <> (TRGT.closed_by_key);
