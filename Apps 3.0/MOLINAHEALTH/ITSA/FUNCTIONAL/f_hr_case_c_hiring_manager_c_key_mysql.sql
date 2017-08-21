@@ -13,14 +13,16 @@ else 'Success. All warehouse records are matching with source.' end Result
 
 from  
 (select   
-case when src.caller_id is not null and lkp.row_id is null then concat(src.record_id,' || ',src.caller_id) else '' end as warnings,
+case when src.jn1 is not null and lkp.row_id is null then concat(src.record_id,' || ',coalesce(src.caller_id_2,src.caller_id)) else '' end as warnings,
 
-case when src.caller_id is not null and lkp.row_id is null then 1 else 0 end as warnings_cnt,
+case when src.jn1 is not null and lkp.row_id is null then 1 else 0 end as warnings_cnt,
 
-case when COALESCE(lkp.row_key,CASE WHEN src.caller_id IS NULL THEN 0 else -1 end) <> COALESCE(trgt.hiring_manager_c_key,0)  then src.record_id else '' end as failures,
+case when COALESCE(lkp.row_key,CASE WHEN src.jn1 IS NULL THEN 0 else -1 end) <> COALESCE(trgt.hiring_manager_c_key,0)  then src.record_id else '' end as failures,
 
-case when COALESCE(lkp.row_key,CASE WHEN src.caller_id IS NULL THEN 0 else -1 end) <> COALESCE(trgt.hiring_manager_c_key,0) then 1 else 0 end as failures_cnt
+case when COALESCE(lkp.row_key,CASE WHEN src.jn1 IS NULL THEN 0 else -1 end) <> COALESCE(trgt.hiring_manager_c_key,0) then 1 else 0 end as failures_cnt
  
-from molinahealth_mdsdb.u_hr_case_ext_final src 
-left join molinahealth_mdwdb.f_hr_case_c trgt on src.record_id = trgt.row_id and src.sourceinstance = trgt.source_id
-left join molinahealth_mdwdb.d_internal_contact lkp on src.caller_id =  right(lkp.row_id,32) and src.sourceinstance = lkp.source_id)fnl;
+from ( select *,coalesce(caller_id_2,caller_id) as jn1 from molinahealth_mdsdb.u_hr_case_ext_final) src 
+join molinahealth_mdwdb.f_hr_case_c trgt on src.record_id = trgt.row_id and src.sourceinstance = trgt.source_id
+left join (select *,right(row_id,32) as jn2 from  molinahealth_mdwdb.d_internal_contact) lkp on src.jn1 = lkp.jn2  and src.sourceinstance = lkp.source_id
+
+)fnl;
