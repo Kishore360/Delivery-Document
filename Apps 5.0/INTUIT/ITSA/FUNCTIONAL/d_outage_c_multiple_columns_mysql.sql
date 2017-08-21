@@ -4,7 +4,7 @@
        END AS Result, 
        CASE 
          WHEN Count(1) > 0 THEN 
-         'MDS to DWH data validation failed for f_change_request.failure_flag' 
+         'MDS to DWH data validation failed for d_outage.multiple_columns' 
          ELSE 'SUCCESS' 
        END AS Message 
 from intuit_mdsdb.cmdb_ci_outage_final src

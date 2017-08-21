@@ -26,18 +26,11 @@ from ldb.f_task a11
 join ldb.d_configuration_item a17 
 on (a11.configuration_item_key = a17.row_key) 
 union
-select 'ldb.d_task_impact a18 ' as Table_name, count(a11.task_key) Row_Count
+select 'ldb.d_lov_task_priority_c a110 ' as Table_name, count(a11.task_key) Row_Count
 from ldb.f_task a11 
 join ldb.d_task a13 
 on (a11.task_key = a13.row_key) 
-join ldb.d_task_impact a18 
-on (a13.impact_src_key = a18.row_key) 
-union
-select 'ldb.d_task_priority a110 ' as Table_name, count(a11.task_key) Row_Count
-from ldb.f_task a11 
-join ldb.d_task a13 
-on (a11.task_key = a13.row_key) 
-join ldb.d_task_priority a110 
+join ldb.d_lov_task_priority_c a110 
 on (a13.priority_src_key = a110.row_key) 
 union
 select 'ldb.d_lov_task_state_c  a111 ' as Table_name, count(a11.task_key) Row_Count
@@ -46,13 +39,6 @@ join ldb.d_task a13
 on (a11.task_key = a13.row_key) 
 join ldb.d_lov_task_state_c  a111 
 on (a13.state_src_key = a111.row_key) 
-union
-select 'ldb.d_task_urgency a112 ' as Table_name, count(a11.task_key) Row_Count
-from ldb.f_task a11 
-join ldb.d_task a13 
-on (a11.task_key = a13.row_key) 
-join ldb.d_task_urgency a112 
-on (a13.urgency_src_key = a112.row_key) 
 union
 select 'ldb.d_calendar_month a114 ' as Table_name, count(a11.task_key) Row_Count
 from ldb.f_task a11 

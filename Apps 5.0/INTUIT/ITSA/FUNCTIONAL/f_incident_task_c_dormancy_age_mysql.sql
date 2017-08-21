@@ -8,5 +8,5 @@ left join intuit_mdwdb.f_incident_task_c f
 on s.sys_id=f.row_id and s.sourceinstance = f.source_id 
 JOIN   intuit_mdwdb.d_lov_map br 
 ON  f.state_src_key = br.src_key   AND br.dimension_wh_code = 'OPEN' 
-WHERE DATEDIFF((SELECT MAX(lastupdated) AS lastupdated
+WHERE timestampdiff(second, (SELECT MAX(lastupdated) AS lastupdated
 FROM intuit_mdwdb.d_o_data_freshness WHERE sourcename like 'ServiceNow%'),f.changed_on)<>f.dormancy_age ) temp
