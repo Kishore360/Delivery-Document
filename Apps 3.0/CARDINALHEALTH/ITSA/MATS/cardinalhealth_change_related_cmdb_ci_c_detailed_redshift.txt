@@ -33,15 +33,15 @@ from ldb.f_change_rel_cmdb_ci_c a11
 join ldb.d_change_request a17 
 on (a11.chg_change_request_key = a17.row_key) 
 union
-select 'ldb.d_internal_organization_group a18 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_configuration_item_change_rel_cmdb_ci_configuration_item_c a18 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_change_rel_cmdb_ci_c a11 
-join ldb.d_internal_organization_group a18 
-on (a11.assignment_group_key = a18.row_key) 
+join ldb.d_configuration_item_change_rel_cmdb_ci_configuration_item_c a18 
+on (a11.configuration_item_c_key = a18.row_key) 
 union
-select 'ldb.d_configuration_item_change_rel_cmdb_ci_configuration_item_c a19 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_internal_organization_group a19 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_change_rel_cmdb_ci_c a11 
-join ldb.d_configuration_item_change_rel_cmdb_ci_configuration_item_c a19 
-on (a11.configuration_item_c_key = a19.row_key) 
+join ldb.d_internal_organization_group a19 
+on (a11.assignment_group_key = a19.row_key) 
 union
 select 'ldb.d_change_request_state a110 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_change_rel_cmdb_ci_c a11 
@@ -108,16 +108,44 @@ on (a11.configuration_item_key = a16.row_key)
 join ldb.d_internal_contact_ci_vp_c a119 
 on (a16.vp_c_key = a119.row_key) 
 union
-select 'ldb.d_internal_contact_level_5_c a120 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_internal_contact_affected_cat_representative_c a120 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_change_rel_cmdb_ci_c a11 
-join ldb.d_configuration_item a16 
-on (a11.configuration_item_key = a16.row_key) 
-join ldb.d_internal_contact_level_5_c a120 
-on (a16.cah_level_5_c_key = a120.row_key) 
+join ldb.d_configuration_item_change_rel_cmdb_ci_configuration_item_c a18 
+on (a11.configuration_item_c_key = a18.row_key) 
+join ldb.d_internal_contact_affected_cat_representative_c a120 
+on (a18.cat_representative_c_key = a120.row_key) 
 union
-select 'ldb.d_schedule_configuration_item_maintenance_schedule_c a121 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_internal_contact_affected_director_c a121 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_change_rel_cmdb_ci_c a11 
+join ldb.d_configuration_item_change_rel_cmdb_ci_configuration_item_c a18 
+on (a11.configuration_item_c_key = a18.row_key) 
+join ldb.d_internal_contact_affected_director_c a121 
+on (a18.director_c_key = a121.row_key) 
+union
+select 'ldb.d_internal_contact_affected_manager_c a122 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_change_rel_cmdb_ci_c a11 
+join ldb.d_configuration_item_change_rel_cmdb_ci_configuration_item_c a18 
+on (a11.configuration_item_c_key = a18.row_key) 
+join ldb.d_internal_contact_affected_manager_c a122 
+on (a18.manager_c_key = a122.row_key) 
+union
+select 'ldb.d_internal_contact_affected_vp_c a123 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_change_rel_cmdb_ci_c a11 
+join ldb.d_configuration_item_change_rel_cmdb_ci_configuration_item_c a18 
+on (a11.configuration_item_c_key = a18.row_key) 
+join ldb.d_internal_contact_affected_vp_c a123 
+on (a18.vp_c_key = a123.row_key) 
+union
+select 'ldb.d_internal_contact_level_5_c a124 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_change_rel_cmdb_ci_c a11 
 join ldb.d_configuration_item a16 
 on (a11.configuration_item_key = a16.row_key) 
-join ldb.d_schedule_configuration_item_maintenance_schedule_c a121 
-on (a16.maintenance_schedule_c_key = a121.row_key) 
+join ldb.d_internal_contact_level_5_c a124 
+on (a16.cah_level_5_c_key = a124.row_key) 
+union
+select 'ldb.d_schedule_configuration_item_maintenance_schedule_c a125 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_change_rel_cmdb_ci_c a11 
+join ldb.d_configuration_item a16 
+on (a11.configuration_item_key = a16.row_key) 
+join ldb.d_schedule_configuration_item_maintenance_schedule_c a125 
+on (a16.maintenance_schedule_c_key = a125.row_key) 
