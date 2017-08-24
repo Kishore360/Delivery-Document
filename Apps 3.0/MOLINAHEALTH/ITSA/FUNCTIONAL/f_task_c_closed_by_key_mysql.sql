@@ -8,11 +8,6 @@ from molinahealth_mdsdb.task_final a
 on  a.sys_id = c.ROW_ID and a.sourceinstance=c.source_id
  JOIN molinahealth_mdwdb.d_internal_contact LKP 
  ON   CONCAT('INTERNAL_CONTACT~',a.closed_by) = LKP.row_id 
-AND a.sourceinstance= LKP.source_id 
+AND a.sourceinstance= LKP.source_id  AND c.pivot_date between LKP.effective_from and LKP.effective_to
  WHERE COALESCE(LKP.row_key, CASE WHEN a.closed_by  IS NULL THEN 0 else -1 end)
 <> c.closed_by_key)g
-
-
-
-
-

@@ -6,7 +6,7 @@ select count(1) as cnt
 from molinahealth_mdsdb.task_final a
 left JOIN  molinahealth_mdwdb.f_task_c b
 ON a.sys_id =b.row_id AND a.sourceinstance= b.source_id 
-where a.reassignment_count<>b.reassignment_count_c )c
+where a.reassignment_count<>b.reassignment_count )c
 
 
 

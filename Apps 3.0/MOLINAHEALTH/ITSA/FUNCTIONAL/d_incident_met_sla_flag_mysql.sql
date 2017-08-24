@@ -1,26 +1,24 @@
 SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
- CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for f_incident.state_src_key' ELSE 'SUCCESS' END as Message from (
- select 
-case when timestampdiff(second,opened_at,coalesce(resolved_at,closed_at))>=coalesce(LKP.lower_range_value,-99) AND timestampdiff(second,opened_at,coalesce(resolved_at,closed_at))<=coalesce(LKP.upper_range_value,-99) 
- and  LKP.dimension_code='Sev1' then  'Y'
-when timestampdiff(second,opened_at,coalesce(resolved_at,closed_at))>=coalesce(LKP.lower_range_value,-99) AND timestampdiff(second,opened_at,coalesce(resolved_at,closed_at))<=coalesce(LKP.upper_range_value,-99) 
-AND LKP.dimension_code='Sev2' then  'Y'
-when timestampdiff(second,opened_at,coalesce(resolved_at,closed_at))>=coalesce(LKP.lower_range_value,-99) AND timestampdiff(second,opened_at,coalesce(resolved_at,closed_at))<=coalesce(LKP.upper_range_value,-99) 
- AND  LKP.dimension_code='Sev3' then  'Y'
-when timestampdiff(second,opened_at,coalesce(resolved_at,closed_at))>=coalesce(LKP.lower_range_value,-99) AND timestampdiff(second,opened_at,coalesce(resolved_at,closed_at))<=coalesce(LKP.upper_range_value,-99) 
- and  LKP.dimension_code='Sev4' then  'Y'
-when timestampdiff(second,opened_at,coalesce(resolved_at,closed_at))>=coalesce(LKP.lower_range_value,-99) AND timestampdiff(second,opened_at,coalesce(resolved_at,closed_at))<=coalesce(LKP.upper_range_value,-99) 
- and  LKP.dimension_code='Sev5' then  'Y'
-else 'N' end met_sla_flag_src, met_sla_flag
-
-FROM molinahealth_mdsdb.incident_final SRC
-LEFT JOIN molinahealth_mdwdb.d_lov_map LKP_MAP 
- ON LKP_MAP.src_rowid=CONCAT('PRIORITY~TASK~~~',SRC.priority)
-LEFT JOIN molinahealth_mdwdb.d_lov LKP 
-ON LKP.dimension_code=LKP_MAP.dimension_wh_code
-LEFT JOIN molinahealth_mdwdb.d_incident TRGT 
- ON (SRC.sys_id =TRGT.row_id  
- AND SRC.sourceinstance= TRGT.source_id  ) 
- where state in (4)
- )a where met_sla_flag_src<>met_sla_flag
+ CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for d_incident.met_sla_flag' ELSE 'SUCCESS' END as Message from (
+ select a13.dimension_name,met_sla_flag,a11.open_to_resolve_duration
+, CASE 
+WHEN a13.dimension_name='Sev1' and a11.open_to_resolve_duration <(2*3600) THEN 'Y'
+WHEN a13.dimension_name='Sev2' and a11.open_to_resolve_duration <(4*3600) THEN 'Y' 
+WHEN a13.dimension_name='Sev3' and a11.open_to_resolve_duration <(8*3600) THEN 'Y' 
+WHEN a13.dimension_name='Sev4' and a11.open_to_resolve_duration <(24*3600) THEN 'Y'
+WHEN a13.dimension_name='Sev5' and a11.open_to_resolve_duration <(72*3600) THEN 'Y'
+END
+from molinahealth_mdwdb.f_incident a11
+join molinahealth_mdsdb.incident_final a12 on a11.row_id = a12.sys_id and a11.source_id = a12.sourceinstance
+join molinahealth_mdwdb.d_incident a12 on a11.incident_key = a12.row_key
+JOIN molinahealth_mdwdb.d_lov a13 on a11.priority_src_key = a13.row_key
+-- group by 1,2
+where a12.met_sla_flag <> CASE 
+WHEN a13.dimension_name='Sev1' and a11.open_to_resolve_duration <(2*3600) THEN 'Y'
+WHEN a13.dimension_name='Sev2' and a11.open_to_resolve_duration <(4*3600) THEN 'Y' 
+WHEN a13.dimension_name='Sev3' and a11.open_to_resolve_duration <(8*3600) THEN 'Y' 
+WHEN a13.dimension_name='Sev4' and a11.open_to_resolve_duration <(24*3600) THEN 'Y'
+WHEN a13.dimension_name='Sev5' and a11.open_to_resolve_duration <(72*3600) THEN 'Y'
+END
+)a
 
