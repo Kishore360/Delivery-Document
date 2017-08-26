@@ -5,8 +5,6 @@ FROM (
 select count(1) as cnt 
 from 
 svb_mdwdb.d_request_item d
-JOIN svb_mdwdb.f_request_item f ON d.row_key = f.request_item_key
-JOIN svb_mdwdb.d_lov_map lov_map ON f.state_src_key = lov_map.src_key
-and lov_map.dimension_class = 'STATE~SC_REQ_ITEM' AND lov_map.dimension_wh_code in ('CLOSED', 'RESOLVED')
-where case when TIMESTAMPDIFF(MINUTE,d.opened_on,d.closed_on)<30 then 'Y' else 'N' END <>d.first_call_resolution_flag
+JOIN svb_mdsdb.sc_req_item_final f ON d.row_key = f.sys_id and d.source_id=f.sourceinstance
+where case when f.u_fcr = 1 then 'Y' else 'N' end <>d.first_call_resolution_flag
  )c
