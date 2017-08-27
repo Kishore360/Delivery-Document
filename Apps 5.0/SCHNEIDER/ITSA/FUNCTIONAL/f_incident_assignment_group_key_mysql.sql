@@ -8,4 +8,4 @@ ON (SRC.incident_number = TRGT.row_id  and  SRC.sourceinstance = TRGT.source_id 
 LEFT JOIN schneider_mdwdb.d_internal_organization LKP 
  ON ( concat('GROUP~',SRC.assigned_group_id )= LKP.row_id
 AND SRC.sourceinstance= LKP.source_id )
- WHERE COALESCE(LKP.row_key,CASE WHEN SRC.assigned_group_id IS NULL THEN 0 else -1 end)<> (TRGT.assignment_group_key)
+ WHERE COALESCE(LKP.row_key,CASE WHEN SRC.assigned_group_id IS NULL THEN 0 else -1 end)<> (TRGT.assignment_group_key)) a;

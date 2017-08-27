@@ -9,5 +9,5 @@ ON SRC.incident_number = TRGT.row_id
 and  SRC.sourceinstance = TRGT.source_id   and TRGT.soft_deleted_flag = 'N'
 LEFT JOIN schneider_mdwdb.d_lov LKP 
  ON LKP.dimension_class like '%STATE~INCIDENT%' and 
-( concat('STATE~INCIDENT~~~',upper(SRC.status))= LKP.row_id 
+( concat('STATE~INCIDENT~~~',upper(SRC.status))= LKP.row_id )
 WHERE COALESCE(LKP.row_key,CASE WHEN SRC.status IS NULL THEN 0 else '-1' end)<> COALESCE(TRGT.state_src_key,''))b

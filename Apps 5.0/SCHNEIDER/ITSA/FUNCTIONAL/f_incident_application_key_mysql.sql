@@ -8,4 +8,4 @@ ON SRC.incident_number = TRGT.row_id and  SRC.sourceinstance = TRGT.source_id
 LEFT JOIN schneider_mdwdb.d_application LKP 
  ON ( COALESCE(CONCAT('APPLICATION','~',SRC.ci),'UNSPECIFIED') = LKP.row_id 
 AND SRC.sourceinstance= LKP.source_id )
- WHERE COALESCE(LKP.row_key,CASE WHEN SRC.ci IS NULL THEN 0 else -1 end)<> (TRGT.application_key)
+ WHERE COALESCE(LKP.row_key,CASE WHEN SRC.ci IS NULL THEN 0 else -1 end)<> (TRGT.application_key))a;

@@ -8,4 +8,4 @@ ON SRC.incident_number = TRGT.row_id and  SRC.sourceinstance = TRGT.source_id
 LEFT JOIN schneider_mdwdb.d_location LKP 
  ON ( SRC.site_id= LKP.row_id  
 AND SRC.sourceinstance= LKP.source_id )
- WHERE COALESCE(LKP.row_key,CASE WHEN SRC.site_id IS NULL THEN 0 else -1 end)<> (TRGT.location_key)
+ WHERE COALESCE(LKP.row_key,CASE WHEN SRC.site_id IS NULL THEN 0 else -1 end)<> (TRGT.location_key))a;
