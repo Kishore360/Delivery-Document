@@ -8,5 +8,5 @@ JOIN schneider_mdwdb.f_incident TRGT
 ON SRC.incident_number = TRGT.row_id and  SRC.sourceinstance = TRGT.source_id  
 LEFT JOIN schneider_mdwdb.d_internal_organization LKP 
 ON ( concat('SUBSIDIARY~',company))= LKP.row_id 
-AND SRC.sourceinstance= LKP.source_id ) and TRGT.pivot_date between effective_from and effective_to and TRGT.soft_deleted_flag = 'N'
+AND SRC.sourceinstance= LKP.source_id )   and TRGT.soft_deleted_flag = 'N'
 WHERE COALESCE(LKP.row_key,CASE WHEN SRC.company IS NULL THEN 0 else -1 end)<> (TRGT.company_key))b

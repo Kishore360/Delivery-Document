@@ -7,7 +7,7 @@ ELSE 'MDS to DWH data validation passed for f_incident.opened_time_key' END as M
 FROM schneider_mdsdb.hp_help_desk_final SRC 
 JOIN schneider_mdwdb.f_incident TRGT 
 ON SRC.incident_number = TRGT.row_id 
-and  SRC.sourceinstance = TRGT.source_id and TRGT.pivot_date between effective_from and effective_to and TRGT.soft_deleted_flag = 'N'
+and  SRC.sourceinstance = TRGT.source_id   and TRGT.soft_deleted_flag = 'N'
 LEFT JOIN schneider_mdwdb.d_calendar_date LKP
  ON date_format(convert_tz(SRC.reported_date,'GMT','America/New_York'),'%Y%m%d')   = LKP.row_id
  where COALESCE(LKP.row_key,'') <> COALESCE(TRGT.opened_time_key,''))b

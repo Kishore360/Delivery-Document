@@ -6,5 +6,5 @@ ELSE 'MDS to DWH data validation passed for f_incident.close_code_src_code' END 
 FROM schneider_mdsdb.hp_help_desk_final SRC 
 JOIN schneider_mdwdb.f_incident TRGT 
 ON SRC.incident_number = TRGT.row_id and  SRC.sourceinstance = TRGT.source_id 
-and TRGT.pivot_date between effective_from and effective_to and TRGT.soft_deleted_flag = 'N'
+  and TRGT.soft_deleted_flag = 'N'
 WHERE COALESCE( SRC.status_reason,'') <> COALESCE(TRGT.close_code_src_code ,''))b
