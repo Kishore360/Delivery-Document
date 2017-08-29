@@ -6,4 +6,4 @@ SELECT CASE WHEN cnt THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  FROM schneider_mdsdb.hp_help_desk_final SRC 
 JOIN schneider_mdwdb.f_incident TRGT 
 ON SRC.incident_number = TRGT.row_id and  SRC.sourceinstance = TRGT.source_id
-WHERE convert_tz(SRC.last_modified_date,'GMT','America/Los_Angeles')<> TRGT.changed_on ))b
+WHERE convert_tz(SRC.last_modified_date,'GMT','America/Los_Angeles')<> TRGT.changed_on )b;

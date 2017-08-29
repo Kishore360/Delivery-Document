@@ -9,7 +9,7 @@ ON SRC.incident_number = TRGT.row_id and  SRC.sourceinstance = TRGT.source_id
 LEFT JOIN schneider_mdwdb.d_incident LKP 
 ON SRC.incident_number = TRGT.row_id AND SRC.sourceinstance= LKP.source_id 
 and LKP.soft_deleted_flag='N' and  TRGT.pivot_date between effective_from and effective_to and TRGT.soft_deleted_flag = 'N'
-WHERE COALESCE(LKP.row_key, CASE WHEN SRC.incident_number IS NULL THEN 0 else -1 end) <> (TRGT.incident_key))
+WHERE COALESCE(LKP.row_key, CASE WHEN SRC.incident_number IS NULL THEN 0 else -1 end) <> (TRGT.incident_key))a;
 
 
 
