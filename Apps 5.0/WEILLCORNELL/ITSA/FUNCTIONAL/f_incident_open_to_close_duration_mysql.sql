@@ -20,4 +20,4 @@ join weillcornell_mdsdb.cmdb_ci_final D
 on D.sys_id = B.u_business_service
 where UPPER(C.user_name) = 'GUEST'
 and UPPER(D.name) = 'ONLINE DIRECTORY' )
-)
+)t;
