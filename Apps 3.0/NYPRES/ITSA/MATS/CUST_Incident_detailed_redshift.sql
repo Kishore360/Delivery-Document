@@ -16,7 +16,7 @@ union
 select 'ldb.d_internal_contact a13 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11 
 join ldb.d_internal_contact a13 
-on (a11.opened_by_key = a13.row_key) 
+on (a11.opened_by_c_key = a13.row_key) 
 union
 select 'ldb.d_calendar_time a14 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11 

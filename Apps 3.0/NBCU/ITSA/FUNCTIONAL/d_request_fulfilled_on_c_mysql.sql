@@ -1,14 +1,12 @@
 SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 CASE WHEN count(1) >0 THEN 'Failure' ELSE 'Data Matched' END as Message
-from
-nbcu_mdwdb.d_request trgt
-join nbcu_mdsdb.sc_request_final sc_request_final
+from nbcu_mdsdb.sc_request_final sc_request_final
+join nbcu_mdwdb.d_request trgt
 on trgt.row_id = sc_request_final.sys_id and trgt.source_id = sc_request_final.sourceinstance
-left join (select ri.sys_id,ri.sourceinstance,max(su.sys_created_on) as fulfilled_on
-from nbcu_mdwdb.d_request trg1 join
-nbcu_mdsdb.sc_request_final ri 
-on trg1.row_id=ri.sys_id and trg1.source_id=ri.sourceinstance
-join nbcu_mdsdb.sys_audit_final su on ri.sys_id = su.documentkey 
+ join (select ri.sys_id,ri.sourceinstance,max(su.sys_created_on) as fulfilled_on
+from nbcu_mdsdb.sc_request_final ri join nbcu_mdwdb.d_request trg1 
+on trg1.row_id=ri.sys_id and trg1.source_id=ri.sourceinstance 
+join nbcu_mdsdb.sys_audit_final su on ri.sys_id = su.documentkey  
 join nbcu_mdsdb.sys_choice_final sc on su.newvalue = sc.value
 where su.tablename = 'sc_request' and su.fieldname = 'request_state' and sc.name = 'sc_request' and sc.element = 'request_state' 
 and sc.label = 'fulfilled'

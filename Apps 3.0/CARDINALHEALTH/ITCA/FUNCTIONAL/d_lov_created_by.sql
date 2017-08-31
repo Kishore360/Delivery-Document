@@ -4,7 +4,7 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 FROM 
 cardinalhealth_mdsdb.synonyms_final SRC 
 LEFT JOIN cardinalhealth_mdwdb.d_lov TRGT 
-	ON (CONCAT('AUX~CCA~~~',acd_no,'~',trim(SRC.value)) =TRGT.row_id 
+	ON (CONCAT('AUX~CCA~~~',SRC.VALUE) =TRGT.row_id 
 	AND SRC.sourceinstance =TRGT.source_id )
 WHERE 'avaya_cms' <> COALESCE(TRGT.created_by,'')
 AND SRC.item_type = 'aux_rsn'
