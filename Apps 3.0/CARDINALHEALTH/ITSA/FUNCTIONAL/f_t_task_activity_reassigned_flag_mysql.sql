@@ -11,4 +11,4 @@ case when a.fieldname = 'assignment_group' and b.task_key <> -1
 and task_attribute_wh_old_value is not null and task_attribute_wh_new_value  is not null then 'Y' 
     else 'N' end
 
- = b.reassigned_flag  )b
+ <> b.reassigned_flag  )b
