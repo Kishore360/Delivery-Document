@@ -11,10 +11,10 @@ AND br.dimension_wh_code IN ('RESOLVED','CLOSED')
 JOIN schneider_mdwdb.d_work_order a ON a.row_key = f.work_order_key
 AND f.source_id = a.source_id
 WHERE
-timestampdiff(Day, convert_tz(convert_tz(SRC.SUBMIT_DATE,<<TENANT_SSI_TIME_ZONE>>,<<DW_TARGET_TIME_ZONE>>),<<DW_TARGET_TIME_ZONE>>,<<TENANT_SSI_TIME_ZONE>>), 
-coalesce(convert_tz(convert_tz(SRC.resolved_at,<<TENANT_SSI_TIME_ZONE>>,<<DW_TARGET_TIME_ZONE>>),<<DW_TARGET_TIME_ZONE>>,<<TENANT_SSI_TIME_ZONE>>), 
-convert_tz(convert_tz(SRC.completed_date,<<TENANT_SSI_TIME_ZONE>>,<<DW_TARGET_TIME_ZONE>>),<<DW_TARGET_TIME_ZONE>>,<<TENANT_SSI_TIME_ZONE>>),
-convert_tz(convert_tz(SRC.sys_updated_on,<<TENANT_SSI_TIME_ZONE>>,<<DW_TARGET_TIME_ZONE>>),<<DW_TARGET_TIME_ZONE>>,<<TENANT_SSI_TIME_ZONE>>))) <> f.age
+timestampdiff(Day, convert_tz(convert_tz(SRC.SUBMIT_DATE,'GMT','America/Los_Angeles'),'America/Los_Angeles','GMT'), 
+coalesce(convert_tz(convert_tz(SRC.resolved_at,'GMT','America/Los_Angeles'),'America/Los_Angeles','GMT'), 
+convert_tz(convert_tz(SRC.completed_date,'GMT','America/Los_Angeles'),'America/Los_Angeles','GMT'),
+convert_tz(convert_tz(SRC.sys_updated_on,'GMT','America/Los_Angeles'),'America/Los_Angeles','GMT'))) <> f.age
   )a
   
   
