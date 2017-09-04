@@ -5,4 +5,4 @@ on (SRC.instanceid = TRGT.row_id  and SRC.sourceinstance = TRGT.source_id )
 join schneider_mdsdb.ast_assetpeople LKP on SRC.reconciliationidentity=LKP.assetinstanceid 
 join schneider_mdsdb.ctm_people_final LKP1 on LKP.peoplegroupinstanceid=LKP1.instanceid 
 where LKP.personrole = "Used by" 
-and coalesce(LKP1.full_name,'UNSPECIFIED')<> coalesce(assigned_to,'');
+and coalesce(LKP1.full_name,'UNSPECIFIED')<> coalesce(TRGT.assigned_to,'');
