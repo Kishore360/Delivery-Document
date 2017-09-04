@@ -6,5 +6,5 @@ JOIN schneider_mdsdb.ast_assetpeople LKP
 ON SRC.reconciliationidentity=LKP.assetinstanceid 
 JOIN schneider_mdsdb.ctm_people_final LKP1 
 ON LKP.peoplegroupinstanceid=LKP1.instanceid 
-WHERE LKP.rersonrole = "Managed by" 
+WHERE LKP.personrole = "Managed by" 
 AND COALESCE(LKP1.full_name,'UNSPECIFIED')<> COALESCE(TRGT.manager,'');

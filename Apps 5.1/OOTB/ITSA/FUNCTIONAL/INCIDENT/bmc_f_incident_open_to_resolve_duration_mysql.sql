@@ -7,7 +7,7 @@ FROM schneider_mdsdb.hpd_help_desk_final SRC
 JOIN schneider_mdwdb.f_incident TRGT 
 ON SRC.incident_number = TRGT.row_id 
 and  SRC.sourceinstance = TRGT.source_id   and TRGT.soft_deleted_flag = 'N'
-LEFT JOIN schneider_mdsdb.d_lov_map LKP 
+LEFT JOIN schneider_mdwdb.d_lov_map LKP 
  ON TRGT.state_src_key = LKP.src_key
 WHERE   LKP.dimension_wh_code IN ('CLOSED') 
 AND  TIMESTAMPDIFF(SECOND,convert_tz(convert_tz( SRC.reported_date,'GMT','America/Los_Angeles'),

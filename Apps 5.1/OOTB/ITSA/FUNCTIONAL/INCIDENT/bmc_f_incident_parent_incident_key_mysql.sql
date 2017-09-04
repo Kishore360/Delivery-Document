@@ -5,4 +5,4 @@ SELECT CASE WHEN cnt THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 JOIN schneider_mdwdb.f_incident TRGT 
 ON SRC.incident_number = TRGT.row_id and  SRC.sourceinstance = TRGT.source_id
  LEFT join schneider_mdwdb.d_incident LKP on SRC.Incident_Number=LKP.row_id
-WHERE LKP.row_key <> SRC.parent_incident_key)E;
+WHERE LKP.row_key <> TRGT.parent_incident_key)E;

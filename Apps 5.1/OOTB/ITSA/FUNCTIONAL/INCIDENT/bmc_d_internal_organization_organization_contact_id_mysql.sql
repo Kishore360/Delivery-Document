@@ -5,5 +5,5 @@ from
 schneider_mdwdb.d_internal_organization a 
 INNER JOIN 
 schneider_mdsdb.ctm_people_organization_final b 
-ON (a.row_id = CONCAT('DEPARTMENT~',b.sys_id) )
+ON (a.row_id = CONCAT('DEPARTMENT~',concat(company,'~',coalesce(organization,'unspecified'),'~',coalesce(department,'unspecified'))) )
 where COALESCE(b.department,'UNSPECIFIED')<> a.organization_contact_id)a

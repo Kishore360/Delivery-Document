@@ -5,6 +5,6 @@ SELECT CASE WHEN cnt THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 JOIN schneider_mdwdb.f_incident TRGT 
 ON SRC.incident_number = TRGT.row_id and  SRC.sourceinstance = TRGT.source_id
 lEFT JOIN schneider_mdwdb.d_calendar_date LKP 
-on (LKP.row_id = date_format(convert_tz(SRC.due_date,'GMT','America/Los_Angeles'),'%Y%m%d'))
+on (LKP.row_id = date_format(convert_tz(SRC.required_resolution_datetime,'GMT','America/Los_Angeles'),'%Y%m%d'))
 WHERE coalesce(LKP.row_key,case when SRC.required_resolution_datetime is null then 0 else -1 end ) <> (TRGT.due_on_key))b;
 

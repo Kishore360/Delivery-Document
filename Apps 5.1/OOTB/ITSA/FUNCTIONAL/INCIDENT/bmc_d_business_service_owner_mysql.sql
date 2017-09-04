@@ -6,5 +6,5 @@ JOIN schneider_mdsdb.ast_assetpeople LKP
 ON SRC.reconciliationidentity=LKP.assetinstanceid 
 JOIN schneider_mdsdb.ctm_people_final LKP1 
 ON LKP.peoplegroupinstanceid=LKP1.instanceid 
-WHERE LKP.rersonrole = "Owned by" 
+WHERE LKP.personrole = "Owned by" 
 AND COALESCE(LKP1.full_name,'UNSPECIFIED')<> COALESCE(TRGT.owner,'');

@@ -9,7 +9,7 @@ JOIN schneider_mdwdb.f_incident TRGT
 ON SRC.incident_number = TRGT.row_id 
 and  SRC.sourceinstance = TRGT.source_id   and TRGT.soft_deleted_flag = 'N'
 LEFT JOIN schneider_mdwdb.d_internal_contact LKP1
- ON TRGT.opened_by_key = LKP.row_key
+ ON TRGT.opened_by_key = LKP1.row_key
  left join schneider_mdwdb.d_internal_organization LKP2
 on LKP2.row_id = COALESCE(concat('DEPARTMENT~',LKP1.department_code),'UNSPECIFIED')
 and LKP1.source_id = LKP2.source_id
