@@ -3,7 +3,7 @@ SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
 ELSE 'Data Matched' END as Message from
 (select count(*) as cnt 
 from schneider_mdwdb.d_internal_organization a 
-join schneider_mdsdb.ctm_people_final_organization_final b 
+join schneider_mdsdb.ctm_people_organization_final b 
 ON a.row_id = CONCAT('DEPARTMENT~',b.sys_id) AND a.source_id = b.sourceinstance
 join
 schneider_mdsdb.sys_user_final c
