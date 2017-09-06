@@ -2,4 +2,4 @@ SELECT CASE WHEN count(1)  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHE
 ON (SRC.task_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id )  LEFT JOIN schneider_mdwdb.d_lov LKP
 ON ((TRGT.age div 86400.0 BETWEEN LKP.lower_range_value AND LKP.upper_range_value)
 AND LKP.dimension_class = 'AGEBUCKET_WH~WORK_ORDER_TASK' )
-WHERE (LKP.row_key )  <> TRGT.age_key)b; 
+WHERE (LKP.row_key )  <> TRGT.age_key; 
