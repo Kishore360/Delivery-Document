@@ -1,8 +1,8 @@
  SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
- CASE WHEN cnt >0 THEN 'MDS to DWH data validation failed for d_incident.dormant_flag' ELSE 'SUCCESS' END as Message from (select count(1) cnt  
+ CASE WHEN cnt >0 THEN 'MDS to DWH data validation failed for d_work_order.dormant_flag' ELSE 'SUCCESS' END as Message from (select count(1) cnt  
   FROM 
-schneider_mdwdb.d_workorder di
-  JOIN schneider_mdwdb.f_workorder fi ON di.row_key = fi.work_order_key
+schneider_mdwdb.d_work_order di
+  JOIN schneider_mdwdb.f_work_order fi ON di.row_key = fi.work_order_key
   JOIN schneider_mdwdb.d_lov_map dlm ON fi.state_src_key = dlm.src_key  	
   where  STATUS <= Resolved and dlm.dimension_class = 'STATE~WORKORDER'
   AND dlm.dimension_wh_code = 'OPEN'

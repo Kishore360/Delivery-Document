@@ -1,6 +1,6 @@
  select CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  CASE WHEN cnt >0 THEN 'MDS to DWH data validation failed for f_work_order.age' ELSE 'SUCCESS' END as Message from (select count(1) cnt 
- FROM (select work_order_id,sourceinstance,SUBMIT_DATE from schneider_mdsdb.WOI_WORKORDER_final where SUBMIT_DATE < coalesce(resolved_at,SUBMIT_DATE)) SRC 
+ FROM (select work_order_id,sourceinstance,SUBMIT_DATE from schneider_mdsdb.woi_workorder_final where SUBMIT_DATE < coalesce(resolved_at,SUBMIT_DATE)) SRC 
   join schneider_mdwdb.d_work_order f ON (SRC.work_order_id =f.row_id  
  AND SRC.sourceinstance= f.source_id and f.soft_deleted_flag='N' )
 
