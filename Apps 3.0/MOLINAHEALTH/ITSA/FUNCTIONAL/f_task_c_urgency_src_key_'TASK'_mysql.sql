@@ -4,6 +4,6 @@ FROM molinahealth_mdsdb.task_final  SRC
 JOIN molinahealth_mdwdb.f_task_c TRGT 
 ON (SRC.sys_id = TRGT.row_id  
 AND SRC.sourceinstance = TRGT.source_id )  
-JOIN molinahealth_mdwdb.d_lov LKP 
-ON COALESCE( concat( 'URGENCY~TASK~~~' ,upper( SRC.urgency)),'UNSPECIFIED') = LKP.row_id and SRC.sys_class_name = 'TASK' 
-WHERE COALESCE(LKP.row_key,CASE WHEN SRC.urgency IS NULL THEN 0 else -1 end)<> (TRGT.urgency_src_key) 
+left JOIN molinahealth_mdwdb.d_lov LKP 
+ON COALESCE( concat( 'URGENCY~TASK~~~' ,upper( SRC.urgency)),'UNSPECIFIED') = LKP.row_id  
+WHERE SRC.sys_class_name = 'TASK' AND  COALESCE(LKP.row_key,CASE WHEN SRC.urgency IS NULL THEN 0 else -1 end)<> (TRGT.urgency_src_key) 
