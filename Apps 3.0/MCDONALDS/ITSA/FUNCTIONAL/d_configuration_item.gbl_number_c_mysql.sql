@@ -11,5 +11,5 @@ LEFT JOIN mcdonalds_mdsdb.u_cmdb_ci_application_component_final c
 ON b.sys_id = c.sys_id and b.sourceinstance = c.sourceinstance
 LEFT JOIN mcdonalds_mdsdb.u_gbl_final d
 on c.u_application_gbl = d.sys_id
-WHERE  a.gbl_number_c = d.u_gbl;
+WHERE  a.gbl_number_c <> d.u_gbl
 )a;

@@ -5,7 +5,7 @@ CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as RESULT,
 CASE WHEN cnt > 0 THEN 'MDS to DWH data validation failed for d_incident.knowledge_used_c_flag' ELSE 'SUCCESS' END as MESSAGE
 FROM 
 (
-SELECT count(1) 
+SELECT count(1) as cnt
 FROM  mcdonalds_mdwdb.d_incident inc
 left join 
 (SELECT a.task , a.kb_knowledge,a.sys_created_on from mcdonalds_mdsdb.m2m_kb_task_final a
