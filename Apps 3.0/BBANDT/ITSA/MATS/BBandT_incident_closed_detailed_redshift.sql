@@ -71,10 +71,10 @@ select 'ldb.d_incident_close_code' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_incident_closed a11  
 join ldb.d_incident_close_code a12  on (a11.close_code_src_key=a12.row_key)
 UNION 
-SELECT 'ldb.d_lov_incident_cause_code_c ' AS Table_Name, count(a11.row_key) as Row_count
+SELECT 'ldb.d_incident_cause_code_c ' AS Table_Name, count(a11.row_key) as Row_count
 FROM ldb.f_incident_closed a11
 JOIN ldb.d_incident b ON a11.incident_key=b.row_key
-JOIN ldb.d_lov_incident_cause_code_c  c ON b.cause_code_c_key=c.row_key
+JOIN ldb.d_incident_cause_code_c  c ON b.cause_code_c_key=c.row_key
 UNION 
 select 'ldb.d_incident_category' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_incident_closed a11  
@@ -137,8 +137,8 @@ from  ldb.f_incident_closed a11
 join ldb.d_business_service a114 on (a11.business_service_key=a114.row_key)
 JOIN ldb.d_business_service_used_for b ON a114.used_for_src_key=b.row_key
 UNION 
-select 'd_lov_incident_resolution_code_c ' as Table_Name, count(a11.row_key) Row_Count
+select 'd_incident_resolution_code_c ' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_incident_closed a11 
 JOIN ldb.d_incident b ON a11.incident_key=b.row_key
-JOIN ldb.d_lov_incident_resolution_code_c  c ON b.resolution_code_c_key=c.row_key
+JOIN ldb.d_incident_resolution_code_c  c ON b.resolution_code_c_key=c.row_key
 

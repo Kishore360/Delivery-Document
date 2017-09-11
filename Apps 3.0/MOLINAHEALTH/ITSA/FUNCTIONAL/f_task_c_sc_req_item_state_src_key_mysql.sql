@@ -12,5 +12,5 @@ JOIN molinahealth_mdwdb.d_lov LKP ON
 COALESCE( CONCAT('STATE','~','SC_REQ_ITEM','~','~','~',UPPER(SRC.state)),'UNSPECIFIED') END
 = LKP.src_rowid 
 AND SRC.sourceinstance= LKP.source_id AND TRGT.pivot_date BETWEEN LKP.effective_from and LKP.effective_to)
-WHERE COALESCE(LKP.row_key,CASE WHEN SRC.state IS NULL THEN 0 else -1 end)<>TRGT.state_src_key;
+WHERE COALESCE(LKP.row_key,CASE WHEN SRC.state IS NULL THEN 0 else -1 end)<>TRGT.state_src_key
 )temp;

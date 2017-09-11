@@ -1,7 +1,7 @@
 select CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for f_incident.dormancy_age' ELSE 'SUCCESS' END as Message
  FROM wow_mdsdb.incident_final SRC 
- LEFT JOIN wow_mdwdb.d_incident TRGT 
+ JOIN wow_mdwdb.d_incident TRGT 
  ON (SRC.sys_id =TRGT.row_id 
  AND SRC.sourceinstance= TRGT.source_id )
  left join wow_mdwdb.d_lov_map lm 

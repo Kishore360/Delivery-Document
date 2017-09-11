@@ -5,6 +5,6 @@ FROM (
 select count(1) as cnt 
 from 
 svb_mdwdb.d_request_item d
-JOIN svb_mdsdb.sc_req_item_final f ON d.row_key = f.sys_id and d.source_id=f.sourceinstance
+JOIN svb_mdsdb.sc_req_item_final f ON d.row_id = f.sys_id and d.source_id=f.sourceinstance
 where case when f.u_fcr = 1 then 'Y' else 'N' end <>d.first_call_resolution_flag
  )c
