@@ -15,4 +15,4 @@ WHERE SRC1.task is not null AND SRC1.asset is null
  LEFT JOIN whirlpool_mdwdb.d_expense_item TRGT 
  ON (SRC.sys_id=TRGT.row_id
  AND SRC.sourceinstance=TRGT.source_id )
- WHERE 'PROJECT/TASK'<> COALESCE(CONVERT(TRGT.expense_class using utf8),'');
+ WHERE 'PROJECT/TASK'<> COALESCE(TRGT.expense_class ,'');

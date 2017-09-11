@@ -4,4 +4,4 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  LEFT JOIN whirlpool_mdwdb.d_asset TRGT 
  ON (SRC.sys_id=TRGT.row_id 
  AND SRC.sourceinstance=TRGT.source_id )
-WHERE COALESCE( CONVERT(convert_tz(SRC.assigned,'GMT','America/Los_Angeles') using utf8),'')<> COALESCE(CONVERT(TRGT.assigned_date using utf8),'')
+WHERE COALESCE( convert_tz(SRC.assigned,'GMT','America/Los_Angeles') ,'')<> COALESCE(TRGT.assigned_date ,'')

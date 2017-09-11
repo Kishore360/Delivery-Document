@@ -5,4 +5,4 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  LEFT JOIN whirlpool_mdwdb.d_asset TRGT 
  ON (SRC.sys_id=TRGT.row_id 
  AND SRC.sourceinstance=TRGT.source_id )
- WHERE COALESCE( CONVERT(SRC.pre_allocated using utf8),'')<> COALESCE(CONVERT(TRGT.pre_allocated using utf8),'')
+ WHERE COALESCE( SRC.pre_allocated ,'')<> COALESCE(TRGT.pre_allocated ,'')

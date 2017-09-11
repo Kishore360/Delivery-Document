@@ -9,7 +9,7 @@ JOIN whirlpool_mdsdb.pm_project_task_final SRC_PT ON (SRC_PT.sys_id = SRC.task)
  ON (SRC.sys_id=TRGT.row_id 
  AND SRC.sourceinstance=TRGT.source_id )
  LEFT JOIN whirlpool_mdwdb.d_expense_item LKP 
- ON ( CONVERT(SRC.base_expense using utf8)= convert(LKP.row_id using utf8)
-AND CONVERT(SRC.sourceinstance using utf8)= convert(LKP.source_id using utf8))
+ ON ( SRC.base_expense = LKP.row_id 
+AND SRC.sourceinstance = LKP.source_id )
  WHERE SRC.asset Is Null 
 AND COALESCE(LKP.row_key,CASE WHEN SRC.base_expense IS NULL THEN 0 else '-1' end)<> COALESCE(TRGT.base_expense_item_key,'')

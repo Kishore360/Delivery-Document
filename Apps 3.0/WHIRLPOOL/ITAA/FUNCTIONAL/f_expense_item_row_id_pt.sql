@@ -9,4 +9,4 @@ JOIN whirlpool_mdsdb.pm_project_task_final SRC_PT ON (SRC_PT.sys_id = SRC.task)
  ON (SRC.sys_id=TRGT.row_id 
  AND SRC.sourceinstance=TRGT.source_id )
  WHERE SRC.asset Is Null 
-AND COALESCE( CONVERT(SRC.sys_id using utf8),'')<> COALESCE(CONVERT(TRGT.row_id using utf8),'')
+AND COALESCE( SRC.sys_id ,'')<> COALESCE(TRGT.row_id ,'')

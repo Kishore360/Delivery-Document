@@ -5,4 +5,4 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  LEFT JOIN whirlpool_mdwdb.d_expense_item TRGT 
  ON (SRC.sys_id=TRGT.row_id 
  AND SRC.sourceinstance=TRGT.source_id )
- WHERE COALESCE( CONVERT(SRC.category using utf8),'')<> COALESCE(CONVERT(TRGT.expense_item_category using utf8),'')
+ WHERE COALESCE( SRC.category ,'')<> COALESCE(TRGT.expense_item_category ,'')

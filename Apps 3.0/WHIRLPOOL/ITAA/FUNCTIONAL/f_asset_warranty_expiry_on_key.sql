@@ -7,6 +7,6 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  AND SRC.sourceinstance=TRGT.source_id )
 LEFT 
 LEFT JOIN whirlpool_mdwdb.d_calendar_date LKP 
-on (convert(LKP.row_id using utf8) = convert(date_format(convert_tz(SRC.warranty_expiration,'GMT','America/New_York'),'%Y%m%d') using utf8) and LKP.source_id=0
+on (LKP.row_id  = date_format(convert_tz(SRC.warranty_expiration,'GMT','America/New_York'),'%Y%m%d')  and LKP.source_id=0
 )
-WHERE CONVERT(COALESCE(LKP.row_key,CASE WHEN SRC.warranty_expiration IS NULL THEN NULL else '-1' end) using utf8) <> CONVERT(COALESCE(TRGT.warranty_expiry_on_key,'') using utf8)
+WHERE COALESCE(LKP.row_key,CASE WHEN SRC.warranty_expiration IS NULL THEN NULL else '-1' end)  <> COALESCE(TRGT.warranty_expiry_on_key,'') 
