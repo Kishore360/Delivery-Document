@@ -6,6 +6,6 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  ON (SRC.sys_id=TRGT.row_id 
  AND SRC.sourceinstance=TRGT.source_id )
  LEFT JOIN whirlpool_mdwdb.d_model_category LKP 
- ON ( CONVERT(SRC.model_category using utf8)= convert(LKP.row_id using utf8)
-AND CONVERT(SRC.sourceinstance using utf8)= convert(LKP.source_id using utf8))
+ ON ( SRC.model_category = LKP.row_id 
+AND SRC.sourceinstance = LKP.source_id )
  WHERE COALESCE(LKP.row_key,CASE WHEN SRC.model_category IS NULL THEN 0 else '-1' end)<> COALESCE(TRGT.model_category_key,'')

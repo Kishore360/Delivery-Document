@@ -5,5 +5,5 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  LEFT JOIN whirlpool_mdwdb.d_expense_item TRGT 
  ON (SRC.sys_id=TRGT.row_id 
  AND SRC.sourceinstance=TRGT.source_id )
- WHERE COALESCE( CONVERT(SRC.state using utf8),'')<> COALESCE(CONVERT(TRGT.expense_status using utf8),'')and SRC.asset 
+ WHERE COALESCE( SRC.state ,'')<> COALESCE(TRGT.expense_status ,'')and SRC.asset 
 is not null;

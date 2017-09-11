@@ -10,4 +10,4 @@ JOIN whirlpool_mdsdb.pm_project_final SRC_P ON (SRC_P.sys_id = SRC.task)
  AND SRC.sourceinstance=TRGT.source_id )
 
  WHERE SRC.asset Is Null 
-AND CONVERT(convert_tz(SRC.sys_created_on,'GMT','America/New_York') using utf8)<> CONVERT(TRGT.created_on using utf8)
+AND convert_tz(SRC.sys_created_on,'GMT','America/New_York') <> TRGT.created_on 

@@ -9,6 +9,6 @@ as Message
 LEFT JOIN whirlpool_mdsdb.sys_db_object_final sys
  on sys.name=SRC.sys_class_name
  LEFT JOIN whirlpool_mdwdb.d_asset_class LKP 
- ON ( CONVERT(sys.sys_id using utf8)= convert(LKP.row_id using utf8)
-AND CONVERT(SRC.sourceinstance using utf8)= convert(LKP.source_id using utf8))
+ ON ( sys.sys_id = LKP.row_id 
+AND SRC.sourceinstance = LKP.source_id )
  WHERE COALESCE(LKP.row_key,CASE WHEN SRC.sys_class_name IS NULL THEN 0 else '-1' end)<> COALESCE(TRGT.asset_class_key,'');

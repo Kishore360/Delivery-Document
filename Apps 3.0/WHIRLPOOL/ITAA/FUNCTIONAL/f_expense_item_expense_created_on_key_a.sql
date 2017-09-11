@@ -6,6 +6,6 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  ON (SRC.sys_id=TRGT.row_id 
  AND SRC.sourceinstance=TRGT.source_id )
  LEFT FROM whirlpool_mdwdb.d_calendar_date LKP 
- ON ( CONVERT(SRC.sys_created_on using utf8)= convert(LKP.row_id using utf8)
-AND CONVERT(SRC.sourceinstance using utf8)= convert(LKP.source_id using utf8))
+ ON ( SRC.sys_created_on = LKP.row_id 
+AND SRC.sourceinstance = LKP.source_id )
  WHERE COALESCE(LKP.row_key,CASE WHEN SRC.sys_created_on IS NULL THEN NULL else '-1' end)<> COALESCE(TRGT.expense_created_on_key,'')and SRC.asset is not null;

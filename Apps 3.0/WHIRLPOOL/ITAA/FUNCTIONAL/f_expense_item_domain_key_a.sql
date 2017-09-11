@@ -6,6 +6,6 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  ON (SRC.sys_id=TRGT.row_id 
  AND SRC.sourceinstance=TRGT.source_id )
  LEFT JOIN whirlpool_mdwdb.d_domain LKP 
- ON ( CONVERT(SRC.sys_domain using utf8)= convert(LKP.row_id using utf8)
-AND CONVERT(SRC.sourceinstance using utf8)= convert(LKP.source_id using utf8))
+ ON ( SRC.sys_domain = LKP.row_id 
+AND SRC.sourceinstance = LKP.source_id )
  WHERE COALESCE(LKP.row_key,CASE WHEN SRC.sys_domain IS NULL THEN 0 else '-1' end)<> COALESCE(TRGT.domain_key,'')and SRC.asset is not null;
