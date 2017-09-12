@@ -1,6 +1,6 @@
 
-SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
-CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for f_incident.resolve_to_close_duration' 
+SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+CASE WHEN cnt >0 THEN 'MDS to DWH data validation failed for f_incident.resolve_to_close_duration' 
 ELSE 'MDS to DWH data validation passed for f_incident.resolve_to_close_duration' END as Message from 
 (select count(1) cnt 
 FROM schneider_mdsdb.hpd_help_desk_final SRC 

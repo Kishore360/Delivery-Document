@@ -9,7 +9,7 @@ ON SRC.incident_number = TRGT.row_id and  SRC.sourceinstance = TRGT.source_id
  ON (lm.src_key = TRGT.state_src_key)
  where lm.dimension_class = 'STATE~INCIDENT'
 AND  lm.dimension_wh_code = 'OPEN'  
-AND COALESCE(TIMESTAMPDIFF(second,SRC.sys_updated_on,CONVERT_TZ((SELECT MAX(lastupdated) AS lastupdated
+AND COALESCE(TIMESTAMPDIFF(second,SRC.last_modified_date,CONVERT_TZ((SELECT MAX(lastupdated) AS lastupdated
 FROM schneider_mdwdb.d_o_data_freshness WHERE sourcename like 'ServiceNow%'),'America/Los_Angeles','GMT')),0)<> TRGT.dormancy_age )a;
  
  
