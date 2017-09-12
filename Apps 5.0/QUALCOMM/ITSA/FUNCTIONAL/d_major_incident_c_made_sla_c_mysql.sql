@@ -4,4 +4,4 @@ FROM qualcomm_mdsdb.u_major_incident_final SRC
  LEFT JOIN qualcomm_mdwdb.d_major_incident_c TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
-WHERE CASE WHEN SRC.made_sla= '1' THEN 'Y' ELSE 'N' END = TRGT.made_sla_c ;
+WHERE CASE WHEN SRC.made_sla= '1' THEN 'Y' ELSE 'N' END <> TRGT.made_sla_c ;
