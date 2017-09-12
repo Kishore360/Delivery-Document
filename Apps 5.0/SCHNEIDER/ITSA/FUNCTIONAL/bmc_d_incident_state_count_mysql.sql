@@ -6,8 +6,8 @@ SELECT CASE WHEN cnt THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  FROM schneider_mdsdb.hpd_help_desk_final SRC 
 JOIN schneider_mdwdb.d_incident TRGT 
 ON SRC.incident_number = TRGT.row_id and  SRC.sourceinstance = TRGT.source_id
-left join  (select sourceinstance, documentkey, count(1) as cnt from schneider_mdsdb.sys_audit_final 
+left join  (select sourceinstance, documentkey, count(1) as cnt from schneider_mdsdb.hpd_help_desk_sys_audit 
 where fieldname= 'state' and tablename= 'incident' 
 group by sourceinstance, documentkey) sd
-on sd.documentkey=LKP.row_id and sd.sourceinstance=LKP.source_id
+on sd.documentkey=TRGT.incident_number and sd.sourceinstance=TRGT.source_id
 where  coalesce(sd.cnt,0)  <> TRGT.state_count)b
