@@ -11,3 +11,7 @@ AND SRC.sourceinstance= LKP.source_id )
  AND SRC.sourceinstance= TRGT.source_id  )
  WHERE COALESCE(LKP.row_key,CASE WHEN SRC.OPERATIONAL_status IS NULL THEN 0 else -1 end)<> (TRGT.OPERATIONAL_status_c_key)
 
+
+ 
+ 
+ d_configuration_item_OPERATIONAL_status_c_key_mysql.sql
