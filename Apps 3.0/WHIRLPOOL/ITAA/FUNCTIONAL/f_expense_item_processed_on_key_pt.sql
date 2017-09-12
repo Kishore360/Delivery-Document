@@ -7,8 +7,6 @@ JOIN whirlpool_mdsdb.pm_project_task_final SRC_PT ON (SRC_PT.sys_id = SRC.task)
  LEFT JOIN whirlpool_mdwdb.f_expense_item TRGT 
  ON (SRC.sys_id=TRGT.row_id 
  AND SRC.sourceinstance=TRGT.source_id )
- LEFT JOIN  app_test.lsm_ls_source_timezone L 
-ON (SRC.sourceinstance=L.sourceid )
  LEFT JOIN whirlpool_mdwdb.d_calendar_date LKP 
  ON(date_format(convert_tz(SRC.process_date,'GMT','America/New_York'),'%Y%m%d') =LKP.row_id
 AND 0 =LKP.source_id)

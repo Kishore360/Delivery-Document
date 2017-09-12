@@ -2,12 +2,12 @@
 SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for f_expense_item.expense_category_key' ELSE 'SUCCESS' END as Message
  FROM whirlpool_mdsdb.fm_expense_line_final SRC
-FROM whirlpool_mdsdb.fx_currency_instance_final FI on (FI.id=SRC.sys_id and FI.field='amount')
-FROM whirlpool_mdsdb.pm_project_task_final SRC_PT ON (SRC_PT.sys_id = SRC.task) 
- LEFT FROM whirlpool_mdwdb.f_expense_item TRGT 
+join whirlpool_mdsdb.fx_currency_instance_final FI on (FI.id=SRC.sys_id and FI.field='amount')
+join whirlpool_mdsdb.pm_project_task_final SRC_PT ON (SRC_PT.sys_id = SRC.task) 
+ LEFT join whirlpool_mdwdb.f_expense_item TRGT 
  ON (SRC.sys_id=TRGT.row_id 
  AND SRC.sourceinstance=TRGT.source_id )
- LEFT FROM whirlpool_mdwdb.d_lov LKP 
+ LEFT join whirlpool_mdwdb.d_lov LKP 
  ON (  UCASE( COALESCE(CONCAT('EXPENSE_ITEM~CATEGORY~~' ,SRC.category))) = LKP.row_id 
 AND SRC.sourceinstance = LKP.source_id )
 AND LKP.dimension_class ='EXPENSE_ITEM'

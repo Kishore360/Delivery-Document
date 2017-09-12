@@ -4,7 +4,7 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  LEFT JOIN whirlpool_mdwdb.f_asset_status_history TRGT 
  on (CONCAT(SRC.sys_id,'~',DATE_FORMAT(SRC.sys_created_on,'%Y%m%d%H%i%S') )  =TRGT.row_id 
  AND SRC.sourceinstance=TRGT.source_id )
-LEFT JOIN whirlpool_mdwdb.sys_db_object_final sys
+LEFT JOIN whirlpool_mdsdb.sys_db_object_final sys
  on sys.name=SRC.sys_class_name
  LEFT JOIN whirlpool_mdwdb.d_asset_class LKP 
  ON ( sys.sys_id = LKP.row_id 
