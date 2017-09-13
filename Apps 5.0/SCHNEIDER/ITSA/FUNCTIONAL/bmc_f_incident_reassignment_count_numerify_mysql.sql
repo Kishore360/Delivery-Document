@@ -9,7 +9,7 @@ ON SRC.incident_number = TRGT.row_id and  SRC.sourceinstance = TRGT.source_id
 JOIN schneider_mdwdb.d_incident LKP 
 ON LKP.row_key = TRGT.incident_key
 left join  (select sourceinstance, documentkey, count(1) as cnt from schneider_mdsdb.sys_audit_final 
-where fieldname= 'assignment_group' and tablename= 'incident' and oldvalue is not NULL 
+where fieldname= 'Assigned Group' and tablename= 'incident' and oldvalue is not NULL 
 group by sourceinstance, documentkey) sd
 on sd.documentkey=LKP.row_id and sd.sourceinstance=LKP.source_id
 where  coalesce(sd.cnt,0)  <> COALESCE(TRGT.reassignment_count_numerify ,''))b

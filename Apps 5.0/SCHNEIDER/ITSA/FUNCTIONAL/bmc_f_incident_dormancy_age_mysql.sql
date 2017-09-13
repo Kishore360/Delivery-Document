@@ -6,11 +6,9 @@ SELECT CASE WHEN cnt THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 JOIN schneider_mdwdb.f_incident TRGT 
 ON SRC.incident_number = TRGT.row_id and  SRC.sourceinstance = TRGT.source_id
  left join schneider_mdwdb.d_lov_map lm 
- ON (lm.src_key = TRGT.state_src_key)
- where lm.dimension_class = 'STATE~INCIDENT'
-AND  lm.dimension_wh_code = 'OPEN'  
-AND COALESCE(TIMESTAMPDIFF(second,SRC.last_modified_date,CONVERT_TZ((SELECT MAX(lastupdated) AS lastupdated
-FROM schneider_mdwdb.d_o_data_freshness WHERE sourcename like 'ServiceNow%'),'America/Los_Angeles','GMT')),0)<> TRGT.dormancy_age )a;
- 
+ ON (lm.src_key = TRGT.state_src_key)  where lm.dimension_class = 'STATE~INCIDENT' AND  lm.dimension_wh_code = 'OPEN' 
+JOIN (select max(lastupdated) as lastupdated,source_id from schneider_workdb.d_o_data_freshness group by source_id) df ON f.source_id = df.source_id
+wHERE TIMESTAMPDIFF(SECOND,CONVERT_TZ(TRGT.changed_on,'America/Los_Angeles','GMT'), CONVERT_TZ(df.lastupdated,'America/Los_Angeles','GMT')) <> TRGT.dormancy_age) a;
+
  
 

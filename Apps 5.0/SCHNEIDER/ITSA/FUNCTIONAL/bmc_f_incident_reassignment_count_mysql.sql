@@ -9,7 +9,7 @@ ON SRC.incident_number = TRGT.row_id
 and  SRC.sourceinstance = TRGT.source_id   and TRGT.soft_deleted_flag = 'N'
 left join 
 (select documentkey, sourceinstance, count(1) as cnt from schneider_workdb.hpd_help_desk_sys_audit 
-where tablename='hpd_help_desk' and fieldname='Assigned Group'  and oldvalue is not NULL and 
+where tablename='hpd_help_desk' and fieldname='Assigned Group'  and oldvalue is not NULL  
 group by documentkey, sourceinstance) sd
 on sd.documentkey=SRC.incident_number and sd.sourceinstance=SRC.sourceinstance
 WHERE  coalesce(sd.cnt,0)

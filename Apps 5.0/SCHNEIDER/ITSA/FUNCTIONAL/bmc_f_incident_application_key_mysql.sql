@@ -8,7 +8,7 @@ ON SRC.incident_number = TRGT.row_id and  SRC.sourceinstance = TRGT.source_id
 left join (select name, sourceinstance,max(reconciliationidentity) as latest_ci 
 from schneider_mdsdb.bmc_core_bmc_baseelement_final where datasetid = 'BMC.ASSET' and classid <> 'BMC_PERSON'  and (name,createdate) in (select name,max(createdate) as latest_date
 from schneider_mdsdb.bmc_core_bmc_baseelement_final where datasetid = 'BMC.ASSET' and classid <> 'BMC_PERSON' 
-group by 1)group by 1, 2) src1 on SRC.ci = src1.name and trgt.source_id = src1.sourceinstance
+group by 1)group by 1, 2) src1 on SRC.ci = src1.name and SRC.sourceinstance= src1.sourceinstance
 LEFT JOIN schneider_mdwdb.d_application LKP 
  ON ( COALESCE(CONCAT('APPLICATION','~',src1.latest_ci),'UNSPECIFIED') = LKP.row_id 
 AND SRC.sourceinstance= LKP.source_id )
