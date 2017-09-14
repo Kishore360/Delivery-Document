@@ -23,19 +23,24 @@ from
 (select 
 kb.sys_id,kb.sourceinstance,
 case 
-when sc_kb.label = 'Retired' then COALESCE(case when timestampdiff(second,kb.sys_created_on,COALESCE(src_sa.retired_on,kb.retired)) <= 0 then 0 else timestampdiff(second,kb.sys_created_on,COALESCE(src_sa.retired_on,kb.retired)) end ,0)
+when sc_kb.label = 'Retired' then 
+COALESCE(case when timestampdiff(second,kb.sys_created_on,COALESCE(src_sa.retired_on,kb.retired)) <= 0 then 0 
+
+else timestampdiff(second,kb.sys_created_on,COALESCE(src_sa.retired_on,kb.retired)) end ,0)
 when sc_kb.label <> 'Retired' then COALESCE(case when timestampdiff(second,kb.sys_created_on,lastupdated) <=0 then 0 else timestampdiff(second,kb.sys_created_on,lastupdated) end ,0)
 else 0 end as age
 from molinahealth_mdsdb.kb_knowledge_final kb
-join molinahealth_mdsdb.sys_choice_final sc_kb on kb.workflow_state = sc_kb.value and sc_kb.name = 'kb_knowledge' and sc_kb.element = 'workflow_state'
+join molinahealth_mdsdb.sys_choice_final sc_kb on kb.workflow_state = sc_kb.value and  kb.sourceinstance=sc_kb.sourceinstance and 
+ sc_kb.name = 'kb_knowledge' and sc_kb.element = 'workflow_state'
 left join 
 (select documentkey,
 max(case when sc.label = 'Retired' then sa.sys_created_on else null end) as retired_on
 from 
-(select documentkey,oldvalue,newvalue,sys_created_on 
+(select documentkey,oldvalue,newvalue,sys_created_on  ,sourceinstance
 from molinahealth_mdsdb.sys_audit_final
 where tablename = 'kb_knowledge' and fieldname = 'workflow_state' )sa
-join molinahealth_mdsdb.sys_choice_final sc on sa.newvalue = sc.value and sc.name = 'kb_knowledge' and sc.element = 'workflow_state'
+join molinahealth_mdsdb.sys_choice_final sc on sa.newvalue = sc.value and sa.sourceinstance=sc.sourceinstance
+ and sc.name = 'kb_knowledge' and sc.element = 'workflow_state'
 group by documentkey) src_sa on kb.sys_id = src_sa.documentkey 
 left join (select source_id,convert_tz(max(lastupdated),'America/Los_Angeles','UTC') as lastupdated from molinahealth_mdwdb.d_o_data_freshness group by source_id) odf on kb.sourceinstance = odf.source_id ) src 
 left join molinahealth_mdwdb.f_kb_knowledge_c trgt on trgt.row_id = src.sys_id and trgt.source_id = src.sourceinstance) fnl ;
