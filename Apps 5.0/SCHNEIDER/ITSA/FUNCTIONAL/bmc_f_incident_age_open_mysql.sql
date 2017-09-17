@@ -6,6 +6,13 @@ ELSE 'MDS to DWH data validation passed for f_incident.age' END as Message from
 FROM schneider_mdsdb.hpd_help_desk_final SRC 
 JOIN schneider_mdwdb.f_incident TRGT 
 ON SRC.incident_number = TRGT.row_id and  SRC.sourceinstance = TRGT.source_id  and TRGT.soft_deleted_flag='N'
+join schneider_mdwdb.d_incident TRGT1
+on TRGT1.row_key = TRGT.incident_key
+AND TRGT.source_id = TRGT1.source_id
 JOIN schneider_mdwdb.d_lov_map LKP ON TRGT.state_src_key = LKP.src_key
 AND LKP.dimension_wh_code IN ('OPEN') and LKP.dimension_class = 'STATE~INCIDENT'
-WHERE TIMESTAMPDIFF(SECOND, convert_tz(convert_tz(SRC.reported_date,'GMT','America/Los_Angeles'),'America/Los_Angeles', 'GMT' ), (SELECT CONVERT_TZ(max(lastupdated),'America/Los_Angeles', 'GMT') AS lastupdated FROM schneider_mdwdb.d_o_data_freshness WHERE sourcename like '%' and etl_run_number=TRGT.etl_run_number)) <> TRGT.age)a; 
+JOIN (
+select source_id,max(lastupdated) as lastupdated from  schneider_mdwdb.d_o_data_freshness
+group by source_id
+) df ON TRGT.source_id = df.source_id
+WHERE TIMESTAMPDIFF(SECOND, convert_tz(TRGT1.opened_on,'GMT','America/New York') , CONVERT_TZ(lastupdated, 'GMT','America/New York')  <> TRGT.age))a; 

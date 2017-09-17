@@ -7,4 +7,4 @@ FROM schneider_mdsdb.hpd_help_desk_final SRC
 JOIN schneider_mdwdb.f_incident TRGT 
 ON SRC.incident_number = TRGT.row_id 
 and  SRC.sourceinstance = TRGT.source_id   and TRGT.soft_deleted_flag = 'N'
-WHERE COALESCE( SRC.kickback_count,'') <> COALESCE(TRGT.reopened_count ,''))b
+WHERE coalesce ( substring_index( SRC.kickback_count,'.',1), '') <> COALESCE(TRGT.reopened_count ,''))b
