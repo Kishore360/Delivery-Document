@@ -3,5 +3,5 @@ JOIN
 schneider_mdsdb.ctm_people_final LKP
 on SRC.site_id=LKP.site_id
 JOIN schneider_mdwdb.d_location TRGT 
-ON (SRC.instance_id = TRGT.row_id  AND SRC.sourceinstance = TRGT.source_id )  
+ON (SRC.site_id = TRGT.row_id  AND SRC.sourceinstance = TRGT.source_id )  
 WHERE LKP.full_name <> (TRGT.contact_name) 
