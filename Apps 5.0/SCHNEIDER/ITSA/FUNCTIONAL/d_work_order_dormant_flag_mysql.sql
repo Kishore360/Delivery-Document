@@ -3,7 +3,7 @@
   FROM 
 schneider_mdwdb.d_work_order di
   JOIN schneider_mdwdb.f_work_order fi ON di.row_key = fi.work_order_key
-  JOIN schneider_mdwdb.d_lov_map dlm ON fi.state_src_key = dlm.src_key  and dlm.dimension_class = 'STATE~WORKORDER'   AND dlm.dimension_wh_code = 'OPEN'
+  JOIN schneider_mdwdb.d_lov_map dlm ON di.work_order_state_key = dlm.src_key  and dlm.dimension_class = 'STATE~WORKORDER'   AND dlm.dimension_wh_code = 'OPEN'
   JOIN (
 			SELECT max(lastupdated) as lastupdated, 
 				   source_id

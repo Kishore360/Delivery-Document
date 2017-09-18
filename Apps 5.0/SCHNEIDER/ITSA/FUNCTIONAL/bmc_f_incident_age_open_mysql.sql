@@ -15,4 +15,4 @@ JOIN (
 select source_id,max(lastupdated) as lastupdated from  schneider_mdwdb.d_o_data_freshness
 group by source_id
 ) df ON TRGT.source_id = df.source_id
-WHERE TIMESTAMPDIFF(SECOND, convert_tz(TRGT1.opened_on,'GMT','America/New York') , CONVERT_TZ(lastupdated, 'GMT','America/New York')  <> TRGT.age))a; 
+WHERE TIMESTAMPDIFF(SECOND, convert_tz(TRGT1.opened_on,'GMT','America/Los_Angeles') , CONVERT_TZ(lastupdated, 'GMT','America/Los_Angeles')  <> TRGT.age))a; 
