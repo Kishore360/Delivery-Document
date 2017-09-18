@@ -4,7 +4,7 @@ SELECT CASE WHEN cnt THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 from schneider_mdsdb.hpd_help_desk_final src 
 inner join schneider_mdwdb.f_incident trgt on src.incident_number = trgt.row_id and src.sourceinstance = trgt.source_id  
 left join (select name, sourceinstance, max(requestid) as latest_ci 
-from schneider_mdsdb.bmc_core_bmc_application_final_final where (name,sourceinstance,createdate) in 
+from schneider_mdsdb.bmc_core_bmc_application_final where (name,sourceinstance,createdate) in 
 (select name,sourceinstance,max(createdate) as latest_date 
 from schneider_mdsdb.bmc_core_bmc_application_final where datasetid = 'BMC.ASSET' group by name, sourceinstance) group by name,sourceinstance) src_lkp on src.ci = src_lkp.name and src.sourceinstance = src_lkp.sourceinstance
 left join schneider_mdwdb.d_application lkp on CONCAT('APPLICATION~',src_lkp.latest_ci) = lkp.row_id and src_lkp.sourceinstance = lkp.source_id 
