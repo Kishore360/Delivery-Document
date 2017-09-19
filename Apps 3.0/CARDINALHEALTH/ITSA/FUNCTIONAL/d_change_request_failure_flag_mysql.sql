@@ -1,15 +1,19 @@
-SELECT CASE 
-         WHEN Count(1) > 0 THEN 'FAILURE' 
-         ELSE 'SUCCESS' 
-       END AS Result, 
-       CASE 
-         WHEN Count(1) > 0 THEN 
-         'MDS to DWH data validation failed for f_change_request.failure_flag' 
-         ELSE 'SUCCESS' 
-       END AS Message 
-FROM   cardinalhealth_mdsdb.change_request_final SRC 
-       LEFT JOIN cardinalhealth_mdwdb.d_change_request TRGT 
-              ON ( SRC.sys_id = TRGT.row_id 
-                   AND SRC.sourceinstance = TRGT.source_id ) 
-WHERE  CASE WHEN SRC.u_success_status LIKE '%fail%' THEN 'Y' ELSE 'N' END
- <> TRGT.failure_flag 
+SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
+,CASE WHEN cnt > 0 THEN 'Data did not Match.' 
+ELSE 'Data Matched' END AS Message 
+FROM (
+ select count(1) cnt
+from
+cardinalhealth_mdwdb.d_change_request d 
+
+ JOIN cardinalhealth_mdwdb.f_change_request f ON d.row_key=f.change_request_key
+
+ where  d.failure_flag<> CASE WHEN f.success_status_src_code_c LIKE '%fail%' THEN 'Y' ELSE 'N' END 
+    
+
+ )b
+ 
+ 
+ 
+ 
+ 
