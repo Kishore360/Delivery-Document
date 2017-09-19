@@ -38,10 +38,14 @@ select'd_incident' as Table_Name, count(a11.*) Row_Count
  join	ldb.d_task_sla_stage	a12
 	  on 	(a11.stage_src_key = a12.row_key)
 	     union
-		  select'd_sla_priority_c' as Table_Name, count(a11.*) Row_Count
+		  select'd_lov_task_sla_priority_c' as Table_Name, count(a11.*) Row_Count
  from  ldb.f_incident_task_sla_open_c             a11 
  join	ldb.d_task_sla	a122
 	  on 	(a11.sla_key = a122.row_key)
- join	ldb.d_sla_priority_c	a12
+ join	ldb.d_lov_task_sla_priority_c	a12
 	  on 	(a122.sla_priority_src_c_key = a12.row_key)
+	  
+ 
+ 
+
 		  
