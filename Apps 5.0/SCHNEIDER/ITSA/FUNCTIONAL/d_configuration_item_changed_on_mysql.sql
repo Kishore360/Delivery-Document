@@ -3,5 +3,4 @@ ELSE 'SUCCESS' END as Message
 from schneider_mdsdb.bmc_core_bmc_baseelement_final SRC
 join schneider_mdwdb.d_configuration_item TRGT 
 on (SRC.requestid = TRGT.row_id  and SRC.sourceinstance = TRGT.source_id ) 
-where 
-coalesce(from_unixtime(SRC.modifieddate,'UNSPECIFIED')<>TRGT.changed_on;
+where  from_unixtime(SRC.modifieddate) <> TRGT.changed_on;

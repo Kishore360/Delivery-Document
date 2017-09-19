@@ -4,4 +4,4 @@ from schneider_mdsdb.bmc_core_bmc_baseelement_final SRC
 join schneider_mdwdb.d_configuration_item TRGT 
 on (SRC.requestid = TRGT.row_id  and SRC.sourceinstance = TRGT.source_id ) 
 where 
-coalesce( from_unixtime(SRC.createdate,'UNSPECIFIED'))<>TRGT.created_on;
+ from_unixtime(SRC.createdate) <> TRGT.created_on;
