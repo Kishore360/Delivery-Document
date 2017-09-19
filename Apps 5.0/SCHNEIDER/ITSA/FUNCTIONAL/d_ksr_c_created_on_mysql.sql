@@ -2,4 +2,4 @@ SELECT CASE WHEN count(1)  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHE
 THEN 'MDS to DWH data validation failed for d_ksr_c.created_on' else 'SUCCESS' end as message
 FROM schneider_mdsdb.ks_srv_customersurvey_base_final SRC
 JOIN schneider_mdwdb.d_ksr_c TRGT ON SRC.customersurveyid  =  TRGT.row_id and  SRC.sourceinstance = TRGT.source_id  
-WHERE convert_tz(SRC.create_date,'GMT', 'America/Los_Angeles') <> (TRGT.created_on)
+WHERE from_unixtime(SRC.create_date) <> (TRGT.created_on)

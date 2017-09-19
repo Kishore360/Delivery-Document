@@ -4,4 +4,4 @@ from schneider_mdsdb.bmc_core_bmc_application_final SRC
 join schneider_mdwdb.d_application TRGT 
 on (SRC.instanceid = TRGT.row_id  and SRC.sourceinstance = TRGT.source_id ) 
 where 
-coalesce(convert_tz(SRC.createdate,'GMT','America/Los_Angeles'),'UNSPECIFIED') <> TRGT.created_on;
+from_unixtime(SRC.createdate) <> TRGT.created_on;
