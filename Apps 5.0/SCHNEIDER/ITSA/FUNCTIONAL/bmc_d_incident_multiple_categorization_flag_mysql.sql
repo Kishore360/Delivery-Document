@@ -1,4 +1,0 @@
-SELECT CASE WHEN count(1)  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)  THEN 'MDS to DWH data validation failed for d_incident.multiple_categorization_flag' ELSE 'SUCCESS' END as Message from schneider_mdwdb.d_incident TRGT 
-join schneider_workdb.hpd_help_desk_sys_audit ta 
-on  TRGT.row_id = ta.documentkey and TRGT.source_id = ta.sourceinstance and ta.tablename = 'hpd_help_desk' and ta.fieldname in ('Product Categorization Tier 1','Product Categorization Tier 2','Product Categorization Tier 3') 
-where  ( case when ta.newvalue <> ta.oldvalue then 'Y' else 'N' end ) <> TRGT.multiple_categorization_flag;
