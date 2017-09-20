@@ -7,7 +7,7 @@ LEFT JOIN whirlpool_mdwdb.f_expense_item TRGT
  ON (SRC.sys_id=TRGT.row_id 
  AND SRC.sourceinstance=TRGT.source_id )
  LEFT JOIN whirlpool_mdwdb.d_lov LKP 
- ON ( CONVERT (UCASE(CONCAT('EXPENSE_ITEM~STATUS~~',SRC.state) ))= LKP.row_id 
+ ON UCASE(CONCAT('EXPENSE_ITEM~STATUS~~',SRC.state) )= LKP.row_id 
 AND SRC.sourceinstance = LKP.source_id 
 AND LKP.dimension_class ='EXPENSE_ITEM'
 AND LKP.dimension_type = 'STATUS'
