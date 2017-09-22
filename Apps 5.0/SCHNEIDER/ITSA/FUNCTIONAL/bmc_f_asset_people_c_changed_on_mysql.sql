@@ -4,6 +4,6 @@
   JOIN schneider_mdwdb.f_asset_people_c TRGT 
  ON (SRC.instanceid=TRGT.row_id 
  AND SRC.sourceinstance=TRGT.source_id )
- where TRGT.changed_on<> from_unixtime(SRC.modified_date)
+ where TRGT.changed_on<>convert_tz((SRC.modified_date),'GMT','America/Los_Angeles')
  
  

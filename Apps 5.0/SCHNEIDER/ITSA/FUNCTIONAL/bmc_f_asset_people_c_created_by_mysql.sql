@@ -2,7 +2,7 @@
  CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for f_asset.asset_key' ELSE 'SUCCESS' END as Message
   FROM  schneider_mdsdb.ast_assetpeople_final SRC 
   JOIN schneider_mdwdb.f_asset_people_c TRGT 
- ON (concat('BUSINESS_SERVICE','~',SRC.requestid)=TRGT.row_id 
+ ON (SRC.instanceid=TRGT.row_id 
  AND SRC.sourceinstance=TRGT.source_id )
  where TRGT.created_by<>SRC.submitter
  

@@ -4,7 +4,7 @@
  FROM schneider_mdsdb.ast_assetpeople_final SRC 
  left join schneider_mdsdb.ctm_people_final emp_lkp on SRC.peoplegroupinstanceid = emp_lkp.instanceid and SRC.sourceinstance = emp_lkp.sourceinstance
   JOIN  schneider_mdwdb.f_asset_people_c TRGT 
- ON (concat('BUSINESS_SERVICE','~',SRC.requestid)=TRGT.row_id 
+ ON (SRC.instanceid=TRGT.row_id 
  AND SRC.sourceinstance=TRGT.source_id )
  LEFT JOIN schneider_mdwdb.d_internal_contact LKP 
  ON ( CONCAT('INTERNAL_CONTACT~',emp_lkp.person_id) = LKP.row_id 
