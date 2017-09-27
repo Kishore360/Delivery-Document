@@ -1,12 +1,12 @@
-SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+
+ 
+ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for f_asset_status_history.department_key' ELSE 'SUCCESS' END as Message
  FROM whirlpool_mdsdb.alm_asset_final SRC 
  LEFT JOIN whirlpool_mdwdb.f_asset_status_history TRGT 
- ON (SRC.sys_id=TRGT.asset_key 
+ ON (concat(SRC.sys_id,'~',date_format(sys_created_on,'%Y%m%d%H%i%S' ) )  =TRGT.row_id  
  AND SRC.sourceinstance=TRGT.source_id )
- LEFT JOIN whirlpool_mdsdb.sys_user_final LKP 
- ON SRC.owned_by= LKP.sys_id 
-AND SRC.sourceinstance = LKP.sourceinstance 
-LEFT JOIN whirlpool_mdwdb.d_internal_organization LKP1
-on LKP1.row_id=COALESCE(CONCAT('DEPARTMENT~',LKP.department),CONCAT('DEPARTMENT~',SRC.department),'UNSPECIFIED')
- WHERE COALESCE(LKP1.row_key,CASE WHEN COALESCE(SRC.department, LKP.department)IS NULL then 0 else '-1' end)<> TRGT.department_key
+ LEFT JOIN whirlpool_mdwdb.d_internal_organization LKP 
+ ON  ( CONCAT('DEPARTMENT~',SRC.department) = LKP.row_id 
+AND SRC.sourceinstance = LKP.source_id )
+ WHERE COALESCE(LKP.row_key,CASE WHEN SRC.department IS NULL THEN 0 else '-1' end)<> COALESCE(TRGT.department_key,'')
