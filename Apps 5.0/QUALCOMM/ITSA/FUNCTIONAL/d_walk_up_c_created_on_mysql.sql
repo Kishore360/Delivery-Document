@@ -4,4 +4,4 @@ FROM qualcomm_mdsdb.u_walk_up_call_final SRC
  LEFT JOIN qualcomm_mdwdb.d_walk_up_call_c TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
-WHERE TRGT.created_on<> CONVERT_TZ(SRC.sys_created_on,'GMT','America/Los_Angeles');
+WHERE TRGT.created_on<> SRC.sys_created_on;

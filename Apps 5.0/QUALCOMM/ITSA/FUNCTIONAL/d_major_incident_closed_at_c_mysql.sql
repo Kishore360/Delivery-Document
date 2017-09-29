@@ -4,4 +4,4 @@ FROM qualcomm_mdsdb.u_major_incident_final SRC
  LEFT JOIN qualcomm_mdwdb.d_major_incident_c TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
-WHERE TRGT.closed_at_c<> CONVERT_TZ(SRC.closed_at,'GMT','America/Los_Angeles');
+WHERE TRGT.closed_at_c<> SRC.closed_at;
