@@ -100,19 +100,19 @@ on (a11.asc_incident_opened_time_c_key = a12.row_key)
 join ldb.d_calendar_time_hour       a120
 on (a12.hour_24_format_num = a120.hour_24_format_num)
 union
-select'ldb.d_incident_impact' as Table_Name, count(a11.row_key) Row_Count
+select'ldb.d_lov_incident_asc_impact_c' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_incident_asc_c       a11 
-join ldb.d_incident_impact       a121
+join ldb.d_lov_incident_asc_impact_c       a121
 on (a11.asc_incident_impact_c_key = a121.row_key)
 union
-select'ldb.d_incident_priority' as Table_Name, count(a11.row_key) Row_Count
+select'ldb.d_lov_incident_asc_priority_c' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_incident_asc_c       a11 
-join ldb.d_incident_priority       a122
+join ldb.d_lov_incident_asc_priority_c       a122
 on (a11.asc_incident_priority_c_key = a122.row_key)
 union
-select'ldb.d_incident_urgency' as Table_Name, count(a11.row_key) Row_Count
+select'ldb.d_lov_incident_asc_urgency_c' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_incident_asc_c       a11 
-join ldb.d_incident_urgency       a123
+join ldb.d_lov_incident_asc_urgency_c       a123
 on (a11.asc_incident_urgency_c_key = a123.row_key)
 union
 select'ldb.d_location' as Table_Name, count(a11.row_key) Row_Count
@@ -158,7 +158,7 @@ on (a11.asc_incident_business_service_c_key = a14.row_key)
 join ldb.d_business_service_criticality       a130
 on (a14.criticality_key = a130.row_key)
 union
-select'ldb.d_business_service_used_for' as Table_Name, count(a11.row_key) Row_Count
+select 'ldb.d_business_service_used_for' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_incident_asc_c       a11 
  join ldb.d_business_service       a14
 on (a11.asc_incident_business_service_c_key = a14.row_key)
@@ -185,7 +185,3 @@ select'ldb.d_calendar_year' as Table_Name, count(a11.row_key) Row_Count
 on (a11.asc_incident_opened_on_c_key = a15.row_key)
 join ldb.d_calendar_year       a134
 on (a15.year_start_date_key = a134.row_key)
-
-
-
-
