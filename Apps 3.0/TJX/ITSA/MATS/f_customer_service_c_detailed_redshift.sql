@@ -8,8 +8,7 @@ on (a11.cs_representative_c_key = a12.row_key)
 union
 select 'ldb.d_customer_service_c a13 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_customer_service_c a11 
-join ldb.d_customer_service_c a13 
-on (a11.row_key = a13.row_key) 
+join ldb.d_customer_service_c a13 ON  a11.customer_service_c_key=a13.row_key
 union
 select 'ldb.d_calendar_date a14 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_customer_service_c a11 

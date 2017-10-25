@@ -270,5 +270,5 @@ union
 select 'ldb.d_asset a145 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11 
 join ldb.d_asset a145 
-on (a11.asset_key = a12.row_key)
+on (a11.asset_key = a145.row_key)
 
