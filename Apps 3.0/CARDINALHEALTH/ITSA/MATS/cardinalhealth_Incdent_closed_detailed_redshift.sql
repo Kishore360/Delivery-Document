@@ -46,3 +46,11 @@ select'ldb.d_incident' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_incident_closed       a11 
 join ldb.d_incident       a19
 on (a11.incident_key=a19.row_key)
+union
+select 'ldb.d_internal_organization_legalentity_company_c a167 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_incident_closed a11
+join    ldb.d_internal_contact_assigned_to       a114
+ on         (a11.assigned_to_key = a114.row_key)
+join    ldb.d_internal_organization_legalentity_company_c       a167
+on         (a114.user_company_c1_key = a167.row_key)
+
