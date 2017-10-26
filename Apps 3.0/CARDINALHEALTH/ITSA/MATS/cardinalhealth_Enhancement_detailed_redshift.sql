@@ -6,76 +6,76 @@ from ldb.f_enhancement_rm_c a11
 join ldb.d_internal_contact a12 
 on (a11.opened_by_key = a12.row_key) 
 union
-select 'ldb.d_master_item a13 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_lov_rm_enhancement_state_c a13 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_enhancement_rm_c a11 
-join ldb.d_master_item a13 
-on (a11.catalog_item_rm_c_key = a13.row_key) 
+join ldb.d_lov_rm_enhancement_state_c a13 
+on (a11.state_src_key = a13.row_key) 
 union
-select 'ldb.d_internal_organization_group a14 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_master_item a14 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_enhancement_rm_c a11 
-join ldb.d_internal_organization_group a14 
-on (a11.assignment_group_key = a14.row_key) 
+join ldb.d_master_item a14 
+on (a11.catalog_item_rm_c_key = a14.row_key) 
 union
-select 'ldb.d_internal_contact_emp_seniors_c a15 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_internal_contact_assigned_to a15 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_enhancement_rm_c a11 
-join ldb.d_internal_organization_group a14 
-on (a11.assignment_group_key = a14.row_key) 
-join ldb.d_internal_contact_emp_seniors_c a15 
-on (a14.manager_c_key = a15.row_key) 
+join ldb.d_internal_contact_assigned_to a15 
+on (a11.assigned_to_key = a15.row_key) 
 union
-select 'ldb.d_assignment_group_level0_manager_c_relation a16 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_internal_organization_group a16 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_enhancement_rm_c a11 
-join ldb.d_assignment_group_level0_manager_c_relation a16 
-on (a11.assignment_group_key = a16.level0_assigment_group_key) 
+join ldb.d_internal_organization_group a16 
+on (a11.assignment_group_key = a16.row_key) 
 union
-select 'ldb.d_calendar_date a17 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_internal_contact_emp_seniors_c a17 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_enhancement_rm_c a11 
-join ldb.d_calendar_date a17 
-on (a11.opened_on_key = a17.row_key) 
+join ldb.d_internal_organization_group a16 
+on (a11.assignment_group_key = a16.row_key) 
+join ldb.d_internal_contact_emp_seniors_c a17 
+on (a16.manager_c_key = a17.row_key) 
 union
-select 'ldb.d_enhancement_rm_c a18 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_assignment_group_level0_manager_c_relation a18 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_enhancement_rm_c a11 
-join ldb.d_enhancement_rm_c a18 
-on (a11.enhancement_c_key = a18.row_key) 
+join ldb.d_assignment_group_level0_manager_c_relation a18 
+on (a11.assignment_group_key = a18.level0_assigment_group_key) 
 union
-select 'ldb.d_calendar_greg_fiscal_c a19 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_calendar_date a19 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_enhancement_rm_c a11 
-join ldb.d_calendar_greg_fiscal_c a19 
-on (a11.opened_on_key = a19.greogrian_calendar_key) 
+join ldb.d_calendar_date a19 
+on (a11.opened_on_key = a19.row_key) 
 union
-select 'ldb.d_calendar_date_fiscal a110 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_enhancement_rm_c a110 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_enhancement_rm_c a11 
-join ldb.d_calendar_greg_fiscal_c a19 
-on (a11.opened_on_key = a19.greogrian_calendar_key) 
-join ldb.d_calendar_date_fiscal a110 
-on (a19.fiscal_key = a110.row_key) 
+join ldb.d_enhancement_rm_c a110 
+on (a11.enhancement_c_key = a110.row_key) 
 union
-select 'ldb.d_internal_contact_assigned_to a111 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_calendar_greg_fiscal_c a111 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_enhancement_rm_c a11 
-join ldb.d_internal_contact_assigned_to a111 
-on (a11.assigned_to_key = a111.row_key) 
+join ldb.d_calendar_greg_fiscal_c a111 
+on (a11.opened_on_key = a111.greogrian_calendar_key) 
 union
-select 'ldb.d_rm_change_scope_feature_c a112 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_calendar_date_fiscal a112 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_enhancement_rm_c a11 
-join ldb.d_rm_change_scope_feature_c a112 
-on (a11.feature_change_scope_c_key = a112.row_key) 
+join ldb.d_calendar_greg_fiscal_c a111 
+on (a11.opened_on_key = a111.greogrian_calendar_key) 
+join ldb.d_calendar_date_fiscal a112 
+on (a111.fiscal_key = a112.row_key) 
 union
-select 'ldb.d_configuration_item a113 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_rm_change_scope_feature_c a113 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_enhancement_rm_c a11 
-join ldb.d_configuration_item a113 
-on (a11.configuration_item_key = a113.row_key) 
+join ldb.d_rm_change_scope_feature_c a113 
+on (a11.feature_change_scope_c_key = a113.row_key) 
 union
-select 'ldb.d_internal_contact_mdm a114 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_configuration_item a114 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_enhancement_rm_c a11 
+join ldb.d_configuration_item a114 
+on (a11.configuration_item_key = a114.row_key) 
+union
+select 'ldb.d_internal_contact_mdm a115 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_enhancement_rm_c a11 
 join ldb.d_internal_contact a12 
 on (a11.opened_by_key = a12.row_key) 
-join ldb.d_internal_contact_mdm a114 
-on (a12.row_current_key = a114.row_current_key) 
-union
-select 'ldb.d_lov_rm_enhancement_state_c a115 ' as Table_name, count(a11.row_key) Row_Count
-from ldb.f_enhancement_rm_c a11 
-join ldb.d_lov_rm_enhancement_state_c a115 
-on (a11.state_src_key = a115.row_key) 
+join ldb.d_internal_contact_mdm a115 
+on (a12.row_current_key = a115.row_current_key) 
 union
 select 'ldb.d_request_item a116 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_enhancement_rm_c a11 
@@ -127,40 +127,47 @@ from ldb.f_enhancement_rm_c a11
 join ldb.d_rm_lov_type_of_request_c a125 
 on (a11.type_of_request_c_key = a125.row_key) 
 union
-select 'ldb.d_assignment_group_level0_manager_c a126 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_internal_organization_legalentity_company_c a126 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_enhancement_rm_c a11 
-join ldb.d_assignment_group_level0_manager_c_relation a16 
-on (a11.assignment_group_key = a16.level0_assigment_group_key) 
-join ldb.d_assignment_group_level0_manager_c a126 
-on (a16.level0_manager_c_key = a126.level0_manager_c_key) 
+join ldb.d_internal_contact_assigned_to a15 
+on (a11.assigned_to_key = a15.row_key) 
+join ldb.d_internal_organization_legalentity_company_c a126 
+on (a15.user_company_c1_key = a126.row_key) 
 union
-select 'ldb.d_calendar_fiscal_period a127 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_assignment_group_level0_manager_c a127 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_enhancement_rm_c a11 
-join ldb.d_calendar_greg_fiscal_c a19 
-on (a11.opened_on_key = a19.greogrian_calendar_key) join ldb.d_calendar_date_fiscal a110 
-on (a19.fiscal_key = a110.row_key) 
-join ldb.d_calendar_fiscal_period a127 
-on (a110.period_start_date_key = a127.row_key) 
+join ldb.d_assignment_group_level0_manager_c_relation a18 
+on (a11.assignment_group_key = a18.level0_assigment_group_key) 
+join ldb.d_assignment_group_level0_manager_c a127 
+on (a18.level0_manager_c_key = a127.level0_manager_c_key) 
 union
-select 'ldb.d_calendar_month a128 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_calendar_fiscal_period a128 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_enhancement_rm_c a11 
-join ldb.d_calendar_date a17 
-on (a11.opened_on_key = a17.row_key) 
-join ldb.d_calendar_month a128 
-on (a17.month_start_date_key = a128.row_key) 
+join ldb.d_calendar_greg_fiscal_c a111 
+on (a11.opened_on_key = a111.greogrian_calendar_key) join ldb.d_calendar_date_fiscal a112 
+on (a111.fiscal_key = a112.row_key) 
+join ldb.d_calendar_fiscal_period a128 
+on (a112.period_start_date_key = a128.row_key) 
 union
-select 'ldb.d_calendar_fiscal_quarter a129 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_calendar_month a129 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_enhancement_rm_c a11 
-join ldb.d_calendar_greg_fiscal_c a19 
-on (a11.opened_on_key = a19.greogrian_calendar_key) join ldb.d_calendar_date_fiscal a110 
-on (a19.fiscal_key = a110.row_key) 
-join ldb.d_calendar_fiscal_quarter a129 
-on (a110.quarter_start_date_key = a129.row_key) 
+join ldb.d_calendar_date a19 
+on (a11.opened_on_key = a19.row_key) 
+join ldb.d_calendar_month a129 
+on (a19.month_start_date_key = a129.row_key) 
 union
-select 'ldb.d_calendar_fiscal_year a130 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_calendar_fiscal_quarter a130 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_enhancement_rm_c a11 
-join ldb.d_calendar_greg_fiscal_c a19 
-on (a11.opened_on_key = a19.greogrian_calendar_key) join ldb.d_calendar_date_fiscal a110 
-on (a19.fiscal_key = a110.row_key) 
-join ldb.d_calendar_fiscal_year a130 
-on (a110.year_start_date_key = a130.row_key) 
+join ldb.d_calendar_greg_fiscal_c a111 
+on (a11.opened_on_key = a111.greogrian_calendar_key) join ldb.d_calendar_date_fiscal a112 
+on (a111.fiscal_key = a112.row_key) 
+join ldb.d_calendar_fiscal_quarter a130 
+on (a112.quarter_start_date_key = a130.row_key) 
+union
+select 'ldb.d_calendar_fiscal_year a131 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_enhancement_rm_c a11 
+join ldb.d_calendar_greg_fiscal_c a111 
+on (a11.opened_on_key = a111.greogrian_calendar_key) join ldb.d_calendar_date_fiscal a112 
+on (a111.fiscal_key = a112.row_key) 
+join ldb.d_calendar_fiscal_year a131 
+on (a112.year_start_date_key = a131.row_key) 
