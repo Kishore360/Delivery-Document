@@ -6,7 +6,7 @@ FROM (SELECT count(1) as CNT
  LEFT JOIN cardinalhealth_mdwdb.d_project LKP
  on LKP.row_id = COALESCE(SRC.u_project,'UNSPECIFIED') and LKP.source_id  = SRC.sourceinstance
  LEFT JOIN cardinalhealth_mdwdb.f_time_entry_c TRGT 
- ON (SRC.sys_id =TRGT.row_id  
+ ON (SRC.sys_id =LEFT(TRGT.row_id,32 )  
  AND SRC.sourceinstance= TRGT.source_id  )
  WHERE LKP.row_key <> TRGT.project_key)temp;
 	
