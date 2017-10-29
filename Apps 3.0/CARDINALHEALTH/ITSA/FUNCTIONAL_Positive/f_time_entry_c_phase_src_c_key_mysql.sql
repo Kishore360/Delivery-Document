@@ -6,9 +6,10 @@ FROM (SELECT count(1) as CNT
   JOIN cardinalhealth_mdwdb.f_time_entry_c TRGT 
  ON (SRC.sys_id =LEFT(TRGT.row_id, 32)  
  AND SRC.sourceinstance= TRGT.source_id  )
+ join cardinalhealth_mdsdb.u_pm_project_phase_final c ON SRC.u_phase = c.sys_id
+	AND SRC.sourceinstance = c.sourceinstance
 LEFT JOIN cardinalhealth_mdwdb.d_lov LKP 
- ON COALESCE(CONCAT('CATEGORY','~','TIME_CARD','~','~','~',upper(SRC.category)),'UNSPECIFIED')= LKP.row_id 
+ ON COALESCE(CONCAT('PHASE~TIME_ENTRY~~~',c.short_description),'UNSPECIFIED')= LKP.row_id 
 AND SRC.sourceinstance= LKP.source_id 
- WHERE COALESCE(LKP.row_key,CASE WHEN SRC.category IS NULL THEN 0 else -1 end)= (TRGT.category_src_key))temp;
- 
+ WHERE COALESCE(LKP.row_key,CASE WHEN c.short_description IS NULL THEN 0 else -1 end)<> (TRGT.phase_src_c_key))temp;
  

@@ -16,6 +16,6 @@ where CASE
 			 WHEN b.day_name='Friday' THEN SRC.friday
 			 WHEN b.day_name='Saturday' THEN SRC.saturday
 			 ELSE 0
-		 END = TRGT.effort_duration)temp
+		 END <> TRGT.effort_duration)temp
 		 
 		 

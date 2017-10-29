@@ -11,5 +11,5 @@ FROM (SELECT count(1) as CNT
 LEFT JOIN cardinalhealth_mdwdb.d_lov LKP 
  ON COALESCE(CONCAT('PHASE~TIME_ENTRY~~~',c.short_description),'UNSPECIFIED')= LKP.row_id 
 AND SRC.sourceinstance= LKP.source_id 
- WHERE COALESCE(LKP.row_key,CASE WHEN c.short_description IS NULL THEN 0 else -1 end)<> (TRGT.phase_src_c_key))temp;
+ WHERE COALESCE(LKP.row_key,CASE WHEN c.short_description IS NULL THEN 0 else -1 end) = (TRGT.phase_src_c_key))temp;
  

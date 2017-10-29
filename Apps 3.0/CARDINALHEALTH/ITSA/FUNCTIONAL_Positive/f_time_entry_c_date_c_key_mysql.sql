@@ -9,7 +9,7 @@
  LEFT JOIN cardinalhealth_mdwdb.f_time_entry_c TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
- WHERE LKP.row_key = TRGT.date_c_key)temp;
+ WHERE LKP.row_key <> TRGT.date_c_key)temp;
  
  
  

@@ -15,7 +15,7 @@ FROM (SELECT count(1) as CNT
   inner join  cardinalhealth_mdsdb.sys_audit_final saf 
   on tcf.sys_id=saf.documentkey where tablename='time_card' and fieldname='state' and newvalue ='Approved'  group by 1 ) as sys_approved_on on sys_approved_on.documentkey=a.sys_id
   
-  where sys_approved_on.approved_on<>TRGT.approved_on
+  where sys_approved_on.approved_on=TRGT.approved_on
   )tmp
   
   

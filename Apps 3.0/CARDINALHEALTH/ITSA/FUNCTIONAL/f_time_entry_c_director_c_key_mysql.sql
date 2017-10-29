@@ -14,4 +14,4 @@ left join cardinalhealth_mdwdb.d_internal_contact c
 
 on c.row_id=coalesce(concat('INTERNAL_CONTACT~',SRC.u_director),'UNSPECIFIED')
 
-where TRGT.director_c_key<>coalesce(c.row_key,case when SRC.u_director is null then 0 else -1 end)) a;
+where TRGT.director_c_key=coalesce(c.row_key,case when SRC.u_director is null then 0 else -1 end)) a;

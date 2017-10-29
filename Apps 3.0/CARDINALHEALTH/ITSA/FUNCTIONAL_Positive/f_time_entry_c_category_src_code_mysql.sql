@@ -4,7 +4,7 @@ CASE WHEN CNT >0 THEN 'MDS to DWH data validation failed' ELSE 'SUCCESS' END as 
 FROM (SELECT count(1) as CNT
  FROM cardinalhealth_mdsdb.time_card_final SRC 
  LEFT JOIN cardinalhealth_mdwdb.f_time_entry_c TRGT 
- ON (SRC.sys_id =LEFT(TRGT.row_id,32 ) 
+ ON (SRC.sys_id =LEFT(TRGT.row_id,32 )  
  AND SRC.sourceinstance= TRGT.source_id  )
- WHERE   SRC.u_user_cc =cost_center)temp;
+ WHERE   SRC.category <> TRGT.category_src_code)temp;
  

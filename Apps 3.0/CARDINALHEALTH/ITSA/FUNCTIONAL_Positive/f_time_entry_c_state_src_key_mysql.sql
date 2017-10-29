@@ -8,4 +8,4 @@ AND SRC.sourceinstance= LKP.source_id )
  LEFT JOIN cardinalhealth_mdwdb.f_time_entry_c TRGT 
  ON (SRC.sys_id =LEFT(TRGT.row_id,32 )  
  AND SRC.sourceinstance= TRGT.source_id  )
- WHERE COALESCE(LKP.row_key,CASE WHEN SRC.state IS NULL THEN 0 else -1 end)= COALESCE(TRGT.state_src_key)
+ WHERE COALESCE(LKP.row_key,CASE WHEN SRC.state IS NULL THEN 0 else -1 end)<> COALESCE(TRGT.state_src_key)

@@ -14,6 +14,6 @@ LEFT JOIN cardinalhealth_mdsdb.u_pm_project_phase_final c ON a.u_phase = c.sys_i
 LEFT JOIN cardinalhealth_mdsdb.pm_project_task_final d ON	d.sys_id = a.task   
 			AND a.sourceinstance = d.sourceinstance	
 			where
-			COALESCE(d.u_expense_type ,'UNSPECIFIED')= TRGT.expense_type)a
+			COALESCE(d.u_expense_type ,'UNSPECIFIED')<> TRGT.expense_type)a
 			
 			

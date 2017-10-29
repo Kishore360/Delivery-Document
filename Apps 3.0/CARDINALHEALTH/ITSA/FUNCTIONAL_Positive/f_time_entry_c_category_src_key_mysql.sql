@@ -9,6 +9,6 @@ FROM (SELECT count(1) as CNT
 LEFT JOIN cardinalhealth_mdwdb.d_lov LKP 
  ON COALESCE(CONCAT('CATEGORY','~','TIME_CARD','~','~','~',upper(SRC.category)),'UNSPECIFIED')= LKP.row_id 
 AND SRC.sourceinstance= LKP.source_id 
- WHERE COALESCE(LKP.row_key,CASE WHEN SRC.category IS NULL THEN 0 else -1 end)= (TRGT.category_src_key))temp;
+ WHERE COALESCE(LKP.row_key,CASE WHEN SRC.category IS NULL THEN 0 else -1 end)<> (TRGT.category_src_key))temp;
  
  

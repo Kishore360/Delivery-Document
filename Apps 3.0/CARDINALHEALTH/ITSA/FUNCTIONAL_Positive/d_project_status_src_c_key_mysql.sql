@@ -6,6 +6,6 @@ on d.row_id=i.sys_id and d.source_id=i.sourceinstance
 join
 cardinalhealth_mdwdb.d_lov h 
 ON (i.state=h.dimension_code AND h.dimension_class='STATE~PM_PROJECT' AND h.current_flag='Y') 
-where coalesce(h.row_key,case when i.state is null then 0 else -1 end) = d.status_src_c_key	
+where coalesce(h.row_key,case when i.state is null then 0 else -1 end) <> d.status_src_c_key	
 ;
 
