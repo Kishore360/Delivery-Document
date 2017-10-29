@@ -1,4 +1,4 @@
-       
+           
            
            
            SELECT 
@@ -10,10 +10,13 @@ FROM (SELECT count(1) as CNT
                LEFT JOIN cardinalhealth_mdwdb.f_time_entry_c TRGT 
  ON (a.sys_id =LEFT(TRGT.row_id,32 )  
  AND a.sourceinstance= TRGT.source_id  )
-           left join     ( select  documentkey ,max(saf.sys_created_on) submitted_on from 
+           left join     ( select  documentkey ,max(saf.sys_created_on) frozen_on from 
  cardinalhealth_mdsdb.time_card_final tcf 
   inner join  cardinalhealth_mdsdb.sys_audit_final saf 
-  on tcf.sys_id=saf.documentkey where tablename='time_card' and fieldname='state' and newvalue ='Released'  group by 1 ) as sys_submitted_on on sys_submitted_on.documentkey=a.sys_id
+  on tcf.sys_id=saf.documentkey where tablename='time_card' and fieldname='state' and newvalue ='Frozen'  group by 1 ) as sys_frozen on sys_frozen.documentkey=a.sys_id
   
-  where sys_submitted_on.submitted_on<>TRGT.submitted_on
+  where sys_frozen.frozen_on<>TRGT.frozen_on
   )tmp
+				
+				
+				
