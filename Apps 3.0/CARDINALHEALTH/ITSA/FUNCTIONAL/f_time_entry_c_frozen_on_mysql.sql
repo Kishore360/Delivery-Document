@@ -15,7 +15,7 @@ FROM (SELECT count(1) as CNT
   inner join  cardinalhealth_mdsdb.sys_audit_final saf 
   on tcf.sys_id=saf.documentkey where tablename='time_card' and fieldname='state' and newvalue ='Frozen'  group by 1 ) as sys_frozen on sys_frozen.documentkey=a.sys_id
   
-  where sys_frozen.frozen_on=TRGT.frozen_on
+  where sys_frozen.frozen_on<>TRGT.frozen_on
   )tmp
 				
 				

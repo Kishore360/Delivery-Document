@@ -8,5 +8,5 @@ FROM (SELECT count(1) as CNT
  LEFT JOIN cardinalhealth_mdwdb.f_time_entry_c TRGT 
  ON (SRC.sys_id =LEFT(TRGT.row_id,32 )  
  AND SRC.sourceinstance= TRGT.source_id  )
- WHERE LKP.row_key = TRGT.project_key)temp;
+ WHERE LKP.row_key <> TRGT.project_key)temp;
 	

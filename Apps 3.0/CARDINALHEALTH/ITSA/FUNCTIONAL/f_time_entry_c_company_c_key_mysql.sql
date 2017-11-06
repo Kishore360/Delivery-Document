@@ -8,4 +8,4 @@ on LKP.row_id = COALESCE(CONCAT('SUBSIDIARY~',SRC.u_company),'UNSPECIFIED') and 
 LEFT JOIN cardinalhealth_mdwdb.f_time_entry_c TRGT 
 ON (SRC.sys_id =LEFT(TRGT.row_id,32 )  
 AND SRC.sourceinstance= TRGT.source_id     )
-WHERE LKP.row_key = TRGT.company_c_key)temp;
+WHERE LKP.row_key <> TRGT.company_c_key)temp;

@@ -8,6 +8,6 @@
  FROM cardinalhealth_mdsdb.sys_user_final incf 
  JOIN cardinalhealth_mdwdb.d_internal_contact dfi
  on dfi.row_id = CONCAT('INTERNAL_CONTACT~',incf.sys_id) and dfi.source_id= incf.sourceinstance
-where incf.u_rate= dfi.rate_C)temp
+where incf.u_rate<> dfi.rate_C)temp
 
 
