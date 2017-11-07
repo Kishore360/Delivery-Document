@@ -1,6 +1,10 @@
 
 select 'ldb.f_task_sla_breached_c a11 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_task_sla_breached_c a11 
+union 
+select 'ldb.d_task_sla_c a11 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_task_sla_breached_c a11 
+join ldb.d_task_sla_c a12 on a11.task_sla_c_key=a12.row_key
 union
 select 'ldb.d_internal_organization_group a12 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_task_sla_breached_c a11 
