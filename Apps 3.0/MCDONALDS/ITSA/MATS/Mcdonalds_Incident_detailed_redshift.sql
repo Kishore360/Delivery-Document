@@ -232,9 +232,7 @@ select'ldb.d_calendar_year' as Table_Name, count(a11.row_key) Row_Count
 on (a11.opened_on_key=a110.row_key)
 join ldb.d_calendar_year       a141
 on (a110.year_start_date_key=a141.row_key)
-
-
-
-
-
-
+UNION 
+SELECT 'd_scafe_core_realm_c' as Table_Name, count(a.row_key) as Row_count
+FROM ldb.f_incident a 
+JOIN ldb.d_scafe_core_realm_c b ON a.scafe_core_realm_c_key=b.row_key

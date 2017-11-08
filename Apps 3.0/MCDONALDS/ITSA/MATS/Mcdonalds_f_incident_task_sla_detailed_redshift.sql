@@ -20,6 +20,11 @@ UNION
 SELECT 'd_calendar_date' as Table_Name,count(a.row_key) as Row_count
 FROM ldb.f_incident_task_sla a 
 JOIN ldb.d_calendar_date b ON a.opened_on_key=b.row_key
+UNION 
+SELECT 'd_scafe_core_realm_c' as Table_Name,count(a.row_key) as Row_count
+FROM ldb.f_incident_task_sla a 
+JOIN ldb.d_scafe_core_realm_c b ON a.scafe_core_realm_c_key=b.row_key
+
 
 
 
