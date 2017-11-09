@@ -1,5 +1,5 @@
-select 'ldb.d_calendar_date a11 ' as Table_name, count(a11.row_key) Row_Count
-from ldb.d_calendar_date a11 
+select 'ldb.f_incident_state a11 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_incident_state a11 
 union
 select 'ldb.f_incident_state a12 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.d_calendar_date a11 
@@ -57,9 +57,9 @@ join ldb.d_incident_state a19
 on (a14.state_src_key = a19.row_key) 
 union
 select 'ldb.d_calendar_month a110 ' as Table_name, count(a11.row_key) Row_Count
-from ldb.d_calendar_date a11 
-join ldb.d_calendar_month a110 
-on (a11.month_start_date_key = a110.row_key) 
+FROM ldb.f_incident_state a 
+JOIN ldb.d_calendar_date a11 ON a.state_on_key=a11.row_key
+join ldb.d_calendar_month a110 on (a11.month_start_date_key = a110.row_key) 
 UNION 
 SELECT 'd_scafe_core_realm_c' as Table_Name, count(a.row_key) as Row_count
 FROM ldb.f_incident_state a 
