@@ -6,7 +6,7 @@ select TRGT.CHANGED_ON from
   LEFT JOIN mercuryins_mdwdb.f_agent_non_acd TRGT
  ON (TRGT.row_id= SRC.sys_id
 	AND SRC.sourceinstance =TRGT.source_id )
-    LEFT JOIN  app_test.lsm_ls_source_timezone L 
+    LEFT JOIN  mercuryins_workdb.lsm_ls_source_timezone L 
 	ON (SRC.sourceinstance = L.sourceid)
 WHERE coalesce(CONVERT_TZ(sys_updated_on,L.source_time_zone,L.target_time_zone),'') <> coalesce(TRGT.CHANGED_ON,'')
 union
@@ -15,6 +15,6 @@ FROM mercuryins_mdsdb.incident_final SRC
 LEFT JOIN mercuryins_mdwdb.f_agent_non_acd TRGT 
 ON (SRC.sys_id = TRGT.row_id
 AND SRC.sourceinstance =TRGT.source_id )
-LEFT JOIN  app_test.lsm_ls_source_timezone L 
+LEFT JOIN  mercuryins_workdb.lsm_ls_source_timezone L 
 	ON (SRC.sourceinstance = L.sourceid)
 WHERE coalesce(CONVERT_TZ(sys_updated_on,L.source_time_zone,L.target_time_zone),'') <> coalesce(TRGT.CHANGED_ON,''))CO

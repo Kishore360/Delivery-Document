@@ -4,7 +4,7 @@ FROM mercuryins_mdsdb.hagent_final SRC
 LEFT JOIN mercuryins_mdwdb.f_agent_call_summary TRGT 
 	ON (concat(row_date,'~',starttime,'~',acd,'~',split,'~',trim(logid),'~',loc_id, '~~', cdchash) =TRGT.row_id 
 	AND SRC.sourceinstance =TRGT.source_id )
-LEFT JOIN  app_test.lsm_ls_source_timezone L 
+LEFT JOIN  mercuryins_workdb.lsm_ls_source_timezone L 
 	ON (SRC.sourceinstance = L.sourceid)
 LEFT JOIN mercuryins_mdwdb.d_calendar_date LKP 
 	ON LKP.row_id = date_format(SRC.row_date,'%Y%m%d')

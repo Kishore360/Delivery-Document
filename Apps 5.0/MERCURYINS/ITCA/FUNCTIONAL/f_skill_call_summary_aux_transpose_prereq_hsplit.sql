@@ -1,6 +1,6 @@
 SET SQL_SAFE_UPDATES = 0;
 
-truncate table app_test.fs_skill_call_summary_aux;
+truncate table mercuryins_workdb.fs_skill_call_summary_aux;
 
 
 SET group_concat_max_len=18446744073709551615;
@@ -37,7 +37,7 @@ WHERE syn.item_type = 'aux_rsn'
 
 
 
-SET @sql = CONCAT('INSERT INTO app_test.fs_skill_call_summary_aux (row_id, source_id,parent_row_id, time_id, day_id, shift_id, skill_id, acd_id, aux_code_src_id, aux_time,  created_by, changed_by, created_on, changed_on, pivot_date)
+SET @sql = CONCAT('INSERT INTO mercuryins_workdb.fs_skill_call_summary_aux (row_id, source_id,parent_row_id, time_id, day_id, shift_id, skill_id, acd_id, aux_code_src_id, aux_time,  created_by, changed_by, created_on, changed_on, pivot_date)
 	SELECT row_id, sourceinstance, parent_row_id,time_id , row_date, ''UNSPECIFIED'', split, acd, aux_src_code_id, aux_time, created_by, changed_by, created_on as created_on, changed_on as changed_on, COALESCE(changed_on, created_on) as pivot_date
 	FROM (', @sql, ') x'
 );
