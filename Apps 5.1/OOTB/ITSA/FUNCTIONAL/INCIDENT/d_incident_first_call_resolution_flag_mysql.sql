@@ -14,7 +14,6 @@ LEFT JOIN <<tenant>>_mdwdb.d_lov_map LM ON TRGTF.state_src_key=LM.src_key and LM
 
  WHERE LM.dimension_wh_code IN('RESOLVED') and 
  CASE WHEN
-<<<<<<< HEAD
 
  TIMESTAMPDIFF(MINUTE,coalesce(SRC.opened_at,'1970-01-01 00:00:00'), SRC.resolved_at)<30
   THEN 'Y' ELSE 'N' END  <> (TRGT.first_call_resolution_flag ))a
@@ -23,13 +22,7 @@ LEFT JOIN <<tenant>>_mdwdb.d_lov_map LM ON TRGTF.state_src_key=LM.src_key and LM
  AND TIMESTAMPDIFF(MINUTE,coalesce(SRC.opened_at,'1970-01-01 00:00:00'), coalesce(SRC.resolved_at,SRC.closed_at,SRC.sys_updated_on))<30
   THEN 'Y' ELSE 'N' END  <> COALESCE(TRGT.first_call_resolution_flag ,''))temp;
 
-=======
--- <<<<<<< HEAD
- TIMESTAMPDIFF(MINUTE,coalesce(SRC.opened_at,'1970-01-01 00:00:00'), SRC.resolved_at)<30
-  THEN 'Y' ELSE 'N' END  <> (TRGT.first_call_resolution_flag ))a
--- =======
--- LM.dimension_wh_code IN('RESOLVED','CLOSED') 
--- AND TIMESTAMPDIFF(MINUTE,coalesce(SRC.opened_at,'1970-01-01 00:00:00'), coalesce(SRC.resolved_at,SRC.closed_at,SRC.sys_updated_on))<30
--- THEN 'Y' ELSE 'N' END  <> COALESCE(TRGT.first_call_resolution_flag ,''))temp;
--- >>>>>>> c7bfeaa6c218a7189df0320b4c059663b1d717ca
->>>>>>> 6a4a9aacb236fe4054046a954ed46576456b7d4f
+
+
+
+
