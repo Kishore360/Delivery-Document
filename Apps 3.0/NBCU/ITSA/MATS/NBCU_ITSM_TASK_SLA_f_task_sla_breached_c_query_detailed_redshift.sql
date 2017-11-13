@@ -17,12 +17,12 @@ union
 select 'ldb.d_calendar_date a14 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_task_sla_breached_c a11 
 join ldb.d_calendar_date a14 
-on (a11.start_on_key = a14.row_key) 
+on (a11.due_on_key = a14.row_key) 
 union
 select 'ldb.d_calendar_quarter a15 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_task_sla_breached_c a11 
 join ldb.d_calendar_date a14 
-on (a11.start_on_key = a14.row_key) 
+on (a11.due_on_key = a14.row_key) 
 join ldb.d_calendar_quarter a15 
 on (a14.quarter_start_date_key = a15.row_key) 
 union
@@ -44,7 +44,7 @@ union
 select 'ldb.d_calendar_week a19 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_task_sla_breached_c a11 
 join ldb.d_calendar_date a14 
-on (a11.start_on_key = a14.row_key) 
+on (a11.due_on_key = a14.row_key) 
 join ldb.d_calendar_week a19 
 on (a14.week_start_date_key = a19.row_key) 
 union
@@ -104,7 +104,7 @@ union
 select 'ldb.d_calendar_month a119 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_task_sla_breached_c a11 
 join ldb.d_calendar_date a14 
-on (a11.start_on_key = a14.row_key) 
+on (a11.due_on_key = a14.row_key) 
 join ldb.d_calendar_month a119 
 on (a14.month_start_date_key = a119.row_key) 
 union
