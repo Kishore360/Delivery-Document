@@ -10,5 +10,5 @@
  AND TRGTF.source_id =TRGT.source_id)
 LEFT JOIN rogersdev_mdwdb.d_lov_map LM ON TRGTF.state_src_key=LM.src_key and LM.dimension_class='STATE~INCIDENT'
  WHERE  LM.dimension_wh_code IN('RESOLVED','CLOSED') 
- AND case when TIMESTAMPDIFF(MINUTE,coalesce(SRC.opened_at,'1970-01-01 00:00:00'), coalesce(SRC.resolved_at,SRC.closed_at,SRC.sys_updated_on))<30
-  THEN 'Y' ELSE 'N' END  <> COALESCE(TRGT.first_call_resolution_flag ,''))temp
+ AND case when TIMESTAMPDIFF(MINUTE,coalesce(SRC.opened_at,'1970-01-01 00:00:00'), coalesce(SRC.u_resolved,SRC.closed_at,SRC.sys_updated_on))<30
+  THEN 'Y' ELSE 'N' END  <> COALESCE(TRGT.first_call_resolution_flag ))temp
