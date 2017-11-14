@@ -183,7 +183,7 @@ on (a15.row_dn_key = a16.lev_0_key)
 join ldb.dh_user_group_level1 a136 
 on (a16.lev_1_key = a136.row_key) 
 union
-select 'ldb.d_lov_incident_dispatch_reason_c a137 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_lov_sc_req_item_dispatch_reason_c a137 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_request_item a11 
 join ldb.d_request_item a17 
 on (a11.request_item_key = a17.row_key) 
