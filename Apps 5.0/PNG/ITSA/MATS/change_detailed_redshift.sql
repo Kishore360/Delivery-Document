@@ -26,3 +26,5 @@ select'ldb.d_lov_change_request_capability_to_detect_c' as Table_Name, count(a11
 join ldb.d_lov_change_request_capability_to_detect_c       a12
 on (a11.capability_to_detect_src_c_key = a12.row_key)
 
+
+
