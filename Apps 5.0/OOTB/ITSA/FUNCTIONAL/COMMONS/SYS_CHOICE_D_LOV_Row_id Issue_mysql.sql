@@ -12,7 +12,7 @@ and scf.language='en') SRC
 left join <<tenant>>_mdwdb.d_lov TGT
 ON TGT.row_id = SRC.row_id
 and TGT.source_id = SRC.source_id
-where TGT.row_id)  <> SRC.row_id
+where TGT.row_id  <> SRC.row_id
 and SRC.row_id not like '%GOAL~~~%'
 and SRC.row_id not like '%PROJECT~~~%'
 and SRC.row_id not like '%PORTFOLIO~~~%'
