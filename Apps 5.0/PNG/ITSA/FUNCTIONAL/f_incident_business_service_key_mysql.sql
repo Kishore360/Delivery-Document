@@ -4,7 +4,7 @@ SELECT CASE WHEN cnt THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  (select count(1) cnt 
  FROM png_mdsdb.incident_final SRC 
 JOIN png_mdwdb.f_incident TRGT 
-ON SRC.number = TRGT.row_id and  SRC.sourceinstance = TRGT.source_id
+ON SRC.sys_id = TRGT.row_id and  SRC.sourceinstance = TRGT.source_id
 LEFT JOIN png_mdwdb.d_service LKP 
  ON ( COALESCE(CONCAT('BUSINESS_SERVICE','~',SRC.business_service),'UNSPECIFIED') = LKP.row_id 
 AND SRC.sourceinstance= LKP.source_id )
