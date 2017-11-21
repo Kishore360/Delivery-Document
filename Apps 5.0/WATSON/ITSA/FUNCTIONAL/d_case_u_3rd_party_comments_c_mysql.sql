@@ -6,4 +6,4 @@ LEFT JOIN watson_mdwdb.d_case TRGT
 	ON (SRC.sys_id =TRGT.row_id 
 	AND SRC.sourceinstance =TRGT.source_id )
 WHERE TRGT.row_key not in (0, -1) and 
-COALESCE(SRC.u_3rd_party_comments,'')<> COALESCE(TRGT.u_3rd_party_comments_c,'')
+COALESCE(SRC.u_3rd_party_comments,'UNSPECIFIED')<> COALESCE(TRGT.u_3rd_party_comments_c,'')

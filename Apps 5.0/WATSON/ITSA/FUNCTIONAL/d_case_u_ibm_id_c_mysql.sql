@@ -5,4 +5,4 @@ LEFT JOIN watson_mdwdb.d_case TRGT
 	ON (SRC.sys_id =TRGT.row_id 
 	AND SRC.sourceinstance =TRGT.source_id )
 WHERE TRGT.row_key not in (0, -1) and 
-COALESCE(SRC.u_ibmid,'')  <> COALESCE(TRGT.u_ibm_id_c,'')
+COALESCE(SRC.u_ibmid,'UNSPECIFIED')  <> COALESCE(TRGT.u_ibmid_c,'')

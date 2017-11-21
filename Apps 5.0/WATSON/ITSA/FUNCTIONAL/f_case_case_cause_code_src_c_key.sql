@@ -5,8 +5,8 @@ LEFT JOIN watson_mdwdb.f_case TRGT
 	ON (SRC.sys_id =TRGT.row_id 
 	AND SRC.sourceinstance =TRGT.source_id )
 LEFT JOIN watson_mdwdb.d_lov LKP 
-	ON ( coalesce(concat(CAUSE_CODE_C~CASE~~~',SRC.u_cause_code),'UNSPECIFIED') = LKP.row_id
-	AND SRC.sourceinstance=LKP.source_id AND dimension_class ='STATE~CASE')
-WHERE COALESCE(LKP.row_key,CASE WHEN SRC.state IS NULL THEN 0 else '-1' end)<> COALESCE(TRGT.case_cause_code_src_c_key ,'')
+	ON ( coalesce(concat('CAUSE_CODE_C~CASE~~~',SRC.u_cause_code),'UNSPECIFIED') = LKP.row_id
+	AND SRC.sourceinstance=LKP.source_id)
+WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_cause_code IS NULL THEN 0 else '-1' end)<> COALESCE(TRGT.case_cause_code_src_c_key ,'')
 
 

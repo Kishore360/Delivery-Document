@@ -6,4 +6,4 @@ LEFT JOIN watson_mdwdb.d_case TRGT
 	ON (SRC.sys_id =TRGT.row_id 
 	AND SRC.sourceinstance =TRGT.source_id )
 WHERE TRGT.row_key not in (0, -1) and 
-COALESCE(SRC.u_contact_3rd_party_c,'')<> COALESCE(TRGT.u_contact_3rd_party_c,'')
+CASE WHEN SRC.u_contact_3rd_party= '1' THEN 'Y' ELSE 'N' END <> COALESCE(TRGT.u_contact_3rd_party_c,'')
