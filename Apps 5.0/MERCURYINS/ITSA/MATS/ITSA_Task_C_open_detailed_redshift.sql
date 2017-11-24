@@ -70,9 +70,9 @@ select'ldb.d_lov_task_c_escalation_c' as Table_Name, count(a11.row_key) Row_Coun
 join ldb.d_lov_task_c_escalation_c       a114
 on (a11.escalation_c_key = a114.row_key)
 union
-select'ldb.d_incident_priority' as Table_Name, count(a11.row_key) Row_Count
+select'ldb.d_lov_task_priority_c' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_task_c       a11 
-join ldb.d_incident_priority       a115
+join ldb.d_lov_task_priority_c       a115
 on (a11.priority_key = a115.row_key)
 union
 select'ldb.d_location' as Table_Name, count(a11.row_key) Row_Count

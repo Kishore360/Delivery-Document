@@ -159,3 +159,7 @@ join ldb.d_request_item a14
 on (a11.request_item_key = a14.row_key) 
 join ldb.d_request_item_situation_c a130 
 on (a14.situation_src_c_key = a130.row_key) 
+UNION 
+SELECT 'd_scafe_core_realm_c' as Table_Name, count(a.row_key) as Row_count
+FROM ldb.f_request_item a 
+JOIN ldb.d_scafe_core_realm_c b ON a.scafe_core_realm_c_key=b.row_key

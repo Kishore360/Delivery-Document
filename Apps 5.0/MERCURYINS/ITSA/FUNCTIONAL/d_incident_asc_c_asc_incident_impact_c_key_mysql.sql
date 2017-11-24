@@ -5,5 +5,5 @@ JOIN mercuryins_mdwdb.d_incident_asc_c TRGT
 ON (SRC.sys_id = TRGT.row_id  
 AND SRC.sourceinstance = TRGT.source_id )  
 join mercuryins_mdwdb.d_lov LKP
-on COALESCE(CONCAT('IMPACT','~','TASK','~','~','~',UPPER(SRC.impact)),'UNSPECIFIED')=LKP.row_id
-WHERE coalesce(LKP.row_key,case when SRC.impact is  null then 0 else -1 end )<>(TRGT.asc_incident_impact_c_key) 
+on COALESCE(CONCAT('IMPACT','~','ASC_INCIDENT','~','~','~',UPPER(SRC.impact)),'UNSPECIFIED')=LKP.row_id
+WHERE coalesce(LKP.row_key,case when SRC.impact is  null then 0 else -1 end )<>(TRGT.asc_incident_impact_c_key)

@@ -219,3 +219,12 @@ join ldb.d_calendar_date a19
 on (a11.opened_on_key = a19.row_key) 
 join ldb.d_calendar_year a138 
 on (a19.year_start_date_key = a138.row_key) 
+UNION 
+select 'ldb.d_internal_contact_created_by_c a19 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_incident a11 
+join ldb.d_internal_contact_created_by_c a19 ON (a11.created_by_c_key=a19.row_key)
+ 
+
+
+
+

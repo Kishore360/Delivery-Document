@@ -170,3 +170,13 @@ on (a15.week_start_date_of_month_key = a18.week_start_date_of_month_key) join ld
 on (a18.quarter_start_date_key = a19.row_key) 
 join ldb.d_calendar_year a131 
 on (a19.year_start_date_key = a131.row_key) 
+UNION 
+select 'ldb.d_lov_change_request_class_c a131 ' as Table_name, count(a11.row_key) Row_Count
+FROM ldb.f_change_request a11
+JOIN ldb.d_change_request b ON a11.change_request_key=b.row_key
+JOIN ldb.d_lov_change_request_class_c y on b.class_c_key=y.row_key
+UNION 
+select 'ldb.d_lov_change_request_class_override_c a131 ' as Table_name, count(a11.row_key) Row_Count
+FROM ldb.f_change_request a11 
+JOIN ldb.d_change_request b ON a11.change_request_key=b.row_key
+JOIN ldb.d_lov_change_request_class_override_c y on b.class_override_c_key=y.row_key

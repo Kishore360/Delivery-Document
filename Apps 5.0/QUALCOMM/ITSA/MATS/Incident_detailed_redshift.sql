@@ -266,3 +266,9 @@ on (a11.incident_key = a12.row_key) join ldb.d_incident_opened_by a112
 on (a12.opened_by_key = a112.row_key) 
 join ldb.d_internal_contact_employee_manager_c a144 
 on (a112.manager_key = a144.row_key) 
+union
+select 'ldb.d_asset a145 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_incident a11 
+join ldb.d_asset a145 
+on (a11.asset_key = a145.row_key)
+

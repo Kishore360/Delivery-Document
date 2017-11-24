@@ -170,3 +170,7 @@ join ldb.d_calendar_date a15
 on (a11.opened_on_key = a15.row_key) 
 join ldb.d_calendar_month a132 
 on (a15.month_start_date_key = a132.row_key) 
+UNION 
+SELECT 'd_scafe_core_realm_c' as Table_Name, count(a.row_key) as Row_count
+FROM ldb.f_change_request a 
+JOIN ldb.d_scafe_core_realm_c b ON a.scafe_core_realm_c_key=b.row_key

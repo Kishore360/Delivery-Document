@@ -7,6 +7,6 @@ CASE WHEN CNT > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
  LEFT JOIN <<tenant>>_mdwdb.d_organization_customer LKP 
- ON CONCAT(company)= LKP.row_id 
+ ON CONCAT('ORG_CUST~',company)= LKP.row_id 
  WHERE COALESCE(LKP.row_key,CASE WHEN SRC.company IS NULL THEN 0 else -1 end) <> TRGT.customer_key)temp;
  

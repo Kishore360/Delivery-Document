@@ -1,0 +1,12 @@
+
+ SELECT CASE WHEN count(1)  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, 
+CASE WHEN count(1)  THEN 'MDS to DWH data validation failed for f_incident.asset_name_c' ELSE 'SUCCESS' END as Message 
+FROM  qualcomm_mdsdb.incident_final SRC
+JOIN qualcomm_mdwdb.f_incident TRGT  
+ON (SRC.sys_id  = TRGT.row_id  
+AND SRC.sourceinstance = TRGT.source_id )
+left JOIN qualcomm_mdsdb.alm_asset_final lkp
+ON  SRC.u_asset = lkp.sys_id 
+WHERE COALESCE(lkp.display_name, 'UNSPECIFIED') <> TRGT.asset_name_c
+
+

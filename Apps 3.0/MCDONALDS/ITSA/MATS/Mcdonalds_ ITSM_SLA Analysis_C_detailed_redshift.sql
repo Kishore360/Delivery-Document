@@ -20,6 +20,10 @@ UNION
 SELECT 'd_sla_analysis_incident_c' as Table_Name, count(a.row_key) as Row_count
 FROM ldb.f_sla_analysis_c a 
 JOIN ldb.d_sla_analysis_incident_c b ON a.incident_key=b.row_key
+UNION 
+SELECT 'd_scafe_core_realm_c' as Table_Name, count(a.row_key) as Row_count
+FROM ldb.f_sla_analysis_c a 
+JOIN ldb.d_scafe_core_realm_c b ON a.scafe_core_realm_c_key=b.row_key
 
 
 

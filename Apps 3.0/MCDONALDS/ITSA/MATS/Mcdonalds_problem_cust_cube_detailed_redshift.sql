@@ -192,3 +192,7 @@ on (a11.assignment_group_key = a15.row_key) join ldb.dh_user_group_hierarchy a16
 on (a15.row_dn_key = a16.lev_0_key) 
 join ldb.dh_user_group_level4 a133 
 on (a16.lev_4_key = a133.row_key) 
+UNION 
+SELECT 'd_scafe_core_realm_c' as Table_Name, count(a.row_key) as Row_count
+FROM ldb.f_problem a 
+JOIN ldb.d_scafe_core_realm_c b ON a.scafe_core_realm_c_key=b.row_key

@@ -13,5 +13,8 @@ LEFT JOIN <<tenant>>_mdwdb.d_lov_map LM ON TRGTF.state_src_key=LM.src_key and LM
 
  WHERE LM.dimension_wh_code IN('RESOLVED') and 
  CASE WHEN
- TIMESTAMPDIFF(MINUTE,coalesce(SRC.opened_at,'1970-01-01 00:00:00'), SRC.resolved_at)<30
+ TIMESTAMPDIFF(MINUTE,SRC.opened_at, coalesce(SRC.resolved_at,SRC.closed_at,SRC.sys_updated_on))<30
   THEN 'Y' ELSE 'N' END  <> (TRGT.first_call_resolution_flag ))a
+  
+  
+  
