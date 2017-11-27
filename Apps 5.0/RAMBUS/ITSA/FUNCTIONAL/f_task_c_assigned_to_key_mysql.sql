@@ -7,5 +7,5 @@ FROM rambus_mdsdb.task_final SRC
 AND TRGT.pivot_date
  BETWEEN LKP.effective_from AND LKP.effective_to
  WHERE  TRGT.soft_deleted_flag='N' 
-and COALESCE(LKP.row_key,CASE WHEN SRC.assigned_to IS NULL THEN 0 else -1 end) = (TRGT.assigned_to_key);
+and COALESCE(LKP.row_key,CASE WHEN SRC.assigned_to IS NULL THEN 0 else -1 end) <>(TRGT.assigned_to_key);
 
