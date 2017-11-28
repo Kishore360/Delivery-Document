@@ -1,5 +1,7 @@
-SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
-CASE WHEN count(1) >0 THEN 'Failure' ELSE 'Data Matched' END as Message
+SELECT 
+CASE WHEN CNT > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+CASE WHEN CNT > 0 THEN 'Failure' ELSE 'Data Matched' END as Message
+FROM (SELECT Count(1) as CNT 
 from
 
 nbcu_mdsdb.task_final a
@@ -14,5 +16,6 @@ where CASE
 	a.number <> task_number or 
 	 a.sys_class_name <> task_type or
 	 a.contact_type <> CONTACT_TYPE_SRC_CODE_C
-	 
+	 )temp;
+
 	 
