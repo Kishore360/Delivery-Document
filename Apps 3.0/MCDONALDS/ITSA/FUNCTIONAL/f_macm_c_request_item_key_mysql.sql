@@ -8,8 +8,8 @@ FROM mcdonalds_mdsdb.x_scafe_mcdcr_chan_mcdcr_change_request_final SRC
 LEFT JOIN mcdonalds_mdwdb.f_macm_c TRGT 
 ON (SRC.SYS_ID=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id)
 LEFT JOIN mcdonalds_mdwdb.d_request_item LKP 
-ON COALESCE(SRC.u_ritm, 'UNSPECIFIED')=LKP.row_id 
-WHERE COALESCE(LKP.row_key,-1)<>TRGT.request_item_key
+ON SRC.instance=LKP.row_id and SRC.sourceinstance=LKP.source_id and SRC.target_table = 'sc_req_item'
+WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_ritm IS NULL THEN 0 else -1 end)<>TRGT.request_item_key
 )a;
 
 
