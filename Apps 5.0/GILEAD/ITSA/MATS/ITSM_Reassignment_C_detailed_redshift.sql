@@ -17,7 +17,12 @@ f_incident_activity */
 
 SELECT 'f_incident_activity' as TABLE_NAME , Count(1) as Row_Count
 FROM ldb.f_incident_activity a 
-UNION 
+UNION
+/* SELECT a.task_key,b.row_key,b.task_type_src_code,count(1) as CNT
+FROM ldb.f_incident_activity a
+RIGHT JOIN ldb.d_task b ON a.task_key=b.row_key
+where a.task_key IS  NULL
+group by 1,2,3; this is expected countup */
 SELECT 'd_task' as TABLE_NAME , Count(1) as Row_Count
 FROM ldb.f_incident_activity a
 JOIN ldb.d_task b ON a.task_key=b.row_key
