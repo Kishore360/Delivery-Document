@@ -71,7 +71,7 @@ union
 select 'ldb.d_task_priority a115 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident_outage a11 
 join ldb.d_task_priority a115 
-on (a11.priority_src_c_key = a115.row_key) 
+on (a11.priority_src_key = a115.row_key) 
 union
 select 'ldb.d_task_contacttype a116 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident_outage a11 
