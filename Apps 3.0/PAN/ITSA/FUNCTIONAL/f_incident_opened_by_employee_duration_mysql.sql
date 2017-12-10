@@ -1,6 +1,7 @@
 -- START
 SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
- CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for f_incident.opened_by_key' ELSE 'SUCCESS' END as Message from
+ CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for f_incident.opened_by_key' ELSE 'SUCCESS' END as Message
+ from
 pan_mdwdb.f_incident f 
 JOIN pan_mdwdb.d_internal_contact a 
 ON a.row_key = f.opened_by_c_key 

@@ -1,5 +1,19 @@
 select 'ldb.f_incident a11 ' as Table_name, count(a11.row_key) Row_Count									
 from ldb.f_incident a11 									
+ union
+
+				  select'd_internal_contact_manager_c' as Table_Name, count(a11.row_key) Row_Count
+from  ldb.f_incident             a11 
+join ldb.d_internal_contact_opened_by_c       a115
+on (a11.opened_by_c_key = a115.row_key)
+join ldb.d_internal_contact_manager_c       a116
+on (a115.manager_c_key = a116.row_key)
+
+union
+select 'ldb.f_incident a11 ' as Table_name, count(a11.row_key) Row_Count									
+from ldb.f_incident a11
+join ldb.d_category_c a12 on a11.category_5_c_key=a12.row_key
+
 union									
 select 'ldb.d_customer a12 ' as Table_name, count(a11.row_key) Row_Count									
 from ldb.f_incident a11 									
