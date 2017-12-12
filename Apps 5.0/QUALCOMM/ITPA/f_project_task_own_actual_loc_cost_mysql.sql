@@ -1,16 +1,16 @@
 SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for f_project_task.own_actual_loc_cost' ELSE 'SUCCESS' END as Message
-FROM #MDS_TABLE_SCHEMA.pm_project_final SRC 
- LEFT JOIN #DWH_TABLE_SCHEMA.f_project_task TRGT 
+FROM qualcomm_mdsdb.pm_project_final SRC 
+ LEFT JOIN qualcomm_mdwdb.f_project_task TRGT 
  ON (SRC.sys_id=TRGT.row_id 
  AND SRC.sourceinstance=TRGT.source_id )
  LEFT JOIN  (
   SELECT project_key, SUM(expense_doc_amount) AS expense_doc_amount, SUM(expense_loc_amount) AS expense_loc_amount 
-  FROM #DWH_TABLE_SCHEMA.f_expense_item 
+  FROM qualcomm_mdwdb.f_expense_item 
   WHERE base_expense_item_key = 0 GROUP BY project_key
  ) FEI 
  ON (FEI.project_key=TRGT.project_key )
-  left join #DWH_TABLE_SCHEMA.d_project DIM
+  left join qualcomm_mdwdb.d_project DIM
  on TRGT.project_key = DIM.row_key 
  WHERE CAST(CASE WHEN DIM.is_leaf_flag='Y' AND FEI.project_key IS NULL THEN COALESCE(TRGT.total_actual_loc_cost,0) 
 								WHEN DIM.is_leaf_flag='Y' AND FEI.project_key IS NOT NULL THEN COALESCE(FEI.expense_loc_amount,0)

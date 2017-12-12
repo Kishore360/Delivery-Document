@@ -4,28 +4,28 @@
 ( SELECT COUNT(SRC.Children) Cnt,SRC.Parent as row_id,SRC.source_id
  FROM 
  (SELECT  C.sys_id AS Children,P.sys_id AS Parent,P.sourceinstance AS source_id 
- FROM #MDS_TABLE_SCHEMA.pm_project_task_final P 
- LEFT JOIN #MDS_TABLE_SCHEMA.pm_project_task_final C
+ FROM qualcomm_mdsdb.pm_project_task_final P 
+ LEFT JOIN qualcomm_mdsdb.pm_project_task_final C
  ON(C.parent=P.sys_id and C.parent is not null)
  UNION
  SELECT  C.sys_id AS Children,P.sys_id AS Parent,P.sourceinstance AS source_id 
- FROM #MDS_TABLE_SCHEMA.pm_project_final P 
- LEFT JOIN #MDS_TABLE_SCHEMA.pm_project_task_final C
+ FROM qualcomm_mdsdb.pm_project_final P 
+ LEFT JOIN qualcomm_mdsdb.pm_project_task_final C
   ON(C.parent=P.sys_id and C.parent is not null)
  UNION
  SELECT  C.sys_id AS Children,P.sys_id AS Parent,P.sourceinstance AS source_id 
- FROM #MDS_TABLE_SCHEMA.pm_project_final P 
- LEFT JOIN #MDS_TABLE_SCHEMA.pm_project_final C
+ FROM qualcomm_mdsdb.pm_project_final P 
+ LEFT JOIN qualcomm_mdsdb.pm_project_final C
   ON(C.parent=P.sys_id and C.parent is not null)
 UNION
  SELECT  C.sys_id AS Children,P.sys_id AS Parent,P.sourceinstance AS source_id 
- FROM #MDS_TABLE_SCHEMA.pm_project_task_final P 
- LEFT JOIN #MDS_TABLE_SCHEMA.pm_project_final C
+ FROM qualcomm_mdsdb.pm_project_task_final P 
+ LEFT JOIN qualcomm_mdsdb.pm_project_final C
   ON(C.parent=P.sys_id and C.parent is not null)
  ) SRC
 GROUP BY SRC.Parent,SRC.source_id
 ) SRC_F
-JOIN #DWH_TABLE_SCHEMA.f_project_task TRGT 
+JOIN qualcomm_mdwdb.f_project_task TRGT 
  ON (SRC_F.row_id =TRGT.row_id 
  AND SRC_F.source_id =TRGT.source_id )
 WHERE COALESCE(CASE WHEN SRC_F.Cnt = 0 THEN 'Y' ELSE 'N' END , '')<> COALESCE(TRGT.is_leaf, '')

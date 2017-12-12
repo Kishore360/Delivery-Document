@@ -1,10 +1,10 @@
 SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for f_project_task.is_ytd_flag' ELSE 'SUCCESS' END as Message
-FROM #DWH_TABLE_SCHEMA.f_project_task sf
-JOIN (select source_id , max(lastupdated) refresh_date from #DWH_TABLE_SCHEMA.d_o_data_freshness group by 1) odf 
+FROM qualcomm_mdwdb.f_project_task sf
+JOIN (select source_id , max(lastupdated) refresh_date from qualcomm_mdwdb.d_o_data_freshness group by 1) odf 
 ON odf.source_id = sf.source_id
-JOIN #DWH_TABLE_SCHEMA.d_lov_map dlm ON sf.project_state_src_key = dlm.src_key AND sf.source_id = dlm.source_id 
-JOIN ( select year_start_date, year_end_date from #DWH_TABLE_SCHEMA.d_calendar_date where calendar_date=year_start_date and lagging_count_of_year=0 and calendar_code = 0) cal  
+JOIN qualcomm_mdwdb.d_lov_map dlm ON sf.project_state_src_key = dlm.src_key AND sf.source_id = dlm.source_id 
+JOIN ( select year_start_date, year_end_date from qualcomm_mdwdb.d_calendar_date where calendar_date=year_start_date and lagging_count_of_year=0 and calendar_code = 0) cal  
 ON
 			( (cal.year_start_date BETWEEN sf.planned_start_on AND sf.planned_end_on) 
 					or (cal.year_end_date between sf.planned_start_on and sf.planned_end_on) 

@@ -29,11 +29,11 @@ create table app_test.ds_location
 	c.sys_updated_on AS CHANGED_ON
 	FROM 
 	(SELECT sys_id,sourceinstance
-	 FROM #MDS_TABLE_SCHEMA.cmn_location_final
+	 FROM qualcomm_mdsdb.cmn_location_final
 	 UNION
 	 SELECT A.sys_id, A.sourceinstance
-	 FROM #MDS_TABLE_SCHEMA.cmn_location_final A
-	 JOIN #MDS_TABLE_SCHEMA.sys_user_final B ON A.contact = B.sys_id AND A.sourceinstance = B.sourceinstance
+	 FROM qualcomm_mdsdb.cmn_location_final A
+	 JOIN qualcomm_mdsdb.sys_user_final B ON A.contact = B.sys_id AND A.sourceinstance = B.sourceinstance
 	)Driver
-	LEFT OUTER JOIN #MDS_TABLE_SCHEMA.cmn_location_final c ON c.sys_id = Driver.sys_ID AND c.sourceinstance = Driver.sourceinstance
-	LEFT OUTER JOIN #MDS_TABLE_SCHEMA.sys_user_final B ON c.contact = B.sys_id AND c.sourceinstance = B.sourceinstance;	
+	LEFT OUTER JOIN qualcomm_mdsdb.cmn_location_final c ON c.sys_id = Driver.sys_ID AND c.sourceinstance = Driver.sourceinstance
+	LEFT OUTER JOIN qualcomm_mdsdb.sys_user_final B ON c.contact = B.sys_id AND c.sourceinstance = B.sourceinstance;	

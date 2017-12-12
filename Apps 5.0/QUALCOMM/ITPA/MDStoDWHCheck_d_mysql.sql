@@ -1,10 +1,10 @@
 select  CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for d_location' ELSE 'SUCCESS' END as Message
 from app_test.ds_location SRC
-left join #DWH_TABLE_SCHEMA.d_geography SRC2
+left join qualcomm_mdwdb.d_geography SRC2
 on(SRC2.row_id=SRC.geo_id
 and SRC2.source_id=SRC.source_id)
-left join #DWH_TABLE_SCHEMA.d_location TRGT
+left join qualcomm_mdwdb.d_location TRGT
 on(SRC.row_id=TRGT.row_id
 and SRC.source_id=TRGT.source_id)
 where convert(concat(coalesce(SRC.row_id,''),coalesce(SRC.source_id,''),coalesce(SRC.location_number,''),coalesce(SRC.location_type_code,''),coalesce(SRC.contact_name,''),coalesce(SRC.location_name,''),coalesce(SRC.contact_id,''),coalesce(SRC.parent_row_id,''),coalesce(SRC.st_address1,''),coalesce(SRC.st_address2,''),coalesce(SRC.st_address3,''),coalesce(SRC.st_address4,''),coalesce(SRC.city_code,''),coalesce(SRC.state_code,''),coalesce(SRC.postal_code,''),coalesce(SRC.country_code,''),coalesce(SRC.email_address,''),coalesce(SRC.mobile_number,''),coalesce(SRC.work_phone,''),coalesce(SRC.time_zone,''),coalesce(SRC.fax_phone_number,''),coalesce(SRC2.row_key,''),coalesce(SRC.created_by,''),coalesce(SRC.changed_by,''))using utf8)

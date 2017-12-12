@@ -7,14 +7,14 @@ END AS Message
 FROM
 (SELECT 
 (SELECT COUNT(*) Count_MDS 
-FROM #MDS_TABLE_SCHEMA.pm_project_final )
+FROM qualcomm_mdsdb.pm_project_final )
 +
 (SELECT COUNT(*) Count_MDS 
-FROM #MDS_TABLE_SCHEMA.pm_project_task_final ) 
+FROM qualcomm_mdsdb.pm_project_task_final ) 
 
 Count_MDS
 , 'pm_project_final+pm_project_task_final' Table_MDS
 ) MDS,
 (SELECT COUNT(*) Count_DWH, 'd_project'  Table_DWH 
-FROM #DWH_TABLE_SCHEMA.d_project
+FROM qualcomm_mdwdb.d_project
 WHERE soft_deleted_flag = 'N') DWH
