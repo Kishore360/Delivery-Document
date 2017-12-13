@@ -8,7 +8,7 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  join qualcomm_mdwdb.d_cat_item_delivery_task_c lkp
  on COALESCE(SRC.delivery_task,'UNSPECIFIED')=lkp.row_id
 where  
-            coleasce(lkp.row_key,case when SRC.delivery_task is null then 0 else -1 end ) <>(TRGT.cat_item_delivery_task_key )
+            COALESCE(lkp.row_key,case when SRC.delivery_task is null then 0 else -1 end ) <>(TRGT.cat_item_delivery_task_key )
 			
 			
 			
