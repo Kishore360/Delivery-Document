@@ -1,6 +1,6 @@
 SELECT
-CASE WHEN CNT  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, 
-CASE WHEN CNT THEN 'MDS to DWH data validation failed for d_macm_c_change_description' ELSE 'SUCCESS' END as Message
+CASE WHEN CNT > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result, 
+CASE WHEN CNT > 0 THEN 'MDS to DWH data validation failed for d_macm_c_change_description' ELSE 'SUCCESS' END as Message
 FROM
 (
 SELECT count(1) as CNT 
