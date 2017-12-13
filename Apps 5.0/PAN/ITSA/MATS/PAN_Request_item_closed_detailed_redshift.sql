@@ -71,18 +71,18 @@ union
 select 'ldb.d_internal_contact_requested_for a115 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_request_item_closed_c a11 
 join ldb.d_internal_contact_requested_for a115 
-on (a11.requested_for_key = a115.row_key) 
+on (a11.request_requested_for_key = a115.row_key) 
 union
 select 'ldb.d_internal_contact_task_closed_by a116 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_request_item_closed_c a11 
 join ldb.d_internal_contact_task_closed_by a116 
 on (a11.closed_by_key = a116.row_key) 
 union
-select 'ldb.d_request_item_employee_type_c a117 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_lov_request_item_employee_type_c  a117 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_request_item_closed_c a11 
 join ldb.d_request_item a14 
 on (a11.request_item_key = a14.row_key) 
-join ldb.d_request_item_employee_type_c a117 
+join ldb.d_lov_request_item_employee_type_c  a117 
 on (a14.employee_type_c_key = a117.row_key) 
 union
 select 'ldb.d_calendar_month a118 ' as Table_name, count(a11.row_key) Row_Count

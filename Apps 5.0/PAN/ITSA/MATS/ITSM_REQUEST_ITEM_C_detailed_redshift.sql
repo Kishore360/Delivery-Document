@@ -43,9 +43,9 @@ on (a11.opened_by_key = a12.row_key)
 join ldb.d_internal_contact_mdm a19 								
 on (a12.row_current_key = a19.row_current_key) 								
 union								
-select 'ldb.d_duration_c_requested_for a110 ' as Table_name, count(a11.row_key) Row_Count								
+select 'ldb.d_duration_c_requested_for_c a110 ' as Table_name, count(a11.row_key) Row_Count								
 from ldb.f_request_item a11 								
-join ldb.d_duration_c_requested_for a110 								
+join ldb.d_duration_c_requested_for_c a110 								
 on (a11.requested_for_employee_duration = a110.duration_c_key) 								
 union								
 select 'ldb.d_duration_c a111 ' as Table_name, count(a11.row_key) Row_Count								
@@ -88,11 +88,11 @@ from ldb.f_request_item a11
 join ldb.d_internal_contact_task_closed_by a118 								
 on (a11.closed_by_key = a118.row_key) 								
 union								
-select 'ldb.d_request_item_employee_type_c a119 ' as Table_name, count(a11.row_key) Row_Count								
+select 'ldb.d_lov_request_item_employee_type_c  a119 ' as Table_name, count(a11.row_key) Row_Count								
 from ldb.f_request_item a11 								
 join ldb.d_request_item a14 								
 on (a11.request_item_key = a14.row_key) 								
-join ldb.d_request_item_employee_type_c a119 								
+join ldb.d_lov_request_item_employee_type_c  a119 								
 on (a14.employee_type_c_key = a119.row_key) 								
 union								
 select 'ldb.d_calendar_month a120 ' as Table_name, count(a11.row_key) Row_Count								

@@ -107,14 +107,14 @@ from ldb.f_incident_resolved a11
 join ldb.d_flag_c a121 
 on (a11.sd_touch_flag_c_key = a121.row_key) 
 union
-select 'ldb.d_lov_service_type_view_c a122 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_lov_incident_service_type_c a122 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident_resolved a11 
-join ldb.d_lov_service_type_view_c a122 
+join ldb.d_lov_incident_service_type_c a122 
 on (a11.service_type_c_key = a122.row_key) 
 union
-select 'ldb.d_lov_resolver_department_view_c a123 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_lov_incident_resolver_department_c a123 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident_resolved a11 
-join ldb.d_lov_resolver_department_view_c a123 
+join ldb.d_lov_incident_resolver_department_c a123 
 on (a11.resolver_department_c_key = a123.row_key) 
 union
 select 'ldb.d_task_impact a124 ' as Table_name, count(a11.row_key) Row_Count
@@ -147,9 +147,9 @@ from ldb.f_incident_resolved a11
 join ldb.d_lov_incident_type_c a129 
 on (a11.type_c_key = a129.row_key) 
 union
-select 'ldb.d_lov_who_is_affected_view_c a130 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_lov_incident_who_is_affected_c a130 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident_resolved a11 
-join ldb.d_lov_who_is_affected_view_c a130 
+join ldb.d_lov_incident_who_is_affected_c a130 
 on (a11.who_is_affected_c_key = a130.row_key) 
 union
 select 'ldb.d_business_service_criticality a131 ' as Table_name, count(a11.row_key) Row_Count

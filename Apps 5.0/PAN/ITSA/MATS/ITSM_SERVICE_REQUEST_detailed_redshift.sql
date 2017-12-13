@@ -1,9 +1,9 @@
 select 'ldb.f_service_request_c a11 ' as Table_name, count(a11.row_key) Row_Count											
 from ldb.f_service_request_c a11 
 union
-select 'ldb.d_service_request_agebucket_c a12 ' as Table_name, count(a11.row_key) Row_Count											
+select 'ldb.d_lov_service_request_agebucket_c  a12 ' as Table_name, count(a11.row_key) Row_Count											
 from ldb.f_service_request_c a11 											
-join ldb.d_service_request_agebucket_c a12 											
+join ldb.d_lov_service_request_agebucket_c  a12 											
 on (a11.age_key = a12.row_key) 											
 union											
 select 'ldb.d_internal_contact a12 ' as Table_name, count(a11.row_key) Row_Count											
@@ -61,11 +61,11 @@ from ldb.f_service_request_c a11
 join ldb.d_duration_c a112 											
 on (a11.opened_by_employee_duration = a112.duration_c_key) 											
 union											
-select 'ldb.d_lov_employee_type_c a113 ' as Table_name, count(a11.row_key) Row_Count											
+select 'ldb.d_lov_request_item_employee_type_c a113 ' as Table_name, count(a11.row_key) Row_Count											
 from ldb.f_service_request_c a11 											
 join ldb.d_internal_contact_employee_type_c a13 											
 on (a11.opened_by_key = a13.row_key) 											
-join ldb.d_lov_employee_type_c a113 											
+join ldb.d_lov_request_item_employee_type_c a113 											
 on (a13.employee_type_c_key = a113.row_key) 											
 union											
 select 'ldb.d_internal_contact_requestor_c a114 ' as Table_name, count(a11.row_key) Row_Count											

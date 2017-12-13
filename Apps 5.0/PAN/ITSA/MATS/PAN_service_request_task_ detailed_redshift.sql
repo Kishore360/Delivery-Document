@@ -58,11 +58,11 @@ on (a11.service_request_c_key = a14.row_key)
 join ldb.d_lov_service_request_category_c a112 
 on (a14.category_src_key = a112.row_key) 
 union
-select 'ldb.d_internal_organization_dpt a113 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_internal_organization_dpt_c  a113 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_sr_task_c a11 
 join ldb.d_sr_task_c a15 
 on (a11.sr_task_c_key = a15.row_key) 
-join ldb.d_internal_organization_dpt a113 
+join ldb.d_internal_organization_dpt_c a113 
 on (a15.department_key = a113.row_key) 
 union
 select 'ldb.d_internal_organization_group_parent_c a114 ' as Table_name, count(a11.row_key) Row_Count

@@ -128,30 +128,30 @@ from ldb.f_change_request_closed a11
 join ldb.d_location a126 										
 on (a11.location_key = a126.row_key) 										
 union										
-select 'ldb.d_internal_contact_validater_c a127 ' as Table_name, count(a11.row_key) Row_Count										
+select 'ldb.d_internal_contact_validator_c  a127 ' as Table_name, count(a11.row_key) Row_Count										
 from ldb.f_change_request_closed a11 										
-join ldb.d_internal_contact_validater_c a127 										
+join ldb.d_internal_contact_validator_c  a127 										
 on (a11.who_valid_the_service_c_key = a127.row_key) 										
 union										
-select 'ldb.d_change_request_category_2_c a128 ' as Table_name, count(a11.row_key) Row_Count										
+select 'ldb.d_lov_change_request_category_2_c a128 ' as Table_name, count(a11.row_key) Row_Count										
 from ldb.f_change_request_closed a11 										
 join ldb.d_change_request a13 										
 on (a11.change_request_key = a13.row_key) 										
-join ldb.d_change_request_category_2_c a128 										
+join ldb.d_lov_change_request_category_2_c a128 										
 on (a13.category_2_c_key = a128.row_key) 										
 union										
-select 'ldb.d_change_request_downtime_c a129 ' as Table_name, count(a11.row_key) Row_Count										
+select 'ldb.d_lov_change_request_downtime_c a129 ' as Table_name, count(a11.row_key) Row_Count										
 from ldb.f_change_request_closed a11 										
 join ldb.d_change_request a13 										
 on (a11.change_request_key = a13.row_key) 										
-join ldb.d_change_request_downtime_c a129 										
+join ldb.d_lov_change_request_downtime_c a129 										
 on (a13.downtime_c_key = a129.row_key) 										
 union										
-select 'ldb.d_change_request_implementation_result_c a130 ' as Table_name, count(a11.row_key) Row_Count										
+select 'ldb.d_lov_change_request_implementation_result_code_c a130 ' as Table_name, count(a11.row_key) Row_Count										
 from ldb.f_change_request_closed a11 										
 join ldb.d_change_request a13 										
 on (a11.change_request_key = a13.row_key) 										
-join ldb.d_change_request_implementation_result_c a130 										
+join ldb.d_lov_change_request_implementation_result_code_c a130 										
 on (a13.implementation_result_code_c_key = a130.row_key) 										
 union										
 select 'ldb.d_internal_organization_group_parent_c a131 ' as Table_name, count(a11.row_key) Row_Count										
@@ -161,18 +161,18 @@ on (a11.assignment_group_key = a15.row_key)
 join ldb.d_internal_organization_group_parent_c a131 										
 on (a15.parent_row_key_c = a131.row_key) 										
 union										
-select 'ldb.d_change_request_tech_validation_c a132 ' as Table_name, count(a11.row_key) Row_Count										
+select 'ldb.d_lov_change_request_tech_validation_c a132 ' as Table_name, count(a11.row_key) Row_Count										
 from ldb.f_change_request_closed a11 										
 join ldb.d_change_request a13 										
 on (a11.change_request_key = a13.row_key) 										
-join ldb.d_change_request_tech_validation_c a132 										
+join ldb.d_lov_change_request_tech_validation_c a132 										
 on (a13.tech_validation_c_key = a132.row_key) 										
 union										
-select 'ldb.d_change_request_user_validation_c a133 ' as Table_name, count(a11.row_key) Row_Count										
+select 'ldb.d_lov_change_request_user_validation_c  a133 ' as Table_name, count(a11.row_key) Row_Count										
 from ldb.f_change_request_closed a11 										
 join ldb.d_change_request a13 										
 on (a11.change_request_key = a13.row_key) 										
-join ldb.d_change_request_user_validation_c a133 										
+join ldb.d_lov_change_request_user_validation_c  a133 										
 on (a13.user_validation_c_key = a133.row_key) 										
 union										
 select 'ldb.d_calendar_month a134 ' as Table_name, count(a11.row_key) Row_Count										

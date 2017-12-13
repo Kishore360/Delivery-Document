@@ -43,9 +43,9 @@ from ldb.f_walk_up_c a11
 join ldb.d_internal_contact a19 
 on (a11.opened_by_key = a19.row_key) 
 union
-select 'ldb.d_walk_up_priority_c a110 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_lov_walk_up_priority_c  a110 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_walk_up_c a11 
-join ldb.d_walk_up_priority_c a110 
+join ldb.d_lov_walk_up_priority_c  a110 
 on (a11.priority_src_key = a110.row_key) 
 union
 select 'ldb.d_internal_contact_requestor_c a111 ' as Table_name, count(a11.row_key) Row_Count
@@ -53,14 +53,14 @@ from ldb.f_walk_up_c a11
 join ldb.d_internal_contact_requestor_c a111 
 on (a11.requestor_c_key = a111.row_key) 
 union
-select 'ldb.d_walk_up_state_c a112 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_lov_walk_up_state_c  a112 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_walk_up_c a11 
-join ldb.d_walk_up_state_c a112 
+join ldb.d_lov_walk_up_state_c  a112 
 on (a11.state_src_key = a112.row_key) 
 union
-select 'ldb.d_walk_up_type_c a113 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_lov_walk_up_type_c  a113 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_walk_up_c a11 
-join ldb.d_walk_up_type_c a113 
+join ldb.d_lov_walk_up_type_c  a113 
 on (a11.walkup_type_src_key = a113.row_key) 
 union
 select 'ldb.d_calendar_fiscal_quarter a114 ' as Table_name, count(a11.row_key) Row_Count
@@ -85,11 +85,11 @@ from ldb.f_walk_up_c a11
 join ldb.d_internal_contact_opened_by_c a117 
 on (a11.opened_by_key = a117.row_key) 
 union
-select 'ldb.d_lov_employee_type_c a1117 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_lov_request_item_employee_type_c a1117 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_walk_up_c a11 
 join ldb.d_internal_contact a19 
 on (a11.opened_by_key = a19.row_key) 
-join ldb.d_lov_employee_type_c a1117 
+join ldb.d_lov_request_item_employee_type_c a1117 
 on (a19.employee_type_c_key = a1117.row_key) 
 union
 select 'ldb.d_walkup_type_c a1117 ' as Table_name, count(a11.row_key) Row_Count

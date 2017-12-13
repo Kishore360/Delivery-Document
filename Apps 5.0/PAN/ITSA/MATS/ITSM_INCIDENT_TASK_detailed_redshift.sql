@@ -41,11 +41,11 @@ from ldb.f_incident_tasks_c a11
 join ldb.d_duration_c a19 										
 on (a11.opened_by_employee_duration = a19.duration_c_key) 										
 union										
-select 'ldb.d_lov_employee_type_c a110 ' as Table_name, count(a11.row_key) Row_Count										
+select 'ldb.d_lov_request_item_employee_type_c a110 ' as Table_name, count(a11.row_key) Row_Count										
 from ldb.f_incident_tasks_c a11 										
 join ldb.d_internal_contact_employee_type_c a13 										
 on (a11.opened_by_c_key = a13.row_key) 										
-join ldb.d_lov_employee_type_c a110 										
+join ldb.d_lov_request_item_employee_type_c a110 										
 on (a13.employee_type_c_key = a110.row_key) 										
 union										
 select 'ldb.d_incident a111 ' as Table_name, count(a11.row_key) Row_Count										
@@ -58,32 +58,32 @@ from ldb.f_incident_tasks_c a11
 join ldb.d_internal_contact_task_closed_by_c a112 										
 on (a11.closed_by_c_key = a112.row_key) 										
 union										
-select 'ldb.d_incident_task_impact_c a113 ' as Table_name, count(a11.row_key) Row_Count										
+select 'ldb.d_lov_incident_task_impact_c  a113 ' as Table_name, count(a11.row_key) Row_Count										
 from ldb.f_incident_tasks_c a11 										
 join ldb.d_incident_tasks_c a15 										
 on (a11.incident_tasks_c_key = a15.row_key) 										
-join ldb.d_incident_task_impact_c a113 										
+join ldb.d_lov_incident_task_impact_c  a113 										
 on (a15.impact_src_key = a113.row_key) 										
 union										
-select 'ldb.d_incident_task_priority_c a114 ' as Table_name, count(a11.row_key) Row_Count										
+select 'ldb.d_lov_incident_task_priority_c  a114 ' as Table_name, count(a11.row_key) Row_Count										
 from ldb.f_incident_tasks_c a11 										
 join ldb.d_incident_tasks_c a15 										
 on (a11.incident_tasks_c_key = a15.row_key) 										
-join ldb.d_incident_task_priority_c a114 										
+join ldb.d_lov_incident_task_priority_c  a114 										
 on (a15.priority_src_key = a114.row_key) 										
 union										
-select 'ldb.d_incident_task_state_c a115 ' as Table_name, count(a11.row_key) Row_Count										
+select 'ldb.d_lov_incident_task_state_c  a115 ' as Table_name, count(a11.row_key) Row_Count										
 from ldb.f_incident_tasks_c a11 										
 join ldb.d_incident_tasks_c a15 										
 on (a11.incident_tasks_c_key = a15.row_key) 										
-join ldb.d_incident_task_state_c a115 										
+join ldb.d_lov_incident_task_state_c  a115 										
 on (a15.state_src_key = a115.row_key) 										
 union										
-select 'ldb.d_incident_task_urgency_c a116 ' as Table_name, count(a11.row_key) Row_Count										
+select 'ldb.d_lov_incident_task_urgency_c  a116 ' as Table_name, count(a11.row_key) Row_Count										
 from ldb.f_incident_tasks_c a11 										
 join ldb.d_incident_tasks_c a15 										
 on (a11.incident_tasks_c_key = a15.row_key) 										
-join ldb.d_incident_task_urgency_c a116 										
+join ldb.d_lov_incident_task_urgency_c  a116 										
 on (a15.urgency_src_key = a116.row_key) 										
 union										
 select 'ldb.d_calendar_month a117 ' as Table_name, count(a11.row_key) Row_Count										

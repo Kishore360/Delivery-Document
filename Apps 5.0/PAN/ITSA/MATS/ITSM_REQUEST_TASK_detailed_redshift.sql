@@ -51,11 +51,11 @@ from ldb.f_request_task a11
 join ldb.d_duration_c a111 									
 on (a11.opened_by_employee_duration = a111.duration_c_key) 									
 union									
-select 'ldb.d_lov_employee_type_c a112 ' as Table_name, count(a11.row_key) Row_Count									
+select 'ldb.d_lov_request_item_employee_type_c a112 ' as Table_name, count(a11.row_key) Row_Count									
 from ldb.f_request_task a11 									
 join ldb.d_internal_contact_employee_type_c a13 									
 on (a11.opened_by_key = a13.row_key) 									
-join ldb.d_lov_employee_type_c a112 									
+join ldb.d_lov_request_item_employee_type_c a112 									
 on (a13.employee_type_c_key = a112.row_key) 									
 union									
 select 'ldb.d_sc_task_priority a113 ' as Table_name, count(a11.row_key) Row_Count									
