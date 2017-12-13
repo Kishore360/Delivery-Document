@@ -10,5 +10,5 @@ LEFT JOIN mcdonalds_mdwdb.f_macm_c TRGT
 ON (SRC.SYS_ID=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id) 
 LEFT JOIN mcdonalds_mdwdb.d_configuration_item LKP
 ON COALESCE(SRC.cmdb_ci, 'UNSPECIFIED')=LKP.row_id
-WHERE COALESCE(LKP.row_key,-1)<>TRGT.configuration_item_key
+WHERE COALESCE(LKP.row_key,case when cmdb_ci is null then 0 else -1 end )<>TRGT.configuration_item_key
 )a;

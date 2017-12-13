@@ -4,7 +4,7 @@ CASE WHEN CNT >0 THEN 'MDS to DWH data validation failed for f_hdi_survey_respon
 FROM (  
 SELECT Count(1) as CNT 
 FROM nypres_mdsdb.us_custom_survey_response_final SRC 
-JOIN nypres_mdsdb.incident_final SRC1 ON SRC.row_id=SRC1.number
+JOIN nypres_mdsdb.incident_final SRC1 ON (SRC.row_id=SRC1.number and SRC.sourceinstance=SRC1.sourceinstance)
 JOIN nypres_mdwdb.f_hdi_survey_response_c TRGT ON SRC1.number=TRGT.row_id and SRC1.sourceinstance=TRGT.source_id
 JOIN nypres_mdwdb.d_lov LKP 
 ON COALESCE( CONCAT('CONTACT_TYPE','~','TASK','~','~','~',upper(SRC1.contact_type),'UNSPECIFIED')=LKP.row_id

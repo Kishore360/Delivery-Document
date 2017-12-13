@@ -9,4 +9,4 @@ left join coach_mdsdb.task_final c
  on c.sys_id=a.u_cab_meeting and a.sourceinstance=c.sourceinstance 
  left  JOIN coach_mdwdb.d_change_request b 
 on  b.ROW_ID=a.SYS_ID and a.sourceinstance=b.source_id 
- where coalesce(c.number,'UNSPECIFIED') <> b.cab_meeting_c )b
+ where c.sys_class_name ='u_change_approval_board_meetin' and coalesce(c.number,'UNSPECIFIED') <> b.cab_meeting_c )b

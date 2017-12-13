@@ -21,6 +21,7 @@ not in (select class_value from asu_workdb.lsm_ls_system_variables where enable_
 'GENDER',
 'STATE~GEO',
 'WARRANTY',
-'CRITICALITY~BUSINESS_SERVICE','U_CATEGORY~INCIDENT'
+'CRITICALITY~BUSINESS_SERVICE','U_CATEGORY~INCIDENT',
+'NAME~TASK_SLA','STATE_C~HRCASE','TASK_TYPE~TASK'
 
 ) )a;
