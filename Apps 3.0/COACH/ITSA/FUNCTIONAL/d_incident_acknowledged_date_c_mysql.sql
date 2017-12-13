@@ -6,5 +6,5 @@ select count(1) as cnt
 from coach_mdsdb.incident_final a
  left  JOIN  coach_mdwdb.d_incident b
 on  b.ROW_ID = a.SYS_ID and a.sourceinstance=b.source_id
-where  DATE_FORMAT(CONVERT_TZ(a.u_acknowledge_timestamp,'GMT','America/New_York'),'%Y%m%d')<> b.acknowledged_date_c )c
+where  (CONVERT_TZ(a.u_acknowledge_timestamp,'GMT','America/New_York'))<> b.acknowledged_date_c )c
 
