@@ -1,6 +1,6 @@
 SELECT 
 CASE WHEN CNT > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
-CASE WHEN CNT >0 THEN 'MDS to DWH data validation failed for f_hdi_survey_response_c.location_c_key' ELSE 'SUCCESS' END as Message
+CASE WHEN CNT >0 THEN 'MDS to DWH data validation failed for f_hdi_survey_response_c.location_key' ELSE 'SUCCESS' END as Message
 FROM (  
 SELECT Count(1) as CNT
 FROM nypres_mdsdb.us_custom_survey_response_final SRC 
