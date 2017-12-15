@@ -1,53 +1,28 @@
 
+SELECT 'f_incident' AS Table_Name, Count(a11.row_key) as Row_Count
+FROM ldb.f_incident a11 
+UNION 
+SELECT 'f_incident_keyword' AS Table_Name, count(a11.row_key) as Row_Count
+FROM ldb.f_incident a11
+JOIN ldb.f_incident_keyword a12 
+ON 
+(a11.assigned_to_key = a12.assigned_to_key AND 
+a11.assignment_group_key = a12.assignment_group_key AND 
+a11.company_key = a12.company_key AND
+a11.configuration_item_key = a12.configuration_item_key AND
+a11.customer_key = a12.customer_key  AND 
+a11.domain_key = a12.domain_key AND
+a11.impact_src_key = a12.impact_src_key AND
+a11.incident_key = a12.table_row_key  AND 
+a11.location_key = a12.location_key  AND 
+a11.opened_by_key = a12.opened_by_key AND 
+a11.opened_time_key = a12.opened_time_key AND 
+a11.priority_src_key = a12.priority_src_key AND 
+a11.reported_type_src_key = a12.reported_type_src_key AND 
+a11.urgency_src_key = a12.urgency_src_key)
+UNION 
 select 'ldb.f_incident a11 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11 
-union
-select 'ldb.f_incident_keyword a12 ' as Table_name, count(a11.row_key) Row_Count
-from ldb.f_incident a11 
-join ldb.f_incident_keyword a12 
-on (a11.assigned_to_key = a12.assigned_to_key and 
-union
-select 'ldb.assignment_group_key = a12.assignment_group_key and ' as Table_name, count(a11.row_key) Row_Count
-from ldb.f_incident a11 
-
-a11.assignment_group_key = a12.assignment_group_key and 
-a11.company_key = a12.company_key and 
-union
-select 'ldb.configuration_item_key = a12.configuration_item_key and ' as Table_name, count(a11.row_key) Row_Count
-from ldb.f_incident a11 
-
-a11.configuration_item_key = a12.configuration_item_key and 
-a11.customer_key = a12.customer_key and 
-union
-select 'ldb.domain_key = a12.domain_key and ' as Table_name, count(a11.row_key) Row_Count
-from ldb.f_incident a11 
-
-a11.domain_key = a12.domain_key and 
-a11.impact_src_key = a12.impact_src_key and 
-union
-select 'ldb.incident_key = a12.table_row_key and ' as Table_name, count(a11.row_key) Row_Count
-from ldb.f_incident a11 
-
-a11.incident_key = a12.table_row_key and 
-a11.location_key = a12.location_key and 
-union
-select 'ldb.opened_by_key = a12.opened_by_key and ' as Table_name, count(a11.row_key) Row_Count
-from ldb.f_incident a11 
-
-a11.opened_by_key = a12.opened_by_key and 
-a11.opened_on_key = a12.opened_on_key and 
-union
-select 'ldb.opened_time_key = a12.opened_time_key and ' as Table_name, count(a11.row_key) Row_Count
-from ldb.f_incident a11 
-
-a11.opened_time_key = a12.opened_time_key and 
-a11.priority_src_key = a12.priority_src_key and 
-union
-select 'ldb.reported_type_src_key = a12.reported_type_src_key and ' as Table_name, count(a11.row_key) Row_Count
-from ldb.f_incident a11 
-
-a11.reported_type_src_key = a12.reported_type_src_key and 
-a11.urgency_src_key = a12.urgency_src_key) 
 union
 select 'ldb.d_customer a13 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11 
@@ -165,7 +140,7 @@ a11.opened_on_key = a12.opened_on_key and a11.opened_time_key = a12.opened_time_
 a11.priority_src_key = a12.priority_src_key and a11.reported_type_src_key = a12.reported_type_src_key and 
 a11.urgency_src_key = a12.urgency_src_key) 
 join ldb.d_incident_category a122 
-on (a12.category_src_key = a122.row_key) 
+on (a12.category_src_key = a122.row_key)
 union
 select 'ldb.d_incident_close_code a123 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11 
@@ -193,7 +168,7 @@ a11.opened_on_key = a12.opened_on_key and a11.opened_time_key = a12.opened_time_
 a11.priority_src_key = a12.priority_src_key and a11.reported_type_src_key = a12.reported_type_src_key and 
 a11.urgency_src_key = a12.urgency_src_key) 
 join ldb.d_incident_severity a124 
-on (a12.severity_src_key = a124.row_key) 
+on (a12.severity_src_key = a124.row_key)  
 union
 select 'ldb.d_incident_state a125 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11 
@@ -229,4 +204,5 @@ join ldb.d_calendar_date a17
 on (a11.opened_on_key = a17.row_key) 
 join ldb.d_calendar_month a127 
 on (a17.month_start_date_key = a127.row_key) 
+
 
