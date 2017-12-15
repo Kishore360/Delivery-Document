@@ -7,4 +7,3 @@ where  approval_to_close_duration_c<>
  
  
  
- 

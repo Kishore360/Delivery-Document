@@ -1,9 +1,13 @@
-SELECT CASE WHEN count(1)  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, 
-CASE WHEN count(1)  THEN 'MDS to DWH data validation failed for d_problem.notifind_sent_c_flag' ELSE 'SUCCESS' END as Message 
-FROM pan_mdwdb.f_incident_tasks_c a
-LEFT OUTER JOIN pan_mdwdb.d_incident x ON a.task_key=x.row_key
-WHERE a.incident_c_key <> coalesce(x.row_key, -1)
- 
+ SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
+,CASE WHEN cnt > 0 THEN 'MDS TO MDW DATA VALIDATION FAILED'
+ELSE 'Data Matched' END AS Message
+FROM (
+select count(1)from pan_mdsdb.u_incident_tasks_final s
+left join pan_mdwdb.f_incident_tasks_c t
+on s.sys_id=t.row_id and s.sourceinstance = t.source_id
+left join pan_mdwdb.d_incident lkp
+on lkp.row_id =parent
+AND lkp.source_id=s.sourceinstance
+WHERE COALESCE(lkp.row_key,CASE WHEN parent IS NULL THEN 0 else -1 end) <> t.incident_c_key) temp
 
- 
- 
+
