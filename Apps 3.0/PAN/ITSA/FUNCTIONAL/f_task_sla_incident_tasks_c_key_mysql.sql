@@ -6,7 +6,7 @@ LEFT OUTER JOIN pan_mdwdb.d_incident_tasks_c x
 ON case when upper(task.sys_class_name) = 'U_INCIDENT_TASKS' then COALESCE(src.task,'UNSPECIFIED') else 'UNSPECIFIED' END =x.row_id
 and task.sourceinstance=x.source_id
 join pan_mdwdb.f_task_sla a on a.row_id=src.sys_id and a.source_id=src.sourceinstance
-WHERE a.incident_tasks_c_key <> coalesce(x.row_key,case when task is null then 0 else -1 end )
+WHERE  upper(task.sys_class_name) = 'U_INCIDENT_TASKS'  and a.incident_tasks_c_key <> coalesce(x.row_key,case when task is null then 0 else -1 end )
  
 
  
