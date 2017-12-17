@@ -57,7 +57,7 @@ join ldb.d_calendar_date a12  on (a11.requested_on_key = a12.row_key)
 join ldb.d_calendar_month a113 on (a12.month_start_date_key = a113.row_key)
 UNION
 select 'ldb.d_calendar_date a12 ' as Table_name, count(a11.row_key) Row_Count
-from ldb.f_task_response_c a11 row_count, 
+from ldb.f_task_response_c a11 
 join ldb.d_calendar_date a12 on (a11.requested_on_key = a12.row_key)
 UNION 
 SELECT 'd_configuration_item_survey_causing_ci_c' as Table_Name,count(a11.row_key) as Row_count
