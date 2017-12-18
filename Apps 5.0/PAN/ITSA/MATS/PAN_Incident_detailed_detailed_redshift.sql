@@ -253,3 +253,10 @@ join ldb.d_calendar_date a17
 on (a11.opened_on_key = a17.row_key) 									
 join ldb.d_calendar_week a143 									
 on (a17.week_start_date_key = a143.row_key) 									
+union
+select 'ldb.d_lov_employee_type_c a110 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_incident a11 
+join ldb.d_internal_contact_employee_type_c a13 
+on (a11.opened_by_c_key = a13.row_key) 
+join ldb.d_lov_employee_type_c a110 
+on (a13.employee_type_c_key = a110.row_key) 

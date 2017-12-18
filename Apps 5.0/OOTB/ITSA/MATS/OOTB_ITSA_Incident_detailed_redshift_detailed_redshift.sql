@@ -1,5 +1,43 @@
 select 'ldb.f_incident' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_incident       a11 
+ union
+select'ldb.d_calendar_quarter' as Table_Name, count(a11.row_key) Row_Count
+ from  ldb.f_incident       a11 
+ join ldb.d_calendar_date       a13
+on (a11.opened_on_key = a13.row_key)
+join ldb.d_calendar_quarter       a120
+on (a13.quarter_start_date_key = a120.row_key)
+union
+select 'ldb.d_calendar_date_fiscal a14 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_incident a11 
+join ldb.d_calendar_greg_fiscal_c a13 
+on (a11.opened_on_key = a13.greogrian_calendar_key) 
+join ldb.d_calendar_date_fiscal a14 
+on (a13.fiscal_key = a14.row_key) 
+union
+select 'ldb.d_calendar_fiscal_quarter a114 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_incident a11 
+join ldb.d_calendar_greg_fiscal_c a13 
+on (a11.opened_on_key = a13.greogrian_calendar_key) join ldb.d_calendar_date_fiscal a14 
+on (a13.fiscal_key = a14.row_key) 
+join ldb.d_calendar_fiscal_quarter a114 
+on (a14.quarter_start_date_key = a114.row_key) 
+union
+select 'ldb.d_calendar_fiscal_year a114 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_incident a11 
+join ldb.d_calendar_greg_fiscal_c a13 
+on (a11.opened_on_key = a13.greogrian_calendar_key) join ldb.d_calendar_date_fiscal a14 
+on (a13.fiscal_key = a14.row_key) 
+join ldb.d_calendar_fiscal_year a114 
+on (a14.year_start_date_key = a114.row_key)
+union
+select 'ldb.d_calendar_fiscal_year a115 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_incident a11 
+join ldb.d_calendar_greg_fiscal_c a13 
+on (a11.opened_on_key = a13.greogrian_calendar_key) join ldb.d_calendar_date_fiscal a14 
+on (a13.fiscal_key = a14.row_key) 
+join ldb.d_calendar_fiscal_year a115 
+on (a14.year_start_date_key = a115.row_key) 
 union
 select'ldb.d_customer' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_incident       a11 
