@@ -71,7 +71,7 @@ union
 select 'ldb.d_internal_contact_requested_for a115 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_request_item_closed_c a11 
 join ldb.d_internal_contact_requested_for a115 
-on (a11.request_requested_for_key = a115.row_key) 
+on (a11.requested_for_key = a115.row_key) 
 union
 select 'ldb.d_internal_contact_task_closed_by a116 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_request_item_closed_c a11 

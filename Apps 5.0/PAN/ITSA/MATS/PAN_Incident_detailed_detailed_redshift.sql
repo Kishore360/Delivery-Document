@@ -8,9 +8,10 @@ join ldb.d_internal_contact_opened_by_c       a115
 on (a11.opened_by_c_key = a115.row_key)
 join ldb.d_internal_contact_manager_c       a116
 on (a115.manager_c_key = a116.row_key)
+where a115.soft_deleted_flag='N'
 
 union
-select 'ldb.f_incident a11 ' as Table_name, count(a11.row_key) Row_Count									
+select 'ldb.d_category_c a11 ' as Table_name, count(a11.row_key) Row_Count									
 from ldb.f_incident a11
 join ldb.d_category_c a12 on a11.category_5_c_key=a12.row_key
 
@@ -148,9 +149,9 @@ from ldb.f_incident a11
 join ldb.d_lov_incident_resolver_department_c a126 									
 on (a11.resolver_department_c_key = a126.row_key) 									
 union									
-select 'ldb.d_task_impact a127 ' as Table_name, count(a11.row_key) Row_Count									
+select 'ldb.d_incident_impact a127 ' as Table_name, count(a11.row_key) Row_Count									
 from ldb.f_incident a11 									
-join ldb.d_task_impact a127 									
+join ldb.d_incident_impact a127 									
 on (a11.impact_src_key = a127.row_key) 									
 union									
 select 'ldb.d_location a128 ' as Table_name, count(a11.row_key) Row_Count									
@@ -158,19 +159,19 @@ from ldb.f_incident a11
 join ldb.d_location a128 									
 on (a11.location_key = a128.row_key) 									
 union									
-select 'ldb.d_task_priority a129 ' as Table_name, count(a11.row_key) Row_Count									
+select 'ldb.d_incident_priority a129 ' as Table_name, count(a11.row_key) Row_Count									
 from ldb.f_incident a11 									
-join ldb.d_task_priority a129 									
+join ldb.d_incident_priority a129 									
 on (a11.priority_src_key = a129.row_key) 									
 union									
-select 'ldb.d_task_contacttype a130 ' as Table_name, count(a11.row_key) Row_Count									
+select 'ldb.d_incident_contacttype a130 ' as Table_name, count(a11.row_key) Row_Count									
 from ldb.f_incident a11 									
-join ldb.d_task_contacttype a130 									
+join ldb.d_incident_contacttype a130 									
 on (a11.reported_type_src_key = a130.row_key) 									
 union									
-select 'ldb.d_task_urgency a131 ' as Table_name, count(a11.row_key) Row_Count									
+select 'ldb.d_incident_urgency a131 ' as Table_name, count(a11.row_key) Row_Count									
 from ldb.f_incident a11 									
-join ldb.d_task_urgency a131 									
+join ldb.d_incident_urgency a131 									
 on (a11.urgency_src_key = a131.row_key) 									
 union									
 select 'ldb.d_lov_incident_type_c a132 ' as Table_name, count(a11.row_key) Row_Count									

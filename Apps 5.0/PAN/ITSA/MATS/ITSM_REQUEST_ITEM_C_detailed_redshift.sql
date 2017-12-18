@@ -45,7 +45,7 @@ on (a12.row_current_key = a19.row_current_key)
 union								
 select 'ldb.d_duration_c_requested_for_c a110 ' as Table_name, count(a11.row_key) Row_Count								
 from ldb.f_request_item a11 								
-join ldb.d_duration_c_requested_for_c a110 								
+join ldb.d_duration_requested_for_c a110 								
 on (a11.requested_for_employee_duration = a110.duration_c_key) 								
 union								
 select 'ldb.d_duration_c a111 ' as Table_name, count(a11.row_key) Row_Count								

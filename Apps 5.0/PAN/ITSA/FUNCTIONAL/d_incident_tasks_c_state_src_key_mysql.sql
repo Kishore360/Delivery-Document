@@ -6,6 +6,6 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
 LEFT JOIN pan_mdwdb.d_lov LKP 
- ON ( concat('STATE','~','TASK','~','~','~',upper(SRC.state))= LKP.src_rowid 
-AND SRC.sourceinstance= LKP.source_id )
+ ON ( concat('STATE','~','INCIDENT','_','TASKS','~','~','~',upper(SRC.state))= LKP.src_rowid 
+ )
  WHERE COALESCE(LKP.row_key,CASE WHEN SRC.state IS NULL THEN 0 else '-1' end)<> COALESCE(TRGT.state_src_key,'')

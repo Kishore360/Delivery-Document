@@ -5,7 +5,7 @@ select count(1) as cnt
 from pan_mdwdb.d_lov
 where 
 row_id <> concat(dimension_class,'~',dimension_type,'~','~',dimension_code)
- and row_id not like ('CONTACT_TYPE~INCIDENT%')
+ and row_id not like ('CONTACT_TYPE~INCIDENT%') and row_id not like '%TENANT_INFORMATION%'
 and dimension_class NOT IN ('LANDING_PAGE','PROJECT','WH~PROJECT')
 and row_key not in (-1,0)
 )a;

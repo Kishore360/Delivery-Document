@@ -14,7 +14,7 @@ LEFT JOIN <<tenant>>_mdwdb.d_internal_contact LKP
 AND TRGT.pivot_date
 BETWEEN LKP.effective_from AND LKP.effective_to)
 LEFT JOIN <<tenant>>_mdwdb.d_internal_contact ic ON (SRC.sys_updated_by = ic.user_name AND SRC.sourceinstance = ic.source_id)
-WHERE 
+WHERE LKP.soft_deleted_flag='N' and 
   TRGT. closed_by_key <>case when (coalesce(LKP.row_key,case when closed_by is null then 0 end ))=0 
 then coalesce(ic.row_key,-1) else coalesce(LKP.row_key,case when closed_by is null then 0 else -1 end) end
 and dlm.dimension_wh_code ='CLOSED' ) temp;

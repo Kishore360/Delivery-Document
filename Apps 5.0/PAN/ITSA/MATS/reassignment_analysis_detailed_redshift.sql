@@ -26,9 +26,9 @@ from ldb.f_incident_reassignment_analysis_c a11
 join ldb.d_internal_organization_group_reassignment_c a16 									
 on (a11.new_assignment_group_key = a16.row_key) 									
 union									
-select 'ldb.d_task_contacttype a17 ' as Table_name, count(1) Row_Count									
+select 'ldb.d_incident_contacttype a17 ' as Table_name, count(1) Row_Count									
 from ldb.f_incident_reassignment_analysis_c a11 									
-join ldb.d_task_contacttype a17 									
+join ldb.d_incident_contacttype a17 									
 on (a11.reported_type_src_key = a17.row_key) 									
 union									
 select 'ldb.d_calendar_month_opened a18 ' as Table_name, count(1) Row_Count									

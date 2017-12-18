@@ -117,9 +117,9 @@ from ldb.f_incident_closed a11
 join ldb.d_lov_incident_resolver_department_c a123 
 on (a11.resolver_department_c_key = a123.row_key) 
 union
-select 'ldb.d_task_impact a124 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_incident_impact a124 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident_closed a11 
-join ldb.d_task_impact a124 
+join ldb.d_incident_impact a124 
 on (a11.impact_src_key = a124.row_key) 
 union
 select 'ldb.d_location a125 ' as Table_name, count(a11.row_key) Row_Count
@@ -127,19 +127,19 @@ from ldb.f_incident_closed a11
 join ldb.d_location a125 
 on (a11.location_key = a125.row_key) 
 union
-select 'ldb.d_task_priority a126 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_incident_priority a126 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident_closed a11 
-join ldb.d_task_priority a126 
+join ldb.d_incident_priority a126 
 on (a11.priority_src_key = a126.row_key) 
 union
-select 'ldb.d_task_contacttype a127 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_incident_contacttype a127 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident_closed a11 
-join ldb.d_task_contacttype a127 
+join ldb.d_incident_contacttype a127 
 on (a11.reported_type_src_key = a127.row_key) 
 union
-select 'ldb.d_task_urgency a128 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_incident_urgency a128 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident_closed a11 
-join ldb.d_task_urgency a128 
+join ldb.d_incident_urgency a128 
 on (a11.urgency_src_key = a128.row_key) 
 union
 select 'ldb.d_lov_incident_type_c a129 ' as Table_name, count(a11.row_key) Row_Count
