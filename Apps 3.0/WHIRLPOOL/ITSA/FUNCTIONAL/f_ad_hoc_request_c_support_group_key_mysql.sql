@@ -4,7 +4,7 @@ SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
   from
   whirlpool_mdsdb.u_ad_hoc_request_final b
   join whirlpool_mdsdb.cmdb_ci_final cmdb_ci 
- ON b.cmdb_ci = cmdb_ci.sys_id
+ ON b.cmdb_ci = cmdb_ci.sys_id and b.sourceinstance=cmdb_ci.sourceinstance
  join whirlpool_mdwdb.f_ad_hoc_request_c a
  on a.row_id=b.sys_id
  and a.source_id=b.sourceinstance

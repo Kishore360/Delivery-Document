@@ -8,15 +8,9 @@ on (a11.walk_up_c_key = a12.row_key)
 union
 select 'ldb.d_calendar_greg_fiscal_c a13 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_walk_up_c a11 
-join ldb.d_calendar_greg_fiscal_c a13 
-on (a11.opened_on_key = a13.greogrian_calendar_key) 
-union
-select 'ldb.d_calendar_date_fiscal a14 ' as Table_name, count(a11.row_key) Row_Count
-from ldb.f_walk_up_c a11 
-join ldb.d_calendar_greg_fiscal_c a13 
-on (a11.opened_on_key = a13.greogrian_calendar_key) 
-join ldb.d_calendar_date_fiscal a14 
-on (a13.fiscal_key = a14.row_key) 
+join          ldb.d_calendar_date_fiscal    a15
+                  on          (a11.opened_on_key = a15.row_key)
+
 union
 select 'ldb.d_calendar_date a15 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_walk_up_c a11 
@@ -65,19 +59,17 @@ on (a11.walkup_type_src_key = a113.row_key)
 union
 select 'ldb.d_calendar_fiscal_quarter a114 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_walk_up_c a11 
-join ldb.d_calendar_greg_fiscal_c a13 
-on (a11.opened_on_key = a13.greogrian_calendar_key) join ldb.d_calendar_date_fiscal a14 
-on (a13.fiscal_key = a14.row_key) 
+join          ldb.d_calendar_date_fiscal    a15
+                  on          (a11.opened_on_key = a15.row_key)
 join ldb.d_calendar_fiscal_quarter a114 
-on (a14.quarter_start_date_key = a114.row_key) 
+on (a15.quarter_start_date_key = a114.row_key) 
 union
 select 'ldb.d_calendar_fiscal_year a115 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_walk_up_c a11 
-join ldb.d_calendar_greg_fiscal_c a13 
-on (a11.opened_on_key = a13.greogrian_calendar_key) join ldb.d_calendar_date_fiscal a14 
-on (a13.fiscal_key = a14.row_key) 
+join          ldb.d_calendar_date_fiscal    a15
+                  on          (a11.opened_on_key = a15.row_key)
 join ldb.d_calendar_fiscal_year a115 
-on (a14.year_start_date_key = a115.row_key) 
+on (a15.year_start_date_key = a115.row_key) 
 
 union
 select 'ldb.d_internal_contact_opened_by_c a117 ' as Table_name, count(a11.row_key) Row_Count

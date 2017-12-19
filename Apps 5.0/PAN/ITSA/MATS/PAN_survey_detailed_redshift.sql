@@ -1,6 +1,26 @@
 select 'ldb.f_incident_response a11 ' as Table_name, count(a11.row_key) Row_Count										
 from ldb.f_incident_response a11 										
-union										
+union	
+select 'ldb.d_calendar_date_fiscal a11 ' as Table_name, count(a11.row_key) Row_Count										
+from ldb.f_incident_response a11 			
+ join          ldb.d_calendar_date_fiscal    a13
+                  on          (a11.requested_on_key = a13.row_key)
+				  
+				  union
+				  select 'ldb.d_calendar_fiscal_quarter a11 ' as Table_name, count(a11.row_key) Row_Count					
+from ldb.f_incident_response a11 			
+ join          ldb.d_calendar_date_fiscal    a13
+                  on          (a11.requested_on_key = a13.row_key)
+				  join          ldb.d_calendar_fiscal_quarter               a16
+                  on          (a13.Quarter_Fiscal_Row_Key = a16.row_key)
+				   union
+				  select 'ldb.d_calendar_fiscal_year a11 ' as Table_name, count(a11.row_key) Row_Count					
+from ldb.f_incident_response a11 			
+ join          ldb.d_calendar_date_fiscal    a13
+                  on          (a11.requested_on_key = a13.row_key)
+				  join          ldb.d_calendar_fiscal_year               a16
+                  on          (a13.year_Fiscal_Row_Key = a16.row_key)
+union						
 select 'ldb.d_internal_contact a12 ' as Table_name, count(a11.row_key) Row_Count										
 from ldb.f_incident_response a11 										
 join ldb.d_internal_contact a12 										
