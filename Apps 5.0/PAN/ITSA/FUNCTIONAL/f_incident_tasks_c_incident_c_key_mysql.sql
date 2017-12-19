@@ -2,7 +2,7 @@
 ,CASE WHEN cnt > 0 THEN 'MDS TO MDW DATA VALIDATION FAILED'
 ELSE 'Data Matched' END AS Message
 FROM (
-select count(1)from pan_mdsdb.u_incident_tasks_final s
+select count(1)cnt from pan_mdsdb.u_incident_tasks_final s
 left join pan_mdwdb.f_incident_tasks_c t
 on s.sys_id=t.row_id and s.sourceinstance = t.source_id
 left join pan_mdwdb.d_incident lkp

@@ -23,7 +23,7 @@ join ldb.d_calendar_date       a14
 on (a11.assigned_on_key = a14.row_key)
 			  
 				  join          ldb.d_calendar_month            a17
-                  on          (a15.month_start_date_key = a17.row_key)
+                  on          (a14.month_start_date_key = a17.row_key)
 union
 select'ldb.d_internal_organization_group' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_incident_activity       a11 
