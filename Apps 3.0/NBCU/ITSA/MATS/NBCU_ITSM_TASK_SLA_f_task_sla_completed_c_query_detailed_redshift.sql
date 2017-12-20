@@ -131,6 +131,11 @@ on (a11.assignment_group_key = a12.row_key) join ldb.dh_user_group_hierarchy a13
 on (a12.row_dn_key = a13.lev_0_key) 
 join ldb.dh_user_group_level5 a122 
 on (a13.lev_5_key = a122.row_key) 
+UNION
+select 'ldb.d_task_sla_c a114 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_task_sla_completed_c a11 
+join ldb.d_task_sla_c a114 
+on (a11.row_key = a114.sla_row_key) 
 
 
 
