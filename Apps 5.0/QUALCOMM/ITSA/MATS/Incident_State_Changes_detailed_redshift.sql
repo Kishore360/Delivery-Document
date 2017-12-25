@@ -103,7 +103,7 @@ union
 select 'ldb.d_incident_previous_state_c a118 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident_state a11 
 join ldb.d_incident_previous_state_c a118 
-on (a11.task_attribute_wh_old_value_key = a118.row_key) 
+on (a11.previous_state_src_key = a118.row_key) 
 union
 select 'ldb.o_data_freshness a119 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident_state a11 

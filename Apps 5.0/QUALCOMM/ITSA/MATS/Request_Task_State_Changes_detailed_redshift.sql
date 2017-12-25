@@ -109,7 +109,7 @@ union
 select 'ldb.d_request_task_previous_state_c a120 ' as Table_name, count(a11.request_task_key) Row_Count
 from ldb.f_request_task_state_activity a11 
 join ldb.d_request_task_previous_state_c a120 
-on (a11.task_attribute_wh_old_value_key = a120.row_key) 
+on (a11.previous_state_key = a120.row_key) 
 union
 select 'ldb.d_sc_task_priority a121 ' as Table_name, count(a11.request_task_key) Row_Count
 from ldb.f_request_task_state_activity a11 
