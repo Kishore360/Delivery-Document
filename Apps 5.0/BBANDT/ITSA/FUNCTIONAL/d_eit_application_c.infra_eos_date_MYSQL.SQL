@@ -5,6 +5,6 @@ CASE WHEN CNT > 0 THEN 'MDS to DWH data validation failed for d_eit_application_
 FROM (
 SELECT count(1) as CNT 
 FROM bbandt_mdsdb.us_technical_health_check_c_final SRC 
-JOIN bbandt_mdwdb.d_eit_application_c TRGT ON (SRC.row_id and TRGT.row_id AND SRC.sourceinstance=TRGT.source_id)
-where CONVERT_TZ (SRC.infra_eos_date,'GMT','America/New_York')<>TRGT.infra_eos_date
+JOIN bbandt_mdwdb.d_eit_application_c TRGT ON (SRC.row_id = TRGT.row_id AND SRC.sourceinstance=TRGT.source_id)
+where COALESCE(SRC.infra_eos_date,'UNSPECIFIED')<>TRGT.infra_eos_date
 )temp;
