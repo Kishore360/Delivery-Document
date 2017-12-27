@@ -8,7 +8,7 @@ join ldb.d_internal_contact_opened_by_c       a115
 on (a11.opened_by_c_key = a115.row_key)
 join ldb.d_internal_contact_manager_c       a116
 on (a115.manager_c_key = a116.row_key)
-where a115.soft_deleted_flag='N'
+
 
 union
 select 'ldb.d_category_c a11 ' as Table_name, count(1) Row_Count									
@@ -94,9 +94,11 @@ join ldb.d_customer_mdm a116
 on (a12.row_current_key = a116.row_current_key) 									
 union									
 select 'ldb.d_internal_organization_department a117 ' as Table_name, count(1) Row_Count									
-from ldb.f_incident a11 									
+from ldb.f_incident a11 	
+join ldb.d_internal_contact a12
+on a12.row_key=a11.opened_by_key
 join ldb.d_internal_organization_department a117 									
-on (a11.opened_by_department_key = a117.row_key) 									
+on (a12.department_key= a117.row_key) 									
 union									
 select 'ldb.d_internal_contact_mdm a118 ' as Table_name, count(1) Row_Count									
 from ldb.f_incident a11 									
@@ -160,9 +162,10 @@ join ldb.d_location a128
 on (a11.location_key = a128.row_key) 									
 union									
 select 'ldb.d_incident_priority a129 ' as Table_name, count(1) Row_Count									
-from ldb.f_incident a11 									
+from ldb.f_incident a11 	
+join ldb.d_incident a12 on a11.incident_key=a12.row_key
 join ldb.d_incident_priority a129 									
-on (a11.priority_src_key = a129.row_key) 									
+on (a12.priority_src_key = a129.row_key) 									
 union									
 select 'ldb.d_incident_contacttype a130 ' as Table_name, count(1) Row_Count									
 from ldb.f_incident a11 									

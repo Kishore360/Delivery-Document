@@ -9,7 +9,7 @@ union
 select 'ldb.d_internal_contact a13 ' as Table_name, count(1) Row_Count
 from ldb.f_incident_resolved a11 
 join ldb.d_internal_contact a13 
-on (a11.opened_by_key = a13.row_key) 
+on (a11.last_resolved_by_key = a13.row_key) 
 union
 select 'ldb.d_calendar_time a14 ' as Table_name, count(1) Row_Count
 from ldb.f_incident_resolved a11 
@@ -39,7 +39,7 @@ union
 select 'ldb.d_internal_contact_opened_by_c a19 ' as Table_name, count(1) Row_Count
 from ldb.f_incident_resolved a11 
 join ldb.d_internal_contact_opened_by_c a19 
-on (a11.opened_by_c_key = a19.row_key) 
+on (a11.last_resolved_by_key = a19.row_key) 
 union
 select 'ldb.d_internal_organization_group a110 ' as Table_name, count(1) Row_Count
 from ldb.f_incident_resolved a11 
@@ -75,13 +75,15 @@ on (a12.row_current_key = a115.row_current_key)
 union
 select 'ldb.d_internal_organization_department a116 ' as Table_name, count(1) Row_Count
 from ldb.f_incident_resolved a11 
-join ldb.d_internal_organization_department a116 
-on (a11.opened_by_department_key = a116.row_key) 
+join ldb.d_internal_contact a12
+on a12.row_key=a11.last_resolved_by_key
+join ldb.d_internal_organization_department a117 									
+on (a12.department_key= a117.row_key) 
 union
 select 'ldb.d_internal_contact_mdm a117 ' as Table_name, count(1) Row_Count
 from ldb.f_incident_resolved a11 
 join ldb.d_internal_contact a13 
-on (a11.opened_by_key = a13.row_key) 
+on (a11.last_resolved_by_key = a13.row_key) 
 join ldb.d_internal_contact_mdm a117 
 on (a13.row_current_key = a117.row_current_key) 
 union
@@ -129,8 +131,9 @@ on (a11.location_key = a125.row_key)
 union
 select 'ldb.d_incident_priority a126 ' as Table_name, count(1) Row_Count
 from ldb.f_incident_resolved a11 
-join ldb.d_incident_priority a126 
-on (a11.priority_src_key = a126.row_key) 
+join ldb.d_incident a12 on a11.incident_key=a12.row_key
+join ldb.d_incident_priority a129 									
+on (a12.priority_src_key = a129.row_key) 	
 union
 select 'ldb.d_incident_contacttype a127 ' as Table_name, count(1) Row_Count
 from ldb.f_incident_resolved a11 

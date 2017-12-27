@@ -84,11 +84,11 @@ on (a11.opened_by_key = a19.row_key)
 join ldb.d_lov_request_item_employee_type_c a1117 
 on (a19.employee_type_c_key = a1117.row_key) 
 union
-select 'ldb.d_walkup_type_c a1117 ' as Table_name, count(1) Row_Count
+select 'ldb.d_lov_walkup_type_c a1117 ' as Table_name, count(1) Row_Count
 from ldb.f_walk_up_c a11 
 join ldb.d_internal_contact a19 
 on (a11.opened_by_key = a19.row_key) 
-join ldb.d_walk_up_type_c a118 
+join ldb.d_lov_walk_up_type_c a118 
 on a118.row_key=a19.employee_type_c_key
 
 

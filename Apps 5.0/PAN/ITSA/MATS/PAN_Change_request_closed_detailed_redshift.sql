@@ -150,9 +150,9 @@ from ldb.f_change_request_closed a11
 join ldb.d_location a126 										
 on (a11.location_key = a126.row_key) 										
 union										
-select 'ldb.d_internal_contact_validator_c  a127 ' as Table_name, count(1) Row_Count										
+select 'ldb.d_internal_contact_validater_c  a127 ' as Table_name, count(1) Row_Count										
 from ldb.f_change_request_closed a11 										
-join ldb.d_internal_contact_validator_c  a127 										
+join ldb.d_internal_contact_validater_c  a127 										
 on (a11.who_valid_the_service_c_key = a127.row_key) 										
 union										
 select 'ldb.d_lov_change_request_category_2_c a128 ' as Table_name, count(1) Row_Count										
