@@ -1,0 +1,14 @@
+SELECT 
+CASE WHEN CNT > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+CASE WHEN CNT >0 THEN 'MDS to DWH data validation failed for d_hdi_survey_response_c.q1ans' ELSE 'SUCCESS' END as Message
+FROM (  
+SELECT Count(1) as CNT 
+FROM nypres_mdsdb.us_custom_survey_response_final SRC 
+JOIN nypres_mdwdb.d_hdi_survey_response_c TRGT 
+-- The Join will be on src.row_id = trgt.row_id , this is correct join. 
+ON (SRC.row_id = TRGT.row_id AND SRC.sourceinstance=TRGT.source_id)
+WHERE coalesce(CASE WHEN SRC.q1=0 THEN 'NA' ELSE SRC.q1 END,'UNSPECIFIED')<>TRGT.q1ans
+ )a;
+ 
+ 
+  

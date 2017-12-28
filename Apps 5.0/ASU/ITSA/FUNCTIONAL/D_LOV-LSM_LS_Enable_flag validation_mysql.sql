@@ -10,4 +10,7 @@ ON TGT.dimension_class = SRC.dimension_class
 where TGT.row_id is null and SRC.dimension_class not like '%CALL%' 
 and SRC.dimension_class not like '%FACILITIES%'  
 and SRC.dimension_class not like '%CATEGORY~HR_CHANGE%'
+and SRC.dimension_class not like '%SECURITY%'
+and SRC.dimension_class not like '%CASE%'
+and SRC.dimension_class not like '%UNIT~SERVICE_ENTITLEMENT%'
 )a;

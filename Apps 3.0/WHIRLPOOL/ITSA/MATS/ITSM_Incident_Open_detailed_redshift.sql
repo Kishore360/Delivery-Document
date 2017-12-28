@@ -237,9 +237,39 @@ select'ldb.d_internal_organization_support_group_c' as Table_Name, count(a11.row
  from  ldb.f_incident       a11 
 join ldb.d_internal_organization_support_group_c     a145
 on (a11.support_group_c_key=a145.row_key)
+union
+select'ldb.d_internal_contact_queue_manager_c' as Table_Name, count(a11.row_key) Row_Count
+ from  ldb.f_incident       a11 
+join ldb.d_internal_organization_group       a113
+on (a11.assignment_group_key=a113.row_key)
+join ldb.d_internal_contact_queue_manager_c  a114 
+on (a113.queue_manager_c_key=a114.row_key)
 
-
-
+union
+select'ldb.d_internal_contact_queue_manager_c' as Table_Name, count(a11.row_key) Row_Count
+ from  ldb.f_incident       a11 
+join ldb.d_internal_organization_group       a113
+on (a11.assignment_group_key=a113.row_key)
+join ldb.d_internal_contact_queue_manager_c  a114 
+on (a113.queue_manager_c_key=a114.row_key)
+join ldb.d_internal_contact_manager_queue_c a115 
+on (a115.row_key=a114.manager_c_key)
+union
+select'ldb.d_internal_contact_queue_manager_c' as Table_Name, count(a11.row_key) Row_Count
+ from  ldb.f_incident       a11 
+join ldb.d_internal_organization_group       a113
+on (a11.assignment_group_key=a113.row_key)
+join ldb.d_internal_contact_queue_manager_c  a114 
+on (a113.queue_manager_c_key=a114.row_key)
+join ldb.d_internal_contact_manager_queue_c a115 
+on (a115.row_key=a114.manager_c_key)
+union
+select'ldb.d_affected_user_location_c' as Table_Name, count(a11.row_key) Row_Count
+ from  ldb.f_incident       a11 
+ join ldb.d_internal_contact_affected_user_c       a111
+on (a11.affected_user_c_key=a111.row_key)
+ join ldb.d_affected_user_location_c a12
+   on  (a111.country_c_key = a12.row_key)
 
 
 

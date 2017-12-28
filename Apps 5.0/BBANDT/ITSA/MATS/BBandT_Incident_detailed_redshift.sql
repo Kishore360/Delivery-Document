@@ -142,4 +142,9 @@ select 'd_lov_incident_resolution_code_c ' as Table_Name, count(a11.row_key) Row
 from  ldb.f_incident a11 
 JOIN ldb.d_incident b ON a11.incident_key=b.row_key
 JOIN ldb.d_lov_incident_resolution_code_c  c ON b.resolution_code_c_key=c.row_key
+UNION 
+select 'ldb.d_calendar_year' as Table_Name, count(a11.row_key) Row_Count
+from  ldb.f_incident a11 
+join ldb.d_calendar_date a110	on (a11.opened_on_key=a110.row_key)
+join ldb.d_calendar_year a14 ON a110.year_start_date_key=a14.row_key
 
