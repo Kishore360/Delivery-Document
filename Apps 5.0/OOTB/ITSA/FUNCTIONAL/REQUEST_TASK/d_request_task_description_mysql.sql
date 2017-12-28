@@ -6,4 +6,4 @@ FROM (SELECT count(1) as CNT
  LEFT JOIN <<tenant>>_mdwdb.d_request_task TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
- WHERE COALESCE( SRC.description,'')<> COALESCE(TRGT.description ,''))temp;
+ WHERE COALESCE( SRC.description,'UNSPECIFIED')<> TRGT.description )temp;

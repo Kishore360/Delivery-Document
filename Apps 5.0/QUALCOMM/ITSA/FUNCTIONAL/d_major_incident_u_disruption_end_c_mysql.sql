@@ -4,4 +4,4 @@ FROM qualcomm_mdsdb.u_major_incident_final SRC
  LEFT JOIN qualcomm_mdwdb.d_major_incident_c TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
-WHERE TRGT.u_disruption_end_c<> CONVERT_TZ(SRC.u_disruption_end,'GMT','America/Los_Angeles');
+WHERE TRGT.u_disruption_end_c <>  CONVERT_TZ(SRC.u_disruption_end,'GMT','GMT');
