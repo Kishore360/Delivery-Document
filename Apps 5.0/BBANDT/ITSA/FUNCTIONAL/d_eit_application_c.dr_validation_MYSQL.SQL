@@ -6,7 +6,7 @@ FROM (
 SELECT count(1) as CNT 
 FROM bbandt_mdsdb.us_technical_health_check_c_final SRC 
 JOIN bbandt_mdwdb.d_eit_application_c TRGT ON (SRC.row_id = TRGT.row_id AND SRC.sourceinstance=TRGT.source_id)
-where coalesce(SRC.dr_validation,'UNSPECIFIED')<>TRGT.dr_validation
+where coalesce(SRC.dr_validation,'UNSPECIFIED')<>TRGT.dr_validation and TRGT.current_flag='Y'
 )temp;
 
 
