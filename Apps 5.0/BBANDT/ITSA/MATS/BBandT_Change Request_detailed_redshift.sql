@@ -177,4 +177,9 @@ join ldb.d_calendar_date a15
 on (a11.opened_on_key = a15.row_key) 
 join ldb.d_calendar_quarter a133 
 on (a15.quarter_start_date_key = a133.row_key) 
+UNION 
+SELECT 'ldb.d_software_c' as Table_Name,count(a11.row_key) as Row_Count
+FROM ldb.f_change_request a11 
+JOIN ldb.d_configuration_item a12 ON a11.configuration_item_key=a12.row_key
+JOIN ldb.d_software_c a13 ON a12.software_c_key=a13.row_key
 
