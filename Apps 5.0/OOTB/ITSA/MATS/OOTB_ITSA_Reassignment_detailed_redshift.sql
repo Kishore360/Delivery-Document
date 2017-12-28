@@ -1,5 +1,11 @@
 select 'ldb.f_incident_activity' as Table_Name, count(1) Row_Count
  from  ldb.f_incident_activity       a11 
+ union 
+select 'ldb.d_calendar_date_fiscal' as Table_Name, count(1) Row_Count
+ from  ldb.f_incident_activity       a11 
+ join          ldb.d_calendar_date_fiscal    a13
+                  on          (a11.opened_on_key = a13.row_key)
+
  
  union 
  select 'ldb.f_incident' as Table_Name, count(1) Row_Count 

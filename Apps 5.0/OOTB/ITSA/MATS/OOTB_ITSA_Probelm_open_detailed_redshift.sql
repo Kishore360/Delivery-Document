@@ -55,8 +55,9 @@ on (a11.change_request_key = a111.row_key)
 union
 select'ldb.d_internal_organization_department' as Table_Name, count(1) Row_Count
  from  ldb.f_problem       a11 
+ join ldb.d_internal_contact a12 on a12.row_key =a11.opened_by_key
 join ldb.d_internal_organization_department       a112
-on (a11.opened_by_department_key = a112.row_key)
+on (a12.department_key = a112.row_key)
 union
 select'ldb.d_internal_contact_mdm' as Table_Name, count(1) Row_Count
  from  ldb.f_problem       a11

@@ -38,8 +38,9 @@ on (a11.request_key = a18.row_key)
 union
 select'ldb.d_internal_organization_department' as Table_Name, count(1) Row_Count
  from  ldb.f_request_item_closed       a11 
-join ldb.d_internal_organization_department       a19
-on (a11.opened_by_department_key = a19.row_key)
+ join ldb.d_internal_contact a12 on a12.row_key =a11.closed_by_key
+join ldb.d_internal_organization_department       a112
+on (a12.department_key = a112.row_key)
 union
 select'ldb.d_internal_contact_mdm' as Table_Name, count(1) Row_Count
  from  ldb.f_request_item_closed       a11
@@ -67,11 +68,7 @@ select'ldb.d_sc_req_item_approval' as Table_Name, count(1) Row_Count
  from  ldb.f_request_item_closed       a11 
 join ldb.d_sc_req_item_approval       a114
 on (a11.approval_state_src_key = a114.row_key)
-union
-select'ldb.d_request_item_contacttype' as Table_Name, count(1) Row_Count
- from  ldb.f_request_item_closed       a11 
-join ldb.d_request_item_contacttype       a115
-on (a11.reported_type_src_key = a115.row_key)
+
 union
 select'ldb.d_sc_req_item_impact' as Table_Name, count(1) Row_Count
  from  ldb.f_request_item_closed       a11 
@@ -101,7 +98,7 @@ union
 select'ldb.d_internal_contact_requested_for' as Table_Name, count(1) Row_Count
  from  ldb.f_request_item_closed       a11 
 join ldb.d_internal_contact_requested_for       a121
-on (a11.requested_for_key = a121.row_key)
+on (a11.request_requested_for_key = a121.row_key)
 union
 select'ldb.d_internal_contact_task_closed_by' as Table_Name, count(1) Row_Count
  from  ldb.f_request_item_closed       a11 
