@@ -6,6 +6,6 @@ SELECT CASE WHEN count(1) THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  AND TRGTF.source_id =TRGT.source_id)
 LEFT JOIN pan_mdwdb.d_lov_map LM
  on TRGT.state_src_key = LM.src_key 
-WHERE TRGT.soft_deleted_flag='N' and  LM.dimension_class = 'STATE~TASK' and 
+WHERE TRGT.soft_deleted_flag='N' and  LM.dimension_class = 'STATE~INCIDENT_TASKS' and 
 ( CASE WHEN LM.dimension_wh_code NOT IN('RESOLVED','CLOSED') THEN 'Y' ELSE 'N' END)<> (TRGT.backlog_flag)
 

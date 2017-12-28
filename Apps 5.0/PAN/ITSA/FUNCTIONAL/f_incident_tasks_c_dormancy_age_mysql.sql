@@ -7,7 +7,7 @@
  JOIN pan_mdwdb.d_incident_tasks_c trgtf on TRGT.incident_tasks_c_key=trgtf.row_key
  left join pan_mdwdb.d_lov_map lm 
  ON (lm.src_key = trgtf.state_src_key)
- where lm.dimension_class = 'STATE~TASK'
+ where lm.dimension_class = 'STATE~INCIDENT_TASKS'
 AND  lm.dimension_wh_code = 'OPEN'  
 AND COALESCE(TIMESTAMPDIFF(SECOND,SRC.sys_updated_on,CONVERT_TZ((SELECT MAX(lastupdated) AS lastupdated
 FROM pan_mdwdb.d_o_data_freshness WHERE sourcename like 'ServiceNow%' ),'America/Los_Angeles','GMT')),0)<> TRGT.dormancy_age )a
