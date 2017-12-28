@@ -38,8 +38,10 @@ on (a11.request_key = a18.row_key)
 union
 select'ldb.d_internal_organization_department' as Table_Name, count(1) Row_Count
  from  ldb.f_request_item       a11 
+  join ldb.d_internal_contact       a12
+on (a11.opened_by_key = a12.row_key)
 join ldb.d_internal_organization_department       a19
-on (a11.opened_by_department_key = a19.row_key)
+on (a12.department_key = a19.row_key)
 union
 select'ldb.d_internal_contact_mdm' as Table_Name, count(1) Row_Count
  from  ldb.f_request_item       a11
