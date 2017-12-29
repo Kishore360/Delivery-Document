@@ -11,4 +11,4 @@ on TRG.row_id=SRC.sys_id   and SRC.SourceInstance =TRG.source_id
 left join  intuit_mdwdb.d_calendar_date cal_sd 
 on cal_sd.row_id=COALESCE(DATE_FORMAT(CONVERT_TZ(SRC.u_post_mortem_schedule_date,'GMT' ,'America/Los_Angeles'),'%Y%m%d'),'UNSPECIFIED') 
  and cal_sd.source_id=0
-where TRG.post_mortem_schedule_c_key <> coalesce(cal_sd.row_key,-1)) temp
+where TRG.post_mortem_schedule_c_key <> coalesce(cal_sd.row_key,case when SRC.u_post_mortem_schedule_date is null then 0 else -1 end  )) temp

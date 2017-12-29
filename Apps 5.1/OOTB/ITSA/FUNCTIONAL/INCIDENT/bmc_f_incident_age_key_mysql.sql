@@ -9,4 +9,4 @@ ON SRC.incident_number = TRGT.row_id and  SRC.sourceinstance = TRGT.source_id  a
 LEFT JOIN schneider_mdwdb.d_lov LKP  
 ON ((TRGT.age div 86400.0 BETWEEN LKP.lower_range_value AND LKP.upper_range_value)
 	AND LKP.dimension_class = 'AGEBUCKET_WH~INCIDENT' )
-WHERE (LKP.row_key )  <> TRGT.age_key)b; 
+WHERE coalesce(LKP.row_key,case when TRGT.age is null then 0 else -1 end )  <> TRGT.age_key)b; 

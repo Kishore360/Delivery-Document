@@ -4,4 +4,4 @@ from pan_mdwdb.f_incident_tasks_c a
 LEFT JOIN pan_mdwdb.d_lov b 
 ON a.dormancy_age BETWEEN b.lower_range_value AND b.upper_range_value  AND 
     b.dimension_class = 'DORMANCYBUCKET_WH~INCIDENT'
-WHERE b.row_key <> a.dormancy_age_c_key and current_flag='Y'
+WHERE coalesce(b.row_key,case when a.dormancy_age is null then 0 else -1 end ) <> a.dormancy_age_c_key and current_flag='Y'

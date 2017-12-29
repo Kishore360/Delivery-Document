@@ -8,5 +8,5 @@ left join schneider_mdwdb.f_incident t
 on s.incident_number=t.row_id and s.sourceinstance = t.source_id
 LEFT JOIN schneider_mdwdb.d_lov L  
 ON ( floor(t.age/(3600*24)) BETWEEN L.lower_range_value AND L.upper_range_value) and L.dimension_class='AGEBUCKET_WH~INCIDENT' 
-WHERE  t.age_key <> coalesce(L.row_key,-1)) temp
+WHERE  t.age_key <> coalesce(L.row_key,case when t.age is null then 0 else -1 end )) temp
 
