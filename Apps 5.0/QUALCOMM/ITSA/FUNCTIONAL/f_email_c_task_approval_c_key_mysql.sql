@@ -11,4 +11,4 @@ LEFT JOIN qualcomm_mdwdb.f_email_c TRGT
    join qualcomm_mdwdb.d_task_approval_c LKP 
 	on                SRC.instance=LKP.row_id and SRC.sourceinstance=LKP.source_id and SRC.target_table = 'sysapproval_approver'
 
- WHERE COALESCE(LKP.row_key,CASE WHEN SRC.instance IS NULL THEN 0 else -1 end) = (TRGT.task_approval_c_key);
+ WHERE COALESCE(LKP.row_key,CASE WHEN SRC.instance IS NULL THEN 0 else -1 end) <> (TRGT.task_approval_c_key);

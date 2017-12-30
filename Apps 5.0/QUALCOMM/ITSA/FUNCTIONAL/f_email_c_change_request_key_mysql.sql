@@ -11,5 +11,5 @@ LEFT JOIN qualcomm_mdwdb.f_email_c TRGT
    join qualcomm_mdwdb.d_change_request LKP 
 	on                SRC.instance=LKP.row_id and SRC.sourceinstance=LKP.source_id and SRC.target_table = 'change_request'
 
- WHERE COALESCE(LKP.row_key,CASE WHEN SRC.instance IS NULL THEN 0 else -1 end) = (TRGT.change_request_key
+ WHERE COALESCE(LKP.row_key,CASE WHEN SRC.instance IS NULL THEN 0 else -1 end) <> (TRGT.change_request_key
 );

@@ -9,7 +9,7 @@ LEFT JOIN qualcomm_mdwdb.f_email_c TRGT
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
    join qualcomm_mdwdb.d_request_task LKP 
-	on                SRC.instance=LKP.row_id and SRC.sourceinstance=LKP.source_id and SRC.target_table = 'sc_task'
+	on                SRC.instance=LKP.row_id and SRC.sourceinstance=LKP.source_id and SRC.target_table = 'd_request_task'
 
- WHERE COALESCE(LKP.row_key,CASE WHEN SRC.instance IS NULL THEN 0 else -1 end) = (TRGT.request_task_key
+ WHERE COALESCE(LKP.row_key,CASE WHEN SRC.instance IS NULL THEN 0 else -1 end) <> (TRGT.request_task_key
 );
