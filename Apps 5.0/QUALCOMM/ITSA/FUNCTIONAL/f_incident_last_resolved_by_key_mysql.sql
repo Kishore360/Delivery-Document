@@ -12,8 +12,6 @@ CONCAT('INTERNAL_CONTACT~',x.resolved_by)=z.row_id  AND x.sourceinstance= z.sour
 JOIN   qualcomm_mdwdb.f_incident B on B.ROW_ID=SYS_ID and x.sourceinstance=B.source_id 
 join qualcomm_mdwdb.d_lov_map map on ( B.state_src_key = map.src_key AND map.dimension_class = 'STATE~INCIDENT')
 
-where last_resolved_by_key<>  coalesce(z.row_key,case when resolved_by is null then 0 else -1 end) and map.dimension_wh_code ='RESOLVED' )temp;  
-
 where last_resolved_by_key<>
 case when (coalesce(z.row_key,case when resolved_by is null then 0 end ))=0 
 then coalesce(y.row_key,-1) else coalesce(z.row_key,case when resolved_by is null then 0 else -1 end) end

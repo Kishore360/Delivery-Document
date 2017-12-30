@@ -5,5 +5,5 @@ JOIN	qualcomm_mdwdb.d_survey_instance_journal_c TRGT
 	 ON (SRC.sys_id=TRGT.row_id 
  AND SRC.sourceinstance=TRGT.source_id )
 WHERE SRC.element<> TRGT.survey_attribute_wh_name
-where SRC.element = 'u_comments' 
+AND SRC.element = 'u_comments' 
  AND SRC.name = 'asmt_assessment_instance'; 
