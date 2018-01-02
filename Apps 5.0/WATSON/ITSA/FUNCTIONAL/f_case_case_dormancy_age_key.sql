@@ -6,5 +6,5 @@ from watson_mdwdb.f_case f
 LEFT JOIN watson_mdwdb.d_lov L  
 ON ((f.dormancy_age BETWEEN L.lower_range_value AND L.upper_range_value)
 	AND L.dimension_class = 'DORMANCYBUCKET_WH~CASE' )
-WHERE COALESCE(L.row_key, -1 ) 
+WHERE COALESCE(L.row_key, case when f.dormancy_age is null then 0 else -1 end ) 
  <> f.case_dormancy_age_key

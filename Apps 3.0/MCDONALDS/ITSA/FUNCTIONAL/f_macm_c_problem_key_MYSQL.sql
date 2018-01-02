@@ -11,5 +11,5 @@ ON (SRC.SYS_ID=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id)
 LEFT JOIN mcdonalds_mdwdb.d_problem LKP 
 ON COALESCE(SRC.u_problem, 'UNSPECIFIED')=LKP.row_id
 WHERE 
-COALESCE(LKP.row_key,-1)<>TRGT.problem_key
+COALESCE(LKP.row_key,case when SRC.u_problem is null then 0 else -1 end)<>TRGT.problem_key
 )a;
