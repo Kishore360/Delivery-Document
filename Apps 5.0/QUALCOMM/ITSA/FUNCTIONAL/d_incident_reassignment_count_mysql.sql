@@ -4,4 +4,4 @@ FROM qualcomm_mdsdb.incident_final SRC
  LEFT JOIN qualcomm_mdwdb.d_incident TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
-WHERE SRC.reassignment_count  <> TRGT.reassignment_count_c ;
+WHERE SRC.reassignment_count  <> TRGT.reassignment_count ;

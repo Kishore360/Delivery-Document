@@ -4,7 +4,7 @@
   JOIN qualcomm_mdwdb.f_major_incident_c TRGT 
  ON (SRC.sys_id =TRGT.row_id 
  AND SRC.sourceinstance= TRGT.source_id )
- join qualcomm_mdwdb.f_major_incident_c D
+ join qualcomm_mdwdb.d_major_incident_c D
  on D.row_key = TRGT.major_incident_c_key
 AND TRGT.source_id = D.source_id
  left join qualcomm_mdwdb.d_lov_map lm 
