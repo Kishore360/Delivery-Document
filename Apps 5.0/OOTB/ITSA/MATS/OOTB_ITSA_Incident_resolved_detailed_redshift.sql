@@ -4,19 +4,19 @@ select 'ldb.f_incident_resolved' as Table_Name, count(1) Row_Count
  select 'ldb.d_calendar_date_fiscal a14 ' as Table_name, count(1) Row_Count
 from ldb.f_incident_resolved a11 
 join ldb.d_calendar_date_fiscal a14 
-on (a11.opened_on_key  = a14.row_key) 
+on (a11.last_resolved_on_key  = a14.row_key) 
 union
 select 'ldb.d_calendar_fiscal_quarter a114 ' as Table_name, count(1) Row_Count
 from ldb.f_incident_resolved a11 
 join ldb.d_calendar_date_fiscal a14 
-on (a11.opened_on_key  = a14.row_key)  
+on (a11.last_resolved_on_key  = a14.row_key)  
 join ldb.d_calendar_fiscal_quarter a114 
 on (a14.quarter_start_date_key = a114.row_key) 
 union
 select 'ldb.d_calendar_fiscal_year a114 ' as Table_name, count(1) Row_Count
 from ldb.f_incident_resolved a11 
 join ldb.d_calendar_date_fiscal a14 
-on (a11.opened_on_key  = a14.row_key)  
+on (a11.last_resolved_on_key  = a14.row_key)  
 join ldb.d_calendar_fiscal_year a114 
 on (a14.year_start_date_key = a114.row_key)
 
@@ -97,8 +97,10 @@ on (a12.row_current_key = a115.row_current_key)
 union
 select'ldb.d_internal_organization_department' as Table_Name, count(1) Row_Count
  from  ldb.f_incident_resolved       a11 
+ join ldb.d_internal_contact a12 
+ on a11.last_resolved_by_key=a12.row_key
 join ldb.d_internal_organization_department       a116
-on (a11.opened_by_department_key = a116.row_key)
+on (a12.department_key = a116.row_key)
 union
 select'ldb.d_domain' as Table_Name, count(1) Row_Count
  from  ldb.f_incident_resolved       a11 

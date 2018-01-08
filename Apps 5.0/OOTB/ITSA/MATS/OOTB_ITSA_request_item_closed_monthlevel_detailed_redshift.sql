@@ -52,8 +52,10 @@ on (a11.configuration_item_key = a110.row_key)
 union
 select'ldb.d_internal_organization_department' as Table_Name, count(1) Row_Count
  from  ldb.f_request_item_closed       a11 
+ join ldb.d_internal_contact a12
+ on a12.row_key=a11.closed_by_key
 join ldb.d_internal_organization_department       a111
-on (a11.opened_by_department_key = a111.row_key)
+on (a12.department_key = a111.row_key)
 union
 select'ldb.d_internal_contact_mdm' as Table_Name, count(1) Row_Count
  from  ldb.f_request_item_closed       a11 
