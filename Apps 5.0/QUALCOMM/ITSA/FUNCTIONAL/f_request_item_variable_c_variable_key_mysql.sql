@@ -17,4 +17,4 @@ on vt.variable = SRC.sys_id and vt.task =  tf.sys_id
 join qualcomm_mdwdb.f_request_item_variable_c TRGT 
 ON ((concat(SRC1.sys_id,'~',vt.task) =TRGT.row_id) AND SRC1.sourceinstance= TRGT.source_id  )
 and SRC.type  in (1,2,3,5,6,7,8,9,10,16,18,24,4)
-WHERE  COALESCE(LKP.row_key,case when SRC1.item_option_new is null then 0 else -1 end )<>TRGT.variable_c_key;
+WHERE  COALESCE(LKP.row_key,case when SRC1.item_option_new is null then 0 else -1 end )= TRGT.variable_c_key;
