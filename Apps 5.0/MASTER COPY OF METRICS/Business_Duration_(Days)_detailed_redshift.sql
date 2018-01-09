@@ -1,7 +1,7 @@
-select	(sum(a11.business_stc_c) / 86400.0) AS "Business Duration (Days)"
-from	ldb.f_incident	a11
-	join	ldb.d_calendar_date	a12
-	  on 	(a11.opened_on_key = a12.row_key)
-	join	ldb.d_calendar_month	a13
-	  on 	(a12.month_start_date_key = a13.row_key)
-where	a13.lagging_count_of_month between 0 and 11
+
+SELECT 
+'Bussiness_Duration',
+sum(a.business_duration)/86400 AS Bussiness_Duration 
+FROM ldb.f_request_task a 
+JOIN ldb.d_calendar_date b ON a.opened_on_key=b.row_key
+where b.lagging_count_of_month between 0 and 12
