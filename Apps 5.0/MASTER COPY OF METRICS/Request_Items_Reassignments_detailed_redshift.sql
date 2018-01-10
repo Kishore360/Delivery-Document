@@ -1,7 +1,7 @@
 SELECT 
-'Age (days)',
-SUM(a.age)/86400.0 as Age_Days
-FROM ldb.f_problem a 
+'Request Item Reassignments',
+sum(a.reassignment_count) as Request_Items_Reassignments
+FROM ldb.f_request_item a 
 JOIN ldb.d_calendar_date b 
 ON a.opened_on_key=b.row_key
 JOIN ldb.d_calendar_month c

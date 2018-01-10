@@ -1,6 +1,7 @@
+
 SELECT 
-'Age (days)',
-SUM(a.age)/86400.0 as Age_Days
+'Acknowledged (Min)',
+sum(a.open_to_acknowledge_duration_c)/60.0 as Acknowledged_Min
 FROM ldb.f_problem a 
 JOIN ldb.d_calendar_date b 
 ON a.opened_on_key=b.row_key

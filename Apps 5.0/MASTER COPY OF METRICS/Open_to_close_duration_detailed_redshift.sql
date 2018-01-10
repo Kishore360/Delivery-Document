@@ -1,7 +1,9 @@
-select	(sum((a11.open_to_close_duration / 86400.0))/count(a11.row_key))*1.0 AS Open_to_close_duration
-from	ldb.f_incident_closed	a11
-	join	ldb.d_calendar_date	a12
-	  on 	(a11.closed_on_key = a12.row_key)
-	join	ldb.d_calendar_month	a13
-	  on 	(a12.month_start_date_key = a13.row_key)
-where	a13.lagging_count_of_month between 0 and 11
+SELECT 
+'Open to Close Duration Days',
+sum(a.open_to_close_duration)/86400.0 as Open_To_Close_Duration
+FROM ldb.f_request_item a 
+JOIN ldb.d_calendar_date b 
+ON a.opened_on_key=b.row_key
+JOIN ldb.d_calendar_month c
+ON b.month_start_date_key = c.row_key
+where c.lagging_count_of_month between 0 and 11

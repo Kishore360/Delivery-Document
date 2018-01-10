@@ -1,6 +1,6 @@
 SELECT 
-'Age (days)',
-SUM(a.age)/86400.0 as Age_Days
+'Days Open',
+sum(a.open_days_business_duration_c)/86400.0 as Days_Open
 FROM ldb.f_problem a 
 JOIN ldb.d_calendar_date b 
 ON a.opened_on_key=b.row_key

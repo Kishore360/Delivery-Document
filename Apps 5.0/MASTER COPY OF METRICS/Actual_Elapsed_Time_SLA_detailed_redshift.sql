@@ -1,6 +1,6 @@
 SELECT 
-'Age (days)',
-SUM(a.age)/86400.0 as Age_Days
+'Actual Elapsed Time(SLA)',
+SUM(a.met_sla_duration_c)/3600.0 as Actual_Elapsed_Time_SLA
 FROM ldb.f_problem a 
 JOIN ldb.d_calendar_date b 
 ON a.opened_on_key=b.row_key

@@ -1,6 +1,6 @@
 SELECT 
-'Age (days)',
-SUM(a.age)/86400.0 as Age_Days
+'RCA MTTR (days)',
+(SUM(a.MTTR_C)/86400.0/count(a.row_key)) as RCA_MTTR_Days
 FROM ldb.f_problem a 
 JOIN ldb.d_calendar_date b 
 ON a.opened_on_key=b.row_key

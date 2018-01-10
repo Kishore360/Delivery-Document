@@ -1,6 +1,6 @@
 SELECT 
-'Days Since Last Update ',
-sum(a.age)/86400.0 as Days_Since_Last_Update 
+'Backlog Request Items ',
+count(a.row_key) as Backlog_RITM 
 FROM ldb.f_request_item a 
 JOIN ldb.d_request_item d
 on a.request_item_key=d.row_key

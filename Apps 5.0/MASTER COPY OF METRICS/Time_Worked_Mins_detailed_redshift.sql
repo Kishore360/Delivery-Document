@@ -1,6 +1,6 @@
 SELECT 
-'Age (days)',
-SUM(a.age)/86400.0 as Age_Days
+'Time Worked(Mins)',
+SUM(a.time_worked)/60.0 as Time_Worked_Mins
 FROM ldb.f_problem a 
 JOIN ldb.d_calendar_date b 
 ON a.opened_on_key=b.row_key
