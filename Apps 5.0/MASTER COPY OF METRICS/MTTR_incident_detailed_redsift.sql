@@ -23,3 +23,16 @@ from	ldb.f_incident	a11
 where	(a13.wh_dimension_code in ('RESOLVED', 'CLOSED')
  and a15.lagging_count_of_month between 0 and 11) 
  )a
+UNION 
+select	'Multiple_Assignment_Incidents',
+count(distinct a11.row_key) AS Multiple_Assignment_Incidents
+from	ldb.f_incident	a11
+	join	ldb.d_calendar_date	a12
+	  on 	(a11.opened_on_key = a12.row_key)
+	join	ldb.d_incident	a13
+	  on 	(a11.incident_key = a13.row_key)
+	join	ldb.d_calendar_month	a14
+	  on 	(a12.month_start_date_key = a14.row_key)
+where	(a13.multiple_assignment_flag='Y'
+ and a14.lagging_count_of_month between 0 and 24)
+
