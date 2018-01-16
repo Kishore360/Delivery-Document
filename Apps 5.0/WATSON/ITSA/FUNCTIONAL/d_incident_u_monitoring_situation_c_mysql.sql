@@ -6,6 +6,5 @@ count(*) as cnt
 from  watson_mdsdb.incident_final a11
  join watson_mdwdb.d_incident  a12
 on a12.row_id= a11.sys_id and a11.sourceinstance=a12.source_id
-where u_monitoring_situation        <>a12.u_monitoring_situation_c )a
-
+where a11.u_monitoring_situation  <>a12.u_monitoring_situation_c)a
 
