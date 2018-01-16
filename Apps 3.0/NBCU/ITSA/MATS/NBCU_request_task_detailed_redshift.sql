@@ -128,6 +128,18 @@ select 'ldb.d_sc_task_priority a122 ' as Table_name, count(a11.row_key) Row_Coun
 from ldb.f_request_task a11 
 join ldb.d_sc_task_priority a122
 on (a11.priority_src_key = a122.row_key)
+UNION 
+select 'ldb.d_request_task_parent_task_c ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_request_task a11 
+join ldb.d_request_task_parent_task_c b ON a11.parent_task_c_key=b.row_key
+UNION 
+select 'ldb.d_request_task_location_c ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_request_task a11 
+JOIN ldb.d_request_task_location_c b ON a11.location_key=b.row_key
+UNION 
+select 'ldb.d_internal_contact_request_task_opened_by_c ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_request_task a11 
+JOIN ldb.d_internal_contact_request_task_opened_by_c b ON a11.opened_by_key=b.row_key
 
 
 

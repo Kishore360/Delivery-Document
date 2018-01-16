@@ -193,3 +193,24 @@ from      ldb.f_problem   a11
                   on         (a15.row_dn_key = a16.lev_0_key)
  join        ldb.dh_user_group_level4          a133
                   on         (a16.lev_4_key = a133.row_key)
+UNION
+SELECT 'd_internal_contact_problem_opened_by_c' AS Table_Name,count(a.row_key) AS Row_count
+FROM ldb.f_problem a 
+JOIN ldb.d_internal_contact_problem_opened_by_c b ON a.opened_by_key=b.row_key
+UNION
+SELECT 'd_lov_problem_source_c' AS Table_Name,count(a.row_key) AS Row_count
+FROM ldb.f_problem a 
+JOIN ldb.d_lov_problem_source_c b  ON a.problem_source_src_c_key=b.row_key
+UNION
+SELECT 'd_problem_parent_task_c' AS Table_Name,count(a.row_key) AS Row_count
+FROM ldb.f_problem a 
+JOIN ldb.d_problem_parent_task_c b  ON a.parent_task_c_key=b.row_key
+UNION 
+select'dh_user_group_level5' as Table_Name, count(a11.row_key) Row_Count
+from      ldb.f_problem   a11 
+				  join        ldb.d_internal_organization_group         a15
+                  on         (a11.assignment_group_key = a15.row_key)
+ join        ldb.dh_user_group_hierarchy   a16
+                  on         (a15.row_dn_key = a16.lev_0_key)
+ join        ldb.dh_user_group_level5         a133
+                  on         (a16.lev_5_key = a133.row_key)
