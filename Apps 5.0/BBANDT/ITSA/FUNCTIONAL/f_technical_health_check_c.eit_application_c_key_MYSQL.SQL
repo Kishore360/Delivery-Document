@@ -13,7 +13,7 @@ cross join bbandt_mdwdb.d_calendar_date cal on cal.month_start_date = calendar_d
 on COALESCE(concat(appl_cal.row_id,'~',date_format(appl_cal.month_start_date,'%Y%m%d')),'UNSPECIFIED')=a.row_id and appl_cal.sourceinstance=a.source_id
 join
 bbandt_mdwdb.d_eit_application_c b
-on coalesce(appl_cal.row_id,'UNSPECIFIED')=b.row_id  
+on (coalesce(appl_cal.row_id,'UNSPECIFIED')=b.row_id  and appl_cal.sourceinstance=b.source_id)
 where coalesce(b.row_key,case when appl_cal.row_id is null then 0  else -1 end)<> a.eit_application_c_key 
 and b.current_flag='Y'
 )temp;
