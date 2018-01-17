@@ -6,5 +6,9 @@ FROM (
 SELECT count(1) as CNT 
 FROM bbandt_mdsdb.us_technical_health_check_c_final SRC 
 JOIN bbandt_mdwdb.d_eit_application_c TRGT ON (SRC.row_id = TRGT.row_id AND SRC.sourceinstance=TRGT.source_id)
-where COALESCE(SRC.infra_eos_date,'UNSPECIFIED')<>TRGT.infra_eos_date and TRGT.current_flag='Y'
+WHERE LEAST(COALESCE(SRC.operating_system,'2030-01-01 00:00:00'),COALESCE(SRC.database,'2030-01-01 00:00:00'),COALESCE(SRC.web_server,'2030-01-01 00:00:00'))
+<>TRGT.infra_eos_date
 )temp;
+
+
+
