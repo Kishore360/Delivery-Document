@@ -1,10 +1,11 @@
  select'f_incident' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_incident             a11 
  union
-  select'f_incident' as Table_Name, count(a11.row_key) Row_Count
+  select 'd_configuration_item_operational_status_c' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_incident             a11 
- join ldb.d_configuration_item_operational_status_c a12
- on a11.operational_status_src_c_key=a12.row_key
+ JOIN ldb.d_configuration_item a12 ON a11.configuration_item_key=a12.row_key
+ JOIN ldb.d_configuration_item_operational_status_c a13 ON a12.operational_status_src_c_key=a13.row_key
+
  union
 
  select'd_incident_type_c' as Table_Name, count(a11.row_key) Row_Count
