@@ -4,5 +4,6 @@ FROM
 tjx_mdwdb.d_incident d
 join tjx_mdwdb.f_incident f
 on d.row_key=f.incident_key
-where f.servc_lvl_discrepancy_c <> ROUND(CAST(d.servc_lvl_tgt_c AS DECIMAL)-(f.servc_lvl_duration_c/3600))
+where f.servc_lvl_discrepancy_c <> ROUND((f.servc_lvl_duration_c/3600)-CAST(d.servc_lvl_tgt_c AS DECIMAL))
 or f.servc_lvl_discrepancy_c is null;
+
