@@ -28,7 +28,7 @@ agent.row_date created_on,
 agent.row_date changed_on,
 coalesce(concat(''INTERNAL_CONTACT~'',agent.acd,''~'',trim(agent.logid)),''UNSPECIFIED'') as EMPLOYEE_ID
 FROM mercuryins_mdsdb.synonyms_final syn
-JOIN mercuryins_mdsdb.hagent_final agent ON (syn.acd_no = agent.acd)
+JOIN mercuryins_mdsdb.dagent_final agent ON (syn.acd_no = agent.acd)
 WHERE syn.item_type = ''aux_rsn''
 AND trim(syn.value) = ', a.value, ' AND ', a.column_name, '<> 0' ,' ') SEPARATOR ' UNION ALL '
 )
@@ -36,7 +36,7 @@ FROM (
 SELECT DISTINCT CONCAT('ti_auxtime', trim(syn.value)) column_name,
 trim(syn.value) `value`
 FROM mercuryins_mdsdb.synonyms_final syn
-JOIN mercuryins_mdsdb.hagent_final agent
+JOIN mercuryins_mdsdb.dagent_final agent
 ON (syn.acd_no = agent.acd)
 WHERE syn.item_type = 'aux_rsn'
 ) a);
