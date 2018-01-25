@@ -217,6 +217,12 @@ select'ldb.d_lov_problem_resolution_code_c' as Table_Name, count(a11.row_key) Ro
 on (a11.problem_key=a12.row_key)
 join ldb.d_lov_problem_resolution_code_c       a131
 on (a12.resolution_code_src_c_key=a131.row_key)
+union
+select'ldb.d_lov_problem_root_cause_category_c' as Table_Name, count(a10.row_key) Row_Count
+from ldb.f_problem a10 
+join ldb.d_problem       a11 on a10.problem_key=a11.row_key
+join ldb.d_lov_problem_root_cause_category_c a12
+on a11.root_cause_category_src_c_key=a12.row_key
 
 
 
