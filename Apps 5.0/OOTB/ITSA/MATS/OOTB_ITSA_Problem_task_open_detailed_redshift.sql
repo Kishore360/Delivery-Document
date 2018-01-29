@@ -61,12 +61,12 @@ union
 select'ldb.d_problem_assignment_group' as Table_Name, count(1) Row_Count
  from  ldb.f_problem_task       a11 
 join ldb.d_problem_assignment_group       a113
-on (a11.problem_assignment_group_key = a113.row_key)
+on (a11.assignment_group_key = a113.row_key)
 union
 select'ldb.d_problem_priority' as Table_Name, count(1) Row_Count
  from  ldb.f_problem_task       a11 
-join ldb.d_problem_priority       a114
-on (a11.problem_priority_src_key = a114.row_key)
+join ldb.d_problem_task_priority       a114
+on (a11.priority_src_key = a114.row_key)
 union
 select'ldb.d_problem_task_approval' as Table_Name, count(1) Row_Count
  from  ldb.f_problem_task       a11 
@@ -107,8 +107,8 @@ on (a15.month_start_date_key = a121.row_key)
 union
 select'ldb.d_problem_state' as Table_Name, count(1) Row_Count
  from  ldb.f_problem_task       a11 
-join ldb.d_problem_state       a122
-on (a11.problem_state_src_key = a122.row_key)
+join ldb.d_problem_task_state       a122
+on (a11.state_src_key = a122.row_key)
 
 
 
