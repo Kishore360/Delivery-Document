@@ -57,4 +57,43 @@ select'ldb.d_task_parent_c' as Table_Name, count(a11.row_key) Row_Count
 on (a11.task_row_key=a12.row_key)
 join ldb.d_task_parent_c         a112
 on (a12.parent_task_key=a112.row_key)
+UNION 
+SELECT 'f_t_task_activity_reassignment_c' as Table_Name,Count(a.row_key) as Row_count
+FROM ldb.f_t_task_activity_reassignment_c a
+UNION 
+SELECT 'dh_user_group_hierarchy' as Table_Name,Count(a.row_key) as Row_count
+FROM ldb.f_t_task_activity_reassignment_c a
+JOIN ldb.d_internal_organization_group b ON a.current_assginment_group_key=b.row_key
+JOIN ldb.dh_user_group_hierarchy c ON b.row_dn_key=c.lev_0_key
+UNION 
+SELECT 'dh_user_group_level1' as Table_Name,Count(a.row_key) as Row_count
+FROM ldb.f_t_task_activity_reassignment_c a
+JOIN ldb.d_internal_organization_group b ON a.current_assginment_group_key=b.row_key
+JOIN ldb.dh_user_group_hierarchy c ON b.row_dn_key=c.lev_0_key
+JOIN ldb.dh_user_group_level1 d ON c.lev_1_key=d.row_key
+UNION 
+SELECT 'dh_user_group_level2' as Table_Name,Count(a.row_key) as Row_count
+FROM ldb.f_t_task_activity_reassignment_c a
+JOIN ldb.d_internal_organization_group b ON a.current_assginment_group_key=b.row_key
+JOIN ldb.dh_user_group_hierarchy c ON b.row_dn_key=c.lev_0_key
+JOIN ldb.dh_user_group_level2 d ON c.lev_2_key=d.row_key
+UNION 
+SELECT 'dh_user_group_level3' as Table_Name,Count(a.row_key) as Row_count
+FROM ldb.f_t_task_activity_reassignment_c a
+JOIN ldb.d_internal_organization_group b ON a.current_assginment_group_key=b.row_key
+JOIN ldb.dh_user_group_hierarchy c ON b.row_dn_key=c.lev_0_key
+JOIN ldb.dh_user_group_level3 d ON c.lev_3_key=d.row_key
+UNION
+SELECT 'dh_user_group_level4' as Table_Name,Count(a.row_key) as Row_count
+FROM ldb.f_t_task_activity_reassignment_c a
+JOIN ldb.d_internal_organization_group b ON a.current_assginment_group_key=b.row_key
+JOIN ldb.dh_user_group_hierarchy c ON b.row_dn_key=c.lev_0_key
+JOIN ldb.dh_user_group_level4 d ON c.lev_4_key=d.row_key
+UNION 
+SELECT 'dh_user_group_level5' as Table_Name,Count(a.row_key) as Row_count
+FROM ldb.f_t_task_activity_reassignment_c a
+JOIN ldb.d_internal_organization_group b ON a.current_assginment_group_key=b.row_key
+JOIN ldb.dh_user_group_hierarchy c ON b.row_dn_key=c.lev_0_key
+JOIN ldb.dh_user_group_level5 d ON c.lev_5_key=d.row_key
+
 
