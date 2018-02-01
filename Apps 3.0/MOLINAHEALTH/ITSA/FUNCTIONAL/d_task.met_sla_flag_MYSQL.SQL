@@ -7,7 +7,7 @@ FROM
 SELECT count(1) as CNT
 FROM molinahealth_mdsdb.task_final SRC
 JOIN molinahealth_mdwdb.d_task TRGT ON (SRC.sys_id=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id)
-WHERE CASE WHEN SRC.made_sla=1 THEN 'Y' ELSE 'N' END<>TRGT.met_sla_flag
+WHERE CASE WHEN SRC.made_sla=TRUE THEN 'Y' ELSE 'N' END<>TRGT.met_sla_flag
 ) a; 
 
  

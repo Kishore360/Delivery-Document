@@ -8,7 +8,7 @@ SELECT Count(1) AS CNT
 FROM molinahealth_mdsdb.task_final SRC 
 LEFT JOIN molinahealth_mdwdb.d_task TRGT ON (SRC.sys_id =TRGT.row_id AND SRC.sourceinstance =TRGT.source_id )
 LEFT JOIN molinahealth_mdwdb.d_task LKP ON (SRC.parent = LKP.row_id AND SRC.sourceinstance = LKP.source_id )
-WHERE COALESCE(LKP.row_key,CASE WHEN SRC.parent IS NULL THEN 0 else -1 end)<> TRGT.parent_task_key
+WHERE LKP.row_key<> TRGT.parent_task_key
 ) a; 
 
 
