@@ -93,7 +93,7 @@ select 'ldb.d_task_impact a119 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_task a11 
 join ldb.d_task a17 
 on (a11.task_key = a17.row_key) 
-join ldb.d_task_impact a119 
+join ldb.d_task_impact_c a119 
 on (a17.impact_src_key = a119.row_key) 
 union
 select 'ldb.d_task_opened_by a120 ' as Table_name, count(a11.row_key) Row_Count
@@ -107,14 +107,14 @@ select 'ldb.d_task_priority a121 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_task a11 
 join ldb.d_task a17 
 on (a11.task_key = a17.row_key) 
-join ldb.d_task_priority a121 
+join ldb.d_task_priority_c a121 
 on (a17.priority_src_key = a121.row_key) 
 union
 select 'ldb.d_task_state a122 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_task a11 
 join ldb.d_task a17 
 on (a11.task_key = a17.row_key) 
-join ldb.d_task_state a122 
+join ldb.d_task_state_c a122 
 on (a17.state_src_key = a122.row_key) 
 union
 select 'ldb.d_task_type a123 ' as Table_name, count(a11.row_key) Row_Count
@@ -128,6 +128,6 @@ select 'ldb.d_task_urgency a124 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_task a11 
 join ldb.d_task a17 
 on (a11.task_key = a17.row_key) 
-join ldb.d_task_urgency a124 
+join ldb.d_task_urgency_c a124 
 on (a17.urgency_src_key = a124.row_key) 
 
