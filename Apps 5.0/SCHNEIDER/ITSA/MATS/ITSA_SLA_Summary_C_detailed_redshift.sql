@@ -53,3 +53,4 @@ join ldb.d_calendar_date a13
 on (a11.opened_on_key = a13.row_key) 
 join ldb.d_calendar_year a110 
 on (a13.year_start_date_key = a110.row_key) 
+
