@@ -63,3 +63,30 @@ UNION
 SELECT 'd_configuration_item_survey_causing_ci_c' as Table_Name,count(a11.row_key) as Row_count
 FROM ldb.f_task_response_c a11
 JOIN ldb.d_configuration_item_survey_causing_ci_c a12 ON a11.causing_ci_c_key=a12.row_key
+union
+SELECT 'd_internal_contact_asst_assigned_to_c' as Table_Name,count(a11.row_key) as Row_count
+FROM ldb.f_task_response_c a11
+  join        ldb.d_internal_contact_asst_assigned_to_c         a17
+                  on         (a11.asmt_user_c_key = a17.row_key)
+				  union
+				  SELECT 'd_internal_contact_request_item_task_response_c' as Table_Name,count(a11.row_key) as Row_count
+FROM ldb.f_task_response_c a11
+  join        ldb.d_internal_contact_request_item_task_response_c         a17
+                    on         (a11.request_task_assigned_to_c_key = a17.row_key)
+					union
+SELECT 'd_internal_organization_asst_group_c' as Table_Name,count(a11.row_key) as Row_count
+FROM ldb.f_task_response_c a11
+		 join        ldb.d_internal_organization_asst_group_c           a16
+                  on         (a11.asmt_assignment_group_c_key = a16.row_key)
+					union
+					SELECT 'd_internal_organization_request_item_task_response_c' as Table_Name,count(a11.row_key) as Row_count
+FROM ldb.f_task_response_c a11
+					     join        ldb.d_internal_organization_request_item_task_response_c       a114
+                  on         (a11.request_task_assignment_group_c_key = a114.row_key)
+				  	union
+					SELECT 'd_location_site_c' as Table_Name,count(a11.row_key) as Row_count
+FROM ldb.f_task_response_c a11				  
+				  join        ldb.d_location   a14
+                  on         (a11.location_key = a14.row_key)
+				  join        ldb.d_location_site_c    a121
+                  on         (a14.site_c_key = a121.row_key)
