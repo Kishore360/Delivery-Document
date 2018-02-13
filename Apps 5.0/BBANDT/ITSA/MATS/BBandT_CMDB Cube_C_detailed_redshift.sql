@@ -1,4 +1,64 @@
-select 'ldb.d_configuration_item a116 ' as Table_name, count(1) Row_Count
+SELECT 'd_configuration_item' as Table_Name,Count(1) as Row_count 
+FROM ldb.d_configuration_item a 
+UNION 
+SELECT 'd_configuration_item_cost_center_c' as Table_Name,Count(1) as Row_count 
+FROM ldb.d_configuration_item a 
+JOIN ldb.d_configuration_item_cost_center_c b ON a.cost_center_c_key=b.row_key
+UNION 
+SELECT 'd_internal_organization_cpu_manufacturer_c' as Table_Name,Count(1) as Row_count 
+FROM ldb.d_configuration_item a 
+JOIN ldb.d_internal_organization_cpu_manufacturer_c b  ON a.cpu_manufacturer_c_key=b.row_key
+UNION 
+SELECT 'd_internal_organization_support_group_c' as Table_Name,Count(1) as Row_count 
+FROM ldb.d_configuration_item a 
+JOIN ldb.d_internal_organization_support_group_c b   ON a.support_group_c_key=b.row_key
+UNION 
+SELECT 'd_location_configuration_item_location_c' as Table_Name,Count(1) as Row_count 
+FROM ldb.d_configuration_item a 
+JOIN ldb.d_location_configuration_item_location_c b   ON a.location_key=b.row_key
+UNION 
+SELECT 'd_lov_configuration_item_chassis_type_c' as Table_Name,Count(1) as Row_count 
+FROM ldb.d_configuration_item a 
+JOIN ldb.d_lov_configuration_item_chassis_type_c b ON a.chassis_type_src_c_key=b.row_key
+UNION 
+SELECT 'd_lov_configuration_item_device_type_c' as Table_Name,Count(1) as Row_count 
+FROM ldb.d_configuration_item a 
+JOIN ldb.d_lov_configuration_item_device_type_c b ON a.device_type_src_c_key=b.row_key
+UNION 
+SELECT 'd_lov_configuration_item_dns_domain_c' as Table_Name,Count(1) as Row_count 
+FROM ldb.d_configuration_item a 
+JOIN ldb.d_lov_configuration_item_dns_domain_c b ON a.dns_domain_src_c_key=b.row_key
+UNION 
+SELECT 'd_lov_configuration_item_environment_c' as Table_Name,Count(1) as Row_count 
+FROM ldb.d_configuration_item a 
+JOIN ldb.d_lov_configuration_item_environment_c b ON a.environment_c_key=b.row_key
+UNION 
+SELECT 'd_lov_configuration_item_install_status_c' as Table_Name,Count(1) as Row_count 
+FROM ldb.d_configuration_item a 
+JOIN ldb.d_lov_configuration_item_install_status_c b ON a.install_status_c_key=b.row_key
+UNION 
+SELECT 'd_lov_configuration_item_operational_status_c' as Table_Name,Count(1) as Row_count 
+FROM ldb.d_configuration_item a 
+JOIN ldb.d_lov_configuration_item_operational_status_c b ON a.operational_status_c_key=b.row_key
+UNION 
+SELECT 'd_lov_configuration_item_os_c' as Table_Name,Count(1) as Row_count 
+FROM ldb.d_configuration_item a 
+JOIN ldb.d_lov_configuration_item_os_c b ON a.os_src_c_key=b.row_key
+UNION 
+SELECT 'd_lov_configuration_item_os_domain_c' as Table_Name,Count(1) as Row_count 
+FROM ldb.d_configuration_item a 
+JOIN ldb.d_lov_configuration_item_os_domain_c b ON a.os_domain_src_c_key=b.row_key
+UNION 
+SELECT 'd_lov_configuration_item_role_c' as Table_Name,Count(1) as Row_count 
+FROM ldb.d_configuration_item a 
+JOIN ldb.d_lov_configuration_item_role_c b ON a.role_c_key=b.row_key
+UNION 
+SELECT 'd_lov_configuration_item_tier_rating_c' as Table_Name,Count(1) as Row_count 
+FROM ldb.d_configuration_item a 
+JOIN ldb.d_lov_configuration_item_tier_rating_c b ON a.tier_rating_c_key=b.row_key
+
+
+/* select 'ldb.d_configuration_item a116 ' as Table_name, count(1) Row_Count
 from ldb.d_configuration_item a116 
 union
 select 'ldb.d_lov_configuration_item_chassis_type_c a12 ' as Table_name, count(1) Row_Count
@@ -97,3 +157,4 @@ join ldb.d_server_c a117
 on (a116.server_c_key = a117.row_key) 
 join ldb.d_lov_server_tier_rating_c a126 
 on (a117.tier_rating_key = a126.row_key) 
+ */
