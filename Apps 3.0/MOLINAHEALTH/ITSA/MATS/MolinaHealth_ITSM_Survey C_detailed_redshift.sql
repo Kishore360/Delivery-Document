@@ -7,7 +7,7 @@ JOIN ldb.d_survey b ON a.survey_key=b.row_key
 UNION
 SELECT 'd_survey_state' as Table_Name,count(1) as Row_Count 
 FROM ldb.f_incident_response a 
-JOIN ldb.d_survey_state b ON a.state_src_key=b.row_key
+JOIN ldb.d_survey_state b ON a.survey_state_src_key=b.row_key
 UNION 
 SELECT 'd_survey_question' as Table_Name,count(1) as Row_Count 
 FROM ldb.f_incident_response a 
