@@ -46,7 +46,7 @@ union
 select 'ldb.d_internal_organization_department a110 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.n_incident_monthly a11 
 join ldb.d_internal_organization_department a110 
-on (a11.opened_by_department_key = a110.row_key and a13.department_key = a110.row_key) 
+on (a11.opened_by_department_key = a110.row_key ) 
 union
 select 'ldb.d_internal_contact_mdm a111 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.n_incident_monthly a11 

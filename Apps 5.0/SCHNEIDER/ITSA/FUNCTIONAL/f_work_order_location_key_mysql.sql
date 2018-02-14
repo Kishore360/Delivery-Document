@@ -1,4 +1,0 @@
-SELECT CASE WHEN count(1)  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)  THEN 'MDS to DWH data validation failed for f_work_order.location_key' ELSE 'SUCCESS' END as Message FROM schneider_mdsdb.woi_workorder_final  SRC JOIN schneider_mdwdb.f_work_order TRGT ON (SRC.request_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id )  
-left join schneider_mdsdb.sit_site_final src_lkp on SRC.site = src_lkp.site and SRC.sourceinstance = src_lkp.sourceinstance
-left join schneider_mdwdb.d_location lkp on  src_lkp.site_id = lkp.row_id and src_lkp.sourceinstance = lkp.source_id 
-where (case when SRC.site is null then 0 when SRC.site is not null and src_lkp.site is null then -1 when SRC.site is not null and  src_lkp.site is not null then lkp.row_key else -1 end) <> coalesce(TRGT.location_key,-1);
