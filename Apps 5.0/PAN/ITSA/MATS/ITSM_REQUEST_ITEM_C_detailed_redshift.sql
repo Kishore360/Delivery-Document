@@ -135,4 +135,5 @@ from ldb.f_request_item a11
 join ldb.d_calendar_date a15 								
 on (a11.opened_on_key = a15.row_key) 								
 join ldb.d_calendar_week a122 								
-on (a15.week_start_date_key = a122.row_key) 								
+on (a15.week_start_date_key = a122.row_key) 	
+							
