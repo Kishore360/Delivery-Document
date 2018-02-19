@@ -6,7 +6,7 @@ FROM
 FROM molinahealth_mdsdb.u_hr_case_final SRC 
 LEFT JOIN  molinahealth_mdwdb.f_hr_case_c TRGT ON (SRC.sys_id =TRGT.row_id AND SRC.sourceinstance =TRGT.source_id )
 LEFT JOIN  molinahealth_mdwdb.d_configuration_item LKP  ON (SRC.cmdb_ci = LKP.row_id AND SRC.sourceinstance = LKP.source_id)
-WHERE COALESCE(LKP.row_key,CASE WHEN SRC.cmdb_ci IS NULL THEN 0 else -1 end)<> TRGT.configuration_item_key;
+WHERE COALESCE(LKP.row_key,CASE WHEN SRC.cmdb_ci IS NULL THEN 0 else -1 end)<> TRGT.configuration_item_key
 ) a; 
 
 
