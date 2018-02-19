@@ -1,5 +1,5 @@
 SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
-CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for f_incident.opened_on_key' ELSE 'SUCCESS' END as Message
+CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for d_variable_c.help_tag' ELSE 'SUCCESS' END as Message
 FROM 
 	nbcu_mdsdb.item_option_new_final SRC
 JOIN 
