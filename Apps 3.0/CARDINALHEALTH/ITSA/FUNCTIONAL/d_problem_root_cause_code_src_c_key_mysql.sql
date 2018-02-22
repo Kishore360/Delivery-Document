@@ -6,6 +6,6 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
 LEFT JOIN cardinalhealth_mdwdb.d_lov LKP 
- ON ( concat('ROOT_CAUSE_CODE_C','~','PROBLEM','~','~','~',upper(u_root_cause_code))= LKP.src_rowid 
+ ON ( concat('ROOT_CAUSE_CODE_C','~','PROBLEM','~','~','~',upper(u_root_cause))= LKP.src_rowid 
 AND SRC.sourceinstance= LKP.source_id )
- WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_root_cause_code IS NULL THEN 0 else -1 end) <> (TRGT.root_cause_code_src_c_key)
+ WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_root_cause IS NULL THEN 0 else -1 end) <> (TRGT.root_cause_code_src_c_key)
