@@ -17,7 +17,7 @@ union
 select 'ldb.d_calendar_month a118 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_task_c_resolved_closed a11 
 join ldb.d_calendar_date a15 
-on (a11.last_resolved_on_key = a15.row_key) 
+on (a11.last_updated_on_key = a15.row_key) 
 join ldb.d_calendar_month a118 
 on (a15.month_start_date_key = a118.row_key) 
 union
