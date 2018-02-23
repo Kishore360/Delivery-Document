@@ -22,9 +22,8 @@ from nbcu_mdwdb.f_task_sla
 where consider_c_flag='Y'
 group by 1) a12 
 ON a11.row_key= a12.task_key
-WHERE a11.task_sla_c_flag is NULL
--- collate utf8_general_ci
-AND a11.task_sla_c_flag <> a12.task_flag 
+WHERE  a11.task_sla_c_flag <> a12.task_flag  collate utf8_general_ci
+AND a11.task_sla_c_flag is NULL
 ) a 
 ) temp;
 
