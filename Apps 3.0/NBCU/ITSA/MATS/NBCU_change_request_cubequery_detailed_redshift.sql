@@ -214,4 +214,10 @@ UNION
 select 'ldb.d_internal_contact_change_request_opened_by_c ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_change_request a11 
 JOIN ldb.d_internal_contact_change_request_opened_by_c b ON a11.opened_by_key=b.row_key
+UNION 
+select 'ldb.d_internal_contact_requested_by_c ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_change_request a11 
+JOIN ldb.d_internal_contact_requested_by_c b ON a11.requested_by_key=b.row_key
+
+
 
