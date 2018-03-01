@@ -5,4 +5,4 @@ FROM mercuryins_mdsdb.dagent_final SRC
 LEFT JOIN mercuryins_mdwdb.f_agent_call_summary TRGT 
 	ON (concat(row_date,'~',acd,'~',split,'~',trim(logid),'~',loc_id) =TRGT.row_id 
 	AND SRC.sourceinstance =TRGT.source_id )
-WHERE COALESCE(SRC.o_acwtime,'')<> COALESCE(TRGT.outbound_acw_time,'')
+WHERE SRC.o_acwtime<> TRGT.outbound_acw_time
