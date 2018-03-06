@@ -8,7 +8,7 @@ JOIN fidelity_mdwdb.d_incident t
 on  t.ROW_ID=s.SYS_ID and s.sourceinstance=t.source_id 
 left join fidelity_mdwdb.d_lov l
 on concat('U_ENVIRONMENT~INCIDENT~~~',upper(s.u_environment))=l.row_id 
-WHERE COALESCE(l.row_key,CASE WHEN s.u_environment IS NULL THEN 0 else -1 end)<> (t.environment_src_c_key)
+WHERE COALESCE(l.row_key,CASE WHEN s.u_environment IS NULL THEN 0 else -1 end)<> (t.u_environment_src_c_key)
  ) temp
  
  

@@ -6,7 +6,7 @@ select count(1) as cnt
 from fidelity_mdsdb.incident_final s
 JOIN fidelity_mdwdb.d_incident t 
 on  t.ROW_ID=s.SYS_ID and s.sourceinstance=t.source_id 
-WHERE u_client_related <> (t.u_client_related_c)
+WHERE (case when u_client_related=1 then 'Y'else  'N' end) <> (t.u_client_related_c)
  ) temp
  
  
