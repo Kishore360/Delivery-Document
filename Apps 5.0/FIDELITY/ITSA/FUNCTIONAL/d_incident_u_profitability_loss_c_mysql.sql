@@ -8,7 +8,7 @@ select count(1) as cnt
 from fidelity_mdsdb.incident_final s
 JOIN fidelity_mdwdb.d_incident t 
 on  t.ROW_ID=s.SYS_ID and s.sourceinstance=t.source_id 
-WHERE coalesce (u_profitability_loss, 'UNSPECIFIED') <> (t.u_profitability_loss_c)
+WHERE coalesce(u_profitability_loss,'UNSPECIFIED')<> (t.u_profitability_loss_c)
  ) temp
  
  
