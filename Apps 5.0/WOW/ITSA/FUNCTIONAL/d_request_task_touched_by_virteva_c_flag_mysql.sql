@@ -5,8 +5,8 @@ from
 wow_mdwdb.d_request_task trg
 join (select documentkey,sourceinstance from wow_mdsdb.sys_audit_final 
  where fieldname='assignment_group' and tablename='sc_task' and
-  (newvalue = 'af54b3910f5f710066e76ab8b1050ebb'
-  or oldvalue = 'af54b3910f5f710066e76ab8b1050ebb')
+  (newvalue in ('af54b3910f5f710066e76ab8b1050ebb','d474fa996f07c100ad775ddd5d3ee452')
+  or oldvalue in ('af54b3910f5f710066e76ab8b1050ebb','d474fa996f07c100ad775ddd5d3ee452'))
   union 
  select sys_id as documentkey, sourceinstance 
  from wow_mdsdb.sc_task_final where assignment_group='af54b3910f5f710066e76ab8b1050ebb'
