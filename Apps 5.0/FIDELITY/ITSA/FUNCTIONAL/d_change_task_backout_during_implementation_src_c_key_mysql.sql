@@ -2,5 +2,5 @@ SELECT CASE WHEN count(1)  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHE
 JOIN fidelity_mdwdb.d_change_task TRGT 
 ON (SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id ) 
  LEFT JOIN fidelity_mdwdb.d_lov LKP 
- ON LKP.row_id=(COALESCE(CONCAT('BACKOUT','~','SOURCE','~','~','~',UPPER(SRC.u_backout_during_implementation)),'UNSPECIFIED') ) 
+ ON LKP.row_id=(COALESCE(CONCAT('U_BACKOUT_DURING_IMPLEMENTATION~CHANGE_TASK','~','~','~',SRC.u_backout_during_implementation),'UNSPECIFIED') ) 
  WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_backout_during_implementation IS NULL THEN 0 else -1 end)<> (TRGT.backout_during_implementation_src_c_key) 
