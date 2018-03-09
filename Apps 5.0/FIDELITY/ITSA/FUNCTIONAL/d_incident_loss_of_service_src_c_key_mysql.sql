@@ -13,4 +13,3 @@ WHERE COALESCE(l.row_key,CASE WHEN s.u_loss_of_service IS NULL THEN 0 else -1 en
  
  
  
- 

@@ -4,8 +4,8 @@ FROM
 fidelity_mdsdb.change_request_final SRC
 LEFT JOIN fidelity_mdwdb.d_problem TRGT 
 ON (SRC.sourceinstance =TRGT.source_id 
-and TRGT.u_problem= LKP.row_id )
+and SRC.u_problem= TRGT.row_id )
 JOIN fidelity_mdwdb.f_change_request trgt1
 on SRC.sys_id = trgt1.row_id and SRC.sourceinstance = trgt1.source_id
-WHERE coalesce(LKP.row_key,case when SRC.u_problem is null then 0 else -1 end) <>trgt1.problem_key
+WHERE coalesce(TRGT.row_key,case when SRC.u_problem is null then 0 else -1 end) <>trgt1.problem_key
 
