@@ -4,9 +4,9 @@ FROM
 fidelity_mdsdb.incident_final SRC
 LEFT JOIN fidelity_mdwdb.d_internal_contact TRGT 
 ON (SRC.sourceinstance =TRGT.source_id 
-and coalesce(concat('INTERNAL_CONTACT~',SRC.caller_id),'UNSPECIFIED' )= LKP.row_id )
+and coalesce(concat('INTERNAL_CONTACT~',SRC.caller_id),'UNSPECIFIED' )= TRGT.row_id )
 JOIN fidelity_mdwdb.d_incident trgt1
 on SRC.sys_id = trgt1.row_id and SRC.sourceinstance = trgt1.source_id
-WHERE coalesce(LKP.row_key,case when SRC.caller_id is null then 0 else -1 end) 
+WHERE coalesce(TRGT.row_key,case when SRC.caller_id is null then 0 else -1 end) 
 <>trgt1.caller_key
 
