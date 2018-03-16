@@ -7,4 +7,4 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 LEFT JOIN pan_mdwdb.d_lov LKP 
  ON ( concat('SUBCATEGORY~INCIDENT','~','~','~',upper(SRC.u_subcategory))= LKP.src_rowid 
 AND SRC.sourceinstance= LKP.source_id )
- WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_subcategory IS NULL THEN 0 else '-1' end)<> COALESCE(TRGT.sub_category_src_key,'')
+ WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_subcategory IS NULL THEN 0 else '-1' end)<> (TRGT.sub_category_src_key)

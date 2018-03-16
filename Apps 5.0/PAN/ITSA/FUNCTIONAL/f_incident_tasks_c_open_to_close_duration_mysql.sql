@@ -3,4 +3,4 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 from pan_mdwdb.f_incident_tasks_c f
 join pan_mdsdb.u_incident_tasks_final i ON f.row_id=i.sys_id AND f.source_id=i.sourceinstance
 where 
-TIMESTAMPDIFF(SECOND,i.opened_at,i.closed_at) <> f.OPEN_TO_CLOSE_DURATION
+TIMESTAMPDIFF(DAY,i.opened_at,i.closed_at) <> f.OPEN_TO_CLOSE_DURATION

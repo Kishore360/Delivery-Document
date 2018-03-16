@@ -4,7 +4,7 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  FROM pan_mdwdb.f_walk_up_c f 
 JOIN pan_mdwdb.d_internal_contact a 
 ON a.row_key = f.opened_by_key 
-where f.opened_by_employee_duration <> COALESCE(TIMESTAMPDIFF(second,a.employee_start_date_c,f.created_on),0)
+where f.opened_by_employee_duration <> COALESCE(TIMESTAMPDIFF(day,a.employee_start_date_c,f.created_on),0)
 
 
 

@@ -4,7 +4,7 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  from pan_mdwdb.f_request_item f
 JOIN  pan_mdsdb.sc_req_item_final src on sys_id=row_id and sourceinstance=source_id
 where  open_to_approval_duration_c<>
- timestampdiff(SECOND, CONVERT_TZ(src.opened_at,'GMT','America/Los_Angeles'), CONVERT_TZ(src.approval_set,'GMT','America/Los_Angeles'));
+ timestampdiff(DAY, CONVERT_TZ(src.opened_at,'GMT','America/Los_Angeles'), CONVERT_TZ(src.approval_set,'GMT','America/Los_Angeles'));
  
  
  
