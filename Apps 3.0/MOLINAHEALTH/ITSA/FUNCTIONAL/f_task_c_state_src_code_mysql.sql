@@ -4,7 +4,7 @@ from molinahealth_mdsdb.task_final SRC
 join
 molinahealth_mdwdb.f_task_c TRGT
 on SRC.sys_id=TRGT.row_id and SRC.sourceinstance=TRGT.source_id
-where    sc.state 
+where    SRC.state 
 	 <>TRGT.state_src_code
 	 
 	 
