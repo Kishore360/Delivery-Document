@@ -5,5 +5,6 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 JOIN pan_mdwdb.d_internal_contact a 
 ON a.row_key = f.opened_by_key 
 where f.opened_by_employee_duration <> COALESCE(TIMESTAMPDIFF(day,a.employee_start_date_c,f.created_on),0)
+and(f.opened_by_employee_duration - COALESCE(TIMESTAMPDIFF(day,a.employee_start_date_c,f.created_on),0)) not in (1,-1) 
 
 

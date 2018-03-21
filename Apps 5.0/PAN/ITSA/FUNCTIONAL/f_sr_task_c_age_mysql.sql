@@ -12,7 +12,8 @@ JOIN  pan_mdwdb.d_sr_task_c a ON a.row_key = f.sr_task_c_key
 AND f.source_id = a.source_id
 JOIN pan_mdwdb.d_lov_map br ON a.state_src_key = br.src_key
 AND br.dimension_wh_code = 'OPEN'
-WHERE
+WHERE (timestampdiff(second,a.opened_on,(SELECT MAX(la.lastupdated) AS lastupdated
+FROM pan_mdwdb.d_o_data_freshness la WHERE  la.sourcename like 'ServiceNow%'))- f.age) not in (3600,-3600) and 
  timestampdiff(second,a.opened_on,(SELECT MAX(la.lastupdated) AS lastupdated
 FROM pan_mdwdb.d_o_data_freshness la WHERE  la.sourcename like 'ServiceNow%'))<> f.age)temp;
 
