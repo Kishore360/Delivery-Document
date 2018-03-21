@@ -3,7 +3,7 @@ SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
 ELSE 'Data Matched' END AS Message 
 FROM (
 
-select count(1) from 				
+select count(1) cnt  from 				
   wow_mdsdb.sc_req_item_final src 
   left join wow_mdwdb.d_request_item trgt
 	ON trgt.row_id = src.sys_id

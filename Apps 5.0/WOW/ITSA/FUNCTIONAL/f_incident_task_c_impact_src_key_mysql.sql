@@ -8,7 +8,7 @@ from wow_mdsdb.u_incident_task_final s
 on s.sys_id=t.row_id and s.sourceinstance = t.source_id
 left join wow_mdwdb.d_lov lkp
 on 
-CONCAT('IMPACT','~','TASK','~','~','~',UPPER(s.impact))
+CONCAT('IMPACT','~','INCIDENT','~','~','~',UPPER(s.impact))
 =lkp.row_id and t.source_id = lkp.source_id
 where  COALESCE(lkp.row_key,CASE WHEN s.impact IS NULL THEN 0 else -1 end) <> t.impact_src_key 
 ) temp
