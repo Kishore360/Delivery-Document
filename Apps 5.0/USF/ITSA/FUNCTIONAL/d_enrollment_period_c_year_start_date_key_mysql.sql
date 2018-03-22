@@ -7,4 +7,4 @@ on  t.ROW_ID=s.SYS_ID and s.sourceinstance=t.source_id
 join usf_mdwdb.d_calendar_date l
 on COALESCE(CAST(CONCAT(LEFT(DATE_FORMAT(s.u_start_date,'%Y%m%d'),4),'0101') as UNSIGNED),'UNSPECIFIED')= l.row_id
 WHERE COALESCE(l.row_key,CASE WHEN s.u_start_date IS NULL THEN 0 else -1 end)<>
- t.year_start_date_key 
+ t.year_start_date_key )a
