@@ -7,9 +7,9 @@ from  ldb.f_request_task       a11
 left outer join  ldb.d_internal_contact_cost_center_c       a14
 on (a11.requested_for_c_key=a14.row_key)
 union
-select'ldb.d_request_task_agebucket' as Table_Name, count(a11.row_key) Row_Count
+select'ldb.d_request_task_agebucket_c' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_request_task       a11 
-left outer join  ldb.d_request_task_agebucket       a112
+left outer join  ldb.d_request_task_agebucket_c       a112
 on (a11.request_task_age_c_key=a112.row_key)
 union
 select'ldb.d_cost_center' as Table_Name, count(a11.row_key) Row_Count

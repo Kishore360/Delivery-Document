@@ -8,7 +8,7 @@ SELECT count(1) as CNT
 FROM molinahealth_mdsdb.task_final SRC 
 LEFT JOIN molinahealth_mdwdb.d_task TRGT ON (SRC.sys_id =TRGT.row_id AND SRC.sourceinstance=TRGT.source_id)
 LEFT JOIN molinahealth_mdwdb.d_lov_map LKP ON TRGT.state_src_key=LKP.src_key
-WHERE  
+WHERE  LKP.dimension_wh_code not in ('CANCELLED') and 
 (CASE WHEN LKP.dimension_class 
 IN 
 (
@@ -20,7 +20,7 @@ IN
 'STATE~SC_REQ_ITEM',
 'STATE~SC_TASK'
  ) 
-AND LKP.dimension_wh_code NOT IN ('RESOLVED','CLOSED') THEN 'Y' ELSE 'N' END)<>TRGT.backlog_flag
+AND LKP.dimension_wh_code NOT IN ('FULFILLED','RESOLVED','CLOSED') THEN 'Y' ELSE 'N' END)<>TRGT.backlog_flag
 ) a; 
 
 

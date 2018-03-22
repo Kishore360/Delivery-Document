@@ -5,7 +5,7 @@ CASE WHEN CNT > 0 THEN 'MDS to DWH data validation failed for f_task.location_ke
 FROM 
 ( 
 SELECT Count(1) AS CNT 
-FROM molinahealth_mdsdb.task_final SRC 
+FROM (select sys_id,sourceinstance,location from molinahealth_mdsdb.task_final where sys_class_name='INCIDENT') SRC 
 LEFT JOIN molinahealth_mdwdb.f_task TRGT 
 ON (SRC.sys_id =TRGT.row_id AND SRC.sourceinstance =TRGT.source_id )
 LEFT JOIN molinahealth_mdwdb.d_location LKP  ON (SRC.location = LKP.row_id AND SRC.sourceinstance = LKP.source_id )

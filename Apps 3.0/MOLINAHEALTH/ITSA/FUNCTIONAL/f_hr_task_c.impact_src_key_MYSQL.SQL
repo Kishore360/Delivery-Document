@@ -9,7 +9,7 @@ FROM
 SELECT count(1) AS CNT
 FROM molinahealth_mdsdb.u_hr_task_final a 
 LEFT JOIN molinahealth_mdwdb.f_hr_task_c b ON (a.sys_id=b.row_id AND a.sourceinstance=b.source_id)
-LEFT JOIN molinahealth_mdwdb.d_lov LKP ON COALESCE(CONCAT('IMPACT','~','TASK','~','~','~', UPPER(a.impact),'UNSPECIFIED')=LKP.row_id AND a.sourceinstance=LKP.source_id)
+LEFT JOIN molinahealth_mdwdb.d_lov LKP ON COALESCE(CONCAT('IMPACT','~','TASK','~','~','~', UPPER(a.impact)),'UNSPECIFIED')=LKP.row_id AND a.sourceinstance=LKP.source_id
 WHERE COALESCE(LKP.row_key,CASE WHEN a.impact IS NULL THEN 0 ELSE -1 END)<>b.impact_src_key
 ) a; 
 
