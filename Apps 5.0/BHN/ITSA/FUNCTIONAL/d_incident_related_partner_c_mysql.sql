@@ -8,7 +8,7 @@ AND SRC.sourceinstance= LKP.sourceinstance )
  LEFT JOIN bhn_mdwdb.d_incident TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
- WHERE  LKP.u_name <> related_partner_c
+ WHERE  LKP.u_name <> related_partner_c -- and substr(LKP.u_name,1,instr(LKP.u_name,'(' )-2)<>related_partner_c
  
  
  

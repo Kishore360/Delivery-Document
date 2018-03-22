@@ -8,7 +8,7 @@ FROM
 (
   SELECT Count(1) as CNT 
  FROM bbandt_mdsdb.problem_final a 
- LEFT JOIN bbandt_mdwdb.d_problem b ON (a.sys_id=b.row_id AND a.sourceinstance=b.sourceinstance)
+ LEFT JOIN bbandt_mdwdb.d_problem b ON (a.sys_id=b.row_id AND a.sourceinstance=b.source_id)
  WHERE COALESCE(a.u_workaround,'UNSPECIFIED') <> b.work_around
 ) a 
 

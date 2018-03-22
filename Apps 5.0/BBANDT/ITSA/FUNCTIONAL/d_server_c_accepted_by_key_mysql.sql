@@ -7,4 +7,4 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  LEFT JOIN bbandt_mdwdb.d_internal_contact LKP 
  ON ( CONCAT('INTERNAL_CONTACT~',SRC.u_accepted_by)= LKP.row_id 
 AND SRC.sourceinstance= LKP.source_id )
- WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_accepted_by IS NULL THEN 0 else -1 end)<> (TRGT.accepted_by_key)
+ WHERE LKP.dw_updated_on<TRGT.dw_updated_on and  COALESCE(LKP.row_key,CASE WHEN SRC.u_accepted_by IS NULL THEN 0 else -1 end)<> (TRGT.accepted_by_key)

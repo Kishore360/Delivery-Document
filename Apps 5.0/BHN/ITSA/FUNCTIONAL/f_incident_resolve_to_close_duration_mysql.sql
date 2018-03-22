@@ -6,7 +6,13 @@ SELECT CASE WHEN cnt THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  AND SRC.sourceinstance= TRGT.source_id  )
   LEFT JOIN bhn_mdwdb.d_lov_map br 
  ON TRGT.state_src_key = br.src_key
-WHERE   br.dimension_wh_code IN ('CLOSED') 
+WHERE 
+(TIMESTAMPDIFF(SECOND,convert_tz(convert_tz( SRC.resolved_at,'GMT','America/Los_Angeles'),
+'America/Los_Angeles','GMT'), 
+convert_tz(convert_tz(SRC.closed_at,'GMT','America/Los_Angeles'),'America/Los_Angeles','GMT'))
+- TRGT.resolve_to_close_duration) not in (3600,-3600) and 
+
+  br.dimension_wh_code IN ('CLOSED') 
 AND  TIMESTAMPDIFF(SECOND,convert_tz(convert_tz( SRC.resolved_at,'GMT','America/Los_Angeles'),
 'America/Los_Angeles','GMT'), 
 convert_tz(convert_tz(SRC.closed_at,'GMT','America/Los_Angeles'),'America/Los_Angeles','GMT'))
