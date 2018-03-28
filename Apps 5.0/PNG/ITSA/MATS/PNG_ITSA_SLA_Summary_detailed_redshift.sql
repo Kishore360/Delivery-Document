@@ -91,3 +91,4 @@ join ldb.d_internal_organization_group a12
 on (a11.assignment_group_key = a12.row_key) join ldb.dh_user_group_hierarchy a13 
 on (a12.row_dn_key = a13.lev_0_key) 
 join ldb.dh_user_group_level4 a115 
+on (a13.lev_4_key = a115.row_key) 
