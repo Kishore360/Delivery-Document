@@ -8,4 +8,4 @@ LEFT JOIN watson_mdwdb.d_case TRGT
 JOIN  app_test.lsm_ls_source_timezone L 
 	ON (SRC.sourceinstance = L.sourceid)
 WHERE TRGT.row_key not in (0, -1) and 
-convert_tz(SRC.sys_created_on,source_time_zone,target_time_zone)<> TRGT.created_on 
+convert_tz(SRC.sys_created_on,'GMT','America/New_York')<> TRGT.created_on 
