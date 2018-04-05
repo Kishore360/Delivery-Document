@@ -272,5 +272,11 @@ UNION
 SELECT 'd_lov_case_first_severity_src_c' as Table_name,Count(a.row_key) as Row_Count 
 FROM ldb.f_case a 
 JOIN ldb.d_case b ON a.case_key=b.row_key
-JOIN ldb.d_case_priority pr ON b.priority_src_key=pr.row_key
 JOIN ldb.d_lov_case_first_severity_src_c c ON b.first_severity_src_c_key=c.row_key
+UNION 
+SELECT 'd_lov_case_status_src_c_watson' as Table_name,Count(a.row_key) as Row_Count 
+FROM ldb.f_case a 
+JOIN ldb.d_case b ON a.case_key=b.row_key
+JOIN ldb.d_lov_case_status_src_c_watson c ON b.status_src_c_key=c.row_key
+
+
