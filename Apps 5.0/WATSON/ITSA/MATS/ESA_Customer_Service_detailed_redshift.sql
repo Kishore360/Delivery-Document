@@ -260,7 +260,6 @@ join ldb.d_calendar_date a15
 on (a11.opened_on_key = a15.row_key) 
 join ldb.d_calendar_year a145 
 on (a15.year_start_date_key = a145.row_key) 
-
 union
 select 'ldb.d_internal_contact_assigned_to a12 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_case a11 
@@ -269,3 +268,9 @@ on (a11.tribe_c_key = a12.row_key)
 join ldb.d_segment_c d2 on a12.segment_c_key=d2.row_key
 join ldb.d_internal_contact_assigned_to d3
 on d3.row_key = d2.general_manager_c_key
+UNION 
+SELECT 'd_lov_case_first_severity_src_c' as Table_name,Count(a.row_key) as Row_Count 
+FROM ldb.f_case a 
+JOIN ldb.d_case b ON a.case_key=b.row_key
+JOIN ldb.d_case_priority pr ON b.priority_src_key=pr.row_key
+JOIN ldb.d_lov_case_first_severity_src_c c ON b.first_severity_src_c_key=c.row_key
