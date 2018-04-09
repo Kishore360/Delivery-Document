@@ -17,7 +17,7 @@ SELECT 'd_survey_instance' as Table_Name,count(1) as Row_Count
 FROM ldb.f_incident_response a 
 JOIN ldb.d_survey_instance b ON a.survey_instance_key=b.row_key
 UNION 
-SELECT 'd_survey_question' as Table_Name,count(1) as Row_Count 
+SELECT 'd_question_type' as Table_Name,count(1) as Row_Count 
 FROM ldb.f_incident_response a 
 JOIN ldb.d_survey_question b ON a.question_key=b.row_key
 JOIN ldb.d_question_type c ON b.question_type_src_key=c.row_key
@@ -59,6 +59,23 @@ SELECT 'd_calendar_month' as Table_Name,count(1) as Row_Count
 FROM ldb.f_incident_response a 
 JOIN ldb.d_calendar_date b  ON a.requested_on_key=b.row_key
 JOIN ldb.d_calendar_month c ON b.month_start_date_key=c.row_key
+UNION 
+SELECT 'd_calendar_quarter' as Table_Name,count(1) as Row_Count 
+FROM ldb.f_incident_response a 
+JOIN ldb.d_calendar_date b  ON a.requested_on_key=b.row_key
+JOIN ldb.d_calendar_quarter c ON b.quarter_start_date_key=c.row_key
+UNION 
+SELECT 'd_calendar_week' as Table_Name,count(1) as Row_Count 
+FROM ldb.f_incident_response a 
+JOIN ldb.d_calendar_date b  ON a.requested_on_key=b.row_key
+JOIN ldb.d_calendar_week c ON b.week_start_date_key=c.row_key
+UNION 
+SELECT 'd_calendar_year' as Table_Name,count(1) as Row_Count 
+FROM ldb.f_incident_response a 
+JOIN ldb.d_calendar_date b  ON a.requested_on_key=b.row_key
+JOIN ldb.d_calendar_year c ON b.year_start_date_key=c.row_key
+
+
 
 
 
