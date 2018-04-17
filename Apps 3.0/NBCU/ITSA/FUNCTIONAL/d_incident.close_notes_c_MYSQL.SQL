@@ -1,13 +1,13 @@
 SELECT 
 CASE WHEN CNT > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
-CASE WHEN CNT > 0 THEN 'MDS to DWH data validation failed for d_incident.close_notes_c' ELSE 'SUCCESS' END as  Message
+CASE WHEN CNT > 0 THEN 'MDS to DWH data validation failed for d_incident.close_notes_c' ELSE 'SUCCESS' END as Message 
 FROM 
 (
-SELECT count(1) as CNT 
-FROM nbcu_mdsdb.task_final a 
-JOIN nbcu_mdwdb.d_incident b ON a.sys_id=b.row_id and a.sourceinstance=b.source_id
-Where a.sys_class_name='incident'
-and COALESCE(a.close_notes,'')<>b.close_notes_c
+SELECT count(1) as CNT
+FROM nbcu_mdsdb.incident_final a 
+LEFT JOIN nbcu_mdwdb.d_incident b ON a.sys_id=b.row_id and a.sourceinstance=b.source_id
+Where coalesce(a.close_notes)<>b.close_notes_c
 ) temp;
 
 
+ 
