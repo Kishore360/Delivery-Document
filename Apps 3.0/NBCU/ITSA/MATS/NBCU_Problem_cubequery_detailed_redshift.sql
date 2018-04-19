@@ -214,3 +214,8 @@ from      ldb.f_problem   a11
                   on         (a15.row_dn_key = a16.lev_0_key)
  join        ldb.dh_user_group_level5         a133
                   on         (a16.lev_5_key = a133.row_key)
+UNION 
+SELECT 'd_lov_problem_root_cause_category_c' AS Table_Name,count(a.row_key) AS Row_count
+FROM ldb.f_problem a 
+JOIN ldb.d_problem b ON a.problem_key=b.row_key
+JOIN ldb.d_lov_problem_root_cause_category_c c ON b.root_cause_category_src_c_key=c.row_key
