@@ -12,6 +12,6 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 LEFT JOIN tjx_mdwdb.d_calendar_date LKP 
 on (LKP.row_id = date_format(convert_tz(COALESCE( SRC.closed_at,SRC.sys_updated_on),'GMT','America/New_York'),'%Y%m%d') 
 	and LKP.source_id=0)
-WHERE CASE WHEN L.dimension_wh_code='CLOSED' THEN COALESCE(LKP.row_key,0) ELSE 0 END 
-<> COALESCE(TRGT.closed_on_key,'')
+WHERE COALESCE(LKP.row_key,CASE WHEN closed_at is null THEN  0 ELSE -1 END )
+<> (TRGT.closed_on_key)
 

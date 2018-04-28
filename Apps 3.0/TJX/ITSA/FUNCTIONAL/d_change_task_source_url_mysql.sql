@@ -5,6 +5,6 @@ FROM tjx_mdsdb.task_final SRC
 LEFT JOIN tjx_mdwdb.d_task TRGT 
 	ON (SRC.sys_id =TRGT.row_id 
 	AND SRC.sourceinstance =TRGT.source_id )
-WHERE concat('<a href="https://#URL/','task','.do?sys_id=',COALESCE(`sys_id`,'')
-,'" target="_blank" >',COALESCE(`number`,''),'</a>')
-<> COALESCE(TRGT.source_url ,'')
+WHERE concat('<a href="https://tjx.service-now.com/nav_to.do?uri=','task','.do?sys_id=',COALESCE(`sys_id`,'')
+,'" target="_blank">',COALESCE(`number`,''),'</a>')
+<> COALESCE(TRGT.source_url ,'');

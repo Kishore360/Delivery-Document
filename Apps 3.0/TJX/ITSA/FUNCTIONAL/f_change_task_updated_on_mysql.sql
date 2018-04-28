@@ -4,7 +4,7 @@ from tjx_mdsdb.change_task_final SRC
 left join tjx_mdwdb.f_change_task TRGT 
  ON SRC.sys_id =TRGT.row_id 
  AND SRC.sourceinstance = TRGT.source_id  
- where (TRGT.changed_on) <> (SRC.sys_updated_on)
+ where (TRGT.changed_on) <> convert_tz(SRC.sys_updated_on,'GMT','America/New_York')
 
 
 

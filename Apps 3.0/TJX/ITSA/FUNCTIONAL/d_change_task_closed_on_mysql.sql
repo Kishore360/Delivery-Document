@@ -7,6 +7,5 @@ FROM tjx_mdsdb.change_task_final SRC
  LEFT JOIN tjx_mdwdb.d_change_task TRGT 
  ON (SRC.sys_id=TRGT.row_id 
  AND SRC.sourceinstance=TRGT.source_id )
-WHERE case when L.dimension_wh_code='CLOSED' then convert_tz(COALESCE( SRC.closed_at,SRC.sys_updated_on),'GMT','America/New_York') 
-else '' end
+WHERE L.dimension_wh_code='CLOSED' and  convert_tz(COALESCE( SRC.closed_at,SRC.sys_updated_on),'GMT','America/New_York') 
  <> COALESCE(TRGT.closed_on,'')
