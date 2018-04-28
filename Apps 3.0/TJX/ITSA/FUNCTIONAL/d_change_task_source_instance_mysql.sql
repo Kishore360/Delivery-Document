@@ -4,7 +4,7 @@ from tjx_mdsdb.change_task_final SRC
 left join tjx_mdwdb.d_change_task TRGT 
  ON SRC.sys_id =TRGT.row_id 
  AND SRC.sourceinstance = TRGT.source_id  
- where coalesce(SRC.source_id,'') <> coalesce(TRGT.sourceinstance,'')
+ where coalesce(TRGT.source_id,'') <> coalesce(SRC.sourceinstance,'')
 
 
 

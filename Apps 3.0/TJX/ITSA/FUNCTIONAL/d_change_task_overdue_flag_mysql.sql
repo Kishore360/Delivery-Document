@@ -18,6 +18,6 @@ LEFT JOIN tjx_mdwdb.d_lov_map LM
 and LM.dimension_class='STATE~TASK'
  
 WHERE CASE WHEN (LM.dimension_wh_code  IN('CLOSED') and coalesce( SRC.closed_at,SRC.sys_updated_on)>coalesce( SRC.due_Date,0) and SRC.due_date is not null)
-or (LM.dimension_wh_code  IN ('OPEN') and coalesce( SRC.due_date,0) < convert_tz(FRESH.lastupdated,'<<DW_TARGET_TIME_ZONE>>' , '<<TENANT_SSI_TIME_ZONE>>')
+or (LM.dimension_wh_code  IN ('OPEN') and coalesce( SRC.due_date,0) < convert_tz(FRESH.lastupdated,'America/New_York','GMT')
 and SRC.due_date is not null and SRC.active=1)
  THEN 'Y' ELSE 'N' END <> TRGT.overdue_flag 

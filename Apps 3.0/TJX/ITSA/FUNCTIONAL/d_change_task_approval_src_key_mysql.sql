@@ -8,4 +8,4 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 LEFT JOIN tjx_mdwdb.d_lov LKP 
  ON  concat('APPROVAL','~','CHANGE_TASK','~','~','~',upper(APPROVAL))= LKP.src_rowid
 AND SRC.sourceinstance = LKP.source_id
- WHERE COALESCE(LKP.row_key,CASE WHEN SRC.approval IS NULL THEN 0 else '-1' end)<> COALESCE(TRGT.approval_src_key ,'')
+ WHERE COALESCE(LKP.row_key,CASE WHEN SRC.approval IS NULL THEN 0 else '-1' end)<> (TRGT.approval_src_key )
