@@ -9,8 +9,5 @@ FROM tjx_mdsdb.change_task_final SRC
  LEFT JOIN tjx_mdwdb.f_change_task TRGT 
  ON (SRC.sys_id=TRGT.row_id 
  AND SRC.sourceinstance=TRGT.source_id )
-WHERE case when L.dimension_wh_code='CLOSED' THEN
-		CASE WHEN SRC.opened_at <= COALESCE( SRC.closed_at,SRC.sys_updated_on) then COALESCE( TIMESTAMPDIFF(SECOND, SRC.opened_at, 
-			COALESCE( SRC.closed_at,SRC.sys_updated_on)) ,'') else '' end
-	  else '' end
-<> COALESCE(TRGT.open_to_close_duration ,'')
+WHERE dimension_wh_code='CLOSED' and  COALESCE( TIMESTAMPDIFF(SECOND, SRC.opened_at, COALESCE( SRC.closed_at,SRC.sys_updated_on)) ) 
+	  <> COALESCE(TRGT.open_to_close_duration ,'')
