@@ -223,8 +223,12 @@ UNION
 select 'ldb.d_internal_contact_created_by_c a19 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11 
 join ldb.d_internal_contact_created_by_c a19 ON (a11.created_by_c_key=a19.row_key)
- 
-
-
+UNION
+select 'ldb.d_internal_organization_it_group_c a20 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_incident a11 
+join ldb.d_internal_contact_assigned_to a15 
+on (a11.assigned_to_key = a15.row_key) 
+join ldb.d_internal_organization_it_group_c a20
+on (a15.it_group_c_key = a20.row_key) 
 
 
