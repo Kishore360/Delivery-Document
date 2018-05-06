@@ -21,7 +21,7 @@ from ldb.f_user_ci_c a11
 join ldb.d_internal_contact_customer_c a12 
 on (a11.user_c_key = a12.row_key) 
 join ldb.d_internal_contact_master_employee_c a15 
-on (a12.bmc_row_key_c = a15.row_key and a14.bmc_row_key_c = a15.row_key) 
+on (a12.bmc_row_key_c = a15.row_key ) 
 union
 select 'ldb.d_asset_master_asset_c a16 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_user_ci_c a11 

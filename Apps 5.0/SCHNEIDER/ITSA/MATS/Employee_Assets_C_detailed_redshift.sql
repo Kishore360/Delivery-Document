@@ -45,7 +45,7 @@ from ldb.f_asset_people_c a11
 join ldb.d_internal_contact_customer_c a13 
 on (a11.employee_key = a13.row_key) 
 join ldb.d_internal_contact_master_employee_c a19 
-on (a13.bmc_row_key_c = a19.row_key and a14.bmc_row_key_c = a19.row_key) 
+on (a13.bmc_row_key_c = a19.row_key ) 
 union
 select 'ldb.d_internal_organization_department a110 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_asset_people_c a11 
