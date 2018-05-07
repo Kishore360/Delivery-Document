@@ -11,6 +11,7 @@ ON LKP.dimension_class like '%SERVICE_TYPE_C~CHANGE_REQUEST%' and
 AND SRC.sourceinstance= LKP.source_id ) 
 JOIN png_mdwdb.d_change_request TRGT ON (SRC.sys_id =TRGT.row_id  AND SRC.sourceinstance= TRGT.source_id  )
 WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_service_type IS NULL THEN 0 else -1 end)<> (TRGT.service_type_src_c_key)
+AND TRGT.soft_deleted_flag='N'
 ) temp;
 
  
