@@ -9,6 +9,7 @@ LEFT JOIN png_mdwdb.d_change_request TRGT ON (SRC.sys_id =TRGT.row_id AND SRC.so
 LEFT JOIN png_mdwdb.d_lov LKP 
 ON (concat('CLOSE_CODE~CHANGE_REQUEST~~~',UPPER(SRC.close_code))= LKP.row_id AND SRC.sourceinstance= LKP.source_id )
  WHERE COALESCE(LKP.row_key,CASE WHEN SRC.close_code IS NULL THEN 0 else -1 end)<> (TRGT.close_code_src_key)
+ and TRGT.soft_deleted_flag='N'
 ) temp; 
 
 
