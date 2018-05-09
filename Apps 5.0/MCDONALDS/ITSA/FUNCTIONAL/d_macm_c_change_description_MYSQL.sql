@@ -10,3 +10,4 @@ ON (SRC.SYS_ID=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id)
 WHERE COALESCE (LEFT(SRC.u_change_description,4000),'UNSPECIFIED')<>TRGT.change_description
 )a;
 
+q
