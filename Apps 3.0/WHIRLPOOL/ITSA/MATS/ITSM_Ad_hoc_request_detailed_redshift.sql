@@ -21,20 +21,20 @@ from ldb.f_ad_hoc_request_c a11
 join ldb.d_ad_hoc_request_c a15 
 on (a11.ad_hoc_request_c_key = a15.row_key) 
 union
-select 'ldb.d_ad_hoc_request_agebucket_c a16 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_internal_organization_group a16 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_ad_hoc_request_c a11 
-join ldb.d_ad_hoc_request_agebucket_c a16 
-on (a11.age_key = a16.row_key) 
+join ldb.d_internal_organization_group a16 
+on (a11.assignment_group_key = a16.row_key) 
 union
-select 'ldb.d_internal_contact_assigned_to a17 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_ad_hoc_request_agebucket_c a17 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_ad_hoc_request_c a11 
-join ldb.d_internal_contact_assigned_to a17 
-on (a11.assigned_to_key = a17.row_key) 
+join ldb.d_ad_hoc_request_agebucket_c a17 
+on (a11.age_key = a17.row_key) 
 union
-select 'ldb.d_internal_organization_group a18 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_internal_contact_assigned_to a18 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_ad_hoc_request_c a11 
-join ldb.d_internal_organization_group a18 
-on (a11.assignment_group_key = a18.row_key) 
+join ldb.d_internal_contact_assigned_to a18 
+on (a11.assigned_to_key = a18.row_key) 
 union
 select 'ldb.d_business_service a19 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_ad_hoc_request_c a11 
@@ -122,3 +122,10 @@ select 'ldb.d_internal_organization_vendor_c a125 ' as Table_name, count(a11.row
 from ldb.f_ad_hoc_request_c a11 
 join ldb.d_internal_organization_vendor_c a125 
 on (a11.vendor_key = a125.row_key) 
+union
+select 'ldb.d_internal_contact_queue_manager_c a126 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_ad_hoc_request_c a11 
+join ldb.d_internal_organization_group a16 
+on (a11.assignment_group_key = a16.row_key) 
+join ldb.d_internal_contact_queue_manager_c a126 
+on (a16.queue_manager_c_key = a126.row_key) 
