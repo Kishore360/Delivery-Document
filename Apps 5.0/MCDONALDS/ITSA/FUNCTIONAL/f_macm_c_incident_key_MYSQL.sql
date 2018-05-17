@@ -4,7 +4,7 @@ CASE WHEN CNT THEN 'MDS to DWH data validation failed for f_macm_c_incident_key'
 FROM
 (
 SELECT count(1) as CNT 
-FROM mcdonalds_mdsdb.x_scafe_mcdcr_chan_mcdcr_change_request_final SRC  
+FROM ( SELECT * FROM  mcdonalds_mdsdb.x_scafe_mcdcr_chan_mcdcr_change_request_final WHERE CDCTYPE<>'D') SRC  
 LEFT JOIN mcdonalds_mdwdb.f_macm_c TRGT 
 ON (SRC.SYS_ID=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id)
 LEFT JOIN mcdonalds_mdwdb.d_incident LKP 

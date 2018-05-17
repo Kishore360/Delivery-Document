@@ -4,7 +4,7 @@ CASE WHEN  cnt > 0 THEN 'd_inciden.incident_priority_downgraded_c_flag Failed'  
 FROM 
 (
 SELECT count(1) as cnt  
-FROM mcdonalds_mdsdb.incident_final SRC
+FROM ( SELECT * FROM mcdonalds_mdsdb.incident_final WHERE CDCTYPE<>'D') SRC
 LEFT JOIN 
 (SELECT distinct documentkey,sourceinstance,newvalue,oldvalue FROM 
 mcdonalds_mdsdb.sys_audit_final where tablename='incident' and fieldname='priority'
