@@ -6,7 +6,9 @@
 
 JOIN mcdonalds_mdwdb.d_lov_map br ON f.state_src_key = br.src_key
 AND br.dimension_wh_code = 'OPEN' and br.dimension_class = 'STATE~INCIDENT'
-
-where   TIMESTAMPDIFF(SECOND,SRC.opened_at,(SELECT CONVERT_TZ(max(lastupdated),'US/Central','GMT') AS lastupdated FROM mcdonalds_mdwdb.d_o_data_freshness where (SRC.cdctime<=f1.lastupdated) and sourcename like 'ServiceNow%' and etl_run_number=f.etl_run_number and (SRC.cdctime<=f1.lastupdated)))<> f.age
-
+left join (select source_id,max(lastupdated) as lastupdated from mcdonalds_mdwdb.d_o_data_freshness group by source_id) f1 on (f1.source_id = SRC.sourceinstance)
+where  (SRC.cdctime<=f1.lastupdated) and TIMESTAMPDIFF(SECOND,SRC.opened_at,(SELECT CONVERT_TZ(max(lastupdated),'US/Central','GMT') AS lastupdated
+ FROM mcdonalds_mdwdb.d_o_data_freshness where  sourcename like 'ServiceNow%' 
+ and etl_run_number=f.etl_run_number ))<> f.age
+)a1
  )A

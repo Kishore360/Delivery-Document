@@ -11,9 +11,9 @@ right join
  join
 (SELECT task  , min(sys_created_on) as sys_created_on from mcdonalds_mdsdb.m2m_kb_task_final
 group by 1) min 
-on a.task = min.task where (SRC.cdctime<=f1.lastupdated) and a.sys_created_on = min.sys_created_on )m2m on m2m.task = inc.row_id
+on a.task = min.task where  a.sys_created_on = min.sys_created_on )m2m on m2m.task = inc.row_id
 right join mcdonalds_mdsdb.kb_knowledge_final  kb
 on m2m.kb_knowledge = kb.sys_id
-left join (select source_id,max(lastupdated) as lastupdated from mcdonalds_mdwdb.d_o_data_freshness group by source_id) f1 on (f1.source_id = SRC.sourceinstance)
-where (SRC.cdctime<=f1.lastupdated) and COALESCE(kb.number,'UNSPECIFIED')<>inc.knowledge_number_c
+left join (select source_id,max(lastupdated) as lastupdated from mcdonalds_mdwdb.d_o_data_freshness group by source_id) f1 on (f1.source_id = kb.sourceinstance)
+where (kb.cdctime<=f1.lastupdated) and COALESCE(kb.number,'UNSPECIFIED')<>inc.knowledge_number_c
 )a;

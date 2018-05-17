@@ -11,11 +11,14 @@ AND br.dimension_wh_code IN ('RESOLVED','CLOSED')
 JOIN mcdonalds_mdwdb.d_incident a ON a.row_key = f.incident_key
 AND f.source_id = a.source_id 
    left join (select source_id,max(lastupdated) as lastupdated from mcdonalds_mdwdb.d_o_data_freshness group by source_id) f1 on (f1.source_id = SRC.sourceinstance)
-where (SRC.cdctime<=f1.lastupdated) and
+where (SRC.cdctime<=f1.lastupdated) and case when timestampdiff(second, convert_tz(convert_tz(SRC.opened_at,'GMT','US/Central'),'US/Central','GMT'), 
+coalesce(convert_tz(convert_tz(SRC.resolved_at,'GMT','US/Central'),'US/Central','GMT'), 
+convert_tz(convert_tz(SRC.closed_at,'GMT','US/Central'),'US/Central','GMT'),
+convert_tz(convert_tz(SRC.sys_updated_on,'GMT','US/Central'),'US/Central','GMT')))< 0 then 0 else 
 timestampdiff(second, convert_tz(convert_tz(SRC.opened_at,'GMT','US/Central'),'US/Central','GMT'), 
 coalesce(convert_tz(convert_tz(SRC.resolved_at,'GMT','US/Central'),'US/Central','GMT'), 
 convert_tz(convert_tz(SRC.closed_at,'GMT','US/Central'),'US/Central','GMT'),
-convert_tz(convert_tz(SRC.sys_updated_on,'GMT','US/Central'),'US/Central','GMT'))) <> f.age
+convert_tz(convert_tz(SRC.sys_updated_on,'GMT','US/Central'),'US/Central','GMT'))) end  <> f.age)a1
   )a
   
   
