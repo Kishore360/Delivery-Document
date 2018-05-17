@@ -3,6 +3,7 @@
 FROM  mcdonalds_mdwdb.d_incident d
 JOIN mcdonalds_mdwdb.f_incident f ON d.row_key = f.incident_key
 JOIN mcdonalds_mdwdb.d_lov_map lov_map ON f.state_src_key = lov_map.src_key
-WHERE  case when (lov_map.dimension_class = 'STATE~INCIDENT' AND lov_map.dimension_wh_code IN('RESOLVED','CLOSED') 
+left join (select source_id,max(lastupdated) as lastupdated from mcdonalds_mdwdb.d_o_data_freshness group by source_id) f1 on (f1.source_id = SRC.sourceinstance)
+where (SRC.cdctime<=f1.lastupdated) and  case when (lov_map.dimension_class = 'STATE~INCIDENT' AND lov_map.dimension_wh_code IN('RESOLVED','CLOSED') 
   AND TIMESTAMPDIFF(MINUTE,d.opened_on,d.last_resolved_on)<30) then 'Y' else 'N' end<>  d.first_call_resolution_flag)a
 
