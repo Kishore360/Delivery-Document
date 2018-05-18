@@ -3,7 +3,7 @@ CASE WHEN CNT  THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 CASE WHEN CNT  THEN 'MDS to DWH data validation failed for d_incident.' ELSE 'SUCCESS' END as Message 
 FROM (
 SELECT count(1) as CNT
-FROM ( SELECT * FROM mcdonalds_mdsdb.incident_final where  CDCTYPE<>'D')  SRC 
+FROM ( SELECT * FROM mcdonalds_mdsdb.incident_final where  cdctype<>'D')  SRC 
 JOIN mcdonalds_mdwdb.d_incident TRGT 
 ON (SRC.sys_id = TRGT.row_id  
 AND SRC.sourceinstance = TRGT.source_id )  
