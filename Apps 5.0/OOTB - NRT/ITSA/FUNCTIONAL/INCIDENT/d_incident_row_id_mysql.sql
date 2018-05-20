@@ -6,5 +6,5 @@ SELECT CASE WHEN cnt THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
   JOIN <<tenant>>_mdwdb.d_incident TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
- left join (select source_id,max(lastupdated) as lastupdated from <<tenant>>_mdwdb.d_o_data_freshness group by source_id) f1 on (f1.source_id = kb.sourceinstance)
+ left join (select source_id,max(lastupdated) as lastupdated from <<tenant>>_mdwdb.d_o_data_freshness group by source_id) f1 on (f1.source_id = SRC.sourceinstance)
  where (SRC.cdctime<=f1.lastupdated) and COALESCE( SRC.sys_id,'')<> COALESCE(TRGT.row_id ,''))b

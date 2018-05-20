@@ -10,5 +10,5 @@ LEFT JOIN <<tenant>>_mdwdb.d_lov LKP
  ON LKP.dimension_class like '%CLOSE_CODE~INCIDENT%' and 
  concat('CLOSE_CODE~INCIDENT~~~',upper(close_code))= (LKP.src_rowid)
 AND SRC.sourceinstance= LKP.source_id 
-left join (select source_id,max(lastupdated) as lastupdated from <<tenant>>_mdwdb.d_o_data_freshness group by source_id) f1 on (f1.source_id = kb.sourceinstance)
+left join (select source_id,max(lastupdated) as lastupdated from <<tenant>>_mdwdb.d_o_data_freshness group by source_id) f1 on (f1.source_id = SRC.sourceinstance)
  where (SRC.cdctime<=f1.lastupdated) and COALESCE(LKP.row_key,CASE WHEN SRC.close_code IS NULL THEN 0 else -1 end)<> (TRGT.close_code_src_key))b

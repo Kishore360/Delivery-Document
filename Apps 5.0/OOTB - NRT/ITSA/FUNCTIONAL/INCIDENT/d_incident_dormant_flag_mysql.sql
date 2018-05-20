@@ -7,5 +7,5 @@
  on TRGT1.row_key = TRGT.incident_key   join 
  <<tenant>>_mdwdb.d_lov_map  lov_map 
  ON (lov_map.src_key = TRGT.state_src_key and dimension_class = 'STATE~INCIDENT' and dimension_wh_code = 'OPEN')
-	left join (select source_id,max(lastupdated) as lastupdated from <<tenant>>_mdwdb.d_o_data_freshness group by source_id) f1 on (f1.source_id = kb.sourceinstance)
+	left join (select source_id,max(lastupdated) as lastupdated from <<tenant>>_mdwdb.d_o_data_freshness group by source_id) f1 on (f1.source_id = SRC.sourceinstance)
 where (SRC.cdctime<=f1.lastupdated) and ( case when timestampdiff(DAY,TRGT1.changed_on, df.lastupdated)>30 then 'Y' else  'N ' end ) <> TRGT1.dormant_flag ;

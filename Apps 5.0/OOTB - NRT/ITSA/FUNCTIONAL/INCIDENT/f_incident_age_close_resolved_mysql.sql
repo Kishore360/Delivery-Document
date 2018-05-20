@@ -10,7 +10,7 @@ JOIN <<tenant>>_mdwdb.d_lov_map br ON f.state_src_key = br.src_key
 AND br.dimension_wh_code IN ('RESOLVED','CLOSED')
 JOIN <<tenant>>_mdwdb.d_incident a ON a.row_key = f.incident_key
 AND f.source_id = a.source_id
-left join (select source_id,max(lastupdated) as lastupdated from <<tenant>>_mdwdb.d_o_data_freshness group by source_id) f1 on (f1.source_id = kb.sourceinstance)
+left join (select source_id,max(lastupdated) as lastupdated from <<tenant>>_mdwdb.d_o_data_freshness group by source_id) f1 on (f1.source_id = SRC.sourceinstance)
 where (SRC.cdctime<=f1.lastupdated) and
 timestampdiff(SECOND, convert_tz(convert_tz(SRC.opened_at,<<TENANT_SSI_TIME_ZONE>>,<<DW_TARGET_TIME_ZONE>>),<<DW_TARGET_TIME_ZONE>>,<<TENANT_SSI_TIME_ZONE>>), 
 coalesce(convert_tz(convert_tz(SRC.resolved_at,<<TENANT_SSI_TIME_ZONE>>,<<DW_TARGET_TIME_ZONE>>),<<DW_TARGET_TIME_ZONE>>,<<TENANT_SSI_TIME_ZONE>>), 

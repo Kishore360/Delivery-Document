@@ -9,7 +9,8 @@ FROM
  AND TRGTF.source_id =TRGT.source_id)
 JOIN <<tenant>>_mdwdb.d_lov_map LM
  on TRGTF.state_src_key = LM.src_key 
-WHERE dimension_class='STATE~PROBLEM'  and  CASE WHEN LM.dimension_wh_code IN('OPEN') THEN 'Y' ELSE 'N' END<> 
+ left join (select source_id,max(lastupdated) as lastupdated from <<tenant>>_mdwdb.d_o_data_freshness group by source_id) f1 on (f1.source_id = SRC.sourceinstance)
+where (SRC.cdctime<=f1.lastupdated) and dimension_class='STATE~PROBLEM'  and  CASE WHEN LM.dimension_wh_code IN('OPEN') THEN 'Y' ELSE 'N' END<> 
 (TRGT.backlog_flag))temp;
 
 

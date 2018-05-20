@@ -9,6 +9,6 @@ SELECT CASE WHEN cnt THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  AND TRGTF.source_id =TRGT.source_id)
 LEFT JOIN <<tenant>>_mdwdb.d_lov_map LM
  on TRGTF.state_src_key = LM.src_key 
- left join (select source_id,max(lastupdated) as lastupdated from <<tenant>>_mdwdb.d_o_data_freshness group by source_id) f1 on (f1.source_id = kb.sourceinstance)
+ left join (select source_id,max(lastupdated) as lastupdated from <<tenant>>_mdwdb.d_o_data_freshness group by source_id) f1 on (f1.source_id = SRC.sourceinstance)
 where (SRC.cdctime<=f1.lastupdated) and LM.dimension_class = 'STATE~INCIDENT' and 
 ( CASE WHEN LM.dimension_wh_code NOT IN('RESOLVED','CLOSED') THEN 'Y' ELSE 'N' END)<> (TRGT.backlog_flag))b

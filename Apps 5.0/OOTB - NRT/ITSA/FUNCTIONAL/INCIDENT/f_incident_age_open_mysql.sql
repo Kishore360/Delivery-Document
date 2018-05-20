@@ -6,7 +6,7 @@
 
 JOIN <<tenant>>_mdwdb.d_lov_map br ON f.state_src_key = br.src_key
 AND br.dimension_wh_code = 'OPEN' and br.dimension_class = 'STATE~INCIDENT'
-left join (select source_id,max(lastupdated) as lastupdated from <<tenant>>_mdwdb.d_o_data_freshness group by source_id) f1 on (f1.source_id = kb.sourceinstance)
+left join (select source_id,max(lastupdated) as lastupdated from <<tenant>>_mdwdb.d_o_data_freshness group by source_id) f1 on (f1.source_id = SRC.sourceinstance)
 where (SRC.cdctime<=f1.lastupdated) and TIMESTAMPDIFF(SECOND,SRC.opened_at,(SELECT CONVERT_TZ(max(lastupdated),<<DW_TARGET_TIME_ZONE>>,<<TENANT_SSI_TIME_ZONE>>) AS lastupdated FROM <<tenant>>_mdwdb.d_o_data_freshness where (SRC.cdctime<=f1.lastupdated) and sourcename like 'ServiceNow%' and etl_run_number=f.etl_run_number))<> f.age
 
  )A

@@ -9,7 +9,7 @@ ON TRGT.state_src_key = dlm.src_key   and dlm.dimension_wh_code = 'CLOSED' and d
 LEFT JOIN <<tenant>>_mdwdb.d_calendar_date LKP 
 on (LKP.row_id = date_format(convert_tz(coalesce(SRC.closed_at,sys_updated_on),<<TENANT_SSI_TIME_ZONE>>,<<DW_TARGET_TIME_ZONE>>),'%Y%m%d') and LKP.source_id=0
 )
-left join (select source_id,max(lastupdated) as lastupdated from <<tenant>>_mdwdb.d_o_data_freshness group by source_id) f1 on (f1.source_id = kb.sourceinstance)
+left join (select source_id,max(lastupdated) as lastupdated from <<tenant>>_mdwdb.d_o_data_freshness group by source_id) f1 on (f1.source_id = SRC.sourceinstance)
 where (SRC.cdctime<=f1.lastupdated) and  case when dlm.dimension_wh_code = 'CLOSED' then (LKP.row_key) else null end <> (TRGT.closed_on_key))b
 
 

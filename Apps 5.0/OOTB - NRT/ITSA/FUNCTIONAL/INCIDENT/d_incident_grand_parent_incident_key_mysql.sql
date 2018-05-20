@@ -23,5 +23,5 @@ ON i.parent_incident=parent_i.sys_id)si
                       END)A  
        LEFT JOIN <<tenant>>_mdwdb.d_incident d1 ON d1.row_id = A.row_id
 AND d1.source_id = A.source_id
-left join (select source_id,max(lastupdated) as lastupdated from <<tenant>>_mdwdb.d_o_data_freshness group by source_id) f1 on (f1.source_id = kb.sourceinstance)
+left join (select source_id,max(lastupdated) as lastupdated from <<tenant>>_mdwdb.d_o_data_freshness group by source_id) f1 on (f1.source_id = SRC.sourceinstance)
 where (SRC.cdctime<=f1.lastupdated) and  d1.grand_parent_incident_key <> A.row_key)b

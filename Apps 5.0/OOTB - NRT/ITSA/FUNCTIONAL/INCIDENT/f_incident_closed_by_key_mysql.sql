@@ -14,7 +14,7 @@ LEFT JOIN <<tenant>>_mdwdb.d_internal_contact LKP
 AND TRGT.pivot_date
 BETWEEN LKP.effective_from AND LKP.effective_to)
 LEFT JOIN <<tenant>>_mdwdb.d_internal_contact ic ON (SRC.sys_updated_by = ic.user_name AND SRC.sourceinstance = ic.source_id)
-left join (select source_id,max(lastupdated) as lastupdated from <<tenant>>_mdwdb.d_o_data_freshness group by source_id) f1 on (f1.source_id = kb.sourceinstance)
+left join (select source_id,max(lastupdated) as lastupdated from <<tenant>>_mdwdb.d_o_data_freshness group by source_id) f1 on (f1.source_id = SRC.sourceinstance)
 where (SRC.cdctime<=f1.lastupdated) and LKP.soft_deleted_flag='N' and 
   TRGT. closed_by_key <>case when (coalesce(LKP.row_key,case when closed_by is null then 0 end ))=0 
 then coalesce(ic.row_key,-1) else coalesce(LKP.row_key,case when closed_by is null then 0 else -1 end) end
