@@ -13,7 +13,7 @@ SELECT CASE
 COALESCE(parent_i.parent_incident,'UNSPECIFIED') as grand_parent_incident_id
 ,i.SourceInstance as source_id
 ,i.sys_id as row_id
-FROM <<tenant>>_mdsdb.incident_final i
+FROM (select * from <<tenant>>_mdsdb.incident_final where cdctype<>'D') i
 LEFT JOIN <<tenant>>_mdsdb.incident_final parent_i
 ON i.parent_incident=parent_i.sys_id)si
    LEFT JOIN <<tenant>>_mdwdb.d_incident di ON si.grand_parent_incident_id =di.row_id
@@ -23,4 +23,5 @@ ON i.parent_incident=parent_i.sys_id)si
                       END)A  
         JOIN <<tenant>>_mdwdb.f_incident d1 ON d1.row_id = A.row_id
 AND d1.source_id = A.source_id
-where  d1.grand_parent_incident_key <> A.row_key)b
+left join (select source_id,max(lastupdated) as lastupdated from <<tenant>>_mdwdb.d_o_data_freshness group by source_id) f1 on (f1.source_id = kb.sourceinstance)
+where (SRC.cdctime<=f1.lastupdated) and  d1.grand_parent_incident_key <> A.row_key)b
