@@ -6,7 +6,7 @@ select count(1) as cnt
 FROM pan6_mdsdb.incident_final SRC 
 LEFT JOIN pan6_mdwdb.d_lov LKP 
  ON LKP.dimension_class like '%CATEGORY~INCIDENT%' and
-  concat('CATEGORY~INCIDENT~~~',upper(u_category ))=  LKP.src_rowid 
+  concat('CATEGORY~INCIDENT~',upper(u_category ))=  LKP.src_rowid 
 AND SRC.sourceinstance= LKP.source_id 
  LEFT JOIN pan6_mdwdb.f_incident TRGT 
  ON (SRC.sys_id =TRGT.row_id  

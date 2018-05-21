@@ -7,6 +7,6 @@ pan6_mdwdb.d_request_item TGT
 ON
 (SRC.sys_id=TGT.row_id and SRC.sourceinstance=TGT.source_id)
 LEFT JOIN pan6_mdwdb.d_lov lkp on 
-CONCAT('EMPLOYEE_TYPE~SC_REQ_ITEM~~~',upper(SRC.u_employee_type))=lkp.row_id
+CONCAT('EMPLOYEE_TYPE~SC_REQ_ITEM~',upper(SRC.u_employee_type))=lkp.row_id
 
 WHERE COALESCE(lkp.row_key,CASE WHEN SRC.u_employee_type IS NULL THEN 0 else -1 end)<>(TGT.employee_type_c_key))x
