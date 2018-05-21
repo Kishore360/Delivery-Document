@@ -7,7 +7,7 @@ CASE WHEN CNT > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  (SELECT count(1) as CNT
 from (select COALESCE(LKP.row_key,CASE WHEN SRC.reason IS NULL THEN 0 else '-1' end)abc,
 (TRGT.reason_src_key)def
- FROM <<tenant>>_mdsdb.change_request_final SRC
+ FROM (select * from <<tenant>>_mdsdb.change_request_final where cdctype<>'D') SRC
   JOIN <<tenant>>_mdwdb.f_change_request TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id )
@@ -15,5 +15,6 @@ from (select COALESCE(LKP.row_key,CASE WHEN SRC.reason IS NULL THEN 0 else '-1' 
  ON ( CONCAT('REASON','~','CHANGE_REQUEST','~','~','~',UPPER(reason))= LKP.src_rowid 
  
 AND SRC.sourceinstance= LKP.source_id ))a
- WHERE abc<>def)temp;
+left join (select source_id,max(lastupdated) as lastupdated from <<tenant>>_mdwdb.d_o_data_freshness group by source_id) f1 on (f1.source_id = SRC.sourceinstance)
+ where (SRC.cdctime<=f1.lastupdated) and abc<>def)temp;
 

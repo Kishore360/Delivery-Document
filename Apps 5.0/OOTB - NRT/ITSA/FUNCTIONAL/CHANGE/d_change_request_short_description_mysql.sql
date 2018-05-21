@@ -8,4 +8,5 @@
  LEFT JOIN <<tenant>>_mdwdb.d_change_request TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
- WHERE char_length(SRC.short_description)<=255 and SRC.short_description<>TRGT.short_description)temp;
+ left join (select source_id,max(lastupdated) as lastupdated from <<tenant>>_mdwdb.d_o_data_freshness group by source_id) f1 on (f1.source_id = SRC.sourceinstance)
+ where (SRC.cdctime<=f1.lastupdated) and char_length(SRC.short_description)<=255 and SRC.short_description<>TRGT.short_description)temp;

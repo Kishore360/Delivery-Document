@@ -7,7 +7,7 @@ SELECT count(1) as cnt
 FROM ( SELECT * FROM mcdonalds_mdsdb.incident_final where  cdctype<>'D') SRC
 LEFT JOIN 
 (SELECT distinct documentkey,sourceinstance,newvalue,oldvalue FROM 
-mcdonalds_mdsdb.sys_audit_final where (SRC.cdctime<=f1.lastupdated) and tablename='incident' and fieldname='priority'
+mcdonalds_mdsdb.sys_audit_final where  tablename='incident' and fieldname='priority'
 and Newvalue> oldvalue ) TA
 ON (SRC.sys_id=TA.documentkey AND SRC.sourceinstance=TA.sourceinstance) 
 JOIN mcdonalds_mdwdb.d_incident TRGT ON SRC.sys_id=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id

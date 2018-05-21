@@ -2,7 +2,7 @@ SELECT
  CASE WHEN CNT > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  CASE WHEN CNT >0 THEN 'MDS to DWH data validation failed for f_request_task .closed_by_key' ELSE 'SUCCESS' END as Message
  FROM (SELECT  count(1) as CNT 
- FROM <<tenant>>_mdsdb.sc_task_final SRC
+ FROM (select * from <<tenant>>_mdsdb.sc_task_final where cdctype<>'D') SRC
  JOIN <<tenant>>_mdwdb.f_request_task TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
@@ -14,5 +14,5 @@ ON TRGT.state_src_key = dlm.src_key AND dlm.dimension_wh_code = 'CLOSED'
 AND TRGT.pivot_date
  BETWEEN LKP.effective_from AND LKP.effective_to)
 LEFT JOIN <<tenant>>_mdwdb.d_internal_contact ic ON (SRC.sys_updated_by = ic.user_name AND SRC.sourceinstance = ic.source_id)
- WHERE 
+ where (src.cdctime<=f1.lastupdated) and 
  COALESCE(LKP.row_key,ic.row_key,CASE WHEN coalesce(SRC.closed_by,SRC.sys_updated_by) IS NULL THEN 0 else -1 end)<> (TRGT.closed_by_key)) temp;

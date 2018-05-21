@@ -7,6 +7,6 @@ FROM (SELECT count(1) as CNT
  LEFT JOIN <<tenant>>_mdwdb.d_request_task TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
- WHERE char_length(SRC.short_description)<=255 and SRC.short_description<>TRGT.short_description)temp;
+ where (src.cdctime<=f1.lastupdated) and char_length(SRC.short_description)<=255 and SRC.short_description<>TRGT.short_description)temp;
  
  

@@ -3,7 +3,7 @@ CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 CASE WHEN cnt >0 THEN 'MDS to DWH data validation failed for d_problem_task.backlog_flag' ELSE 'SUCCESS' END as Message
  FROM 
  (SELECT count(1) as CNT
- FROM <<tenant>>_mdsdb.problem_task_final SRC 
+ FROM (select * from <<tenant>>_mdsdb.problem_task_final where  cdctype<>'D') SRC 
  LEFT JOIN <<tenant>>_mdwdb.d_problem_task TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
@@ -12,7 +12,8 @@ CASE WHEN cnt >0 THEN 'MDS to DWH data validation failed for d_problem_task.back
  AND TRGTF.source_id =TRGT.source_id and TRGTF.soft_deleted_flag='N')
   LEFT JOIN <<tenant>>_mdwdb.d_lov_map LM
  on TRGTF.state_src_key = LM.src_key 
- WHERE LM.dimension_class='STATE~PROBLEM_TASK' and  
+ left join (select source_id,max(lastupdated) as lastupdated from <<tenant>>_mdwdb.d_o_data_freshness group by source_id) f1 on (f1.source_id = SRC.sourceinstance)
+ where (src.cdctime<=f1.lastupdated) and LM.dimension_class='STATE~PROBLEM_TASK' and  
  ( CASE WHEN LM.dimension_wh_code IN ('OPEN')
  THEN 'Y' ELSE 'N' END)<> (TRGT.backlog_flag ))temp;
  

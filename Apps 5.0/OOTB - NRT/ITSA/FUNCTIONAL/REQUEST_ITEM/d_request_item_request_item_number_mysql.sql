@@ -2,9 +2,10 @@ SELECT
 CASE WHEN CNT > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 CASE WHEN CNT >0 THEN 'MDS to DWH data validation failed for d_request_item.request_item_number' ELSE 'SUCCESS' END as Message
 FROM (SELECT count(1) as CNT
- FROM <<tenant>>_mdsdb.sc_req_item_final SRC 
+ (select * from <<tenant>>_mdsdb.sc_req_item_final cdctype<>'D') SRC 
  LEFT JOIN <<tenant>>_mdwdb.d_request_item TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
- WHERE COALESCE( SRC.number,'')<> COALESCE(TRGT.request_item_number ,''))temp;
+ left join (select source_id,max(lastupdated) as lastupdated from <<tenant>>_mdwdb.d_o_data_freshness group by source_id) f1 on (f1.source_id = SRC.sourceinstance)
+ WHERE (SRC.cdctime<=f1.lastupdated) and COALESCE( SRC.number,'')<> COALESCE(TRGT.request_item_number ,''))temp;
  

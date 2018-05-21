@@ -6,13 +6,15 @@ CASE WHEN CNT >0 THEN 'MDS to DWH data validation failed for d_request_item.prio
 	d.priority_escalated_flag as target from (
 	select group_concat(a.flag) as res,a.documentkey from (
 	select case when newvalue<oldvalue then 'Y' else 'N' end as flag,documentkey from <<tenant>>_mdsdb.sys_audit_final 
-	 where
+	 WHERE (SRC.cdctime<=f1.lastupdated) and
 	tablename = 'sc_req_item' 
 	AND fieldname =  'priority' and oldvalue is not null and newvalue is not null
 	)a group by a.documentkey
 	)b
 	 join <<tenant>>_mdsdb.sc_req_item_final c on b.documentkey=c.sys_id
 	join <<tenant>>_mdwdb.d_request_item d on c.sys_id = d.row_id and c.sourceinstance = d. source_id
-	) e where priority_escalation<>target)h;
+	) e 
+	left join (select source_id,max(lastupdated) as lastupdated from <<tenant>>_mdwdb.d_o_data_freshness group by source_id) f1 on (f1.source_id = SRC.sourceinstance)
+	WHERE (SRC.cdctime<=f1.lastupdated) and priority_escalation<>target)h;
 	
 

@@ -11,7 +11,8 @@ CASE WHEN CNT > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  AND TRGTF.source_id =TRGT.source_id)
   LEFT JOIN <<tenant>>_mdwdb.d_lov_map LM
  on TRGTF.state_src_key = LM.src_key and LM.dimension_class='REQUEST_STATE~SC_REQUEST' AND TRGT.soft_deleted_flag='N'
-WHERE ( CASE WHEN LM.dimension_wh_code IN ('OPEN') THEN 'Y' ELSE 'N' END)<> (TRGT.backlog_flag))temp;
+ left join (select source_id,max(lastupdated) as lastupdated from <<tenant>>_mdwdb.d_o_data_freshness group by source_id) f1 on (f1.source_id = SRC.sourceinstance)
+where (SRC.cdctime<=f1.lastupdated) and ( CASE WHEN LM.dimension_wh_code IN ('OPEN') THEN 'Y' ELSE 'N' END)<> (TRGT.backlog_flag))temp;
 
 
 

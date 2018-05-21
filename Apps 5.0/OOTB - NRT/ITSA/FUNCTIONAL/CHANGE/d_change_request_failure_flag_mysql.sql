@@ -11,7 +11,8 @@ on f.change_request_key=TRGT.row_key
        JOIN <<tenant>>_mdwdb.d_lov_map br 
          ON (SRC.review_status = br.dimension_code and f.source_id=br.source_id 
             )
-WHERE   br.dimension_class = 'REVIEW_STATUS~CHANGE_REQUEST' AND
+			left join (select source_id,max(lastupdated) as lastupdated from <<tenant>>_mdwdb.d_o_data_freshness group by source_id) f1 on (f1.source_id = SRC.sourceinstance)
+where (SRC.cdctime<=f1.lastupdated) and   br.dimension_class = 'REVIEW_STATUS~CHANGE_REQUEST' AND
 CASE 
          WHEN br.dimension_wh_code = 'FAIL' 
                THEN 'Y' 
