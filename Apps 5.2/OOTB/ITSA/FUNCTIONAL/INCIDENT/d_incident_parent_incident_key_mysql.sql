@@ -1,0 +1,11 @@
+SELECT CASE WHEN cnt THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+ CASE WHEN cnt THEN 'MDS to DWH data validation failed for d_incident.parent_incident_key' ELSE 'SUCCESS' END as Message from (select count(1) cnt 
+ FROM (select * from <<tenant>>_mdsdb.incident_final where cdctype<>'D') SRC 
+ LEFT JOIN <<tenant>>_mdwdb.d_incident TRGT 
+ ON (SRC.sys_id =TRGT.row_id  
+ AND SRC.sourceinstance= TRGT.source_id  )
+ JOIN <<tenant>>_mdwdb.d_incident LKP 
+ ON ( SRC.parent_incident= LKP.row_id 
+AND SRC.sourceinstance= LKP.source_id )
+left join (select source_id,max(lastupdated) as lastupdated from <<tenant>>_mdwdb.d_o_data_freshness group by source_id) f1 on (f1.source_id = kb.sourceinstance)
+ where (SRC.cdctime<=f1.lastupdated) and COALESCE(LKP.row_key,CASE WHEN SRC.parent_incident IS NULL THEN 0 else -1 end)<>(TRGT.parent_incident_key))b
