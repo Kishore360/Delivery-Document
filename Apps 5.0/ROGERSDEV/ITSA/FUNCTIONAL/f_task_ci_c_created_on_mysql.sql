@@ -5,7 +5,6 @@ CASE WHEN a.cnt  THEN
 from (
 select count(1) as cnt
 from rogersdev_mdsdb.task_ci_final src 
-join rogersdev_mdwdb.f_task_ci_c trgt on src.sys_id=trgt.row_id 
+join rogersdev_mdwdb.d_task_ci_c trgt on src.sys_id=trgt.row_id 
 and src.sourceinstance=trgt.source_id 
-join rogersdev_mdwdb.d_task lkp on src. task=lkp.row_id-- 657820 
 where CONVERT_TZ(src.sys_created_on,'GMT','America/New_York') <> trgt.created_on)a
