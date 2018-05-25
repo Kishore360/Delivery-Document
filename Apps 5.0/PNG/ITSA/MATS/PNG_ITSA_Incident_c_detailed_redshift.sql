@@ -19,12 +19,12 @@ union
 select 'ldb.d_ag_manager_role_vp_dir_ad_c a15 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11 
 join ldb.d_ag_manager_role_vp_dir_ad_c a15 
-on (a11.assignment_group_key = a15.internal_organization_key) 
+on (a11.inc_assignment_group_key = a15.internal_organization_key) 
 union
 select 'ldb.d_internal_contact_associate_director_c a16 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11 
 join ldb.d_ag_manager_role_vp_dir_ad_c a15 
-on (a11.assignment_group_key = a15.internal_organization_key) 
+on (a11.inc_assignment_group_key = a15.internal_organization_key) 
 join ldb.d_internal_contact_associate_director_c a16 
 on (a15.associate_director_key = a16.row_key) 
 union
@@ -66,7 +66,7 @@ union
 select 'ldb.d_internal_contact_director_c a114 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11 
 join ldb.d_ag_manager_role_vp_dir_ad_c a15 
-on (a11.assignment_group_key = a15.internal_organization_key) 
+on (a11.inc_assignment_group_key = a15.internal_organization_key) 
 join ldb.d_internal_contact_director_c a114 
 on (a15.director_key = a114.row_key) 
 union
@@ -87,7 +87,7 @@ union
 select 'ldb.d_internal_contact_vp_c a117 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11 
 join ldb.d_ag_manager_role_vp_dir_ad_c a15 
-on (a11.assignment_group_key = a15.internal_organization_key) 
+on (a11.inc_assignment_group_key = a15.internal_organization_key) 
 join ldb.d_internal_contact_vp_c a117 
 on (a15.vp_key = a117.row_key) 
 union
