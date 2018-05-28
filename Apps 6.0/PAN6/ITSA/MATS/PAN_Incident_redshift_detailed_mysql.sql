@@ -174,13 +174,6 @@ from ldb.f_incident a11
 join ldb.d_incident_contacttype a131 
 on (a11.reported_type_src_key = a131.row_key) 
 union
-select 'ldb.d_lov_employee_type_c a132 ' as Table_name, count(a11.row_key) Row_Count
-from ldb.f_incident a11 
-join ldb.d_internal_contact_employee_type_c a16 
-on (a11.opened_by_c_key = a16.row_key) 
-join ldb.d_lov_employee_type_c a132 
-on (a16.employee_type_c_key = a132.row_key) 
-union
 select 'ldb.d_incident_impact a133 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11 
 join ldb.d_incident_impact a133 
