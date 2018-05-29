@@ -13,3 +13,5 @@ AND TIMESTAMPDIFF(SECOND,SRC.opened_at,coalesce(SRC.u_resolved_at,SRC.closed_at)
 
 
 
+
+

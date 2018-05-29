@@ -9,7 +9,10 @@ on SRC.sys_id=b.row_id and SRC.sourceinstance=b.source_id
  LEFT JOIN pan6_mdwdb.d_lov_map br 
  ON b.state_src_key = br.src_key
 WHERE br.dimension_wh_code IN ('CLOSED')
-AND TIMESTAMPDIFF(SECOND,SRC.opened_at,SRC.closed_at) <> TRGT.open_to_close_duration;
+AND case when b.opened_on> b.changed_on then null else  TIMESTAMPDIFF(SECOND,b.opened_on,coalesce(b.closed_on,b.changed_on)) end <> TRGT.open_to_close_duration;
+
+
+
 
 
 
