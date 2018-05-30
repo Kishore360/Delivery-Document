@@ -7,6 +7,6 @@ select count(1) as cnt
  LEFT JOIN pan6_mdwdb.d_sr_task_c TRGT 
  ON (SRC.sys_id =TRGT.row_id  AND SRC.sourceinstance= TRGT.source_id  )
 left  JOIN pan6_mdwdb.d_lov_map lkp
-on lkp.src_key=t.state_src_key and lkp.dimension_wh_code in ('CLOSED','RESOLVED')
-WHERE coalesce(t.last_resolved_on,'') <> coalesce(convert_tz(coalesce(s.u_resolved_at),'GMT','America/Los_Angeles'),''))t ;
+on lkp.src_key=TRGT.state_src_key and lkp.dimension_wh_code in ('CLOSED','RESOLVED')
+WHERE coalesce(TRGT.last_resolved_on,'') <> coalesce(convert_tz(coalesce(SRC.u_resolved_at),'GMT','America/Los_Angeles'),''))t ;
 

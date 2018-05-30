@@ -9,6 +9,6 @@
  FROM pan6_mdsdb.u_stask_final SRC 
  LEFT JOIN pan6_mdwdb.d_sr_task_c TRGT ON (SRC.sys_id =TRGT.row_id  AND SRC.sourceinstance= TRGT.source_id)
  LEFT JOIN pan6_mdwdb.d_lov LKP ON 
- (COALESCE( CONCAT('PRIORITY','~','TASK','~','~','~',upper(SRC.priority)),'UNSPECIFIED')=LKP.row_id
+ (COALESCE( CONCAT('PRIORITY','~','TASK','~',upper(SRC.priority)),'UNSPECIFIED')=LKP.row_id
  AND TRGT.source_id=LKP.source_id)
  WHERE COALESCE (LKP.row_key, CASE WHEN SRC.priority IS NULL THEN 0 ELSE -1 END)<>TRGT.priority_src_key)temp;
