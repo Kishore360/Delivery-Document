@@ -284,3 +284,17 @@ join ldb.d_calendar_date a110
 on (a11.opened_on_key = a110.row_key) 
 join ldb.d_calendar_year a147 
 on (a110.year_start_date_key = a147.row_key) 
+UNION 
+SELECT 'ldb.d_calendar_date_fiscal' as Table_Name,Count(a11.row_key) as Row_Count
+FROM ldb.f_incident a11
+JOIN ldb.d_calendar_date_fiscal a12 ON a11.opened_on_key=a12.row_key
+UNION 
+SELECT 'ldb.d_calendar_fiscal_year' as Table_Name,Count(a11.row_key) as Row_Count
+FROM ldb.f_incident a11
+JOIN ldb.d_calendar_date_fiscal a12 ON a11.opened_on_key=a12.row_key
+JOIN ldb.d_calendar_fiscal_year a13 ON a12.year_start_date_key=a13.row_key
+UNION 
+SELECT 'ldb.d_calendar_fiscal_quarter' as Table_Name,Count(a11.row_key) as Row_Count
+FROM ldb.f_incident a11
+JOIN ldb.d_calendar_date_fiscal a12 ON a11.opened_on_key=a12.row_key
+JOIN ldb.d_calendar_fiscal_quarter a13 ON a12.quarter_start_date_key=a13.row_key
