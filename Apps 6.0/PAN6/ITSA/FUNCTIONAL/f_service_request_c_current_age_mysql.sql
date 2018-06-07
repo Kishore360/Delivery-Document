@@ -9,6 +9,5 @@ on s.sys_id=f.row_id and s.sourceinstance = f.source_id
 JOIN pan6_mdwdb.d_service_request_c a 
 ON s.sys_id= a.row_id AND s.sourceinstance= a.source_id
 JOIN   pan6_mdwdb.d_lov_map br 
-ON  a.state_src_key = br.src_key AND br.dimension_wh_code = 'OPEN' 
-WHERE TIMESTAMPDIFF(second,a.opened_on,(SELECT MAX(lastupdated) AS lastupdated
-FROM pan6_mdwdb.d_o_data_freshness WHERE sourcename like 'ServiceNow%')) <> f.current_age ) temp
+ON  a.state_src_key = br.src_key AND br.dimension_wh_code IN ('CLOSED','RESOLVED')
+WHERE TIMESTAMPDIFF(SECOND, a.opened_on, COALESCE(a.last_resolved_on, a.closed_on)) <> f.current_age ) temp;
