@@ -1,10 +1,15 @@
-SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
-,CASE WHEN cnt > 0 THEN 'Data did not Match.' 
-ELSE 'Data Matched' END AS Message 
-FROM (select
-count(*) as cnt
-from  watson_mdsdb.incident_final a11
- join watson_mdwdb.d_incident  a12
-on a12.row_id= a11.sys_id and a11.sourceinstance=a12.source_id
-where u_disruption_began   <>a12.u_disruption_began_c )a
+
+SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+CASE WHEN cnt >0 THEN 'MDS to DWH data validation failed for d_change_request.u_outage_start_time_c' 
+ELSE 'MDS to DWH data validation passed for d_incident.u_disruption_began_c' END as Message from 
+(select count(1) cnt 
+FROM watson_mdsdb.incident_final SRC 
+JOIN watson_mdwdb.d_incident TRGT 
+ON SRC.sys_id = TRGT.row_id 
+and  SRC.sourceinstance = TRGT.source_id   and TRGT.soft_deleted_flag = 'N'
+WHERE COALESCE( convert_tz(SRC.u_disruption_began,'GMT','America/New_York'),'') <> COALESCE(TRGT.u_disruption_began_c ,''))b
+
+
+
+
 
