@@ -7,7 +7,7 @@ FROM
 (
 SELECT count(1) as cnt
 FROM mcdonalds_mdwdb.d_configuration_item a
-join FROM (select * from mcdonalds_mdsdb.cmdb_ci_final where cdctype<>'D') b on a.row_id=b.sys_id and a.source_id=b.sourceinstance
+join  (select * from mcdonalds_mdsdb.cmdb_ci_final where cdctype<>'D') b on a.row_id=b.sys_id and a.source_id=b.sourceinstance
 LEFT JOIN mcdonalds_mdsdb.u_cmdb_ci_application_component_final c
 ON b.sys_id = c.sys_id and b.sourceinstance = c.sourceinstance
 LEFT JOIN mcdonalds_mdsdb.u_gbl_final d
