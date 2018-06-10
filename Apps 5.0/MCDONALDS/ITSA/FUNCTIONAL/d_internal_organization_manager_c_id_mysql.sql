@@ -8,4 +8,4 @@ LEFT JOIN mcdonalds_mdwdb.d_internal_contact LKP
 ON ( concat( 'INTERNAL_CONTACT~' ,upper( SRC.manager)) = LKP.row_id  
 AND SRC.sourceinstance = LKP.source_id )  
 left join (select source_id,max(lastupdated) as lastupdated from mcdonalds_mdwdb.d_o_data_freshness group by source_id) f1 on (f1.source_id = SRC.sourceinstance)
-where (src.cdctime<=f1.lastupdated) and COALESCE(LKP.row_key,CASE WHEN SRC.manager IS NULL THEN 0 else -1 end)<> (TRGT.manager_c_key) 
+where (SRC.cdctime<=f1.lastupdated) and COALESCE(LKP.row_key,CASE WHEN SRC.manager IS NULL THEN 0 else -1 end)<> (TRGT.manager_c_key) 

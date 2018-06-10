@@ -5,7 +5,7 @@ left join mcdonalds_mdsdb.sys_user_final LKP2 on LKP1.requested_for=LKP2.sys_id 
 join mcdonalds_mdwdb.f_request_item f on SRC.sys_id=f.row_id and SRC.sourceinstance=f.source_id
 join  mcdonalds_mdwdb.d_internal_contact f2 on f.requested_for_key=f2.row_key
 left join (select source_id,max(lastupdated) as lastupdated from mcdonalds_mdwdb.d_o_data_freshness group by source_id) f1 on (f1.source_id = SRC.sourceinstance)
- where (src.cdctime<=f1.lastupdated) and f2.soft_deleted_flag='N' and COALESCE(LKP2.email,case when LKP1.requested_for  is null then 'UNSPECIFIED' else 'UNKNOWN' end  )<>f2.email_address;
+ where (SRC.cdctime<=f1.lastupdated) and f2.soft_deleted_flag='N' and COALESCE(LKP2.email,case when LKP1.requested_for  is null then 'UNSPECIFIED' else 'UNKNOWN' end  )<>f2.email_address;
  
  
  
