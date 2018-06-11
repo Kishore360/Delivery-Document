@@ -7,6 +7,6 @@ join pan6_mdwdb.d_incident d
 on f.incident_key=d.row_key
 JOIN pan6_mdwdb.d_internal_contact a 
 ON a.row_key = f.opened_by_c_key 
-WHERE f.opened_by_employee_duration <> COALESCE(TIMESTAMPDIFF(day,a.employee_start_date_c,d.opened_on),0);
+WHERE f.opened_by_employee_duration <> COALESCE(TIMESTAMPDIFF(day,date(a.employee_start_date_c),date(d.opened_on)),0);
 -- END 
 

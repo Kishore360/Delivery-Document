@@ -8,4 +8,5 @@ JOIN pan6_mdwdb.d_incident TRGT1
 on TRGT.incident_key=TRGT1.row_key
 join pan6_mdwdb.d_internal_contact LKP
 on COALESCE(CONCAT('INTERNAL_CONTACT~',SRC.caller_id),'UNSPECIFIED')=LKP.row_id
-WHERE TRGT.caller_by_employee_duration_c <> COALESCE(TIMESTAMPDIFF(day,LKP.employee_start_date_c,TRGT1.opened_on),0);
+WHERE TRGT.caller_by_employee_duration_c <> COALESCE(TIMESTAMPDIFF(day,date(a.employee_start_date_c),date(TRGT1.opened_on)),0);
+
