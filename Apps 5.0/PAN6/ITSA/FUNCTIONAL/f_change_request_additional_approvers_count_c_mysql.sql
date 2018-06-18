@@ -3,8 +3,8 @@ SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
 ELSE 'Data Matched' END AS Message
 FROM (
 select count(1) as cnt
-from pan_mdwdb.f_change_request a
-inner join pan_mdsdb.change_request_final b
+from pan6_mdwdb.f_change_request a
+inner join pan6_mdsdb.change_request_final b
 on a.row_id=b.sys_id
 and a.source_id=b.sourceinstance
 where

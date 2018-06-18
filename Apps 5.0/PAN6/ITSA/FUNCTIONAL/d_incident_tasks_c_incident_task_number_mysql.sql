@@ -3,7 +3,7 @@ SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
 ELSE 'Data Matched' END AS Message 
 FROM (
 select count(1) as cnt 
-from pan_mdsdb.u_incident_tasks_final s
-left join pan_mdwdb.d_incident_tasks_c t
+from pan6_mdsdb.u_incident_tasks_final s
+left join pan6_mdwdb.d_incident_tasks_c t
 on s.sys_id=t.row_id and s.sourceinstance = t.source_id
 where s.number<>t.incident_task_number) temp
