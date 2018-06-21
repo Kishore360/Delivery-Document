@@ -5,4 +5,4 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  on f.request_item_key=d.row_key
  JOIN pan6_mdwdb.d_internal_contact a 
 ON a.row_key = f.opened_by_key 
-WHERE f.opened_by_employee_duration <> COALESCE(TIMESTAMPDIFF(DAY,a.employee_start_date_c,d.opened_on),0)
+WHERE f.opened_by_employee_duration <> COALESCE(TIMESTAMPDIFF(DAY,date(a.employee_start_date_c),date(d.opened_on)),0)
