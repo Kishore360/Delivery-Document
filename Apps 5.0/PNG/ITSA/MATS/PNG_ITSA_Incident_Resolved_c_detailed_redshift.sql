@@ -225,7 +225,7 @@ from ldb.f_incident_resolved  a11
 join ldb.d_incident a114 
 on (a11.incident_key = a114.row_key) 
 join ldb.d_incident_opened_by a139 
-on (a114.last_resolved_by_key = a139.row_key) 
+on (a114.opened_by_key = a139.row_key) 
 union
 select 'ldb.d_incident_priority a140 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident_resolved  a11 
