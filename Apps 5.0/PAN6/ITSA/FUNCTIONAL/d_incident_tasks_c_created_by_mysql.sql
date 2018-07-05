@@ -4,8 +4,8 @@
 ELSE 'Data Matched' END AS Message 
 FROM (
 select count(1) as cnt
-from pan_mdsdb.u_incident_tasks_final s
-left  JOIN pan_mdwdb.d_incident_tasks_c t 
+from pan6_mdsdb.u_incident_tasks_final s
+left  JOIN pan6_mdwdb.d_incident_tasks_c t 
 on  t.ROW_ID=s.SYS_ID and s.sourceinstance=t.source_id 
 WHERE t.created_by <> s.sys_created_by
  ) temp

@@ -7,4 +7,4 @@ JOIN pan6_mdwdb.d_service_request_c d
  ON trgt.service_request_c_key = d.row_key
 LEFT JOIN pan6_mdwdb.d_internal_contact lkp
 ON COALESCE(CONCAT('INTERNAL_CONTACT~',u_requestor),'UNSPECIFIED') =lkp.row_id and src.sourceinstance = lkp.source_id
-WHERE requestor_employee_duration_c<>COALESCE(TIMESTAMPDIFF(day,date(a.employee_start_date_c),date(d.opened_on)),0);
+WHERE requestor_employee_duration_c<>COALESCE(TIMESTAMPDIFF(day,date(lkp.employee_start_date_c),date(d.opened_on)),0);

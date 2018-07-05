@@ -30,23 +30,23 @@ SUBSTRING_INDEX(SUBSTRING_INDEX(u_notified_groups,',',3),',',-1) AS part3,
 SUBSTRING_INDEX(SUBSTRING_INDEX(u_notified_groups,',',4),',',-1) AS part4,
 SUBSTRING_INDEX(SUBSTRING_INDEX(u_notified_groups,',',5),',',-1) AS part5,
 SUBSTRING_INDEX(SUBSTRING_INDEX(u_notified_groups,',',6),',',-1) AS part6
-from pan_mdsdb.change_request_final a
+from pan6_mdsdb.change_request_final a
 )ij
-left join pan_mdwdb.d_internal_organization b
+left join pan6_mdwdb.d_internal_organization b
 on concat('GROUP~',ij.part1)=b.row_id
-left join pan_mdwdb.d_internal_organization c
+left join pan6_mdwdb.d_internal_organization c
 on concat('GROUP~',ij.part2)=c.row_id
-left join pan_mdwdb.d_internal_organization d
+left join pan6_mdwdb.d_internal_organization d
 on concat('GROUP~',ij.part3)=d.row_id
-left join pan_mdwdb.d_internal_organization e
+left join pan6_mdwdb.d_internal_organization e
 on concat('GROUP~',ij.part4)=e.row_id
-left join pan_mdwdb.d_internal_organization f
+left join pan6_mdwdb.d_internal_organization f
 on concat('GROUP~',ij.part5)=f.row_id
-left join pan_mdwdb.d_internal_organization g
+left join pan6_mdwdb.d_internal_organization g
 on concat('GROUP~',ij.part6)=g.row_id
 
 )SRC
-left join pan_mdwdb.d_change_request TRG
+left join pan6_mdwdb.d_change_request TRG
 on SRC.sys_id=TRG.row_id 
 where SRC.notified_groups_c <>TRG.notified_groups_c
 )A
