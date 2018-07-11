@@ -178,132 +178,181 @@ from ldb.f_change_request a11
 join ldb.d_change_request_urgency a134 
 on (a11.urgency_src_key = a134.row_key) 
 union
-select 'ldb.d_internal_organization_department a135 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_critical_incident_c a135 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_change_request a11 
-join ldb.d_internal_organization_department a135 
-on (a11.requested_by_department_key = a135.row_key) 
+join ldb.d_critical_incident_c a135 
+on (a11.critical_incident_c_key = a135.row_key) 
 union
-select 'ldb.d_domain a136 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_internal_organization_department a136 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_change_request a11 
-join ldb.d_domain a136 
-on (a11.domain_key = a136.row_key) 
+join ldb.d_internal_organization_department a136 
+on (a11.requested_by_department_key = a136.row_key) 
 union
-select 'ldb.d_internal_contact_mdm a137 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_domain a137 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_change_request a11 
+join ldb.d_domain a137 
+on (a11.domain_key = a137.row_key) 
+union
+select 'ldb.d_lov_change_req_pg_downtime_priority_c a138 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_change_request a11 
+join ldb.d_lov_change_req_pg_downtime_priority_c a138 
+on (a11.pg_downtime_priority_src_c_key = a138.row_key) 
+union
+select 'ldb.d_internal_contact_mdm a139 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_change_request a11 
 join ldb.d_internal_contact a12 
 on (a11.opened_by_key = a12.row_key) 
-join ldb.d_internal_contact_mdm a137 
-on (a12.row_current_key = a137.row_current_key) 
+join ldb.d_internal_contact_mdm a139 
+on (a12.row_current_key = a139.row_current_key) 
 union
-select 'ldb.d_calendar_fiscal_quarter a138 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_calendar_fiscal_quarter a140 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_change_request a11 
 join ldb.d_calendar_date_fiscal a13 
 on (a11.opened_on_key = a13.row_key) 
-join ldb.d_calendar_fiscal_quarter a138 
-on (a13.quarter_start_date_key = a138.row_key) 
+join ldb.d_calendar_fiscal_quarter a140 
+on (a13.quarter_start_date_key = a140.row_key) 
 union
-select 'ldb.d_internal_contact_change_request_ci_owned_by_c a139 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_incident a141 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_change_request a11 
-join ldb.d_internal_contact_change_request_ci_owned_by_c a139 
-on (a11.owned_by_c_key = a139.row_key) 
+join ldb.d_incident a141 
+on (a11.incident_key = a141.row_key) 
 union
-select 'ldb.dh_user_group_level1 a140 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_internal_contact_change_request_ci_owned_by_c a142 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_change_request a11 
+join ldb.d_internal_contact_change_request_ci_owned_by_c a142 
+on (a11.owned_by_c_key = a142.row_key) 
+union
+select 'ldb.d_internal_contact_test_manager_c a143 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_change_request a11 
+join ldb.d_internal_contact_test_manager_c a143 
+on (a11.test_manager_c_key = a143.row_key) 
+union
+select 'ldb.dh_user_group_level1 a144 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_change_request a11 
 join ldb.d_internal_organization_group a14 
 on (a11.assignment_group_key = a14.row_key) join ldb.dh_user_group_hierarchy a17 
 on (a14.row_dn_key = a17.lev_0_key) 
-join ldb.dh_user_group_level1 a140 
-on (a17.lev_1_key = a140.row_key) 
+join ldb.dh_user_group_level1 a144 
+on (a17.lev_1_key = a144.row_key) 
 union
-select 'ldb.d_business_service_criticality a141 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_lov_change_request_impact_classification_c a145 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_change_request a11 
+join ldb.d_change_request a15 
+on (a11.change_request_key = a15.row_key) 
+join ldb.d_lov_change_request_impact_classification_c a145 
+on (a15.impact_classification_c_key = a145.row_key) 
+union
+select 'ldb.d_business_service_criticality a146 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_change_request a11 
 join ldb.d_business_service a18 
 on (a11.business_service_key = a18.row_key) 
-join ldb.d_business_service_criticality a141 
-on (a18.criticality_key = a141.row_key) 
+join ldb.d_business_service_criticality a146 
+on (a18.criticality_key = a146.row_key) 
 union
-select 'ldb.d_business_service_used_for a142 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_business_service_used_for a147 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_change_request a11 
 join ldb.d_business_service a18 
 on (a11.business_service_key = a18.row_key) 
-join ldb.d_business_service_used_for a142 
-on (a18.used_for_src_key = a142.row_key) 
+join ldb.d_business_service_used_for a147 
+on (a18.used_for_src_key = a147.row_key) 
 union
-select 'ldb.d_calendar_week a143 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_calendar_week a148 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_change_request a11 
 join ldb.d_calendar_date a19 
 on (a11.opened_on_key = a19.row_key) 
-join ldb.d_calendar_week a143 
-on (a19.week_start_date_key = a143.row_key) 
+join ldb.d_calendar_week a148 
+on (a19.week_start_date_key = a148.row_key) 
 union
-select 'ldb.d_change_request_close_code a144 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_change_request_close_code a149 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_change_request a11 
 join ldb.d_change_request a15 
 on (a11.change_request_key = a15.row_key) 
-join ldb.d_change_request_close_code a144 
-on (a15.close_code_src_key = a144.row_key) 
+join ldb.d_change_request_close_code a149 
+on (a15.close_code_src_key = a149.row_key) 
 union
-select 'ldb.d_lov_change_request_multi_service_impact_c a145 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_lov_change_request_component_c a150 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_change_request a11 
 join ldb.d_change_request a15 
 on (a11.change_request_key = a15.row_key) 
-join ldb.d_lov_change_request_multi_service_impact_c a145 
-on (a15.multi_service_impact_src_c_key = a145.row_key) 
+join ldb.d_lov_change_request_component_c a150 
+on (a15.component_c_key = a150.row_key) 
 union
-select 'ldb.d_calendar_fiscal_year a146 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_lov_change_request_multi_service_impact_c a151 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_change_request a11 
+join ldb.d_change_request a15 
+on (a11.change_request_key = a15.row_key) 
+join ldb.d_lov_change_request_multi_service_impact_c a151 
+on (a15.multi_service_impact_src_c_key = a151.row_key) 
+union
+select 'ldb.d_lov_change_request_downtime_impact_c a152 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_change_request a11 
+join ldb.d_change_request a15 
+on (a11.change_request_key = a15.row_key) 
+join ldb.d_lov_change_request_downtime_impact_c a152 
+on (a15.change_downtime_impact_c_key = a152.row_key) 
+union
+select 'ldb.d_calendar_fiscal_year a153 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_change_request a11 
 join ldb.d_calendar_date_fiscal a13 
 on (a11.opened_on_key = a13.row_key) 
-join ldb.d_calendar_fiscal_year a146 
-on (a13.year_start_date_key = a146.row_key) 
+join ldb.d_calendar_fiscal_year a153 
+on (a13.year_start_date_key = a153.row_key) 
 union
-select 'ldb.d_lov_change_request_require_downtime_c a147 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_lov_change_request_project_related_c a154 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_change_request a11 
 join ldb.d_change_request a15 
 on (a11.change_request_key = a15.row_key) 
-join ldb.d_lov_change_request_require_downtime_c a147 
-on (a15.require_downtime_src_c_key = a147.row_key) 
+join ldb.d_lov_change_request_project_related_c a154 
+on (a15.project_related_c_key = a154.row_key) 
 union
-select 'ldb.d_lov_change_request_service_type_c a148 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_lov_change_request_require_downtime_c a155 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_change_request a11 
 join ldb.d_change_request a15 
 on (a11.change_request_key = a15.row_key) 
-join ldb.d_lov_change_request_service_type_c a148 
-on (a15.service_type_src_c_key = a148.row_key) 
+join ldb.d_lov_change_request_require_downtime_c a155 
+on (a15.require_downtime_src_c_key = a155.row_key) 
 union
-select 'ldb.d_lov_change_request_capability_to_detect_c a149 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_lov_change_request_service_type_c a156 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_change_request a11 
 join ldb.d_change_request a15 
 on (a11.change_request_key = a15.row_key) 
-join ldb.d_lov_change_request_capability_to_detect_c a149 
-on (a15.capability_to_detect_src_c_key = a149.row_key) 
+join ldb.d_lov_change_request_service_type_c a156 
+on (a15.service_type_src_c_key = a156.row_key) 
 union
-select 'ldb.dh_user_group_level2 a150 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_lov_change_request_capability_to_detect_c a157 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_change_request a11 
+join ldb.d_change_request a15 
+on (a11.change_request_key = a15.row_key) 
+join ldb.d_lov_change_request_capability_to_detect_c a157 
+on (a15.capability_to_detect_src_c_key = a157.row_key) 
+union
+select 'ldb.dh_user_group_level2 a158 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_change_request a11 
 join ldb.d_internal_organization_group a14 
 on (a11.assignment_group_key = a14.row_key) join ldb.dh_user_group_hierarchy a17 
 on (a14.row_dn_key = a17.lev_0_key) 
-join ldb.dh_user_group_level2 a150 
-on (a17.lev_2_key = a150.row_key) 
+join ldb.dh_user_group_level2 a158 
+on (a17.lev_2_key = a158.row_key) 
 union
-select 'ldb.d_calendar_quarter a151 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_calendar_quarter a159 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_change_request a11 
 join ldb.d_calendar_date a19 
 on (a11.opened_on_key = a19.row_key) 
-join ldb.d_calendar_quarter a151 
-on (a19.quarter_start_date_key = a151.row_key) 
+join ldb.d_calendar_quarter a159 
+on (a19.quarter_start_date_key = a159.row_key) 
 union
-select 'ldb.d_business_service_grand_parent_c a152 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_business_service_grand_parent_c a160 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_change_request a11 
 join ldb.d_business_service a18 
 on (a11.business_service_key = a18.row_key) join ldb.d_business_service_parent_c a118 
 on (a18.parent_business_service_c_key = a118.row_key) 
-join ldb.d_business_service_grand_parent_c a152 
-on (a118.parent_business_service_c_key = a152.row_key) 
+join ldb.d_business_service_grand_parent_c a160 
+on (a118.parent_business_service_c_key = a160.row_key) 
 union
-select 'ldb.d_calendar_year a153 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_calendar_year a161 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_change_request a11 
 join ldb.d_calendar_date a19 
 on (a11.opened_on_key = a19.row_key) 
-join ldb.d_calendar_year a153 
-on (a19.year_start_date_key = a153.row_key) 
+join ldb.d_calendar_year a161 
+on (a19.year_start_date_key = a161.row_key) 
+
