@@ -1,17 +1,11 @@
-SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
-,CASE WHEN cnt > 0 THEN 'Data did not Match.' 
-ELSE 'Data Matched' END AS Message 
-FROM (
-select  count(1) cnt 
-from svb_mdsdb.cmdb_ci_final a
-left JOIN svb_mdwdb.d_configuration_item b
-on 
-a.sys_id=b.row_id AND a.sourceinstance=b.source_id
-LEFT  JOIN  svb_mdwdb.d_internal_contact c
-on CONCAT('INTERNAL_CONTACT~',a.u_portfolio_owner)= c.ROW_ID 
-AND c.source_id = a.sourceinstance
-where 
-case when a.u_portfolio_owner is null then 0
-when  a.u_portfolio_owner is not null and c.row_key is null then -1
-else 
-c.row_key end <> b.portfolio_owner_c_key )b
+SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed' ELSE 'SUCCESS' END as Message
+FROM  
+svb_mdwdb.d_configuration_item a 
+JOIN svb_mdsdb.cmdb_ci_final b
+ON a.row_id = b.sys_id and a.source_id = b.sourceinstance 
+LEFT join svb_mdwdb.d_internal_contact d
+on d.row_id = COALESCE(CONCAT('INTERNAL_CONTACT~',b.u_portfolio_owner),'UNSPECIFIED')
+
+where
+a.portfolio_owner_c_key <> COALESCE(d.row_key,CASE WHEN b.u_portfolio_owner IS NULL THEN 0 else -1 end);

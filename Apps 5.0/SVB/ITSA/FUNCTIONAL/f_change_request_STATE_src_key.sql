@@ -8,6 +8,6 @@ svb_mdsdb.change_request_final src
 JOIN  svb_mdwdb.f_change_request  trgt
 on  trgt.ROW_ID = src.SYS_ID and src.sourceinstance=trgt.source_id
 join svb_mdwdb.d_lov lkp
-on COALESCE(CONCAT('STATE','~','CHANGE_REQUEST','~','~','~',UPPER(src.u_change_state)),'UNSPECIFIED')=lkp.row_id
-where  coalesce(lkp.row_key, case when src.u_change_state is null then 0 else -1 end ) <>trgt.STATE_src_key
+on COALESCE(CONCAT('STATE','~','CHANGE_REQUEST','~','~','~',UPPER(src.phase)),'UNSPECIFIED')=lkp.row_id
+where  coalesce(lkp.row_key, case when src.phase is null then 0 else -1 end ) <>trgt.STATE_src_key
  )c
