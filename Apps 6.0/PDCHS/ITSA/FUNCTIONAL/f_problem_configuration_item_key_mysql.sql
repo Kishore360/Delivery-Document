@@ -1,6 +1,6 @@
 SELECT 
 CASE WHEN CNT > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
-CASE WHEN CNT >0 THEN 'MDS to DWH data validation failed for f_request_task.configuration_item_key' ELSE 'SUCCESS' END as Message
+CASE WHEN CNT >0 THEN 'MDS to DWH data validation failed for f_problem.configuration_item_key' ELSE 'SUCCESS' END as Message
 FROM (SELECT count(1) as CNT
  FROM (select * from pdchs_mdsdb.problem_final where CDCTYPE<>'D') SRC 
  LEFT JOIN pdchs_mdwdb.f_problem TRGT 
