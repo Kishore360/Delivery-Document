@@ -13,6 +13,5 @@ FROM       mcdonalds_mdwdb.f_n_request_item_agm_io_snapshot_monthly_c a11
  join mcdonalds_mdwdb.d_internal_contact a13 on a11.assignment_gp_manager_key=a13.row_key
  -- where month_start_key>=20180101 and month_start_key<=20180601
 group by 1 ,2)b 
-on  a.month_start_key=b.prev_month_start_key and 
- a.assignment_gp_manager_key>0 and 
+on  a.month_start_key=b.prev_month_start_key  and 
 a.assignment_gp_manager_key=b.assignment_gp_manager_key  where begining<>prev_begining_backlog )a;

@@ -17,5 +17,4 @@ FROM       mcdonalds_mdwdb.f_n_request_item_agm_io_snapshot_monthly_c a11
  -- where month_start_key>=20180101 and month_start_key<=20180601
 group by 1 ,2)b 
 on  a.month_start_key=b.prev_month_start_key and 
- a.assignment_gp_manager_key>0 and 
 a.assignment_gp_manager_key=b.assignment_gp_manager_key  where begining=prev_begining_backlog)a;

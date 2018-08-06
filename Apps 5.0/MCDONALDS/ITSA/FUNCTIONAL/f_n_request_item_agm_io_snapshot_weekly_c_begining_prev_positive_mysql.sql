@@ -17,5 +17,4 @@ FROM       mcdonalds_mdwdb.f_n_request_item_agm_io_snapshot_weekly_c a11
  -- where week_start_key>=20180101 and week_start_key<=20180601
 group by 1 ,2)b 
 on  a.week_start_key=b.prev_week_start_key and 
- a.assignment_gp_manager_key>0 and 
 a.assignment_gp_manager_key=b.assignment_gp_manager_key  where begining=prev_begining_backlog)a;

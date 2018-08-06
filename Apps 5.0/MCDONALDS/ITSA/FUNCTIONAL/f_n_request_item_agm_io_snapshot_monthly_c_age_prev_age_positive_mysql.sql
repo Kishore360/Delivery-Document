@@ -14,7 +14,6 @@ FROM     mcdonalds_mdwdb.f_n_request_item_agm_io_snapshot_monthly_c
 group by 1 ,2,3,4,5)b 
 on  a.month_start_key=b.prev_month_start_key 
 where a.assignment_gp_manager_key=b.assignment_gp_manager_key 
-and a.assignment_gp_manager_key>0 
 and  a.priority_src_key=b.priority_src_key
 and a.business_service_c_key=b.business_service_c_key
  -- and prev_age not in (0) and
