@@ -24,5 +24,5 @@ where  a.assigned_to_key=b.assigned_to_key and
 and a.business_service_key=b.business_service_key 
 -- and a.week_start_key>=20180101 and a.week_start_key<=20180601 
  -- and prev_age not in (0) and
-and  (age)<>(prev_age) )a;
+and  (age)=(prev_age) )a;
 

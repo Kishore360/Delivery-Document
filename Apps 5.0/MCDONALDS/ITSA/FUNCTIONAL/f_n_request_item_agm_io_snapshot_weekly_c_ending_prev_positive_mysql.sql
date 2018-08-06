@@ -21,4 +21,4 @@ group by 1 ,2,3)b
 on  a.week_start_key=b.prev_week_start_key 
 -- AND a.assignment_group_key=b.assignment_group_key    
 AND a.assignment_gp_manager_key=b.assignment_gp_manager_key    
-WHERE a.assignment_gp_manager_key > 0 and ending =prev_ending_backlog)a;
+WHERE  ending =prev_ending_backlog)a;
