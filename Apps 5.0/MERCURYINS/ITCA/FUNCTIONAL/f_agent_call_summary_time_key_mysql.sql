@@ -7,4 +7,4 @@ LEFT JOIN mercuryins_mdwdb.f_agent_call_summary TRGT
 	AND SRC.sourceinstance =TRGT.source_id )
 LEFT JOIN mercuryins_mdwdb.d_calendar_time LKP 
 on (LKP.row_id  = lpad(starttime, 4, '0')  and LKP.source_id=0)
-WHERE COALESCE(LKP.row_key,CASE WHEN SRC.starttime IS NULL THEN 0 else '' end) <> COALESCE(TRGT.time_key,'')
+WHERE COALESCE(LKP.row_key,CASE WHEN SRC.starttime IS NULL THEN 0 else '' end) <> TRGT.time_key

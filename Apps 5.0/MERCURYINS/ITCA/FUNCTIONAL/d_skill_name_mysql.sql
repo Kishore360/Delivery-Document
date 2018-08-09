@@ -7,7 +7,7 @@ mercuryins_mdsdb.us_d_skill_final SRC
 LEFT JOIN mercuryins_mdwdb.d_skill TRGT 
 		ON ( CONCAT(SRC.acd_no,'~',SRC.skill_name) =TRGT.row_id 
  AND SRC.sourceinstance =TRGT.source_id )
-WHERE COALESCE(SRC.skill_name,'') <> COALESCE(TRGT.name,'')
+WHERE trim(SRC.skill_name) <>TRGT.name
 and TRGT.row_key not in (0,-1)
 union 
 select TRGT.row_id from
@@ -15,7 +15,7 @@ mercuryins_mdsdb.synonyms_final SRC
 LEFT JOIN mercuryins_mdwdb.d_skill TRGT 
 	ON ( CONCAT(SRC.acd_no,'~',trim(SRC.value)) =TRGT.row_id 
  AND SRC.sourceinstance =TRGT.source_id )
-WHERE trim(SRC.item_name) <> COALESCE(TRGT.name,'')
+WHERE trim(SRC.item_name) <> TRGT.name
 and TRGT.row_key not in (0,-1)
 and SRC.item_type = 'split')SQ
 

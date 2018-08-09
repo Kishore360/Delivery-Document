@@ -4,4 +4,4 @@ FROM mercuryins_mdsdb.dagent_final SRC
 LEFT JOIN mercuryins_mdwdb.f_agent_call_summary TRGT 
 	ON (concat(row_date,'~',acd,'~',split,'~',trim(logid),'~',loc_id) =TRGT.row_id 
 	AND SRC.sourceinstance =TRGT.source_id )
-WHERE COALESCE(cast(SRC.acdcalls as DECIMAL(28,10)),'')<> COALESCE(TRGT.calls_in_waittime_interval,'')
+WHERE cast(SRC.acdcalls as DECIMAL(28,10))<> TRGT.calls_in_waittime_interval
