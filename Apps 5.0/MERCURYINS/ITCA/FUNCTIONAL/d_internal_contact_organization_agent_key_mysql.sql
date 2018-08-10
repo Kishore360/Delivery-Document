@@ -8,4 +8,4 @@ LEFT JOIN mercuryins_mdwdb.d_internal_contact_organization TRGT
 LEFT JOIN mercuryins_mdwdb.d_internal_contact INTCONT
  ON (CONCAT('INTERNAL_CONTACT~',SRC.acd_no,'~',SRC.value) = INTCONT.row_id
  AND SRC.sourceinstance =INTCONT.source_id )
-WHERE COALESCE(INTCONT.row_key, -1) <> COALESCE(TRGT.agent_key ,'')
+WHERE COALESCE(INTCONT.row_key, case when COALESCE(SRC.acd_no,SRC.value) is null then 0 else -1 end) <> TRGT.agent_key 

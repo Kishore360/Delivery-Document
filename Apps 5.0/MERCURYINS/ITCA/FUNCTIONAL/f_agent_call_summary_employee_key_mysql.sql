@@ -8,4 +8,4 @@ LEFT JOIN mercuryins_mdwdb.f_agent_call_summary TRGT
 LEFT JOIN mercuryins_mdwdb.d_internal_contact LKP 
 	ON ( COALESCE(CONCAT('INTERNAL_CONTACT~',SRC.acd,'~',trim(SRC.logid)),'UNSPECIFIED') = LKP.row_id
 	AND SRC.sourceinstance=LKP.source_id)
-WHERE COALESCE(LKP.row_key,CASE WHEN trim(SRC.logid) IS NULL THEN 0 else '-1' end)<> COALESCE(TRGT.employee_key ,'')
+WHERE COALESCE(LKP.row_key,CASE WHEN trim(SRC.logid) IS NULL THEN 0 else '-1' end)<>TRGT.employee_key 

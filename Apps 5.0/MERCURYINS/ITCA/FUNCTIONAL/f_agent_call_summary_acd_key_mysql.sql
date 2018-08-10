@@ -8,4 +8,4 @@ LEFT JOIN mercuryins_mdwdb.f_agent_call_summary TRGT
 LEFT JOIN mercuryins_mdwdb.d_acd LKP 
 	ON (SRC.acd = LKP.row_id
 	AND SRC.sourceinstance = LKP.source_id)
-WHERE COALESCE(LKP.row_key,CASE WHEN SRC.acd IS NULL THEN 0 else '-1' end)<> COALESCE(TRGT.acd_key,'')
+WHERE COALESCE(LKP.row_key,CASE WHEN SRC.acd IS NULL THEN 0 else '-1' end)<>TRGT.acd_key

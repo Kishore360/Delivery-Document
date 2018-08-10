@@ -9,4 +9,4 @@ LEFT JOIN mercuryins_mdsdb.us_d_skill_final MDS
 LEFT JOIN mercuryins_mdwdb.d_skill LKP 
 	ON ( COALESCE(concat(SRC.acd,'~',split), 'UNSPECIFIED') = LKP.row_id
 	AND SRC.sourceinstance=LKP.source_id)
-WHERE  COALESCE(LKP.row_key,CASE WHEN SRC.split IS NULL THEN 0 else '-1' end)<> COALESCE(TRGT.skill_key ,'')
+WHERE  COALESCE(LKP.row_key,CASE WHEN SRC.split IS NULL THEN 0 else '-1' end)<> TRGT.skill_key 
