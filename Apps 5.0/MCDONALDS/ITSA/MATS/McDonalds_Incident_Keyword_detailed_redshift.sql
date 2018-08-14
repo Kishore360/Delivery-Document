@@ -148,8 +148,9 @@ on (a11.state_src_key = a127.row_key)
 union
 select 'ldb.d_incident_subcategory a128 ' as Table_name, count(1) Row_Count
 from ldb.f_incident_keyword a11 
+join ldb.d_incident a12 on a12.row_key=a11.incident_key
 join ldb.d_incident_subcategory a128 
-on (a11.sub_category_src_key = a128.row_key) 
+on (a12.sub_category_src_key = a128.row_key) 
 union
 select 'ldb.d_calendar_quarter a129 ' as Table_name, count(1) Row_Count
 from ldb.f_incident_keyword a11 
