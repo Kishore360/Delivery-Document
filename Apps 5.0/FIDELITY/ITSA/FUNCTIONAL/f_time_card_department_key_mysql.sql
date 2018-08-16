@@ -9,4 +9,6 @@ LEFT JOIN fidelity_mdsdb.knta_users_final LKP_SRC
 on SRC1.resource_id = LKP_SRC.user_id and LKP_SRC.sourceinstance = SRC1.sourceinstance
 LEFT JOIN fidelity_mdwdb.d_internal_organization LKP
 on  COALESCE(CONCAT(LKP_SRC.DEPARTMENT_CODE,'~~~','DEPT'),'UNSPECIFIED') = LKP.row_id and LKP.source_id = LKP_SRC.sourceinstance
-WHERE coalesce(LKP.row_key,case when LKP_SRC.DEPARTMENT_CODE is null then 0 else -1 end ) <> TRGT.department_key; 
+WHERE coalesce(LKP.row_key,case when LKP_SRC.DEPARTMENT_CODE is null then 0 else -1 end ) <> TRGT.department_key
+AND SRC1.CREATION_DATE >'2017-01-01'
+; 

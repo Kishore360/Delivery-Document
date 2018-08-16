@@ -9,4 +9,7 @@ LEFT JOIN fidelity_mdsdb.knta_users_final LKP_SRC
 on SRC1.resource_id = LKP_SRC.user_id and LKP_SRC.sourceinstance = SRC1.sourceinstance
 LEFT JOIN fidelity_mdwdb.d_location LKP
 on  COALESCE(CONCAT(LKP_SRC.location_code,'~~~','RSC - Location'),'UNSPECIFIED') = LKP.row_id and LKP.source_id = SRC1.sourceinstance
-WHERE coalesce(LKP.row_key,case when LKP_SRC.location_code is null then 0 else -1 end ) <> TRGT.location_key; 
+WHERE coalesce(LKP.row_key,case when LKP_SRC.location_code is null then 0 else -1 end ) <> TRGT.location_key
+AND SRC1.CREATION_DATE >'2017-01-01'
+
+; 
