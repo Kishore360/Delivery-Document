@@ -13,7 +13,7 @@ UNION
 SELECT 
 'd_incident_table',d.soft_deleted_flag,count(1) AS Dimension_Count
 FROM pan_mdwdb.d_incident d 
-group by 1,2;
+group by 1,2
 
 UNION 
 -- ITSA_Change_C_Module 
@@ -31,7 +31,7 @@ UNION
 SELECT 
 'd_change_request',d.soft_deleted_flag,count(1) AS Dimension_Count
 FROM pan_mdwdb.d_change_request d
-group by 1,2;
+group by 1,2
 UNION 
 -- ITSA_Request Item_C_Module 
 
