@@ -1,4 +1,4 @@
-
+SELECT 
 CASE WHEN CNT > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 CASE WHEN CNT > 0 THEN 'MDS to DWH data validation failed for f_change_request.TRGT.manager_expedited_c_key' ELSE 'SUCCESS' END as Message
 FROM 
