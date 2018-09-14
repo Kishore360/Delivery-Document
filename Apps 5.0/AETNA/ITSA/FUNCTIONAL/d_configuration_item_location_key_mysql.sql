@@ -7,4 +7,6 @@ FROM aetna_mdsdb.cmdb_ci_final SRC
 JOIN aetna_mdwdb.d_configuration_item TRGT ON (SRC.sys_id =TRGT.row_id AND SRC.sourceinstance= TRGT.source_id)
 JOIN aetna_mdwdb.d_location LKP  
 ON (COALESCE(SRC.location,'UNSPECIFIED') =LKP.row_id AND SRC.sourceinstance= LKP.source_id)
-WHERE COALESCE (LKP.row_key,CASE WHEN SRC.location IS NULL THEN 0 ELSE -1 END)<> (TRGT.location_key))temp;
+WHERE TRGT.soft_deleted_flag='N'
+AND  COALESCE (LKP.row_key,CASE WHEN SRC.location IS NULL THEN 0 ELSE -1 END)<> (TRGT.location_key)
+)temp;
