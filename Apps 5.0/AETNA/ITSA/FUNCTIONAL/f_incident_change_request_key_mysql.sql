@@ -11,9 +11,10 @@ LEFT JOIN aetna_mdwdb.d_change_request LKP
 
  
 
- SELECT 
+SELECT 
 CASE WHEN CNT > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 CASE WHEN CNT > 0 THEN 'MDS to DWH data validation failed' ELSE 'SUCCESS' END as Message
+FROM 
 (
 SELECT Count(1) as CNT 
 FROM aetna_mdsdb.incident_final SRC 
@@ -21,5 +22,5 @@ LEFT JOIN aetna_mdsdb.change_request_final cr ON (SRC.u_temp_remedy_change=cr.nu
 LEFT JOIN aetna_mdwdb.f_incident TRGT ON (SRC.sys_id =TRGT.row_id  AND SRC.sourceinstance= TRGT.source_id )
 JOIN aetna_mdwdb.d_change_request LKP ON (cr.sys_id =LKP.row_id AND cr.sourceinstance=LKP.source_id)
 WHERE TRGT.soft_deleted_flag='N'
-AMD COALESCE(LKP.row_key,CASE WHEN SRC.u_temp_remedy_change IS NULL THEN 0 else -1 end)<>TRGT.change_request_key
+AND COALESCE(LKP.row_key,CASE WHEN SRC.u_temp_remedy_change IS NULL THEN 0 else -1 end)<>TRGT.change_request_key
 ) temp;
