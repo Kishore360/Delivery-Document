@@ -12,3 +12,5 @@ left join equifax_mdwdb.d_internal_organization LKP on CONCAT('GROUP~',SRC.u_cal
 
 WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_caller_group IS NULL THEN 0 ELSE -1 END)<>TRGT.caller_group_c_key 
 ) temp;
+
+
