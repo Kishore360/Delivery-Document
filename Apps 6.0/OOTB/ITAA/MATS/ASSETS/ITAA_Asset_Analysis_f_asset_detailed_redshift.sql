@@ -8,8 +8,8 @@ on (a11.asset_key=a12.row_key)
 union
 select 'ldb.d_asset_class' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_asset a11 
-join ldb.d_asset_class a12
-on (a11.asset_class_key=a12.row_key)
+JOIN ldb.d_asset a12 on (a11.asset_key=a12.row_key)
+join ldb.d_asset_class a13 on (a12.asset_class_key=a13.row_key)
 union
 select 'ldb.d_calendar_date' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_asset a11 
@@ -25,17 +25,14 @@ on (a12.month_start_date_key=a13.row_key)
 union
 select 'ldb.d_calendar_quarter' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_asset a11 
-join ldb.d_calendar_date a12
-on (a11.asset_created_on_key=a12.row_key)
-join ldb.d_calendar_quarter a13
-on (a12.quarter_start_date_key=a13.row_key)
+join ldb.d_calendar_date a12 on (a11.asset_created_on_key=a12.row_key)
+JOIN ldb.d_calendar_month a13 ON (a12.month_start_date_key=a13.row_key)
+join ldb.d_calendar_quarter a14 on (a13.quarter_start_date_key=a14.row_key)
 union
 select 'ldb.d_calendar_week' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_asset a11 
-join ldb.d_calendar_date a12
-on (a11.asset_created_on_key=a12.row_key)
-join ldb.d_calendar_week a13
-on (a12.week_start_date_key=a13.row_key)
+join ldb.d_calendar_date a12 on (a11.asset_created_on_key=a12.row_key)
+join ldb.d_calendar_week a13 on (a12.week_start_date_key=a13.row_key)
 union
 select 'ldb.d_configuration_item' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_asset a11 
@@ -70,9 +67,9 @@ join ldb.d_internal_contact_mdm a13
 on (a12.row_current_key=a13.row_current_key)
 union
 select 'ldb.d_lov_asset_age_year_view' as Table_Name, count(a11.row_key) Row_Count
-from  ldb.f_asset a11 
-join ldb.d_lov_asset_age_year_view a12
-on (a11.year_bucket_key=a12.row_key)
+from  ldb.f_asset a11
+JOIN ldb.d_asset a12 ON a11.asset_key=a12.row_key 
+join ldb.d_lov_asset_age_year_view a13 ON a12.asset_age_year_bucket_key=a13.row_key
 union
 select 'ldb.d_lov_asset_status_view' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_asset a11 
@@ -85,9 +82,9 @@ join ldb.d_lov_asset_substatus_view a12
 on (a11.asset_substatus_key=a12.row_key)	
 union
 select 'ldb.d_lov_asset_warranty_bucket_view' as Table_Name, count(a11.row_key) Row_Count
-from  ldb.f_asset a11 
-join ldb.d_lov_asset_warranty_bucket_view a12
-on (a11.warranty_days_bucket=a12.row_key)	
+from  ldb.f_asset a11
+JOIN ldb.d_asset a12 ON a11.asset_key=a12.row_key 
+join ldb.d_lov_asset_warranty_bucket_view a13 on (a12.warranty_days_bucket_key=a13.row_key)
 union
 select 'ldb.d_model_category' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_asset a11 
