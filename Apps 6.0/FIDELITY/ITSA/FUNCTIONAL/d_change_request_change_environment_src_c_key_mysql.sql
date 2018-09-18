@@ -5,4 +5,5 @@ JOIN  fidelity_mdwdb.d_change_request TRGT
 ON (SRC.sys_id = TRGT.row_id AND SRC.sourceinstance= TRGT.source_id)
 join fidelity_mdwdb.d_lov LKP
 on COALESCE(CONCAT('U_ENVIRONMENT','~','CHANGE_REQUEST','~',UPPER(SRC.u_environment)),'UNSPECIFIED') =LKP.row_id
+and LKP.source_id=SRC.sourceinstance and LKP.dimension_class='U_ENVIRONMENT~CHANGE_REQUEST'
 WHERE COALESCE(LKP.row_key,case when SRC.u_environment is null then 0 else -1 end ) <> TRGT.change_environment_src_c_key; 

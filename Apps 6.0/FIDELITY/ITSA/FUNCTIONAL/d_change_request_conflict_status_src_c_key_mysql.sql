@@ -5,5 +5,6 @@ JOIN  fidelity_mdwdb.d_change_request TRGT
 ON (SRC.sys_id = TRGT.row_id AND SRC.sourceinstance= TRGT.source_id)
 join fidelity_mdwdb.d_lov LKP
 on COALESCE(CONCAT('CONFLICT_STATUS_C~CHANGE_REQUEST~',SRC.conflict_status),'UNSPECIFIED') =LKP.row_id
-WHERE COALESCE(LKP.row_key,case when SRC.conflict_status is null then 0 else -1 end ) <> TRGT.conflict_status_src_c_key
+and LKP.source_id=SRC.sourceinstance and LKP.dimension_class='CONFLICT_STATUS_C~CHANGE_REQUEST'
+WHERE COALESCE(LKP.row_key,case when SRC.conflict_status is null then 0 else -1 end ) = TRGT.conflict_status_src_c_key
 ; 
