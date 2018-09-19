@@ -3,8 +3,7 @@ from  ldb.f_asset a11
 union
 select 'ldb.d_asset' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_asset a11 
-join ldb.d_asset a12
-on (a11.asset_key=a12.row_key)
+join ldb.d_asset a12 on (a11.asset_key=a12.row_key)
 union
 select 'ldb.d_asset_class' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_asset a11 
@@ -112,3 +111,27 @@ select 'ldb.d_supplier' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_asset a11 
 join ldb.d_supplier a12
 on (a11.supplier_key=a12.row_key)
+UNION 
+select 'ldb.d_lov_asset_expenditure_type_view' as Table_Name, count(a11.row_key) Row_Count
+from  ldb.f_asset a11 
+JOIN ldb.d_asset a12 ON a11.asset_key=a12.row_key
+JOIN ldb.d_lov_asset_expenditure_type_view a13 ON a12.expenditure_type_key=a13.row_key
+UNION 
+select 'ldb.d_lov_asset_expenditure_type_view' as Table_Name, count(a11.row_key) Row_Count
+from  ldb.f_asset a11 
+JOIN ldb.d_asset a12 ON a11.asset_key=a12.row_key
+JOIN ldb.d_lov_asset_acquisition_method_view a13 ON a12.acquisition_method_src_key=a13.row_key
+
+UNION 
+select 'ldb.d_cost_center' as Table_Name, count(a11.row_key) Row_Count
+from  ldb.f_asset a11 
+JOIN ldb.d_asset b ON a11.asset_key=b.row_key
+JOIN ldb.d_cost_center c ON b.cost_center_key=c.row_key
+UNION 
+select 'ldb.d_asset_product_model' as Table_Name, count(a11.row_key) Row_Count
+from  ldb.f_asset a11 
+JOIN ldb.d_asset b ON a11.asset_key=b.row_key
+JOIN ldb.d_asset_product_model c ON b.product_model_key=c.row_key
+
+
+
