@@ -235,3 +235,15 @@ join ldb.d_calendar_date a18
 on (a11.opened_on_key = a18.row_key) 
 join ldb.d_calendar_year a140 
 on (a18.year_start_date_key = a140.row_key) 
+union
+select 'ldb.d_internal_contact_customer_c a141 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_incident a11 
+join ldb.d_internal_contact_customer_c        a141
+on (a11.caller_c_key = a141.row_key) 
+union
+select 'ldb.d_lov_service_type_c a142 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_incident a11 
+join ldb.d_incident a111 
+on (a11.incident_key = a111.row_key) 
+join ldb.d_lov_service_type_c        a142
+on (a111.service_type_key = a142.row_key) 
