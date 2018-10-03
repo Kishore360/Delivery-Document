@@ -209,3 +209,9 @@ join ldb.d_change_request a13
 on (a11.change_request_key = a13.row_key) 
 join ldb.d_lov_change_request_resolution_reason_c a138 
 on (a13.resolution_reason_src_c_key = a138.row_key) 
+union
+select 'ldb.d_internal_contact_cab_delegate_c a139 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_change_request a11 
+join ldb.d_internal_contact_cab_delegate_c a139 
+on (a11.cab_delegate_c_key= a139.row_key) 
+
