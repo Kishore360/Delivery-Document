@@ -9,4 +9,4 @@
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  ) LEFT JOIN pan6_mdwdb.d_internal_contact LKP 
 on (LKP.row_id = concat('INTERNAL_CONTACT~',coalesce(SRC.closed_by,sys_updated_by)) )
- WHERE COALESCE(LKP.row_key)<>(TRGT.closed_by_key)
+ WHERE length(LKP.row_id)>=49  and    COALESCE(LKP.row_key)<>(TRGT.closed_by_key)
