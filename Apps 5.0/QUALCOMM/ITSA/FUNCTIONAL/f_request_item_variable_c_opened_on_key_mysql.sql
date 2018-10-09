@@ -12,3 +12,4 @@ on  concat(a.sys_id,'~',c.request_item) = TRGT.ROW_ID and a.sourceinstance=TRGT.
 left  JOIN  qualcomm_mdwdb.d_calendar_date Inter
 on Inter.row_id = date_format(convert_tz(d.opened_at,'GMT','GMT'),'%Y%m%d') 
 where Inter.row_key <> TRGT.opened_on_key) g
+

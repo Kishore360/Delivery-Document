@@ -3,7 +3,7 @@
 CASE WHEN count(1)<1  THEN 'Age_key not populated correctly' ELSE 'SUCCESS' END as Message 
 FROM ( 
        
-            select priority_src_key,business_service_c_key,month_start_key,floor((age/86400)/ending_backlog) as  age_populated ,
+            select priority_src_key,business_service_key,month_start_key,floor((age/86400)/ending_backlog) as  age_populated ,
 case when floor((age/86400)/ending_backlog) between 0 and 1 then 71187
      when floor((age/86400)/ending_backlog)  between 2 and 4 then 71188
      when floor((age/86400)/ending_backlog)  between 5 and 7 then 71189
