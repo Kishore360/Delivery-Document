@@ -6,10 +6,10 @@ CASE WHEN cnt >0 THEN 'MDS to DWH data validation failed for f_service_request.d
 from 
 (select count(1) as cnt 
 from 
-(select sys_id, sourceinstance, calendar_duration from pan6_mdsdb.u_service_request_final where CDCTYPE<>'D') a 
+(select sys_id, sourceinstance, calendar_duration from pan_mdsdb.u_service_request_final where CDCTYPE<>'D') a 
 
 left join 
-pan6_mdwdb.f_service_request_c f 
+pan_mdwdb.f_service_request_c f 
 
 ON a.sys_id=f.row_id and a.sourceinstance=f.source_id
  

@@ -11,16 +11,16 @@ FROM
 from 
  
 (select sys_id, sourceinstance from 
- pan6_mdsdb.u_service_request_final where CDCTYPE <> 'D') SRC 
+ pan_mdsdb.u_service_request_final where CDCTYPE <> 'D') SRC 
  
 LEFT JOIN 
-pan6_mdwdb.f_service_request_c TRGT 
+pan_mdwdb.f_service_request_c TRGT 
  
 ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
  
 LEFT JOIN 
-pan6_mdwdb.d_service_request_c LKP 
+pan_mdwdb.d_service_request_c LKP 
  
 ON ( SRC.sys_id= LKP.row_id 
 AND SRC.sourceinstance= LKP.source_id and LKP.soft_deleted_flag='N' )

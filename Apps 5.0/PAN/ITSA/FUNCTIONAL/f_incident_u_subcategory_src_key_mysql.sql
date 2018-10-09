@@ -9,16 +9,16 @@ FROM
 (select count(1) as cnt 
 from 
 (select sys_id, sourceinstance,u_subcategory from 
- pan6_mdsdb.incident_final where CDCTYPE<>'D') SRC 
+ pan_mdsdb.incident_final where CDCTYPE<>'D') SRC 
  
 LEFT JOIN 
-pan6_mdwdb.d_incident TRGT 
+pan_mdwdb.d_incident TRGT 
  
 ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
 
 LEFT JOIN 
-(select * from pan6_mdwdb.d_lov where soft_deleted_flag='N') LKP 
+(select * from pan_mdwdb.d_lov where soft_deleted_flag='N') LKP 
  
 ON ( concat('SUBCATEGORY~INCIDENT','~',upper(SRC.u_subcategory))= LKP.src_rowid 
 AND SRC.sourceinstance= LKP.source_id )

@@ -9,13 +9,13 @@ from
 
 from 
 
-(select sys_id, sourceinstance, opened_at, assigned_to from pan6_mdsdb.incident_final where cdctype<>'D') a
+(select sys_id, sourceinstance, opened_at, assigned_to from pan_mdsdb.incident_final where cdctype<>'D') a
  
 left join 
-pan6_mdwdb.d_incident c on a.sys_id=c.row_id and a.sourceinstance=c.source_id 
+pan_mdwdb.d_incident c on a.sys_id=c.row_id and a.sourceinstance=c.source_id 
 
 join 
-pan6_mdwdb.d_internal_contact a13 
+pan_mdwdb.d_internal_contact a13 
 on concat('INTERNAL_CONTACT~',a.assigned_to)=a13.row_id and a.sourceinstance=a13.source_id 
 
 

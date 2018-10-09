@@ -8,9 +8,9 @@ FROM
 (select count(1) cnt 
 
 from 
-(select sys_id, sourceinstance, active from pan6_mdsdb.u_service_request_final where CDCTYPE<>'D') a
+(select sys_id, sourceinstance, active from pan_mdsdb.u_service_request_final where CDCTYPE<>'D') a
  
-left join pan6_mdwdb.d_service_request_c b 
+left join pan_mdwdb.d_service_request_c b 
 on a.sys_id=b.row_id and a.sourceinstance=b.source_id  
 
 where case when a.active = 1 then 'Y' else 'N' end <>b.active_flag)i; 

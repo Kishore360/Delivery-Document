@@ -7,14 +7,14 @@ CASE WHEN cnt >0 THEN 'MDS to DWH data validation failed for d_service_request_c
  
 (select count(1) as cnt 
 from 
-(select sys_id, sourceinstance,u_subcategory from  pan6_mdsdb.u_service_request_final where cdctype<>'D') SRC
+(select sys_id, sourceinstance,u_subcategory from  pan_mdsdb.u_service_request_final where cdctype<>'D') SRC
  
-LEFT JOIN (select row_key, source_id,row_id from pan6_mdwdb.d_lov where soft_deleted_flag<>'Y') LKP 
+LEFT JOIN (select row_key, source_id,row_id from pan_mdwdb.d_lov where soft_deleted_flag<>'Y') LKP 
  
 ON ( concat('SUBCATEGORY_C~SERVICE_REQUEST_C~',upper(u_subcategory))= LKP.row_id 
 AND SRC.sourceinstance= LKP.source_id ) 
  
-LEFT JOIN pan6_mdwdb.d_service_request_c TRGT 
+LEFT JOIN pan_mdwdb.d_service_request_c TRGT 
  
 ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
