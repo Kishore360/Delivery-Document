@@ -8,7 +8,7 @@ select count(1) as cnt
 from pan6_mdsdb.u_walk_up_final s
 left  JOIN pan6_mdwdb.d_walk_up_c t 
 on  t.ROW_ID=s.SYS_ID and s.sourceinstance=t.source_id 
-WHERE t.active_flag <> case when s.active=0 then 'N' else 'Y' end) temp
+WHERE t.active_flag <> case when coalesce(s.active,0)=0 then 'N' else 'Y' end) temp
 
 
 
