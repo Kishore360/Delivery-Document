@@ -62,6 +62,10 @@ FROM ldb.f_response_ext_c a
 JOIN ldb.d_calendar_date_fiscal b ON a.survey_ext_taken_on_c_key=b.row_key
 JOIN ldb.d_calendar_fiscal_quarter c ON b.quarter_start_date_key=c.row_key
 JOIN ldb.d_calendar_fiscal_year d ON c.year_start_date_key=d.row_key
+UNION 
+Select 'd_response_ext_c' as Table_name, Count(1) as Row_count
+FROM ldb.f_response_ext_c a
+JOIN ldb.d_response_ext_c b ON a.response_ext_c_key=b.row_key
 
 
 
