@@ -10,11 +10,11 @@ from
 (select sys_id, sourceinstance, u_category from pan_mdsdb.incident_final where cdctype<>'D') a
  
 left join 
-(select row_key, source_id, src_rowid, dimension_class from  pan_mdwdb.d_lov where soft_deleted_flag<>'Y' )b 
+(select row_key, source_id, src_rowid, dimension_class from  pan_mdwdb.d_lov  )b 
  
 on b.dimension_class like '%CATEGORY~INCIDENT%' 
 and 
-COALESCE(CONCAT('CATEGORY~INCIDENT','~',UPPER(a.u_category)),'UNSPECIFIED')=b.src_rowid
+COALESCE(CONCAT('CATEGORY~INCIDENT','~~~',UPPER(a.u_category)),'UNSPECIFIED')=b.src_rowid
  
 left join 
 pan_mdwdb.d_incident c on a.sourceinstance=c.source_id and a.sys_id=c.row_id 

@@ -13,9 +13,9 @@ from
 (select sys_id, sourceinstance, u_type from pan_mdsdb.u_service_request_final where CDCTYPE<>'D') SRC 
 
 LEFT JOIN 
-( select source_id,row_id,row_key from pan_mdwdb.d_lov where soft_deleted_flag<>'Y') LKP 
+( select source_id,row_id,row_key from pan_mdwdb.d_lov ) LKP 
  
-ON ( concat('TYPE_C~SERVICE_REQUEST_C~',upper(SRC.u_type))= LKP.row_id 
+ON ( concat('TYPE_C~SERVICE_REQUEST_C~~~',upper(SRC.u_type))= LKP.row_id 
 AND SRC.sourceinstance= LKP.source_id ) 
  
 LEFT JOIN 

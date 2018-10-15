@@ -5,6 +5,6 @@ LEFT JOIN pan_mdwdb.d_lov lkp
 ON COALESCE(CONCAT('APPLICATION_TIER_C~CONFIGURATION_ITEM~~~',src.u_application_tier),'UNSPECIFIED') =lkp.row_id 
 JOIN  pan_mdwdb.d_configuration_item trgt
 on src.sys_id = trgt.row_id and src.sourceinstance = trgt.source_id
-where COALESCE(lkp.row_key,CASE WHEN src.u_application_tier IS NULL THEN 0 else -1 end)<> trgt.application_tier_src_c_key
+where trgt.soft_deleted_flag='N' and COALESCE(lkp.row_key,CASE WHEN src.u_application_tier IS NULL THEN 0 else -1 end)<> trgt.application_tier_src_c_key
 ;
 

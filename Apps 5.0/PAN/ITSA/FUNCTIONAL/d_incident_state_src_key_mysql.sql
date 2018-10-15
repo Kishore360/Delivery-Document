@@ -7,4 +7,4 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 LEFT JOIN pan_mdwdb.d_lov LKP 
  ON ( concat('STATE','~','INCIDENT','~','~','~',upper(incident_state))= LKP.src_rowid 
 AND SRC.sourceinstance= LKP.source_id )
- WHERE COALESCE(LKP.row_key,CASE WHEN SRC.incident_state IS NULL THEN 0 else '-1' end)<> COALESCE(TRGT.state_src_key,'')
+ WHERE LKP.soft_deleted_flag='N' and TRGT.soft_deleted_flag='N' and   COALESCE(LKP.row_key,CASE WHEN SRC.incident_state IS NULL THEN 0 else '-1' end)<> COALESCE(TRGT.state_src_key,'')

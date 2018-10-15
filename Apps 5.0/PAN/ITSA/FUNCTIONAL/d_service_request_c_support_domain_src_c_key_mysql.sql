@@ -10,8 +10,8 @@ from
 JOIN  pan_mdwdb.d_service_request_c  trgt 
 on src.sys_id = trgt.row_id and src.sourceinstance = trgt.source_id
  
-LEFT JOIN (select row_id, row_key, source_id from pan_mdwdb.d_lov where soft_deleted_flag<>'Y') lkp
+LEFT JOIN (select row_id, row_key, source_id from pan_mdwdb.d_lov ) lkp
  
-ON COALESCE(CONCAT('SUPPORT_DOMAIN~SERVICE_REQUEST_C~',src.u_support_domain),'UNSPECIFIED') =lkp.row_id 
+ON COALESCE(CONCAT('SUPPORT_DOMAIN~SERVICE_REQUEST_C~~~',src.u_support_domain),'UNSPECIFIED') =lkp.row_id 
 
 where COALESCE(lkp.row_key,CASE WHEN src.u_support_domain IS NULL THEN 0 else -1 end)<> trgt.support_domain_src_c_key)a; 

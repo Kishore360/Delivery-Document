@@ -70,7 +70,14 @@ union
 select 'ldb.d_internal_contact_to a115 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11 
 join ldb.f_incident_activity a12 
-on (a11.assignment_group_key = a12.assignment_group_key and a11.assignment_group_key = a12.current_assginment_group_key  and a11.category_5_c_key = a12.category_5_c_key and a11.incident_key = a12.incident_key  and a11.opened_on_key = a12.opened_on_key and a11.reported_type_src_key = a12.reported_type_src_key) 
+on (a11.assignment_group_key = a12.assignment_group_key 
+and a11.assignment_group_key = a12.current_assginment_group_key 
+and a11.assignment_group_key = a12.from_assignment_group_key 
+and a11.category_5_c_key = a12.category_5_c_key 
+and a11.incident_key = a12.incident_key  
+and a11.opened_on_key = a12.assigned_on_key
+and a11.opened_on_key = a12.opened_on_key 
+and a11.reported_type_src_key = a12.reported_type_src_key) 
 join ldb.d_internal_contact_to a115 
 on (a12.to_assigned_to_key = a115.row_key) 
 union

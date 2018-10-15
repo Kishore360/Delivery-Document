@@ -18,9 +18,9 @@ ON (SRC.sys_id =TRGT.row_id
  AND SRC.sourceinstance= TRGT.source_id  )
 
 LEFT JOIN 
-(select * from pan_mdwdb.d_lov where soft_deleted_flag='N') LKP 
+(select * from pan_mdwdb.d_lov ) LKP 
  
-ON ( concat('SUBCATEGORY~INCIDENT','~',upper(SRC.u_subcategory))= LKP.src_rowid 
+ON ( concat('SUBCATEGORY~INCIDENT','~~~',upper(SRC.u_subcategory))= LKP.src_rowid 
 AND SRC.sourceinstance= LKP.source_id )
  
 WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_subcategory IS NULL THEN 0 else '-1' end) <> (TRGT.sub_category_src_key)) temp

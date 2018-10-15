@@ -11,9 +11,9 @@ FROM
 from 
 (select sys_id, sourceinstance,u_category from pan_mdsdb.u_service_request_final where CDCTYPE<>'D') SRC 
 
-LEFT JOIN (select row_id, source_id, row_key from pan_mdwdb.d_lov where soft_deleted_flag<>'Y') LKP 
+LEFT JOIN (select row_id, source_id, row_key from pan_mdwdb.d_lov ) LKP 
  
-ON ( concat('CATEGORY_C~SERVICE_REQUEST_C~',upper(SRC.u_category))= LKP.row_id 
+ON ( concat('CATEGORY_C~SERVICE_REQUEST_C~~~',upper(SRC.u_category))= LKP.row_id 
 AND SRC.sourceinstance= LKP.source_id ) 
  
 LEFT JOIN pan_mdwdb.d_service_request_c TRGT 

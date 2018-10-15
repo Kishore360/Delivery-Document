@@ -9,11 +9,11 @@ from
 
 FROM (select sys_id, sourceinstance,u_category from pan_mdsdb.incident_final where CDCTYPE<>'D')SRC 
 
-LEFT JOIN (select row_key, src_rowid, source_id,dimension_class from pan_mdwdb.d_lov where soft_deleted_flag<>'Y') LKP 
+LEFT JOIN (select row_key, src_rowid, source_id,dimension_class from pan_mdwdb.d_lov ) LKP 
  
 ON 
  LKP.dimension_class like '%CATEGORY~INCIDENT%' and
-  concat('CATEGORY~INCIDENT~',upper(u_category ))=  LKP.src_rowid 
+  concat('CATEGORY~INCIDENT~~~',upper(u_category ))=  LKP.src_rowid 
 AND SRC.sourceinstance= LKP.source_id 
  
 LEFT JOIN pan_mdwdb.f_incident TRGT 
