@@ -7,12 +7,12 @@ from
 (select count(1) as cnt 
 
 from 
-(select sys_id, sourceinstance from pan6_mdsdb.sc_task_final where cdctype<>'D') SRC 
+(select sys_id, sourceinstance from paloalto_mdsdb.sc_task_final where cdctype<>'D') SRC 
 
-left join pan6_mdwdb.f_request_task f on SRC.sys_id=f.row_id and SRC.sourceinstance=f.source_id
+left join paloalto_mdwdb.f_request_task f on SRC.sys_id=f.row_id and SRC.sourceinstance=f.source_id
  
-join pan6_mdwdb.d_request_task d on SRC.sys_id=d.row_id and SRC.sourceinstance=d.source_id
+join paloalto_mdwdb.d_request_task d on SRC.sys_id=d.row_id and SRC.sourceinstance=d.source_id
  
-left join pan6_mdwdb.d_internal_contact  a ON a.row_key = f.opened_by_key 
+left join paloalto_mdwdb.d_internal_contact  a ON a.row_key = f.opened_by_key 
 
 WHERE  COALESCE(TIMESTAMPDIFF(DAY,date(a.employee_start_date_c),date(d.opened_on)),0) <> f.opened_by_employee_duration )temp ;

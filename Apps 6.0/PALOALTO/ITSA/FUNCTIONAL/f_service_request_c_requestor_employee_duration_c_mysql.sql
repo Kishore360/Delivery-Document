@@ -8,15 +8,15 @@ FROM
 (select count(1) as cnt 
 from 
  
-(select sys_id, sourceinstance,u_requestor  from pan6_mdsdb.u_service_request_final where cdctype<>'D') src
+(select sys_id, sourceinstance,u_requestor  from paloalto_mdsdb.u_service_request_final where cdctype<>'D') src
  
-join pan6_mdwdb.f_service_request_c trgt 
+join paloalto_mdwdb.f_service_request_c trgt 
 on src.sys_id = trgt.row_id and src.sourceinstance = trgt.source_id
  
-JOIN pan6_mdwdb.d_service_request_c d 
+JOIN paloalto_mdwdb.d_service_request_c d 
  ON trgt.service_request_c_key = d.row_key 
 
-LEFT JOIN pan6_mdwdb.d_internal_contact lkp
+LEFT JOIN paloalto_mdwdb.d_internal_contact lkp
  ON COALESCE(CONCAT('INTERNAL_CONTACT~',u_requestor),'UNSPECIFIED') =lkp.row_id and src.sourceinstance = lkp.source_id 
 
 WHERE requestor_employee_duration_c <> COALESCE(TIMESTAMPDIFF(day,date(lkp.employee_start_date_c),date(d.opened_on)),0)) temp;

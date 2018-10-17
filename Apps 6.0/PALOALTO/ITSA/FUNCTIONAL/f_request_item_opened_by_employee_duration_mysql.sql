@@ -7,15 +7,15 @@ from
  
 (select count(1) as cnt 
 from 
-(select * from pan6_mdsdb.sc_req_item_final where CDCTYPE<>'D') SRC
+(select * from paloalto_mdsdb.sc_req_item_final where CDCTYPE<>'D') SRC
   
-join  pan6_mdwdb.f_request_item f 
+join  paloalto_mdwdb.f_request_item f 
 on SRC.sys_id=f.row_id and SRC.sourceinstance=f.source_id
  
-join pan6_mdwdb.d_request_item d
+join paloalto_mdwdb.d_request_item d
  on f.request_item_key=d.row_key
  
-left JOIN pan6_mdwdb.d_internal_contact a 
+left JOIN paloalto_mdwdb.d_internal_contact a 
 ON a.row_key = f.opened_by_key 
 
 WHERE f.opened_by_employee_duration <> COALESCE(TIMESTAMPDIFF(DAY,date(a.employee_start_date_c),date(d.opened_on)),0)) temp;

@@ -84,7 +84,7 @@ union
 select 'ldb.d_duration_c a115 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_walk_up_c a11 
 join ldb.d_duration_c a115 
-on (a11.opened_by_employee_duration = a115.row_key) 
+on (a11.opened_by_employee_duration_c = a115.row_key) 
 union
 select 'ldb.d_lov_walk_up_priority_c a116 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_walk_up_c a11 

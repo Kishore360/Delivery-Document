@@ -8,12 +8,12 @@ FROM
 
 from 
 
-(select sys_id, sourceinstance, contact_type from pan6_mdsdb.u_service_request_final where cdctype<>'D') s 
+(select sys_id, sourceinstance, contact_type from paloalto_mdsdb.u_service_request_final where cdctype<>'D') s 
 
-left join  pan6_mdwdb.f_service_request_c  t
+left join  paloalto_mdwdb.f_service_request_c  t
 on s.sys_id=t.row_id and s.sourceinstance = t.source_id 
 
-LEFT JOIN (select row_id,source_id, row_key from pan6_mdwdb.d_lov where soft_deleted_flag<>'Y') l  
+LEFT JOIN (select row_id,source_id, row_key from paloalto_mdwdb.d_lov where soft_deleted_flag<>'Y') l  
 
 ON COALESCE(CONCAT('CONTACT_TYPE~SERVICE_REQUEST~',s.contact_type),'UNSPECIFIED')= l.row_id 
 and l.source_id=s.sourceinstance

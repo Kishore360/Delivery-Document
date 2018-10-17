@@ -6,9 +6,9 @@ from
 
 (select count(1) as cnt 
 
-from (select sys_id,sourceinstance, short_description from pan6_mdsdb.u_service_request_final where CDCTYPE<>'D') i
+from (select sys_id,sourceinstance, short_description from paloalto_mdsdb.u_service_request_final where CDCTYPE<>'D') i
  
-left join pan6_mdwdb.d_service_request_c d
+left join paloalto_mdwdb.d_service_request_c d
  
 ON d.row_id=i.sys_id AND d.source_id=i.sourceinstance 
 

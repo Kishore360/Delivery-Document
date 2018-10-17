@@ -6,14 +6,14 @@ CASE WHEN cnt >0 THEN 'MDS to DWH data validation failed for f_incident.sub_cate
 FROM 
 ( select count(1) as cnt 
 from 
-(select sys_id, sourceinstance,u_subcategory from pan6_mdsdb.incident_final where cdctype<>'D') SRC 
+(select sys_id, sourceinstance,u_subcategory from paloalto_mdsdb.incident_final where cdctype<>'D') SRC 
  
-LEFT JOIN pan6_mdwdb.d_incident TRGT 
+LEFT JOIN paloalto_mdwdb.d_incident TRGT 
  
 ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
 
-LEFT JOIN (select src_rowid, source_id, row_key, dimension_class from  pan6_mdwdb.d_lov where soft_deleted_flag<>'Y') LKP 
+LEFT JOIN (select src_rowid, source_id, row_key, dimension_class from  paloalto_mdwdb.d_lov where soft_deleted_flag<>'Y') LKP 
  
 ON LKP.dimension_class like '%CATEGORY~INCIDENT%' and  ( concat('SUBCATEGORY~INCIDENT','~',upper(SRC.u_subcategory))= LKP.src_rowid 
 AND SRC.sourceinstance= LKP.source_id )

@@ -5,10 +5,10 @@ CASE WHEN cnt >0 THEN 'MDS to DWH data validation failed for f_walk_up_c.opened_
  FROM 
  (select count(1) as cnt 
  
-from (select * from pan6_mdsdb.u_walk_up_final where cdctype<>'D') SRC 
+from (select * from paloalto_mdsdb.u_walk_up_final where cdctype<>'D') SRC 
  
-left join pan6_mdwdb.f_walk_up_c f on SRC.sys_id=f.row_id and SRC.sourceinstance=f.source_id
+left join paloalto_mdwdb.f_walk_up_c f on SRC.sys_id=f.row_id and SRC.sourceinstance=f.source_id
  
-JOIN pan6_mdwdb.d_internal_contact a ON a.row_key = f.opened_by_key 
+JOIN paloalto_mdwdb.d_internal_contact a ON a.row_key = f.opened_by_key 
 
 where  COALESCE(TIMESTAMPDIFF(day,a.employee_start_date_c,f.created_on),0) <> f.opened_by_employee_duration) temp;
