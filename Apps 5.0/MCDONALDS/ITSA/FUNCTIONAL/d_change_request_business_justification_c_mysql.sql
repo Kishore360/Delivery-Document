@@ -9,3 +9,4 @@ JOIN  mcdonalds_mdsdb.change_request_final i on d.row_id = i.sys_id and d.source
 where  char_length(i.justification)=250 and
  d.justification_c <> coalesce(i.justification,'UNSPECIFIED'))temp;
 
+ 
