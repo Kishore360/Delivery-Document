@@ -7,7 +7,7 @@ from paloalto_mdsdb.u_stask_final s
 left  JOIN paloalto_mdwdb.f_sr_task_c t 
 on  t.ROW_ID=s.SYS_ID and s.sourceinstance=t.source_id 
 left join paloalto_mdwdb.d_calendar_date l
-on  date_format(convert_tz(s.closed_at,'GMT','America/Los_Angeles'),'%Y%m%d') = l.row_id
+on  date_format(convert_tz(coalesce(s.closed_at,sys_updated_on),'GMT','America/Los_Angeles'),'%Y%m%d') = l.row_id
 WHERE t.closed_on_key <> l.row_key) temp
 
 

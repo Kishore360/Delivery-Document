@@ -12,5 +12,5 @@ left join paloalto_mdwdb.d_service_request_c d
  
 ON d.row_id=i.sys_id AND d.source_id=i.sourceinstance 
 
-where 
+where d.soft_deleted_flag='N' and 
 replace(convert(coalesce(i.short_description,'UNSPECIFIED') using ASCII),'?',' ')<>d.short_description)temp;

@@ -13,4 +13,4 @@ from
 left join paloalto_mdwdb.d_service_request_c b 
 on a.sys_id=b.row_id and a.sourceinstance=b.source_id  
 
-where case when a.active = 1 then 'Y' else 'N' end <>b.active_flag)i; 
+where b.soft_deleted_flag='N' and  case when a.active = 1 then 'Y' else 'N' end <>b.active_flag)i; 

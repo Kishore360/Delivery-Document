@@ -8,4 +8,4 @@
  FROM paloalto_mdsdb.u_stask_final SRC 
  LEFT JOIN paloalto_mdwdb.d_sr_task_c TRGT 
  ON (SRC.sys_id =TRGT.row_id  AND SRC.sourceinstance= TRGT.source_id )
- WHERE IF(SRC.active>0 ,'Y' ,'N') <>TRGT.active_flag)temp;
+ WHERE TRGT.soft_deleted_flag='N'  and TRGT.IF(SRC.active>0 ,'Y' ,'N') <>TRGT.active_flag)temp;

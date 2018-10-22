@@ -4,4 +4,4 @@ SELECT CASE WHEN cnt THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
   JOIN  paloalto_mdwdb.d_incident TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
-  where CASE WHEN SRC.caused_by is not null then 'Y' else 'N' END<> (TRGT.caused_by_change_flag ))b
+  where TRGT.soft_deleted_flag='N' and  CASE WHEN SRC.caused_by is not null then 'Y' else 'N' END<> (TRGT.caused_by_change_flag ))b
