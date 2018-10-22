@@ -13,4 +13,4 @@ on LKP.row_id =
 COALESCE(DATE_FORMAT(CONVERT_TZ(coalesce(s.closed_at,s.sys_updated_on),'GMT','America/Los_Angeles'),'%Y%m%d'),'UNSPECIFIED')
 JOIN paloalto_mdwdb.d_lov_map dlm 
 ON d.state_src_key = dlm.src_key
-WHERE case when dlm.dimension_wh_code = 'CLOSED' then (LKP.row_key) else null end  <> t.closed_on_key) temp
+WHERE d.soft_deleted_flag='N' and  case when dlm.dimension_wh_code = 'CLOSED' then (LKP.row_key) else null end  <> t.closed_on_key) temp

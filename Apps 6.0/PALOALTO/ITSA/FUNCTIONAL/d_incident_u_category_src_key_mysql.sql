@@ -14,7 +14,7 @@ from
  
 left join 
  
-(select src_rowid, row_key from  paloalto_mdwdb.d_lov where soft_deleted_flag<>'Y') b 
+(select src_rowid, row_key from  paloalto_mdwdb.d_lov ) b 
 on 
 COALESCE(CONCAT('CATEGORY~INCIDENT','~',UPPER(a.u_category)),'UNSPECIFIED')=b.src_rowid 
 

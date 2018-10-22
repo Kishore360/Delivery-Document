@@ -2,17 +2,17 @@
 
 SELECT 
 'incident_final_table',SRC.CDCTYPE,count(1) AS Source_Count
-FROM pan_mdsdb.incident_final SRC 
+FROM paloalto_mdsdb.incident_final SRC 
 group by 1,2
 UNION 
 SELECT 
 'f_incident_table',f.soft_deleted_flag,count(1) AS Fact_Count
-FROM pan_mdwdb.f_incident f 
+FROM paloalto_mdwdb.f_incident f 
 group by 1,2
 UNION 
 SELECT 
 'd_incident_table',d.soft_deleted_flag,count(1) AS Dimension_Count
-FROM pan_mdwdb.d_incident d 
+FROM paloalto_mdwdb.d_incident d 
 group by 1,2
 
 UNION 
@@ -20,52 +20,52 @@ UNION
 
 SELECT 
 'change_request_final',SRC.CDCTYPE,count(1) AS Source_Count
-FROM pan_mdsdb.change_request_final SRC 
+FROM paloalto_mdsdb.change_request_final SRC 
 group by 1,2
 UNION 
 SELECT 
 'f_change_request_table',f.soft_deleted_flag,count(1) AS Fact_Count
-FROM pan_mdwdb.f_change_request f 
+FROM paloalto_mdwdb.f_change_request f 
 group by 1,2
 UNION 
 SELECT 
 'd_change_request',d.soft_deleted_flag,count(1) AS Dimension_Count
-FROM pan_mdwdb.d_change_request d
+FROM paloalto_mdwdb.d_change_request d
 group by 1,2
 UNION 
 -- ITSA_Request Item_C_Module 
 
 SELECT 
 'sc_req_item_final',SRC.CDCTYPE,count(1) AS Source_Count
-FROM pan_mdsdb.sc_req_item_final SRC 
+FROM paloalto_mdsdb.sc_req_item_final SRC 
 group by 1,2
 UNION 
 SELECT 
 'f_request_item',f.soft_deleted_flag,count(1) AS Fact_Count
-FROM pan_mdwdb.f_request_item f 
+FROM paloalto_mdwdb.f_request_item f 
 group by 1,2
 UNION 
 SELECT 
 'd_request_item',d.soft_deleted_flag,count(1) AS Dim_Count
-FROM pan_mdwdb.d_request_item d
+FROM paloalto_mdwdb.d_request_item d
 group by 1,2
 
 UNION 
 -- ITSA_Request Task_C_Module
 
 SELECT 
-'pan_mdsdb.sc_task_final',SRC.CDCTYPE,count(1) AS Source_Count
-FROM pan_mdsdb.sc_task_final SRC
+'paloalto_mdsdb.sc_task_final',SRC.CDCTYPE,count(1) AS Source_Count
+FROM paloalto_mdsdb.sc_task_final SRC
 group by 1,2
 UNION 
 SELECT 
 '_request_task',f.soft_deleted_flag,count(1) AS Fact_Count
-FROM pan_mdwdb.f_request_task f
+FROM paloalto_mdwdb.f_request_task f
 group by 1,2
 UNION 
 SELECT 
 'd_request_task',d.soft_deleted_flag,count(1) AS Dim_Count
-FROM pan_mdwdb.d_request_task d
+FROM paloalto_mdwdb.d_request_task d
 group by 1,2
 
 UNION 
@@ -73,17 +73,17 @@ UNION
 
 SELECT 
 'u_service_request_final',SRC.CDCTYPE,count(1) AS Source_Count
-FROM pan_mdsdb.u_service_request_final SRC
+FROM paloalto_mdsdb.u_service_request_final SRC
 group by 1,2
 UNION 
 SELECT 
 'f_service_request_c',f.soft_deleted_flag,count(1) AS Fact_Count
-FROM pan_mdwdb.f_service_request_c f
+FROM paloalto_mdwdb.f_service_request_c f
 group by 1,2
 UNION 
 SELECT 
 'd_service_request_c',d.soft_deleted_flag,count(1) AS Dim_Count
-FROM pan_mdwdb.d_service_request_c d
+FROM paloalto_mdwdb.d_service_request_c d
 group by 1,2
 
 UNION 
@@ -91,17 +91,17 @@ UNION
 
 SELECT 
 'u_stask_final',SRC.CDCTYPE,count(1) AS Source_Count
-FROM pan_mdsdb.u_stask_final SRC
+FROM paloalto_mdsdb.u_stask_final SRC
 group by 1,2
 UNION 
 SELECT 
 'f_sr_task_c',f.soft_deleted_flag,count(1) AS Fact_Count
-FROM pan_mdwdb.f_sr_task_c f 
+FROM paloalto_mdwdb.f_sr_task_c f 
 group by 1,2
 UNION 
 SELECT 
 'd_sr_task_c',d.soft_deleted_flag,count(1) AS Dim_Count
-FROM pan_mdwdb.d_sr_task_c d 
+FROM paloalto_mdwdb.d_sr_task_c d 
 group by 1,2
 UNION 
 
@@ -112,17 +112,17 @@ UNION
 
 SELECT 
 'u_walk_up_final',SRC.CDCTYPE,count(1) AS Source_Count
-FROM pan_mdsdb.u_walk_up_final SRC 
+FROM paloalto_mdsdb.u_walk_up_final SRC 
 group by 1,2
 UNION 
 SELECT 
 'f_walk_up_c',f.soft_deleted_flag,count(1) AS Fact_Count
-FROM pan_mdwdb.f_walk_up_c f
+FROM paloalto_mdwdb.f_walk_up_c f
 group by 1,2
 UNION 
 SELECT 
 'd_walk_up_c',d.soft_deleted_flag,count(1) AS Dim_Count
-FROM pan_mdwdb.d_walk_up_c d 
+FROM paloalto_mdwdb.d_walk_up_c d 
 group by 1,2
 
 UNION 
@@ -130,15 +130,15 @@ UNION
 
 SELECT 
 'problem_final',SRC.CDCTYPE,count(1) AS Source_Count
-FROM pan_mdsdb.problem_final SRC 
+FROM paloalto_mdsdb.problem_final SRC 
 group by 1,2
 UNION 
 SELECT 
 'f_problem',f.soft_deleted_flag,count(1) AS Fact_Count
-FROM pan_mdwdb.f_problem f 
+FROM paloalto_mdwdb.f_problem f 
 group by 1,2
 UNION 
 SELECT 
 'd_problem',d.soft_deleted_flag,count(1) AS Dim_Count
-FROM pan_mdwdb.d_problem d  
+FROM paloalto_mdwdb.d_problem d  
 group by 1,2

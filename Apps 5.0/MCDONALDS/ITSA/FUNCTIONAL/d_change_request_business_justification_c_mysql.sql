@@ -7,3 +7,4 @@ mcdonalds_mdwdb.d_change_request d
 JOIN  mcdonalds_mdsdb.change_request_final i on d.row_id = i.sys_id and d.source_id= i.sourceinstance
 where  LEFT(d.justification_c,200) <> coalesce(LEFT(i.justification,200),'UNSPECIFIED'))temp;
 
+ 

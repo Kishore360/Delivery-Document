@@ -5,4 +5,4 @@ from
 paloalto_mdsdb.u_service_request_final a
 join paloalto_mdwdb.d_service_request_c b
 on a.sys_id=b.row_id and a.sourceinstance=b.source_id
-where b.type_src_code<> a.u_type;
+where b.soft_deleted_flag='N' and  b.type_src_code<> a.u_type;
