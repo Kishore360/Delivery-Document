@@ -98,10 +98,11 @@ on (a13.year_start_date_key = a118.row_key)
 union
 select 'ldb.d_internal_organization_group_parent_c a119 ' as Table_name, count(1) Row_Count
 from ldb.f_sr_task_c a11 
-join ldb.d_internal_organization_group a19 
-on (a11.assignment_group_key = a19.row_key) 
+
+	join	ldb.d_internal_organization_group_parent_internal_c	a113
+	  on 	(a11.assignment_group_c_key = a113.row_key)
 join ldb.d_internal_organization_group_parent_c a119 
-on (a19.parent_row_key_c = a119.row_key) 
+on (a113.parent_row_c_key = a119.row_key)
 union
 select 'ldb.d_lov_service_request_priority_c a120 ' as Table_name, count(1) Row_Count
 from ldb.f_sr_task_c a11 
@@ -142,7 +143,11 @@ on (a14.quarter_start_date_key = a124.row_key)
 union
 select 'ldb.d_calendar_year a125 ' as Table_name, count(1) Row_Count
 from ldb.f_sr_task_c a11 
-join ldb.d_calendar_date a14 
-on (a11.opened_on_key = a14.row_key) 
+join ldb.d_calendar_date a13 
+on (a11.opened_on_key = a13.row_key) 
+join	ldb.d_calendar_month	a14
+	  on 	(a13.month_start_date_key = a14.row_key)
+join	ldb.d_calendar_quarter	a15
+	  on 	(a14.quarter_start_date_key = a15.row_key)
 join ldb.d_calendar_year a125 
-on (a14.year_start_date_key = a125.row_key) 
+on (a15.year_start_date_key = a125.row_key) 

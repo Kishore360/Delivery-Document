@@ -11,4 +11,4 @@ left join paloalto_mdwdb.f_walk_up_c f on SRC.sys_id=f.row_id and SRC.sourceinst
  
 JOIN paloalto_mdwdb.d_internal_contact a ON a.row_key = f.opened_by_key 
 
-where  COALESCE(TIMESTAMPDIFF(day,a.employee_start_date_c,f.created_on),0) <> f.opened_by_employee_duration) temp;
+where  COALESCE(TIMESTAMPDIFF(day,date(a.employee_start_date_c),date(f.created_on)),0) <> f.opened_by_employee_duration) temp;
