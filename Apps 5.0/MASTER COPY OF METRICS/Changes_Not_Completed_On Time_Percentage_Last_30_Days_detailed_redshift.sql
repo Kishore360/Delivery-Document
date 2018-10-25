@@ -1,4 +1,4 @@
-SELECT a.X/b.Y*100.00 AS Changes_Not_Completed_On Time_Percentage_Last_30_Days
+SELECT a.X/b.Y*100.00 AS Changes_Not_Completed_On_Time_Percentage_Last_30_Days
 FROM 
 (
 SELECT count(a.change_request_key)*1.00 AS X 
