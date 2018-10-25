@@ -1,10 +1,7 @@
-SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
-,CASE WHEN cnt > 0 THEN 'Data did not Match.' 
-ELSE 'Data Matched' END AS Message 
-FROM (
-select count(1) as cnt
-from mcdonalds_mdsdb.u_incident_task_final s
-left join mcdonalds_mdwdb.f_incident_task_c t
-on s.sys_id=t.row_id and s.sourceinstance = t.source_id
-where s.reassignment_count <> t.reassignment_count
-) temp
+SELECT CASE WHEN count(1)  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, 
+CASE WHEN count(1)  THEN 'MDS to DWH data validation failed for f_incident_task_c.reassignment_count' ELSE 'SUCCESS' END as Message 
+FROM mcdonalds_mdwdb.f_incident_task_c trgt
+RIGHT JOIN mcdonalds_mdsdb.incident_task_final src
+on src.sys_id = trgt.row_id and src.sourceinstance = trgt.source_id
+where src.reassignment_count <> trgt.reassignment_count
+;
