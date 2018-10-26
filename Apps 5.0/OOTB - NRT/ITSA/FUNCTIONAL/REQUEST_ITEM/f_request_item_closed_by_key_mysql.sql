@@ -1,8 +1,8 @@
  SELECT 
  CASE WHEN CNT > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 CASE WHEN CNT >0 THEN 'MDS to DWH data validation failed for f_change_request.closed_by_key' ELSE 'SUCCESS' END as Message
-FROM (SELECT  count(1) as CNT 
- (select * from <<tenant>>_mdsdb.sc_req_item_final cdctype<>'D') SRC
+FROM (SELECT  count(1) as CNT from
+ (select * from <<tenant>>_mdsdb.sc_req_item_final where  cdctype<>'D') SRC
 JOIN <<tenant>>_mdwdb.f_request_item TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )

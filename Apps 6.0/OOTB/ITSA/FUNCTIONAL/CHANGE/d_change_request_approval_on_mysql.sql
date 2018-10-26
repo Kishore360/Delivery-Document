@@ -6,6 +6,6 @@ CASE WHEN CNT > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  LEFT JOIN <<tenant>>_mdwdb.d_change_request TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
-where COALESCE(CONVERT_TZ(SRC.approval_set,<<TENANT_SSI_TIME_ZONE>>,<<DW_TARGET_TIME_ZONE>>),'')
+where TRGT.soft_deleted_flag='N'and  COALESCE(CONVERT_TZ(SRC.approval_set,<<TENANT_SSI_TIME_ZONE>>,<<DW_TARGET_TIME_ZONE>>),'')
 <> TRGT.approval_on)temp;
  

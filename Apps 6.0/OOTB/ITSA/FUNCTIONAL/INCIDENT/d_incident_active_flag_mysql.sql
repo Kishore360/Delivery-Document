@@ -7,4 +7,4 @@ SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
   JOIN <<tenant>>_mdwdb.d_incident TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
- WHERE ( CASE WHEN SRC.active= 1 then 'Y' else 'N' END)<> (TRGT.active_flag ))b
+ WHERE TRGT.soft_deleted_flag='N' and  ( CASE WHEN SRC.active= 1 then 'Y' else 'N' END)<> (TRGT.active_flag ))b

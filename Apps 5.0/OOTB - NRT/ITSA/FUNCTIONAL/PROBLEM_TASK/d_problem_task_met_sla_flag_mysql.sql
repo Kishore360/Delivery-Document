@@ -7,5 +7,5 @@ FROM (SELECT count(1) as CNT
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
  left join (select source_id,max(lastupdated) as lastupdated from <<tenant>>_mdwdb.d_o_data_freshness group by source_id) f1 on (f1.source_id = SRC.sourceinstance)
- where (src.cdctime<=f1.lastupdated) and ( CASE WHEN made_sla= 1  then 'Y' else 'N' END)<> (TRGT.met_sla_flag ))temp;
+ where (SRC.cdctime<=f1.lastupdated) and ( CASE WHEN made_sla= 1  then 'Y' else 'N' END)<> (TRGT.met_sla_flag ))temp;
  
