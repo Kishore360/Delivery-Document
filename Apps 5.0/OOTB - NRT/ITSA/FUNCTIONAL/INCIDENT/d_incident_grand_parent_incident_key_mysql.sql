@@ -9,7 +9,7 @@ SELECT CASE
           si.row_id AS row_id,
           si.source_id,
     COALESCE(di.grand_parent_incident_key,'') as grand_parent_incident_key
-   FROM (select 
+   FROM (select i.cdctime cdctime,
 COALESCE(parent_i.parent_incident,'UNSPECIFIED') as grand_parent_incident_id
 ,i.SourceInstance as source_id
 ,i.sys_id as row_id
@@ -20,8 +20,10 @@ ON i.parent_incident=parent_i.sys_id)si
    AND di.source_id = CASE
                           WHEN si.grand_parent_incident_id = 'UNSPECIFIED' THEN 0
                           ELSE si.source_id
-                      END)A  
+                      END
+                      left join (select source_id,max(lastupdated) as lastupdated from <<tenant>>_mdwdb.d_o_data_freshness group by source_id) f1 
+                      on (f1.source_id = si.source_id )
+where (cdctime<=f1.lastupdated) )A  
        LEFT JOIN <<tenant>>_mdwdb.d_incident d1 ON d1.row_id = A.row_id
 AND d1.source_id = A.source_id
-left join (select source_id,max(lastupdated) as lastupdated from <<tenant>>_mdwdb.d_o_data_freshness group by source_id) f1 on (f1.source_id = SRC.sourceinstance)
-where (SRC.cdctime<=f1.lastupdated) and  d1.grand_parent_incident_key <> A.row_key)b
+where d1.grand_parent_incident_key <> A.row_key)b

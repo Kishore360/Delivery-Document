@@ -4,4 +4,4 @@ SELECT CASE WHEN cnt THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
   JOIN <<tenant>>_mdwdb.d_incident TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
- WHERE ( CASE WHEN SRC.reopen_count > 0 then 'Y' else 'N' END)<> (TRGT.reopened_flag ))b
+ WHERE TRGT.soft_deleted_flag='N' and ( CASE WHEN SRC.reopen_count > 0 then 'Y' else 'N' END)<> (TRGT.reopened_flag ))b
