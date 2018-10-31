@@ -10,7 +10,7 @@
  ON (TRGTF.request_task_key =TRGT.row_key
  AND TRGTF.source_id =TRGT.source_id)
 LEFT JOIN <<tenant>>_mdwdb.d_lov_map LM
- on TRGTF.state_src_key = LM.src_key  AND LM.dimension_class='STATE~SC_TASK' )a
+ on TRGTF.state_src_key = LM.src_key  AND LM.dimension_class='STATE~SC_TASK' 
  left join (select source_id,max(lastupdated) as lastupdated from <<tenant>>_mdwdb.d_o_data_freshness group by source_id) f1 on (f1.source_id = SRC.sourceinstance)
-where (src.cdctime<=f1.lastupdated) and abc<>def
+where (SRC.cdctime<=f1.lastupdated) )a where  abc<>def
 

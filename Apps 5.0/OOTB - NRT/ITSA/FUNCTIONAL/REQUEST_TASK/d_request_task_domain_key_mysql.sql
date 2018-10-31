@@ -10,6 +10,7 @@ CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for d_request_task
  AND SRC.sourceinstance= TRGT.source_id  )
  LEFT JOIN <<tenant>>_mdwdb.d_domain LKP 
  ON ( SRC.sys_domain= LKP.row_id 
-AND SRC.sourceinstance= LKP.source_id ))a
-left join (select source_id,max(lastupdated) as lastupdated from <<tenant>>_mdwdb.d_o_data_freshness group by source_id) f1 on (f1.source_id = SRC.sourceinstance)
- where (src.cdctime<=f1.lastupdated) and abc<>def
+AND SRC.sourceinstance= LKP.source_id )
+left join (select source_id,max(lastupdated) as lastupdated from <<tenant>>_mdwdb.d_o_data_freshness group by source_id) f1 
+on (f1.source_id = SRC.sourceinstance)
+ where (SRC.cdctime<=f1.lastupdated) )a where abc<>def
