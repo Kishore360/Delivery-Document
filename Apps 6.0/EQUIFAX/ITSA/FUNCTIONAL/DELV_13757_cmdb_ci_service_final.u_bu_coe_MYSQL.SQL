@@ -4,7 +4,7 @@ CASE WHEN CNT > 0 THEN 'MDS to DWH data validation failed for cmdb_ci_service_fi
 FROM 
 (
 SELECT Count(1) AS CNT 
-from equifax_mdsdb.cmdb_ci_service_final src
+from (select * from equifax_mdsdb.cmdb_ci_service_final where cdctype<>'D') src
 left join equifax_mdwdb.d_service t on RIGHT(t.row_id,32)=src.sys_id and src.sourceinstance=t.source_id
 where coalesce(src.u_bu_coe,'UNSPECIFIED')<>t.bu_c 
 ) temp;
