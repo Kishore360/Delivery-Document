@@ -414,7 +414,7 @@ where	(a13.wh_dimension_code in ('RESOLVED', 'CLOSED')
  ) 
  )a
 union
-select	'MTTR Business Duration (Hours)'as metrics,sum((a11.business_duration_c / 3600.0))/count(a11.row_key) AS value
+select	'MTTR Business Duration (Hours)'as metrics,sum((a11.sla_business_duration_c / 3600.0))/count(a11.row_key) AS value
 from	ldb.f_incident_resolved	a11
 	join	ldb.d_calendar_date	a12
 	  on 	(a11.last_resolved_on_key = a12.row_key)

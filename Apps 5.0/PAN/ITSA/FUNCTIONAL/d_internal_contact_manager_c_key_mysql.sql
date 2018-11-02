@@ -6,6 +6,6 @@ ON right(a.row_id,32)=b.sys_id AND a.source_id=b.sourceinstance
 LEFT JOIN pan_mdwdb.d_internal_contact e 
 ON e.row_id= COALESCE(concat('INTERNAL_CONTACT~',b.manager),'UNSPECIFIED')
 AND e.source_id=b.sourceinstance
-where a.manager_c_key<> case when b.manager is null then 0  ELSE (e.row_key) END;
+where  e.soft_deleted_flag='N' and  a.manager_c_key<> case when b.manager is null then 0  ELSE (e.row_key) END;
 
 

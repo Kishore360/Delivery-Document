@@ -10,9 +10,9 @@ FROM
  
 from 
 (select sys_id,sourceinstance, state from  pan_mdsdb.u_service_request_final where CDCTYPE<>'D') SRC 
-LEFT JOIN (select row_id, row_key, source_id from pan_mdwdb.d_lov where soft_deleted_flag<>'Y') LKP 
+LEFT JOIN (select row_id, row_key, source_id from pan_mdwdb.d_lov ) LKP 
  
-ON ( concat('STATE_C~SERVICE_REQUEST_C~',upper(SRC.state))= LKP.row_id AND SRC.sourceinstance= LKP.source_id ) 
+ON ( concat('STATE_C~SERVICE_REQUEST_C~~~',upper(SRC.state))= LKP.row_id AND SRC.sourceinstance= LKP.source_id ) 
  
 LEFT JOIN pan_mdwdb.d_service_request_c TRGT  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )

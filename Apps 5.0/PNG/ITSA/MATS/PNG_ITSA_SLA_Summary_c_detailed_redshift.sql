@@ -93,3 +93,9 @@ on (a12.row_dn_key = a13.lev_0_key)
 join ldb.dh_user_group_level4 a115 
 on (a13.lev_4_key = a115.row_key) 
 
+UNION 
+select 'ldb.d_internal_organization_vendor_company_c a115 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_incident_task_sla a11 
+JOIN ldb.d_task_sla c ON a11.sla_key=c.row_key
+JOIN ldb.d_internal_organization_vendor_company_c d ON c.vendor_c_key=d.row_key
+

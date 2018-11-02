@@ -7,4 +7,4 @@ SELECT CASE WHEN cnt THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
   JOIN <<tenant>>_mdwdb.d_incident TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
- WHERE COALESCE( SRC.sys_created_by,'')<> COALESCE(TRGT.created_by ,''))b
+ WHERE TRGT.soft_deleted_flag='N' and  COALESCE( SRC.sys_created_by,'')<> COALESCE(TRGT.created_by ,''))b

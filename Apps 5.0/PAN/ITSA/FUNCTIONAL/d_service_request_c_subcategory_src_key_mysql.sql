@@ -11,7 +11,7 @@ from
  
 LEFT JOIN (select row_key, source_id,row_id from pan_mdwdb.d_lov where soft_deleted_flag<>'Y') LKP 
  
-ON ( concat('SUBCATEGORY_C~SERVICE_REQUEST_C~',upper(u_subcategory))= LKP.row_id 
+ON ( concat('SUBCATEGORY_C~SERVICE_REQUEST_C~~~',upper(u_subcategory))= LKP.row_id 
 AND SRC.sourceinstance= LKP.source_id ) 
  
 LEFT JOIN pan_mdwdb.d_service_request_c TRGT 

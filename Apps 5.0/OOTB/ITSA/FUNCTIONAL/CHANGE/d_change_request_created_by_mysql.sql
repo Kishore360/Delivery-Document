@@ -8,4 +8,4 @@ FROM (SELECT count(1) as CNT
  LEFT JOIN <<tenant>>_mdwdb.d_change_request TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
- WHERE COALESCE( SRC.sys_created_by,'')<> (TRGT.created_by))temp;
+ WHERE TRGT.soft_deleted_flag='N'and COALESCE( SRC.sys_created_by,'')<> (TRGT.created_by))temp;

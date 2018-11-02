@@ -5,5 +5,5 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 pan_mdwdb.f_incident f 
 JOIN pan_mdwdb.d_internal_contact a 
 ON a.row_key = f.opened_by_c_key 
-WHERE f.opened_by_employee_duration <> COALESCE(TIMESTAMPDIFF(day,a.employee_start_date_c,f.created_on),0);
+WHERE a.soft_deleted_flag='N' and f.opened_by_employee_duration <> COALESCE(TIMESTAMPDIFF(day,a.employee_start_date_c,f.created_on),0);
 -- END 

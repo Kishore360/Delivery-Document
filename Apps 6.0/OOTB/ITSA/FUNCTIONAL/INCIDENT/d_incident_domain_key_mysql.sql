@@ -10,4 +10,4 @@ SELECT CASE WHEN cnt THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  LEFT JOIN <<tenant>>_mdwdb.d_domain LKP 
  ON ( SRC.sys_domain= LKP.row_id 
 AND SRC.sourceinstance= LKP.source_id )
- WHERE COALESCE(LKP.row_key,CASE WHEN SRC.sys_domain IS NULL THEN 0 else -1 end)<>(TRGT.domain_key))b
+ WHERE TRGT.soft_deleted_flag='N' and  COALESCE(LKP.row_key,CASE WHEN SRC.sys_domain IS NULL THEN 0 else -1 end)<>(TRGT.domain_key))b

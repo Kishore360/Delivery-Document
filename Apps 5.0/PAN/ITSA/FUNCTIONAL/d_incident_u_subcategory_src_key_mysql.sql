@@ -13,9 +13,9 @@ LEFT JOIN pan_mdwdb.d_incident TRGT
 ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
 
-LEFT JOIN (select src_rowid, source_id, row_key, dimension_class from  pan_mdwdb.d_lov where soft_deleted_flag<>'Y') LKP 
+LEFT JOIN (select src_rowid, source_id, row_key, dimension_class from  pan_mdwdb.d_lov ) LKP 
  
-ON LKP.dimension_class like '%CATEGORY~INCIDENT%' and  ( concat('SUBCATEGORY~INCIDENT','~',upper(SRC.u_subcategory))= LKP.src_rowid 
+ON LKP.dimension_class like '%CATEGORY~INCIDENT%' and  ( concat('SUBCATEGORY~INCIDENT','~~~',upper(SRC.u_subcategory))= LKP.src_rowid 
 AND SRC.sourceinstance= LKP.source_id )
  
 WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_subcategory IS NULL THEN 0 else '-1' end)<> (TRGT.sub_category_src_key)) temp;

@@ -14,10 +14,12 @@ JOIN png_mdwdb.d_lov LKP ON (CONCAT('STATE','~','CHANGE_REQUEST','~~~',SRC.state
 WHERE 
 (CASE WHEN 
 LKP.dimension_name ='Closed' THEN 
-timestampdiff(second,coalesce(CONVERT_TZ(SRC.closed_at,'GMT','America/New_York'),CONVERT_TZ(SRC.sys_updated_on,'GMT','America/New_York')),
-CONVERT_TZ(SRC.u_pg_requested_delivery_date,'GMT','America/New_York'))
-ELSE timestampdiff(second,(SELECT Max(x.lastupdated) FROM png_workdb.o_data_freshness x),
-CONVERT_TZ(SRC.u_pg_requested_delivery_date,'GMT','America/New_York')) 
+timestampdiff(second,
+CONVERT_TZ(SRC.u_pg_requested_delivery_date,'GMT','America/New_York'),
+coalesce(CONVERT_TZ(SRC.closed_at,'GMT','America/New_York'),CONVERT_TZ(SRC.sys_updated_on,'GMT','America/New_York')))
+ELSE timestampdiff(second,
+CONVERT_TZ(SRC.u_pg_requested_delivery_date,'GMT','America/New_York'),
+(SELECT Max(x.lastupdated) FROM png_workdb.o_data_freshness x))
 END )<>TRGT.agreed_to_close_duration_c
 ) temp;
 

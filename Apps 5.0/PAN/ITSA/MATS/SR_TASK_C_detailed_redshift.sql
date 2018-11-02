@@ -133,8 +133,10 @@ on (a15.type_src_key = a123.row_key)
 union
 select 'ldb.d_calendar_quarter a124 ' as Table_name, count(1) Row_Count
 from ldb.f_sr_task_c a11 
-join ldb.d_calendar_date a14 
-on (a11.opened_on_key = a14.row_key) 
+join ldb.d_calendar_date a13 
+on (a11.opened_on_key = a13.row_key) 
+join	ldb.d_calendar_month	a14
+	  on 	(a13.month_start_date_key = a14.row_key)
 join ldb.d_calendar_quarter a124 
 on (a14.quarter_start_date_key = a124.row_key) 
 union

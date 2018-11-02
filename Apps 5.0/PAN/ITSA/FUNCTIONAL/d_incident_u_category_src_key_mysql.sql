@@ -14,9 +14,9 @@ from
  
 left join 
  
-(select src_rowid, row_key from  pan_mdwdb.d_lov where soft_deleted_flag<>'Y') b 
+(select src_rowid, row_key from  pan_mdwdb.d_lov ) b 
 on 
-COALESCE(CONCAT('CATEGORY~INCIDENT','~',UPPER(a.u_category)),'UNSPECIFIED')=b.src_rowid 
+COALESCE(CONCAT('CATEGORY~INCIDENT','~~~',UPPER(a.u_category)),'UNSPECIFIED')=b.src_rowid 
 
 left join 
 pan_mdwdb.d_incident c on a.sourceinstance=c.source_id and a.sys_id=c.row_id
