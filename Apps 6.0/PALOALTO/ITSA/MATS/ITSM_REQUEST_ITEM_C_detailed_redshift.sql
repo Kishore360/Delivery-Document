@@ -67,12 +67,12 @@ union
 select 'ldb.d_duration_c_requested_for_c a110 ' as Table_name, count(1) Row_Count								
 from ldb.f_request_item a11 								
 join ldb.d_duration_requested_for_c a110 								
-on (a11.requested_for_employee_duration = a110.duration_c_key) 								
+on (a11.requested_for_employee_duration_c = a110.duration_c_key) 								
 union								
 select 'ldb.d_duration_c a111 ' as Table_name, count(1) Row_Count								
 from ldb.f_request_item a11 								
 join ldb.d_duration_c a111 								
-on (a11.opened_by_employee_duration = a111.duration_c_key) 								
+on (a11.opened_by_employee_duration_c = a111.duration_c_key) 								
 union								
 select 'ldb.d_hr_change_category a112 ' as Table_name, count(1) Row_Count								
 from ldb.f_request_item a11 								
@@ -123,12 +123,12 @@ on (a11.opened_on_key = a15.row_key)
 join ldb.d_calendar_month a120 								
 on (a15.month_start_date_key = a120.row_key) 								
 union								
-select 'ldb.d_internal_organization_group_parent_c a121 ' as Table_name, count(1) Row_Count								
-from ldb.f_request_item a11 								
-join ldb.d_internal_organization_group a16 								
-on (a11.assignment_group_key = a16.row_key) 								
-join ldb.d_internal_organization_group_parent_c a121 								
-on (a16.parent_row_key_c = a121.row_key) 								
+select 'ldb.d_internal_organization_group_parent_c a122 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_request_item a11 
+join ldb.d_internal_organization_group_parent_internal_c a13 
+on (a11.assignment_group_c_key = a13.row_key) 
+join ldb.d_internal_organization_group_parent_c a122 
+on (a13.parent_row_c_key = a122.row_key) 								
 union								
 select 'ldb.d_calendar_week a122 ' as Table_name, count(1) Row_Count								
 from ldb.f_request_item a11 								

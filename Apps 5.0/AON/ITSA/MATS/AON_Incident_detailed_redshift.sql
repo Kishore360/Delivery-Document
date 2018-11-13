@@ -259,7 +259,29 @@ join ldb.d_incident a17
 on (a11.incident_key = a17.row_key) 
 join ldb.d_task_sla_resolution_flag a146 
 on (a17.met_resolution_sla_flag_key = a146.row_key) 
-union
+unionselect a.lagging_count_of_month,(a.a/a1.b)*100.00 from (
+select	a14.lagging_count_of_month m1,count(a11.row_key) AS a
+from	ldb.f_incident	a11
+	join	ldb.d_calendar_date	a12
+	  on 	(a11.opened_on_key = a12.row_key)
+	join	ldb.d_incident	a13
+	  on 	(a11.incident_key = a13.row_key)
+	join	ldb.d_calendar_month	a14
+	  on 	(a12.month_start_date_key = a14.row_key)
+where	(a13.met_response_sla_flag = 'Y'
+ and a14.lagging_count_of_month between 0 and 11)group by 1)a
+ cross join 
+ (select	a14.lagging_count_of_month m2,count(a11.row_key) AS b
+from	ldb.f_incident	a11
+	join	ldb.d_calendar_date	a12
+	  on 	(a11.opened_on_key = a12.row_key)
+	join	ldb.d_incident	a13
+	  on 	(a11.incident_key = a13.row_key)
+	join	ldb.d_calendar_month	a14
+	  on 	(a12.month_start_date_key = a14.row_key)
+where	( a14.lagging_count_of_month between 0 and 11)group by 1
+ )a1 on a1.m2=a.m1
+ )b
 select 'ldb.d_task_sla_response_flag a147 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11 
 join ldb.d_incident a17 
