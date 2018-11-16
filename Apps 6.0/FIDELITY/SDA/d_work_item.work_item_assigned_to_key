@@ -1,0 +1,9 @@
+SELECT CASE WHEN count(1)  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, 
+CASE WHEN count(1)  THEN 'MDS to DWH data validation failed for d_work_item_work_item_assigned_to_key' ELSE 'SUCCESS' END as Message 
+FROM  fidelity_mdsdb.issue_final SRC
+LEFT JOIN fidelity_mdwdb.d_work_item TRGT
+on (SRC.id=TRGT.row_id and SRC.sourceinstance=TRGT.source_id)
+LEFT JOIN fidelity_mdwdb.d_internal_contact LKP 
+ ON ( concat('INTERNAL_CONTACT~',assigneeid) = LKP.row_id )
+where CASE WHEN (SRC.assigneeid IS  NULL or SRC.assigneeid ='' )THEN 0 ELSE LKP.row_key END
+<>TRGT.work_item_assigned_to_key and SRC.cdctype<>'D';
