@@ -6,4 +6,4 @@ on SRC1.prj_project_id = SRC.project_id
 left join  fidelity_mdwdb.d_project TRGT
 on SRC.project_id=TRGT.row_id
 and SRC.sourceinstance=TRGT.source_id
-where coalesce(SRC.PROJECT_PHASE_SRC_KEY,'')<>coalesce(TRGT.PRJ_PHASE_CODE,'')
+where coalesce(SRC1.PROJECT_PHASE_SRC_KEY,'')<>coalesce(TRGT.PRJ_PHASE_CODE,'')

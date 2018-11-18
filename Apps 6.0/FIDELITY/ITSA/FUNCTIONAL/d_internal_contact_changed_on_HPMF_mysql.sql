@@ -3,4 +3,4 @@ CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for d_internal_con
 FROM  (select * from fidelity_mdsdb.hp_knta_users_final where  cdctype<>'D') SRC
 left join (select * from fidelity_mdwdb.d_internal_contact) TRGT
 on CONCAT('INTERNAL_CONTACT~', SRC.USER_ID) =TRGT.row_id and SRC.sourceinstance=TRGT.source_id
-WHERE  COALESCE(convert_tz(SRC.LAST_UPDATE_DATE,'@#TENANT_SSI_TIME_ZONE@#','@#DW_TARGET_TIME_ZONE@#'),'') <> COALESCE(TRGT.changed_on,'')
+WHERE  COALESCE(convert_tz(SRC.LAST_UPDATE_DATE,'GMT','America/New_York'),'') <> COALESCE(TRGT.changed_on,'')

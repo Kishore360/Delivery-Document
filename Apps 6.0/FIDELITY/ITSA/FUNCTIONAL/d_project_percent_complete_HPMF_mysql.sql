@@ -6,4 +6,4 @@ on SRC1.request_id=SRC.pfm_request_id
 left join  fidelity_mdwdb.d_project TRGT
 on SRC.project_id=TRGT.row_id
 and SRC.sourceinstance=TRGT.source_id
-where coalesce(SRC.percent_complete,'')<>coalesce(TRGT.percent_complete,'')
+where coalesce(SRC1.percent_complete,'')<>coalesce(TRGT.percent_complete,'')

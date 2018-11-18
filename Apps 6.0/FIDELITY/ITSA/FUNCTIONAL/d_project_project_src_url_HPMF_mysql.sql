@@ -6,4 +6,4 @@ on SRC1.prj_project_id = SRC.project_id
 left join  fidelity_mdwdb.d_project TRGT
 on SRC.project_id=TRGT.row_id
 and SRC.sourceinstance=TRGT.source_id
-where coalesce(SRC.PRJ_PROJECT_URL,'')<>coalesce(TRGT.PROJECT_SRC_URL,'')
+where coalesce(SRC1.PRJ_PROJECT_URL,'')<>coalesce(TRGT.PROJECT_SRC_URL,'')
