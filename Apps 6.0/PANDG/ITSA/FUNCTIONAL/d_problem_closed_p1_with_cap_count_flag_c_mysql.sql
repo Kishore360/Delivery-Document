@@ -1,6 +1,7 @@
 
-SELECT CASE WHEN count(1)  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, 
-CASE WHEN count(1)  THEN 'MDS to DWH data validation failed for d_problem.closed_p1_with_cap_count_flag_c' ELSE 'SUCCESS' END as Message 
+SELECT 
+CASE WHEN count(1) > 0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, 
+CASE WHEN count(1) > 0  THEN 'MDS to DWH data validation failed for d_problem.closed_p1_with_cap_count_flag_c' ELSE 'SUCCESS' END as Message 
 FROM (
 SELECT a11.row_id,a11.closed_p1_with_cap_count_flag_c,f_prb.assignment_group_key =0 
 FROM png_mdwdb.d_problem a11
@@ -10,7 +11,6 @@ JOIN png_mdwdb.d_internal_organization d_org ON f_prb.assignment_group_key = d_o
 JOIN png_mdwdb.d_lov pr_lv ON f_prb.priority_src_key = pr_lv.row_key
 JOIN png_mdwdb.d_lov st_lv ON f_prb.state_src_key = st_lv.row_key
 JOIN png_mdwdb.d_lov sfa_lv ON a11.sfa_status_c_key = sfa_lv.row_key
-
 JOIN (SELECT d_prb.row_key as problem_key,count(1) AS cnt,SUM(IF(a11.outcome_flag='N',1,0)) as non_breached
 FROM png_mdwdb.f_task_sla a11
 JOIN png_mdwdb.d_problem d_prb ON a11.problem_key = d_prb.row_key 
@@ -36,4 +36,4 @@ WHERE a11.closed_p1_with_cap_count_flag_c <>
 	AND pr_lv.dimension_code = 1 
 	AND lv_mp.dimension_wh_code IN ('CLOSED','RESOLVED') 
 	THEN 'Y' ELSE 'N' END
-);
+)temp;

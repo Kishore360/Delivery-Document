@@ -1,6 +1,7 @@
 
-SELECT CASE WHEN count(1)  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, 
-CASE WHEN count(1)  THEN 'MDS to DWH data validation failed for d_problem.open_p1_kwn_err_count_flag_c' ELSE 'SUCCESS' END as Message 
+SELECT 
+CASE WHEN count(1) > 0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, 
+CASE WHEN count(1) > 0  THEN 'MDS to DWH data validation failed for d_problem.open_p1_kwn_err_count_flag_c' ELSE 'SUCCESS' END as Message 
 FROM (
 SELECT a11.row_id,a11.open_p1_kwn_err_count_flag_c,f_prb.assignment_group_key =0 
 FROM png_mdwdb.d_problem a11
@@ -38,7 +39,5 @@ WHERE a11.open_p1_kwn_err_count_flag_c <>
 	AND lv_mp.dimension_wh_code NOT IN('RESOLVED','CLOSED','CANCELLED') 
 	AND  sfa_lv.dimension_name in ('Closed Complete','Closed Incomplete') 
 	THEN 'Y' ELSE 'N' END
+)temp;
 
-
-
-);

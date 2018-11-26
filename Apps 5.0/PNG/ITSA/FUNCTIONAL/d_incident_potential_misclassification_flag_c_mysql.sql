@@ -1,6 +1,7 @@
 
-SELECT CASE WHEN count(1)  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, 
-CASE WHEN count(1)  THEN 'MDS to DWH data validation failed for d_request_item.response_sla_c_flag' ELSE 'SUCCESS' END as Message 
+SELECT 
+CASE WHEN count(1) > 0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, 
+CASE WHEN count(1) > 0 THEN 'MDS to DWH data validation failed for d_request_item.response_sla_c_flag' ELSE 'SUCCESS' END as Message 
 FROM (
 SELECT trgt.row_id,
 lv.dimension_code = 1 ,lv_mp.dimension_class = 'STATE~INCIDENT' , lv_mp.dimension_wh_code in('CLOSED','RESOLVED') ,
@@ -22,5 +23,4 @@ LEFT JOIN (SELECT incident_cbp_c_key,count(1) cnt FROM png_mdwdb.f_task_cbp_c WH
 WHERE trgt.potential_misclassification_flag_c =
 CASE WHEN lv.dimension_code = 1 AND lv_mp.dimension_class = 'STATE~INCIDENT' AND lv_mp.dimension_wh_code in('CLOSED','RESOLVED') AND((X.age >86400 AND trgt.associated_incident_alert_flag_c = 'N') 
 OR (X.impact_src_code =3) OR (trgt.p1_priority_flag_c = 'Y') OR (d_conf.used_for_flag_c = 'Y') OR COALESCE(cbp.cnt,0)<=0) THEN 'Y' ELSE 'N' END
-)
-;
+) temp;
