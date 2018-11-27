@@ -1,7 +1,7 @@
 
 SELECT 
 CASE WHEN count(1) > 0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, 
-CASE WHEN count(1) > 0 THEN 'MDS to DWH data validation failed for d_request_item.response_sla_c_flag' ELSE 'SUCCESS' END as Message 
+CASE WHEN count(1) > 0 THEN 'MDS to DWH data validation failed for d_incident.potential_misclassification_flag_c' ELSE 'SUCCESS' END as Message 
 FROM (
 SELECT trgt.row_id,
 lv.dimension_code = 1 ,lv_mp.dimension_class = 'STATE~INCIDENT' , lv_mp.dimension_wh_code in('CLOSED','RESOLVED') ,
@@ -20,7 +20,8 @@ JOIN png_mdwdb.d_lov_map lv_mp ON trgt.state_src_key =lv_mp.src_key
 JOIN png_mdwdb.d_configuration_item d_conf ON X.configuration_item_key = d_conf.row_key
 LEFT JOIN (SELECT incident_cbp_c_key,count(1) cnt FROM png_mdwdb.f_task_cbp_c WHERE impacted_cbp_flag ='Y' AND incident_cbp_c_key >0 and soft_deleted_flag ='N' group by 1) cbp ON trgt.row_key =cbp.incident_cbp_c_key
 
-WHERE trgt.potential_misclassification_flag_c =
-CASE WHEN lv.dimension_code = 1 AND lv_mp.dimension_class = 'STATE~INCIDENT' AND lv_mp.dimension_wh_code in('CLOSED','RESOLVED') AND((X.age >86400 AND trgt.associated_incident_alert_flag_c = 'N') 
+WHERE trgt.potential_misclassification_flag_c <>
+CASE WHEN lv.dimension_code = 1 AND lv_mp.dimension_class = 'STATE~INCIDENT' AND lv_mp.dimension_wh_code in('CLOSED','RESOLVED') 
+AND((X.age >86400 AND trgt.associated_incident_alert_flag_c = 'N') 
 OR (X.impact_src_code =3) OR (trgt.p1_priority_flag_c = 'Y') OR (d_conf.used_for_flag_c = 'Y') OR COALESCE(cbp.cnt,0)<=0) THEN 'Y' ELSE 'N' END
 ) temp;

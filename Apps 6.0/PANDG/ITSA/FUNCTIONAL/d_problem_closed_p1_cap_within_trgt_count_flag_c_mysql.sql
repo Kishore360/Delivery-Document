@@ -1,6 +1,7 @@
 
-SELECT CASE WHEN count(1)  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, 
-CASE WHEN count(1)  THEN 'MDS to DWH data validation failed for d_request_item.closed_p1_cap_within_trgt_count_flag_c' ELSE 'SUCCESS' END as Message 
+SELECT 
+CASE WHEN count(1) > 0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, 
+CASE WHEN count(1) > 0  THEN 'MDS to DWH data validation failed for d_request_item.closed_p1_cap_within_trgt_count_flag_c' ELSE 'SUCCESS' END as Message 
 FROM (
 SELECT a11.row_id,a11.closed_p1_cap_within_trgt_count_flag_c,f_prb.assignment_group_key =0 
 FROM png_mdwdb.d_problem a11
@@ -37,7 +38,4 @@ WHERE a11.closed_p1_cap_within_trgt_count_flag_c <>
 	AND sla.non_breached >0 
 	AND lv_mp.dimension_wh_code IN ('CLOSED','RESOLVED') 
 	THEN 'Y' ELSE 'N' END
-
-
-
-);
+) temp;
