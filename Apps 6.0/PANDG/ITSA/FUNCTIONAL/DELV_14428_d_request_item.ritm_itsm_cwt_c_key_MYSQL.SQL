@@ -4,9 +4,9 @@ CASE WHEN CNT > 0 THEN 'MDS to DWH data validation failed for d_request_item.rit
 FROM 
 (
 Select Count(1) as CNT 
-FROM png_mdsdb.sc_req_item_final SRC 
-LEFT JOIN png_mdwdb.d_request_item TRGT ON (SRC.sys_id=TRGT.row_id and SRC.sourceinstance=TRGT.source_id)
-JOIN png_mdwdb.d_lov LKP ON CONCAT('ITSM_CWT_C~SC_REQ_ITEM~~~',SRC.u_itsm_cwt)=LKP.row_id AND SRC.sourceinstance=LKP.source_id
+FROM pandg_mdsdb.sc_req_item_final SRC 
+LEFT JOIN pandg_mdwdb.d_request_item TRGT ON (SRC.sys_id=TRGT.row_id and SRC.sourceinstance=TRGT.source_id)
+JOIN pandg_mdwdb.d_lov LKP ON CONCAT('ITSM_CWT_C~SC_REQ_ITEM~~~',SRC.u_itsm_cwt)=LKP.row_id AND SRC.sourceinstance=LKP.source_id
 WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_itsm_cwt IS NULL THEN 0 ELSE -1 END)<>TRGT.ritm_itsm_cwt_c_key
 
 ) temp;

@@ -9,8 +9,8 @@ CASE WHEN CNT > 0 THEN 'MDS to DWH data validation failed for d_survey_ext_c.sur
 FROM 
 (
 SELECT Count(1) as CNT 
-FROM png_mdsdb.us_survey_response_score_final SRC
-LEFT JOIN png_mdwdb.d_survey_ext_c TRGT ON (COALESCE(SRC.Question_Type)=TRGT.row_id AND (SRC.sourceinstance)=TRGT.source_id)
+FROM pandg_mdsdb.us_survey_response_score_final SRC
+LEFT JOIN pandg_mdwdb.d_survey_ext_c TRGT ON (COALESCE(SRC.Question_Type)=TRGT.row_id AND (SRC.sourceinstance)=TRGT.source_id)
 WHERE 
 CASE WHEN SRC.Question_Type LIKE '%SPMS%' THEN 'SPMS' 
 WHEN SRC.Question_Type LIKE '%SOBR%' THEN 'SOBR' ELSE 'AM' END <>TRGT.survey_source_name

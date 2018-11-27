@@ -5,9 +5,9 @@ CASE WHEN CNT > 0 THEN 'MDS to DWH data validation failed for d_internal_organiz
 FROM 
 (
 SELECT Count(1) as CNT
-FROM png_mdsdb.incident_final SRC 
-LEFT JOIN png_mdwdb.f_incident TRGT ON (SRC.sys_id=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id)
-JOIN png_mdwdb.d_internal_organization LKP on CONCAT('GROUP~',SRC.assignment_group)=LKP.row_id AND SRC.sourceinstance=LKP.source_id
+FROM pandg_mdsdb.incident_final SRC 
+LEFT JOIN pandg_mdwdb.f_incident TRGT ON (SRC.sys_id=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id)
+JOIN pandg_mdwdb.d_internal_organization LKP on CONCAT('GROUP~',SRC.assignment_group)=LKP.row_id AND SRC.sourceinstance=LKP.source_id
 Where 
 (CASE WHEN LKP.organization_name LIKE '%L4%' THEN 'L4'
 WHEN LKP.organization_name LIKE '%L3%' THEN 'L3' 

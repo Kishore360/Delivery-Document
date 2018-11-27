@@ -4,8 +4,8 @@ CASE WHEN CNT >0 THEN 'MDS to DWH data validation failed for d_incident.quantita
 FROM
 (
 Select Count(1) as CNT 
-from png_mdsdb.incident_final SRC 
-LEFT JOIN png_mdwdb.d_incident TRGT ON (SRC.sys_id=TRGT.row_id)
+from pandg_mdsdb.incident_final SRC 
+LEFT JOIN pandg_mdwdb.d_incident TRGT ON (SRC.sys_id=TRGT.row_id)
 WHERE (SRC.u_quantitative_description)<>TRGT.quantitative_description_c
 ) temp;
 

@@ -8,8 +8,8 @@ CASE WHEN CNT > 0 THEN 'MDS to DWH data validation failed for d_survey_assessor_
 FROM 
 (
 SELECT Count(1) as CNT 
-FROM png_mdsdb.us_survey_response_score_final SRC
-LEFT JOIN png_mdwdb.d_survey_assessor_role_ext_c TRGT ON (COALESCE(SRC.Assessor_Role,'UNSPECIFIED')=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id)
+FROM pandg_mdsdb.us_survey_response_score_final SRC
+LEFT JOIN pandg_mdwdb.d_survey_assessor_role_ext_c TRGT ON (COALESCE(SRC.Assessor_Role,'UNSPECIFIED')=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id)
 WHERE COALESCE(SRC.Assessor_Role,'UNSPECIFIED')<>TRGT.assessor_role_name
 
 ) temp;

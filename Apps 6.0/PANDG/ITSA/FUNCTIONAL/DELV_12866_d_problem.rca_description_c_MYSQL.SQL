@@ -4,8 +4,8 @@ CASE WHEN CNT > 0 THEN 'MDS to DWH data validation failed for d_problem.rca_desc
 FROM 
 (
 SELECT Count(1) AS CNT
-FROM png_mdsdb.problem_final SRC 
-LEFT JOIN png_mdwdb.d_problem TRGT ON (SRC.sys_id=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id)
+FROM pandg_mdsdb.problem_final SRC 
+LEFT JOIN pandg_mdwdb.d_problem TRGT ON (SRC.sys_id=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id)
 WHERE COALESCE(SRC.u_pg_rca_description,'UNSPECIFIED')<>TRGT.rca_description_c
 ) temp;
 

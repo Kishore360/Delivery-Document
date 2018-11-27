@@ -6,9 +6,9 @@ CASE WHEN CNT > 0 THEN 'MDS to DWH data validation failed for d_internal_contact
 FROM 
 (
 SELECT Count(1) as CNT 
-FROM png_mdsdb.sys_user_final a 
-LEFT JOIN png_mdsdb.cmn_schedule_final b ON a.schedule=b.sys_id AND a.sourceinstance=b.sourceinstance
-LEFT JOIN png_mdwdb.d_internal_contact c ON (CONCAT('INTERNAL_CONTACT~',a.sys_id)=c.row_id AND a.sourceinstance=c.source_id)
+FROM pandg_mdsdb.sys_user_final a 
+LEFT JOIN pandg_mdsdb.cmn_schedule_final b ON a.schedule=b.sys_id AND a.sourceinstance=b.sourceinstance
+LEFT JOIN pandg_mdwdb.d_internal_contact c ON (CONCAT('INTERNAL_CONTACT~',a.sys_id)=c.row_id AND a.sourceinstance=c.source_id)
 WHERE coalesce(b.name,'UNSPECIFIED')<>c.schedule_c
 ) temp;
 

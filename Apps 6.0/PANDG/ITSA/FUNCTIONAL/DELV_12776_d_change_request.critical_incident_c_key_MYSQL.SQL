@@ -6,9 +6,9 @@ CASE WHEN CNT > 0 THEN 'MDS to DWH data validation failed for d_change_request.c
 FROM 
 (
 SELECT Count(1) AS CNT 
-FROM png_mdsdb.change_request_final SRC 
-LEFT JOIN png_mdwdb.f_change_request TRGT ON (SRC.sys_id=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id)
-JOIN png_mdwdb.d_incident LKP ON (SRC.u_incident=LKP.row_id AND SRC.sourceinstance=LKP.source_id)
+FROM pandg_mdsdb.change_request_final SRC 
+LEFT JOIN pandg_mdwdb.f_change_request TRGT ON (SRC.sys_id=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id)
+JOIN pandg_mdwdb.d_incident LKP ON (SRC.u_incident=LKP.row_id AND SRC.sourceinstance=LKP.source_id)
 WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_incident IS NULL THEN 0 ELSE -1 END)<>TRGT.critical_incident_c_key
 ) temp; 
 
