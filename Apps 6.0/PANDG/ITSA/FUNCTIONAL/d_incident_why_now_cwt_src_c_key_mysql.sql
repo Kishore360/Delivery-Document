@@ -1,6 +1,7 @@
-SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
- CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for f_incident.state_src_key' ELSE 'SUCCESS' END as Message
- FROM png_mdsdb.incident_final SRC
+SELECT 
+CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for f_incident.state_src_key' ELSE 'SUCCESS' END as Message
+FROM png_mdsdb.incident_final SRC
 LEFT JOIN png_mdwdb.d_lov LKP 
  ON LKP.dimension_class like '%WHY_NOT_CWT_C~INCIDENT%' and 
 ( concat('WHY_NOT_CWT_C~INCIDENT~~~',upper(u_choice_2))= LKP.row_id 
