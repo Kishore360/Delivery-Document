@@ -51,9 +51,6 @@ UNION
 select 'ldb.d_calendar_date_opened' as Table_Name, count(1) Row_Count
 from  ldb.f_incident_activity  a11 
 join  ldb.d_calendar_date_opened a110 on (a11.date_key = a110.row_key)
-UNION 
-select 'ldb.d_internal_organization_group_parent_internal_c a14 ' as Table_name, count(a11.row_key) Row_Count
-from ldb.f_incident_activity a11 
-join ldb.d_internal_organization_group_parent_internal_c a14  on (a11.from_assignment_group_c_key = a14.row_key)
+
 
 
