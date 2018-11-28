@@ -16,7 +16,7 @@ union
 select 'ldb.d_calendar_date a14 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident_task_sla a11 
 join ldb.d_calendar_date a14 
-on (a11.opened_on_key = a14.row_key) 
+on (a11.date_key = a14.row_key) 
 union
 select 'ldb.d_incident a15 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident_task_sla a11 
@@ -25,10 +25,8 @@ on (a11.incident_key = a15.row_key)
 union
 select 'ldb.d_calendar_month a16 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident_task_sla a11 
-join ldb.d_calendar_date a14 
-on (a11.opened_on_key = a14.row_key) 
-join ldb.d_calendar_month a16 
-on (a14.month_start_date_key = a16.row_key) 
+join ldb.d_calendar_date a14 on (a11.date_key = a14.row_key) 
+join ldb.d_calendar_month a16 on (a14.month_start_date_key = a16.row_key) 
 union
 select 'ldb.d_task_sla a17 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident_task_sla a11 
@@ -43,10 +41,9 @@ union
 select 'ldb.dh_user_group_level1 a19 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident_task_sla a11 
 join ldb.d_internal_organization_group a12 
-on (a11.assignment_group_key = a12.row_key) join ldb.dh_user_group_hierarchy a13 
-on (a12.row_dn_key = a13.lev_0_key) 
-join ldb.dh_user_group_level1 a19 
-on (a13.lev_1_key = a19.row_key) 
+on (a11.assignment_group_key = a12.row_key) 
+join ldb.dh_user_group_hierarchy a13 on (a12.row_dn_key = a13.lev_0_key) 
+join ldb.dh_user_group_level1 a19 on (a13.lev_1_key = a19.row_key) 
 union
 select 'ldb.d_incident_priority a110 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident_task_sla a11 
@@ -72,10 +69,10 @@ on (a13.lev_2_key = a112.row_key)
 union
 select 'ldb.d_calendar_year a113 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident_task_sla a11 
-join ldb.d_calendar_date a14 
-on (a11.opened_on_key = a14.row_key) 
-join ldb.d_calendar_year a113 
-on (a14.year_start_date_key = a113.row_key) 
+join ldb.d_calendar_date a14 on (a11.date_key = a14.row_key) 
+JOIN ldb.d_calendar_month x ON a14.month_start_date_key=x.row_key
+JOIN ldb.d_calendar_quarter y ON x.quarter_start_date_key=y.row_key
+join ldb.d_calendar_year a113 on (y.year_start_date_key = a113.row_key) 
 union
 select 'ldb.dh_user_group_level3 a114 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident_task_sla a11 

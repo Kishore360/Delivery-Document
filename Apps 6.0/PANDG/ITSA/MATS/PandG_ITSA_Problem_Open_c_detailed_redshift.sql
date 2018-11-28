@@ -9,17 +9,17 @@ union
 select 'ldb.d_internal_contact a13 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_problem a11 
 join ldb.d_internal_contact a13 
-on (a11.opened_by_key = a13.row_key) 
+on (a11.employee_key = a13.row_key) 
 union
 select 'ldb.d_calendar_date_fiscal a14 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_problem a11 
 join ldb.d_calendar_date_fiscal a14 
-on (a11.opened_on_key = a14.row_key) 
+on (a11.date_key = a14.row_key) 
 union
 select 'ldb.d_calendar_time a15 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_problem a11 
 join ldb.d_calendar_time a15 
-on (a11.opened_time_key = a15.row_key) 
+on (a11.time_key = a15.row_key) 
 union
 select 'ldb.d_internal_organization_group a16 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_problem a11 
@@ -46,7 +46,7 @@ union
 select 'ldb.d_calendar_date a110 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_problem a11 
 join ldb.d_calendar_date a110 
-on (a11.opened_on_key = a110.row_key) 
+on (a11.date_key = a110.row_key) 
 union
 select 'ldb.d_change_request a111 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_problem a11 
@@ -73,30 +73,29 @@ union
 select 'ldb.d_calendar_month a115 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_problem a11 
 join ldb.d_calendar_date a110 
-on (a11.opened_on_key = a110.row_key) 
+on (a11.date_key = a110.row_key) 
 join ldb.d_calendar_month a115 
 on (a110.month_start_date_key = a115.row_key) 
 union
 select 'ldb.d_calendar_quarter a116 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_problem a11 
-join ldb.d_calendar_date a110 
-on (a11.opened_on_key = a110.row_key) 
-join ldb.d_calendar_quarter a116 
-on (a110.quarter_start_date_key = a116.row_key) 
+join ldb.d_calendar_date a110 on (a11.date_key = a110.row_key) 
+JOIN ldb.d_calendar_month x ON a110.month_start_date_key=x.row_key
+join ldb.d_calendar_quarter a116 on (x.quarter_start_date_key = a116.row_key) 
 union
 select 'ldb.d_calendar_week a117 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_problem a11 
 join ldb.d_calendar_date a110 
-on (a11.opened_on_key = a110.row_key) 
+on (a11.date_key = a110.row_key) 
 join ldb.d_calendar_week a117 
 on (a110.week_start_date_key = a117.row_key) 
 union
-select 'ldb.d_calendar_year a118 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_calendar_year y ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_problem a11 
-join ldb.d_calendar_date a110 
-on (a11.opened_on_key = a110.row_key) 
-join ldb.d_calendar_year a118 
-on (a110.year_start_date_key = a118.row_key) 
+join ldb.d_calendar_date a110 on (a11.date_key = a110.row_key) 
+JOIN ldb.d_calendar_month x ON a110.month_start_date_key=x.row_key
+join ldb.d_calendar_quarter a116 on (x.quarter_start_date_key = a116.row_key) 
+JOIN ldb.d_calendar_year y ON a116.year_start_date_key=y.row_key 
 union
 select 'ldb.d_location a119 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_problem a11 
@@ -120,30 +119,28 @@ union
 select 'ldb.d_internal_organization_department a122 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_problem a11 
 join ldb.d_internal_contact a13 
-on (a11.opened_by_key = a13.row_key) 
+on (a11.employee_key = a13.row_key) 
 join ldb.d_internal_organization_department a122 
 on (a13.department_key = a122.row_key) 
 union
 select 'ldb.d_internal_contact_mdm a123 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_problem a11 
 join ldb.d_internal_contact a13 
-on (a11.opened_by_key = a13.row_key) 
+on (a11.employee_key = a13.row_key) 
 join ldb.d_internal_contact_mdm a123 
 on (a13.row_current_key = a123.row_current_key) 
 union
 select 'ldb.d_calendar_fiscal_quarter a124 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_problem a11 
 join ldb.d_calendar_date_fiscal a14 
-on (a11.opened_on_key = a14.row_key) 
+on (a11.date_key = a14.row_key) 
 join ldb.d_calendar_fiscal_quarter a124 
 on (a14.quarter_start_date_key = a124.row_key) 
 union
 select 'ldb.d_calendar_time_hour a125 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_problem a11 
-join ldb.d_calendar_time a15 
-on (a11.opened_time_key = a15.row_key) 
-join ldb.d_calendar_time_hour a125 
-on (a15.hour_24_format_num = a125.hour_24_format_num) 
+join ldb.d_calendar_time a15 on (a11.time_key = a15.row_key) 
+join ldb.d_calendar_time_hour a125 on (a15.hour_24_format_char = a125.hour_24_format_char) 
 union
 select 'ldb.d_internal_contact_pg_opened_for_c a126 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_problem a11 
@@ -229,7 +226,7 @@ union
 select 'ldb.d_calendar_fiscal_year a140 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_problem a11 
 join ldb.d_calendar_date_fiscal a14 
-on (a11.opened_on_key = a14.row_key) 
+on (a11.date_key = a14.row_key) 
 join ldb.d_calendar_fiscal_year a140 
 on (a14.year_start_date_key = a140.row_key) 
 union
@@ -308,7 +305,8 @@ union
 select 'ldb.dh_user_group_level3 a151 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_problem a11 
 join ldb.d_internal_organization_group a16 
-on (a11.assignment_group_key = a16.row_key) join ldb.dh_user_group_hierarchy a18 
+on (a11.assignment_group_key = a16.row_key) 
+join ldb.dh_user_group_hierarchy a18 
 on (a16.row_dn_key = a18.lev_0_key) 
 join ldb.dh_user_group_level3 a151 
 on (a18.lev_3_key = a151.row_key) 
