@@ -130,33 +130,27 @@ join ldb.d_calendar_time_hour a125 on (a15.hour_24_format_char = a125.hour_24_fo
 union
 select 'ldb.d_internal_contact_pg_opened_for_c a126 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_problem_closed a11 
-join ldb.d_internal_contact_pg_opened_for_c a126 
-on (a11.pg_opened_for_c_key = a126.row_key) 
+join ldb.d_internal_contact_pg_opened_for_c a126 on (a11.pg_opened_for_c_key = a126.row_key) 
 union
 select 'ldb.d_lov_problem_category_c a127 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_problem_closed a11 
-join ldb.d_lov_problem_category_c a127 
-on (a11.category_src_key = a127.row_key) 
+join ldb.d_lov_problem_category_c a127 on (a11.category_src_key = a127.row_key) 
 union
 select 'ldb.d_problem_reported_type a128 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_problem_closed a11 
-join ldb.d_problem_reported_type a128 
-on (a11.reported_type_src_key = a128.row_key) 
+join ldb.d_problem_reported_type a128 on (a11.reported_type_src_key = a128.row_key) 
 union
 select 'ldb.d_problem_impact a129 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_problem_closed a11 
-join ldb.d_problem_impact a129 
-on (a11.impact_src_key = a129.row_key) 
+join ldb.d_problem_impact a129 on (a11.impact_src_key = a129.row_key) 
 union
 select 'ldb.d_problem_priority a130 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_problem_closed a11 
-join ldb.d_problem_priority a130 
-on (a11.priority_src_key = a130.row_key) 
+join ldb.d_problem_priority a130 on (a11.priority_src_key = a130.row_key) 
 union
 select 'ldb.d_configuration_item_problem_service_offering_c a131 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_problem_closed a11 
-join ldb.d_configuration_item_problem_service_offering_c a131 
-on (a11.service_offering_c_key = a131.row_key) 
+join ldb.d_configuration_item_problem_service_offering_c a131 on (a11.service_offering_c_key = a131.row_key) 
 union
 select 'ldb.d_problem_urgency a132 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_problem_closed a11 
@@ -213,10 +207,8 @@ join ldb.d_lov_pg_problem_identification_c a142 on (a113.pg_problem_identificati
 union
 select 'ldb.d_lov_problem_root_cause_code_c a143 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_problem_closed a11 
-join ldb.d_problem a113 
-on (a11.problem_key = a113.row_key) 
-join ldb.d_lov_problem_root_cause_code_c a143 
-on (a113.root_cause_code_src_c_key = a143.row_key) 
+join ldb.d_problem a113 on (a11.problem_key = a113.row_key) 
+join ldb.d_lov_problem_root_cause_code_c a143 on (a113.root_cause_code_src_c_key = a143.row_key) 
 union
 select 'ldb.d_problem_state a144 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_problem_closed a11 
@@ -225,8 +217,10 @@ join ldb.d_problem_state a144 on (a113.state_src_key = a144.row_key)
 union
 select 'ldb.d_lov_problem_rca_status_c a145 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_problem_closed a11 
-join ldb.d_problem a113 on (a11.problem_key = a113.row_key) 
-join ldb.d_lov_problem_rca_status_c a145 on (a113.rca_status_c_key = a145.row_key) 
+join ldb.d_problem a113 
+on (a11.problem_key = a113.row_key) 
+join ldb.d_lov_problem_rca_status_c a145 
+on (a113.rca_status_c_key = a145.row_key) 
 union
 select 'ldb.d_lov_problem_root_cause_sub_code_c a146 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_problem_closed a11 
@@ -266,3 +260,9 @@ from ldb.f_problem_closed a11
 join ldb.d_internal_organization_group a16 on (a11.assignment_group_key = a16.row_key) 
 join ldb.dh_user_group_hierarchy a18 on (a16.row_dn_key = a18.lev_0_key) 
 join ldb.dh_user_group_level4 a152 on (a18.lev_4_key = a152.row_key) 
+UNION 
+
+select 'ldb.d_configuration_item_criticality_c a13 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_problem_closed a11 
+join ldb.d_configuration_item a112 on (a11.configuration_item_key = a112.row_key)
+JOIN ldb.d_configuration_item_criticality_c a13 ON a112.business_critical_c_key=a13.row_key
