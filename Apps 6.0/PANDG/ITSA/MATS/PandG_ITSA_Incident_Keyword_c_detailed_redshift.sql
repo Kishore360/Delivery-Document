@@ -170,8 +170,7 @@ on (a17.month_start_date_key=a18.row_key)
 join ldb.d_calendar_quarter  a19
 on (a18.quarter_start_date_key=a19.row_key)
 join ldb.d_calendar_year  a130
-on (a19.year_start_date_key=a130.row_key);
-
+on (a19.year_start_date_key=a130.row_key)
 UNION 
 select 'ldb.f_incident_keyword' as Table_Name, count(1) Row_Count
  from  ldb.f_incident_keyword       a11 
