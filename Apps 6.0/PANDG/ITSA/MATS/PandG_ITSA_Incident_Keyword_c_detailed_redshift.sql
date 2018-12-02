@@ -157,20 +157,15 @@ join ldb.d_incident_state  a128
 on (a11.incident_state_src_key=a128.row_key)
 union
 select'ldb.d_incident_subcategory' as Table_Name, count(a11.row_key) Row_Count
- from  ldb.f_incident_keyword  a11 
-join ldb.d_incident_subcategory  a129
-on (a11.incident_sub_category_src_key=a129.row_key)
+from  ldb.f_incident_keyword  a11 
+join ldb.d_incident_subcategory  a129 on (a11.incident_sub_category_src_key=a129.row_key)
 union
 select'ldb.d_calendar_year' as Table_Name, count(a11.row_key) Row_Count
- from  ldb.f_incident_keyword  a11 
-   join ldb.d_calendar_date  a17
-on (a11.date_key=a17.row_key)
-join ldb.d_calendar_month  a18
-on (a17.month_start_date_key=a18.row_key)
-join ldb.d_calendar_quarter  a19
-on (a18.quarter_start_date_key=a19.row_key)
-join ldb.d_calendar_year  a130
-on (a19.year_start_date_key=a130.row_key)
+from  ldb.f_incident_keyword  a11 
+join ldb.d_calendar_date  a17 on (a11.date_key=a17.row_key)
+join ldb.d_calendar_month  a18 on (a17.month_start_date_key=a18.row_key)
+join ldb.d_calendar_quarter  a19 on (a18.quarter_start_date_key=a19.row_key)
+join ldb.d_calendar_year  a130 on (a19.year_start_date_key=a130.row_key)
 UNION 
 select 'ldb.f_incident_keyword' as Table_Name, count(1) Row_Count
  from  ldb.f_incident_keyword       a11 
