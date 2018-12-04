@@ -10,6 +10,7 @@ LEFT JOIN pandg_mdsdb.task_sla_final b ON a.sys_id=b.task AND a.sourceinstance=b
 Where b.stage <>'cancelled' Group by 1,2,3) SRC 
 LEFT JOIN pandg_mdwdb.d_request_item TRGT ON SRC.sys_id=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id 
 WHERE SRC.Source_Met_sla_Flag<>TRGT.met_sla_flag
+AND TRGT.soft_deleted_flag='N'
 ) temp;
  
 
