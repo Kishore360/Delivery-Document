@@ -7,13 +7,13 @@ CASE WHEN count(1)<1  THEN 'Age_key not populated correctly' ELSE 'SUCCESS' END 
 FROM ( select a.assignment_gp_manager_key,a.month_start_key,b.prev_month_start_key,begining,prev_begining_backlog from (
 select assignment_gp_manager_key, month_start_key,sum(beginning_backlog) begining 
 FROM     mcdonalds_mdwdb.f_n_incident_agm_io_snapshot_monthly_c a11
- join mcdonalds_mdwdb.d_internal_contact a13 on a11.assignment_gp_manager_key=a13.row_key
+ join mcdonalds_mdwdb.d_internal_organization a13 on a11.assignment_gp_manager_key=a13.row_key
  -- where month_start_key>=20180101 and month_start_key<=20180601
 group by 1 ,2 )a 
 join (
 select assignment_gp_manager_key  , prev_month_start_key,sum(prev_beginning_backlog) prev_begining_backlog   
 FROM       mcdonalds_mdwdb.f_n_incident_agm_io_snapshot_monthly_c a11
- join mcdonalds_mdwdb.d_internal_contact a13 on a11.assignment_gp_manager_key=a13.row_key
+ join mcdonalds_mdwdb.d_internal_organization a13 on a11.assignment_gp_manager_key=a13.row_key
  -- where month_start_key>=20180101 and month_start_key<=20180601
 group by 1 ,2)b 
 on  a.month_start_key=b.prev_month_start_key and 

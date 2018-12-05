@@ -7,13 +7,13 @@ CASE WHEN count(1)>0  THEN 'Age_key not populated correctly' ELSE 'SUCCESS' END 
 FROM ( select a.assignment_gp_manager_key,a.week_start_key,b.prev_week_start_key,ending,beg from (
 select assignment_gp_manager_key  ,prev_week_start_key, week_start_key,sum(ending_backlog) ending
 FROM     mcdonalds_mdwdb.f_n_incident_agm_io_snapshot_weekly_c a11
-join mcdonalds_mdwdb.d_internal_contact a13 on a11.assignment_gp_manager_key=a13.row_key
+join mcdonalds_mdwdb.d_internal_organization a13 on a11.assignment_gp_manager_key=a13.row_key
 --where assignment_gp_manager_key>0 -- and  week_start_key>=20180101 and week_start_key<=20180601
 group by 1,2,3 )a 
 join (
 select assignment_gp_manager_key, prev_week_start_key,week_start_key,sum(beginning_backlog) beg  
 FROM     mcdonalds_mdwdb.f_n_incident_agm_io_snapshot_weekly_c a11
-join mcdonalds_mdwdb.d_internal_contact a13 on a11.assignment_gp_manager_key=a13.row_key
+join mcdonalds_mdwdb.d_internal_organization a13 on a11.assignment_gp_manager_key=a13.row_key
 --where assignment_gp_manager_key>0 -- and   prev_week_start_key>=20180101 and prev_week_start_key<=20180601
 group by 1 ,2,3)b 
 on  a.week_start_key=b.prev_week_start_key AND a.assignment_gp_manager_key=b.assignment_gp_manager_key   
