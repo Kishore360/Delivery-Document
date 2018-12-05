@@ -1,6 +1,6 @@
 SELECT 
 CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result, 
-CASE WHEN count(1) > 0 THEN 'MDS to DWH data validation failed for d_request_item.response_sla_c_flag' ELSE 'SUCCESS' END as Message 
+CASE WHEN count(1) > 0 THEN 'MDS to DWH data validation failed for d_configuration_item.used_for_flag_c' ELSE 'SUCCESS' END as Message 
 FROM (
 SELECT trgt.row_id,src.*,trgt.used_for_flag_c,trgt.soft_deleted_flag
 FROM pandg_mdwdb.d_configuration_item trgt
