@@ -1,6 +1,8 @@
-SELECT CASE WHEN count(1)  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, 
-CASE WHEN count(1)  THEN 'MDS to DWH data validation failed for d_request_item.response_sla_c_flag' ELSE 'SUCCESS' END as Message 
-FROM (SELECT trgt.row_id,src.*,trgt.used_for_flag_c,trgt.soft_deleted_flag
+SELECT 
+CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result, 
+CASE WHEN count(1) > 0 THEN 'MDS to DWH data validation failed for d_request_item.response_sla_c_flag' ELSE 'SUCCESS' END as Message 
+FROM (
+SELECT trgt.row_id,src.*,trgt.used_for_flag_c,trgt.soft_deleted_flag
 FROM png_mdwdb.d_configuration_item trgt
 RIGHT JOIN 
 (SELECT a11.sys_id,a11.sourceinstance,a11.sys_class_name,a11.u_pg_environment,a12.used_for us1,a13.used_for us2,a14.used_for us3,a15.used_for us4
@@ -20,5 +22,5 @@ LEFT JOIN png_mdsdb.service_offering_final a15 ON a11.sys_id = a15.sys_id AND a1
 on src.sys_id = trgt.row_id and src.sourceinstance = trgt.source_id
 WHERE trgt.used_for_flag_c <> src.vl_to_check
 AND trgt.soft_deleted_flag ='N'
-)
+)temp
 ;
