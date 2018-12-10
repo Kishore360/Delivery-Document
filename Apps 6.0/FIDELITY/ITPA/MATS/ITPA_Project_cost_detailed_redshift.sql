@@ -93,4 +93,29 @@ join ldb.d_calendar_quarter       a14
 on (a13.quarter_start_date_key = a14.row_key)
 join ldb.d_calendar_year       a116
 on (a14.year_start_date_key = a116.row_key)
-
+union
+select'ldb.d_calendar_date_fiscal' as Table_Name, count(a11.row_key) Row_Count
+ from  ldb.f_project       a11 
+ join   ldb.d_calendar_date_fiscal          a125
+on  (a11.fiscal_date_key = a125.row_key)
+union
+select'ldb.d_calendar_fiscal_period' as Table_Name, count(a11.row_key) Row_Count
+ from  ldb.f_project       a11 	
+  join   ldb.d_calendar_date_fiscal          a125
+on  (a11.fiscal_date_key = a125.row_key)
+join ldb.d_calendar_fiscal_period     a126
+on (a125.period_start_date_key = a126.row_key)
+union
+select'ldb.d_calendar_fiscal_quarter' as Table_Name, count(a11.row_key) Row_Count
+ from  ldb.f_project a11 	
+  join   ldb.d_calendar_date_fiscal  a125
+on  (a11.fiscal_date_key = a125.row_key)
+join ldb.d_calendar_fiscal_quarter   a127
+on (a125.quarter_start_date_key = a127.row_key)
+union
+select'ldb.d_calendar_fiscal_year' as Table_Name, count(a11.row_key) Row_Count
+ from  ldb.f_project a11 	
+  join   ldb.d_calendar_date_fiscal  a125
+on  (a11.fiscal_date_key = a125.row_key)
+join ldb.d_calendar_fiscal_year a128
+on (a125.year_start_date_key = a128.row_key)
