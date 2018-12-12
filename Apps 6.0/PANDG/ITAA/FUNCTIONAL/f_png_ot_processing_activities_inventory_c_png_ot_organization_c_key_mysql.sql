@@ -1,5 +1,5 @@
 SELECT CASE WHEN count(1)>0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result, 
-CASE WHEN count(1)>0 THEN 'MDS to DWH data validation failed for f_png_ot_processing_activities_inventory_c.Owning_Organization' 
+CASE WHEN count(1)>0 THEN 'MDS to DWH data validation failed for f_png_ot_processing_activities_inventory_c.png_ot_organization_c_key' 
 ELSE 'SUCCESS' END as Message 
 FROM pandg_mdsdb.pg_ot_processing_activities_inventory_final  src
 LEFT JOIN  pandg_mdwdb.f_png_ot_processing_activities_inventory_c trgt
