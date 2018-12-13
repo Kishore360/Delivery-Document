@@ -3,5 +3,5 @@ CASE WHEN count(1)>0 THEN 'MDS to DWH data validation failed for d_png_ot_proces
 FROM pandg_mdsdb.pg_ot_processing_activities_inventory_final  src
 LEFT JOIN  pandg_mdwdb.d_png_ot_processing_activities_inventory_c trgt
 on src.inventory_id = trgt.row_id and src.sourceinstance = trgt.source_id
-where src.case when src.Custom_Field_num6 IS NULL or src.Custom_Field_num6 = ''
+where case when src.Custom_Field_num6 IS NULL or src.Custom_Field_num6 = ''
       then 'UNSPECIFIED'  else src.Custom_Field_num6 end <> trgt.custom_field_num6
