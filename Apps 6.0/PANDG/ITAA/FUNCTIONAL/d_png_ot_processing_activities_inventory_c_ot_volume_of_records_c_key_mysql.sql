@@ -1,7 +1,7 @@
 SELECT CASE WHEN count(1)>0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result, 
-CASE WHEN count(1)>0 THEN 'MDS to DWH data validation failed for d_pandg_ot_processing_activities_inventory_c.ot_volume_of_records_c_key' ELSE 'SUCCESS' END as Message 
+CASE WHEN count(1)>0 THEN 'MDS to DWH data validation failed for d_png_ot_processing_activities_inventory_c.ot_volume_of_records_c_key' ELSE 'SUCCESS' END as Message 
 FROM pandg_mdsdb.pg_ot_processing_activities_inventory_final  src
-LEFT JOIN  pandg_mdwdb.d_pandg_ot_processing_activities_inventory_c trgt
+LEFT JOIN  pandg_mdwdb.d_png_ot_processing_activities_inventory_c trgt
 on src.inventory_id = trgt.row_id and src.sourceinstance = trgt.source_id
 JOIN pandg_mdwdb.d_lov lkp
 ON COALESCE(CONCAT('OT_VOLUME_OF_RECORDS_C~PROCESSING_ACTIVITIES',src.Volumes_of_Records_All_Countries),'UNSPECIFIED') =lkp.row_id
