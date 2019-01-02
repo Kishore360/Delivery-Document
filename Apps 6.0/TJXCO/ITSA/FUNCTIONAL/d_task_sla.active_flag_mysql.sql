@@ -4,4 +4,4 @@ SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  LEFT JOIN tjxco_mdwdb.d_task_sla TRGT 
  ON (SRC.sys_id=TRGT.row_id 
  AND SRC.sourceinstance=TRGT.source_id )
- WHERE coalesce(case when SRC.active=1 then 'Y' when SRC.active=0 then 'N' end, 'UNSPECIFIED') =TRGT.active_flag) temp;
+ WHERE coalesce(case when SRC.active=1 then 'Y' when SRC.active=0 then 'N' end, 'UNSPECIFIED') <>TRGT.active_flag) temp;

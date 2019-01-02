@@ -4,4 +4,4 @@ SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  LEFT JOIN tjxco_mdwdb.f_task_sla TRGT 
  ON (SRC.sys_id=TRGT.row_id 
  AND SRC.sourceinstance=TRGT.source_id )
- WHERE convert_tz(SRC.pause_time, 'GMT','America/New_York')=TRGT.pause_time_c) temp;
+ WHERE convert_tz(SRC.pause_time, 'GMT','America/New_York')<>TRGT.pause_time_c) temp;
