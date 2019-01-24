@@ -121,5 +121,9 @@ JOIN ldb.d_rita_application_c b ON a.rita_application_c_key=b.row_key
 JOIN ldb.d_rita_application_repository_sub_type_c c ON b.rita_application_repository_sub_type_c_key=c.row_key
 
 
-
+UNION 
+SELECT 'ldb.d_application_gdpr_grouping_name_calculated' AS TABLE_NAME, COUNT(1) AS ROW_COUNT 
+FROM ldb.f_rita_application_c_fact a 
+JOIN ldb.d_rita_application_c b ON a.rita_application_c_key=b.row_key
+JOIN ldb.d_application_gdpr_grouping_name_calculated c ON b.gdpr_grouping_name_calculated_key=c.row_key
 
