@@ -5,13 +5,24 @@ CASE WHEN CNT > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 CASE WHEN CNT > 0 THEN 'MDS to DWH data validation failed for d_rita_application_c.precise_geo_loc_flag' ELSE 'SUCCESS' END as Message
 FROM 
 (
-SELECT Count(1) as CNT 
-FROM png_mdsdb.pg_mega_pgb_application_rita_final SRC  
-LEFT JOIN png_mdsdb.pg_mega_pgv_application_data_model_final SRC1 ON SRC.NAME=SRC1.APP_HEX AND SRC.sourceinstance=SRC1.sourceinstance
-LEFT JOIN png_mdwdb.d_rita_application_c TRGT ON SRC.NAME=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id
-WHERE 
-(CASE WHEN SRC1.ATTRIBUTE_NAME ='Precise geo location data' THEN 'Y' ELSE 'N' END )<> TRGT.precise_geo_loc_flag
-AND SRC.cdctype<>'D'
-)temp;
 
+SELECT Count(1) as CNT 
+FROM 
+(
+SELECT NAME,sourceinstance,GROUP_CONCAT(DISTINCT ATTRIBUTE_NAME ORDER BY ATTRIBUTE_NAME) AS ATTRIBUTE_NAME
+FROM 
+(
+SELECT app.NAME,app.sourceinstance,app.cdctype,
+ATT.ATTRIBUTE_NAME
+FROM png_mdsdb.pg_mega_pgb_application_rita_final as app 
+LEFT JOIN 
+(SELECT app_hex,sourceinstance,ATTRIBUTE_NAME,count(1) 
+FROM png_mdsdb.pg_mega_pgv_application_data_model_final where app_hex  IS NOT NULL and ATTRIBUTE_NAME IS NOT NULL AND cdctype<>'D'
+group by 1,2,3) AS ATT ON app.NAME=ATT.app_hex AND app.sourceinstance=ATT.sourceinstance AND app.cdctype<>'D'
+) Y 
+Group BY NAME
+) SRC 
+LEFT JOIN png_mdwdb.d_rita_application_c TRGT ON SRC.NAME=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id AND TRGT.soft_deleted_flag='N'
+WHERE (CASE WHEN SRC.ATTRIBUTE_NAME like '%Precise geo location data%' THEN 'Y' ELSE 'N' END)<>TRGT.precise_geo_loc_flag
+)temp;
 
