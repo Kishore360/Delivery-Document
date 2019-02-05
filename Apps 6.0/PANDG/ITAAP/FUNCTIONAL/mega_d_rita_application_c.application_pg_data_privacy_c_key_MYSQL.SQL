@@ -10,6 +10,7 @@ LEFT JOIN png_mdwdb.d_lov LKP ON
 COALESCE(CONCAT('APPLICATION_PG_DATA_PRIVACY_C~RITA_APPLICATION~',upper(SRC.PG_DATA_PRIVACY)),'UNSPECIFIED')=LKP.row_id 
 AND SRC.sourceinstance=LKP.source_id
 WHERE COALESCE(LKP.row_key,CASE WHEN upper(SRC.PG_DATA_PRIVACY) IS NULL THEN 0 ELSE -1 END)<>TRGT.application_pg_data_privacy_c_key
+AND SRC.cdctype<>'D'
 ) temp;
 
 
