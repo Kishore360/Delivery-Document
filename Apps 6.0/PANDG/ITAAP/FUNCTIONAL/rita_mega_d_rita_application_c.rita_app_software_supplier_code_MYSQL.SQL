@@ -10,7 +10,7 @@ FROM
 (
 SELECT SRC.NAME,SRC.sourceinstance, 
 GROUP_CONCAT(DISTINCT Organization ORDER BY Organization) AS Organization_NAME,
-GROUP_CONCAT(DISTINCT CARDINAL_CODE ORDER BY CARDINAL_CODE) AS CARDINAL_CODE 
+GROUP_CONCAT(DISTINCT CARDINAL_CODE ORDER BY Organization) AS CARDINAL_CODE 
 FROM png_mdsdb.pg_mega_pgb_application_rita_final SRC 
 LEFT JOIN 
 (SELECT a.app_hexid,a.responsible_org_unit_hexid,a.sourceinstance,Count(1)
