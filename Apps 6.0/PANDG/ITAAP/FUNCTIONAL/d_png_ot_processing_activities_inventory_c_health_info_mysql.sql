@@ -1,7 +1,11 @@
-SELECT CASE WHEN count(1)>0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result, 
-CASE WHEN count(1)>0 THEN 'MDS to DWH data validation failed for d_png_ot_processing_activities_inventory_c.health_info' ELSE 'SUCCESS' END as Message 
-FROM png_mdsdb.pg_ot_processing_activities_inventory_final  src
-LEFT JOIN  png_mdwdb.d_png_ot_processing_activities_inventory_c trgt
-on src.inventory_id = trgt.row_id and src.sourceinstance = trgt.source_id
-where case when src.Data_Elements_Collected_PG like '%Protected Health Information (“PHI”) as defined by HIPAA%'
-      then 'TRUE'  else 'FALSE' end <> trgt.health_info
+SELECT 
+CASE WHEN CNT > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result, 
+CASE WHEN CNT > 0 THEN 'MDS to DWH data validation failed for d_png_ot_processing_activities_inventory_c.health_info' ELSE 'SUCCESS' END as Message 
+FROM 
+(
+SELECT Count(1) as CNT 
+FROM png_mdsdb.pg_ot_processing_activities_inventory_final SRC 
+LEFT JOIN png_mdwdb.d_png_ot_processing_activities_inventory_c TRGT ON SRC.inventory_id=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id AND SRC.cdctype<>'D'
+WHERE 
+(CASE WHEN SRC.Data_Elements_Collected_PG LIKE '%Protected Health Information (“PHI”)%' THEN 'TRUE' ELSE 'FALSE' END)<>TRGT.health_info
+) temp;
