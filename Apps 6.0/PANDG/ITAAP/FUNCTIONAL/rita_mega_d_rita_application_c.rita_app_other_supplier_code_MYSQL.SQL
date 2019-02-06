@@ -16,7 +16,7 @@ LEFT JOIN
 (SELECT a.app_hexid,a.responsible_org_unit_hexid,a.sourceinstance,Count(1)
 FROM png_mdsdb.pg_mega_pgv_app_responsible_org_person_final a 
 WHERE (a.third_party_with_access<>'N' AND a.third_party_with_access IS NOT NULL AND a.third_party_with_access<>' ' )
-AND a.app_hexid IS NOT NULL AND a.responsible_org_unit_hexid IS NOT NULL 
+AND a.app_hexid IS NOT NULL AND a.responsible_org_unit_hexid IS NOT NULL AND a.cdctype<>'D'
 group by 1,2,3) ORG ON SRC.NAME=ORG.app_hexid AND SRC.sourceinstance=ORG.sourceinstance
 LEFT JOIN 
 (SELECT distinct b.NAME,LEFT((CARDINAL),255) AS CARDINAL_CODE,GENERICLOCALNAME,sourceinstance,

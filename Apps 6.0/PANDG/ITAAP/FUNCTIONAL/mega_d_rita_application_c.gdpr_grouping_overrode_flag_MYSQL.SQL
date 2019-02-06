@@ -13,7 +13,7 @@ LEFT JOIN png_mdsdb.pg_mega_pgb_app_keyword_final SRC1 ON SRC.NAME=SRC1.APP_HEXI
 LEFT JOIN png_mdwdb.d_rita_application_c TRGT ON SRC.NAME=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id
 WHERE (CASE WHEN SRC1.KEYWORD_NAME IN ('ITAM: GDPR - Grouping: 1','ITAM: GDPR - Grouping: 2','ITAM: GDPR - Grouping: 3','ITAM: GDPR - Grouping: 4') THEN 'Y'
 ELSE 'N' END)<>TRGT.gdpr_grouping_overrode_flag
-AND SRC.d
+AND SRC.cdctype<>'D'  AND SRC1.cdctype<>'D' 
 ) temp;
 
 
