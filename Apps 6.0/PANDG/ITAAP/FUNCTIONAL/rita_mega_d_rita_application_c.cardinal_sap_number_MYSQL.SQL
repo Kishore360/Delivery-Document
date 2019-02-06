@@ -8,7 +8,7 @@ FROM
 (
 SELECT SRC.NAME,SRC.sourceinstance, SRC.cdctype,
 GROUP_CONCAT(DISTINCT Organization ORDER BY Organization) AS Organization_NAME,
-GROUP_CONCAT(DISTINCT CARDINAL_CODE ORDER BY CARDINAL_CODE) AS CARDINAL_CODE 
+GROUP_CONCAT(DISTINCT CARDINAL_CODE ORDER BY Organization) AS CARDINAL_CODE 
 FROM png_mdsdb.pg_mega_pgb_application_rita_final SRC 
 LEFT JOIN 
 (SELECT a.app_hexid,a.responsible_org_unit_hexid,a.sourceinstance,cdctype,Count(1)
@@ -18,7 +18,7 @@ a.pg_software_supplier<>'N' AND a.pg_software_supplier IS NOT NULL AND a.pg_soft
 OR (a.pg_service_manager_supplier<>'N' AND a.pg_service_manager_supplier IS NOT NULL AND a.pg_service_manager_supplier<>' ' )
 OR (a.pg_implementation_supplier<>'N' AND a.pg_implementation_supplier IS NOT NULL AND a.pg_implementation_supplier<>' ' )
 OR (a.supplier<>'N' AND a.supplier IS NOT NULL AND a.supplier<>' ' )
-AND a.app_hexid IS NOT NULL AND a.responsible_org_unit_hexid IS NOT NULL 
+AND a.app_hexid IS NOT NULL AND a.responsible_org_unit_hexid IS NOT NULL AND a.cdctype<>'D'
 group by 1,2,3) ORG ON SRC.NAME=ORG.app_hexid AND SRC.sourceinstance=ORG.sourceinstance
 LEFT JOIN 
 (SELECT distinct b.NAME,LEFT((CARDINAL),255) AS CARDINAL_CODE,GENERICLOCALNAME,sourceinstance,

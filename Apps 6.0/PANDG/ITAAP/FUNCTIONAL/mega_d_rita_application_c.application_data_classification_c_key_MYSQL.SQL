@@ -5,7 +5,7 @@ FROM
 (
 SELECT Count(1) as CNT 
 FROM png_mdsdb.pg_mega_pgb_application_rita_final SRC 
-LEFT JOIN png_mdwdb.d_rita_application_c TRGT ON SRC.NAME=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id
+LEFT JOIN png_mdwdb.d_rita_application_c TRGT ON SRC.NAME=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id AND SRC.cdctype<>'D'
 JOIN png_mdwdb.d_lov LKP ON 
 COALESCE(CONCAT('APPLICATION_DATA_CLASSIFICATION_C~RITA_APPLICATION~',upper(SRC.PG_DATA_CLASSIFICATION)),'UNSPECIFIED')=LKP.row_id 
 AND SRC.sourceinstance=LKP.source_id
