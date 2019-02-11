@@ -9,15 +9,15 @@ FROM
 SELECT NAME,sourceinstance,cdctype,GROUP_CONCAT(DISTINCT le_name ORDER BY le_name ) AS le_name FROM 
 (
 SELECT a.NAME,a.sourceinstance,LEG.le_name,cdctype
-FROM pandg_mdsdb.pg_mega_pgb_application_rita_final a 
+FROM png_mdsdb.pg_mega_pgb_application_rita_final a 
 LEFT JOIN 
-(SELECT app_hexid,sourceinstance,le_hexid,le_name,count(1) FROM pandg_mdsdb.pg_mega_pgv_app_le_final 
+(SELECT app_hexid,sourceinstance,le_hexid,le_name,count(1) FROM png_mdsdb.pg_mega_pgv_app_le_final 
 WHERE (le_hexid IS NOT NULL AND le_hexid<>'') AND (app_hexid IS NOT NULL AND cdctype<>'D')
 GROUP BY 1,2,3,4) LEG ON a.NAME=LEG.app_hexid AND a.sourceinstance=LEG.sourceinstance
 ) X 
 GROUP BY NAME 
 ) SRC 
-LEFT JOIN pandg_mdwdb.d_rita_application_c TRGT ON (SRC.NAME=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id)
+LEFT JOIN png_mdwdb.d_rita_application_c TRGT ON (SRC.NAME=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id)
 WHERE COALESCE(SRC.le_name,'UNSPECIFIED')<>TRGT.rita_app_legal_entity_name
 AND SRC.cdctype<>'D'
 ) temp;

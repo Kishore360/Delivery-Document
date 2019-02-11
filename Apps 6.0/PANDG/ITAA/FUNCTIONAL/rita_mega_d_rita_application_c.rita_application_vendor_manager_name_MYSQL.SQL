@@ -12,11 +12,11 @@ FROM
 (
 SELECT 
 a.NAME,a.sourceinstance,VED.person_intranet_id
-FROM pandg_mdsdb.pg_mega_pgb_application_rita_final a
+FROM png_mdsdb.pg_mega_pgb_application_rita_final a
 LEFT JOIN 
 (
 SELECT app_hexid,sourceinstance,person_intranet_id,Count(1)
-FROM pandg_mdsdb.pg_mega_pgv_app_responsible_org_person_final
+FROM png_mdsdb.pg_mega_pgv_app_responsible_org_person_final
 WHERE (vendor_application_manager<>'N' AND vendor_application_manager IS NOT NULL AND vendor_application_manager<>'')
 AND (app_hexid IS NOT NULL AND person_hex IS NOT NULL and cdctype<>'D')
 GROUP by 1,2,3
@@ -26,7 +26,7 @@ ON a.NAME=VED.app_hexid AND a.sourceinstance=VED.sourceinstance
 GROUP BY NAME
 ) SRC 
 LEFT JOIN 
-pandg_mdwdb.d_rita_application_c TRGT ON SRC.NAME=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id
+png_mdwdb.d_rita_application_c TRGT ON SRC.NAME=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id
 WHERE COALESCE(SRC.person_intranet_id,'UNSPECIFIED')<>TRGT.rita_application_vendor_manager_name
 ) temp;
 

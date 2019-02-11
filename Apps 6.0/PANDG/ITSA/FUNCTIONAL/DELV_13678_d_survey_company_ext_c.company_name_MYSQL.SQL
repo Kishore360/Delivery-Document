@@ -9,8 +9,8 @@ FROM
 (
 
 SELECT Count(1) as CNT 
-FROM pandg_mdsdb.us_survey_response_score_final SRC
-LEFT JOIN pandg_mdwdb.d_survey_company_ext_c TRGT ON (COALESCE(SRC.Holding_Company,'UNSPECIFIED')=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id)
+FROM png_mdsdb.us_survey_response_score_final SRC
+LEFT JOIN png_mdwdb.d_survey_company_ext_c TRGT ON (COALESCE(SRC.Holding_Company,'UNSPECIFIED')=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id)
 WHERE (COALESCE(SRC.Holding_Company,'UNSPECIFIED'))
 <> TRGT.company_name
 ) temp;

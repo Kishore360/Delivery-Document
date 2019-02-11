@@ -11,16 +11,16 @@ SELECT NAME,sourceinstance,cdctype,GROUP_CONCAT(DISTINCT BP_NAME ORDER BY BP_NAM
 FROM 
 (
 SELECT a.NAME,a.sourceinstance,BP.BP_NAME,cdctype
-FROM pandg_mdsdb.pg_mega_pgb_application_rita_final a 
+FROM png_mdsdb.pg_mega_pgb_application_rita_final a 
 LEFT JOIN 
 (
-SELECT app_hex,sourceinstance,BP_NAME,Count(1) FROM pandg_mdsdb.pg_mega_snv_app_assoc_business_process_final
+SELECT app_hex,sourceinstance,BP_NAME,Count(1) FROM png_mdsdb.pg_mega_snv_app_assoc_business_process_final
 WHERE (app_hex IS NOT NULL )AND (BP_NAME IS NOT NULL and BP_NAME <>'') AND cdctype <>'D'
 GROUP BY 1,2,3) BP ON a.NAME=BP.app_hex AND a.sourceinstance=BP.sourceinstance
 ) X 
 GROUP BY NAME
 ) SRC 
-LEFT JOIN pandg_mdwdb.d_rita_application_c TRGT ON (SRC.NAME=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id )
+LEFT JOIN png_mdwdb.d_rita_application_c TRGT ON (SRC.NAME=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id )
 WHERE COALESCE(SRC.BP_NAME,'UNSPECIFIED')<>TRGT.rita_app_business_process_name
 AND SRC.cdctype<>'D'
 ) temp; 

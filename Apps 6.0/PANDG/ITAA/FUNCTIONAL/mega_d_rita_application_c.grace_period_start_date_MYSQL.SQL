@@ -6,17 +6,17 @@ CASE WHEN CNT > 0 THEN 'MDS to DWH data validation failed for d_rita_application
 FROM 
 (
 SELECT COUNT(1) as CNT 
-FROM pandg_mdsdb.pg_mega_pgb_application_rita_final SRC 
-LEFT JOIN pandg_mdwdb.d_rita_application_c TRGT ON SRC.NAME=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id
-LEFT JOIN (select source_id,max(lastupdated) as lastupdated from pandg_mdwdb.o_data_freshness
+FROM png_mdsdb.pg_mega_pgb_application_rita_final SRC 
+LEFT JOIN png_mdwdb.d_rita_application_c TRGT ON SRC.NAME=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id
+LEFT JOIN (select source_id,max(lastupdated) as lastupdated from png_mdwdb.o_data_freshness
 group by source_id) OD ON TRGT.source_id=OD.source_id
 LEFT JOIN 
-(SELECT a.app_hexid,a.sourceinstance,
-CASE WHEN Count(distinct a.responsible_org_unit_hexid) <= 1 THEN MAX(COALESCE(a.responsible_org_unit_hexid,'UNSPECIFIED')) ELSE 'UNKNOWN' end as responsible_org_unit_hexid  
-FROM pandg_mdsdb.pg_mega_pgv_app_responsible_org_person_final a WHERE a.pg_development_org = 'Y' AND a.app_hexid IS NOT NULL
+(SELECT a.app_hexid,a.sourceinstance,MIN(COALESCE(a.responsible_org_unit_hexid,'UNSPECIFIED')) as responsible_org_unit_hexid   
+FROM png_mdsdb.pg_mega_pgv_app_responsible_org_person_final a WHERE (a.pg_development_org = 'Y' AND a.app_hexid IS NOT NULL AND cdctype <> 'D')
 group by a.app_hexid,a.sourceinstance) SRC1 ON (SRC.NAME=SRC1.app_hexid AND SRC.sourceinstance=SRC1.sourceinstance )
-LEFT JOIN pandg_mdsdb.pg_mega_pgv_org_itam_gbs_final level1
-ON (SRC1.responsible_org_unit_hexid=level1.LVL1_ORG_HEX AND SRC1.sourceinstance=level1.sourceinstance )
+LEFT JOIN png_mdsdb.pg_mega_pgv_org_itam_gbs_final level1
+ON ((SRC1.responsible_org_unit_hexid=level1.LVL3_ORG_HEX or SRC1.responsible_org_unit_hexid=level1.LVL2_ORG_HEX
+or SRC1.responsible_org_unit_hexid=level1.LVL1_ORG_HEX) AND SRC1.sourceinstance=level1.sourceinstance )
 WHERE 
 CASE WHEN 
 SRC.APPLICATION_NATURE IN ('Generic','XOApplication','NonDigital','Component')

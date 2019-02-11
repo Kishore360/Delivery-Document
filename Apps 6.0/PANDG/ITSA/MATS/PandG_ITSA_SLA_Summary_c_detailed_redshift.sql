@@ -95,4 +95,46 @@ select 'ldb.d_internal_organization_vendor_company_c a115 ' as Table_name, count
 from ldb.f_incident_task_sla a11 
 JOIN ldb.d_task_sla c ON a11.sla_key=c.row_key
 JOIN ldb.d_internal_organization_vendor_company_c d ON c.vendor_c_key=d.row_key
+UNION 
+select 'ldb.d_internal_contact_vp_c a115 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_incident_task_sla a11 
+JOIN ldb.d_task_sla c ON a11.sla_key=c.row_key
+JOIN ldb.d_internal_contact_vp_c d ON c.u_owned_by_c_key=d.row_key
+UNION 
+select 'ldb.d_internal_contact_vp_sla_owner_c a115 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_incident_task_sla a11 
+JOIN ldb.d_task_sla c ON a11.sla_key=c.row_key
+JOIN ldb.d_internal_contact_vp_c d ON c.u_owned_by_c_key=d.row_key
+JOIN ldb.d_internal_contact_vp_sla_owner_c e ON d.vp_key=e.row_key
 
+UNION 
+select 'ldb.d_internal_contact_director_c a115 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_incident_task_sla a11 
+JOIN ldb.d_task_sla c ON a11.sla_key=c.row_key
+JOIN ldb.d_internal_contact_director_c d ON c.u_owned_by_c_key=d.row_key
+UNION 
+select 'ldb.d_internal_contact_director_sla_owner_c a115 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_incident_task_sla a11 
+JOIN ldb.d_task_sla c ON a11.sla_key=c.row_key
+JOIN ldb.d_internal_contact_director_c d ON c.u_owned_by_c_key=d.row_key
+JOIN ldb.d_internal_contact_director_sla_owner_c e ON d.director_key=e.row_key
+UNION 
+select 'ldb.d_internal_contact_associate_director_c a115 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_incident_task_sla a11 
+JOIN ldb.d_task_sla c ON a11.sla_key=c.row_key
+JOIN ldb.d_internal_contact_associate_director_c d ON c.u_owned_by_c_key=d.row_key
+UNION 
+select 'ldb.d_internal_contact_associate_director_c a115 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_incident_task_sla a11 
+JOIN ldb.d_task_sla c ON a11.sla_key=c.row_key
+JOIN ldb.d_internal_contact_ad_sla_owner_c d ON c.u_owned_by_c_key=d.row_key
+UNION 
+select 'ldb.d_ag_manager_role_vp_dir_ad_c a115 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_incident_task_sla a11 
+JOIN ldb.d_task_sla c ON a11.sla_key=c.row_key
+JOIN ldb.d_ag_manager_role_vp_dir_ad_c d ON a11.inc_assignment_group_key=d.row_key
+UNION 
+select 'ldb.d_ag_manager_role_vp_dir_ad_task_sla_owner_c a115 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_incident_task_sla a11 
+JOIN ldb.d_task_sla c ON a11.sla_key=c.row_key
+JOIN ldb.d_ag_manager_role_vp_dir_ad_task_sla_owner_c d ON c.u_owned_by_c_key=d.row_key

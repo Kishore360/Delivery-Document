@@ -11,17 +11,17 @@ SELECT NAME,sourceinstance,GROUP_CONCAT(DISTINCT site_name ORDER BY site_name) A
 FROM 
 (
 SELECT a.NAME,SITE.site_name,a.sourceinstance
-FROM pandg_mdsdb.pg_mega_pgb_application_rita_final  a
+FROM png_mdsdb.pg_mega_pgb_application_rita_final  a
 LEFT JOIN
 (
 SELECT app_hex,site_hex,site_name,sourceinstance,Count(1)
-FROM pandg_mdsdb.pg_mega_pgv_application_site_pii_final WHERE app_hex IS NOT NULL AND site_hex <>'' AND cdctype<>'D'
+FROM png_mdsdb.pg_mega_pgv_application_site_pii_final WHERE app_hex IS NOT NULL AND site_hex <>'' AND cdctype<>'D'
 group by 1,2,3
 ) SITE ON a.NAME=SITE.app_hex AND a.sourceinstance=SITE.sourceinstance
 ) X
 GROUP BY NAME
 ) SRC  
-LEFT JOIN pandg_mdwdb.d_rita_application_c TRGT ON SRC.NAME=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id
+LEFT JOIN png_mdwdb.d_rita_application_c TRGT ON SRC.NAME=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id
 WHERE COALESCE(SRC.SITE_NAME,'UNSPECIFIED')<>TRGT.rita_application_site_name
 ) temp;
 
