@@ -7,22 +7,22 @@ SELECT Count(1) as CNT
 FROM 
 (
 SELECT X.NAME,X.sourceinstance,
-SUBSTRING_INDEX(GROUP_CONCAT(hex_id ORDER BY hex_order DESC separator '@'),'@',1) AS pg_development_org_hex
+SUBSTRING_INDEX(GROUP_CONCAT(hex_id ORDER BY hex_order DESC,hex_id ASC separator '@'),'@',1) AS pg_development_org_hex
 FROM 
 (
 SELECT SRC.NAME,SRC.sourceinstance,SRC1.app_hexid,SRC1.sourceinstance as sourceinstance1,
 CASE 
-WHEN LVL3_ORG_HEX IS NOT NULL THEN LVL3_ORG_HEX
-WHEN LVL2_ORG_HEX IS NOT NULL THEN LVL2_ORG_HEX
-WHEN LVL1_ORG_HEX IS NOT NULL THEN LVL1_ORG_HEX
-WHEN LVL0_ORG_HEX IS NOT NULL THEN LVL0_ORG_HEX
+WHEN LVL3_ORG_HEX IS NOT NULL THEN SRC1.responsible_org_unit_hexid
+WHEN LVL2_ORG_HEX IS NOT NULL THEN SRC1.responsible_org_unit_hexid
+WHEN LVL1_ORG_HEX IS NOT NULL THEN SRC1.responsible_org_unit_hexid
+WHEN LVL0_ORG_HEX IS NOT NULL THEN SRC1.responsible_org_unit_hexid
 ELSE SRC1.responsible_org_unit_hexid
 END as hex_id,
 CASE
-	WHEN LVL3_ORG_HEX IS NOT NULL THEN 3
-	WHEN LVL2_ORG_HEX IS NOT NULL THEN 2
-	WHEN LVL1_ORG_HEX IS NOT NULL THEN 1
-	WHEN LVL0_ORG_HEX IS NOT NULL THEN 0
+	WHEN LVL3_ORG_HEX =SRC1.responsible_org_unit_hexid THEN 3
+	WHEN LVL2_ORG_HEX =SRC1.responsible_org_unit_hexid THEN 2
+	WHEN LVL1_ORG_HEX =SRC1.responsible_org_unit_hexid THEN 1
+	WHEN LVL0_ORG_HEX =SRC1.responsible_org_unit_hexid THEN 0
 	ELSE -1
 END as hex_order
 FROM png_mdsdb.pg_mega_pgb_application_rita_final SRC 
