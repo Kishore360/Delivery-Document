@@ -3,38 +3,31 @@ from ldb.f_change_request a11
 union
 select 'ldb.d_internal_contact a12 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_change_request a11 
-join ldb.d_internal_contact a12 
-on (a11.employee_key = a12.row_key) 
+join ldb.d_internal_contact a12  on (a11.employee_key = a12.row_key) 
 union
 select 'ldb.d_internal_contact_assigned_to a13 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_change_request a11 
-join ldb.d_internal_contact_assigned_to a13 
-on (a11.assigned_to_key = a13.row_key) 
+join ldb.d_internal_contact_assigned_to a13  on (a11.assigned_to_key = a13.row_key) 
 union
 select 'ldb.d_internal_organization_group a14 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_change_request a11 
-join ldb.d_internal_organization_group a14 
-on (a11.assignment_group_key = a14.row_key) 
+join ldb.d_internal_organization_group a14 on (a11.assignment_group_key = a14.row_key) 
 union
 select 'ldb.d_business_service a15 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_change_request a11 
-join ldb.d_business_service a15 
-on (a11.business_service_key = a15.row_key) 
+join ldb.d_business_service a15  on (a11.business_service_key = a15.row_key) 
 union
 select 'ldb.d_change_request a16 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_change_request a11 
-join ldb.d_change_request a16 
-on (a11.change_request_key = a16.row_key) 
+join ldb.d_change_request a16 on (a11.change_request_key = a16.row_key) 
 union
 select 'ldb.d_configuration_item a17 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_change_request a11 
-join ldb.d_configuration_item a17 
-on (a11.configuration_item_key = a17.row_key) 
+join ldb.d_configuration_item a17  on (a11.configuration_item_key = a17.row_key) 
 union
 select 'ldb.d_calendar_date a18 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_change_request a11 
-join ldb.d_calendar_date a18 
-on (a11.date_key = a18.row_key) 
+join ldb.d_calendar_date a18  on (a11.date_key = a18.row_key) 
 union
 select 'ldb.d_calendar_month a19 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_change_request a11 
@@ -170,16 +163,17 @@ on (a16.change_coordinator_c_key = a131.row_key)
 union
 select 'ldb.d_internal_contact_manager_c a132 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_change_request a11 
-join ldb.d_change_request a16 
-on (a11.change_request_key = a16.row_key) 
-join ldb.d_internal_contact_manager_c a132 
-on (a16.change_manager_c_key = a132.row_key) 
+join ldb.d_change_request a16 on (a11.change_request_key = a16.row_key) 
+join ldb.d_internal_contact_manager_c a132  on (a16.change_manager_c_key = a132.row_key) 
 union
 select 'ldb.d_calendar_year a133 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_change_request a11 
-join ldb.d_calendar_date a18 
-on (a11.date_key = a18.row_key) join ldb.d_calendar_month a19 
-on (a18.month_start_date_key = a19.row_key) join ldb.d_calendar_quarter a110 
-on (a19.quarter_start_date_key = a110.row_key) 
-join ldb.d_calendar_year a133 
-on (a110.year_start_date_key = a133.row_key) 
+join ldb.d_calendar_date a18 on (a11.date_key = a18.row_key) 
+join ldb.d_calendar_month a19 on (a18.month_start_date_key = a19.row_key) 
+join ldb.d_calendar_quarter a110 on (a19.quarter_start_date_key = a110.row_key) 
+join ldb.d_calendar_year a133 on (a110.year_start_date_key = a133.row_key) 
+UNION 
+SELECT  'ldb.d_internal_organization_change_coordinator_group_c a133 ' as Table_name, count(a.row_key) Row_Count
+FROM ldb.f_change_request a 
+JOIN ldb.d_change_request b ON a.change_request_key=b.row_key
+JOIN ldb.d_internal_organization_change_coordinator_group_c c ON b.change_coordinator_group_c_key=c.row_key
