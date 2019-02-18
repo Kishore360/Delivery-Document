@@ -4,23 +4,23 @@ CASE WHEN CNT > 0 THEN 'MDS to DWH data validation failed for d_rita_application
 FROM 
 (
 SELECT Count(1) as CNT 
+FROM png_mdsdb.pg_mega_pgb_application_rita_final as app
+LEFT JOIN
+(
+SELECT app_hex, sourceinstance,group_concat(DISTINCT ATTRIBUTE_NAME) as res
 FROM 
 (
-SELECT NAME,sourceinstance,GROUP_CONCAT(DISTINCT ATTRIBUTE_NAME ORDER BY ATTRIBUTE_NAME) AS ATTRIBUTE_NAME
-FROM 
-(
-SELECT app.NAME,app.sourceinstance,app.cdctype,
-ATT.ATTRIBUTE_NAME
-FROM png_mdsdb.pg_mega_pgb_application_rita_final as app 
-LEFT JOIN 
-(SELECT app_hex,sourceinstance,ATTRIBUTE_NAME,count(1) 
+SELECT app_hex,sourceinstance,replace(ATTRIBUTE_NAME,char('124'),'@') AS ATTRIBUTE_NAME 
 FROM png_mdsdb.pg_mega_pgv_application_data_model_final where app_hex  IS NOT NULL and ATTRIBUTE_NAME IS NOT NULL AND cdctype<>'D'
-group by 1,2,3) AS ATT ON app.NAME=ATT.app_hex AND app.sourceinstance=ATT.sourceinstance AND app.cdctype<>'D'
-) Y 
-Group BY NAME
-) SRC 
-LEFT JOIN png_mdwdb.d_rita_application_c TRGT ON SRC.NAME=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id AND TRGT.soft_deleted_flag='N'
-WHERE (CASE WHEN SRC.ATTRIBUTE_NAME like '%Marital Status%' THEN 'Y' ELSE 'N' END)<>TRGT.marital_stats_c_flag
+) SRC1 
+WHERE 
+SRC1.ATTRIBUTE_NAME ='Marital Status' OR SRC1.ATTRIBUTE_NAME like '%@Marital Status@%' OR SRC1.ATTRIBUTE_NAME like '%@Marital Status' OR SRC1.ATTRIBUTE_NAME like 'Marital Status@%'
+GROUP BY 1,2
+) X ON app.NAME=X.app_hex AND app.sourceinstance=X.sourceinstance
+LEFT JOIN png_mdwdb.d_rita_application_c TRGT ON app.NAME=TRGT.row_id AND app.sourceinstance=TRGT.source_id
+WHERE 
+IF(X.res like '%Marital Status%','Y','N')<>TRGT.marital_stats_c_flag
+
 )temp;
 
 
