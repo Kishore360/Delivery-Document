@@ -1,5 +1,3 @@
-
-
 SELECT 
 CASE WHEN CNT > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 CASE WHEN CNT > 0 THEN 'MDS to DWH data validation failed for d_rita_application_c.organization_sap_vendor_name' ELSE 'SUCCESS' END as Message
