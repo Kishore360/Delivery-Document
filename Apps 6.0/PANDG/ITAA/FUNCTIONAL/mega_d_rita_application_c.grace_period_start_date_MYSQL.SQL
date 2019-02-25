@@ -20,7 +20,7 @@ or SRC1.responsible_org_unit_hexid=level1.LVL1_ORG_HEX) AND SRC1.sourceinstance=
 WHERE 
 CASE WHEN 
 SRC.APPLICATION_NATURE IN ('Generic','XOApplication','NonDigital','Component')
-AND SRC.LIFE_CYCLE_STATUS  NOT IN ('Decomissioned','Exception Use','not_used','Undecided','Discovery/Requ.','Exception')
+AND SRC.LIFE_CYCLE_STATUS  NOT IN ('Decomissioned','Exception Use','not_used','Undecided','Exception')
 AND TRGT.gdpr_relevant_c_flag ='Y' 
 AND level1.LVL1_ORG_NAME IN 
 ('Information Security','IT Consumer Solutions','IT Customer Solutions & Delivery','IT Data & Analytics Organization','IT IT Development Organization',
