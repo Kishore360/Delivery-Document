@@ -4,8 +4,8 @@ CASE WHEN CNT > 0 THEN 'MDS to DWH data validation failed for f_change_request.p
 FROM 
 (
 SELECT Count(1) AS CNT
-FROM pandg_mdsdb.change_request_final SRC 
-LEFT JOIN pandg_mdwdb.f_change_request TRGT ON (SRC.sys_id=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id)
+FROM png_mdsdb.change_request_final SRC 
+LEFT JOIN png_mdwdb.f_change_request TRGT ON (SRC.sys_id=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id)
 WHERE COALESCE(SRC.u_pg_confirmation_decision_duration,'UNSPECIFIED')<>TRGT.pg_confirmation_decision_duration_c
 ) temp; 
 

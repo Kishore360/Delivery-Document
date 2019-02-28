@@ -229,17 +229,13 @@ join ldb.d_internal_contact_incident_opened_for_c a147 on (a114.opened_for_key =
 union
 select 'ldb.d_lov_incident_service_type_c a148 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11 
-join ldb.d_incident a114 
-on (a11.incident_key = a114.row_key) 
-join ldb.d_lov_incident_service_type_c a148 
-on (a114.service_type_src_c_key = a148.row_key) 
+join ldb.d_incident a114 on (a11.incident_key = a114.row_key) 
+join ldb.d_lov_incident_service_type_c a148 on (a114.service_type_src_c_key = a148.row_key) 
 union
 select 'ldb.d_lov_incident_why_not_cwt_c a149 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11 
-join ldb.d_incident a114 
-on (a11.incident_key = a114.row_key) 
-join ldb.d_lov_incident_why_not_cwt_c a149 
-on (a114.why_now_cwt_src_c_key = a149.row_key) 
+join ldb.d_incident a114 on (a11.incident_key = a114.row_key) 
+join ldb.d_lov_incident_why_not_cwt_c a149 on (a114.why_now_cwt_src_c_key = a149.row_key) 
 union
 select 'ldb.d_calendar_quarter a13 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11 
@@ -263,3 +259,8 @@ on (a11.date_key = a111.row_key)
 JOIN ldb.d_calendar_month a12 ON a111.month_start_date_key=a12.row_key
 JOIN ldb.d_calendar_quarter a13 ON a12.quarter_start_date_key=a13.row_key
 JOIN ldb.d_calendar_year a14 ON a13.year_start_date_key=a14.row_key
+UNION 
+select 'ldb.d_lov_incremental_cost_c a150' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_incident a11 
+join ldb.d_incident a114 on (a11.incident_key = a114.row_key) 
+JOIN ldb.d_lov_incremental_cost_c a150 ON a114.incremental_cost_src_c_key=a150.row_key

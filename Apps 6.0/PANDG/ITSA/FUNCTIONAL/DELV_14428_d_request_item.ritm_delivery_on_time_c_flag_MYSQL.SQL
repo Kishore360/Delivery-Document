@@ -7,8 +7,8 @@ CASE WHEN cnt > 0 THEN 'MDS to DWH data validation failed for d_request_item.rit
 FROM 
 (
 SELECT Count(1) as CNT 
-FROM pandg_mdsdb.sc_req_item_final SRC 
-LEFT JOIN pandg_mdwdb.d_request_item TRGT ON (SRC.sys_id=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id)
+FROM png_mdsdb.sc_req_item_final SRC 
+LEFT JOIN png_mdwdb.d_request_item TRGT ON (SRC.sys_id=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id)
 WHERE 
 (CASE 
 WHEN TRGT.active_flag='N' AND TRGT.estimated_delivery IS NOT NULL AND TRGT.closed_on <= TRGT.estimated_delivery THEN 'Y'  
