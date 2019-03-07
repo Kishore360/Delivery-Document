@@ -6,7 +6,7 @@ FROM
 FROM png_mdsdb.change_request_final a
 JOIN png_mdwdb.d_change_request b on a.sys_id=b.row_id and a.sourceinstance=b.source_id
 WHERE convert_tz(a.requested_by_date,'GMT','America/New_York')<> b.requested_completion_on
-AND a.src.cdctype<>'D'
+AND a.cdctype<>'D'
 ) temp;
 
 
