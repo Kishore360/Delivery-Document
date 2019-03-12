@@ -7,7 +7,7 @@ SELECT Count(1) as CNT
 FROM png_mdsdb.pg_mega_pgb_application_rita_final SRC
 LEFT JOIN 
 (
-SELECT a.app_hexid,a.sourceinstance,CASE WHEN COUNT(1) <= 1 THEN MAX(COALESCE(a.person_hex,'UNSPECIFIED')) ELSE 'UNKNOWN' END AS 'person_hex'  
+SELECT a.app_hexid,a.sourceinstance,CASE WHEN COUNT(distinct a.person_hex) <= 1 THEN MAX(COALESCE(a.person_hex,'UNSPECIFIED')) ELSE 'UNKNOWN' END AS 'person_hex'  
 FROM png_mdsdb.pg_mega_pgv_app_responsible_org_person_final a  WHERE a.application_manager = 'Y' AND a.cdctype<>'D'
 group by a.app_hexid
 ) ASSET_OWNER ON SRC.NAME=ASSET_OWNER.app_hexid AND SRC.sourceinstance=ASSET_OWNER.sourceinstance
