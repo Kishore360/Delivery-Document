@@ -68,6 +68,12 @@ SELECT 'ldb.d_application_gdpr_grouping_name_c' AS TABLE_NAME, COUNT(1) AS ROW_C
 FROM ldb.f_rita_application_c_fact a11
 JOIN ldb.d_rita_application_c a12 ON a11.rita_application_c_key=a12.row_key
 JOIN ldb.d_application_gdpr_grouping_name_c a13 ON a12.gdpr_grouping_name_c_key=a13.row_key
+UNION 
+SELECT 'ldb.d_rita_application_ext_c' AS TABLE_NAME, COUNT(1) AS ROW_COUNT 
+FROM ldb.f_rita_application_c_fact a11
+JOIN ldb.d_rita_application_c a12 ON a11.rita_application_c_key=a12.row_key
+JOIN ldb.d_rita_application_ext_c a13 ON a12.rita_application_ext_c_key=a13.row_key
+
 
 
 
