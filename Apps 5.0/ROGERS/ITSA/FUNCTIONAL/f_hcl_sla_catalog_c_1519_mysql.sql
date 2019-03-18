@@ -23,7 +23,7 @@ join rogers_mdwdb.d_calendar_date d32 on f.opened_on_key=d32.row_key
 left join rogers_mdwdb.d_internal_organization d11 on d12.assignment_group_for_pit_lead_c_key=d11.row_key 
 where 
 has_breached=0 and 
-d11.organization_name like '%HCL%' and 
+d11.organization_name like '%HCL%' and lagging_count_of_month between 0 and 11 and    
 b34.name='Rogers Priority 2 - Resolution' 
 and u_sub_status not in ('Cancelled','Out Of Scope') 
 group by 1 )a
@@ -36,7 +36,7 @@ join rogers_mdwdb.d_problem d12 on f.problem_key=d12.row_key
 join rogers_mdwdb.d_calendar_date d32 on f.opened_on_key=d32.row_key
 left join rogers_mdwdb.d_internal_organization d11 on d12.assignment_group_for_pit_lead_c_key=d11.row_key 
 where month_start_date_key>='20180101' and 
-d11.organization_name like '%HCL%' and 
+d11.organization_name like '%HCL%' and lagging_count_of_month between 0 and 11 and    
 b34.name='Rogers Priority 2 - Resolution' 
 and u_sub_status not in ('Cancelled','Out Of Scope') 
 group by 1)b on a.month_start_date_key=b.month_start_date_key   )b2  on a.xy1=b2.month_start_date_key

@@ -20,14 +20,13 @@ join rogers_mdsdb.contract_sla_final b34 on a.sla=b34.sys_id
 join   rogers_mdwdb.f_incident f on b.sys_id=f.row_id 
 join rogers_mdwdb.d_problem d12 on f.problem_key=d12.row_key
 join rogers_mdwdb.d_calendar_date d32 on f.opened_on_key=d32.row_key
-left join rogers_mdwdb.d_internal_organization d11 on d12.assignment_group_for_pit_lead_c_key=d11.row_key 
-left join rogers_mdwdb.d_internal_organization d112 on f.assignment_group_key=d112.row_key 
+left join rogers_mdwdb.d_lov lov on f.priority_src_key=lov.row_key
+left join rogers_mdwdb.d_internal_organization d112 on f.resolved_by_group_key=d112.row_key 
 where 
-has_breached=0 and 
-d11.organization_name like '%HCL%' and 
+dimension_name in ('priority 1','priority 2') and 
 d112.organization_name like '%HCL%' and 
 b34.name='Rogers-Vital App-Password-Resolution' 
-and u_sub_status not in ('Cancelled',) 
+and u_sub_status not in ('Cancelled') 
 group by 1 )a
 cross join 
 ( select  month_start_date_key month_start_date_key,count(1)cnt from      rogers_mdsdb.incident_final b
@@ -36,10 +35,9 @@ join rogers_mdsdb.contract_sla_final b34 on a.sla=b34.sys_id
 join   rogers_mdwdb.f_incident f on b.sys_id=f.row_id 
 join rogers_mdwdb.d_problem d12 on f.problem_key=d12.row_key
 join rogers_mdwdb.d_calendar_date d32 on f.opened_on_key=d32.row_key
-left join rogers_mdwdb.d_internal_organization d11 on d12.assignment_group_for_pit_lead_c_key=d11.row_key 
-left join rogers_mdwdb.d_internal_organization d112 on f.assignment_group_key=d112.row_key 
-where month_start_date_key>='20180101' and 
-d11.organization_name like '%HCL%' and 
+left join rogers_mdwdb.d_lov lov on f.priority_src_key=lov.row_key
+left join rogers_mdwdb.d_internal_organization d112 on f.resolved_by_group_key=d112.row_key 
+where month_start_date_key>='20180101' and dimension_name in ('priority 1','priority 2') and 
 d112.organization_name like '%HCL%' and 
 b34.name='Rogers-Vital App-Password-Resolution' 
 and u_sub_status not in ('Cancelled') 

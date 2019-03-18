@@ -23,7 +23,7 @@ join rogers_mdwdb.d_calendar_date d32 on f.opened_on_key=d32.row_key
 left join rogers_mdwdb.d_internal_organization d11 on d12.assignment_group_for_pit_lead_c_key=d11.row_key 
 left join rogers_mdwdb.d_internal_organization d112 on f.assignment_group_key=d112.row_key 
 where 
-has_breached=0 and 
+has_breached=0 and lagging_count_of_month between 0 and 11 and  
 d11.organization_name like '%HCL%' and 
 d112.organization_name like '%HCL%' and 
 b34.name='Rogers Priority 3 - Resolution' 
@@ -38,7 +38,7 @@ join rogers_mdwdb.d_problem d12 on f.problem_key=d12.row_key
 join rogers_mdwdb.d_calendar_date d32 on f.opened_on_key=d32.row_key
 left join rogers_mdwdb.d_internal_organization d11 on d12.assignment_group_for_pit_lead_c_key=d11.row_key 
 left join rogers_mdwdb.d_internal_organization d112 on f.assignment_group_key=d112.row_key 
-where month_start_date_key>='20180101' and 
+where month_start_date_key>='20180101' and lagging_count_of_month between 0 and 11 and  
 d11.organization_name like '%HCL%' and 
 d112.organization_name like '%HCL%' and 
 b34.name='Rogers Priority 3 - Resolution' 
