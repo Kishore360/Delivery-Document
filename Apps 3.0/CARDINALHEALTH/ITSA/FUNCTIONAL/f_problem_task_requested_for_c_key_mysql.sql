@@ -11,5 +11,5 @@ FROM (SELECT count(1) as CNT
 LEFT JOIN cardinalhealth_mdwdb.d_internal_contact LKP 
  ON COALESCE(CONCAT('INTERNAL_CONTACT','~',lkp_s.u_requested_for),'UNSPECIFIED')= LKP.row_id 
 AND SRC.sourceinstance= LKP.source_id 
- WHERE COALESCE(LKP.row_key,CASE WHEN lkp_s.u_requested_for IS NULL THEN 0 else -1 end)<> (TRGT.requested_for_c_key))c;
+ WHERE TRGT.soft_deleted_flag='N' and LKP.soft_deleted_flag='N' and  COALESCE(LKP.row_key,CASE WHEN lkp_s.u_requested_for IS NULL THEN 0 else -1 end)<> (TRGT.requested_for_c_key))c;
  
