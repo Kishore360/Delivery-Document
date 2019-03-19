@@ -7,3 +7,11 @@ left join  nbcu_mdwdb.d_configuration_item  TRGT
 on SRC.sys_id=TRGT.row_id and SRC.sourceinstance=TRGT.Source_id
 where TRGT.soft_deleted_flag<>'Y' and 
 coalesce(SRC.serial_number,'UNSPECIFIED') <> TRGT.serial_number_c) temp;
+
+
+Configuration Item	Class	Changed On Date	Executive Sponsor Name	Category	Primary Duration(Hours)	
+alpwsld00001	Apache	1/5/2018	UNSPECIFIED	UNSPECIFIED	1,348.5	
+Configuration Item	Class	Changed On Date	Executive Sponsor Name	Category	Primary Duration(Hours)	
+American National Standards Institute (ANSI)	Application	12/12/2017	Sponsor TBD	Resource	1,835.8	
+Configuration Item	Class	Changed On Date	Executive Sponsor Name	Category	Primary Duration(Hours)	
+Zscaler Proxy Authentication	Application	11/28/2017	James Turcotte	Resource	14,928.5	

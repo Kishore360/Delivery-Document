@@ -182,4 +182,10 @@ on (a11.date_key = a18.row_key) join ldb.d_calendar_month a19
 on (a18.month_start_date_key = a19.row_key) join ldb.d_calendar_quarter a110 
 on (a19.quarter_start_date_key = a110.row_key) 
 join ldb.d_calendar_year a133 
-on (a110.year_start_date_key = a133.row_key); 
+on (a110.year_start_date_key = a133.row_key)
+UNION 
+SELECT  'ldb.d_internal_organization_change_coordinator_group_c a133 ' as Table_name, count(a.row_key) Row_Count
+FROM ldb.f_change_request_closed a 
+JOIN ldb.d_change_request b ON a.change_request_key=b.row_key
+JOIN ldb.d_internal_organization_change_coordinator_group_c c ON b.change_coordinator_group_c_key=c.row_key
+

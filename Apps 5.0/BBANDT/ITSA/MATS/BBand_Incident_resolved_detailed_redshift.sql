@@ -61,7 +61,7 @@ join ldb.d_incident_severity a12 on (a11.severity_src_key=a12.row_key)
 UNION 
 SELECT 'ldb.d_incident_resolution_ci_c' AS Table_Name, count(a11.row_key) as Row_count
 FROM ldb.f_incident_resolved a11
-JOIN ldb.d_incident_resolution_ci_c b ON a11.resolution_ci_c_key=b.row_key
+JOIN ldb.d_incident_resolution_ci_c b ON a11.resolution_ci_detail_key=b.row_key
 UNION 
 SELECT 'ldb.d_software_c' AS Table_Name, count(a11.row_key) as Row_count
 FROM ldb.f_incident_resolved a11

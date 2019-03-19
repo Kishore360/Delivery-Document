@@ -7,4 +7,4 @@ from
  on SRC.sourceinstance=SRC1.sourceinstance and SRC.sys_id=SRC1.sys_id
 left join  nbcu_mdwdb.d_configuration_item  TRGT
 on SRC.sys_id=TRGT.row_id and SRC.sourceinstance=TRGT.Source_id
-where SRC1.u_application_id <> TRGT.application_id_c) temp;
+where TRGT.soft_deleted_flag<>'Y' and  SRC1.u_application_id <> TRGT.application_id_c) temp;

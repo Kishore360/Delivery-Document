@@ -1,4 +1,5 @@
-SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+SELECT 
+CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for f_incident_archer_id_c_key' ELSE 'SUCCESS' END as Message
 FROM bbandt_mdsdb.incident_final SRC 
 LEFT JOIN bbandt_mdwdb.d_software_c LKP 
