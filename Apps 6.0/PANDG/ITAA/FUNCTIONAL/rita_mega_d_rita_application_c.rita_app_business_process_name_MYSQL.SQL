@@ -10,8 +10,7 @@ FROM
 SELECT NAME,sourceinstance,cdctype,GROUP_CONCAT(DISTINCT BP_NAME ORDER BY BP_NAME) AS BP_NAME
 FROM 
 (
-SELECT a.NAME,a.sourceinstance,BP.BP_NAME,cdctype
-FROM png_mdsdb.pg_mega_pgb_application_rita_final a 
+SELECT a.NAME,a.sourceinstance,BP.BP_NAME,cdctype FROM png_mdsdb.pg_mega_pgb_application_rita_final a 
 LEFT JOIN 
 (
 SELECT app_hex,sourceinstance,BP_NAME,Count(1) FROM png_mdsdb.pg_mega_snv_app_assoc_business_process_final
