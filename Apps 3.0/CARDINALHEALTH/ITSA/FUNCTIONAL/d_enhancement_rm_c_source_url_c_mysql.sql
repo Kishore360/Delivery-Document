@@ -1,0 +1,10 @@
+SELECT 
+CASE WHEN CNT > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+CASE WHEN CNT >0 THEN 'Failure' ELSE 'Data Matched' END as Message
+FROM (SELECT count(1) as CNT
+ FROM cardinalhealth_mdwdb.d_enhancement_rm_c d
+JOIN cardinalhealth_mdsdb.rm_enhancement_final i ON d.row_id=i.sys_id
+                AND d.source_id=i.sourceinstance
+where d.source_url_c <> 
+CONCAT('<a href=\"','https://cardinal.service-now.com/nav_to.do?uri=','rm_enhancement.do?sys_id=',i.sys_id,'\" target=\"_blank\">',i.number,'</a>'))temp;
+
