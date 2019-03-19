@@ -19,7 +19,8 @@ case when COALESCE(lkp.row_key,CASE WHEN src.u_cah_level_4_product_owner_ad IS N
 case when COALESCE(lkp.row_key,CASE WHEN src.u_cah_level_4_product_owner_ad IS NULL THEN 0 else -1 end) <> COALESCE(trgt.director_c_key,0) then 1 else 0 end as failures_cnt
 from cardinalhealth_mdsdb.cmdb_ci_application_final src 
 left join cardinalhealth_mdwdb.d_configuration_item trgt on src.sys_id = trgt.row_id and src.sourceinstance = trgt.source_id
-left join cardinalhealth_mdwdb.d_internal_contact lkp on lkp.row_id =COALESCE(CONCAT('INTERNAL_CONTACT~',src.u_cah_level_4_product_owner_ad),'UNSPECIFIED') and lkp.source_id = src.sourceinstance)fnl;
+left join cardinalhealth_mdwdb.d_internal_contact lkp on lkp.row_id =COALESCE(CONCAT('INTERNAL_CONTACT~',src.u_cah_level_4_product_owner_ad),'UNSPECIFIED') and lkp.source_id = src.sourceinstance
+where trgt.soft_deleted_flag='N' and lkp.soft_deleted_flag='N' )fnl;
 
 
 

@@ -2,7 +2,7 @@ SELECT CASE WHEN count(1)  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHE
 fidelity_mdsdb.change_request_final  SRC 
 JOIN fidelity_mdwdb.d_change_failure TRGT 
 ON (SRC.sys_id = TRGT.row_id  AND SRC.sourceinstance = TRGT.source_id ) 
- WHERE COALESCE(SRC.u_is_application_outage_required,'UNSPECIFIED') <> (TRGT.is_application_outage_required_c) ;
+ WHERE TRGT.soft_deleted_flag='N' and current_flag='Y'  and  COALESCE(SRC.u_is_application_outage_required,'UNSPECIFIED') <> (TRGT.is_application_outage_required_c) ;
  
  
 

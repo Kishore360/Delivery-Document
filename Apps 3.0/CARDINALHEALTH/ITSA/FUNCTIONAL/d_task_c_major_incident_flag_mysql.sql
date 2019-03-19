@@ -6,5 +6,5 @@ FROM (SELECT count(1) as CNT
  LEFT JOIN cardinalhealth_mdwdb.d_task_c TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
- WHERE   CASE WHEN SRC.priority = 1 THEN 'Y' ELSE 'N' END <> major_incident_flag)temp;
+ WHERE SRC.sys_class_name='incident' and  TRGT.soft_deleted_flag='N' and   CASE WHEN SRC.priority = 1 THEN 'Y' ELSE 'N' END <> major_incident_flag)temp;
  

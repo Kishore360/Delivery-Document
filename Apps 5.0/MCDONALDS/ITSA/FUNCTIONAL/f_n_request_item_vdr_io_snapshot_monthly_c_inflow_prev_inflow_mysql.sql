@@ -1,5 +1,5 @@
-SELECT CASE WHEN count(1)>1  THEN 'SUCCESS' ELSE  'FAILURE'  END as Result, 
-CASE WHEN count(1)>1  THEN  'SUCCESS' ELSE  'Age_key not populated correctly'  END as Message 
+SELECT CASE WHEN count(1)<1  THEN 'SUCCESS' ELSE  'FAILURE'  END as Result, 
+CASE WHEN count(1)<1  THEN  'SUCCESS' ELSE  'Age_key not populated correctly'  END as Message 
 FROM (    
   select a.month_start_key,b.prev_month_start_key,inflow,prev_inflow from (
 select month_start_key,sum(inflow_count) inflow

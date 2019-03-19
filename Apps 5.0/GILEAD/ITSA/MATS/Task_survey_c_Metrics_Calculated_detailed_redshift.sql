@@ -55,3 +55,12 @@ WHERE c.lagging_count_of_month between 0 and 11
 )b 
 
 
+CSAT SCORE:
+
+SELECT 
+a.task_type,avg(case when a.response_value<0 then 0 else a.response_value end  ) 
+FROM ldb.f_incident_response a 
+JOIN ldb.d_survey_state b ON a.survey_state_src_key=b.row_key
+JOIN ldb.d_calendar_date c ON a.requested_on_key=c.row_key
+WHERE c.lagging_count_of_month between 0 and 11 and b.wh_dimension_code='REQUESTED'
+group by a.task_type
