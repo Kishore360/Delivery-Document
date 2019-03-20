@@ -6,4 +6,4 @@ select count(1) as cnt
 from cardinalhealth_mdsdb.rm_enhancement_final a
  left  JOIN  cardinalhealth_mdwdb.d_enhancement_rm_c b
 on  b.ROW_ID = a.SYS_ID and a.sourceinstance=b.source_id
-where  CONVERT_TZ(a.closed_at,'GMT','America/New_York')<>b.closed_on )c
+where  CONVERT_TZ(a.closed_at,'GMT','America/New_York')<>b.closed_date )c

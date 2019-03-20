@@ -3,19 +3,21 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  
  FROM cardinalhealth_mdsdb.incident_final SRC
  
- LEFT JOIN cardinalhealth_mdwdb.d_incident TRGT 
+  JOIN cardinalhealth_mdwdb.d_incident TRGT 
  ON (SRC.sys_id=TRGT.row_id 
  AND SRC.sourceinstance=TRGT.source_id )
- LEFT JOIN (
+ JOIN (
  select source_id,max(lastupdated) as lastupdated from  cardinalhealth_mdwdb.d_o_data_freshness
  group by source_id
  ) FRESH  ON(FRESH.source_id=SRC.sourceinstance)
 
-LEFT JOIN cardinalhealth_mdwdb.d_lov_map LM
+JOIN cardinalhealth_mdwdb.d_lov_map LM
  on concat('STATE~INCIDENT~~~',upper(SRC.incident_state) )= LM.src_rowid
-and LM.dimension_class='STATE~INCIDENT'
  
-WHERE CASE WHEN (LM.dimension_wh_code  IN('CLOSED') and coalesce( SRC.closed_at,SRC.sys_updated_on)>coalesce( SRC.due_date,0) and SRC.due_date is not null)
+ 
+WHERE LM.dimension_class='STATE~INCIDENT' and  TRGT.soft_deleted_flag='N' and
+CASE WHEN (LM.dimension_wh_code  IN('CLOSED') and 
+coalesce( SRC.closed_at,SRC.sys_updated_on)>coalesce( SRC.due_date,0) and SRC.due_date is not null)
 or (LM.dimension_wh_code  IN ('OPEN') and coalesce( SRC.due_date,0) < convert_tz(FRESH.lastupdated,'GMT','America/New_York')
 and SRC.due_date is not null and SRC.active=1)
  THEN 'Y' ELSE 'N' END <> TRGT.over_due_flag 

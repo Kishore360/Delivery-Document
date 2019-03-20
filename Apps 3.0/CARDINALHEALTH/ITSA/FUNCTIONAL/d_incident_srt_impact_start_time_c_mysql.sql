@@ -8,6 +8,6 @@ select count(1) as cnt
 from cardinalhealth_mdsdb.incident_final a
 JOIN  cardinalhealth_mdwdb.d_incident b
 on  b.row_id = a.sys_id and a.sourceinstance=b.source_id
-where convert_tz(a.u_srt_impact_start_time,'GMT','America/New_York')<> b.srt_impact_start_time_c)c
+where b.soft_deleted_flag='N' and convert_tz(a.u_srt_impact_start_time,'GMT','America/New_York')<> b.srt_impact_start_time_c)c
 
 

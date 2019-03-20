@@ -7,5 +7,5 @@ LEFT JOIN  cardinalhealth_mdwdb.f_defect_rm_c TRGT
 ON (SRC.sys_id =TRGT.row_id  AND SRC.sourceinstance= TRGT.source_id )
 LEFT JOIN cardinalhealth_mdwdb.d_task LKP ON SRC.sys_id=LKP.row_id
 AND SRC.sourceinstance= LKP.source_id 
-WHERE COALESCE(LKP.row_key,CASE WHEN SRC.sys_id IS NULL THEN 0 else -1 end)<> (TRGT.task_key))temp;
+WHERE COALESCE(LKP.row_key,CASE WHEN SRC.sys_id IS NULL THEN 0 else -1 end)<> (TRGT.task_c_key))temp;
 
