@@ -33,7 +33,7 @@ left join
    GROUP BY saf.documentkey,
             saf.sourceinstance) fcr_non_eligible ON fcr_non_eligible.documentkey=a.sys_id
 AND fcr_non_eligible.sourceinstance=a.sourceinstance
- where (CASE
+ where b.soft_deleted_flag='N'    and (CASE
                                         WHEN (fcr_non_eligible.documentkey IS NULL
                                               OR a.fcr_non_eligible.flag =0)
                                              AND (sug.parent IN ('08c2f109f09338c4162f5e64504d3ef4',
