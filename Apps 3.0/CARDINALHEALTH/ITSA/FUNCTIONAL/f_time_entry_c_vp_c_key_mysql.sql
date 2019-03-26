@@ -8,15 +8,20 @@
 SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
 ,CASE WHEN cnt > 0 THEN 'Data did not Match.' 
 ELSE 'Data Matched' END AS Message 
-from(SELECT count(1) as CNT
+from(select count(1)cnt  from
+(SELECT concat(SRC.sys_id,'~',b.day_name) ABC,SRC.sourceinstance src,coalesce(c.row_key,case when SRC.u_vp is null then 0 else -1 end) sr
  FROM cardinalhealth_mdsdb.time_card_final SRC 
- JOIN cardinalhealth_mdwdb.d_calendar_date b ON SRC.week_starts_on = b.week_start_date
- LEFT JOIN cardinalhealth_mdwdb.f_time_entry_c TRGT 
- ON (concat(SRC.sys_id,'~',b.day_name) =TRGT.row_id  
- AND SRC.sourceinstance= TRGT.source_id  ) 
+ JOIN cardinalhealth_mdwdb.d_calendar_date b ON SRC.week_starts_on = b.week_start_date and SRC.sourceinstance=b.source_id
+ and b.week_start_date>='2018-11-05'
+ left join cardinalhealth_mdwdb.d_internal_contact c
+on c.row_id=concat('INTERNAL_CONTACT~',SRC.u_vp) and c.soft_deleted_flag='N'  
+and SRC.sourceinstance=c.source_id 
+)a
 
-left join cardinalhealth_mdwdb.d_internal_contact c
+JOIN 
 
-on c.row_id=coalesce(concat('INTERNAL_CONTACT~',SRC.u_vp),'UNSPECIFIED')
-
-where TRGT.vp_c_key<>coalesce(c.row_key,case when SRC.u_vp is null then 0 else -1 end)) a;
+(select row_id,source_id,vp_c_key vp from cardinalhealth_mdwdb.f_time_entry_c where soft_deleted_flag='N' and
+ week_starts_on>='2018-11-05 00:00:00'  ) TRGT 
+ ON  a.ABC =TRGT.row_id  AND a.src= TRGT.source_id  
+ where a.sr<>TRGT.vp 
+  ) a;
