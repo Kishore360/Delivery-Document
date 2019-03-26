@@ -21,6 +21,7 @@ GROUP BY 1,2
 LEFT JOIN png_mdwdb.d_rita_application_c TRGT ON app.NAME=TRGT.row_id AND app.sourceinstance=TRGT.source_id
 WHERE 
 IF(X.res like '%Gender%','Y','N')<>TRGT.gender_c_flag
+AND app.cdctype<>'D'
 
 )temp;
 
