@@ -1,6 +1,4 @@
 
-
-  
 SELECT 
 CASE WHEN CNT > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 CASE WHEN CNT >0 THEN 'MDS to DWH data validation failed for f_request_task.reassignment_count_numerify_c' ELSE 'SUCCESS' END as Message
