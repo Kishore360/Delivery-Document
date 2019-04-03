@@ -11,6 +11,6 @@ JOIN tjxco_mdwdb.f_task_sla b ON a.sys_id=b.row_id and a.sourceinstance=b.source
 JOIN  tjxco_mdwdb.d_lov LKP 
 ON COALESCE(CONCAT('STAGE','~','TASK_SLA','~',UPPER(a.stage)),'UNSPECIFIED')=LKP.row_id
 AND a.sourceinstance=LKP.source_id
-WHERE COALESCE(LKP.row_key,CASE WHEN a.stage IS NULL THEN 0 ELSE -1 END) <> b.stage_src_key
+WHERE COALESCE(LKP.row_key,CASE WHEN a.stage IS NULL THEN 0 ELSE -1 END) <> b.stage_src_key and a.cdctype<>'D'
 )temp;
 
