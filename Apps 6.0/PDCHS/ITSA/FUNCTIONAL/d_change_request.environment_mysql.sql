@@ -4,6 +4,6 @@ from
 (
 select count(1) as cnt from pdchs_mdsdb.change_request_final SRC
 left join pdchs_mdwdb.d_change_request TRGT on SRC.sys_id=TRGT.row_id and SRC.sourceinstance=TRGT.source_id
-where coalesce(SRC.u_environment,'UNSPECIFIED') <> TRGT.environment
-)temp1;
+where coalesce(SRC.u_environment,'UNSPECIFIED') <>TRGT.environment and SRC.cdctype<>'D'
+)temp;
 
