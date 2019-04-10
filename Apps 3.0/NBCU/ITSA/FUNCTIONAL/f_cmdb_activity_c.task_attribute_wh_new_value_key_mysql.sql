@@ -7,4 +7,4 @@ from
 left join  nbcu_mdwdb.f_cmdb_activity_c  TRGT
 on SRC.sys_id=TRGT.row_id and SRC.sourceinstance=TRGT.Source_id
 where TRGT.soft_deleted_flag<>'Y' and 
-coalesce(LKP.row_key, case when SRC.newvalue is null then 0 else -1 end) <> TRGT.task_attribute_wh_new_value_key) temp;
+coalesce(LKP.row_key, case when SRC.newvalue is null then 0 else -1 end)<>TRGT.task_attribute_wh_new_value_key) temp;
