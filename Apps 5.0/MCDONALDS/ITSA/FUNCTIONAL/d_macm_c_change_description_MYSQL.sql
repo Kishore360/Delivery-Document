@@ -11,4 +11,3 @@ left join (select source_id,max(lastupdated) as lastupdated from mcdonalds_mdwdb
 on (f1.source_id = SRC.sourceinstance)
 where (SRC.cdctime<=f1.lastupdated) and COALESCE (LEFT(SRC.u_change_description,4000),'UNSPECIFIED')<>TRGT.change_description
 )a;
-
