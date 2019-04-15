@@ -4,9 +4,4 @@ ELSE 'Data Matched' END AS Message
 FROM
 (select count(*) as cnt 
 from schneider_mdwdb.d_internal_organization a 
-join schneider_mdsdb.ctm_people_organization_final b 
-ON a.row_id = CONCAT('DEPARTMENT~',b.sys_id) AND a.source_id = b.sourceinstance
-join
-schneider_mdsdb.sys_user_final c
-on (b.manager=c.sys_id) 
-where COALESCE(concat(c.first_name,' ',c.last_name),'UNSPECIFIED')<>a.organization_contact_name)c ;
+where CASE WHEN a.row_key!='-1' then 'UNSPECIFIED' end<>a.organization_contact_name)a;

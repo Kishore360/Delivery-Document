@@ -9,4 +9,5 @@ ON (SRC.sys_id =TRGT.row_id   AND SRC.sourceinstance= TRGT.source_id  )
 join nypres_mdwdb.d_incident lkp
 on SRC.task=lkp.row_id and SRC.sourceinstance = lkp.source_id
 WHERE coalesce(lkp.row_key,case when SRC.task is NULL then 0 else -1 end) <> TRGT.incident_key
+and TRGT.soft_deleted_flag='N'
 )temp;

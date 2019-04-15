@@ -6,4 +6,5 @@ from rambus_mdwdb.f_incident a
 INNER JOIN rambus_mdsdb.incident_final b ON a.row_id =b.sys_id AND a.source_id=b.sourceinstance
 LEFT OUTER JOIN rambus_mdwdb.d_internal_contact c
 on c.row_id=concat('INTERNAL_CONTACT~',b.u_affected_client)
-where a.opened_by_key<>c.row_key) a;
+where DATE_FORMAT(a.pivot_date, '%Y-%m-%d %H:%i:%s')
+AND (a.pivot_date BETWEEN c.effective_from AND c.effective_to) and a.opened_by_key<>c.row_key) a;
