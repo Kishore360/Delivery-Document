@@ -6,4 +6,4 @@ left join  tjxco_mdsdb.task_final SRC on SRC1.task=SRC.sys_id and SRC1.sourceins
  left join  tjxco_mdwdb.f_task TRGT  ON (SRC.sys_id =TRGT.row_id   AND SRC.sourceinstance= TRGT.source_id  )
 LEFT JOIN tjxco_mdwdb.d_internal_organization LKP  
 ON ( coalesce(concat('GROUP~',assignment_group),'UNSPECIFIED')= LKP.row_id AND SRC.sourceinstance= LKP.source_id )
-  WHERE COALESCE(LKP.row_key,CASE WHEN SRC.assignment_group IS NULL THEN 0 else -1 end) = (TRGT.assignment_group_key)) temp;
+  WHERE COALESCE(LKP.row_key,CASE WHEN SRC.assignment_group IS NULL THEN 0 else -1 end) <>(TRGT.assignment_group_key)) temp;
