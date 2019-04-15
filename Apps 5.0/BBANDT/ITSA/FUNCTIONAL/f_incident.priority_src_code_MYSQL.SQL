@@ -4,9 +4,9 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 left join bbandt_mdsdb.sys_user_group_final lkp 
 on SRC.assignment_group = lkp.sys_id 
 and SRC.sourceinstance = lkp.sourceinstance
- LEFT JOIN bbandt_mdwdb.d_incident TRGT 
+ LEFT JOIN bbandt_mdwdb.f_incident TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
- WHERE COALESCE( 'N','')<> COALESCE(TRGT.duplicate_incident_flag ,'') -- 46303
- and ((lkp.name not like 'ITSM-LOB-Branchinfo%' and name not like 'ITSM-LOB-HumanSystems%' and name not like 'ITSM-LOB-CPS%'
-and name not like 'ITSM-LOB-LoanServices%' and name not like 'ITSM-LOB-Wealth%') or lkp.name is null);
+ WHERE COALESCE( SRC.priority,'')<> COALESCE(TRGT.priority_src_code ,'') -- 46303
+ and ((lkp.name not like 'ITSM-LOB-Branchinfo%' and lkp.name not like 'ITSM-LOB-HumanSystems%' and lkp.name not like 'ITSM-LOB-CPS%'
+and lkp.name not like 'ITSM-LOB-LoanServices%' and lkp.name not like 'ITSM-LOB-Wealth%') or lkp.name is null);
