@@ -5,5 +5,5 @@ FROM
 (SELECT count(1) as CNT 
 FROM tjxco_mdsdb.task_sla_final b 
 JOIN tjxco_mdwdb.f_task_sla trgt ON b.sys_id=trgt.row_id and b.sourceinstance=trgt.source_id
-WHERE CONVERT_TZ(b.end_time,'GMT','America/New_York') = trgt.end_time_c
+WHERE CONVERT_TZ(b.end_time,'GMT','America/New_York') <> trgt.end_time_c
 )temp;
