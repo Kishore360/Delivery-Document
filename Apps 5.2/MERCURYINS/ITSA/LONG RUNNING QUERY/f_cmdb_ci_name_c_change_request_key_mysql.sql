@@ -1,3 +1,8 @@
+create index change_fin_index on mercuryins_mdsdb.change_request_final (sys_id,sourceinstance); -- ,u_ci_name: 0.59 sec
+create index cmdb_ci_fact_db_index on mercuryins_mdwdb.f_cmdb_ci_name_c (row_id,source_id);  -- ,change_request_key : 0.18 sec
+create index cmdb_ci_dimension_db_index on mercuryins_mdwdb.d_change_request (row_id,source_id);  -- row_key : 0.57
+
+
 SELECT CASE WHEN count(1)  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, 
 CASE WHEN count(1)  THEN 'MDS to DWH data validation failed for f_task_c.urgency' ELSE 'SUCCESS' END as Message 
 FROM (SELECT CONCAT(cr.sys_id,'~',COALESCE(SUBSTRING_INDEX(SUBSTRING_INDEX(TRIM(cr.u_ci_name), ',', n.n), ',', -1),'UNSPECIFIED')) AS row_id,
@@ -17,3 +22,8 @@ ON SRC.Row_id=TRGT.row_id and SRC.source_id=TRGT.source_id
 join mercuryins_mdwdb.d_change_request LKP
 on SRC.change_request_id=LKP.row_id
 WHERE coalesce(LKP.row_key,case when SRC.change_request_id is null then  0 else -1 end )<>TRGT.change_request_key
+;
+
+Drop index change_fin_index on mercuryins_mdsdb.change_request_final;
+Drop index cmdb_ci_fact_db_index on mercuryins_mdwdb.f_cmdb_ci_name_c;
+Drop index cmdb_ci_dimension_db_index on mercuryins_mdwdb.d_change_request;
