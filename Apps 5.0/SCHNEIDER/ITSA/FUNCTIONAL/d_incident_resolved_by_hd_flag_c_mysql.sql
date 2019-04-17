@@ -1,4 +1,5 @@
-SELECT CASE WHEN count(1)  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)  THEN 'MDS to DWH data validation failed for d_work_order.met_sla_flag' ELSE 'SUCCESS' END as Message
+SELECT CASE WHEN count(1)  THEN 'SUCCESS' ELSE 'FAILURE' END as Result, 
+CASE WHEN count(1) THEN 'SUCCESS' ELSE 'MDS to DWH data validation failed for d_work_order.met_sla_flag' ELSE END as Message
 FROM schneider_workdb.d_incident TRGT 
 join schneider_mdsdb.hpd_help_desk_final SRC on SRC.entry_id=TRGT.row_id and SRC.sourceinstance=TRGT.source_id
 JOIN (select * from schneider_mdwdb.d_internal_organization where support_group_role_c='Help Desk' and group_flag='Y') lkp

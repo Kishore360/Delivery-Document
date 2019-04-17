@@ -8,5 +8,5 @@ JOIN mcdonalds_mdsdb.incident_final inc ON src.parent = inc.sys_id AND src.sourc
 
 WHERE 
 IF(CONVERT_TZ(src.opened_at,'GMT','US/Central') > CONVERT_TZ(inc.opened_at,'GMT','US/Central'),TIMESTAMPDIFF(SECOND,CONVERT_TZ(inc.opened_at,'GMT','US/Central'),CONVERT_TZ(src.opened_at,'GMT','US/Central')), 0)
- = trgt.parent_age_at_task_open
+ <> trgt.parent_age_at_task_open
 ;

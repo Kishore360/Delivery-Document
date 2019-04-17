@@ -5,13 +5,13 @@ CASE WHEN cnt > 0 THEN 'Data did not Match.'
 ELSE 'Data Matched' END AS Message 
 
 FROM (
-select count(1) as cnt FROM mcdonalds_mdsdb.u_incident_tasks_final SRC 
+select count(1) as cnt FROM mcdonalds_mdsdb.incident_task_final SRC 
  
-LEFT JOIN mcdonalds_mdwdb.f_incident_tasks_c TRGT 
+LEFT JOIN mcdonalds_mdwdb.f_incident_task_c TRGT 
  ON (SRC.sys_id=TRGT.row_id 
  AND SRC.sourceinstance=TRGT.source_id )
  
-JOIN mcdonalds_mdwdb.d_incident_tasks_c a 
+JOIN mcdonalds_mdwdb.d_incident_task_c a 
 ON SRC.sys_id= a.row_id AND SRC.sourceinstance= a.source_id 
 
 left join mcdonalds_mdwdb.d_lov_map lm 

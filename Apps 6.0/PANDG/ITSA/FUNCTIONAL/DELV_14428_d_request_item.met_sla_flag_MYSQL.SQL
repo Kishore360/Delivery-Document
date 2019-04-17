@@ -1,18 +1,23 @@
 SELECT 
-CASE WHEN CNT > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
-CASE WHEN CNT > 0 THEN 'MDS to DWH data validation failed for d_request_item.met_sla_flag' ELSE 'SUCCESS' END as Message
+CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+CASE WHEN cnt > 0 THEN 'MDS to DWH data validation failed for d_request_item.met_sla_flag' ELSE 'SUCCESS' END as Message
 FROM 
-(Select Count(1) as CNT FROM 
-(Select a.sys_id,a.sourceinstance,b.sla,
-CASE WHEN b.sla IS NULL THEN 'X' WHEN SUM(b.has_breached) > 0 THEN 'N' ELSE 'Y'END as Source_Met_sla_Flag
-FROM png_mdsdb.sc_req_item_final a
-LEFT JOIN png_mdsdb.task_sla_final b ON a.sys_id=b.task AND a.sourceinstance=b.sourceinstance
-Where b.stage <>'cancelled' Group by 1,2,3) SRC 
-LEFT JOIN png_mdwdb.d_request_item TRGT ON SRC.sys_id=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id 
-WHERE SRC.Source_Met_sla_Flag<>TRGT.met_sla_flag
-AND TRGT.soft_deleted_flag='N'
-) temp;
+(
+SELECT count(1) as CNT
+FROM png_mdwdb.d_request_item TRGT 
+JOIN 
+(
+SELECT screqitem.sys_id,screqitem.sourceinstance,CASE WHEN SUM(tsla.has_breached) > 0 THEN 'N' ELSE 'Y'END as MET_SLA_Flag
+FROM png_mdsdb.sc_req_item_final screqitem
+inner join png_mdsdb.task_sla_final tsla ON (screqitem.sys_id=tsla.task AND screqitem.sourceinstance=tsla.sourceinstance)
+Where tsla.stage<>'cancelled'
+Group by 1,2
+) SRC 
+ON (TRGT.row_id=SRC.sys_id AND TRGT.source_id=SRC.sourceinstance)
+WHERE SRC.MET_SLA_Flag<>TRGT.met_sla_flag
+ ) temp;
+ 
+ 
  
 
  
-

@@ -7,4 +7,4 @@ FROM
 tjxco_mdsdb.task_sla_final src1
 join tjxco_mdsdb.task_final src on src1.task=src.sys_id and src1.sourceinstance=src.sourceinstance
 LEFT JOIN tjxco_mdwdb.d_task trgt ON src.sys_id=trgt.row_id and src.sourceinstance=trgt.source_id
-WHERE (CASE WHEN src.reassignment_count>0 THEN 'Y' ELSE 'N' END) <> (trgt.reassignment_flag) )temp;
+WHERE (CASE WHEN src.reassignment_count>0 THEN 'Y' ELSE 'N' END) <> trgt.reassignment_flag and src.cdctype<>'D') temp;

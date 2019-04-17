@@ -3,16 +3,15 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  FROM     watson_mdsdb.u_github_issues_final s
 left join  watson_mdwdb.d_github_issues_c t on s.sys_id=t.row_id and s.sourceinstance=t.source_id
 where 
-status_c<>coalesce(u_status,'UNSPECIFIED') or 
-issue_link_c<>u_issue_link or 
-labels_c<>coalesce(u_labels,'UNSPECIFIED') or 
-tempcomment_c<>u_tempcomment or 
-title_c<>u_title or 
-user_c<>coalesce(u_user,'UNSPECIFIED') or 
-will_add_existing_issue_link_flag_c<>case when u_will_add_existing_issue_link=1 then 'Y' else 'N' end  or 
-add_comment_c<>coalesce(u_add_comment,'UNSPECIFIED') or 
-api_link_c<>u_api_link or 
-assignees_c<>u_assignees or 
-body_c<>u_body or 
-description_c<>u_description or 
-html_4_c<>u_html_4
+t.status_c<>coalesce(s.u_status,'UNSPECIFIED') or 
+t.issue_link_c<>s.u_issue_link or 
+t.labels_c<>coalesce(s.u_labels,'UNSPECIFIED') or 
+t.tempcomment_c<>s.u_tempcomment or 
+t.title_c<>s.u_title or 
+t.user_c<>coalesce(s.u_user,'UNSPECIFIED') or 
+t.will_add_existing_issue_link_flag_c<>case when s.u_will_add_existing_issue_link=1 then 'Y' else 'N' end  or 
+t.add_comment_c<>coalesce(s.u_add_comment,'UNSPECIFIED') or 
+t.api_link_c<>s.u_api_link or 
+t.body_c<>s.u_body or 
+t.description_c<>s.u_description or 
+t.html_4_c<>s.u_html_4
