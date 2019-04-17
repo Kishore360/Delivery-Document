@@ -1,10 +1,10 @@
 SELECT CASE WHEN cnt>0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN cnt>0  
 THEN 'MDS to DWH data validation failed for d_problem.problem_investigation_start_c' ELSE 'SUCCESS' END as Message FROM (
-select count(1) cnt from
+select count(1)cnt  from
 (select sla,month_start_date_key xy1,(attained_availability)attained_availability
 from   rogers_mdwdb.d_hcl_sla_catalog_c  d 
 join    rogers_mdwdb.f_hcl_sla_catalog_c f on hcl_sla_catalog_c_key=d.row_key
-where sla='1.3.2' and d.hcl_schedule_ac_attachment_ref ='Availability' )a1
+where sla='1.3.11' and d.hcl_schedule_ac_attachment_ref ='Availability' )a1
 right join 
 (
 
@@ -27,8 +27,8 @@ join rogers_mdwdb.d_configuration_item dc on d.configuration_item_key=dc.row_key
 join rogers_mdwdb.f_incident_duration_c fdc on fdc.incident_key=f.incident_key -- *
   join (select distinct substring(month_end_date_key,7,2) as number_of_days,month_name,month_start_date_key ,lagging_count_of_month from rogers_mdwdb.d_calendar_date where lagging_count_of_month between 0 and 11) ta 
  on d32.month_start_date_key=ta.month_start_date_key
-where  component_criticality_c='vital'  and dc.subcategory in ('Windows Server','Linux server') and 
-    d11.organization_name like '%HCL%' 
+where component_criticality_c='Vital'   and dc.subcategory in ('Weblogic Server','Apache Server') 
+   and d11.organization_name like '%HCL%' 
 and fl.dimension_name in ('Priority 1','Priority 2')
 and g.dimension_name not in ('Cancelled','Disqualified','UNSPECIFIED')   
 and d32.lagging_count_of_month between 0 and 11

@@ -1,4 +1,4 @@
-SELECT CASE WHEN count(1)  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)  
+SELECT CASE WHEN cnt>0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN cnt>0  
 THEN 'MDS to DWH data validation failed for d_problem.problem_investigation_start_c' ELSE 'SUCCESS' END as Message FROM (
 select a.*,yz  ,cast(coalesce((((tot_days_month*available_duration)-b.outage_duration)/(tot_days_month*available_duration))*100.0000,100.00) as decimal(10,2)) as expected from 
 (
@@ -10,7 +10,7 @@ select month_start_date_key xy1,
 from   rogers_mdwdb.d_hcl_sla_catalog_c  d 
 join    rogers_mdwdb.f_hcl_sla_catalog_c f on hcl_sla_catalog_c_key=d.row_key
 where sla='2.6.16')a
-join 
+right join 
 (select distinct month_start_date_key,month_end_date_key, substring(month_end_date_key,7,2) as tot_days_month from rogers_mdwdb.d_calendar_date )c 
 on a.xy1=c.month_start_date_key
 left join 

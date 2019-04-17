@@ -1,17 +1,17 @@
-SELECT CASE WHEN count(1)  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)  
+SELECT CASE WHEN cnt>0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN cnt>0  
 THEN 'MDS to DWH data validation failed for d_problem.problem_investigation_start_c' ELSE 'SUCCESS' END as Message FROM (
-select a.*,round(b.attained_execution_expected,2) from 
+select count(1) cnt from 
 (
-select RIGHT(d.row_id,8) xy1,round(attained_execution,2)attained_execution
+select RIGHT(d.row_id,8) xy1,round(attained_execution,1)attained_execution
 -- ,tier,services,hcl_schedule_ac_attachment_ref,metric,measurement_window,agreed_minimum,agreed_minimum_formatted_c,agreed_expected,agreed_expected_formatted_c ,csi_eligible,
 -- weighting_factor,reference,rag
 from   rogers_mdwdb.d_hcl_sla_catalog_c  d 
 join   rogers_mdwdb.f_hcl_sla_catalog_c f on hcl_sla_catalog_c_key=d.row_key
 where sla='1.4.15')a
-left join 
+right join 
 (
 
-select xy,a.cnt1,b.cnt2,(a.cnt1/b.cnt2)*100.0 as attained_execution_expected
+select xy,a.cnt1,b.cnt2,round((a.cnt1/b.cnt2)*100.0,1) as attained_execution_expected
 from 
 (
 select  date_format(convert_tz(work_end,'GMT','America/New_York'),'%Y%m01') xy,count(1) cnt1
@@ -23,7 +23,7 @@ left join rogers_mdwdb.d_lov lov on concat('STATE~CHANGE_REQUEST~~~', src.state)
 where  extract(year from work_end)>=2018 and 
 LKP.organization_name like 'HCL%' and src.approval='approved' and src.u_sub_status in ('Successful') 
 and lov.dimension_name in ('Completed','Closed') and src.u_environment='production'
- group by extract(month from convert_tz(work_end,'GMT','America/New_York'))
+ group by extract(year from convert_tz(work_end,'GMT','America/New_York')),extract(month from convert_tz(work_end,'GMT','America/New_York'))
 )a
 
  join 
@@ -37,5 +37,6 @@ left join rogers_mdwdb.d_lov lov on concat('STATE~CHANGE_REQUEST~~~', src.state)
 where extract(year from work_end)>=2018 and  
 LKP.organization_name like 'HCL%' and src.approval='approved' and
 src.u_sub_status <> 'Cancelled' and lov.dimension_name in ('Completed','Closed') and src.u_environment='production'
-group by extract(month from convert_tz(work_end,'GMT','America/New_York'))
-) b on xy=yz)b on b.xy=a.xy1 where round(a.attained_execution,2)<> round(b.attained_execution_expected,2))b1;
+ group by extract(year from convert_tz(work_end,'GMT','America/New_York')),
+ extract(month from convert_tz(work_end,'GMT','America/New_York'))
+) b on xy=yz)b on b.xy=a.xy1 where round(a.attained_execution,1)<> round(b.attained_execution_expected,1))b1;

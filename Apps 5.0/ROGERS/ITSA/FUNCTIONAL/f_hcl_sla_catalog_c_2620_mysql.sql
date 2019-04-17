@@ -1,4 +1,4 @@
-SELECT CASE WHEN count(1)  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)  
+SELECT CASE WHEN cnt>0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN cnt>0  
 THEN 'MDS to DWH data validation failed for d_problem.problem_investigation_start_c' ELSE 'SUCCESS' END as Message FROM (
 select a.*,yz  ,cast(coalesce((((tot_days_month*available_duration)-b.outage_duration)/(tot_days_month*available_duration))*100.0000,100.00) as decimal(10,2)) as expected from 
 (
@@ -23,11 +23,13 @@ join rogers_mdwdb.d_application  d1 on f1.application_key=d1.row_key
 join rogers_mdwdb.f_application_availability_c f2 on f2.outage_key=f1.outage_key
 join  rogers_mdwdb.f_problem d on d.problem_key=f.problem_key
 join rogers_mdwdb.d_calendar_date d32 on f.opened_on_key=d32.row_key
+join rogers_mdwdb.d_lov fl on d.priority_src_key=fl.row_key 
+join rogers_mdwdb.d_lov g on d21.sub_status_src_c_key=g.row_key 
 left join rogers_mdwdb.d_internal_organization d11 on d.assignment_group_for_pit_lead_c_key=d11.row_key 
 where  name in (0909) and
    d11.organization_name like '%HCL%'
-and f.priority_src_key in ('17921','17922')
-and d23.sub_status_src_c_key not in ('34151',34156)
+and fl.dimension_name in ('Priority 1','Priority 2')
+and g.dimension_name not in ('Cancelled','Disqualified','UNSPECIFIED')
 -- group by month_start_date_key
 )b on xy1=yz
 where cast(attained_vital_application as decimal(10,2))<>

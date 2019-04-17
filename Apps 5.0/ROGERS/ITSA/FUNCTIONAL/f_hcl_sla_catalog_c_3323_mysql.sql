@@ -4,8 +4,8 @@ select count(1) cnt from
 (select sla,month_start_date_key xy1,(attained_availability)attained_availability
 from   rogers_mdwdb.d_hcl_sla_catalog_c  d 
 join    rogers_mdwdb.f_hcl_sla_catalog_c f on hcl_sla_catalog_c_key=d.row_key
-where sla='1.3.2' and d.hcl_schedule_ac_attachment_ref ='Availability' )a1
-right join 
+where sla='3.3.23' and d.hcl_schedule_ac_attachment_ref ='Availability' )a1
+left join 
 (
 
 
@@ -18,6 +18,7 @@ join  rogers_mdwdb.f_problem d on d.problem_key=f.problem_key
 -- join rogers_mdwdb.f_outage f1 on d.problem_key=f1.problem_key -- *
 
 join rogers_mdwdb.f_application_availability_c f2 on d.configuration_item_key=f2.configuration_item_key
+-- join rogers_mdwdb.d_application  d1 on f2.application_key=d1.row_key
 join  rogers_mdwdb.d_problem d21 on d21.row_key=d.problem_key
 join rogers_mdwdb.d_calendar_date d32 on f.opened_on_key=d32.row_key -- *
 left join rogers_mdwdb.d_internal_organization d11 on d.assignment_group_for_pit_lead_c_key=d11.row_key
@@ -27,8 +28,8 @@ join rogers_mdwdb.d_configuration_item dc on d.configuration_item_key=dc.row_key
 join rogers_mdwdb.f_incident_duration_c fdc on fdc.incident_key=f.incident_key -- *
   join (select distinct substring(month_end_date_key,7,2) as number_of_days,month_name,month_start_date_key ,lagging_count_of_month from rogers_mdwdb.d_calendar_date where lagging_count_of_month between 0 and 11) ta 
  on d32.month_start_date_key=ta.month_start_date_key
-where  component_criticality_c='vital'  and dc.subcategory in ('Windows Server','Linux server') and 
-    d11.organization_name like '%HCL%' 
+where component_criticality_c='Important' --  and dc.subcategory in ('AIX Server','UNIX Server','HPUX Server','Solaris Server') and 
+   and d11.organization_name like '%HCL%' 
 and fl.dimension_name in ('Priority 1','Priority 2')
 and g.dimension_name not in ('Cancelled','Disqualified','UNSPECIFIED')   
 and d32.lagging_count_of_month between 0 and 11
@@ -36,6 +37,4 @@ and d32.lagging_count_of_month between 0 and 11
 group by yz
 
 
-)b on b.yz=a1.xy1 where round(a1.attained_availability,1)<>round(b.attained_availability,1)) c
-
-
+)b on b.yz=a1.xy1 where a1.attained_availability<>b.attained_availability) c
