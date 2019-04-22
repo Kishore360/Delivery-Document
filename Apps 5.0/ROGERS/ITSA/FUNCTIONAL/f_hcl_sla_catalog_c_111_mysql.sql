@@ -10,9 +10,9 @@ where sla='1.1.1' and d.hcl_schedule_ac_attachment_ref ='Governance' )a1
 right join 
 (
 
-select  d32.month_start_date_key msd,rca_business_days_c/86400.0,case when rca_business_days_c/86400.0 >=0 and rca_business_days_c/86400.0 <5 then 5
-when rca_business_days_c/86400.0 >=5 and rca_business_days_c/86400.0 <10 then 10
-when rca_business_days_c/86400.0 >=10 then 11 end
+select  d32.month_start_date_key msd,sum(rca_business_days_c/86400.0),case when sum(rca_business_days_c/86400.0) >=0 and sum(rca_business_days_c/86400.0) <5 then 5
+when sum(rca_business_days_c/86400.0) >=5 and sum(rca_business_days_c/86400.0) <10 then 5.1
+when sum(rca_business_days_c/86400.0) >=10 then 5.2 end
  attained_Governance
 from  rogers_mdwdb.f_problem d 
 -- join rogers_mdwdb.f_application_availability_c f2 on d.configuration_item_key=f2.configuration_item_key
