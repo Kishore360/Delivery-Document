@@ -4,4 +4,4 @@ FROM (select count(1) as cnt from bbandt_mdwdb.d_configuration_item trgt
 RIGHT JOIN bbandt_mdsdb.cmdb_ci_final src
 on src.sys_id = trgt.row_id and src.sourceinstance = trgt.source_id
 WHERE coalesce(trgt.mac_address_c,'UNSPECIFIED') <> coalesce(src.mac_address,'UNSPECIFIED')
-and src.CDCTYPE<>'D' and trgt.soft_deleted_flag='Y')ma
+and src.CDCTYPE<>'D' and trgt.soft_deleted_flag='N')ma
