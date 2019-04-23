@@ -7,4 +7,4 @@ ON (SRC.sys_id =TRGT.row_id   AND SRC.sourceinstance= TRGT.source_id  )
 left join bbandt_mdwdb.d_task lkp
 on SRC.task=lkp.row_id and SRC.sourceinstance = lkp.source_id
 WHERE lkp.dw_updated_on<TRGT.dw_updated_on and coalesce(lkp.row_key,case when SRC.task is NULL then 0 else -1 end) <> TRGT.task_key
-and SRC.CDCTYPE<>'D' and TRGT.soft_deleted_flag='N')ma
+and SRC.CDCTYPE<>'D' and TRGT.soft_deleted_flag='Y')ma

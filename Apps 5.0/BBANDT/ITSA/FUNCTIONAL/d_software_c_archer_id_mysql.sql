@@ -7,4 +7,5 @@ CASE WHEN CNT  > 0 THEN 'MDS to DWH data validation failed for d_software_c.arch
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
  WHERE COALESCE( SRC.u_archer_id,'')<> TRGT.archer_id 
+ and SRC.CDCTYPE<>'D'
  ) temp; 

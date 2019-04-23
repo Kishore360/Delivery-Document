@@ -1,7 +1,4 @@
 
- 
- 
- 
   SELECT 
  CASE WHEN CNT>0 THEN 'FAILURE' ELSE 'SUCCESS' END as RESULT,
  CASE WHEN CNT>0 THEN 'd_configuration_item.install_status_src_c_key is failed' ELSE 'SUCCESS' END as Message
@@ -12,4 +9,5 @@
  JOIN bbandt_mdwdb.d_lov LKP
  ON ((COALESCE(CONCAT('OS_DOMAIN_C~CONFIGURATION_ITEM','~~~',UPPER(SRC.os_domain)),'UNSPECIFIED'))=LKP.row_id
  AND SRC.sourceinstance=LKP.source_id)
- WHERE COALESCE(LKP.row_key,CASE WHEN SRC.os_domain IS NULL THEN 0 ELSE -1 END)<>(TRGT.os_domain_src_c_key))temp;
+ WHERE COALESCE(LKP.row_key,CASE WHEN SRC.os_domain IS NULL THEN 0 ELSE -1 END)<>TRGT.os_domain_src_c_key
+ and SRC.CDCTYPE<>'D' and TRGT.soft_deleted_flag='Y')temp;

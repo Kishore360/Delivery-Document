@@ -15,4 +15,4 @@ and src.invest_id=trgt.invest_id
 and src.type=trgt.type
 and src.year=trgt.year
 and src.month=trgt.month
-where src.month<>trgt.month_c and trgt.soft_deleted_flag='N' and src.CDCTYPE<>'D')a;
+where src.month<>trgt.month_c and trgt.soft_deleted_flag='Y' and src.CDCTYPE<>'D')a;

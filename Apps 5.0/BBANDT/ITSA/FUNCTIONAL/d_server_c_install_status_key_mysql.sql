@@ -7,4 +7,4 @@ left join bbandt_mdwdb.d_lov lkp
 ON ( CONCAT('INSTALL_STATUS~SERVER_C','~~~',UPPER(s.install_status))= lkp.row_id 
 and t.source_id = lkp.source_id)
 where COALESCE(lkp.row_key,CASE WHEN s.install_status IS NULL THEN 0 else -1 end) <>t.install_status_key
-and s.CDCTYPE<>'D' and t.soft_deleted_flag='Y')ma
+and s.CDCTYPE<>'D' and t.soft_deleted_flag='N')ma

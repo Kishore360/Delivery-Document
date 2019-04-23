@@ -7,4 +7,4 @@ left join bbandt_mdwdb.d_lov lkp
 ON ( CONCAT('TIER_RATING~SERVER_C','~~~',UPPER(s.u_tier_rating))= lkp.row_id 
 and t.source_id = lkp.source_id)
 where COALESCE(lkp.row_key,CASE WHEN s.u_tier_rating IS NULL THEN 0 else -1 end) <>t.tier_rating_key
-and s.CDCTYPE<>'D' and t.soft_deleted_flag='Y')ma
+and s.CDCTYPE<>'D' and t.soft_deleted_flag='N')ma
