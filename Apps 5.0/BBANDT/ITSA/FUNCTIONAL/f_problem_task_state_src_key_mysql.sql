@@ -10,4 +10,5 @@ CASE WHEN CNT > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 LEFT JOIN bbandt_mdwdb.d_lov LKP 
  ON ( concat('STATE~problem_task~~~',state)= LKP.row_id 
 AND SRC.sourceinstance= LKP.source_id )
- WHERE COALESCE(LKP.row_key,CASE WHEN SRC.state IS NULL THEN 0 else -1 end)<> (TRGT.state_src_key))temp;
+ WHERE COALESCE(LKP.row_key,CASE WHEN SRC.state IS NULL THEN 0 else -1 end)<> (TRGT.state_src_key)
+ and SRC.CDCTYPE<>'D' and TRGT.soft_deleted_flag='N')temp;

@@ -1,6 +1,6 @@
-SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
- CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed' ELSE 'SUCCESS' END as Message
- FROM bbandt_mdsdb.incident_final SRC 
+SELECT CASE WHEN cnt> 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+ CASE WHEN cnt >0 THEN 'MDS to DWH data validation failed' ELSE 'SUCCESS' END as Message
+ FROM (select count(1) as cnt from bbandt_mdsdb.incident_final SRC 
 left join bbandt_mdsdb.sys_user_group_final lkp 
 on SRC.assignment_group = lkp.sys_id 
 and SRC.sourceinstance = lkp.sourceinstance
@@ -9,4 +9,4 @@ and SRC.sourceinstance = lkp.sourceinstance
  AND SRC.sourceinstance= TRGT.source_id  )
  WHERE COALESCE( SRC.subcategory,'')<> COALESCE(TRGT.sub_category_src_code ,'') -- 12
  and SRC.CDCTYPE<>'D' and TRGT.soft_deleted_flag='N' and ((lkp.name not like 'ITSM-LOB-Branchinfo%' and lkp.name not like 'ITSM-LOB-HumanSystems%' and lkp.name not like 'ITSM-LOB-CPS%'
-and lkp.name not like 'ITSM-LOB-LoanServices%' and lkp.name not like 'ITSM-LOB-Wealth%') or lkp.name is null);
+and lkp.name not like 'ITSM-LOB-LoanServices%' and lkp.name not like 'ITSM-LOB-Wealth%') or lkp.name is null))ma;

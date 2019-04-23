@@ -7,7 +7,7 @@ FROM watson_mdsdb.incident_final SRC
 JOIN watson_mdwdb.d_incident TRGT 
 ON SRC.sys_id = TRGT.row_id 
 and  SRC.sourceinstance = TRGT.source_id   and TRGT.soft_deleted_flag = 'N'
-WHERE COALESCE( convert_tz(SRC.u_disruption_began,'GMT','America/New_York'),'') <> COALESCE(TRGT.u_disruption_began_c ,''))b
+WHERE convert_tz(SRC.u_disruption_began,'GMT','UTC') <> TRGT.u_disruption_began_c )b
 
 
 
