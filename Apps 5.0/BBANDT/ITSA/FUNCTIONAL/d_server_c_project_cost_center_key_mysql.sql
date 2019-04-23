@@ -8,4 +8,4 @@ SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  ON ( SRC.u_project_cost_center= LKP.row_id 
 AND SRC.sourceinstance= LKP.source_id )
  WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_project_cost_center IS NULL THEN 0 else -1 end)<>TRGT.project_cost_center_key
- and SRC.CDCTYPE<>'D' and TRGT.soft_deleted_flag='Y')ma
+ and SRC.CDCTYPE<>'D' and TRGT.soft_deleted_flag='N')ma

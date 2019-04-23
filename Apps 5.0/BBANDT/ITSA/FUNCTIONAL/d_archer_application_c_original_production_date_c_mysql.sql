@@ -3,4 +3,4 @@ CASE WHEN cnt>0  THEN 'MDS to DWH data validation failed for d_archer_applicatio
 FROM (select count(1) as cnt from bbandt_mdsdb.app_vwarchertonumerifyfeed_final  SRC
  JOIN bbandt_mdwdb.d_archer_application_c TRGT ON (SRC.application_id = TRGT.row_id  AND SRC.sourceinstance = TRGT.source_id ) 
  WHERE SRC.original_production_date <> (TRGT.original_production_date_c) 
- and SRC.cdchash<>'D' and TRGT.soft_deleted_flag='Y')ma
+ and SRC.cdchash<>'D' and TRGT.soft_deleted_flag='N')ma

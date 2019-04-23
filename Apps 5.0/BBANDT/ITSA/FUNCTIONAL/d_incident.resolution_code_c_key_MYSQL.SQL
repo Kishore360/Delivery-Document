@@ -10,4 +10,4 @@ LEFT JOIN bbandt_mdwdb.d_lov LKP
  ON ( concat('RESOLUTION_CODE_C~INCIDENT~~~',u_resolution_code )= LKP.row_id 
 AND a.sourceinstance= LKP.source_id )
 WHERE COALESCE(LKP.row_key,CASE WHEN a.u_resolution_code  IS NULL THEN 0 else -1 end)<>b.resolution_code_c_key and a.CDCTYPE<>'D' 
-and b.soft_deleted_flag='Y')temp; 
+and b.soft_deleted_flag='N')temp; 

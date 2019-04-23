@@ -5,4 +5,4 @@ SELECT CASE WHEN cnt> 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
  WHERE COALESCE( SRC.sys_created_by,'')<> COALESCE(TRGT.created_by ,'')
- and SRC.CDCTYPE<>'D' and TRGT.soft_deleted_flag='Y')ma
+ and SRC.CDCTYPE<>'D' and TRGT.soft_deleted_flag='N')ma

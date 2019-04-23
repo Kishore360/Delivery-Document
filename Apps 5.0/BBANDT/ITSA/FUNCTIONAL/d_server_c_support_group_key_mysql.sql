@@ -8,4 +8,4 @@ SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  ON ( CONCAT('GROUP~',SRC.support_group)= LKP.row_id 
 AND SRC.sourceinstance= LKP.source_id )
  WHERE COALESCE(LKP.row_key,CASE WHEN SRC.support_group IS NULL THEN 0 else -1 end)<> (TRGT.support_group_key)
- and SRC.CDCTYPE<>'D' and TRGT.soft_deleted_flag='Y')ma
+ and SRC.CDCTYPE<>'D' and TRGT.soft_deleted_flag='N')ma

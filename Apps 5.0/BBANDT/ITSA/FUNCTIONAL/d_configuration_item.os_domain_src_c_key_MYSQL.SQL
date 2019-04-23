@@ -10,4 +10,4 @@
  ON ((COALESCE(CONCAT('OS_DOMAIN_C~CONFIGURATION_ITEM','~~~',UPPER(SRC.os_domain)),'UNSPECIFIED'))=LKP.row_id
  AND SRC.sourceinstance=LKP.source_id)
  WHERE COALESCE(LKP.row_key,CASE WHEN SRC.os_domain IS NULL THEN 0 ELSE -1 END)<>TRGT.os_domain_src_c_key
- and SRC.CDCTYPE<>'D' and TRGT.soft_deleted_flag='Y')temp;
+ and SRC.CDCTYPE<>'D' and TRGT.soft_deleted_flag='N')temp;

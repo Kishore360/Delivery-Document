@@ -6,7 +6,7 @@ FROM (SELECT  count(1) as cnt from
 right JOIN bbandt_mdsdb.cmdb_ci_server_final ser 
 ON trgt.row_id = ser.sys_id AND trgt.source_id = ser.sourceinstance
 WHERE coalesce((trgt.cpu_type_c),'0') <> coalesce(ser.cpu_type,'0') and
-ser.CDCTYPE<>'D' and trgt.soft_deleted_flag='Y'
+ser.CDCTYPE<>'D' and trgt.soft_deleted_flag='N'
 ) a
 ;
 

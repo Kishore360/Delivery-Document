@@ -7,4 +7,4 @@ left join bbandt_mdwdb.d_lov lkp
 ON ( CONCAT('ENVIRONMENT~SOFTWARE_C','~~~',UPPER(s.u_environment))= lkp.src_rowid 
 and t.source_id = lkp.source_id)
 where COALESCE(lkp.row_key,CASE WHEN s.u_environment IS NULL THEN 0 else -1 end) <>t.environment_key
-and s.CDCTYPE<>'D' and t.soft_deleted_flag='Y')ma
+and s.CDCTYPE<>'D' and t.soft_deleted_flag='N')ma
