@@ -6,5 +6,5 @@ CASE WHEN cnt> 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
   JOIN bbandt_mdwdb.d_change_request TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
- WHERE COALESCE( SRC.risk_value,'')<> COALESCE(TRGT.risk_value_c ,'')
+ WHERE COALESCE( SRC.risk_value,'')<> TRGT.risk_value_c 
  and SRC.CDCTYPE<>'D' and TRGT.soft_deleted_flag='N')ma
