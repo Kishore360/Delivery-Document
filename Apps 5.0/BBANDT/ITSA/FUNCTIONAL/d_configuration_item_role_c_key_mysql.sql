@@ -5,4 +5,4 @@ SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 LEFT JOIN bbandt_mdwdb.d_lov LKP 
  ON  LKP.dimension_class =  'ROLE_C~CONFIGURATION_ITEM' and (concat('ROLE_C~CONFIGURATION_ITEM~~~',upper(SRC.u_role))= LKP.row_id AND SRC.sourceinstance= LKP.source_id )
  WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_role IS NULL THEN 0 else -1 end)<> TRGT.role_c_key
- and SRC.CDCTYPE<>'D' and TRGT.soft_deleted_flag='Y')ma; 
+ and SRC.CDCTYPE<>'D' and TRGT.soft_deleted_flag='N')ma; 

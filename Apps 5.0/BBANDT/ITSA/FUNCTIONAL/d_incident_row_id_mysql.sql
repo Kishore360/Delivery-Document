@@ -6,5 +6,5 @@ FROM
 (select sys_id, sourceinstance from bbandt_mdsdb.incident_final where cdctype<>'D') SRC 
 LEFT JOIN bbandt_mdwdb.d_incident TRGT 
  ON (SRC.sys_id =TRGT.row_id   AND SRC.sourceinstance= TRGT.source_id  )
-WHERE SRC.sys_id <> TRGT.row_id and TRGT.soft_deleted_flag='Y') temp;
+WHERE SRC.sys_id <> TRGT.row_id and TRGT.soft_deleted_flag='N') temp;
  

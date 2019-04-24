@@ -4,5 +4,5 @@ SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  LEFT JOIN bbandt_mdwdb.d_server_c TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
- WHERE COALESCE( SRC.ram,'')<> COALESCE(TRGT.ram_size ,'')
+ WHERE COALESCE( SRC.ram,'UNSPECIFIED')<> TRGT.ram_size 
  and SRC.CDCTYPE<>'D' and TRGT.soft_deleted_flag='N')ma
