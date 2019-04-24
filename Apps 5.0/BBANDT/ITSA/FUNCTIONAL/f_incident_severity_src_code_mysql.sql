@@ -10,4 +10,4 @@ and SRC.sourceinstance = lkp.sourceinstance
  AND SRC.sourceinstance= TRGT.source_id  )
  WHERE ( SRC.severity)<> (TRGT.severity_src_code ) -- 46303
  and (lkp.name not like 'ITSM-LOB-Branchinfo%' and lkp.name not like 'ITSM-LOB-HumanSystems%' and lkp.name not like 'ITSM-LOB-CPS%'
-and lkp.name not like 'ITSM-LOB-LoanServices%' and lkp.name not like 'ITSM-LOB-Wealth%') and SRC.CDCTYPE<>'D' and TRGT.soft_deleted_flag='Y')ma;
+and lkp.name not like 'ITSM-LOB-LoanServices%' and lkp.name not like 'ITSM-LOB-Wealth%') and SRC.CDCTYPE<>'D' and TRGT.soft_deleted_flag='N')ma;
