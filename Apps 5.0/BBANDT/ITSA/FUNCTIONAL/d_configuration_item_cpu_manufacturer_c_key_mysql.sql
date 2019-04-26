@@ -10,6 +10,6 @@ select count(1) as cnt from
 ON trgt.row_id = ser.sys_id AND trgt.source_id = ser.sourceinstance
 LEFT JOIN bbandt_mdwdb.d_internal_organization lkp
 ON COALESCE(CONCAT('SUBSIDIARY~',ser.cpu_manufacturer),'UNSPECIFIED') = lkp.row_id and ser.sourceinstance = lkp.source_id
-WHERE COALESCE(lkp.row_key,CASE WHEN ser.cpu_manufacturer IS NULL THEN 0 else -1 end) <> cpu_manufacturer_c_key
+WHERE COALESCE(lkp.row_key,CASE WHEN ser.cpu_manufacturer IS NULL THEN 0 else -1 end) <> trgt.cpu_manufacturer_c_key
 and ser.CDCTYPE<>'D' and trgt.soft_deleted_flag='N')a
 ;
