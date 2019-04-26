@@ -25,7 +25,7 @@ WHEN
 CASE WHEN b.MEGA_HEX_ID iS NOT NULL THEN  
 SUM(CASE WHEN b.Assessment_Status IN ('Complete','Cancelled') 
 AND ((b.Issues_ID IS NOT NULL) OR (b.Issues_ID <> ''))
-AND b.Overall_Status NOT IN ('Complete','Draft') THEN 1 ELSE NULL END) END) > 0 THEN 'Y' ELSE 'N' END AS iRisk_Open_Issues_flag
+AND b.Overall_Status NOT IN ('Complete','Closed','Draft') THEN 1 ELSE NULL END) END) > 0 THEN 'Y' ELSE 'N' END AS iRisk_Open_Issues_flag
 FROM png_mdsdb.pg_mega_pgb_application_rita_final a 
 LEFT JOIN png_mdsdb.pg_mega_irisk_assessment_issues_final b ON a.NAME=b.MEGA_HEX_ID AND a.sourceinstance=b.sourceinstance AND b.cdctype<>'D'
 LEFT JOIN png_mdsdb.pg_mega_legacyg1_final SRC2 ON a.NAME=SRC2.MEGA_ID AND a.sourceinstance=SRC2.sourceinstance AND SRC2.cdctype<>'D'
