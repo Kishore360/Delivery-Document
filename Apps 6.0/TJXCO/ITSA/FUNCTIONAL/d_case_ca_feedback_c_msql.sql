@@ -3,4 +3,4 @@ case when count(1)>1 then 'Data mismatch for d_case.ca_feedback_c' else 'Matchin
 from  tjxco_mdsdb.sn_customerservice_case_final src
 join tjxco_mdwdb.d_case tgt
 on src.sys_id=tgt.row_id and src.sourceinstance=tgt.source_id
-where src.u_ca_feedback<>tgt.ca_feedback_c;	
+where coalesce(src.u_ca_feedback,'UNSPECIFIED')<>tgt.ca_feedback_c;	
