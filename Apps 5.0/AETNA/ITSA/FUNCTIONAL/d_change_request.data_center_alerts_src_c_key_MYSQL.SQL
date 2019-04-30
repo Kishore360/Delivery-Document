@@ -8,6 +8,6 @@ LEFT JOIN aetna_mdwdb.d_lov LKP
  ON (COALESCE(CONCAT('DATA_CENTER_ALERTS~CHANGE_REQUEST~~~',UPPER(SRC.u_data_center_alerts)),'UNSPECIFIED') = LKP.row_id 
 AND SRC.sourceinstance= LKP.source_id )
  WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_data_center_alerts  IS NULL THEN 0 else -1 end) <> TRGT.data_center_alerts_src_c_key
- and SRC.cdctype<>'D')ma;
+ and SRC.cdctype<>'D' and TRGT.soft_deleted_flag='N')ma;
 
  
