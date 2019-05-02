@@ -6,7 +6,7 @@ FROM
 tjxco_mdsdb.sn_customerservice_case_final SRC
 left join tjxco_mdwdb.d_case TRGT
 on SRC.sys_id=TRGT.row_id and SRC.sourceinstance=TRGT.source_id
-where SRC.u_brand<>TRGT.brand_c
+where coalesce(SRC.u_brand,'UNSPECIFIED')<>TRGT.brand_c
 and SRC.cdctype<>'D' and TRGT.soft_deleted_flag='N'
 )ma;
 
