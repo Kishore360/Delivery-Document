@@ -93,4 +93,4 @@ UNION
 SELECT 'ldb.d_location' AS TABLE_NAME, COUNT(1) AS ROW_COUNT 
 FROM ldb.f_rita_application_c_fact a
 JOIN ldb.d_application_pg_asset_owner_c b ON a.rita_application_pg_asset_owner_c_key=b.row_key
-JOIN ldb.d_location c ON b.location_key=b.row_key
+JOIN ldb.d_location c ON b.location_key=c.row_key
