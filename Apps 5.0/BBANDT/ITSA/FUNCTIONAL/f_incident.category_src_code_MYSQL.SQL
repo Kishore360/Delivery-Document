@@ -7,6 +7,6 @@ and SRC.sourceinstance = lkp.sourceinstance
  LEFT JOIN bbandt_mdwdb.f_incident TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
- WHERE ( SRC.category)<> (TRGT.category_src_code )
+ WHERE coalesce(SRC.category,'UNSPECIFIED')<> (TRGT.category_src_code )
  and (lkp.name not like 'ITSM-LOB-Branchinfo%' and lkp.name not like 'ITSM-LOB-HumanSystems%' and lkp.name not like 'ITSM-LOB-CPS%'
 and lkp.name not like 'ITSM-LOB-LoanServices%' and lkp.name not like 'ITSM-LOB-Wealth%') and SRC.CDCTYPE<>'D' and TRGT.soft_deleted_flag='N')ma;

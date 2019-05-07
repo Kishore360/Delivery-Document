@@ -7,6 +7,6 @@ and SRC.sourceinstance = lkp.sourceinstance
  LEFT JOIN bbandt_mdwdb.f_incident TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
- WHERE COALESCE( SRC.subcategory,'')<> COALESCE(TRGT.sub_category_src_code ,'') -- 12
+ WHERE COALESCE( SRC.subcategory,'')<> TRGT.sub_category_src_code
  and SRC.CDCTYPE<>'D' and TRGT.soft_deleted_flag='N' and ((lkp.name not like 'ITSM-LOB-Branchinfo%' and lkp.name not like 'ITSM-LOB-HumanSystems%' and lkp.name not like 'ITSM-LOB-CPS%'
 and lkp.name not like 'ITSM-LOB-LoanServices%' and lkp.name not like 'ITSM-LOB-Wealth%') or lkp.name is null))ma;
