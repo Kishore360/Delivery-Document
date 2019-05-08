@@ -16,3 +16,4 @@ where  tgt.close_code_dq_c<>(case when close_code  is  null  then 0
  
  
  
+where tgt.contact_type_dq_c<>(CASE WHEN incident.contact_type  is null 
