@@ -11,6 +11,6 @@ ON ( concat('DEPARTMENT~',scu.department)= LKP.row_id
  AND scu.sourceinstance= LKP.source_id )
 WHERE DATE_FORMAT(TRGT.pivot_date, '%Y-%m-%d %H:%i:%s')
 AND (TRGT.pivot_date BETWEEN LKP.effective_from AND LKP.effective_to)
-
+and
 
 COALESCE(LKP.row_key,CASE WHEN (scu.department is  null ) THEN 0 else -1 end) <> (TRGT.opened_by_department_key)  
