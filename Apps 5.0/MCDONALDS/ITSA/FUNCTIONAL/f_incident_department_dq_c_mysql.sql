@@ -7,6 +7,9 @@ case when opened_by is null then 0
      when sys_user.department is null then 0
 	 when opened_by is not null and sys_user.sys_id  is null then 0
 	 when sys_user.department is not null  and cmn_department.sys_id  is null then 0
+	 when cmn_department.name in ('UNSPECIFED', 'unspecified', 'Unspecified', 'null', 'spaces', 'UNALLOCATED', 'Unallocated', 
+     'unallocated', 'Undefined', 'UNDEFINED', 'undefined', 'UNKONWN', 'unknown', 'Unknown') or name is null 
+	 or name='' or name=' ' then 0
    else 1 end 
 )  
 from  mcdonalds_mdsdb.incident_final incident
@@ -21,6 +24,9 @@ case when opened_by is null then 0
      when sys_user.department is null then 0
 	 when opened_by is not null and sys_user.sys_id  is null then 0
 	 when sys_user.department is not null  and cmn_department.sys_id  is null then 0
+ when cmn_department.name in ('UNSPECIFED', 'unspecified', 'Unspecified', 'null', 'spaces', 'UNALLOCATED', 'Unallocated', 
+     'unallocated', 'Undefined', 'UNDEFINED', 'undefined', 'UNKONWN', 'unknown', 'Unknown') or name is null 
+	 or name='' or name=' ' then 0  
    else 1 end 
 )  
 

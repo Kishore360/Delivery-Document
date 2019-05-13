@@ -5,6 +5,9 @@ FROM
 select number, incident.assignment_group,sys_user_group.sys_id ,assignment_group_dq_c,
 (case when assignment_group  is not null and sys_user_group.sys_id is null then 0 
 when assignment_group  is  null and sys_user_group.sys_id is null then 0 
+  when sys_user_group.name in ('UNSPECIFED', 'unspecified', 'Unspecified', 'null', 'spaces', 'UNALLOCATED', 'Unallocated', 
+     'unallocated', 'Undefined', 'UNDEFINED', 'undefined', 'UNKONWN', 'unknown', 'Unknown') or name is null 
+	 or name='' or name=' ' then 0
 else 1
 end) 
 from  mcdonalds_mdsdb.incident_final incident
@@ -14,6 +17,9 @@ join     mcdonalds_mdwdb.f_incident tgt
 on incident.sys_id=tgt.row_id and incident.sourceinstance=tgt.source_id
 where tgt.assignment_group_dq_c<>(case when assignment_group  is not null and sys_user_group.sys_id is null then 0 
 when assignment_group  is  null and sys_user_group.sys_id is null then 0 
+when sys_user_group.name in ('UNSPECIFED', 'unspecified', 'Unspecified', 'null', 'spaces', 'UNALLOCATED', 'Unallocated', 
+     'unallocated', 'Undefined', 'UNDEFINED', 'undefined', 'UNKONWN', 'unknown', 'Unknown') or name is null 
+	 or name='' or name=' ' then 0
 else 1
 end)  )a;
 
