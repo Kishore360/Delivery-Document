@@ -7,4 +7,4 @@ left join bbandt_mdwdb.d_lov lkp
 ON ( CONCAT('OPERATIONAL_STATUS_C~CONFIGURATION_ITEM','~~~',UPPER(s.operational_status))= lkp.row_id 
 and t.source_id = lkp.source_id)
 where COALESCE(lkp.row_key,CASE WHEN s.operational_status IS NULL THEN 0 else -1 end) <>t.operational_status_c_key
-and t.soft_deleted_flag='Y' and s.CDCTYPE<>'D')ma
+and t.soft_deleted_flag='N' and s.CDCTYPE<>'D')ma

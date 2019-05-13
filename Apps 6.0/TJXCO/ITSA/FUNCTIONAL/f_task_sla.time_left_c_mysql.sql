@@ -5,4 +5,4 @@ FROM
 (SELECT count(1) as CNT	
  from tjxco_mdsdb.task_sla_final src  
 left join tjxco_mdwdb.f_task_sla trgt on src.sys_id=trgt.row_id and src.sourceinstance=trgt.source_id	
-where src.time_left <> trgt.time_left_c )temp;
+where src.time_left <> trgt.time_left_c and src.cdctype<>'D' and trgt.soft_deleted_flag='N')temp;

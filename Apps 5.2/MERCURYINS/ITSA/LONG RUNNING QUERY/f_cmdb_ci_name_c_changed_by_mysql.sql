@@ -19,5 +19,5 @@ JOIN mercuryins_mdwdb.f_cmdb_ci_name_c TRGT
 ON SRC.Row_id=TRGT.row_id and SRC.source_id=TRGT.source_id
 WHERE SRC.changed_by<>TRGT.changed_by;
 
-Drop index change_fin_index on mercuryins_mdsdb.task_final;
-Drop index cmdb_ci_fact_db_index on mercuryins_mdwdb.d_task;
+Drop index change_fin_index on mercuryins_mdsdb.change_request_final;
+Drop index cmdb_ci_fact_db_index on mercuryins_mdwdb.f_cmdb_ci_name_c;

@@ -6,4 +6,4 @@ LEFT JOIN bbandt_mdwdb.d_lov LKP
  ON  LKP.dimension_class =  'CAUSE_CODE_C~INCIDENT' and (concat('CAUSE_CODE_C~INCIDENT~~~',upper(SRC.u_cause_code))= LKP.row_id 
  AND SRC.sourceinstance= LKP.source_id )
  WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_cause_code IS NULL THEN 0 else -1 end)<> TRGT.cause_code_c_key
- and SRC.CDCTYPE<>'D' and TRGT.soft_deleted_flag='Y')ma; 
+ and SRC.CDCTYPE<>'D' and TRGT.soft_deleted_flag='N')ma; 

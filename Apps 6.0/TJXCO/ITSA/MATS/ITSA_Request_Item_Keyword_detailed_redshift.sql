@@ -9,7 +9,7 @@ union
 select'ldb.d_internal_contact_assigned_to' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_request_item_keyword       a11 
 join ldb.d_internal_contact_assigned_to       a13
-on (a11.assigned_to_key=a13.row_key)
+on (a11.requested_for_key=a13.row_key)
 union
 select'ldb.d_internal_organization_group' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_request_item_keyword       a11 

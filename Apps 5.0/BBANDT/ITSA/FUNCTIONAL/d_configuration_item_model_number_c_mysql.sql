@@ -4,5 +4,5 @@ CASE WHEN cnt>0 THEN 'MDS to DWH data validation failed for d_configuration_item
 FROM (select count(1) as cnt from bbandt_mdwdb.d_configuration_item trgt
 RIGHT JOIN bbandt_mdsdb.cmdb_ci_final src
 on src.sys_id = trgt.row_id and src.sourceinstance = trgt.source_id
-WHERE coalesce(trgt.model_number_c,0) <> coalesce(src.model_number,0)
+WHERE trgt.model_number_c <> coalesce(src.model_number,0)
 and src.CDCTYPE<>'D' and trgt.soft_deleted_flag='N')ma

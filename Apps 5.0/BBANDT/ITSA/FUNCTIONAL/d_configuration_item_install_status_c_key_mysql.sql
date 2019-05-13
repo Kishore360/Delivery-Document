@@ -5,4 +5,4 @@ SELECT CASE WHEN cnt> 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 LEFT JOIN bbandt_mdwdb.d_lov LKP 
  ON  LKP.dimension_class =  'INSTALL_STATUS_C~CONFIGURATION_ITEM' and (concat('INSTALL_STATUS_C~CONFIGURATION_ITEM~~~',upper(SRC.install_status))= LKP.row_id AND SRC.sourceinstance= LKP.source_id )
  WHERE COALESCE(LKP.row_key,CASE WHEN SRC.install_status IS NULL THEN 0 else -1 end)<> TRGT.install_status_c_key
- and SRC.CDCTYPE<>'D' and TRGT.soft_deleted_flag='Y')ma; 
+ and SRC.CDCTYPE<>'D' and TRGT.soft_deleted_flag='N')ma; 
