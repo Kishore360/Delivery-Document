@@ -5,4 +5,3 @@ FROM gilead_mdsdb.asmt_assessment_instance_final SRC
  ON (SRC.sys_id =TRGT.row_id   AND SRC.sourceinstance= TRGT.source_id  )
 WHERE SRC.number <> TRGT.survey_number_c;
 
-

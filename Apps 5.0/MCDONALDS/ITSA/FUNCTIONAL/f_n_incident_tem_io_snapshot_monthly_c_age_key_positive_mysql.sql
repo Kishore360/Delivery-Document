@@ -1,23 +1,10 @@
-
-	 
-	     SELECT CASE WHEN count(1)<1  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, 
-CASE WHEN count(1)<1  THEN 'Age_key not populated correctly' ELSE 'SUCCESS' END as Message 
-FROM (   
-            select assignment_group_key,priority_src_key,business_service_c_key,month_start_key,floor((age/86400)/ending_backlog) as  age_populated ,
-case when floor((age/86400)/ending_backlog) between 0 and 1 then 71187
-     when floor((age/86400)/ending_backlog)  between 2 and 4 then 71188
-     when floor((age/86400)/ending_backlog)  between 5 and 7 then 71189
-     when floor((age/86400)/ending_backlog)  between 8 and 14 then 71190
-     when floor((age/86400)/ending_backlog)  between 15 and 28 then 71191
-     when floor((age/86400)/ending_backlog)  between 29 and 60 then 71192
-     when floor((age/86400)/ending_backlog)  between 61 and 1000000 then 71193 end age_key_expected  ,age_key age_key_actual
-     from  mcdonalds_mdwdb.f_n_incident_io_snapshot_monthly_c
-     where   case when floor((age/86400)/ending_backlog) between 0 and 1 then 71187
-     when floor((age/86400)/ending_backlog)  between 2 and 4 then 71188
-     when floor((age/86400)/ending_backlog)  between 5 and 7 then 71189
-     when floor((age/86400)/ending_backlog)  between 8 and 14 then 71190
-     when floor((age/86400)/ending_backlog)  between 15 and 28 then 71191
-     when floor((age/86400)/ending_backlog)  between 29 and 60 then 71192
-     when floor((age/86400)/ending_backlog)  between 61 and 1000000 then 71193 end  =age_key)a ;
+SELECT CASE WHEN count(1)>0  THEN 'FAILURE' ELSE  'SUCCESS'  END as Result, 
+CASE WHEN count(1)>0  THEN  'Age_key not populated correctly' ELSE  'SUCCESS'  END as Message 
+from (
+ select distinct age_key,floor((age/86400)/ending_backlog),l.lower_range_value,l.upper_range_value 
+ ,l.row_key 
+ from  mcdonalds_mdwdb.f_n_incident_io_snapshot_monthly_c
+join  mcdonalds_mdwdb.d_lov l on lower_range_value<=floor((age/86400)/ending_backlog) and  upper_range_value>=floor((age/86400)/ending_backlog) 
+ where dimension_class='ASGMT_AGEBUCKET_WH~INCIDENT' and l.row_key<>age_key)a;
 	 
 	 

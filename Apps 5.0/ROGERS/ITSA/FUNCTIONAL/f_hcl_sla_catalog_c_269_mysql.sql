@@ -1,4 +1,4 @@
-SELECT CASE WHEN count(1)  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)  
+SELECT CASE WHEN cnt>0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN cnt>0  
 THEN 'MDS to DWH data validation failed for d_problem.problem_investigation_start_c' ELSE 'SUCCESS' END as Message FROM (
 select a.*,yz  ,cast(coalesce((((tot_days_month*available_duration)-b.outage_duration)/(tot_days_month*available_duration))*100.0000,100.00) as decimal(10,2)) as expected from 
 (

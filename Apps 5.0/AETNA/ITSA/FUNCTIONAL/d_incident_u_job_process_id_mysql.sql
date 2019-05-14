@@ -7,7 +7,7 @@ FROM
  FROM aetna_mdsdb.incident_final SRC 
  LEFT JOIN aetna_mdwdb.d_incident TRGT 
  ON (SRC.sys_id =TRGT.row_id  AND SRC.sourceinstance= TRGT.source_id  )
- WHERE TRGT.soft_deleted_flag='N'
- AND SRC.u_job_process_id <> (TRGT.u_job_process_id)
+ WHERE SRC.u_job_process_id <> TRGT.u_job_process_id and SRC.cdctype<>'D'
+ AND TRGT.soft_deleted_flag='N'
  ) temp;
  

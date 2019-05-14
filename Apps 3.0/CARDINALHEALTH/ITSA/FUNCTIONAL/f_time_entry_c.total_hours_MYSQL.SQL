@@ -1,17 +1,20 @@
-SELECT 
-CASE WHEN CNT > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
-CASE WHEN CNT >0 THEN 'MDS to DWH data validation failed' ELSE 'SUCCESS' END as Message
-FROM (
-		SELECT count(1) as CNT FROM
-cardinalhealth_mdsdb.time_card_final a
- JOIN cardinalhealth_mdwdb.d_calendar_date b ON a.week_starts_on = b.week_start_date
- LEFT JOIN cardinalhealth_mdwdb.f_time_entry_c TRGT 
- ON (concat(a.sys_id,'~',b.day_name) =TRGT.row_id  
- AND a.sourceinstance= TRGT.source_id  )
-LEFT JOIN cardinalhealth_mdsdb.u_pm_project_phase_final c ON a.u_phase = c.sys_id
-            AND a.sourceinstance = c.sourceinstance
-LEFT JOIN cardinalhealth_mdsdb.pm_project_task_final d ON a.task=d.sys_id   
-			AND a.sourceinstance = d.sourceinstance	
-			where COALESCE(a.total)<> TRGT.total_hours and TRGT.soft_deleted_flag<>'Y')ma
+
 			
-			
+			 
+SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
+,CASE WHEN cnt > 0 THEN 'Data did not Match.' 
+ELSE 'Data Matched' END AS Message 
+from(select count(1)cnt  from
+(SELECT concat(SRC.sys_id,'~',b.day_name) ABC,SRC.sourceinstance src, total sr
+ FROM cardinalhealth_mdsdb.time_card_final SRC 
+ JOIN cardinalhealth_mdwdb.d_calendar_date b ON SRC.week_starts_on = b.week_start_date and SRC.sourceinstance=b.source_id
+ and b.week_start_date>='2018-11-05'
+)a
+
+JOIN 
+
+(select row_id,source_id,total_hours vp from cardinalhealth_mdwdb.f_time_entry_c where soft_deleted_flag='N' and
+ week_starts_on>='2018-11-05 00:00:00'  ) TRGT 
+ ON  a.ABC =TRGT.row_id  AND a.src= TRGT.source_id  
+ where a.sr<>TRGT.vp 
+  ) a;

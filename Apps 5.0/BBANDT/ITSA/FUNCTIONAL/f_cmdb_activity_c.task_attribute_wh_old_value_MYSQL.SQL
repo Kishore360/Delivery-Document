@@ -1,6 +1,3 @@
-
-
-
 SELECT 
 CASE WHEN CNT > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 CASE WHEN CNT > 0 THEN 'MDS to DWH data validation failed for f_cmdb_activity_c.task_attribute_wh_old_value' ELSE 'SUCCESS' END as Message  
@@ -28,7 +25,7 @@ WHEN 'dns_domain' then COALESCE(CONCAT('DNS_DOMAIN_C~CONFIGURATION_ITEM~~~',uppe
 WHEN 'chassis_type' then COALESCE(CONCAT('CHASSIS_TYPE_C~CONFIGURATION_ITEM~~~',upper(SRC.oldvalue)),'UNSPECIFIED')
 WHEN 'device_type' then COALESCE(CONCAT('DEVICE_TYPE_C~CONFIGURATION_ITEM~~~',upper(SRC.oldvalue)),'UNSPECIFIED')
 ELSE COALESCE(SRC.oldvalue,'UNSPECIFIED') END
-) <> TRGT.task_attribute_wh_old_value
+) <> TRGT.task_attribute_wh_old_value and SRC.CDCTYPE<>'D' and TRGT.soft_deleted_flag='N'
 ) temp;
 
 

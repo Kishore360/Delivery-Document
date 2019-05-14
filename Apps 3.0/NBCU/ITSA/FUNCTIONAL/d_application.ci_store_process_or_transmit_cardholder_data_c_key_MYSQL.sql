@@ -10,4 +10,5 @@ SRC.sourceinstance=LKP.source_id)
 JOIN nbcu_mdwdb.d_application TRGT
   ON (concat('APPLICATION','~',SRC.sys_id)= TRGT.row_id AND SRC.sourceinstance=TRGT.source_id)  and TRGT.soft_deleted_flag <>'Y'
  WHERE COALESCE(LKP.row_key, CASE WHEN SRC.u_store_process_or_transmit_ca IS NULL THEN 0 ELSE -1 END)
+ <>TRGT.ci_store_process_or_transmit_cardholder_data_c_key
 )temp;

@@ -11,9 +11,9 @@ FROM
 
 (
 select name,count(1) as total_complete
-,100*((count(1))/18) as perc_completeness
-,100.00 - 100*((count(1))/18) as perc_in_completeness
-,50- (count(1)) as total_incomplete
+,100*((count(1))/17) as perc_completeness
+,100.00 - 100*((count(1))/17) as perc_in_completeness
+,17- (count(1)) as total_incomplete
 from(SELECT Y.name, field, value from png_mdsdb.pg_mega_pgb_application_rita_final A
 JOIN (
 select name,'PG_APPLICATION_DESCRIPTION' as field, PG_APPLICATION_DESCRIPTION  as value
@@ -80,7 +80,8 @@ on rp.responsible_org_unit_hexid = org.name
 where (pg_implementation_supplier <>'N' AND pg_implementation_supplier is not null) and rp.cdctype <>'D' and  app_hexid is not null and  responsible_org_unit_hexid is not null and org.CARDINAL <> ''   AND org.CARDINAL IS NOT NULL
 group by app_hexid
 UNION ALL
-select app_hexid as name, 'Other Supplier SAP Code', max(org.CARDINAL) as value
+-- removed as part of DELV-16543
+/* select app_hexid as name, 'Other Supplier SAP Code', max(org.CARDINAL) as value
 from   png_mdsdb.pg_mega_pgv_app_responsible_org_person_final as rp
 inner join  
 (select distinct name,CARDINAL from  png_mdsdb.pg_mega_pgb_org_unit_final) as org
@@ -88,7 +89,7 @@ on rp.responsible_org_unit_hexid = org.name
 where  (third_party_with_access <>'No' AND third_party_with_access is not null) and rp.cdctype <>'D' and 
 app_hexid is not null and  responsible_org_unit_hexid is not null and org.CARDINAL <> '' AND org.CARDINAL IS NOT NULL
 group by app_hexid
-union all
+union all */
 select app_hexid as name,'Data Category', max(DATA_CAT_HEXID) as value from png_mdsdb.pg_mega_pgv_app_data_cat_final 
 where app_hexid is not null and DATA_CAT_HEXID is not null and DATA_CAT_HEXID <> '' and cdctype <> 'D'
 group by app_hexid

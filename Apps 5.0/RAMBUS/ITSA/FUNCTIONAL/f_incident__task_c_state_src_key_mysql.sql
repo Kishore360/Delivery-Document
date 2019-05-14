@@ -4,7 +4,7 @@ CASE WHEN CNT > 0 THEN 'Data did not Match.'
 ELSE 'Data Matched' END AS Message 
 FROM 
 (SELECT COUNT(1) AS CNT 
-FROM rambus_mdsdb.incident_final SRC 
+FROM rambus_mdsdb.task_final SRC 
 JOIN rambus_mdwdb.d_task TRGT ON (SRC.sys_id =TRGT.row_id  AND SRC.sourceinstance= TRGT.source_id)
 JOIN rambus_mdwdb.d_lov LKP ON 
 (CASE WHEN SRC.sys_class_name='INCIDENT' THEN

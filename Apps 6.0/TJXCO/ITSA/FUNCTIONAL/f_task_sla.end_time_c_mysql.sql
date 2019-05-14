@@ -1,7 +1,9 @@
-SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
- CASE WHEN cnt >0 THEN 'MDS to DWH data validation failed for f_task_sla.end_time_c' ELSE 'SUCCESS' END as Message
- FROM (select count(1) as cnt from ( SELECT * FROM tjxco_mdsdb.task_sla_final WHERE CDCTYPE<>'D') SRC 
- LEFT JOIN tjxco_mdwdb.f_task_sla TRGT 
- ON (SRC.sys_id=TRGT.row_id 
- AND SRC.sourceinstance=TRGT.source_id )
- WHERE convert_tz(SRC.end_time, 'GMT', 'America/New_york') <> TRGT.end_time_c) temp;
+SELECT 
+CASE WHEN CNT > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+CASE WHEN CNT >0 THEN 'MDS to DWH data validation failed for f_task_sla.end_time_c' ELSE 'SUCCESS' END as  Message
+FROM 
+(SELECT count(1) as CNT 
+FROM tjxco_mdsdb.task_sla_final src 
+JOIN tjxco_mdwdb.f_task_sla trgt ON src.sys_id=trgt.row_id and src.sourceinstance=trgt.source_id
+WHERE CONVERT_TZ(src.end_time,'GMT','America/New_York')<>trgt.end_time_c and src.cdctype<>'D'
+)temp;

@@ -1,4 +1,4 @@
-SELECT CASE WHEN count(1)  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)  
+SELECT CASE WHEN count(1)>0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)>0  
 THEN 'MDS to DWH data validation failed for d_problem.problem_investigation_start_c' ELSE 'SUCCESS' END as Message 
 -- select xy1,b2.month_start_date_key,attained_response_and_resolution,cnt
 FROM (
@@ -14,7 +14,7 @@ where sla in ('1.5.16')
 right join
 (
 select a.month_start_date_key month_start_date_key,(a.cnt/b.cnt)*100.0 cnt from 
-( select  month_start_date_key,count(1)cnt from      rogers_mdsdb.incident_final b
+( select  month_start_date_key,count(1) cnt from      rogers_mdsdb.incident_final b
 join    rogers_mdsdb.task_sla_final a on a.task=b.sys_id 
 join rogers_mdsdb.contract_sla_final b34 on a.sla=b34.sys_id
 join   rogers_mdwdb.f_incident f on b.sys_id=f.row_id 
@@ -28,7 +28,7 @@ b34.name='Rogers Priority 1 - Response'
 and u_sub_status not in ('Cancelled','Out Of Scope') 
 group by 1 )a
 cross join 
-( select  month_start_date_key month_start_date_key,count(1)cnt from      rogers_mdsdb.incident_final b
+( select  month_start_date_key month_start_date_key,count(1) cnt from      rogers_mdsdb.incident_final b
 join    rogers_mdsdb.task_sla_final a on a.task=b.sys_id 
 join rogers_mdsdb.contract_sla_final b34 on a.sla=b34.sys_id
 join   rogers_mdwdb.f_incident f on b.sys_id=f.row_id 

@@ -9,6 +9,7 @@ ON (coalesce(CONCAT('IS_APPLICATION_SSO_ENABLED','~','APPLICATION~~~',SRC.u_is_a
 SRC.sourceinstance=LKP.source_id)
 JOIN nbcu_mdwdb.d_application TRGT
 ON (concat('APPLICATION','~',SRC.sys_id)= TRGT.row_id AND SRC.sourceinstance=TRGT.source_id)  and TRGT.soft_deleted_flag <>'Y'
-WHERE COALESCE(LKP.row_key, CASE WHEN SRC.u_is_application_sso_enabled IS NULL THEN 0 ELSE -1 END)
+WHERE COALESCE(LKP.row_key, CASE WHEN SRC.u_is_application_sso_enabled_ IS NULL THEN 0 ELSE -1 END)
   <>TRGT.ci_is_application_sso_enabled_c_key
 )temp;
+

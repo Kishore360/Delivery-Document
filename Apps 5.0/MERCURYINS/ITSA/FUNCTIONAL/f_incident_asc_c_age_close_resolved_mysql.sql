@@ -1,15 +1,16 @@
- select CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+select CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  CASE WHEN cnt >0 THEN 'MDS to DWH data validation failed for f_incident_asc_c.age' ELSE 'SUCCESS' END as Message
 from
 (
-select count(1) as cnt FROM (select * from mercuryins_mdsdb.u_asc_ticket_final where opened_at < coalesce(u_resolved,closed_at)) SRC 
+select count(1) cnt FROM 
+ mercuryins_mdsdb.u_asc_ticket_final  SRC 
   join mercuryins_mdwdb.f_incident_asc_c f ON (SRC.sys_id =f.row_id  
- AND SRC.sourceinstance= f.source_id  )
+ AND SRC.sourceinstance= f.source_id and f.soft_deleted_flag='N' )
+join mercuryins_mdwdb.d_incident_asc_c d ON (f.incident_asc_c_key=d.row_key and f.soft_deleted_flag='N' )
 JOIN mercuryins_mdwdb.d_lov_map br ON f.asc_incident_state_c_key = br.src_key
-AND br.dimension_wh_code IN ('RESOLVED')
+AND br.dimension_wh_code IN ('CLOSED','RESOLVED') and br.dimension_class = 'STATE~ASC_INCIDENT'
+WHERE 
 
-WHERE
-timestampdiff(DAY, SRC.opened_at, coalesce(SRC.u_resolved, SRC.closed_at)) <> f.age
+
+timestampdiff(SECOND, d.opened_on,coalesce(d.last_resolved_on,d.closed_on)) <> f.age
   )a
-  
-  

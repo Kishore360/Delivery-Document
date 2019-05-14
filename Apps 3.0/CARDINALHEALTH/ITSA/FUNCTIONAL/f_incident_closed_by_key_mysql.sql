@@ -1,21 +1,18 @@
-SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
-CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for f_incident.closed_by_key' ELSE 'SUCCESS' END as Message
+SELECT 
+CASE WHEN CNT > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+CASE WHEN CNT >0 THEN 'MDS to DWH data validation failed for f_incident.closed_by_key' ELSE 'SUCCESS' END as Message
+FROM 
+(select count(1) cnt from 
+(SELECT coalesce(LKP.row_key,case when SRC.closed_by is null  THEN 0 ELSE -1 end) source,TRGT.closed_by_key TARGT
 FROM cardinalhealth_mdsdb.incident_final SRC 
- LEFT JOIN cardinalhealth_mdwdb.d_lov_map L
- ON (concat('STATE~INCIDENT~~~',upper(SRC.incident_state))=L.src_rowid
- AND SRC.sourceinstance=L.source_id )
- LEFT JOIN cardinalhealth_mdwdb.f_incident TRGT 
+JOIN cardinalhealth_mdwdb.d_lov_map L
+ ON (SRC.incident_state=L.dimension_code  )
+  JOIN cardinalhealth_mdwdb.f_incident TRGT 
  ON (SRC.sys_id=TRGT.row_id 
  AND SRC.sourceinstance=TRGT.source_id )
 LEFT JOIN cardinalhealth_mdwdb.d_internal_contact LKP 
- ON ( concat('INTERNAL_CONTACT~',SRC.closed_by) = LKP.row_id 
- AND SRC.sourceinstance = LKP.source_id )	
-LEFT JOIN cardinalhealth_mdwdb.d_internal_contact LKP1
- ON (SRC.sys_updated_by = LKP1.user_name 
-AND SRC.sourceinstance = LKP1.source_id )	
-WHERE 
-(case when L.dimension_wh_code='CLOSED' and LKP.ROW_KEY IS NOT NULL THEN LKP.ROW_KEY
-when L.dimension_wh_code='CLOSED' and LKP.ROW_KEY IS NULL AND LKP1.ROW_KEY IS NOT NULL THEN LKP1.ROW_KEY  
-WHEN L.dimension_wh_code<>'CLOSED'  THEN 0 
-ELSE -1 end)
-<> COALESCE(TRGT.closed_by_key ,'')
+ON ( SRC.closed_by = substring(LKP.row_id,18,length(LKP.row_id))  AND SRC.sourceinstance = LKP.source_id )	
+
+WHERE L.dimension_wh_code='CLOSED' and  LKP.soft_deleted_flag='N' and  TRGT.soft_deleted_flag='N' 
+and L.dimension_class = 'STATE~INCIDENT'  
+)temp where source<>TARGT)a;
