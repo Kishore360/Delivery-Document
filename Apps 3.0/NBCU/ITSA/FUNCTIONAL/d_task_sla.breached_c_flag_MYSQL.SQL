@@ -7,5 +7,5 @@ FROM
 (SELECT count(1) as CNT 
 FROM nbcu_mdsdb.task_sla_final src 
 LEFT JOIN nbcu_mdwdb.f_task_sla trgt ON src.sys_id=trgt.row_id and src.sourceinstance=trgt.source_id
-WHERE if(src.has_breached=TRUE,'Y','N')<>trgt.breached_c_flag
+WHERE (case when src.has_breached=1 then 'Y' else 'N' end)<>trgt.breached_c_flag and trgt.soft_deleted_flag='N'
 )temp;
