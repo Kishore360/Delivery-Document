@@ -5,10 +5,9 @@ FROM (
 SELECT count(1) as CNT
 FROM nbcu_mdsdb.cmdb_ci_appl_final SRC
 LEFT JOIN nbcu_mdwdb.d_lov LKP 
-ON (coalesce(CONCAT('LEGAL_HOLD','~','APPLICATION~~~',SRC.u_legal_hold),'UNSPECIFIED')=LKP.row_id AND
-SRC.sourceinstance=LKP.source_id)
+ON (coalesce(CONCAT('PCI_CLASSIFICATION~APPLICATION~~~',SRC.u_pci_classification),'UNSPECIFIED'))=LKP.row_id AND
+SRC.sourceinstance=LKP.source_id
 JOIN nbcu_mdwdb.d_application TRGT
   ON (concat('APPLICATION','~',SRC.sys_id)= TRGT.row_id AND SRC.sourceinstance=TRGT.source_id)  and TRGT.soft_deleted_flag <>'Y'
- WHERE COALESCE(LKP.row_key, CASE WHEN SRC.u_legal_hold IS NULL THEN 0 ELSE -1 END)
-  <>TRGT.ci_pci_classification_c_key)temp;
-)temp;
+ WHERE COALESCE(LKP.row_key, CASE WHEN SRC.u_pci_classification IS NULL THEN 0 ELSE -1 END)<>TRGT.ci_pci_classification_c_key)temp;
+

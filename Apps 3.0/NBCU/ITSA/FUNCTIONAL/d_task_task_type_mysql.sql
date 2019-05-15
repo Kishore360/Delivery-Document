@@ -37,7 +37,7 @@ WHEN a.sys_class_name='facilities_request' THEN 'Facilities Request'
 WHEN a.sys_class_name='facilities_request_task' THEN 'Facilities Request Task'
 WHEN a.sys_class_name='u_tlmd_bcst_incident' THEN 'TLMD Broadcast Incident'
 WHEN a.sys_class_name='u_shoot' THEN 'Shoot'
-END <> b.task_type 
+END <> b.task_type and b.soft_deleted_flag='N'
 ) a; 
 
  
