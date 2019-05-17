@@ -6,5 +6,6 @@ FROM
 FROM tjx_mdsdb.task_final src 
 LEFT JOIN tjx_mdwdb.d_task trgt ON src.sys_id=trgt.row_id and src.sourceinstance=trgt.source_id
 WHERE (CASE WHEN src.reassignment_count>0 THEN 'Y' ELSE 'N' END) <> trgt.reassignment_flag
+and trgt.soft_deleted_flag='N'
  )temp;
 
