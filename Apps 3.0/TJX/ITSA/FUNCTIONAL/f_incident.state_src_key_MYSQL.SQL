@@ -3,8 +3,9 @@ CASE WHEN CNT > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 CASE WHEN CNT >0 THEN 'MDS to DWH data validation failed for f_incident.state_src_key' ELSE 'SUCCESS' END as Message
 FROM (SELECT COUNT(1) as CNT
  FROM tjx_mdsdb.incident_final SRC
-LEFT JOIN tjx_mdwdb.d_lov LKP 
- ON SRC.incident_state=substring(LKP.row_id,18,length(LKP.row_id))
+LEFT JOIN tjx_mdwdb.d_lov LKP
+ ON   
+COALESCE( CONCAT('STATE','~','INCIDENT','~','~','~',UPPER(SRC.incident_state)),'UNSPECIFIED')=LKP.row_id
 AND SRC.sourceinstance= LKP.source_id 
  LEFT JOIN tjx_mdwdb.f_incident TRGT 
  ON (SRC.sys_id =TRGT.row_id  
@@ -12,5 +13,4 @@ AND SRC.sourceinstance= LKP.source_id
  WHERE LKP.dimension_class='STATE~INCIDENT' 
  and coalesce(LKP.row_key,CASE WHEN SRC.incident_state IS NULL THEN 0 else -1 end)<> TRGT.state_src_key
  and TRGT.soft_deleted_flag='N')temp;
- 
  
