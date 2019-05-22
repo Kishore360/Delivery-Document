@@ -18,7 +18,7 @@ ON n.n <= 1 + (LENGTH(COALESCE(TRIM(cr.u_ci_name),'UNSPECIFIED')) - LENGTH(REPLA
 JOIN mercuryins_mdwdb.f_cmdb_ci_name_c TRGT 
 ON SRC.Row_id=TRGT.row_id and SRC.source_id=TRGT.source_id
 WHERE 
-CONVERT_TZ(SRC.changed_on,'GMT','America/Los_Angeles')<>TRGT.changed_on;
+SRC.changed_on<>TRGT.changed_on;
 
 
 

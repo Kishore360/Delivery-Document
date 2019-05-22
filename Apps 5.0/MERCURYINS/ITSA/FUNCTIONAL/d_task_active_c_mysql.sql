@@ -5,4 +5,4 @@ from mercuryins_mdsdb.task_final SRC
 join
 mercuryins_mdwdb.d_task TRGT
 on SRC.sys_id=TRGT.row_id and SRC.sourceinstance=TRGT.source_id
-where case when SRC.active=1 then 'Y' else 'N' end <>TRGT.active_c
+where case when SRC.active=1 then 'Y' else 'N' end <>TRGT.active_c_flag
