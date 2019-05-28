@@ -13,6 +13,4 @@ LEFT JOIN png_mdwdb.d_png_ot_processing_activities_inventory_c TRGT ON SRC.inven
 WHERE 
 CASE WHEN SRC1.User_Name IS NULL OR SRC1.User_Name ='' 
 THEN 'UNSPECIFIED' ELSE SRC1.User_Name END<>TRGT.business_process_owner
-AND SRC.cdctype='X'
-
-) temp;
+AND SRC.cdctype='X') temp;

@@ -39,7 +39,7 @@ UNION
 SELECT 'ldb.d_sc_req_item_priority' AS TABLE_NAME, COUNT(1) AS ROW_COUNT 
 FROM ldb.f_request_item_task_sla_c a11
 JOIN ldb.d_request_item a12 ON a11.request_item_key=a12.row_key
-JOIN ldb.d_sc_req_item_priority a13 ON a11.priority_src_c_key=a13.row_key
+JOIN ldb.d_sc_req_item_priority a13 ON a11.priority_src_key=a13.row_key
 UNION 
 SELECT 'ldb.d_internal_organization_vendor_company_c' AS TABLE_NAME, COUNT(1) AS ROW_COUNT 
 FROM ldb.f_request_item_task_sla_c a11
