@@ -4,10 +4,7 @@ CASE WHEN CNT >0 THEN 'MDS to DWH data validation failed for d_task_sla.sla_cond
 FROM 
 (SELECT count(1) as CNT 
 FROM tjx_mdsdb.contract_sla_final src 
-JOIN tjx_mdsdb.task_sla_final b ON src.sys_id=b.sla AND src.sourceinstance=b.sourceinstance
 JOIN tjx_mdwdb.d_task_sla trgt ON src.sys_id=trgt.row_id and src.sourceinstance=trgt.source_id
-WHERE COALESCE(SUBSTRING(src.start_condition,1,255),'UNSPECIFIED')<>(trgt.sla_condition)
+WHERE COALESCE(src.start_condition,'UNSPECIFIED')<>trgt.sla_condition
+AND trgt.soft_deleted_flag='N'
 )temp;
-
-
-

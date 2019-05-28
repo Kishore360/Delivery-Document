@@ -6,6 +6,6 @@ FROM
 SELECT count(1) as CNT  
 FROM  tjx_mdsdb.task_final a 
 JOIN tjx_mdwdb.f_task_c b ON a.sys_id=b.row_id and a.sourceinstance=b.source_id
-WHERE COALESCE(a.number,'UNSPECIFIED')<>b.task_number 
+WHERE COALESCE(a.number,'UNSPECIFIED')<>b.task_number and b.soft_deleted_flag='N'
 )temp;
 
