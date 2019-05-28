@@ -8,7 +8,7 @@ when u_integration_srms_location.name in ('UNSPECIFED', 'unspecified', 'Unspecif
      'unallocated', 'Undefined', 'UNDEFINED', 'undefined', 'UNKONWN', 'unknown', 'Unknown') or name is null 
 	 or name='' or name=' ' then 0
    else 1 end 
-)  
+
  
 from  mcdonalds_mdsdb.change_request_final incident
 left join mcdonalds_mdsdb.core_company_final  u_integration_srms_location 

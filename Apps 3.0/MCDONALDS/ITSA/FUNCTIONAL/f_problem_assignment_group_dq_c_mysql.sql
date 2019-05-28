@@ -10,10 +10,10 @@ when u_integration_srms_location.name in ('UNSPECIFED', 'unspecified', 'Unspecif
    else 1 end 
  
  
-from  mcdonalds_mdsdb.change_request_final incident
+from  mcdonalds_mdsdb.problem_final incident
 left join mcdonalds_mdsdb.sys_user_group_final u_integration_srms_location 
 on incident.assignment_group=u_integration_srms_location.sys_id and incident.sourceinstance= u_integration_srms_location.sourceinstance
-left join  mcdonalds_mdwdb.f_change_request tgt
+left join  mcdonalds_mdwdb.f_problem tgt
 on incident.sys_id=tgt.row_id and incident.sourceinstance=tgt.source_id
 where  tgt.assignment_group_dq_c<>(case when incident.assignment_group  is  null  then 0 
 when incident.assignment_group  is not  null  and  u_integration_srms_location.sys_id is null then 0 
