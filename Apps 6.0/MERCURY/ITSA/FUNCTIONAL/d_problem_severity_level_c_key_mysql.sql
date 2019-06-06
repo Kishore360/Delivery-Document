@@ -8,5 +8,6 @@ LEFT JOIN mercury_mdwdb.d_lov LKP
  ON ( concat('SEVERITY_LEVEL~PROBLEM~~~',SRC.u_severity_level))= LKP.src_rowid 
 AND SRC.sourceinstance= LKP.source_id 
  WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_severity_level IS NULL THEN 0 else -1 end)<> (TRGT.severity_level_c_key)
+and SRC.CDCTYPE='X'
  
 

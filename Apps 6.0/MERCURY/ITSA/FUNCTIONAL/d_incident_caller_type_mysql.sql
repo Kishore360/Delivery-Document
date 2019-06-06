@@ -5,3 +5,4 @@ JOIN mercury_mdwdb.d_incident TRGT
 ON (SRC.sys_id  = TRGT.row_id  
 AND SRC.sourceinstance = TRGT.source_id )
 WHERE TRGT.caller_type <> SRC.u_caller_type
+AND SRC.CDCTYPE='X';

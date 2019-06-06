@@ -5,5 +5,6 @@ JOIN mercury_mdwdb.d_incident_asc_c TRGT
 ON (SRC.sys_id = TRGT.row_id  
 AND SRC.sourceinstance = TRGT.source_id )  
 join mercury_mdwdb.d_lov LKP
-on COALESCE( CONCAT('CONTACT_TYPE','~','ASC_INCIDENT','~','~','~',UPPER(SRC.contact_type)),'UNSPECIFIED')=LKP.row_id
+on COALESCE( CONCAT('CONTACT_TYPE','~','ASC_INCIDENT','~',UPPER(SRC.contact_type)),'UNSPECIFIED')=LKP.row_id
 WHERE coalesce(LKP.row_key,case when SRC.contact_type is  null then 0 else -1 end )<> (TRGT.asc_incident_contact_type_c_key) 
+AND SRC.CDCTYPE='X'

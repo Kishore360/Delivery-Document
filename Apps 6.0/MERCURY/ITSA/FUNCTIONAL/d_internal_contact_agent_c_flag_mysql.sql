@@ -5,5 +5,6 @@ JOIN mercury_mdwdb.d_internal_contact TRGT
 ON (concat('INTERNAL_CONTACT~',SRC.sys_id ) = TRGT.row_id  
 AND SRC.sourceinstance = TRGT.source_id )
 WHERE case when SRC.u_agent = 1 then 'Y' else 'N' end <>TRGT.agent_c_flag
+AND SRC.CDCTYPE='X';
 
 

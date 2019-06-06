@@ -7,3 +7,4 @@ AND SRC.sourceinstance = TRGT.source_id )
 join mercury_mdwdb.d_internal_contact LKP
 on case when SRC.assigned_to is null then 'UNSPECIFIED' else concat('INTERNAL_CONTACT~',SRC.assigned_to) end=LKP.row_id
 WHERE coalesce(LKP.row_key,case when SRC.assigned_to is null then  0 else -1 end )<>TRGT.assigned_to_c_key
+AND SRC.CDCTYPE='X';

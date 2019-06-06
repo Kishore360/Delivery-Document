@@ -5,3 +5,4 @@ JOIN mercury_mdwdb.d_problem TRGT
 ON (SRC.sys_id = TRGT.row_id  
 AND SRC.sourceinstance = TRGT.source_id )  
 WHERE (CASE WHEN SRC.u_incident_manager_notified = 1 then 'Y' else 'N' END) <> (TRGT.incident_manager_notified_c_flag) 
+AND SRC.CDCTYPE='X';
