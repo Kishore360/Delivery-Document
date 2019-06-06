@@ -1,9 +1,9 @@
 SELECT CASE WHEN a.cnt THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  CASE WHEN a.cnt THEN 'MDS to DWH data validation failed for f_problem.change_request_key' ELSE 'SUCCESS' END as Message
 from (select count(1) as cnt
-from mercuryins_mdsdb.task_final SRC
+from mercury_mdsdb.task_final SRC
 join
- mercuryins_mdwdb.d_task TRGT
+ mercury_mdwdb.d_task TRGT
 on SRC.sys_id=TRGT.row_id and SRC.sourceinstance=TRGT.source_id
 where 
 SRC.sys_class_name in ('TICKET','INCIDENT','PROBLEM','PROBLEM_TASK','SC_REQ_ITEM','SC_TASK','SC_REQUEST','CHANGE_REQUEST'

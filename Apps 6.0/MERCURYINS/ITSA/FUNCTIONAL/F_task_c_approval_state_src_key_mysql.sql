@@ -3,10 +3,10 @@ SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
 ELSE 'Data Matched' END AS Message 
 FROM (
 select count(1) as cnt
-from  mercuryins_mdsdb.task_final s
-left  JOIN mercuryins_mdwdb.f_task_c t 
+from  mercury_mdsdb.task_final s
+left  JOIN mercury_mdwdb.f_task_c t 
 on  t.ROW_ID=s.SYS_ID and s.sourceinstance=t.source_id  
-join mercuryins_mdwdb.d_lov l
+join mercury_mdwdb.d_lov l
 ON CASE 
 		WHEN s.sys_class_name ='SC_REQ_ITEM' THEN COALESCE( CONCAT('APPROVAL','~','SC_REQ_ITEM','~','~','~',UPPER(s.approval)),'UNSPECIFIED')
 		WHEN s.sys_class_name ='SC_REQUEST' THEN COALESCE( CONCAT('APPROVAL','~','SC_REQUEST','~','~','~',UPPER(s.approval)),'UNSPECIFIED')

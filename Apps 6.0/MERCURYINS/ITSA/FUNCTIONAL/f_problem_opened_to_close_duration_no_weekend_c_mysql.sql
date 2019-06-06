@@ -1,6 +1,6 @@
 SELECT CASE WHEN count(1)  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, 
 CASE WHEN count(1)  THEN 'MDS to DWH data validation failed for f_task_c.urgency' ELSE 'SUCCESS' END as Message 
-From mercuryins_mdwdb.f_problem trgt
+From mercury_mdwdb.f_problem trgt
 INNER JOIN 
 (
 Select
@@ -12,8 +12,8 @@ Select
               else 24*60*60  	end
 		)
     ) time_diff_sec
-From   ( select sys_id,opened_at , closed_at  from mercuryins_mdsdb.problem_final ) f
-join mercuryins_mdwdb.d_calendar_date dt
+From   ( select sys_id,opened_at , closed_at  from mercury_mdsdb.problem_final ) f
+join mercury_mdwdb.d_calendar_date dt
     on dt.calendar_date between date(opened_at) and date(closed_at)
 group by  sys_id,opened_at, closed_at
 ) src on src.sys_id=trgt.row_id

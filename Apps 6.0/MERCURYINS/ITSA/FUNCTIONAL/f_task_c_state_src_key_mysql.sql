@@ -2,13 +2,13 @@ select CASE WHEN a.cnt> 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  CASE WHEN a.cnt >0 THEN 'MDS to DWH data validation failed for f_problem.change_request_key' ELSE 'SUCCESS' END as Message
 from 
 (SELECT count(1) as cnt
-from mercuryins_mdsdb.task_final SRC
- LEFT OUTER JOIN mercuryins_mdsdb.sc_request_final sc_request 
+from mercury_mdsdb.task_final SRC
+ LEFT OUTER JOIN mercury_mdsdb.sc_request_final sc_request 
                 ON SRC.sys_id = sc_request.sys_id 
                 AND SRC.sourceinstance = sc_request.sourceinstance  
-join mercuryins_mdwdb.f_task_c TRGT
+join mercury_mdwdb.f_task_c TRGT
 on SRC.sys_id=TRGT.row_id and SRC.sourceinstance=TRGT.source_id
-join mercuryins_mdwdb.d_lov LKP
+join mercury_mdwdb.d_lov LKP
 on CASE 
 		WHEN SRC.sys_class_name ='INCIDENT' THEN COALESCE( CONCAT('STATE','~','INCIDENT','~','~','~',UPPER(SRC.state)),'UNSPECIFIED')
 		WHEN SRC.sys_class_name ='PROBLEM' THEN COALESCE( CONCAT('STATE','~','PROBLEM','~','~','~',UPPER(SRC.state)),'UNSPECIFIED')
