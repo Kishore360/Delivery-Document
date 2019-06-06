@@ -9,9 +9,9 @@ on  t.ROW_ID=s.SYS_ID and s.sourceinstance=t.source_id
 join mercuryins_mdwdb.d_lov l
 ON CASE 
 		WHEN s.sys_class_name ='INCIDENT' THEN COALESCE( CONCAT('ESCALATION','~','INCIDENT','~','~','~',UPPER(s.escalation)),'UNSPECIFIED')
-		WHEN s.sys_class_name ='ASC_INCIDENT' THEN COALESCE( CONCAT('ESCALATION','~','ASC_INCIDENT','~','~','~',UPPER(s.escalation)),'UNSPECIFIED')
-		ELSE
-		'UNSPECIFIED'
+		WHEN s.sys_class_name ='u_asc_ticket' THEN COALESCE( CONCAT('ESCALATION','~','u_asc_ticket','~','~','~',UPPER(s.escalation)),'UNSPECIFIED')
+		ELSE COALESCE( CONCAT('ESCALATION','~','TASK','~','~','~',UPPER(s.escalation)),'UNSPECIFIED')
+		
 	END= l.row_id
  
 WHERE COALESCE(l.row_key,CASE WHEN s.escalation IS NULL THEN 0 else '-1' end)<>
