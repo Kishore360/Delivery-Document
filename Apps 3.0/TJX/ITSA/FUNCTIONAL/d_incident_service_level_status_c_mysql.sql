@@ -12,4 +12,4 @@ WHEN (f.servc_lvl_discrepancy_c>-24 AND f.servc_lvl_discrepancy_c<0)
 AND b.dimension_name NOT IN ('CLOSED','RESOLVED') THEN 'AMBER'
 WHEN (f.servc_lvl_discrepancy_c>-24 AND f.servc_lvl_discrepancy_c<0)
 AND b.dimension_name IN ('CLOSED','RESOLVED') THEN 'IN' END
- 
+;

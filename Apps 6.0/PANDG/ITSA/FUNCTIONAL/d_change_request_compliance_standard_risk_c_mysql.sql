@@ -20,5 +20,5 @@ on a.type_src_key = type1.row_key
 where state.dimension_wh_code = 'CLOSED' and type.dimension_name <> ('Non-Production') 
 and type1.dimension_name = 'Standard'
 and close.dimension_name not in ('Rejected', 'Withdrawn / Cancelled')
-and (impact.dimension_name <> '3-Low' or risk.dimension_name <> 'Low')
-and a.compliance_standard_risk_c <> 'N' <> a.compliance_standard_risk_c
+and (risk.dimension_name <> 'Low')
+and a.compliance_standard_risk_c <> 'N' ;
