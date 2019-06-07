@@ -4,4 +4,4 @@ FROM mercury_mdsdb.incident_final SRC
 JOIN mercury_mdwdb.d_incident TRGT  
 ON (SRC.sys_id  = TRGT.row_id  
 AND SRC.sourceinstance = TRGT.source_id )
-WHERE CONVERT_TZ(SRC.u_resolved,'GMT','America/Los_Angeles') <> TRGT.last_resolved_on
+WHERE CONVERT_TZ(SRC.u_resolved,'GMT','America/Los_Angeles') <> TRGT.last_resolved_on and SRC.CDCTYPE<>'D'

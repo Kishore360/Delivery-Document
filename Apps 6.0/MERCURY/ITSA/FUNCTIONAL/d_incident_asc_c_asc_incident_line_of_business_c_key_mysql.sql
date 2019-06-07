@@ -5,5 +5,5 @@ JOIN mercury_mdwdb.d_incident_asc_c TRGT
 ON (SRC.sys_id = TRGT.row_id  
 AND SRC.sourceinstance = TRGT.source_id )  
 join mercury_mdwdb.d_lov LKP
-on COALESCE( CONCAT('LINE_OF_BUSINESS','~','ASC_INCIDENT','~','~','~',UPPER(SRC.u_line_of_business)),'UNSPECIFIED')=LKP.row_id
-WHERE coalesce(LKP.row_key,case when SRC.u_line_of_business is  null then 0 else -1 end )<>(TRGT.asc_incident_line_of_business_c_key) 
+on COALESCE( CONCAT('LINE_OF_BUSINESS','~','ASC_INCIDENT','~',UPPER(SRC.u_line_of_business)),'UNSPECIFIED')=LKP.row_id
+WHERE coalesce(LKP.row_key,case when SRC.u_line_of_business is  null then 0 else -1 end )<>(TRGT.asc_incident_line_of_business_c_key) and SRC.CDCTYPE<>'D'

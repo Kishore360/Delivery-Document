@@ -6,6 +6,6 @@ select count(1)  cnt from
 mercury_mdsdb.incident_final a join
  mercury_mdwdb.d_incident b
 on a.sys_id=b.row_id
-and a.sourceinstance=b.source_id
-where 
+and a.sourceinstance=b.source_id and a.cdctype='X'
+where  
 case when a.u_created_by_wess=1 then 'Y' else 'N' END  <> b.created_by_wess_c)b

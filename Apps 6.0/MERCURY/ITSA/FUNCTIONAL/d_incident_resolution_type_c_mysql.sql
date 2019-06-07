@@ -7,4 +7,4 @@ mercury_mdsdb.incident_final a join
  mercury_mdwdb.d_incident b
 on a.sys_id=b.row_id
 and a.sourceinstance=b.source_id
-where coalesce(a.u_resolution_type,'a')<>coalesce(b.resolution_type_c,'a'))b
+where coalesce(a.u_resolution_type,'UNSPECIFIED')<>coalesce(b.resolution_type_c) and a.CDCTYPE<>'D')b

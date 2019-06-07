@@ -3,5 +3,5 @@ CASE WHEN count(1)  THEN 'MDS to DWH data validation failed for d_problem.missio
 FROM mercury_mdsdb.problem_final  SRC 
 JOIN mercury_mdwdb.d_problem TRGT 
 ON (SRC.sys_id = TRGT.row_id  
-AND SRC.sourceinstance = TRGT.source_id )  
+AND SRC.sourceinstance = TRGT.source_id )  and SRC.cdctype='X'
 WHERE (CASE WHEN SRC.u_mission_mode_sent = 1 then 'Y' else 'N' END) <> (TRGT.mission_mode_sent_c_flag) 

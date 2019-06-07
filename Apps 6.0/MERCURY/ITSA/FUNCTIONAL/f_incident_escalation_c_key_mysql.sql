@@ -4,5 +4,5 @@ FROM mercury_mdsdb.incident_final SRC
 JOIN mercury_mdwdb.f_incident TRGT 
 ON SRC.sys_id=TRGT.row_id and SRC.sourceinstance=TRGT.source_id
 join mercury_mdwdb.d_lov LKP
-on COALESCE(CONCAT('ESCALATION','~','INCIDENT','~','~','~',UPPER(SRC.escalation)),'UNSPECIFIED')=LKP.row_id
-WHERE coalesce(LKP.row_key,case when SRC.escalation is null then  0 else -1 end )<>TRGT.escalation_c_key
+on COALESCE(CONCAT('ESCALATION','~','INCIDENT','~',UPPER(SRC.escalation)),'UNSPECIFIED')=LKP.row_id
+WHERE coalesce(LKP.row_key,case when SRC.escalation is null then  0 else -1 end )<>TRGT.escalation_c_key and SRC.CDCTYPE<>'D'

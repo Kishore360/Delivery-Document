@@ -6,4 +6,4 @@ ON (concat('BUSINESS_SERVICE~',SRC.sys_id ) = TRGT.row_id
 AND SRC.sourceinstance = TRGT.source_id )
 join mercury_mdwdb.d_internal_contact LKP
 on COALESCE(CONCAT('INTERNAL_CONTACT~',SRC.owned_by),'UNSPECIFIED')=LKP.row_id
-WHERE coalesce(LKP.row_key,case when SRC.owned_by is null then  0 else -1 end )<>TRGT.owner_c_key
+WHERE coalesce(LKP.row_key,case when SRC.owned_by is null then  0 else -1 end )<>TRGT.owner_c_key and and SRC.CDCTYPE<>'D'

@@ -7,6 +7,6 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
 LEFT JOIN mercury_mdwdb.d_lov LKP 
- ON ( concat('SUBCATEGORY~ASC_INCIDENT~~~',upper(subcategory))= LKP.src_rowid 
+ ON ( concat('SUBCATEGORY~ASC_INCIDENT~',upper(subcategory))= LKP.row_id 
 AND SRC.sourceinstance= LKP.source_id )
- WHERE COALESCE(LKP.row_key,CASE WHEN SRC.subcategory IS NULL THEN 0 else -1 end)<> (TRGT.asc_incident_sub_category_c_key)
+ WHERE COALESCE(LKP.row_key,CASE WHEN SRC.subcategory IS NULL THEN 0 else -1 end)<> (TRGT.asc_incident_sub_category_c_key) and SRC.CDCTYPE<>'D'
