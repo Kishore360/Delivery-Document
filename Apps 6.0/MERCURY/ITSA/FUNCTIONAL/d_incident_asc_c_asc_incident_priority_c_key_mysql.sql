@@ -7,3 +7,5 @@ AND SRC.sourceinstance = TRGT.source_id )  and SRC.cdctype<>'D'
 join mercury_mdwdb.d_lov LKP
 on COALESCE(CONCAT('PRIORITY','~','ASC_INCIDENT','~',UPPER(SRC.priority)),'UNSPECIFIED')=LKP.row_id
 WHERE coalesce(LKP.row_key,case when SRC.priority is  null then 0 else -1 end )<>(TRGT.asc_incident_priority_c_key) ;
+
+
