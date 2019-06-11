@@ -92,7 +92,7 @@ select 'ldb.d_calendar_fiscal_quarter a11 ' as Table_name, count(a11.row_key) Ro
 from ldb.f_incident a11 
 JOIN ldb.d_calendar_date_fiscal a12 ON a11.fiscal_date_key=a12.row_key
 JOIN ldb.d_calendar_fiscal_quarter a13 ON a12.quarter_start_date_key=a13.row_key 
-JOIN ldb.d_calendar_fiscal_year a14 IN a13.year_start_date_key=a14.row_key
+JOIN ldb.d_calendar_fiscal_year a14 ON a13.year_start_date_key=a14.row_key
 
 
 
