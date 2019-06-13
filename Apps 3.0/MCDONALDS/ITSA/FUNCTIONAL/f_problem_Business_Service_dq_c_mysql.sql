@@ -4,7 +4,7 @@ FROM (
 select u_business_service  ,business_criticality_dq_c,
 case when incident.u_business_service   is  null  then 0 
 when incident.u_business_service   is not  null  and  u_integration_srms_location.sys_id is null then 0 
-when u_integration_srms_location.u_business_service in ('UNSPECIFED', 'unspecified', 'Unspecified', 'null', 'spaces', 'UNALLOCATED', 'Unallocated', 
+when incident.u_business_service in ('UNSPECIFED', 'unspecified', 'Unspecified', 'null', 'spaces', 'UNALLOCATED', 'Unallocated', 
      'unallocated', 'Undefined', 'UNDEFINED', 'undefined', 'UNKONWN', 'unknown', 'Unknown') or u_business_service is null 
 	 or u_business_service='' or u_business_service=' ' then 0
    else 1 end 
@@ -17,7 +17,7 @@ left join  mcdonalds_mdwdb.f_problem tgt
 on incident.sys_id=tgt.row_id and incident.sourceinstance=tgt.source_id
 where  tgt.Business_Service_dq_c<>(case when incident.u_business_service   is  null  then 0 
 when incident.u_business_service   is not  null  and  u_integration_srms_location.sys_id is null then 0 
-when u_integration_srms_location.u_business_service in ('UNSPECIFED', 'unspecified', 'Unspecified', 'null', 'spaces', 'UNALLOCATED', 'Unallocated', 
+when incident.u_business_service in ('UNSPECIFED', 'unspecified', 'Unspecified', 'null', 'spaces', 'UNALLOCATED', 'Unallocated', 
      'unallocated', 'Undefined', 'UNDEFINED', 'undefined', 'UNKONWN', 'unknown', 'Unknown') or u_business_service is null 
 	 or u_business_service='' or u_business_service=' ' then 0
    else 1 end 
