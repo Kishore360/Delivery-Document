@@ -1,3 +1,38 @@
+/* d_ag_manager_role_vp_dir_ad_c
+d_business_service
+d_calendar_date
+d_calendar_date_fiscal
+d_calendar_fiscal_quarter
+d_calendar_fiscal_year
+d_calendar_month
+d_calendar_quarter
+d_calendar_week
+d_calendar_year
+d_configuration_item
+d_internal_contact_assigned_to
+d_internal_contact_assignment_group_delegate_c
+d_internal_contact_associate_director_c
+d_internal_contact_director_c
+d_internal_contact_requested_for
+d_internal_contact_vp_c
+d_internal_organization_group
+d_lov_ritm_category_c
+d_lov_ritm_closure_code_c
+d_lov_ritm_cwt_c
+d_lov_ritm_requesttype_c
+d_lov_ritm_servicetype_c
+d_lov_ritm_subcategory_c
+d_master_item
+d_request
+d_request_item
+d_request_item_contacttype
+d_request_item_state
+d_ri_service_offering_c
+d_sc_req_item_approval
+d_sc_req_item_priority
+f_request_item
+f_request_item_closed */
+
 select 'ldb.f_request_item' as Table_Name, count(1) Row_Count
  from  ldb.f_request_item       a11 
 union
@@ -193,4 +228,38 @@ select 'ldb.d_internal_organization_group' as Table_Name, count(1) Row_Count
 from  ldb.f_request_item a 
 JOIN ldb.d_internal_organization_group b on (a.assignment_group_key = b.row_key)
 JOIN ldb.d_internal_contact_assignment_group_delegate_c c ON b.pg_delegate_c_key=c.row_key
+UNION 
+SELECT 'd_ri_service_offering_c' as Table_Name,Count(1) as Row_Count
+FROM ldb.f_request_item a
+JOIN ldb.d_ri_service_offering_c c ON a.service_offering_key=c.row_key
+UNION 
+SELECT 'd_configuration_item' as Table_Name,Count(1) as Row_Count
+FROM ldb.f_request_item a
+JOIN ldb.d_configuration_item b ON a.configuration_item_key=b.row_key
+UNION 
+SELECT 'd_business_service' as Table_Name,Count(1) as Row_Count
+FROM ldb.f_request_item a
+JOIN ldb.d_business_service b ON a.business_service_key=b.row_key
+UNION 
+SELECT 'd_ag_manager_role_vp_dir_ad_c' as Table_Name,Count(1) as Row_Count
+FROM ldb.f_request_item a
+JOIN ldb.d_ag_manager_role_vp_dir_ad_c b ON a.assignment_group_key=b.row_key
+UNION 
+SELECT 'd_internal_contact_vp_c' as Table_Name,Count(1) as Row_Count
+FROM ldb.f_request_item a
+JOIN ldb.d_ag_manager_role_vp_dir_ad_c b ON a.assignment_group_key=b.row_key
+JOIN ldb.d_internal_contact_vp_c c ON b.vp_key=c.row_key
+UNION 
+SELECT 'd_internal_contact_director_c' as Table_Name,Count(1) as Row_Count
+FROM ldb.f_request_item a
+JOIN ldb.d_ag_manager_role_vp_dir_ad_c b ON a.assignment_group_key=b.row_key
+JOIN ldb.d_internal_contact_director_c c ON b.director_key=c.row_key
+UNION 
+SELECT 'd_internal_contact_associate_director_c' as Table_Name,Count(1) as Row_Count
+FROM ldb.f_request_item a
+JOIN ldb.d_ag_manager_role_vp_dir_ad_c b ON a.assignment_group_key=b.row_key
+JOIN ldb.d_internal_contact_associate_director_c c ON b.associate_director_key=c.row_key
+
+
+
 

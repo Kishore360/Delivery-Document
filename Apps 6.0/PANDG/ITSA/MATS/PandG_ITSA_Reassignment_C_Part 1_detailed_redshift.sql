@@ -1,3 +1,19 @@
+/* d_calendar_date
+d_calendar_month
+d_configuration_item
+d_incident
+d_incident_priority
+d_incident_state
+d_internal_contact_from
+d_internal_contact_to
+d_internal_organization_group
+d_internal_organization_group_from
+d_internal_organization_group_to
+f_incident
+f_incident_activity */
+
+
+
 select 'ldb.f_incident_activity a11 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident_activity a11 
 union
@@ -51,6 +67,10 @@ UNION
 select 'ldb.d_calendar_date_opened' as Table_Name, count(1) Row_Count
 from  ldb.f_incident_activity  a11 
 join  ldb.d_calendar_date_opened a110 on (a11.date_key = a110.row_key)
+UNION 
+select 'ldb.d_configuration_item a13 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_incident_activity a11 
+join ldb.d_configuration_item a12 ON a11.configuration_item_key=a12.row_key
 
 
 

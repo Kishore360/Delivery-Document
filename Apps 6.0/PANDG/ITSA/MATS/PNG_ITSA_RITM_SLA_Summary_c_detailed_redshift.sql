@@ -12,6 +12,7 @@ d_internal_contact_director_c
 d_internal_contact_director_sla_owner_c
 d_internal_contact_vp_c
 d_internal_contact_vp_sla_owner_c
+d_internal_organization_group
 d_internal_organization_vendor_company_c
 d_request_item
 d_sc_req_item_priority
@@ -112,3 +113,7 @@ JOIN ldb.d_calendar_date a12 ON a11.start_on_key=a12.row_key
 JOIN ldb.d_calendar_month a13 ON a12.month_start_date_key=a13.row_key
 JOIN ldb.d_calendar_quarter a14 ON a13.quarter_start_date_key=a14.row_key
 JOIN ldb.d_calendar_year a15 ON a14.year_start_date_key=a15.row_key
+UNION 
+SELECT 'ldb.d_internal_organization_group' AS TABLE_NAME, COUNT(1) AS ROW_COUNT 
+FROM ldb.f_request_item_task_sla_c a11
+JOIN ldb.d_internal_organization_group a13 ON a11.assignment_group_key=a13.row_key
