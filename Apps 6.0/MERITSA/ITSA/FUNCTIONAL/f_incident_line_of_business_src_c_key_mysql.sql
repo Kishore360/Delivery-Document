@@ -6,7 +6,7 @@ select count(1) cnt
 from mercury_mdsdb.incident_final a
 left JOIN mercury_mdwdb.f_incident b
 on 
-a.sys_id=b.row_id AND a.sourceinstance=b.source_id and .cdctype<>'D'
+a.sys_id=b.row_id AND a.sourceinstance=b.source_id and a.cdctype<>'D'
 LEFT  JOIN  mercury_mdwdb.d_lov c
 on COALESCE(CONCAT('LINE_OF_BUSINESS~INCIDENT~',a.u_line_of_business),'UNSPECIFIED')=c.ROW_ID 
 AND c.source_id = a.sourceinstance

@@ -11,7 +11,7 @@ SELECT A.sys_id, A.sourceinstance FROM mercury_mdsdb.cmdb_ci_appl_final A
 JOIN mercury_mdsdb.sys_choice_final syd_1 on syd_1.element = 'operational_status' and syd_1.name = 'cmdb_ci' and syd_1.value = A.operational_status
 UNION
 SELECT A.sys_id, A.sourceinstance FROM mercury_mdsdb.cmdb_ci_appl_final A
-JOIN mercury_mdsdb.sys_choice_delta syd_2 on syd_2.element = 'install_status' and syd_2.name = 'cmdb_ci' and syd_2.value = A.install_status
+JOIN mercury_mdsdb.sys_choice_final syd_2 on syd_2.element = 'install_status' and syd_2.name = 'cmdb_ci' and syd_2.value = A.install_status
 UNION
 SELECT A.sys_id, A.sourceinstance FROM mercury_mdsdb.cmdb_ci_appl_final A
 JOIN mercury_mdsdb.cmn_location_final loc on A.location = loc.sys_id AND A.sourceinstance = loc.sourceinstance

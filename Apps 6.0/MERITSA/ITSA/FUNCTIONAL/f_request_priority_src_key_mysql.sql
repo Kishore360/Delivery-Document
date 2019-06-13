@@ -9,7 +9,7 @@ left join mercury_mdwdb.f_request b
 on a.sys_id=b.row_id and a.sourceinstance=b.source_id and a.cdctype<>'D'
 left join mercury_mdwdb.d_lov c
 on c.row_id=COALESCE(CONCAT('PRIORITY','~','SC_REQUEST','~',UPPER(a.priority)),'UNSPECIFIED') and a.sourceinstance=c.source_id
-where WHERE COALESCE(c.row_key,CASE WHEN a.priority IS NULL THEN 0 else '-1' end) <> b.priority_src_key
+where  COALESCE(c.row_key,CASE WHEN a.priority IS NULL THEN 0 else '-1' end) <> b.priority_src_key
 ) g
 
 

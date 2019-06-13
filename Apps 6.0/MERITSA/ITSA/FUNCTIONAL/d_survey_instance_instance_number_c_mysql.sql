@@ -7,7 +7,7 @@ FROM (SELECT count(1) as CNT
  FROM mercury_mdsdb.survey_instance_final SRC 
  LEFT JOIN mercury_mdwdb.d_survey_instance TRGT 
  ON (SRC.sys_id =TRGT.row_id  
- AND SRC.sourceinstance= TRGT.source_id  )
+ AND SRC.sourceinstance= TRGT.source_id  ) and SRC.cdctype<>'D'
   WHERE SRC.number <> TRGT.survey_instance_number_c
  )temp;
  

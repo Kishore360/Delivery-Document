@@ -14,7 +14,7 @@ FROM (select count(1) as cnt
  AND SRC.sourceinstance= TRGT.source_id AND SRC.cdctype<>'D')
 LEFT JOIN mercury_mdwdb.d_lov LKP
 on LKP.row_id=COALESCE(CONCAT('STAGE','~','SC_REQ_ITEM','~',UPPER(SRC.stage)),'UNSPECIFIED') and SRC.sourceinstance=LKP.source_id
-where WHERE COALESCE(LKP.row_key,CASE WHEN SRC.stage IS NULL THEN 0 else '-1' end) <> TRGT.stage_src_key and SRC.cdctype<>'D'
+where  COALESCE(LKP.row_key,CASE WHEN SRC.stage IS NULL THEN 0 else '-1' end) <> TRGT.stage_src_key and SRC.cdctype<>'D'
 ) g
 
 
