@@ -7,5 +7,5 @@ FROM (SELECT count(1) as CNT
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  ) and SRC.cdctype<>'D'
 LEFT JOIN mercury_mdwdb.d_lov LKP 
-ON COALESCE( concat('IMPACT~sc_task~~~' ,upper(SRC.impact)),'UNSPECIFIED') = LKP.row_id 
+ON COALESCE( concat('IMPACT~sc_task~' ,upper(SRC.impact)),'UNSPECIFIED') = LKP.row_id 
 WHERE COALESCE(LKP.row_key,CASE WHEN SRC.impact IS NULL THEN 0 else -1 end)<> (TRGT.impact_src_key) )A
