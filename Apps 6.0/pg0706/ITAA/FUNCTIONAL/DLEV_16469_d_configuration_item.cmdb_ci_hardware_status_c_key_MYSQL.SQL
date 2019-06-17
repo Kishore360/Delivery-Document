@@ -9,7 +9,7 @@ LEFT JOIN png_mdsdb.cmdb_ci_hardware_final SRC1 ON SRC.sys_id=SRC1.sys_id AND SR
 LEFT JOIN png_mdsdb.cmdb_ci_storage_device_final SRC2 ON SRC.sys_id=SRC2.sys_id AND SRC.sourceinstance=SRC2.sourceinstance AND SRC2.cdctype ='X'
 LEFT JOIN png_mdsdb.cmdb_ci_voice_hardware_final SRC3 ON SRC.sys_id=SRC2.sys_id AND SRC.sourceinstance=SRC2.sourceinstance AND SRC3.cdctype ='X'
 LEFT JOIN png_mdwdb.d_configuration_item TRGT ON SRC.sys_id =TRGT.row_id AND SRC.sourceinstance=TRGT.source_id
-LEFT JOIN png_mdwdb.d_lov LKP ON 
+JOIN png_mdwdb.d_lov LKP ON 
 COALESCE(concat('CMDB_CI~HARDWARE_STATUS','~',UPPER(COALESCE(SRC1.hardware_status,SRC2.u_pg_hardware_status,SRC3.u_pg_hardware_status))),'UNSPECIFIED')
 =LKP.row_id 
 WHERE 

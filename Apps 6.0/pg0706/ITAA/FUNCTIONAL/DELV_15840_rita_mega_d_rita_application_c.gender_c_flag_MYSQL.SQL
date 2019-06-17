@@ -2,9 +2,7 @@ SELECT
 CASE WHEN CNT > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 CASE WHEN CNT > 0 THEN 'MDS to DWH data validation failed for d_rita_application_c.gender_c_flag' ELSE 'SUCCESS' END as Message
 FROM 
-(
-
-SELECT Count(1) as CNT 
+(SELECT Count(1) as CNT 
 FROM png_mdsdb.pg_mega_pgb_application_rita_final as app
 LEFT JOIN
 (
@@ -22,7 +20,6 @@ LEFT JOIN png_mdwdb.d_rita_application_c TRGT ON app.NAME=TRGT.row_id AND app.so
 WHERE 
 IF(X.res like '%Gender%','Y','N')<>TRGT.gender_c_flag
 AND app.cdctype<>'D'
-
 )temp;
 
 
