@@ -1,7 +1,7 @@
 SELECT
 CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for d_internal_contact_organization.active_flag' ELSE 'SUCCESS' END as Message
-FROM mercury_mdsdb.agroups_bwd_delta SRC 
+FROM mercury_mdsdb.agroups_final SRC 
 LEFT JOIN mercury_mdwdb.d_internal_contact_organization TRGT 
  ON (concat(acd_no,'~',trim(item_name),'~',value) =TRGT.row_id 
  AND SRC.sourceinstance =TRGT.source_id ) 
