@@ -3,10 +3,16 @@ CASE WHEN count(1)  THEN 'MDS to DWH data validation failed for f_task_c.urgency
 FROM mercury_mdsdb.task_final SRC
 JOIN mercury_mdwdb.f_task_c TRGT  
 ON (SRC.sys_id  = TRGT.row_id  
-AND SRC.sourceinstance = TRGT.source_id )
+AND SRC.sourceinstance = TRGT.source_id ) and SRC.cdctype<>'D'
 join mercury_mdwdb.d_lov LKP
-on CASE 
-		WHEN SRC.sys_class_name ='INCIDENT' THEN COALESCE( CONCAT('CONTACT_TYPE','~','TASK','~','~','~',UPPER(SRC.contact_type)),'UNSPECIFIED')
-		WHEN SRC.sys_class_name ='U_ASC_TICKET' THEN COALESCE( CONCAT('CONTACT_TYPE','~','U_ASC_TICKET','~','~','~',UPPER(SRC.contact_type)),'UNSPECIFIED')
-		ELSE COALESCE( CONCAT('CONTACT_TYPE','~','TASK','~','~','~',UPPER(SRC.contact_type)),'UNSPECIFIED')	END=LKP.row_id
+on 
+CASE    WHEN SRC.sys_class_name ='INCIDENT' THEN COALESCE( CONCAT('CONTACT_TYPE','~','TASK','~',UPPER(SRC.contact_type)),'UNSPECIFIED')
+
+   WHEN SRC.sys_class_name ='U_ASC_TICKET' THEN COALESCE( CONCAT('CONTACT_TYPE','~','U_ASC_TICKET','~',UPPER(SRC.contact_type)),'UNSPECIFIED')
+
+WHEN SRC.sys_class_name ='sn_customerservice_case' THEN COALESCE(
+
+        CONCAT('REPORTED_TYPE','~','CASE','~',UPPER(SRC.contact_type)),'UNSPECIFIED')   
+
+   ELSE COALESCE( CONCAT('CONTACT_TYPE','~','TASK','~',UPPER(SRC.contact_type)),'UNSPECIFIED') END=LKP.row_id
 WHERE coalesce(LKP.row_key,case when SRC.contact_type is null then  0 else -1 end )<> TRGT.contact_type_src_c_key

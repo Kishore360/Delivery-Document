@@ -5,12 +5,12 @@ FROM (
 select count(1) as cnt
 from  mercury_mdsdb.task_final s
 left  JOIN mercury_mdwdb.f_task_c t 
-on  t.ROW_ID=s.SYS_ID and s.sourceinstance=t.source_id  
+on  t.ROW_ID=s.SYS_ID and s.sourceinstance=t.source_id  and s.cdctype<>'D'
 join mercury_mdwdb.d_lov l
 ON CASE 
-		WHEN s.sys_class_name ='INCIDENT' THEN COALESCE( CONCAT('ESCALATION','~','INCIDENT','~','~','~',UPPER(s.escalation)),'UNSPECIFIED')
-		WHEN s.sys_class_name ='u_asc_ticket' THEN COALESCE( CONCAT('ESCALATION','~','u_asc_ticket','~','~','~',UPPER(s.escalation)),'UNSPECIFIED')
-		ELSE COALESCE( CONCAT('ESCALATION','~','TASK','~','~','~',UPPER(s.escalation)),'UNSPECIFIED')
+		WHEN s.sys_class_name ='INCIDENT' THEN COALESCE( CONCAT('ESCALATION','~','INCIDENT','~',UPPER(s.escalation)),'UNSPECIFIED')
+		WHEN s.sys_class_name ='u_asc_ticket' THEN COALESCE( CONCAT('ESCALATION','~','u_asc_ticket','~',UPPER(s.escalation)),'UNSPECIFIED')
+		ELSE COALESCE( CONCAT('ESCALATION','~','TASK','~',UPPER(s.escalation)),'UNSPECIFIED')
 		
 	END= l.row_id
  

@@ -6,7 +6,7 @@ JOIN mercury_mdwdb.d_incident TRGT
 ON (SRC.sys_id  = TRGT.row_id  
 AND SRC.sourceinstance = TRGT.source_id )
 JOIN mercury_mdwdb.d_lov_map br ON TRGT.state_src_key = br.src_key
-AND br.dimension_wh_code  in  ('CLOSED','RESOLVED') and br.dimension_class = 'STATE~INCIDENT'
+AND br.dimension_wh_code  in  ('OPEN') and br.dimension_class = 'STATE~INCIDENT'
 WHERE 
 CASE 
 WHEN timestampdiff(MINUTE,TRGT.opened_on,
