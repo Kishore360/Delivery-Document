@@ -15,8 +15,7 @@ OR(mega_creation_date is NULL and datediff(last_updated,PG_DATE_LAST_REVIEWED) <
 OR(datediff(last_updated,mega_creation_date) <= 365 and PG_DATE_LAST_REVIEWED is NULL ) THEN 1 
 ELSE 0 END or data_Currentness_c is NULL
 )<>a.data_Currentness_c
-AND a.soft_deleted_flag='N';
-
+AND a.soft_deleted_flag='N'
 )temp;
 
   
