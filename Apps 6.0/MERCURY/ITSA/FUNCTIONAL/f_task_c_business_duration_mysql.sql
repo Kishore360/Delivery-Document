@@ -4,4 +4,6 @@ from mercury_mdsdb.task_final SRC
 join
 mercury_mdwdb.f_task_c TRGT
 on SRC.sys_id=TRGT.row_id and SRC.sourceinstance=TRGT.source_id
-where TIMESTAMPDIFF(second,'1970-01-01 00:00:00',SRC.business_duration) <>TRGT.business_duration
+where SRC.sys_class_name in ('CHANGE_REQUEST','PROBLEM','CHANGE_TASK','PROBLEM_TASK','em_ci_severity_task','FACILITIES','HR_CASE',
+'KB_SUBMISSION','PM_PROJECT','PM_PROJECT_TASK','RM_DEFECT','sn_customerservice_case','SYSAPPROVAL_GROUP','TASK',
+'TICKET','U_ASC_TICKET','U_INCIDENT_TASK','U_PROBLEM_TASK','U_SHIFT_TURNOVER_REPORT','VTB_TASK') and TIMESTAMPDIFF(second,'1970-01-01 00:00:00',SRC.business_duration) <>TRGT.business_duration

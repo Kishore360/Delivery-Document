@@ -1,7 +1,7 @@
 SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for d_incident.dormant_flag' ELSE 'SUCCESS' END as Message
 FROM (
-select number,u_problem_manager ,u_problem_manager_dq_c,
+select number,u_problem_manager ,problem_manager_dq_c,
 case when incident.u_problem_manager  is  null  then 0 
 when incident.u_problem_manager  is not  null  and  u_integration_srms_location.sys_id is null then 0 
 when u_integration_srms_location.name in ('UNSPECIFED', 'unspecified', 'Unspecified', 'null', 'spaces', 'UNALLOCATED', 'Unallocated', 

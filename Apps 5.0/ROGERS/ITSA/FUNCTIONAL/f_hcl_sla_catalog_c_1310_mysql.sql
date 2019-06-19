@@ -15,8 +15,9 @@ select  d32.month_start_date_key yz,sum(f2.available_duration*ta.number_of_days)
 from  rogers_mdwdb.f_incident f 
 join rogers_mdwdb.d_incident  d23 on f.incident_key=d23.row_key
 -- New addition 
-join rogers_mdwdb.f_task_ci_c c2 on d.problem_key=c2.task_key
 join  rogers_mdwdb.f_problem d on d.problem_key=f.problem_key 
+join rogers_mdwdb.f_task_ci_c c2 on d.problem_key=c2.task_key
+
 -- join rogers_mdwdb.f_outage f1 on d.problem_key=f1.problem_key -- *
 
 join rogers_mdwdb.f_application_availability_c f2 on d.configuration_item_key=f2.configuration_item_key
@@ -38,7 +39,7 @@ where component_criticality_c='Critical'   and dc.subcategory in ('Database','MS
 and fl.dimension_name in ('Priority 1','Priority 2')
 and g.dimension_name not in ('Cancelled','Disqualified','UNSPECIFIED')   
 -- New addition 
-and g.dimension_name in ('deployed')
+and g1.dimension_name in ('deployed')
 and d32.lagging_count_of_month between 0 and 11
 )a
 group by yz

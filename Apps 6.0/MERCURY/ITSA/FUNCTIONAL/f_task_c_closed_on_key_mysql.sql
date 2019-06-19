@@ -18,7 +18,9 @@ join
 
 mercury_mdwdb.d_lov_map br ON TRGT.state_src_key = br.src_key AND dimension_class = 'STATE~TASK'
 
-where 
+where SRC.sys_class_name in ('CHANGE_REQUEST','PROBLEM','CHANGE_TASK','PROBLEM_TASK','em_ci_severity_task','FACILITIES','HR_CASE',
+'KB_SUBMISSION','PM_PROJECT','PM_PROJECT_TASK','RM_DEFECT','sn_customerservice_case','SYSAPPROVAL_GROUP','TASK',
+'TICKET','U_ASC_TICKET','U_INCIDENT_TASK','U_PROBLEM_TASK','U_SHIFT_TURNOVER_REPORT','VTB_TASK') and 
 case when SRC.closed_at is null or  (br.dimension_wh_code !='CLOSED' and SRC.closed_at  is not null) then 0 
 
 when SRC.closed_at is not null and  (br.dimension_wh_code ='CLOSED') then LKP.row_key

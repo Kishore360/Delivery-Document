@@ -4,4 +4,6 @@ FROM mercury_mdsdb.task_final SRC
 JOIN mercury_mdwdb.f_task_c TRGT 
 ON (SRC.sys_id  = TRGT.row_id  
 AND SRC.sourceinstance = TRGT.source_id )
-WHERE SRC.sys_created_by<>TRGT.created_by
+WHERE SRC.sys_class_name in ('CHANGE_REQUEST','PROBLEM','CHANGE_TASK','PROBLEM_TASK','em_ci_severity_task','FACILITIES','HR_CASE',
+'KB_SUBMISSION','PM_PROJECT','PM_PROJECT_TASK','RM_DEFECT','sn_customerservice_case','SYSAPPROVAL_GROUP','TASK',
+'TICKET','U_ASC_TICKET','U_INCIDENT_TASK','U_PROBLEM_TASK','U_SHIFT_TURNOVER_REPORT','VTB_TASK') and SRC.sys_created_by<>TRGT.created_by
