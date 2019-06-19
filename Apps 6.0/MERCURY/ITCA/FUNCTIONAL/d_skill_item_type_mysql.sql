@@ -16,6 +16,6 @@ LEFT JOIN mercury_mdwdb.d_skill TRGT
 	ON ( CONCAT(SRC.acd_no,'~',trim(SRC.value)) =TRGT.row_id 
  AND SRC.sourceinstance =TRGT.source_id )
 WHERE trim(SRC.descr) <> COALESCE(TRGT.description,'')
-and TRGT.row_key not in (0,-1)
+and TRGT.row_key not in (0,-1) and TRGT.current_flag='Y'
 and SRC.item_type = 'split')SQ
 
