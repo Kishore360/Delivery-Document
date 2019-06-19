@@ -1,1 +1,6 @@
-SELECT CASE WHEN count(1)  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)  THEN 'MDS to DWH data validation failed for d_archer_application_c.confidential_data_storage_by_user_c' ELSE 'SUCCESS' END as Message FROM bbandt_mdsdb.app_vwarchertonumerifyfeed_final  SRC JOIN bbandt_mdwdb.d_archer_application_c TRGT ON (SRC.application_id = TRGT.row_id  AND SRC.sourceinstance = TRGT.source_id )  WHERE SRC.confidential_data_storage_by_user <> (TRGT.confidential_data_storage_by_user_c) 
+select case when count(1)>1 then 'FAILURE' else 'SUCCESS'  END as result ,
+CASE WHEN count(1)>1 then 'Data mismatch'  ELSE 'SUCCESS'  END as Message
+from bbandt_mdsdb.app_vwarchertonumerifyfeed_final a
+join bbandt_mdwdb.d_archer_application_c b
+on a.application_id=b.row_id and a.sourceinstance=b.source_id
+where COALESCE(a.confidential_data_storage_by_user,'UNSPECIFIED')<>b.confidential_data_storage_by_user_c;
