@@ -1,5 +1,3 @@
-
-
 SELECT 
 CASE WHEN CNT > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 CASE WHEN CNT > 0 THEN 'MDS to DWH data validation failed for d_rita_application_c.identification_flag' ELSE 'SUCCESS' END as Message
@@ -15,9 +13,11 @@ SELECT app.NAME,app.sourceinstance,app.cdctype,
 ATT.ATTRIBUTE_NAME
 FROM png_mdsdb.pg_mega_pgb_application_rita_final as app 
 LEFT JOIN 
-(SELECT app_hex,sourceinstance,ATTRIBUTE_NAME,count(1) 
-FROM png_mdsdb.pg_mega_pgv_application_data_model_final where app_hex  IS NOT NULL and ATTRIBUTE_NAME IS NOT NULL AND cdctype<>'D'
-group by 1,2,3) AS ATT ON app.NAME=ATT.app_hex AND app.sourceinstance=ATT.sourceinstance AND app.cdctype<>'D'
+(SELECT a.app_hex,a.sourceinstance,a.ATTRIBUTE_NAME,count(1) 
+FROM png_mdsdb.pg_mega_pgv_application_data_model_final a
+JOIN png_mdsdb.pg_ot_data_elements_map_final b ON a.ATTRIBUTE_NAME=b.data_element AND a.sourceinstance=b.sourceinstance
+where app_hex  IS NOT NULL and ATTRIBUTE_NAME IS NOT NULL AND a.cdctype='X'
+group by 1,2,3) AS ATT ON app.NAME=ATT.app_hex AND app.sourceinstance=ATT.sourceinstance AND app.cdctype='X'
 ) Y 
 Group BY NAME
 ) SRC 
