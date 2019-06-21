@@ -5,11 +5,5 @@ JOIN mercury_mdwdb.d_problem TRGT
 ON (SRC.sys_id = TRGT.row_id  
 AND SRC.sourceinstance = TRGT.source_id ) 
 join mercury_mdwdb.d_lov LKP
-<<<<<<< HEAD
-on COALESCE(CONCAT('STATE','~','PROBLEM','~','~','~',UPPER(SRC.state)),'UNSPECIFIED') = LKP.row_id 
-where coalesce(LKP.row_key,case when SRC.state is null then 0 else -1 end)<>TRGT.state_src_key
-AND SRC.CDCTYPE='X';
-=======
 on COALESCE(CONCAT('STATE','~','PROBLEM','~',UPPER(SRC.state)),'UNSPECIFIED') = LKP.row_id 
 where coalesce(LKP.row_key,case when SRC.state is null then 0 else -1 end)<>TRGT.state_src_key
->>>>>>> b9c3e8cd5b6c4a06ebfd40f4c13a53ad26bed492

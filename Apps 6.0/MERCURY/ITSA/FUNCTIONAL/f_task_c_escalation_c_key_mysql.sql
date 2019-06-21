@@ -14,7 +14,9 @@ ON CASE
 		
 	END= l.row_id
  
-WHERE COALESCE(l.row_key,CASE WHEN s.escalation IS NULL THEN 0 else '-1' end)<>
+WHERE s.sys_class_name in ('CHANGE_REQUEST','PROBLEM','CHANGE_TASK','PROBLEM_TASK','em_ci_severity_task','FACILITIES','HR_CASE',
+'KB_SUBMISSION','PM_PROJECT','PM_PROJECT_TASK','RM_DEFECT','sn_customerservice_case','SYSAPPROVAL_GROUP','TASK',
+'TICKET','U_ASC_TICKET','U_INCIDENT_TASK','U_PROBLEM_TASK','U_SHIFT_TURNOVER_REPORT','VTB_TASK') and COALESCE(l.row_key,CASE WHEN s.escalation IS NULL THEN 0 else '-1' end)<>
  t.escalation_c_key
 ) temp
 
