@@ -3,5 +3,5 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 FROM mercury_mdsdb.synonyms_final SRC
 left JOIN mercury_mdwdb.d_agent TRGT 
 	ON (trim(CONCAT(acd_no,'~',trim(value))) =TRGT.row_id 
-	AND SRC.sourceinstance =TRGT.source_id ) and SRC.item_type = 'agname'
-WHERE   trim(SRC.item_name)<> TRGT.full_name
+	AND SRC.sourceinstance =TRGT.source_id ) and SRC.item_type = 'agname'  and TRGT.current_flag='Y'	
+WHERE   trim(SRC.item_name)<> TRGT.full_name 
