@@ -9,14 +9,14 @@ FROM
 (select count(1) as cnt 
  
 from 
-(select sys_id, sourceinstance,u_category from pan6_mdsdb.u_service_request_final where CDCTYPE<>'D') SRC 
+(select sys_id, sourceinstance,u_category from paloalto_mdsdb.u_service_request_final where CDCTYPE<>'D') SRC 
 
-LEFT JOIN (select row_id, source_id, row_key from pan6_mdwdb.d_lov where soft_deleted_flag<>'Y') LKP 
+LEFT JOIN (select row_id, source_id, row_key from paloalto_mdwdb.d_lov where soft_deleted_flag<>'Y') LKP 
  
 ON ( concat('CATEGORY_C~SERVICE_REQUEST_C~',upper(SRC.u_category))= LKP.row_id 
 AND SRC.sourceinstance= LKP.source_id ) 
  
-LEFT JOIN pan6_mdwdb.d_service_request_c TRGT 
+LEFT JOIN paloalto_mdwdb.d_service_request_c TRGT 
  
 ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )

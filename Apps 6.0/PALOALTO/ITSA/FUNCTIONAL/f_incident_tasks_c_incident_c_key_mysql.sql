@@ -2,10 +2,10 @@
 ,CASE WHEN cnt > 0 THEN 'MDS TO MDW DATA VALIDATION FAILED'
 ELSE 'Data Matched' END AS Message
 FROM (
-select count(1)cnt from pan6_mdsdb.u_incident_tasks_final s
-left join pan6_mdwdb.f_incident_tasks_c t
+select count(1)cnt from paloalto_mdsdb.u_incident_tasks_final s
+left join paloalto_mdwdb.f_incident_tasks_c t
 on s.sys_id=t.row_id and s.sourceinstance = t.source_id
-left join pan6_mdwdb.d_incident lkp
+left join paloalto_mdwdb.d_incident lkp
 on lkp.row_id =parent
 AND lkp.source_id=s.sourceinstance
 WHERE COALESCE(lkp.row_key,CASE WHEN parent IS NULL THEN 0 else -1 end) <> t.incident_c_key) temp

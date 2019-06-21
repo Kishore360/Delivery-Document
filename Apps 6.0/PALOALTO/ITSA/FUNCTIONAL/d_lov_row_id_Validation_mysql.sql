@@ -2,7 +2,7 @@ SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 CASE WHEN cnt >0 THEN 'MDS to DWH data validation failed for f_request_item.configuration_item_key' ELSE 'SUCCESS' END as Message
 FROM (
 select count(1) as cnt
-from pan_mdwdb.d_lov
+from paloalto_mdwdb.d_lov
 where 
 row_id <> concat(dimension_class,'~',dimension_type,'~','~',dimension_code)
  and row_id not like ('CONTACT_TYPE~INCIDENT%') and row_id not like '%TENANT_INFORMATION%'

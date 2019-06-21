@@ -30,23 +30,23 @@ SUBSTRING_INDEX(SUBSTRING_INDEX(u_additional_approvers,',',3),',',-1) AS part3,
 SUBSTRING_INDEX(SUBSTRING_INDEX(u_additional_approvers,',',4),',',-1) AS part4,
 SUBSTRING_INDEX(SUBSTRING_INDEX(u_additional_approvers,',',5),',',-1) AS part5,
 SUBSTRING_INDEX(SUBSTRING_INDEX(u_additional_approvers,',',6),',',-1) AS part6
-from pan_mdsdb.change_request_final a
+from paloalto_mdsdb.change_request_final a
 )ij
-left join pan_mdwdb.d_internal_contact b
+left join paloalto_mdwdb.d_internal_contact b
 on concat('INTERNAL_CONTACT~',ij.part1)=b.row_id
-left join pan_mdwdb.d_internal_contact c
+left join paloalto_mdwdb.d_internal_contact c
 on concat('INTERNAL_CONTACT~',ij.part2)=c.row_id
-left join pan_mdwdb.d_internal_contact d
+left join paloalto_mdwdb.d_internal_contact d
 on concat('INTERNAL_CONTACT~',ij.part3)=d.row_id
-left join pan_mdwdb.d_internal_contact e
+left join paloalto_mdwdb.d_internal_contact e
 on concat('INTERNAL_CONTACT~',ij.part4)=e.row_id
-left join pan_mdwdb.d_internal_contact f
+left join paloalto_mdwdb.d_internal_contact f
 on concat('INTERNAL_CONTACT~',ij.part5)=f.row_id
-left join pan_mdwdb.d_internal_contact g
+left join paloalto_mdwdb.d_internal_contact g
 on concat('INTERNAL_CONTACT~',ij.part6)=g.row_id
 
 )SRC
-left join pan_mdwdb.d_change_request TRG
+left join paloalto_mdwdb.d_change_request TRG
 on SRC.sys_id=TRG.row_id
 where TRG.additional_approvers_c<>SRC.approvers_c
 )A

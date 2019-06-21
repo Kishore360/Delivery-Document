@@ -2,16 +2,16 @@ SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
 ,CASE WHEN cnt > 0 THEN 'Data did not Match.' 
 ELSE 'Data Matched' END AS Message 
 FROM (
-select count(1) as cnt FROM pan6_mdsdb.u_incident_tasks_final SRC 
- LEFT JOIN pan6_mdwdb.f_incident_tasks_c TRGT 
+select count(1) as cnt FROM paloalto_mdsdb.u_incident_tasks_final SRC 
+ LEFT JOIN paloalto_mdwdb.f_incident_tasks_c TRGT 
  ON (SRC.sys_id=TRGT.row_id 
  AND SRC.sourceinstance=TRGT.source_id )
- JOIN pan6_mdwdb.d_incident_tasks_c a 
+ JOIN paloalto_mdwdb.d_incident_tasks_c a 
 ON SRC.sys_id= a.row_id AND SRC.sourceinstance= a.source_id
-left join pan6_mdwdb.d_lov_map lm 
+left join paloalto_mdwdb.d_lov_map lm 
   ON (lm.src_key = a.state_src_key)
  LEFT JOIN (
- select source_id,max(lastupdated) as lastupdated from  pan6_mdwdb.d_o_data_freshness
+ select source_id,max(lastupdated) as lastupdated from  paloalto_mdwdb.d_o_data_freshness
  group by source_id
  ) df 
  ON (TRGT.source_id = df.source_id )

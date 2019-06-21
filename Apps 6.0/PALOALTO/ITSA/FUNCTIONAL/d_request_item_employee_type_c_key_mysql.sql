@@ -8,14 +8,14 @@ from
  
 from 
  
-(select sys_id, sourceinstance,u_employee_type from pan6_mdsdb.sc_req_item_final where CDCTYPE<>'D') SRC 
+(select sys_id, sourceinstance,u_employee_type from paloalto_mdsdb.sc_req_item_final where CDCTYPE<>'D') SRC 
 left join 
-pan6_mdwdb.d_request_item TGT 
+paloalto_mdwdb.d_request_item TGT 
 
 ON
 (SRC.sys_id=TGT.row_id and SRC.sourceinstance=TGT.source_id)
 
-LEFT JOIN (select row_key, row_id from pan6_mdwdb.d_lov where soft_deleted_flag<>'Y') lkp   
+LEFT JOIN (select row_key, row_id from paloalto_mdwdb.d_lov where soft_deleted_flag<>'Y') lkp   
 on 
 CONCAT('EMPLOYEE_TYPE~SC_REQ_ITEM~',upper(SRC.u_employee_type))=lkp.row_id 
 

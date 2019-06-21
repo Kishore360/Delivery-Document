@@ -4,7 +4,7 @@ SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
 ELSE 'Data Matched' END AS Message 
 FROM (
 select count(1) as cnt
-from pan6_mdsdb.incident_final a
-left join pan6_mdwdb.d_incident c 
+from paloalto_mdsdb.incident_final a
+left join paloalto_mdwdb.d_incident c 
 on  a.sys_id = c.ROW_ID and a.sourceinstance=c.source_id
 where c.major_incident_flag <> CASE WHEN a.u_major_incident=1 THEN 'Y' ELSE 'N'END) g

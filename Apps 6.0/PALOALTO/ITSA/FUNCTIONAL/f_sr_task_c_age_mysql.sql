@@ -5,16 +5,16 @@ CASE WHEN CNT >0 THEN 'MDS to DWH data validation failed for f_sr_task_c_created
 FROM 
 (
 select   count(1)cnt
-FROM pan6_mdsdb.u_stask_final SRC 
-  join  pan6_mdwdb.f_sr_task_c f ON (SRC.sys_id =f.row_id  
+FROM paloalto_mdsdb.u_stask_final SRC 
+  join  paloalto_mdwdb.f_sr_task_c f ON (SRC.sys_id =f.row_id  
  AND SRC.sourceinstance= f.source_id  )
-JOIN  pan6_mdwdb.d_sr_task_c a ON a.row_key = f.sr_task_c_key
+JOIN  paloalto_mdwdb.d_sr_task_c a ON a.row_key = f.sr_task_c_key
 AND f.source_id = a.source_id
-JOIN pan6_mdwdb.d_lov_map br ON a.state_src_key = br.src_key
+JOIN paloalto_mdwdb.d_lov_map br ON a.state_src_key = br.src_key
 AND br.dimension_wh_code = 'OPEN'
 WHERE (timestampdiff(second,a.opened_on,(SELECT MAX(la.lastupdated) AS lastupdated
-FROM pan6_mdwdb.d_o_data_freshness la WHERE  la.sourcename like 'ServiceNow%'))- f.age) not in (3600,-3600) and 
+FROM paloalto_mdwdb.d_o_data_freshness la WHERE  la.sourcename like 'ServiceNow%'))- f.age) not in (3600,-3600) and 
  timestampdiff(second,a.opened_on,(SELECT MAX(la.lastupdated) AS lastupdated
-FROM pan6_mdwdb.d_o_data_freshness la WHERE  la.sourcename like 'ServiceNow%'))<> f.age)temp;
+FROM paloalto_mdwdb.d_o_data_freshness la WHERE  la.sourcename like 'ServiceNow%'))<> f.age)temp;
 
 
