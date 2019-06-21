@@ -128,13 +128,13 @@ select 'ldb.d_change_request_third_party_c a126 ' as Table_name, count(a11.row_k
 from ldb.f_change_request a11 
 join ldb.d_change_request_third_party_c a126 
 on (a11.third_party_c_key = a126.row_key) 
-union
+/*union
 select 'ldb.d_change_request_affected_environment_c a127 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_change_request a11 
 join ldb.d_change_request a13 
 on (a11.change_request_key = a13.row_key) 
 join ldb.d_change_request_affected_environment_c a127 
-on (a13.affected_environment_src_c_key = a127.row_key) 
+on (a13.affected_environment_src_c_key = a127.row_key) */
 union
 select 'ldb.d_business_service_criticality a128 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_change_request a11 
@@ -149,7 +149,7 @@ join ldb.d_business_service a14
 on (a11.business_service_key = a14.row_key) 
 join ldb.d_business_service_used_for a129 
 on (a14.used_for_src_key = a129.row_key) 
-union
+/*union
 select 'ldb.d_change_request_closure_code_c a130 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_change_request a11 
 join ldb.d_change_request a13 
@@ -162,7 +162,7 @@ from ldb.f_change_request a11
 join ldb.d_change_request a13 
 on (a11.change_request_key = a13.row_key) 
 join ldb.d_change_request_database_type_c a131 
-on (a13.database_type_src_c_key = a131.row_key) 
+on (a13.database_type_src_c_key = a131.row_key) */
 union
 select 'ldb.d_calendar_month a132 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_change_request a11 
