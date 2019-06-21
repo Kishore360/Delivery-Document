@@ -13,7 +13,6 @@ WHEN SRC.RoPA_linked_to_IT_Asset = 'YES' OR SRC.RoPA_linked_to_IT_Asset ='yes' O
 WHEN SRC.RoPA_linked_to_IT_Asset = 'No' OR SRC.RoPA_linked_to_IT_Asset ='no' OR SRC.RoPA_linked_to_IT_Asset ='N' THEN 'N'
 ELSE 'X' END )<>TRGT.ropa_linked_to_it_asset
 AND SRC.cdctype='X'
-
 ) temp;
 
 
