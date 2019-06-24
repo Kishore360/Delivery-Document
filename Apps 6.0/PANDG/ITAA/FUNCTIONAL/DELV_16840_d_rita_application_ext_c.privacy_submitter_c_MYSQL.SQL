@@ -1,3 +1,7 @@
+SELECT 
+CASE WHEN CNT > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+CASE WHEN CNT > 0 THEN 'MDS to DWH data validation failed ' ELSE 'SUCCESS' END as Message
+from (
 SELECT Count(1) as CNT 
 FROM png_mdsdb.pg_mega_pgb_application_rita_final Z 
 LEFT JOIN 
@@ -62,5 +66,5 @@ ORDER BY COALESCE(X.Submission_Date,X.Due_Date) DESC
 group by MEGA_HEX_ID,sourceinstance 
 ) Y ON Z.NAME=Y.MEGA_HEX_ID AND Z.sourceinstance=Y.sourceinstance
 LEFT JOIN png_mdwdb.d_rita_application_ext_c TRGT ON Z.NAME=TRGT.row_id AND Z.sourceinstance=TRGT.source_id
-WHERE COALESCE(Y.Submitter,'UNSPECIFIED')<>TRGT.privacy_Submitter_c
-;
+WHERE COALESCE(Y.Submitter,'UNSPECIFIED')<>TRGT.privacy_Submitter_c)ma
+
