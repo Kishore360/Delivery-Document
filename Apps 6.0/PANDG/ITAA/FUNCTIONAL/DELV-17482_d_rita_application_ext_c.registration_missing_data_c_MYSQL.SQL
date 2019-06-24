@@ -3,7 +3,7 @@ CASE WHEN CNT > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 CASE WHEN CNT > 0 THEN 'MDS to DWH data validation failed for d_rita_application_ext_c.registration_missing_data_c' ELSE 'SUCCESS' END as Message
 FROM 
 (
-SELECT Count(1) FROM 
+SELECT Count(1) as cnt FROM 
 (
 SELECT row_key , replace(replace(GROUP_CONCAT(distinct if(gap_column = 'UNSPECIFIED','00000',gap_column) order by gap_column ASC  SEPARATOR ' , '  ),', 00000',''),'00000 , ','')  as missing_attributes,
 sum(gap_count) as missing_count , sum(scope_count) as scope_count
