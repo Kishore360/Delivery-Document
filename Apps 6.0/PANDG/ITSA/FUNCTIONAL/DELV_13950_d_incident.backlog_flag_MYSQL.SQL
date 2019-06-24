@@ -13,6 +13,7 @@ JOIN (Select x.source_id,max(x.lastupdated) as Lastupdated
 FROM png_workdb.o_data_freshness x  group by source_id) da ON (SRC.sourceinstance=da.source_id)
 WHERE 
 CASE WHEN LM.dimension_wh_code='OPEN' AND (DATEDIFF(da.lastupdated,TRGT.opened_on)+1) > 30 THEN 'Y' ELSE 'N' END<>TRGT.backlog_flag
+and SRC.cdctype<>'D'
 ) temp;
 
 

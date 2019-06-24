@@ -49,5 +49,5 @@ on a.type_src_key = type1.row_key
 where state.dimension_wh_code = 'CLOSED' and type.dimension_name <> ('Non-Production') 
 and type1.dimension_name = 'Emergency'
 and close.dimension_name not in ('Rejected', 'Withdrawn / Cancelled')
-AND a.compliance_cab_approval_c  = CASE WHEN tmp.change_request_key is NULL OR tmp.ecab_flag_count = 0 
+AND a.compliance_cab_approval_c  <> CASE WHEN tmp.change_request_key is NULL OR tmp.ecab_flag_count = 0 
 or (tmp.ecab_flag_count > 0 and tmp.emer_cab_status_count > 0) THEN 'N' ELSE a.compliance_cab_approval_c END ;
