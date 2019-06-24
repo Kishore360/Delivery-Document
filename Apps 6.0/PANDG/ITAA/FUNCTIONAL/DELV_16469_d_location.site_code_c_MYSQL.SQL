@@ -10,7 +10,7 @@ LEFT JOIN png_mdsdb.cmn_location_final SRC1 ON SRC.location=SRC1.sys_id AND SRC.
 LEFT JOIN png_mdwdb.d_configuration_item TRGT ON SRC.sys_id=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id
 LEFT JOIN png_mdwdb.d_location LKP ON SRC.location=LKP.row_id AND SRC.sourceinstance=LKP.source_id
 WHERE COALESCE(SRC1.u_pg_site_code002,'UNSPECIFIED')<>LKP.site_code_c
-AND SRC.cdctype<>'D'
+AND SRC.cdctype<>'D' and SRC1.cdctype<>'D'
 
 ) temp;
 
