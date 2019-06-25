@@ -4,6 +4,6 @@ FROM (
 select count(1) cnt  from rogers_mdsdb.problem_final s
 join rogers_mdwdb.d_problem d on s.sys_id=d.row_id and s.sourceinstance=d.source_id
 where s.short_description like '%risk%' and
-case when s.short_description like '%priority%' then substring_index( substring_index(s.short_description,'"',2),'"',-1) else "UNSPECIFIED"end<>risk_priority_c;
+case when s.short_description like '%priority%' then substring_index( substring_index(s.short_description,'"',2),'"',-1) else "UNSPECIFIED"end<>risk_priority_c)a;
 
 
