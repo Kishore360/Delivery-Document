@@ -6,7 +6,6 @@ FROM
 Select Count(1) as CNT 
 FROM equifax_mdsdb.cmdb_ci_final SRC
 LEFT JOIN equifax_mdwdb.f_configuration_item_c TRGT ON SRC.sys_id=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id
-LEFT JOIN equifax_mdwdb.d_lov LKP ON ceil(round((TRGT.age_c/(86400.00)))) BETWEEN (LKP.lower_range_value+0.1) AND LKP.upper_range_value
-AND LKP.dimension_class='WH_AGEBUCKET~CMDB' 
-WHERE COALESCE(LKP.row_key,CASE WHEN TRGT.age_c IS NULL THEN 0 ELSE -1 END)<>TRGT.ci_age_c_key
+LEFT OUTER JOIN equifax_mdwdb.d_lov x ON floor((TRGT.age_c/(86400.0*365)))+0.1 BETWEEN x.lower_range_value AND x.upper_range_value AND (x.dimension_class = 'WH_AGEBUCKET~CMDB')
+WHERE TRGT.ci_age_c_key<>coalesce(x.row_key, -1)
 ) temp;
