@@ -7,6 +7,6 @@ SELECT count(1) as CNT
 FROM mcdonalds_mdsdb.x_scafe_mcdcr_chan_mcdcr_change_request_final SRC
 JOIN mcdonalds_mdwdb.d_macm_c TRGT 
 ON (SRC.SYS_ID=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id) 
-WHERE COALESCE (LEFT(SRC.u_change_description,4000),'UNSPECIFIED')<>TRGT.change_description
+WHERE COALESCE (LEFT(SRC.u_change_description,100),'UNSPECIFIED')<>LEFT(TRGT.change_description,100)
 )a;
 
