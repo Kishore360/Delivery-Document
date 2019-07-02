@@ -213,4 +213,3 @@ join ldb.d_internal_contact_change_opened_by_manager_c a139
 on (a111.manager_c_key = a139.row_key) 
 
  
-PM
