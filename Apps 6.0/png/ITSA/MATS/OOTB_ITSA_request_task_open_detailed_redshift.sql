@@ -19,7 +19,7 @@ union
 select'ldb.d_calendar_date' as Table_Name, count(1) Row_Count
  from  ldb.f_request_task       a11 
 join ldb.d_calendar_date       a15
-on (a11.opened_on_key = a15.row_key)
+on (a11.date_key = a15.row_key)
 union
 select'ldb.d_request_task' as Table_Name, count(1) Row_Count
  from  ldb.f_request_task       a11 
@@ -66,27 +66,30 @@ union
 select'ldb.d_calendar_month' as Table_Name, count(1) Row_Count
  from  ldb.f_request_task       a11 
  join ldb.d_calendar_date       a15
-on (a11.opened_on_key = a15.row_key)
+on (a11.date_key = a15.row_key)
 join ldb.d_calendar_month       a114
 on (a15.month_start_date_key = a114.row_key)
 union
 select'ldb.d_calendar_week' as Table_Name, count(1) Row_Count
  from  ldb.f_request_task       a11 
  join ldb.d_calendar_date       a15
-on (a11.opened_on_key = a15.row_key)
+on (a11.date_key = a15.row_key)
 join ldb.d_calendar_week       a115
 on (a15.week_start_date_key = a115.row_key)
 union
-select'ldb.d_calendar_quarter' as Table_Name, count(1) Row_Count
- from  ldb.f_request_task       a11
- join ldb.d_calendar_date       a15
-on (a11.opened_on_key = a15.row_key)
-join ldb.d_calendar_quarter       a116
-on (a15.quarter_start_date_key = a116.row_key)
-union
-select'ldb.d_calendar_year' as Table_Name, count(1) Row_Count
+select 'ldb.d_calendar_quarter' as Table_Name, count(1) Row_Count
  from  ldb.f_request_task       a11 
  join ldb.d_calendar_date       a15
-on (a11.opened_on_key = a15.row_key)
-join ldb.d_calendar_year       a117
-on (a15.year_start_date_key = a117.row_key)
+on (a11.date_key = a15.row_key)
+join ldb.d_calendar_month       a114
+on (a15.month_start_date_key = a114.row_key)
+join ldb.d_calendar_quarter x ON a114.quarter_start_date_key=x.row_key
+UNION 
+select 'ldb.d_calendar_year' as Table_Name, count(1) Row_Count
+ from  ldb.f_request_task       a11 
+ join ldb.d_calendar_date       a15
+on (a11.date_key = a15.row_key)
+join ldb.d_calendar_month       a114
+on (a15.month_start_date_key = a114.row_key)
+join ldb.d_calendar_quarter x ON a114.quarter_start_date_key=x.row_key
+JOIN ldb.d_calendar_year y ON x.year_start_date_key=y.row_key
