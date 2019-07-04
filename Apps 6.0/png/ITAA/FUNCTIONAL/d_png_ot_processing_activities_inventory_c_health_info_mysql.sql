@@ -8,4 +8,5 @@ FROM png_mdsdb.pg_ot_processing_activities_inventory_final SRC
 LEFT JOIN png_mdwdb.d_png_ot_processing_activities_inventory_c TRGT ON SRC.inventory_id=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id AND SRC.cdctype<>'D'
 WHERE 
 (CASE WHEN SRC.Data_Elements_Collected_PG LIKE '%Protected Health Information (“PHI”)%' THEN 'TRUE' ELSE 'FALSE' END)<>TRGT.health_info
+AND SRC.cdctype='X'
 ) temp;

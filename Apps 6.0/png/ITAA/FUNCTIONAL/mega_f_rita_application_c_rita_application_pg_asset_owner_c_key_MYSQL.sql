@@ -13,7 +13,7 @@ group by a.app_hexid
 ) ASSET_OWNER ON SRC.NAME=ASSET_OWNER.app_hexid AND SRC.sourceinstance=ASSET_OWNER.sourceinstance
 LEFT JOIN png_mdwdb.f_rita_application_c TRGT ON SRC.NAME=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id 
 LEFT JOIN png_mdwdb.d_internal_contact LKP ON ASSET_OWNER.person_hex=LKP.row_id AND ASSET_OWNER.sourceinstance=LKP.source_id
-WHERE COALESCE(LKP.row_key,CASE WHEN ASSET_OWNER.person_hex IS NULL THEN 0 ELSE -1 END )<>TRGT.rita_application_pg_asset_owner_c_key
+WHERE COALESCE(LKP.row_key,CASE WHEN ASSET_OWNER.person_hex ='UNSPECIFIED' or ASSET_OWNER.person_hex is NULL  THEN 0 ELSE -1 END )<>TRGT.rita_application_pg_asset_owner_c_key
 AND SRC.cdctype='X'
 ) temp;
 
