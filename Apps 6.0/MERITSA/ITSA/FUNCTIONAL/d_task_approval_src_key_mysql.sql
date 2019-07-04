@@ -4,11 +4,11 @@ ELSE 'Data Matched' END AS Message
 FROM (
 
 select count(1) as cnt
-from  mercury_mdsdb.task_final s
-left  JOIN mercury_mdwdb.d_task t 
+from  meritsa_mdsdb.task_final s
+left  JOIN meritsa_mdwdb.d_task t 
 on  t.ROW_ID=s.SYS_ID and s.sourceinstance=t.source_id  and s.cdctype<>'D'
-left join mercury_mdsdb.sc_request_final dr on s.sys_id=dr.sys_id and s.sourceinstance=dr.sourceinstance
-join mercury_mdwdb.d_lov l on
+left join meritsa_mdsdb.sc_request_final dr on s.sys_id=dr.sys_id and s.sourceinstance=dr.sourceinstance
+join meritsa_mdwdb.d_lov l on
 COALESCE(CONCAT('APPROVAL','~','TASK','~','~','~',upper(s.approval )),'UNSPECIFIED') = l.row_id and t.source_id=l.source_id
  WHERE s.sys_class_name in ('CHANGE_REQUEST','PROBLEM','CHANGE_TASK','PROBLEM_TASK','em_ci_severity_task','FACILITIES','HR_CASE',
 'KB_SUBMISSION','PM_PROJECT','PM_PROJECT_TASK','RM_DEFECT','sn_customerservice_case','SYSAPPROVAL_GROUP','TASK',

@@ -3,8 +3,8 @@ SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
 ELSE 'Data Matched' END AS Message 
 FROM (
 select COUNT(1)cnt from
-mercury_mdsdb.cmn_location_final a join
- mercury_mdwdb.d_location b
+meritsa_mdsdb.cmn_location_final a join
+ meritsa_mdwdb.d_location b
 on a.sys_id=b.row_id
 and a.sourceinstance=b.source_id
 where 

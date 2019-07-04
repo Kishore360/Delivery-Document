@@ -6,11 +6,11 @@ SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
 ,CASE WHEN cnt > 0 THEN 'Data did not Match.' 
 ELSE 'Data Matched' END AS Message 
 FROM (select count(1) as cnt
- FROM mercury_mdsdb.sc_req_item_final SRC 
- LEFT JOIN mercury_mdwdb.f_request_item TRGT 
+ FROM meritsa_mdsdb.sc_req_item_final SRC 
+ LEFT JOIN meritsa_mdwdb.f_request_item TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id AND SRC.cdctype<>'D')
-LEFT JOIN mercury_mdwdb.d_lov LKP
+LEFT JOIN meritsa_mdwdb.d_lov LKP
 on LKP.row_id=COALESCE(CONCAT('STATE','~','SC_REQ_ITEM','~',UPPER(SRC.state)),'UNSPECIFIED') and SRC.sourceinstance=LKP.source_id
 where COALESCE(LKP.row_key,CASE WHEN SRC.state IS NULL THEN 0 else '-1' end) <> TRGT.state_src_key 
 ) g

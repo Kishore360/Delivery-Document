@@ -4,7 +4,7 @@ union
 select'ldb.d_calendar_date' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_change_request       a11 
 join ldb.d_calendar_date       a12
-on (a11.opened_on_key = a12.row_key)
+on (a11.date_key = a12.row_key)
 union
 select'ldb.d_change_request' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_change_request       a11 
@@ -49,28 +49,28 @@ union
 select'ldb.d_calendar_month' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_change_request       a11 
  join ldb.d_calendar_date       a12
-on (a11.opened_on_key = a12.row_key)
+on (a11.date_key = a12.row_key)
 join ldb.d_calendar_month       a111
 on (a12.month_start_date_key = a111.row_key)
 union
 select'ldb.d_calendar_week' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_change_request       a11
  join ldb.d_calendar_date       a12
-on (a11.opened_on_key = a12.row_key)
+on (a11.date_key = a12.row_key)
 join ldb.d_calendar_week       a112
 on (a12.week_start_date_key = a112.row_key)
 union
 select'ldb.d_calendar_quarter' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_change_request       a11 
  join ldb.d_calendar_date       a12
-on (a11.opened_on_key = a12.row_key)
+on (a11.date_key = a12.row_key)
 join ldb.d_calendar_quarter       a113
 on (a12.quarter_start_date_key = a113.row_key)
 union
 select'ldb.d_calendar_year' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_change_request       a11 
  join ldb.d_calendar_date       a12
-on (a11.opened_on_key = a12.row_key)
+on (a11.date_key = a12.row_key)
 join ldb.d_calendar_year       a114
 on (a12.year_start_date_key = a114.row_key)
 
