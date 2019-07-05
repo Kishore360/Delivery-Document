@@ -7,7 +7,12 @@ SELECT Count(1) as CNT
 FROM png_mdsdb.us_survey_response_score_final SRC
 LEFT JOIN png_mdwdb.d_survey_account_ext_c TRGT ON 
 (COALESCE(SRC.Account,'UNSPECIFIED')=TRGT.row_id and SRC.sourceinstance=TRGT.source_id)
-WHERE COALESCE(SRC.Account,'UNSPECIFIED')<>TRGT.account_name
+WHERE LEFT(COALESCE(SRC.Account,'UNSPECIFIED'),255)<>TRGT.account_name
 AND SRC.cdctype='X'
 ) temp;
+
+
+
+
+
 

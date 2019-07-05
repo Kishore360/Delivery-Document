@@ -1,6 +1,6 @@
 SELECT 
 CASE WHEN CNT > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
-CASE WHEN CNT > 0 THEN 'MDS to DWH data validation failed for d_rita_application_c.rita_app_other_supplier_name' ELSE 'SUCCESS' END as Message
+CASE WHEN CNT > 0 THEN 'MDS to DWH data validation failed for d_rita_application_c.rita_app_implementation_supplier_code' ELSE 'SUCCESS' END as Message
 FROM 
 (
 SELECT Count(1) as CNT 
@@ -15,9 +15,8 @@ else LEFT(replace(replace(responsible_org_unit,CONCAT(' - ',cardinal),''),cardin
 ,app.sourceinstance from (
 png_mdsdb.pg_mega_pgb_application_rita_final app
 left join (select app_hexid,responsible_org_unit_hexid,responsible_org_unit,sourceinstance,count(1) from png_mdsdb.pg_mega_pgv_app_responsible_org_person_final 
-where 
-(a.third_party_with_access<>'N' AND a.third_party_with_access IS NOT NULL AND a.third_party_with_access<>' ' )
-AND a.app_hexid IS NOT NULL AND a.responsible_org_unit_hexid IS NOT NULL AND a.cdctype<>'D'
+where (pg_implementation_supplier<> 'N' AND  pg_implementation_supplier is not null) and app_hexid is not null and responsible_org_unit_hexid is not null
+and cdctype='X' 
 group by 1,2,3,4)org
 on app.name=org.app_hexid and app.sourceinstance=org.sourceinstance 
 left join (select distinct name,LEFT((cardinal),255) as CARDINAL from  png_mdsdb.pg_mega_pgb_org_unit_final
@@ -29,11 +28,8 @@ group by app_hexid
 ) SRC1  
 LEFT JOIN 
 png_mdwdb.d_rita_application_c TRGT ON SRC1.app_hexid=TRGT.row_id 
-WHERE COALESCE(SRC1.Organization_NAME,'UNSPECIFIED')<>TRGT.rita_app_other_supplier_name
-and TRGT.soft_deleted_flag ='N'
+WHERE rita_app_implementation_supplier_code<>COALESCE(SRC1.CARDINAL,'UNSPECIFIED')
+AND TRGT.soft_deleted_flag ='N'
 ) temp;
-
-
-
 
 
