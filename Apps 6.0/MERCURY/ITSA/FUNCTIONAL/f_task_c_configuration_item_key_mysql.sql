@@ -8,7 +8,7 @@ mercury_mdwdb.f_task_c TRGT
 on SRC.sys_id=TRGT.row_id and SRC.sourceinstance=TRGT.source_id
 join
 mercury_mdwdb.d_configuration_item LKP
-on COALESCE(SRC.cmdb_ci,'UNSPECIFIED')= LKP.row_id and TRGT.source_id=LKP.source_id
+on COALESCE(SRC.cmdb_ci,'UNSPECIFIED')= LKP.row_id and TRGT.source_id=LKP.source_id and LKP.soft_deleted_flag='N'
 where SRC.sys_class_name in ('CHANGE_REQUEST','PROBLEM','CHANGE_TASK','PROBLEM_TASK','em_ci_severity_task','FACILITIES','HR_CASE',
 'KB_SUBMISSION','PM_PROJECT','PM_PROJECT_TASK','RM_DEFECT','sn_customerservice_case','SYSAPPROVAL_GROUP','TASK',
 'TICKET','U_ASC_TICKET','U_INCIDENT_TASK','U_PROBLEM_TASK','U_SHIFT_TURNOVER_REPORT','VTB_TASK') and coalesce(LKP.row_key,case when SRC.cmdb_ci is null then 0 else -1 end)<>TRGT.configuration_item_key
