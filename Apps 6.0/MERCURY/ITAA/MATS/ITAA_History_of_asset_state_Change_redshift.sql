@@ -83,7 +83,7 @@ union
 select 'ldb.d_calendar_year a19 ' as Table_name, count(a11.row_key) Row_Count
 
 from ldb.f_asset_activity_c a11
- ldb.d_calendar_date a15
+ join ldb.d_calendar_date a15
 
 on (a11.state_on_key = a15.row_key) join ldb.d_calendar_month a16
 
@@ -182,3 +182,4 @@ on (a11.assigned_to_key = a14.row_key)
 join ldb.d_location_assigned_to a117
 
 on (a14.location_key = a117.row_key)
+

@@ -12,7 +12,7 @@ select 5 union select 6 union select 7 union select 8 union select 9) A,
 (select 0 u union select 1 union select 2 union select 3 union select 4 union
 select 5 union select 6 union select 7 union select 8 union select 9) B
 order by x)  n
-  on   length(u_ci_name)-length(replace(u_ci_name,',',''))+1 > x-1) a on t.row_id =concat(a.sys_id,'~',a.name_id)
-left join mercury_mdwdb.d_configuration_item b on a.name_id=b.row_id  
+  on   length(u_ci_name)-length(replace(u_ci_name,',',''))+1 > x-1 and a.cdctype='X') a on t.row_id =concat(a.sys_id,'~',a.name_id)
+left join mercury_mdwdb.d_configuration_item b on a.name_id=b.row_id and b.soft_deleted_flag='N' 
 
 WHERE COALESCE(b.row_key,CASE WHEN a.u_ci_name IS NULL THEN 0 else -1 end)<>(t.change_ci_name_c_key))x
