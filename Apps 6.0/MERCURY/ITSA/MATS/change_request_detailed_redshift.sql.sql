@@ -191,7 +191,7 @@ from ldb.f_change_request a11
 join ldb.d_parent_change_request_c a14 
 on (a11.parent_change_request_key = a14.row_key) 
 join ldb.d_lov_change_request_parent_state a136 
-on (a14.parent_state_src = a136.row_key) 
+on (a14.parent_state_src_key = a136.row_key) 
 union
 select 'ldb.o_data_freshness a137 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_change_request a11 
