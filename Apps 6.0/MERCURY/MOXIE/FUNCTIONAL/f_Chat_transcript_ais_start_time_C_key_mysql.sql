@@ -4,5 +4,5 @@ FROM
 (select count(1) as cnt
 from mercury_mdsdb.mox_mercury_transcript_final a
 left join mercury_mdwdb.f_chat_transcript_c f on concat('mercury~',a.row_id)=f.row_id
-left join  mercury_mdwdb.d_calendar_date d on str_to_date(datetime,'%d/%m/%Y')=d.row_id 
+left join  mercury_mdwdb.d_calendar_date d on str_to_date(datetime,'%Y/%m/%d')=d.row_id 
 where coalesce(d.row_key,case when datetime is null then 0 else -1 end)<>f.start_time_c_key)a;

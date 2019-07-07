@@ -3,7 +3,7 @@ CASE WHEN cnt>0  THEN 'MDS to DWH data validation failed for f_agent_log.agent_c
 FROM
 (select count(1) as cnt
  from mercury_mdsdb.mox_mercury_agent_report_final  a
-left join mercury_mdwdb.f_agent_log f on concat('AIS~',a.row_id)=f.row_id
+left join mercury_mdwdb.f_agent_log_c f on concat('AIS~',a.row_id)=f.row_id
 where a.Agent<>f.agent_c  )a
 ;
 
