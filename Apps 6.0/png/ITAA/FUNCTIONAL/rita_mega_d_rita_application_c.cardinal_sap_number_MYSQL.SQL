@@ -41,12 +41,6 @@ WHERE (cardinal IS NOT NULL AND cardinal <>'N' and cardinal<>'')  AND cdctype<>'
 GROUP  BY NAME 
 ) X
 LEFT JOIN png_mdwdb.d_rita_application_c TRGT ON X.NAME=TRGT.row_id AND X.sourceinstance=TRGT.source_id
-WHERE COALESCE(X.cardinal,'UNSPECIFIED')<>TRGT.cardinal_sap_number
+WHERE COALESCE(X.cardinal,'UNSPECIFIED')<>TRGT.cardinal_sap_number AND TRGT.soft_deleted_flag ='N'
 ) temp;
-
-
-
-
-
-
 

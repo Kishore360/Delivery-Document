@@ -11,6 +11,7 @@ LEFT JOIN png_mdwdb.d_change_request TRGT
 ON (SRC.sys_id=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id)
 
 WHERE CONVERT_TZ(SRC.u_pg_dwontime_end,'GMT','America/New_York')<>TRGT.downtime_end_c
+AND SRC.cdctype='X'
 ) temp; 
 
 

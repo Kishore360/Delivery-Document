@@ -2,7 +2,11 @@
 SELECT 
 CASE WHEN count(1) > 0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, 
 CASE WHEN count(1) > 0 THEN 'MDS to DWH data validation failed for d_incident.potential_misclassification_flag_c' ELSE 'SUCCESS' END as Message 
-FROM (
+FROM 
+(
+SELECT COUNT(1) as CNT 
+FROM 
+(
 SELECT trgt.row_id,
 lv.dimension_code = 1 ,lv_mp.dimension_class = 'STATE~INCIDENT' , lv_mp.dimension_wh_code in('CLOSED','RESOLVED') ,
 X.age ,trgt.associated_incident_alert_flag_c , X.impact_src_code =3 , trgt.p1_priority_flag_c = 'Y' ,d_conf.used_for_flag_c = 'Y' ,cbp.cnt,trgt.potential_misclassification_flag_c
@@ -24,4 +28,5 @@ WHERE trgt.potential_misclassification_flag_c <>
 CASE WHEN lv.dimension_code = 1 AND lv_mp.dimension_class = 'STATE~INCIDENT' AND lv_mp.dimension_wh_code in('CLOSED','RESOLVED') 
 AND((X.age >86400 AND trgt.associated_incident_alert_flag_c = 'N') 
 OR (X.impact_src_code =3) OR (trgt.p1_priority_flag_c = 'Y') OR (d_conf.used_for_flag_c = 'Y') OR COALESCE(cbp.cnt,0)<=0) THEN 'Y' ELSE 'N' END
+) Y 
 ) temp;
