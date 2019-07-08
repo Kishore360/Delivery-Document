@@ -6,4 +6,5 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 ON a.id=issue.id and a.sourceinstance=issue.sourceinstance 
  join paloalto_mdwdb.d_work_item_epic b
  on issue.key=b.row_id and issue.sourceinstance=b.source_id
- where issue.summary<>b.summary;
+ where issue.summary<>b.summary
+and a.cdctype='X';
