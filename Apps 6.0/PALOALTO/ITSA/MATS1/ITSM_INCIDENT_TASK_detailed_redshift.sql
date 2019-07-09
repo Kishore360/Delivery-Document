@@ -119,7 +119,7 @@ from ldb.f_incident_tasks_c a11
 join ldb.d_internal_organization_group a16 										
 on (a11.assignment_group_c_key = a16.row_key) 										
 join ldb.d_internal_organization_group_parent_c a118 										
-on (a16.parent_row_key_c = a118.row_key) 										
+on (a16.parent_row_c_key = a118.row_key) 										
 union										
 select 'ldb.d_calendar_week a119 ' as Table_name, count(1) Row_Count										
 from ldb.f_incident_tasks_c a11 										
