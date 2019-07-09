@@ -25,9 +25,6 @@ where  (cardinal is not null and cardinal<>'')
 on responsible_org_unit_hexid = organization.name 
 ))Z
 group by app_hexid
-
-
-
 ) SRC1  
 LEFT JOIN 
 png_mdwdb.d_rita_application_c TRGT ON SRC1.app_hexid=TRGT.row_id
