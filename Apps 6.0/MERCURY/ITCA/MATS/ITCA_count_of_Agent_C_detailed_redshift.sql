@@ -6,11 +6,6 @@ select'ldb.d_agent' as Table_Name, count(a11.row_key) Row_Count
 join ldb.d_agent       a12
 on (a11.agent_key = a12.row_key)
 union
-select'ldb.d_group_lvl' as Table_Name, count(a11.row_key) Row_Count
- from  ldb.f_agent_call_summary       a11 
-join ldb.d_group_lvl       a13
-on (a11.group_lvl_key = a13.row_key)
-union
 select'ldb.d_skill' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_agent_call_summary       a11 
 join ldb.d_skill       a14
@@ -58,4 +53,5 @@ select'ldb.d_source' as Table_Name, count(a11.row_key) Row_Count
  from  ldb.f_agent_call_summary       a11 
 join ldb.d_source       a111
 on (a11.source_id = a111.source_id)
+
 
