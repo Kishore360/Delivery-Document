@@ -14,3 +14,6 @@ AND a.sourceinstance=LKP.source_id
 WHERE COALESCE(LKP.row_key,CASE WHEN a.stage IS NULL THEN 0 ELSE -1 END) <> b.stage_src_key and a.cdctype<>'D'
 )temp;
 
+
+ 
+
