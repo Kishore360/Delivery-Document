@@ -10,3 +10,6 @@ and src.sourceinstance = trgt.source_id
 JOIN png_mdwdb.d_png_ot_processing_activities_inventory_c lkp
 ON COALESCE(src.inventory_id,'UNSPECIFIED')=lkp.row_id and trgt.source_id=lkp.source_id
 where COALESCE(lkp.row_key,case when src.inventory_id is NULL THEN 0 ELSE -1 END)<>trgt.png_ot_processing_activities_inventory_c_key;
+
+
+ 
