@@ -119,12 +119,7 @@ on (a11.survey_key = a12.row_key)
 union
 select 'ldb.d_survey_sd_categorization_c a12 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_ad_hoc_request_response_c a11 
-join ldb.d_survey a12 
-on (a11.sd_categorization_src_c_key = a12.row_key)
-union
-select 'ldb.d_survey_sd_categorization_c a12 ' as Table_name, count(a11.row_key) Row_Count
-from ldb.f_ad_hoc_request_response_c a11 
-join ldb.d_survey a12 
+join ldb.d_survey_sd_categorization_c  a12 
 on (a11.sd_categorization_src_c_key = a12.row_key)
 union
 select 'ldb.d_survey_sd_categorization_state_c a12 ' as Table_name, count(a11.row_key) Row_Count
