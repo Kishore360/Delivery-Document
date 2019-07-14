@@ -17,7 +17,7 @@ WHERE (sys_audit.fieldname='end_date' and sys_audit.tablename='change_request' a
 group by 1,2,3) SRC1 ON SRC.sys_id=SRC1.documentkey AND SRC.sourceinstance=SRC1.sourceinstance
 LEFT JOIN mcdonalds_mdwdb.f_change_request_failure_adv_c TRGT ON SRC.sys_id=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id
 WHERE COALESCE(SRC1.cnt,' ')<>TRGT.reschedule_count
-AND SRC.CDCTYPE<>'D';
+AND SRC.CDCTYPE<>'D'
 
 ) temp;
 

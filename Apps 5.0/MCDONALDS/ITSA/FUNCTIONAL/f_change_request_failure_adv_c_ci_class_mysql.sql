@@ -11,7 +11,7 @@ join mcdonalds_mdwdb.f_change_request_failure_adv_c d on change_request.sys_id=d
                 mcdonalds_mdsdb.sys_db_object_final sdof 
                     ON cmdb_ci.sys_class_name=sdof.name 
                     and cmdb_ci.sourceinstance=sdof.sourceinstance   
-					where coalesce(sdof.label,'UNSPECIFIED') <> ci_class
+					where coalesce(sdof.label,'UNSPECIFIED') <> d.ci_class
 					
 					
 					

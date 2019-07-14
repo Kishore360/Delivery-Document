@@ -6,12 +6,23 @@ CASE WHEN count(1) >0 THEN 'Failure' ELSE 'Data Matched' END as Message
                 mcdonalds_mdsdb.change_request_final change_request    
 				join mcdonalds_mdwdb.f_change_request_failure_adv_c d on change_request.sys_id=d.row_id       
 LEFT OUTER JOIN
-    mcdonalds_mdsdb.sys_choice_final impact ON BINARY change_request.impact = impact.value
-        AND change_request.sourceinstance = impact.sourceinstance
-        AND impact.element = 'priority'
+    mcdonalds_mdsdb.sys_choice_final priority ON BINARY change_request.priority = priority.value
+        AND change_request.sourceinstance = priority.sourceinstance
+        AND priority.element = 'priority'
         AND priority.name = 'task'
         AND priority.language = 'EN'
         AND priority.inactive = 0
+AND ((change_request.priority , priority.sys_created_on) IN (SELECT 
+            sys_choice.value AS priority,
+                MAX(sys_choice.sys_created_on) AS max
+        FROM
+            mcdonalds_mdsdb.sys_choice_final sys_choice
+        WHERE
+            sys_choice.element = 'priority'
+                AND sys_choice.name = 'task'
+                AND sys_choice.language = 'EN'
+                AND sys_choice.inactive = 0
+        GROUP BY sys_choice.value))
 		where  coalesce(priority.label,change_request.priority,'UNSPECIFIED') <> change_priority_src_code
 		
 		
