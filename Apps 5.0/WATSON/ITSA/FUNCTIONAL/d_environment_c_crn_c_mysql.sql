@@ -3,9 +3,9 @@ SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
 ELSE 'Data Matched' END AS Message 
 FROM (select
 count(*) as cnt
-from  watson_mdsdb.u_environment_final a11
+from  watson_mdsdb.cmdb_ci_environment_final a11
  join watson_mdwdb.d_environment_c  a12
 on a12.row_id= a11.sys_id and a11.sourceinstance=a12.source_id
-where u_crn <>a12.crn_c )a
+where coalesce(a11.u_crn,'UNSPECIFIED')<>a12.crn_c )a
 
 
