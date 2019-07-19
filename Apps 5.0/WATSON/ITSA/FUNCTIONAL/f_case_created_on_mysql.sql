@@ -5,4 +5,4 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 LEFT JOIN watson_mdwdb.f_case TRGT 
 	ON (SRC.sys_id =TRGT.row_id 
 	AND SRC.sourceinstance =TRGT.source_id )
-WHERE convert_tz(SRC.sys_created_on,'GMT','America/New_York')<> TRGT.created_on 
+WHERE convert_tz(SRC.sys_created_on,'GMT','UTC')<>TRGT.created_on 
