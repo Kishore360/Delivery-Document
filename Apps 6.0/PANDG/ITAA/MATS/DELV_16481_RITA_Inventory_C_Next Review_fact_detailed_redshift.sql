@@ -190,7 +190,7 @@ join ldb.d_processing_activities_sap_vendor_c       a115
 on (a11.sap_vendor_c_key = a115.row_key)
 
 UNION 
-select 'ldb.d_rita_application_source_type_c' as Table_Name, count(a11.row_key) Row_Count
+select 'ldb.d_lov_rita_application_source_type_c' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_png_ot_processing_activities_inventory_next_reviewed_c_fact a11 
 JOIN ldb.d_png_ot_processing_activities_inventory_c a12 ON a11.png_ot_inventory_c_key=a12.row_key
-JOIN ldb.d_rita_application_source_type_c a13 ON a12.rita_application_source_type_c_key=a13.row_key
+JOIN ldb.d_lov_rita_application_source_type_c a13 ON a12.rita_application_source_type_c_key=a13.row_key

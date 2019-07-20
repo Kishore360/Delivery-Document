@@ -95,10 +95,10 @@ FROM ldb.f_rita_application_c_fact a11
 JOIN ldb.d_processing_activities_managing_organization_c a12 ON a11.managing_organization_c_key=a12.row_key
 JOIN ldb.d_lvl3_organization_lead_c a13 ON a12.lvl3_organization_c_key=a13.row_key
 UNION 
-SELECT 'ldb.d_rita_application_source_type_c' AS TABLE_NAME, COUNT(1) AS ROW_COUNT 
+SELECT 'ldb.d_lov_rita_application_source_type_c' AS TABLE_NAME, COUNT(1) AS ROW_COUNT 
 FROM ldb.f_rita_application_c_fact a 
 JOIN ldb.d_rita_application_c b ON a.rita_application_c_key=b.row_key
-JOIN ldb.d_rita_application_source_type_c c ON b.rita_application_source_type_c_key=c.row_key
+JOIN ldb.d_lov_rita_application_source_type_c c ON b.rita_application_source_type_c_key=c.row_key
 UNION 
 SELECT 'ldb.d_data_retention_status_c' AS TABLE_NAME, COUNT(1) AS ROW_COUNT 
 FROM ldb.f_rita_application_c_fact a 

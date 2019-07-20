@@ -296,4 +296,4 @@ union
 select'ldb.d_business_service' as Table_Name, count(1) Row_Count
  from  ldb.f_incident_keyword       a11 
 join ldb.d_business_service       a12
-on (a11.business_service_c_key = a12.row_key)
+ON a11.business_service_key=a12.row_key

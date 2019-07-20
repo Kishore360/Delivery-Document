@@ -47,18 +47,18 @@ AND
 ,'Protected Health Information (“PHI”) as defined by HIPAA','Other health or medical data')))
 THEN 'GROUP4'
 ELSE 'UNSPECIFIED' END) AS Source_Grouping,Count(SRC.SHORT_NAME) as CNT
-FROM pandg_mdsdb.pg_mega_pgb_application_rita_final SRC
+FROM png_mdsdb.pg_mega_pgb_application_rita_final SRC
 LEFT JOIN 
 (SELECT a.app_hexid,a.sourceinstance,
 CASE WHEN Count(distinct responsible_org_unit_hexid) <= 1 then MAX(coalesce(a.responsible_org_unit_hexid,'UNSPECIFIED')) else 'UNKNOWN' end as responsible_org_unit_hexid  
-FROM pandg_mdsdb.pg_mega_pgv_app_responsible_org_person_final a WHERE a.pg_development_org = 'Y' 
+FROM png_mdsdb.pg_mega_pgv_app_responsible_org_person_final a WHERE a.pg_development_org = 'Y' 
 group by a.app_hexid,a.sourceinstance
 ) SRC1 ON (SRC.NAME=SRC1.app_hexid AND SRC.sourceinstance=SRC1.sourceinstance )
-LEFT JOIN pandg_mdsdb.pg_mega_pgv_application_data_model_final X ON SRC.name=X.APP_HEX AND SRC.sourceinstance=X.sourceinstance
-LEFT JOIN pandg_mdsdb.pg_mega_pgv_org_itam_gbs_final level1
+LEFT JOIN png_mdsdb.pg_mega_pgv_application_data_model_final X ON SRC.name=X.APP_HEX AND SRC.sourceinstance=X.sourceinstance
+LEFT JOIN png_mdsdb.pg_mega_pgv_org_itam_gbs_final level1
 ON (SRC1.responsible_org_unit_hexid=level1.LVL1_ORG_HEX OR SRC1.responsible_org_unit_hexid=level1.LVL2_ORG_HEX
 OR SRC1.responsible_org_unit_hexid=level1.LVL3_ORG_HEX)
 AND SRC1.sourceinstance=level1.sourceinstance
-LEFT JOIN pandg_mdwdb.d_rita_application_c TRGT ON SRC.NAME=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id
+LEFT JOIN png_mdwdb.d_rita_application_c TRGT ON SRC.NAME=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id
 group by 1;
 

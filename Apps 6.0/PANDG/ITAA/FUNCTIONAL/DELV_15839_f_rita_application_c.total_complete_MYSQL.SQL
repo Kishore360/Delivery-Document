@@ -107,7 +107,7 @@ where app_hexid is not null and le_hexid is not null and le_hexid<> '' and cdcty
 group by app_hexid
 UNION ALL 
 SELECT app_hex,'Data Elements Combined flag',max(ATTRIBUTE_NAME) as value 
-FROM (SELECT app_hex,replace(ATTRIBUTE_NAME,char('124'),'@') as ATTRIBUTE_NAME FROM png_mdsdb.pg_mega_pgv_application_data_model_final) a11
+FROM (SELECT app_hex,replace(ATTRIBUTE_NAME,char('124'),'@') as ATTRIBUTE_NAME FROM png_mdsdb.pg_mega_pgv_application_data_model_final where cdctype='X') a11
 WHERE 
 a11.ATTRIBUTE_NAME ='Data about teens 16-18' OR a11.ATTRIBUTE_NAME like '%@Data about teens 16-18@%' OR a11.ATTRIBUTE_NAME like '%@Data about teens 16-18' OR a11.ATTRIBUTE_NAME like 'Data about teens 16-18@%'
 OR a11.ATTRIBUTE_NAME ='Other (e.g. customer) account username and password' OR a11.ATTRIBUTE_NAME like '%@Other (e.g. customer) account username and password@%' OR a11.ATTRIBUTE_NAME like '%@Other (e.g. customer) account username and password' OR a11.ATTRIBUTE_NAME like 'Other (e.g. customer) account username and password@%'
