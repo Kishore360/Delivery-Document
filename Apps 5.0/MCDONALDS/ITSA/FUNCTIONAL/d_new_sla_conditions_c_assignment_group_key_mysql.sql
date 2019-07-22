@@ -1,4 +1,8 @@
-select count(1)
+SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+CASE WHEN cnt >0 THEN 'MDS to DWH data validation failed for d_incident.dormant_flag'
+ ELSE 'SUCCESS' END as Message
+ FROM (
+select count(1) cnt 
 			from mcdonalds_mds_viewdb.us_new_sla_map_final us_sla                  
             LEFT OUTER JOIN
                 mcdonalds_mds_viewdb.cmdb_ci_service_final serv 
@@ -28,5 +32,5 @@ join mcdonalds_mdwdb.d_new_sla_conditions_c d1 on
             '~',
             COALESCE(us_sla.priority,
             'UNSPECIFIED')),
-            255) AS row_id,=d1.row_id
-			where coalesce(d.row_key,case when sys_user_group.sys_id is null then 0 else -1 end )<>assignment_group_key
+            255) =d1.row_id
+			where coalesce(d.row_key,case when core_company.sys_id is null then 0 else -1 end )<>assignment_group_key)a
