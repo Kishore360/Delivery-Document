@@ -4,5 +4,5 @@ SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  FROM(select count(1) as cnt from 
   png_mdsdb.us_location_continuity_itsa_c_final SRC
  JOIN png_mdwdb.f_it_location_continuity_c TRGT
-ON concat(COALESCE(SRC.Actual_of,'UNSPECIFIED'),'~',COALESCE(SRC.Site,'UNSPECIFIED')) = TRGT.row_id
+ON concat(COALESCE(SRC.Actual_of,'UNSPECIFIED'),'~',COALESCE(SRC.Site,'UNSPECIFIED')) = TRGT.row_id AND SRC.sourceinstance=TRGT.source_id
 where ROUND(SRC.Strategy,5)<>TRGT.strategy_c)ma

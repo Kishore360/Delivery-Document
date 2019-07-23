@@ -1,7 +1,6 @@
-
 SELECT 
-CASE WHEN count(1) > 0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, 
-CASE WHEN count(1) > 0 THEN 'MDS to DWH data validation failed for d_incident.potential_misclassification_flag_c' ELSE 'SUCCESS' END as Message 
+CASE WHEN CNT > 0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, 
+CASE WHEN CNT > 0 THEN 'MDS to DWH data validation failed for d_incident.potential_misclassification_flag_c' ELSE 'SUCCESS' END as Message 
 FROM 
 (
 SELECT COUNT(1) as CNT 
@@ -16,6 +15,7 @@ JOIN
 (SELECT f_inc.incident_key,MAX(f_inc.configuration_item_key) as configuration_item_key,MAX(f_inc.age) age,MAX(f_chg.impact_src_code) impact_src_code,count(1) as cnt
 FROM png_mdwdb.f_incident f_inc
 JOIN png_mdwdb.f_change_request f_chg ON f_inc.change_request_key = f_chg.change_request_key OR f_chg.incident_key = f_inc.incident_key
+AND f_inc.source_id=f_chg.source_id
 GROUP BY 1
 ) X
 ON trgt.row_key = X.incident_key
