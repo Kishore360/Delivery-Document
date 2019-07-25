@@ -109,7 +109,7 @@ select 'ldb.d_calendar_month  a122' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_problem_task a11
 join ldb.d_calendar_date  a16
 on (a11.opened_on_key = a16.row_key)
-join ldb.d_calendar_month  a122row_count, 
+join ldb.d_calendar_month  a122
 on (a16.month_start_date_key = a122.row_key)
 union
 select 'ldb.d_problem_state a123' as Table_name, count(a11.row_key) Row_Count
