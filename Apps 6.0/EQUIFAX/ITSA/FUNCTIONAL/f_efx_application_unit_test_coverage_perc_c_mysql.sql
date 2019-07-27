@@ -6,8 +6,9 @@ FROM equifax_mdsdb.u_efx_application_final SRC
 JOIN equifax_mdwdb.f_efx_application_c TRGT 
 ON SRC.sys_id = TRGT.row_id 
 and  SRC.sourceinstance = TRGT.source_id  
-WHERE case when u_unit_test_coverage between 0 and 25 then 0.05
-    when u_unit_test_coverage between 26 and 50 then 0.1
-    when u_unit_test_coverage between 51 and 75 then 0.15
-    when u_unit_test_coverage between 76 and 99 then 0.20
-    when u_unit_test_coverage = 100 then 0.25 end <> TRGT.unit_test_coverage_perc_c)b
+WHERE  case when u_unit_test_coverage ="0 - 25" then 0.05
+    when u_unit_test_coverage = "26 - 50" then 0.10
+    when u_unit_test_coverage = "51 - 75"  then 0.15
+    when u_unit_test_coverage = "76 - 99"  then 0.20
+    when u_unit_test_coverage = 100 then 0.25
+    else u_unit_test_coverage/100 end <> TRGT.unit_test_coverage_perc_c)b

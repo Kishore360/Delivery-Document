@@ -4,7 +4,7 @@ SELECT CASE WHEN cnt> 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  FROM
    png_mdsdb.us_dgtl_response_time_data_final SRC
  JOIN png_mdwdb.d_dgtl_response_time_c TRGT
-ON concat (COALESCE(SRC.Test_Name,'UNSPECIFIED'),COALESCE(SRC.Date,'UNSPECIFIED')) = TRGT.row_id
+ON concat (COALESCE(SRC.Test_Name,'UNSPECIFIED'),COALESCE(SRC.Date,'UNSPECIFIED')) = TRGT.row_id AND SRC.sourceinstance=TRGT.source_id
 WHERE SRC.Test_Status <> TRGT.test_status_c)ma;
 
 

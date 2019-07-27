@@ -10,10 +10,10 @@ JOIN png_mdwdb.f_incident FA ON (TRGT.row_key=FA.incident_key AND TRGT.source_id
 JOIN png_mdwdb.d_lov LKP ON (CONCAT('STATE~INCIDENT~',SRC.state))=LKP.row_id AND SRC.sourceinstance=LKP.source_id
 JOIN png_mdwdb.d_lov_map LM ON FA.state_src_key=LM.src_key
 JOIN (Select x.source_id,max(x.lastupdated) as Lastupdated 
-FROM png_workdb.o_data_freshness x  group by source_id) da ON (SRC.sourceinstance=da.source_id)
+FROM png_mdwdb.d_o_data_freshness x  group by source_id) da ON (SRC.sourceinstance=da.source_id)
 WHERE 
 CASE WHEN LM.dimension_wh_code='OPEN' AND (DATEDIFF(da.lastupdated,TRGT.opened_on)+1) > 30 THEN 'Y' ELSE 'N' END<>TRGT.backlog_flag
-and SRC.cdctype<>'D'
+and SRC.cdctype='X'
 ) temp;
 
 

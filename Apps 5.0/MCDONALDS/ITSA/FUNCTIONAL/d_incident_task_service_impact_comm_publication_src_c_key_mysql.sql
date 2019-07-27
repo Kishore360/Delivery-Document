@@ -7,12 +7,7 @@ SELECT CASE WHEN cnt THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  ON ( SRC.sys_id= LKP.row_id 
 AND SRC.sourceinstance= LKP.source_id )
 LEFT JOIN mcdonalds_mdwdb.d_lov lkp
-ON COALESCE(CONCAT('REMAINDER_NOTIFICATIONS_C~INCIDENT_TASK~~~',src.u_reminder_notifications),'UNSPECIFIED') =lkp.row_id and src.sourceinstance = lkp.source_id
- WHERE lkp.row_key<> (TRGT.service_impact_comm_publication_src_c_key))b
- 
- 
- 
- 
-
+ON COALESCE(CONCAT('REMAINDER_NOTIFICATIONS_C~INCIDENT_TASK~~~',SRC.u_reminder_notifications),'UNSPECIFIED') =lkp.row_id and SRC.sourceinstance = lkp.source_id
+ WHERE lkp.row_key<> (LKP.service_impact_comm_publication_src_c_key))b
  
  

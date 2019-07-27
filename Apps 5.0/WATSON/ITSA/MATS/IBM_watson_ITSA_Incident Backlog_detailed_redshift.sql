@@ -43,7 +43,7 @@ join ldb.d_internal_contact_assigned_to a18
 on (a11.assigned_to_key = a18.row_key)
 union
 select 'ldb.d_calendar_month  a19' as Table_name, count(a11.row_key) Row_Count
-from ldb.f_incident a11row_count, 
+from ldb.f_incident a11
 join ldb.d_calendar_date  a12
 on (a11.opened_on_key = a12.row_key)
 join ldb.d_calendar_month  a19
