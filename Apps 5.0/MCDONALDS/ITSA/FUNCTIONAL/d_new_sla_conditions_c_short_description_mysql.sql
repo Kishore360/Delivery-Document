@@ -34,5 +34,5 @@ join mcdonalds_mdwdb.d_new_sla_conditions_c d1 on
             '~',
             COALESCE(us_sla.priority,
             'UNSPECIFIED')),
-            255) =d1.row_id
+            255) =d1.row_id and serv.sourceinstance=d1.source_id
 			where us_sla.short_description<>d1.short_description)a

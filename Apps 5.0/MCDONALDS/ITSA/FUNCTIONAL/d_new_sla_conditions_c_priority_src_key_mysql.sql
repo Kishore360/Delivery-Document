@@ -32,7 +32,7 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
             '~',
             COALESCE(us_sla.priority,
             'UNSPECIFIED')),
-            255) =d1.row_id
+            255) =d1.row_id and us_sla.sourceinstance=d1.source_id
 			where coalesce(l.row_key,case when sys_user_group.sys_id is null then 0 else -1 end )<>d1.priority_src_key
 			
 			

@@ -19,5 +19,5 @@ select count(1) cnt
 join mcdonalds_mdwdb.d_new_sla_conditions_c d1 on 
 				LEFT(CONCAT( COALESCE(us_sla.sla_name,'UNSPECIFIED'),'~',COALESCE(us_sla.type,'UNSPECIFIED'),'~',
             COALESCE(sys_user_group.sys_id,'UNSPECIFIED'),'~',COALESCE(us_sla.assignment_group_vendor,'UNSPECIFIED'),
-            '~',COALESCE(us_sla.business_service,'UNSPECIFIED'),'~',COALESCE(us_sla.priority,'UNSPECIFIED')),255) =d1.row_id
+            '~',COALESCE(us_sla.business_service,'UNSPECIFIED'),'~',COALESCE(us_sla.priority,'UNSPECIFIED')),255) =d1.row_id and serv.sourceinstance=d1.source_id
 			where us_sla.business_service<>end_to_end_business_service)a

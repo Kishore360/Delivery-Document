@@ -32,5 +32,5 @@ join mcdonalds_mdwdb.d_new_sla_conditions_c d1 on
             '~',
             COALESCE(us_sla.priority,
             'UNSPECIFIED')),
-            255) =d1.row_id
+            255) =d1.row_id and serv.sourceinstance=d1.source_id
 			where coalesce(d.row_key,case when core_company.sys_id is null then 0 else -1 end )<>assignment_group_key)a
