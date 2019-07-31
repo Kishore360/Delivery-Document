@@ -1,9 +1,3 @@
-/* 
-f_group_type_c
-d_internal_organization_group
-d_group_type_c */
-
-
 SELECT 'f_group_type_c' AS Table_Name, Count(1) AS CNT 
 FROM ldb.f_group_type_c a 
 UNION 

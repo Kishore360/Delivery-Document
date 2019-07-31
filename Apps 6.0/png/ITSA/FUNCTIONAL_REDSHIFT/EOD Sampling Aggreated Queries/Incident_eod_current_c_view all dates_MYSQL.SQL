@@ -182,7 +182,7 @@ AND
 (co.source_dimension_code not in ('Deleted', 'Invalid/Out of Scope', 'Misclassification', 'Request Rejected', 'Withdrawn by Requester')
 or co.source_dimension_code in ('UNSPECIFIED'))
 AND pi.incident_number IN ('UNSPECIFIED')
-AND c.lagging_count_of_quarter='0'
+AND qx.lagging_count_of_quarter='0'
 )
 group by 1,2,3,4,5,6,7,8,9,10
 UNION
