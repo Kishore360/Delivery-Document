@@ -17,12 +17,12 @@ ON ((SRC1.responsible_org_unit_hexid=level1.LVL3_ORG_HEX or SRC1.responsible_org
 or SRC1.responsible_org_unit_hexid=level1.LVL1_ORG_HEX) AND SRC1.sourceinstance=level1.sourceinstance )
 WHERE 
 CASE WHEN 
-SRC.APPLICATION_NATURE IN ('Generic','XOApplication','NonDigital','Component')
+SRC.APPLICATION_NATURE IN ('Generic','XOApplication','NonDigital','Component','Platform','XOPlatform')
 AND SRC.LIFE_CYCLE_STATUS  NOT IN ('Decomissioned','Exception Use','not_used','Undecided','Exception')
 AND TRGT.gdpr_relevant_c_flag ='Y' 
 AND level1.LVL1_ORG_NAME IN 
 ('Information Security','IT Consumer Solutions','IT Customer Solutions & Delivery','IT Data & Analytics Organization','IT IT Development Organization',
-'IT IT Innovation Organization','IT Solutions','Consumer Services','FSS','IDQ','MANAGEMENT SERVICES','Master Data Organization','MY PG SERVICES',
+'IT IT Innovation Organization','IT Solutions','Consumer Services','FPSS','IDQ','MANAGEMENT SERVICES','Master Data Organization','MY PG SERVICES',
 'PS Shared Services & Technology Operations','PTW'
 )
 THEN COALESCE(TRGT.grace_period_start_date,CONVERT_TZ(OD.lastupdated,'GMT','America/New_York')) 
