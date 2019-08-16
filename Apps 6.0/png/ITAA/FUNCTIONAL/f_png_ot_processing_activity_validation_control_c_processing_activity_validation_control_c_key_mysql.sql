@@ -1,4 +1,5 @@
-SELECT CASE WHEN count(1)>0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result, 
+SELECT
+CASE WHEN count(1)>0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result, 
 CASE WHEN count(1)>0 THEN 'MDS to DWH data validation failed for f_png_ot_processing_activity_validation_control_c.processing_activity_validation_control_c_key' 
 ELSE 'SUCCESS' END as Message 
 FROM (select a11.Inventory_Id,a11.sourceinstance,a12.Compliance_control from png_mdsdb.pg_ot_processing_activities_inventory_final a11                 

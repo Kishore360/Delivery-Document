@@ -309,3 +309,10 @@ select 'ldb.d_lov_incremental_cost_c a150' as Table_name, count(a11.row_key) Row
 from ldb.f_incident_resolved a11 
 join ldb.d_incident a114 on (a11.incident_key = a114.row_key) 
 JOIN ldb.d_lov_incremental_cost_c a150 ON a114.incremental_cost_src_c_key=a150.row_key
+
+
+UNION 
+SELECT 'd_incident_unit_of_measure_c' AS Table_Name,Count(a.row_key) as Row_Count 
+FROM ldb.f_incident_resolved a 
+JOIN ldb.d_incident b ON a.incident_key=b.row_key
+JOIN ldb.d_incident_unit_of_measure_c c ON b.incident_unit_of_measure_c_key=c.row_key

@@ -1,5 +1,3 @@
-
-
 SELECT CASE WHEN Total_SLA_Count= Cancelled_SLA_Count   AND Total_SLA_Count > 0 THEN 'C'
 WHEN NON_Cancelled_SLA_Resolution_Hasbreached_Count > 0 THEN 'N'
 WHEN NON_Cancelled_SLA_Count >0 AND NON_Cancelled_SLA_Resolution_Hasbreached_Count =0 THEN 'Y'
