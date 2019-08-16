@@ -8,3 +8,4 @@ LEFT JOIN mcdonalds_mdwdb.d_lov LKP
 ON ( concat( 'U_SITUATION_C~INCIDENT~~~' ,upper( SRC.u_situation)) = LKP.row_id  
 AND SRC.sourceinstance = LKP.source_id )  
 WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_situation IS NULL THEN 0 else -1 end)<> (TRGT.situation_c_key) 
+

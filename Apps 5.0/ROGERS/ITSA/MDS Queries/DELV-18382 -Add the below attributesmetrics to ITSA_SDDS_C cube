@@ -1,0 +1,33 @@
+Requester Department:
+----------------------
+select b.number,d1.name,d1.department,d.name from   
+rogersdev_mdsdb.incident_final b  
+left  join rogersdev_mdsdb.sys_user_final d1  on d1.sys_id=b.caller_id
+left  join rogersdev_mdsdb.cmn_department_final d  on d1.department=d.sys_id
+where b.number in ('INC2250397','INC2231735');
+
+Related Knowledge Record:
+-------------------------
+
+select b.number,b.u_knowledge_record,c.sys_id,c.number from   
+ rogersdev_mdsdb.incident_final b  
+left  join  rogersdev_mdsdb.kb_knowledge_final c on b.u_knowledge_record=c.sys_id
+/*left  join rogersdev_mdsdb.sys_user_final d1  on d1.sys_id=b.caller_id
+left  join rogersdev_mdsdb.cmn_department_final d  on d1.department=d.sys_id*/
+where b.number in ('INC2188507','INC2252752','INC2264954');
+
+Related Problem number:
+-----------------------
+
+select b.number,c.sys_id,c.number from   
+  rogersdev_mdsdb.incident_final b  
+left  join  rogersdev_mdsdb.problem_final c on b.problem_id=c.sys_id
+/*left  join rogersdev_mdsdb.sys_user_final d1  on d1.sys_id=b.caller_id
+left  join rogersdev_mdsdb.cmn_department_final d  on d1.department=d.sys_id*/
+where b.number in ('INC2276192','INC2270366','INC2233857');
+
+CHILD INCIDENTS:
+----------------
+
+select number,child_incidents from   
+  rogersdev_mdsdb.incident_final where number in ('INC2427811','INC2285605','INC2233857');
