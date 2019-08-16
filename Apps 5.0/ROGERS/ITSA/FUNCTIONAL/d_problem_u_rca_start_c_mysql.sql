@@ -9,4 +9,4 @@ where
 			CONVERT_TZ (u_rca_start,
             'GMT',
             'America/New_York') <> u_rca_start_c
-			
+			)a

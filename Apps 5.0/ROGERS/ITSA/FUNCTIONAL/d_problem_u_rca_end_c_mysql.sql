@@ -9,4 +9,4 @@ JOIN rogers_mdsdb.problem_final p ON d.row_id=p.sys_id
 where 		
 			CONVERT_TZ (u_rca_end,
             'GMT',
-            'America/New_York') <> u_rca_end_c
+            'America/New_York') <> u_rca_end_c)a
