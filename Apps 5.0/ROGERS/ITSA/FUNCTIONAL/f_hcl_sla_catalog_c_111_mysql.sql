@@ -10,7 +10,7 @@ where sla='1.1.1' and d.hcl_schedule_ac_attachment_ref ='Governance' )a1
 right join 
 (
 
-select a.mcd mcd,(a.abc/a1.def)*100.0 from 
+select a.msd msd,(a.abc/a1.def)*100.0 attained_Governance from 
 (select  d32.month_start_date_key msd,count(1) abc
 from  rogers_mdwdb.f_problem_task f2 
 join rogers_mdwdb.d_problem_task d2 on f2.problem_task_key=d2.row_key
@@ -20,7 +20,7 @@ where  d11.organization_name like '%HCL%' and d2.closed_on<=d2.due_on
 and d32.lagging_count_of_month between 0 and 11
 group by 1)a
 cross join 
-(select  d32.month_start_date_key msd,count(1) abc
+(select  d32.month_start_date_key msd,count(1) def
 from  rogers_mdwdb.f_problem_task f2 
 join rogers_mdwdb.d_problem_task d2 on f2.problem_task_key=d2.row_key
 join rogers_mdwdb.d_calendar_date d32 on f2.closed_on_key=d32.row_key 

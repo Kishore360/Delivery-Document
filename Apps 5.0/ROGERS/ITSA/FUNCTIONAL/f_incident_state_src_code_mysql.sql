@@ -6,4 +6,5 @@ SELECT CASE WHEN cnt THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
   JOIN rogers_mdwdb.f_incident TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
- WHERE COALESCE( SRC.incident_state,'')<> COALESCE(TRGT.state_src_code ,''))b
+ WHERE COALESCE( SRC.incident_state,'')<> COALESCE(TRGT.state_src_code ,'')
+ )b
