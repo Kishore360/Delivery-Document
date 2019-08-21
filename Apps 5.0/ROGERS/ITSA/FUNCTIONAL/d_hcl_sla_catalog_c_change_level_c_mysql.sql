@@ -8,7 +8,7 @@ JOIN rogers_mdsdb.us_hcl_sla_catalog_final p ON d.row_id=concat(p.sla,
             '~',
             p.hcl_schedule_ac_attachment_ref,'~',
 			REPLACE(STR_TO_DATE(start_date,'%d-%m-%Y'),'-','')) 
-where p.change_level_c <> d.change_level 
+where d.change_level_c <> p.change_level 
 )a
 
 

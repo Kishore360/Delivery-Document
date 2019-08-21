@@ -5,5 +5,5 @@ select count(1) cnt
         FROM
 rogers_mdwdb.f_task_survey f
 join rogers_mdwdb.d_incident di on f.incident_id=di.row_id and f.source_id=di.source_id
-JOIN rogers_mddb.us_dissats_comments_c_final dc ON di.incident_number=dc.ticket AND di.source_id=dc.sourceinstance
+JOIN rogers_mdsdb.us_dissats_comments_c_final dc ON di.incident_number=dc.ticket AND di.source_id=dc.sourceinstance
 where f.survey_general_comments_c<>coalesce(dc.general_comments_for_deck,'UNSPECIFIED'))a
