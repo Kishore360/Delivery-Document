@@ -9,5 +9,5 @@ left join ntrs_mdsdb.u_cmdb_ci_software_master_final SRC2 on (SRC1.u_software=SR
 SRC1.sourceinstance=SRC2.sourceinstance)
 left join ntrs_mdwdb.f_incident TRGT on (SRC.sys_id=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id)
 left join ntrs_mdwdb.d_cmdb_ci_model_c LKP on LKP.row_key=TRGT.incident_product_name_c_key
-left join ntrs_mdwdb.d_cmdb_ci_software_master_c LKP2 on LKP2.row_key=LKP.software_c_key
+left join ntrs_mdwdb.d_cmdb_ci_software_master_c LKP2 on LKP2.row_key=LKP.cmdb_ci_software_master_c_key
 where SRC2.u_cef_type<>LKP2.u_cef_type)a;

@@ -10,4 +10,4 @@ SRC1.sourceinstance=SRC2.sourceinstance)
 left join ntrs_mdwdb.f_incident TRGT on (SRC.sys_id=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id)
 left join ntrs_mdwdb.d_cmdb_ci_model_c LKP on LKP.row_key=TRGT.cmdb_ci_model_c_key
 left join ntrs_mdwdb.d_cmdb_ci_software_master_c LKP2 on LKP2.row_key=LKP.cmdb_ci_software_master_c_key
-where (case when SRC2.u_cef='Yes' then 'Y' when SRC2.u_cef='No' then 'N' else u_cef end )<>LKP2.u_cef)a;
+where (case when SRC2.u_cef='Yes' then 'Y' when SRC2.u_cef='No' then 'N' else SRC2.u_cef end )<>LKP2.u_cef)a;
