@@ -8,7 +8,7 @@ sum(case when t2.alternative_change_failure_c_flag = 'Y' then 1 else 0 end) as p
 sum(case when t2.alternative_change_failure_c_flag = 'N' then 1 else 0 end) as prior_success_changes
 from 
 (
-select d.row_key as change_request_key,d.assigned_to_key, d.alternative_change_failure_c_flag, coalesce(d.work_start_on, d.u_planned_start_date_c) as change_start_date, coalesce(d.closed_on, d.work_end_on) as change_end_date
+select d.row_key as change_request_key,d.assigned_to_key, d.alternative_change_failure_c_flag, coalesce(d.work_start_on, d.planned_start_on) as change_start_date, coalesce(d.closed_on, d.work_end_on) as change_end_date
 from mcdonalds_mdwdb.d_change_request d 
 join 
 (select distinct f.assigned_to_key  
@@ -16,7 +16,7 @@ from mcdonalds_mdwdb.f_change_request f) t
 on d.assigned_to_key = t.assigned_to_key
 where t.assigned_to_key <> 0) t1 
 join (
-select d.row_key as change_request_key,d.assigned_to_key, d.alternative_change_failure_c_flag, coalesce(d.work_start_on, d.u_planned_start_date_c) as change_start_date, coalesce(d.closed_on, d.work_end_on) as change_end_date
+select d.row_key as change_request_key,d.assigned_to_key, d.alternative_change_failure_c_flag, coalesce(d.work_start_on, d.planned_start_on) as change_start_date, coalesce(d.closed_on, d.work_end_on) as change_end_date
 from mcdonalds_mdwdb.d_change_request d 
 join 
 (select distinct f.assigned_to_key  

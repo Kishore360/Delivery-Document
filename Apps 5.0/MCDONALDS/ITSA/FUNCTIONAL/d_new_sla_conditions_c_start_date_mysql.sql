@@ -5,7 +5,7 @@
 SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 CASE WHEN cnt >0 THEN 'MDS to DWH data validation failed for d_incident.dormant_flag' ELSE 'SUCCESS' END as Message
 FROM (
-select count(1) cnt from 
+select count(1) cnt 
 			from mcdonalds_mds_viewdb.us_new_sla_map_final us_sla                  
             LEFT OUTER JOIN
                 mcdonalds_mdsdb.cmdb_ci_service_final serv 
@@ -35,5 +35,5 @@ join mcdonalds_mdwdb.d_new_sla_conditions_c d1 on
             '~',
             COALESCE(us_sla.priority,
             'UNSPECIFIED')),
-            255) =d1.row_id
-			where us_sla.start_date<>start_date)a
+            255) =d1.row_id and serv.sourceinstance=d1.source_id
+			where us_sla.start_date<>d1.start_date)a

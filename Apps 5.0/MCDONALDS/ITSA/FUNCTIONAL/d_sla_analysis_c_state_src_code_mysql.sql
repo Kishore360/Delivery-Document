@@ -1,16 +1,22 @@
-SELECT CASE WHEN count(1)>0  THEN 'FAILURE' ELSE  'SUCCESS'  END as Result, 
-CASE WHEN count(1)>0  THEN  'Data mismatch' ELSE  'SUCCESS'  END as Message 
-from mcdonalds_mdsdb.task_final a
-join mcdonalds_mdsdb.incident_final b 
-ON a.sys_id = b.sys_id and a.sourceinstance = b.sourceinstance and  b.CDCTYPE<>'D'
-LEFT JOIN mcdonalds_mdsdb.task_sla_final c 
-ON a.sys_id = c.task AND a.sourceinstance = c.sourceinstance and  c.CDCTYPE<>'D'
-LEFT JOIN mcdonalds_mdsdb.contract_sla_final d 
-ON c.sla = d.sys_id AND c.sourceinstance = d.sourceinstance  and d.CDCTYPE<>'D'
-join mcdonalds_mdwdb.d_sla_analysis_c e 
-on CONCAT(a.sys_id, '~',COALESCE(c.sla,'UNSPECIFIED'),'~',COALESCE(c.sys_id,'UNSPECIFIED'))=e.row_id and d.sourceinstance=e.source_id
- join (select source_id,max(lastupdated) as lastupdated from mcdonalds_mdwdb.d_o_data_freshness group by source_id) f1
- on (f1.source_id = c.sourceinstance) 
- and  (c.cdctime<=f1.lastupdated)
-WHERE c.stage <> 'cancelled'   and a.CDCTYPE ='X'
-and COALESCE(b.state,'UNSPECIFIED')<>e.state_src_code;
+
+SELECT CASE WHEN cnt>0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, 
+CASE WHEN cnt>0  THEN 'MDS to DWH data validation failed for d_sla_analysis_c.sla_type' ELSE 'SUCCESS' END as Message
+from 
+(
+select count(1) cnt from 
+(
+select a.state state,CONCAT(a.sys_id, '~',c.sla,'~',c.sys_id) sys_id,a.sourceinstance sourceinstance from 
+(select sys_id,sys_class_name,sourceinstance,COALESCE(state,'UNSPECIFIED') state  from mcdonalds_mdsdb.task_final 
+ where  sys_class_name='INCIDENT' and CDCTYPE<>'D'  )a
+   JOIN  (select task,sourceinstance,stage, COALESCE(sla,'UNSPECIFIED')sla,cdctime,COALESCE(sys_id,'UNSPECIFIED') sys_id from 
+   mcdonalds_mdsdb.task_sla_final 
+   where CDCTYPE<>'D' and stage <> 'cancelled')c 
+ON a.sys_id = c.task AND a.sourceinstance = c.sourceinstance 
+join (select source_id,max(lastupdated) as lastupdated from mcdonalds_mdwdb.d_o_data_freshness group by source_id) f1
+ on (f1.source_id = c.sourceinstance)  and  (c.cdctime<=f1.lastupdated)
+ )a1
+join (select source_id,row_id,state_src_code from mcdonalds_mdwdb.d_sla_analysis_c where soft_deleted_flag='N' )e 
+on a1.sys_id=e.row_id and a1.sourceinstance=e.source_id   
+and  a1.state<>e.state_src_code
+
+) temp;

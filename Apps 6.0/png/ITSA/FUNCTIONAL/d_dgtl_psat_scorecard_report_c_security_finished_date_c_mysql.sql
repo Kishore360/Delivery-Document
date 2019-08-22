@@ -3,6 +3,6 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  FROM
    png_mdsdb.us_dgtl_psat_scorecard_report_final SRC
  JOIN png_mdwdb.d_dgtl_psat_scorecard_report_c TRGT
-ON concat (COALESCE(FLOOR(SRC.Touchpoint_Number),'-','UNSPECIFIED'),COALESCE(SRC.FileDate,'UNSPECIFIED')) = TRGT.row_id
+ON concat (COALESCE(FLOOR(SRC.Touchpoint_Number),'-','UNSPECIFIED'),COALESCE(SRC.FileDate,'UNSPECIFIED')) = TRGT.row_id AND SRC.sourceinstance=TRGT.source_id
 WHERE cast(SRC.Security_Finish_Date as Date) <> TRGT.security_finished_date_c;
 

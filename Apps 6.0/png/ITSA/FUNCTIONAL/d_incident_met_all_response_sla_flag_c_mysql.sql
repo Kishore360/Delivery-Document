@@ -12,7 +12,7 @@ sum(case when target_c = 'resolution' THEN 1 ELSE 0 END) as resolution_sla_count
 sum(case when target_c = 'response' THEN 1 ELSE 0 END) as response_sla_count 
 from png_mdwdb.f_incident a 
 JOIN png_mdwdb.f_task_sla b 
-ON a.incident_key = b.incident_key
+ON a.incident_key = b.incident_key and a.source_id=b.source_id
 join  png_mdwdb.d_task_sla dt on dt.row_key=b.sla_key
 where b.task_type='INCIDENT'
 group by 1) A
