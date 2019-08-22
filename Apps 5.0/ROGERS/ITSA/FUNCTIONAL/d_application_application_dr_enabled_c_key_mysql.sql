@@ -7,3 +7,4 @@ ON (concat('APPLICATION~',SRC.sys_id) = TRGT.row_id AND SRC.sourceinstance = TRG
  ON ( COALESCE(CONCAT('DRENABLED','~','CMDB_CI_APPL','~','~','~',UPPER(SRC.u_dr_enabled)),'UNSPECIFIED') = LKP.row_id 
  AND SRC.sourceinstance = LKP.source_id ) 
  WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_dr_enabled IS NULL THEN 0 else -1 end)<> (TRGT.application_dr_enabled_c_key) 
+and SRC.CDCTYPE='X';

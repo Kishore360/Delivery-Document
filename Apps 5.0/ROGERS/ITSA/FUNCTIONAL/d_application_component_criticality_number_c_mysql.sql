@@ -3,3 +3,4 @@ FROM rogers_mdsdb.cmdb_ci_appl_final  SRC
 JOIN rogers_mdwdb.d_application TRGT 
 ON (concat('APPLICATION~',SRC.sys_id) = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id )
 where component_criticality_c <> COALESCE(u_component_criticality,'UNSPECIFIED')
+and SRC.CDCTYPE='X';

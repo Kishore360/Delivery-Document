@@ -16,3 +16,4 @@ ON b.sys_id = middle.sys_id and b.sourceinstance= middle.sourceinstance
 JOIN rogers_mdwdb.d_application  TRGT 
 ON (concat('APPLICATION~',b.sys_id) = TRGT.row_id AND b.sourceinstance = TRGT.source_id )
 WHERE COALESCE(ser.u_managed_by,netgear.u_managed_by,ins.u_managed_by,clust.u_managed_by,middle.u_managed_by,'UNSPECIFIED')<> TRGT.managed_by_c
+and b.CDCTYPE='X' and ser.CDCTYPE='X' and model.CDCTYPE='X' and netgear.CDCTYPE='X' and ins.CDCTYPE='X' and clust.CDCTYPE='X' and middle.CDCTYPE='X';

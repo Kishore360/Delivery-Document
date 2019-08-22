@@ -7,4 +7,5 @@ select count(1) cnt from
 rogers_mdwdb.d_configuration_item config 
 JOIN rogers_mdsdb.cmdb_ci_final ci
 on ci.sys_id  = config.row_id and ci.sourceinstance  = config.source_id
-where ci_installed_date_c <> convert_tz(install_date,'GMT','America/New_York'))a
+where ci_installed_date_c <> convert_tz(install_date,'GMT','America/New_York')
+and config.CDCTYPE='X' and ci.cdctype='X')a

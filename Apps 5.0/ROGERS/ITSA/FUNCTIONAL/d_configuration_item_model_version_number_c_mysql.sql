@@ -16,5 +16,6 @@ ON b.sys_id = middle.sys_id and b.sourceinstance= middle.sourceinstance
 JOIN rogers_mdwdb.d_configuration_item TRGT 
 ON b.sys_id = TRGT.row_id AND b.sourceinstance = TRGT.source_id 
  WHERE COALESCE(ser.u_model_name2,ser.u_model_version_number,b.u_model_version_number,model.name,'UNSPECIFIED') <> TRGT.model_version_number_c
+and b.CDCTYPE='X' and ser.CDCTYPE='X' and model.CDCTYPE='X' and netgear.CDCTYPE='X' and ins.CDCTYPE='X' and clust.CDCTYPE='X' and middle.CDCTYPE='X';
 
 

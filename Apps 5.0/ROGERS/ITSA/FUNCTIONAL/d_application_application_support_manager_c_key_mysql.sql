@@ -7,3 +7,4 @@ ON (concat('APPLICATION~',SRC.sys_id) = TRGT.row_id AND SRC.sourceinstance = TRG
  ON ( COALESCE(CONCAT('INTERNAL_CONTACT~',SRC.u_support_manager),'UNSPECIFIED') = LKP.row_id 
  AND SRC.sourceinstance = LKP.source_id ) 
  WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_support_manager IS NULL THEN 0 else -1 end)<> (TRGT.application_support_manager_c_key) 
+and SRC.CDCTYPE='X';

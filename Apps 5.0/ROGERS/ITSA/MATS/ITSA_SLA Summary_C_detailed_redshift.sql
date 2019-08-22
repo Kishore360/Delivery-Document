@@ -13,19 +13,19 @@ on (a11.opened_on_key = a12.row_key)
 join	ldb.d_calendar_month	a13 
 on (a12.month_start_date_key = a13.row_key) 
 union
-select 'ldb.d_task_sla	a13 ' as Table_name, count(1) Row_Count
+select 'ldb.d_task_sla	a20 ' as Table_name, count(1) Row_Count
 from ldb.f_incident_task_sla	a11 
-join	ldb.d_task_sla	a13 
-on (a11.sla_key = a13.row_key) 
+join	ldb.d_task_sla	a20 
+on (a11.sla_key = a20.row_key) 
 union
 select 'ldb.d_task_sla_name	a14 ' as Table_name, count(1) Row_Count
 from ldb.f_incident_task_sla	a11 
 join	ldb.d_calendar_date	a12 
 on (a11.opened_on_key = a12.row_key) join	ldb.d_calendar_month	a13 
-on (a12.month_start_date_key = a13.row_key) join	ldb.d_task_sla	a13 
-on (a11.sla_key = a13.row_key) 
+on (a12.month_start_date_key = a13.row_key) join	ldb.d_task_sla	a20 
+on (a11.sla_key = a20.row_key) 
 join	ldb.d_task_sla_name	a14 
-on (a13.sla_category_key = a14.row_key) 
+on (a20.sla_category_key = a14.row_key) 
 union
 select 'ldb.d_task_sla_stage	a15 ' as Table_name, count(1) Row_Count
 from ldb.f_incident_task_sla	a11 

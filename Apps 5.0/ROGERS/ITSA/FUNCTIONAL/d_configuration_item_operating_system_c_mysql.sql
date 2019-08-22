@@ -50,3 +50,4 @@ operating_system_c <> case when ci.sys_class_name = 'cmdb_ci_win_server' then CO
                      when ci.sys_class_name in (select distinct sys_class_name from rogers_mdsdb.cmdb_ci_computer_final) then COALESCE(comp.os,'UNSPECIFIED')				 
                      when ci.sys_class_name in (select distinct sys_class_name from rogers_mdsdb.cmdb_ci_db_instance_final) then COALESCE(ins.u_operating_system,'UNSPECIFIED')
                      else 'NOT APPLICABLE' END
+and config.cdctype='X';

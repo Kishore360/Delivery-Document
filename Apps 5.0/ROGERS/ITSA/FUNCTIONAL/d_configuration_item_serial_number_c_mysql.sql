@@ -6,4 +6,4 @@ select count(1) cnt
      rogers_mdwdb.d_configuration_item d 
 JOIN rogers_mdsdb.cmdb_ci_final p ON d.row_id=sys_id 
 where serial_number_c <> COALESCE(p.serial_number,'UNSPECIFIED') 
-)a
+and p.CDCTYPE='X')a

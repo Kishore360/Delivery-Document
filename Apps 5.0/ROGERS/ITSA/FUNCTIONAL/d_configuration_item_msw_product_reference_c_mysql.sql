@@ -71,4 +71,5 @@ when ins.sys_class_name <> 'cmdb_ci_db_mssql_instance' then
 COALESCE(CONCAT(COALESCE(core_company2.name,''),' ',COALESCE(SUBSTRING_INDEX(ci.u_model_version_number,'.',2),'')),'UNSPECIFIED')
 when ci.sys_class_name in (select distinct sys_class_name from rogers_mdsdb.u_cmdb_ci_middleware_final) 
 then COALESCE(CONCAT(COALESCE(core_company2.name,''),' ',COALESCE(middle.subcategory,''),' ',COALESCE(SUBSTRING_INDEX(middle.u_model_version_number,'.',2),'')),'UNSPECIFIED')			
-	else 'NOT APPLICABLE' END)a
+	else 'NOT APPLICABLE' END
+and config.CDCTYPE='X' and ci.cdctype='X')a
