@@ -13,4 +13,5 @@ group by source_id
 ) df ON trgt.source_id = df.source_id
 where 
 purchase_date_c <> CASE WHEN src.purchase_date > df.lastupdated THEN  convert_tz(src.sys_created_on,'GMT','America/New_York') 
-ELSE  convert_tz(src.purchase_date,'GMT','America/New_York') END)a
+ELSE  convert_tz(src.purchase_date,'GMT','America/New_York') END
+and src.CDCTYPE='X')a

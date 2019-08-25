@@ -17,4 +17,5 @@ LEFT JOIN rogers_mdsdb.cmdb_ci_computer_final comp
 ON ci.sys_id = comp.sys_id and ci.sourceinstance= comp.sourceinstance
 
 where 
-os_version_c <> COALESCE(ser.os_version,ins.u_os_version,comp.os_version,'UNSPECIFIED'))a
+os_version_c <> COALESCE(ser.os_version,ins.u_os_version,comp.os_version,'UNSPECIFIED')
+and config.CDCTYPE='X' and ci.cdctype='X')a

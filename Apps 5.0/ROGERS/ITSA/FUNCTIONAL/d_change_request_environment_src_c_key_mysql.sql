@@ -1,1 +1,3 @@
 SELECT CASE WHEN count(1)  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)  THEN 'MDS to DWH data validation failed for d_change_request.environment_src_c_key' ELSE 'SUCCESS' END as Message FROM rogers_mdsdb.change_request_final  SRC JOIN rogers_mdwdb.d_change_request TRGT ON (SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id )  LEFT JOIN rogers_mdwdb.d_lov LKP ON ( COALESCE(CONCAT('ENVIRONMENT','~','CHANGE_REQUEST','~','~','~',UPPER(SRC.u_environment)),'UNSPECIFIED') = LKP.row_id AND SRC.sourceinstance = LKP.source_id ) WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_environment IS NULL THEN 0 else -1 end)<> (TRGT.environment_src_c_key) 
+and SRC.CDCTYPE='X'
+

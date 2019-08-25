@@ -11,4 +11,5 @@ on ci.sys_id  = config.row_id and ci.sourceinstance  = config.source_id
 left join rogers_mdwdb.d_lov d 
 on COALESCE(CONCAT('SUBSTATUS~CMDB_CI~~~',ci.u_sub_status),'UNSPECIFIED')=d.row_id
 where d.soft_deleted_flag='N' and
- substatus_src_c_key <> coalesce(d.row_key,case when ci.u_sub_status is null then 0 else -1 end))a
+ substatus_src_c_key <> coalesce(d.row_key,case when ci.u_sub_status is null then 0 else -1 end)
+and config.CDCTYPE='X' and ci.cdctype='X')a

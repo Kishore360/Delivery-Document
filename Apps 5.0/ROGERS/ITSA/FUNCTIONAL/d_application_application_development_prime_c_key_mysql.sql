@@ -6,5 +6,6 @@ ON (concat('APPLICATION~',SRC.sys_id) = TRGT.row_id AND SRC.sourceinstance = TRG
  LEFT JOIN rogers_mdwdb.d_internal_contact LKP 
  ON ( COALESCE(CONCAT('INTERNAL_CONTACT~',SRC.u_development_prime),'UNSPECIFIED') = LKP.row_id 
  AND SRC.sourceinstance = LKP.source_id ) 
- WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_development_prime IS NULL THEN 0 else -1 end)<> (TRGT.application_development_prime_c_key) 
+ WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_development_prime IS NULL THEN 0 else -1 end)<> (TRGT.application_development_prime_c_key)
+and SRC.CDCTYPE='X' 
 

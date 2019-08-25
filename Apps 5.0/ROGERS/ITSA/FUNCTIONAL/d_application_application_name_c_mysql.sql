@@ -5,4 +5,5 @@ FROM rogers_mdsdb.cmdb_ci_appl_final  SRC
 JOIN rogers_mdwdb.d_application TRGT 
 ON (concat('APPLICATION~',SRC.sys_id) = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id ) 
  WHERE COALESCE(SRC.u_application_name ,'UNSPECIFIED')<> TRGT.application_name_c
+and SRC.CDCTYPE='X'
 

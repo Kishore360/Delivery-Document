@@ -7,7 +7,7 @@ FROM
 SELECT count(1) as cnt 
 FROM whirlpool_mdsdb.us_osvw_patching_dashboardnumerify_final SRC 
 LEFT JOIN whirlpool_mdwdb.d_ops_svc_vms_c TRGT ON SRC.row_id=TRGT.row_id and SRC.sourceinstance=TRGT.source_id
-WHERE SRC.apply<>TRGT.queued_for_installation_c)ma;
+WHERE SRC.apply<>TRGT.queued_for_installation_c and TRGT.soft_deleted_flag='N')ma;
 
 
 
