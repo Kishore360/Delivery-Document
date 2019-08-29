@@ -7,7 +7,7 @@ FROM
 SELECT count(1) as cnt 
 FROM  whirlpool_mdsdb.us_ppbr_consolidated_final  src
 left join whirlpool_mdwdb.d_patching_pcs_by_region trgt on src.row_id=trgt.row_id and src.sourceinstance=trgt.source_id
-where coalesce(src.computeros,'UNSPECIFIED')<>trgt.computer_os_c
+where coalesce(src.computeros,'UNSPECIFIED')<>trgt.computer_os_c and src.CDCTYPE<>'D'
 ) temp; 
 
 
