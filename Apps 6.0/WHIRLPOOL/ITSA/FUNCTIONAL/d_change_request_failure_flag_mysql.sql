@@ -7,5 +7,6 @@ on d_cr.row_key=f_cr.change_request_key
 join whirlpool_mdwdb.d_lov br on 
 f_cr.implementation_result_src_c_key = br.row_key
 and f_cr.source_id =br.source_id 
-where (case when br.dimension_class ='U_IMPLEMENTATION_RESULT~CHANGE_REQUEST' 
-and br.dimension_name='Implemented - With error / issue' then 'Y' else 'N' end)<>d_cr.failure_flag;
+where (case when br.dimension_class ='U_IMPLEMENTATION_RESULT~CHANGE_REQUEST'
+and br.dimension_name in('Implemented - With error / issue','Implemented - With error / issue',
+'Implemented Partially','Not Implemented')  then 'Y' else 'N' end)<>d_cr.failure_flag;
