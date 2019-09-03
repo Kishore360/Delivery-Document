@@ -8,4 +8,6 @@ ON (concat('APPLICATION~',SRC.sys_id) = TRGT.row_id AND SRC.sourceinstance = TRG
  AND SRC.sourceinstance = LKP.source_id ) 
  WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_development_director IS NULL THEN 0 else -1 end)<>
  (TRGT.application_development_director_c_key) 
+and SRC.CDCTYPE='X'
+
 

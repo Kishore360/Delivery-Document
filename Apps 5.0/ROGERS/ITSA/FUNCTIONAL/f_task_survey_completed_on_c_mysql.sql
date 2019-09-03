@@ -9,4 +9,5 @@ select count(1) cnt
 rogers_mdwdb.f_task_survey f
 LEFT JOIN rogers_mdsdb.task_survey_final tsf ON f.row_id=tsf.sys_id
 AND f.source_id=tsf.sourceinstance
-where  f.completed_on_c <> convert_tz(tsf.completed_date,'GMT','America/New_York') )a
+where  f.completed_on_c <> convert_tz(tsf.completed_date,'GMT','America/New_York')
+and tsf.CDCTYPE='X' )a

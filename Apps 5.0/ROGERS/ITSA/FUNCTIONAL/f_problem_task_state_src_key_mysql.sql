@@ -5,4 +5,6 @@ ON (SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id )
 join rogers_mdwdb.d_lov LKP
 on COALESCE(CONCAT('STATE','~','problem_task','~','~','~',UPPER(SRC.u_status)),'UNSPECIFIED')= LKP.row_id
 WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_status IS NULL THEN 0 else -1 end)<>TRGT.state_src_key
+and SRC.CDCTYPE='X'
+
 
