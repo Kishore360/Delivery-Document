@@ -6,5 +6,5 @@ from
 LEFT JOIN equifax_mdsdb.sys_user_final LKP
 ON SRC.managed_by = LKP.sys_id and SRC.sourceinstance = LKP.sourceinstance
 left join equifax_mdwdb.d_configuration_item TRGT on SRC.sys_id=TRGT.row_id and SRC.sourceinstance=TRGT.source_id
-where coalesce(LKP.name,'UNSPECIFIED')<>TRGT.MANAGED_BY AND SRC.cdctype<>'D'
+where CONCAT(LKP.first_name,' ',LKP.last_name)<>TRGT.MANAGED_BY AND SRC.cdctype<>'D'
 )temp;
