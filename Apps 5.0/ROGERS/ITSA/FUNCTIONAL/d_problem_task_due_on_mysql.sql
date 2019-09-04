@@ -3,4 +3,5 @@ FROM rogers_mdsdb.u_pm_action_items_final  SRC
 JOIN rogers_mdwdb.d_problem_task TRGT 
 ON (SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id )
 WHERE CONVERT_TZ(SRC.u_target_date,'GMT','America/New_York')<>TRGT.due_on
+and SRC.CDCTYPE='X'
 

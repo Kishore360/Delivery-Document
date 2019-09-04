@@ -8,6 +8,7 @@ AND SRC.sourceinstance= LKP.source_id )
   JOIN rogers_mdwdb.d_incident TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
- WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_reopen_reason IS NULL THEN 0 else -1 end)<> (TRGT.incident_reopen_reason_c_key);
+ WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_reopen_reason IS NULL THEN 0 else -1 end)<> (TRGT.incident_reopen_reason_c_key)
+and SRC.CDCTYPE='X';
  
  

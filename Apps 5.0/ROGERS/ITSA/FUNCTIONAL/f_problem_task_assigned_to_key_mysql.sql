@@ -5,4 +5,5 @@ ON (SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id )
 LEFT JOIN rogers_mdwdb.d_internal_contact LKP 
 ON (case when SRC.u_assigned_to is null then 'UNSPECIFIED' else concat('INTERNAL_CONTACT~',SRC.u_assigned_to) end = LKP.row_id AND SRC.sourceinstance = LKP.source_id ) 
 WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_assigned_to IS NULL THEN 0 else -1 end)<> (TRGT.assigned_to_key) 
+and SRC.CDCTYPE='X'
 
