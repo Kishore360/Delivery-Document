@@ -1,6 +1,6 @@
 SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
-CASE WHEN cnt >0 THEN 'MDS to DWH data validation failed for f_incident.impact_src_code' 
-ELSE 'MDS to DWH data validation passed for f_incident.impact_src_code' END as Message from 
+CASE WHEN cnt >0 THEN 'MDS to DWH data validation failed for f_task_ci_c.ci_task_problem_c_key' 
+ELSE 'MDS to DWH data validation passed for f_task_ci_c.ci_task_problem_c_key' END as Message from 
 (select count(1) cnt 
 from
 equifax_mdsdb.task_ci_final a
