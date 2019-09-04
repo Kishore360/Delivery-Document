@@ -3,7 +3,6 @@ CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 CASE WHEN cnt >0 THEN 'MDS to DWH data validation failed' ELSE 'SUCCESS' END as Message 
 from(
 select count(1) cnt  from
-number from
 rogers_mdwdb.d_configuration_item config 
 JOIN rogers_mdsdb.cmdb_ci_final ci
 on ci.sys_id  = config.row_id and ci.sourceinstance  = config.source_id
