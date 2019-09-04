@@ -8,4 +8,5 @@ from rogers_mdsdb.task_ci_final src
 left join rogers_mdsdb.task_final lkp on src.task=lkp.sys_id
 join rogers_mdwdb.d_task_ci_c trgt on src.sys_id=trgt.row_id 
 and src.sourceinstance=trgt.source_id 
-where coalesce(lkp.sys_class_name,'UNSPECIFIED') <> trgt.task_class_type)a
+where coalesce(lkp.sys_class_name,'UNSPECIFIED') <> trgt.task_class_type
+and src.cdctype='X')a
