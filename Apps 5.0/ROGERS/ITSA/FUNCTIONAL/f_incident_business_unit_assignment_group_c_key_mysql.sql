@@ -10,10 +10,9 @@ left join rogers_mdwdb.d_internal_organization d1 on case
                 2) then coalesce( concat('GROUP~',
                 p.u_resolver_group),
                 'UNSPECIFIED')      
-                else       concat('GROUP~',
-                p.assignment_group)              
+                else       coalesce( concat('GROUP~',
+                p.assignment_group),
+                'UNSPECIFIED')              
             end =d1.row_id and p.sourceinstance=d1.source_id 
-where coalesce(d1.row_key,case when u_resolver_group is null then 0 else -1 end ) <> business_unit_assignment_group_c_key  )a
-
-
-
+where coalesce(d1.row_key,case when(case when p.priority in (1,2) then  p.u_resolver_group else  p.assignment_group end )is null 
+then 0 else -1 end ) <> business_unit_assignment_group_c_key  )a

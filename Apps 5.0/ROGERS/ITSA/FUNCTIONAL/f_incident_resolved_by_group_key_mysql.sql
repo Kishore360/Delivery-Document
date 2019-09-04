@@ -1,1 +1,7 @@
-SELECT CASE WHEN count(1)  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)  THEN 'MDS to DWH data validation failed for f_incident.resolved_by_group_key' ELSE 'SUCCESS' END as Message FROM rogers_mdsdb.incident_final  SRC JOIN rogers_mdwdb.f_incident TRGT ON (SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id )  LEFT JOIN rogers_mdwdb.d_internal_organization LKP ON ( concat( 'GROUP~' ,upper( SRC.u_resolver_group)) = LKP.row_id AND SRC.sourceinstance = LKP.source_id ) WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_resolver_group IS NULL THEN 0 else -1 end)<> (TRGT.resolved_by_group_key) 
+SELECT CASE WHEN count > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result,
+CASE WHEN count > 0 THEN 'Data did not Match.' ELSE 'Data Matched' END AS Message 
+FROM(
+select count(1) as count from rogersdev_mdsdb.question_final src
+join rogersdev_mdwdb.d_question_c trgt
+on src.sys_id=trgt.row_id and src.sourceinstance=trgt.source_id
+where if(src.active=1,'Y','N') <>trgt.active_flag)ma
