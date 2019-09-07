@@ -3,6 +3,6 @@ SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  from(select count(1) as cnt from watson_mdsdb.task_ci_final src
  left join watson_mdwdb.d_task_ci_c trgt 
  on src.sys_id=trgt.row_id and src.sourceinstance=trgt.source_id
- where src.sys_mod_count<>trgt.update_count)ma;
+ where src.sys_mod_count<>trgt.update_count and src.cdctype<>'D')ma;
  
  

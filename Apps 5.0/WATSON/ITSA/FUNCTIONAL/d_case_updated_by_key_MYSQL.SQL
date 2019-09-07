@@ -8,5 +8,5 @@ LEFT JOIN watson_mdwdb.d_case TRGT
 LEFT JOIN watson_mdwdb.d_internal_contact LKP 
 	ON ( coalesce(SRC.sys_updated_by,'UNSPECIFIED') = LKP.user_name
 	AND SRC.sourceinstance=LKP.source_id)
-WHERE TRGT.row_key not in (0, -1) and 
-COALESCE(LKP.row_key,CASE WHEN SRC.sys_updated_by IS NULL THEN 0 else '-1' end)<> COALESCE(TRGT.updated_by_key ,'');
+WHERE 
+COALESCE(LKP.row_key,CASE WHEN SRC.sys_updated_by IS NULL THEN 0 else '-1' end)<> TRGT.updated_by_key and SRC.cdctype<>'D';

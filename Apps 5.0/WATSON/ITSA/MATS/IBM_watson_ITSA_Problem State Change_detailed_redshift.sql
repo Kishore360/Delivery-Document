@@ -27,7 +27,7 @@ join ldb.d_problem  a16
 on (a11.problem_key = a16.row_key)
 union
 select 'ldb.d_calendar_month a17' as Table_name, count(1) Row_Count
-from ldb.f_problem_state_activity a11
+from ldb.f_problem_state_ activity  a11
 join ldb.d_calendar_date  a12
 on (a11.state_on_key = a12.row_key)
 join ldb.d_calendar_month a17
