@@ -19,7 +19,7 @@ ELSE 'Incomplete' END
 ELSE 'N/A' END
  as irisk_status ,
  
- SUM( case when irwi.Assessment_Status IN ('Complete','Cancelled') and irwi.Issues_ID is not null and irwi.Issues_ID is not null
+ SUM( case when irwi.Assessment_Status IN ('Complete','Cancelled') and irwi.Issues_ID is not null 
 	 and irwi.Overall_Status not in ('Complete','Draft','Closed') then 1
 	end) as iRisk_Open_Issues
  
