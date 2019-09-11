@@ -4,7 +4,7 @@ from mcdonalds_mdsdb.change_task_final SRC
 left join mcdonalds_mdwdb.d_change_task TRGT 
  ON SRC.sys_id =TRGT.row_id 
  AND SRC.sourceinstance = TRGT.source_id  
- where coalesce(SRC.created_on,'') <> coalesce(TRGT.sys_created_on,'')
+ where coalesce(TRGT.created_on,'') <> coalesce(SRC.sys_created_on,'')
 
 
 

@@ -4,7 +4,7 @@ from mcdonalds_mdsdb.change_task_final SRC
 left join mcdonalds_mdwdb.d_change_task TRGT 
  ON SRC.sys_id =TRGT.row_id 
  AND SRC.sourceinstance = TRGT.source_id  
- where coalesce(case when SRC.met_sla = True then 'Y' else 'N' end,'') <> coalesce(TRGT.made_sla_flag,'')
+ where coalesce(case when SRC.made_sla = True then 'Y' else 'N' end,'') <> coalesce(TRGT.met_sla_flag,'')
  
  
 

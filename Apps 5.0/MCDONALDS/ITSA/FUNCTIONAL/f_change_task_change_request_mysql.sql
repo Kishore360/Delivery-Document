@@ -4,6 +4,6 @@ from mcdonalds_mdsdb.change_task_final SRC
 left join mcdonalds_mdwdb.f_change_task TRGT 
  ON SRC.sys_id =TRGT.row_id 
  AND SRC.sourceinstance = TRGT.source_id  
- where coalesce(SRC.change_request_id,'') <> coalesce(TRGT.change_request,'')
+ where coalesce(TRGT.change_request_id,'') <> coalesce(SRC.change_request,'')
  
 
