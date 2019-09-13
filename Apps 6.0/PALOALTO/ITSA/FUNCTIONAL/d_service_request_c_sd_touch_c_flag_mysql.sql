@@ -10,8 +10,9 @@ select count(1) as cnt
 from 
 paloalto_mdsdb.u_service_request_final a 
 
-left join paloalto_mdwdb.d_service_request_c c
+join paloalto_mdwdb.d_service_request_c c
 on  a.sys_id = c.row_id and a.sourceinstance=c.source_id 
 
-where CASE WHEN a.u_sd_touch=1 THEN 'Y' ELSE 'N'END<>c.sd_touch_c_flag) g
+where CASE WHEN a.u_sd_touch=1 THEN 'Y' ELSE 'N'END<>c.sd_touch_c_flag
+and a.cdctype='X') g
  ;

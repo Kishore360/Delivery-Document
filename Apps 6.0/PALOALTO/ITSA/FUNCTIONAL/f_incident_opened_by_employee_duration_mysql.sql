@@ -7,6 +7,7 @@ join paloalto_mdwdb.d_incident d
 on f.incident_key=d.row_key
 JOIN paloalto_mdwdb.d_internal_contact a 
 ON a.row_key = f.opened_by_c_key 
-WHERE f.opened_by_employee_duration <> COALESCE(TIMESTAMPDIFF(day,date(a.employee_start_date_c),date(d.opened_on)),0);
+WHERE f.opened_by_employee_duration <> COALESCE(TIMESTAMPDIFF(day,date(a.employee_start_date_c),date(d.opened_on)),0
+and d.soft_deleted_flag='N' and f.soft_deleted_flag='N');
 -- END 
 

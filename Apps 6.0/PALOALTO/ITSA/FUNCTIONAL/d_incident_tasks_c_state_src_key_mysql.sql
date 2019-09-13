@@ -9,3 +9,4 @@ LEFT JOIN paloalto_mdwdb.d_lov LKP
  ON ( concat('STATE','~','INCIDENT','_','TASKS','~',upper(SRC.state))= LKP.src_rowid 
  )
  WHERE COALESCE(LKP.row_key,CASE WHEN SRC.state IS NULL THEN 0 else '-1' end)<> COALESCE(TRGT.state_src_key,'')
+and SRC.cdctype='X'
