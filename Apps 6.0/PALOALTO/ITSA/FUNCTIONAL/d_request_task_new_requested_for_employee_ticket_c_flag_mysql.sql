@@ -6,5 +6,5 @@ JOIN paloalto_mdwdb.f_request_task  a12
  ON a12.request_task_key = a11.row_key
 JOIN paloalto_mdwdb.d_internal_contact a13 
 ON a12.requested_for_key = a13.row_key
-WHERE a11.new_requestor_employee_ticket_c_flag <> IF(COALESCE(TIMESTAMPDIFF(DAY,date(a13.employee_start_date_c),date(a11.opened_on)),-1) >=0 AND COALESCE(TIMESTAMPDIFF(DAY,date(a13.employee_start_date_c),date(a11.opened_on)),-1) <=30,'Y','N')
+WHERE a11.new_requestor_employee_ticket_c_flag <> IF(COALESCE(TIMESTAMPDIFF(DAY,date(a13.employee_start_date_c),date(a11.opened_on)),-1) >=0 AND COALESCE(TIMESTAMPDIFF(DAY,date(a13.employee_start_date_c),date(a11.opened_on)),-1) <=30,'Y','N') and a11.soft_deleted_flag='N'
 ;

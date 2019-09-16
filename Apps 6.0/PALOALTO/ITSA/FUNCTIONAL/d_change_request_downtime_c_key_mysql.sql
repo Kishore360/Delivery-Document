@@ -10,4 +10,5 @@ left join 	paloalto_mdwdb.d_lov map
 on map.row_id = coalesce(CONCAT('U_DOWNTIME~CHANGE_REQUEST~~~',upper(SRC.u_downtime)),'UNSPECIFIED')
 and map.source_id =if(SRC.u_downtime is null ,0,SRC.sourceinstance)
 where map.row_key <> TRG.downtime_c_key
+and SRC.cdctype='X'
 )A

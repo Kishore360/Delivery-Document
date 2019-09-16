@@ -7,7 +7,7 @@ from paloalto_mdsdb.u_walk_up_final s
 left  JOIN paloalto_mdwdb.d_walk_up_c t 
 on  t.ROW_ID=s.SYS_ID and s.sourceinstance=t.source_id 
 WHERE t.changed_on <> convert_tz(s.sys_updated_on,'GMT','America/Los_Angeles')
- ) temp
+ and s.cdctype='X') temp
  
  
  

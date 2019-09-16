@@ -8,5 +8,6 @@ JOIN paloalto_mdwdb.d_internal_contact a
 ON a.row_key = f.opened_by_key 
 where f.opened_by_employee_duration <> COALESCE(TIMESTAMPDIFF(day,a.employee_start_date_c,d.opened_on),0)
 and(f.opened_by_employee_duration - COALESCE(TIMESTAMPDIFF(day,a.employee_start_date_c,d.opened_on),0)) not in (1,-1) 
+and d.soft_deleted_flag='N'
 
 
