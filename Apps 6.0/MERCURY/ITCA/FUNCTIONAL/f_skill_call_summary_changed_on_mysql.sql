@@ -5,4 +5,4 @@ FROM mercury_mdsdb.dsplit_final SRC
 LEFT JOIN mercury_mdwdb.f_skill_call_summary TRGT 
 	ON ( concat(left(from_unixtime(row_date/1000.0),24),'~',acd,'~',trim(split))  =TRGT.row_id 
 	AND SRC.sourceinstance =TRGT.source_id )
-WHERE SRC.row_date<> TRGT.changed_on 
+WHERE left(from_unixtime(row_date/1000.0),24)<> TRGT.changed_on 
