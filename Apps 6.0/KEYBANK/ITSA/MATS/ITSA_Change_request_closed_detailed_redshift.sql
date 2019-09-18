@@ -194,26 +194,33 @@ select 'ldb.d_change_request_process_followed_c a135 ' as Table_name, count(a11.
 	join ldb.d_change_request_process_followed_c a135 
 	on (a14.change_process_followed_c_key = a135.row_key)  
 union
-select 'ldb.d_change_request_substate_c a136 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_change_request_likelihhod_c a136 ' as Table_name, count(a11.row_key) Row_Count
  from ldb.f_change_request_closed a11 
  join ldb.d_change_request a14 
  on (a11.change_request_key = a14.row_key) 
-	join ldb.d_change_request_substate_c a136 
-	on (a14.change_request_substate_c_key = a136.row_key)  
+	join ldb.d_change_request_likelihhod_c a136 
+	on (a14.change_request_likelihood_c_key = a136.row_key)  
 union
-select 'ldb.d_change_request_verification_produced_expected_results_c a137 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_change_request_substate_c a137 ' as Table_name, count(a11.row_key) Row_Count
  from ldb.f_change_request_closed a11 
  join ldb.d_change_request a14 
  on (a11.change_request_key = a14.row_key) 
-	join ldb.d_change_request_verification_produced_expected_results_c a137 
-	on (a14.change_request_verification_produced_results_c_key = a137.row_key)  
+	join ldb.d_change_request_substate_c a137 
+	on (a14.change_request_substate_c_key = a137.row_key)  
 union
-select 'ldb.d_calendar_year a138 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_change_request_verification_produced_expected_results_c a138 ' as Table_name, count(a11.row_key) Row_Count
+ from ldb.f_change_request_closed a11 
+ join ldb.d_change_request a14 
+ on (a11.change_request_key = a14.row_key) 
+	join ldb.d_change_request_verification_produced_expected_results_c a138 
+	on (a14.change_request_verification_produced_results_c_key = a138.row_key)  
+union
+select 'ldb.d_calendar_year a139 ' as Table_name, count(a11.row_key) Row_Count
  from ldb.f_change_request_closed a11 
  join ldb.d_calendar_date a18 
  on (a11.date_key = a18.row_key)join ldb.d_calendar_month a19 
  on (a18.month_start_date_key = a19.row_key)join ldb.d_calendar_quarter a110 
  on (a19.quarter_start_date_key = a110.row_key) 
-	join ldb.d_calendar_year a138 
-	on (a110.year_start_date_key = a138.row_key)  
+	join ldb.d_calendar_year a139 
+	on (a110.year_start_date_key = a139.row_key) 
 

@@ -7,4 +7,5 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
                     '%Y-%m-%d') 
                     else STR_TO_DATE(a.Revised_End_Date,
                     '%Y-%m-%d') 
-                end<>b.planned_end_date_c;
+                end<>b.planned_end_date_c
+and a.cdctype='X';

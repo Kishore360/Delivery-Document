@@ -6,4 +6,5 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  where Convert_tz(STR_TO_DATE(a.Modified,
                 '%Y-%m-%d %H:%i:%s'),
                 'GMT',
-                'America/Los_Angeles')<>b.initiative_modified_date;
+                'America/Los_Angeles')<>b.initiative_modified_date
+and a.CDCTYPE='X';

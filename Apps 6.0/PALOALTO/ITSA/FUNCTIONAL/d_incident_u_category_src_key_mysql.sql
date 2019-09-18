@@ -21,4 +21,5 @@ COALESCE(CONCAT('CATEGORY~INCIDENT','~',UPPER(a.u_category)),'UNSPECIFIED')=b.sr
 left join 
 paloalto_mdwdb.d_incident c on a.sourceinstance=c.source_id and a.sys_id=c.row_id
  
-where COALESCE(b.row_key,case when a.u_category is null then 0 else -1 end )<>c.category_src_key)i; 
+where COALESCE(b.row_key,case when a.u_category is null then 0 else -1 end )<>c.category_src_key
+and c.soft_deleted_flag='N')i; 

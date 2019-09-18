@@ -3,3 +3,4 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
    FROM paloalto_mdsdb.u_incident_tasks_final i
 join paloalto_mdwdb.d_incident_tasks_c f on sys_id=f.row_id and sourceinstance=f.source_id where
 IF(i.active = TRUE,'Y','N') <> f.ACTIVE_FLAG
+and i.cdctype='X'

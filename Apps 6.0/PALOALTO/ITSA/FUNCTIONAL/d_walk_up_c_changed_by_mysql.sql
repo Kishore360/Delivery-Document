@@ -7,6 +7,7 @@ select count(1) as cnt
 from paloalto_mdsdb.u_walk_up_final s
 left  JOIN paloalto_mdwdb.d_walk_up_c t 
 on  t.ROW_ID=s.SYS_ID and s.sourceinstance=t.source_id 
-WHERE t.changed_by <> s.sys_updated_by) temp
+WHERE t.changed_by <> s.sys_updated_by
+and s.cdctype='X') temp
 
 

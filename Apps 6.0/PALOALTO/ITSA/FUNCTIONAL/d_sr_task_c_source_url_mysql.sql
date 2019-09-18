@@ -8,4 +8,5 @@ FROM paloalto_mdsdb.u_stask_final	 SRC
  where
 CONCAT('<a href=\"https://panservicedesk.service-now.com/nav_to.do?uri=u_stask.do?sys_id=',SRC.sys_id,'\" target=\"_blank\">',SRC.number,'</a>')
 <>TRGT.source_url 
+and SRC.cdctype='X'
 
