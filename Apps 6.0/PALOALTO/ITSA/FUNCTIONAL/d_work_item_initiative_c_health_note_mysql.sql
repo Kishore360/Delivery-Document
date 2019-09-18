@@ -3,5 +3,6 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  FROM paloalto_mdsdb.sm_ppm_it_master_final a
  join paloalto_mdwdb.d_work_item_initiative_c b
  on a.Primary=b.row_id and a.sourceinstance=b.source_id
- where a.Health_Note<>b.health_note;
+ where a.Health_Note<>b.health_note
+and a.cdctype='X';
                 

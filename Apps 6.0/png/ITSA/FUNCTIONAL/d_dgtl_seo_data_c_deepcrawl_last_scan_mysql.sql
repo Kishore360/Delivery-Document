@@ -5,7 +5,7 @@ FROM
 (
 SELECT Count(1) as CNT 
 FROM png_mdsdb.us_dgtl_seodata_c_final SRC 
-LEFT JOIN pgdyna_mdwdb.d_dgtl_seo_data_c TRGT 
+LEFT JOIN png_mdwdb.d_dgtl_seo_data_c TRGT 
 ON concat ( COALESCE(floor(SRC.TP_ID),'UNSPECIFIED'),  COALESCE(SRC.DeepCrawl_Last_Scan,'UNSPECIFIED') )
 =
 TRGT.row_id AND SRC.sourceinstance=TRGT.source_id
