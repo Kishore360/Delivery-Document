@@ -7,4 +7,4 @@ FROM mcdonalds_mdsdb.incident_final  SRC
 JOIN mcdonalds_mdwdb.d_incident TRGT 
 ON (SRC.sys_id = TRGT.row_id  
 AND SRC.sourceinstance = TRGT.source_id )  
-WHERE COALESCE( convert_tz(SRC.u_eta ,'GMT','US/Central')) <> TRGT.eta_c)a;
+WHERE COALESCE( convert_tz(SRC.u_eta ,'GMT','US/Central')) <> TRGT.eta_c and SRC.cdctype='X')a;
