@@ -7,4 +7,4 @@ on src.sys_id = trgt.row_id and src.sourceinstance = trgt.source_id and trgt.sof
 LEFT JOIN mcdonalds_mdwdb.d_lov lkp
 ON CONCAT('SERVICE_CATEGORY_C~REQUEST_ITEM~~~',src.u_service_category) =lkp.row_id and src.sourceinstance = lkp.source_id
 where COALESCE(lkp.row_key,CASE WHEN src.u_service_category IS NULL THEN 0 else -1 end)<> trgt.service_category_src_c_key
-)a;
+and src.cdctime='X')a;
