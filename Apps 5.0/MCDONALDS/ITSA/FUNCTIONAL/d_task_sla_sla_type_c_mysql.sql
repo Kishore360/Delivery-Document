@@ -6,6 +6,6 @@ FROM
 FROM mcdonalds_mdsdb.contract_sla_final src 
 JOIN mcdonalds_mdsdb.task_sla_final b ON src.sys_id=b.sla AND src.sourceinstance=b.sourceinstance
 LEFT JOIN mcdonalds_mdwdb.d_task_sla trgt ON src.sys_id=trgt.row_id and src.sourceinstance=trgt.source_id
-WHERE COALESCE(src.type,'UNSPECIFIED')<>(trgt.sla_type_c )
+WHERE COALESCE(src.type,'UNSPECIFIED')<>(trgt.sla_type_c ) and src.cdctype='X'
 )temp;
 
