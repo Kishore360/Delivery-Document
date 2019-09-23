@@ -8,6 +8,6 @@ ON (concat('APPLICATION~',SRC.sys_id) = TRGT.row_id AND SRC.sourceinstance = TRG
  ON ( COALESCE(CONCAT('SOXSENSITIVE','~','CMDB_CI_APPL','~','~','~',UPPER(SRC.u_sox_sensitive)),'UNSPECIFIED') = LKP.row_id 
  AND SRC.sourceinstance = LKP.source_id ) 
  WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_sox_sensitive IS NULL THEN 0 else -1 end)<> (TRGT.application_sox_sensitive_c_key) 
-and SRC.CDCTYPE='X'
+and SRC.CDCTYPE='X' and LKP.soft_deleted_flag='N'
 
 

@@ -6,6 +6,7 @@ FROM rogers_mdsdb.problem_final SRC
   JOIN  rogers_mdwdb.f_problem TRGT 
   ON (SRC.sys_id=TRGT.row_id  AND SRC.sourceinstance= TRGT.source_id )
   where TRGT.reported_type_src_key <>coalesce(LKP.row_key,case WHEN SRC.contact_type is null then 0 else -1 end)
+and SRC.CDCTYPE='X' and  LKP.soft_deleted_flag='N'
   
   
   

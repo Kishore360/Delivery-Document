@@ -12,4 +12,4 @@ ON ci.sys_id = service.sys_id and ci.sourceinstance= service.sourceinstance
 LEFT JOIN rogers_mdsdb.cmdb_ci_appl_final appl
 ON ci.sys_id = appl.sys_id and ci.sourceinstance= appl.sourceinstance
 where ID_C  <>  COALESCE(service.u_service_id, appl.name, ci.u_ci_id,'UNSPECIFIED')
-and config.CDCTYPE='X' and ci.cdctype='X' )a
+and config.CDCTYPE='X' and ci.cdctype='X'  and service.CDCTYPE='X' and appl.cdctype='X' )a

@@ -13,4 +13,5 @@ COALESCE(CONCAT('INTERNAL_CONTACT~',ci.managed_by),'UNSPECIFIED') end=d.row_id
 where config.soft_deleted_flag='N' and managed_by_c_key <>
 coalesce(d.row_key,case when (case when ci.subcategory='Business Application' then app.u_support_manager
 else ci.managed_by end) is null then 0 else -1 end) 
+and config.CDCTYPE='X' and ci.cdctype='X' and d.soft_deleted_flag='N'
 )a

@@ -1,0 +1,2 @@
+SELECT CASE WHEN count(1)  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)  THEN 'MDS to DWH data validation failed for d_incident.last_resolved_on' ELSE 'SUCCESS' END as Message FROM rogers_mdsdb.incident_final  SRC JOIN rogers_mdwdb.d_incident TRGT ON (SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id ) WHERE convert_tz(SRC.u_resolved,'GMT','America/New_York')<> (TRGT.last_resolved_on) 
+and SRC.CDCTYPE='X'

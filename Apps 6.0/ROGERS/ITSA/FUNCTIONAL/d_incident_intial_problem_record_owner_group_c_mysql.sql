@@ -1,0 +1,2 @@
+SELECT CASE WHEN count(1)  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)  THEN 'MDS to DWH data validation failed for d_incident.intial_problem_record_owner_group_c' ELSE 'SUCCESS' END as Message FROM rogers6_mdsdb.incident_final  SRC JOIN rogers6_mdwdb.d_incident TRGT ON (SRC.sys_id = TRGT.row_id  AND SRC.sourceinstance = TRGT.source_id )  WHERE SRC.u_which_group_is_the_initial_problem_record_owner <> (TRGT.initial_problem_record_owner_c) 
+and SRC.CDCTYPE='X' 

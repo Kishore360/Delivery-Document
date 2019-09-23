@@ -10,4 +10,4 @@ on ci.sys_id  = config.row_id and ci.sourceinstance  = config.source_id
 left join rogers_mdwdb.d_lov d 
 on COALESCE(CONCAT('STATUS~CMDB_CI~~~',ci.u_status),'UNSPECIFIED')=d.row_id
 where d.soft_deleted_flag='N' and status_src_c_key <> coalesce(d.row_key,case when ci.u_status is null then 0 else -1 end)
-and config.CDCTYPE='X' AND ci.CDCTYPE='X')a; 
+and config.CDCTYPE='X' AND ci.CDCTYPE='X' and d.soft_deleted_flag='N')a; 

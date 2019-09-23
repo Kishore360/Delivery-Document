@@ -12,4 +12,4 @@ left join rogers_mdwdb.d_lov d
 on COALESCE(CONCAT('SUBSTATUS~CMDB_CI~~~',ci.u_sub_status),'UNSPECIFIED')=d.row_id
 where d.soft_deleted_flag='N' and
  substatus_src_c_key <> coalesce(d.row_key,case when ci.u_sub_status is null then 0 else -1 end)
-and config.CDCTYPE='X' and ci.cdctype='X')a
+and config.CDCTYPE='X' and ci.cdctype='X'and d.soft_deleted_flag='N')a

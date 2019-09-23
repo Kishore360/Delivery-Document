@@ -1,0 +1,25 @@
+DELV-18338 
+
+- Assignment Group Manager:
+
+select b.number,b.assignment_group,d1.name from -- rogersdev_mdsdb.task_survey_final a left join  
+rogersdev_mdsdb.incident_final b -- on a.task=b.sys_id and a.sourceinstance =b.sourceinstance
+left  join rogersdev_mdsdb.sys_user_group_final d  on b.assignment_group=d.sys_id
+left  join rogersdev_mdsdb.sys_user_final d1  on d1.sys_id=d.manager
+where b.number in ('INC1256852','INC0936606');
+
+
+- Survey Affected Assignment Group,Survey Agent,Survey Dissatisfier Category,Survey General Comments :
+
+select b.number,dissatisfier_category,b.assignment_group,agent,general_comments_for_deck,d12.organization_name,d12.row_id,d1.sys_id,COALESCE(CONCAT('GROUP~',d1.sys_id),'UNSPECIFIED') from  rogersdev_mdsdb.task_survey_final a left join  
+rogersdev_mdsdb.incident_final b  on a.task=b.sys_id and a.sourceinstance=b.sourceinstance
+left join rogersdev_mdsdb.us_dissats_comments_c_final dc ON b.number=dc.ticket AND b.sourceinstance=dc.sourceinstance
+left  join rogersdev_mdsdb.sys_user_group_final d1  on  d1.name=dc.affected_assignment_group and d1.sourceinstance=dc.sourceinstance
+left  join rogersdev_mdwdb.d_internal_organization d12  on  d12.row_id=COALESCE(CONCAT('GROUP~',d1.sys_id),'UNSPECIFIED') 
+and d12.source_id=d1.sourceinstance
+where b.number in ('INC1218284','INC0504374','INC1170532');
+
+
+
+	
+

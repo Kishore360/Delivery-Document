@@ -72,4 +72,7 @@ COALESCE(CONCAT(COALESCE(core_company2.name,''),' ',COALESCE(SUBSTRING_INDEX(ci.
 when ci.sys_class_name in (select distinct sys_class_name from rogers_mdsdb.u_cmdb_ci_middleware_final) 
 then COALESCE(CONCAT(COALESCE(core_company2.name,''),' ',COALESCE(middle.subcategory,''),' ',COALESCE(SUBSTRING_INDEX(middle.u_model_version_number,'.',2),'')),'UNSPECIFIED')			
 	else 'NOT APPLICABLE' END
-and config.CDCTYPE='X' and ci.cdctype='X')a
+and config.cdctype='X' and ci.cdctype='X' and app.CDCTYPE='X' and win.CDCTYPE='X' and ins.CDCTYPE='X' and middle.CDCTYPE='X'
+and win_ops.cdctype='X' and osx.CDCTYPE='X' and osx_ops.CDCTYPE='X' and lnx.CDCTYPE='X'
+and lnx_ops.cdctype='X' and unx.CDCTYPE='X' and unx_ops.CDCTYPE='X' and esx.CDCTYPE='X' 
+and esx_ops.cdctype='X' and cim.CDCTYPE='X' and cim_ops.CDCTYPE='X' and cas.CDCTYPE='X' and cas_ops.CDCTYPE='X' and core_company2.CDCTYPE='X' )a
