@@ -5,7 +5,7 @@ FROM
 (
 SELECT Count(1) as CNT 
 FROM png_mdsdb.us_dgtl_website_data_snapshot_final SRC 
-LEFT JOIN pgdyna_mdwdb.d_dgtl_calibre_report_c TRGT 
+LEFT JOIN png_mdwdb.d_dgtl_calibre_report_c TRGT 
 ON concat ( COALESCE(site,'UNSPECIFIED'), '~',
 COALESCE(MetricsSnapshotsCreatedAt,'UNSPECIFIED'), '~',COALESCE(MetricName,'UNSPECIFIED'),
  '~',COALESCE(TestProfileIsMobile,'UNSPECIFIED') )=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id

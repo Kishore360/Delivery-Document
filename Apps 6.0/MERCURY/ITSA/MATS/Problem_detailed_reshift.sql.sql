@@ -166,6 +166,13 @@ on (a11.business_service_key = a17.row_key)
 join ldb.d_business_service_used_for a129 
 on (a17.used_for_src_key = a129.row_key) 
 union
+select 'ldb.d_lov_service_operational_status_c a129 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_problem a11 
+join ldb.d_business_service a127 
+on (a11.business_service_key = a127.row_key) 
+join ldb.d_lov_service_operational_status_c a139 
+on (a127.service_operational_status_c_key = a139.row_key) 
+union
 select 'ldb.d_lov_problem_outage_scope_c a130 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_problem a11 
 join ldb.d_problem a14 
