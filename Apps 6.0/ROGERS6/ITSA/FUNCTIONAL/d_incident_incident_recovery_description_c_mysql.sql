@@ -3,6 +3,6 @@ SELECT CASE WHEN count(1)  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHE
  FROM rogers6_mdsdb.incident_final  SRC  
 JOIN rogers6_mdwdb.d_incident TRGT 
 ON (SRC.sys_id = TRGT.row_id  AND SRC.sourceinstance = TRGT.source_id )
- WHERE COALESCE(SRC.u_what_was_done_to_recover_service_indicate_if_this_was_a_w_0116,
+ WHERE COALESCE(SRC.u_what_was_done_to_recover_service_indicate_if_this_was_a_w_0135,
                 'UNSPECIFIED') <> (TRGT.incident_recovery_description_c) 
 and SRC.CDCTYPE='X' 

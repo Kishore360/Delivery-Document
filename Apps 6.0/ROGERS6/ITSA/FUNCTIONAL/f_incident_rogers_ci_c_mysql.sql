@@ -7,5 +7,5 @@ select count(1) cnt
         FROM
      rogers6_mdwdb.f_incident d 
 JOIN  rogers6_mdsdb.us_ci_tracker_incident_final p ON d.incident_number=p.incident AND d.source_id = p.sourceinstance
-where rogers6_ci <> rogers6_ci_c 
+where rogers_ci <> rogers_ci_c 
 and p.CDCTYPE='X' )a
