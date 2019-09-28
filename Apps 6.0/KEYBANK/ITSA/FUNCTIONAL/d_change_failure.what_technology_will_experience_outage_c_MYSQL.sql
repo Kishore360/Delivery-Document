@@ -5,6 +5,6 @@ FROM
 (
 SELECT Count(1) AS CNT 
 FROM keybank_mdsdb.change_request_final SRC 
-LEFT JOIN keybankcrp_mdwdb.d_change_failure TRGT ON (SRC.sys_id=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id)
+LEFT JOIN keybank_mdwdb.d_change_failure TRGT ON (SRC.sys_id=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id)
 WHERE coalesce(SRC.u_technology_outage,'UNSPECIFIED')<>TRGT.what_technology_will_experience_outage_c
 AND SRC.cdctype='X' ) temp;
