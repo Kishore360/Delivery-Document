@@ -85,14 +85,14 @@ union
 select 'ldb.d_change_task_priority a116 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_change_task a11
 join ldb.d_change_task a111
-on (a11.change_task_key = a111.row_key)
+on (a11.change_task_key = a111.row_key) 
 join ldb.d_change_task_priority a116
 on (a111.priority_src_key = a116.row_key)
 union
 select 'ldb.d_change_task_state a117 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_change_task a11
 join ldb.d_change_task a111
-on (a11.change_task_key = a111.row_key)
+on (a11.change_task_key = a111.row_key) 
 join ldb.d_change_task_state a117
 on (a111.state_src_key = a117.row_key)
 union
@@ -111,3 +111,6 @@ on (a17.month_start_date_key = a18.row_key) join ldb.d_calendar_quarter a19
 on (a18.quarter_start_date_key = a19.row_key)
 join ldb.d_calendar_year a119
 on (a19.year_start_date_key = a119.row_key)
+union
+select 'ldb.backlog_flag = '' ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_change_task a11

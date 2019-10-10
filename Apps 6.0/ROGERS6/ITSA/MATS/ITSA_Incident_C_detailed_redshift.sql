@@ -131,7 +131,7 @@ union
 select 'ldb.d_incident_requester_c a124 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11
 join ldb.d_incident a12
-on (a11.incident_key = a12.row_key)
+on (a11.incident_key = a12.row_key) 
 join ldb.d_incident_requester_c a124
 on (a12.row_key = a124.row_key)
 union
@@ -159,14 +159,14 @@ union
 select 'ldb.d_parent_incident a128 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11
 join ldb.d_incident a12
-on (a11.incident_key = a12.row_key)
+on (a11.incident_key = a12.row_key) 
 join ldb.d_parent_incident a128
 on (a12.parent_incident_key = a128.row_key)
 union
 select 'ldb.d_internal_contact_caller_id_c a129 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11
 join ldb.d_incident a12
-on (a11.incident_key = a12.row_key)
+on (a11.incident_key = a12.row_key) 
 join ldb.d_internal_contact_caller_id_c a129
 on (a12.opened_by_c_key = a129.row_key)
 union
@@ -208,7 +208,7 @@ union
 select 'ldb.d_lov_incident_incident_type_c a137 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11
 join ldb.d_incident a12
-on (a11.incident_key = a12.row_key)
+on (a11.incident_key = a12.row_key) 
 join ldb.d_lov_incident_incident_type_c a137
 on (a12.incident_type_src_c_key = a137.row_key)
 union
@@ -243,7 +243,7 @@ union
 select 'ldb.d_lov_incident_event_type_c a142 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11
 join ldb.d_incident a12
-on (a11.incident_key = a12.row_key)
+on (a11.incident_key = a12.row_key) 
 join ldb.d_lov_incident_event_type_c a142
 on (a12.event_type_src_c_key = a142.row_key)
 union
@@ -257,21 +257,21 @@ union
 select 'ldb.d_incident_category a144 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11
 join ldb.d_incident a12
-on (a11.incident_key = a12.row_key)
+on (a11.incident_key = a12.row_key) 
 join ldb.d_incident_category a144
 on (a12.category_src_key = a144.row_key)
 union
 select 'ldb.d_incident_close_code a145 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11
 join ldb.d_incident a12
-on (a11.incident_key = a12.row_key)
+on (a11.incident_key = a12.row_key) 
 join ldb.d_incident_close_code a145
 on (a12.close_code_src_key = a145.row_key)
 union
 select 'ldb.d_incident_opened_by a146 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11
 join ldb.d_incident a12
-on (a11.incident_key = a12.row_key)
+on (a11.incident_key = a12.row_key) 
 join ldb.d_incident_opened_by a146
 on (a12.opened_by_key = a146.row_key)
 union
@@ -292,35 +292,35 @@ union
 select 'ldb.d_incident_resolved_by a149 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11
 join ldb.d_incident a12
-on (a11.incident_key = a12.row_key)
+on (a11.incident_key = a12.row_key) 
 join ldb.d_incident_resolved_by a149
 on (a12.resolved_by_key = a149.row_key)
 union
 select 'ldb.d_task_sla_response_flag a150 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11
 join ldb.d_incident a12
-on (a11.incident_key = a12.row_key)
+on (a11.incident_key = a12.row_key) 
 join ldb.d_task_sla_response_flag a150
 on (a12.met_response_sla_flag_key = a150.row_key)
 union
 select 'ldb.d_incident_severity a151 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11
 join ldb.d_incident a12
-on (a11.incident_key = a12.row_key)
+on (a11.incident_key = a12.row_key) 
 join ldb.d_incident_severity a151
 on (a12.severity_src_key = a151.row_key)
 union
 select 'ldb.d_incident_state a152 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11
 join ldb.d_incident a12
-on (a11.incident_key = a12.row_key)
+on (a11.incident_key = a12.row_key) 
 join ldb.d_incident_state a152
 on (a12.state_src_key = a152.row_key)
 union
 select 'ldb.d_lov_incident_sub_status_c a153 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11
 join ldb.d_incident a12
-on (a11.incident_key = a12.row_key)
+on (a11.incident_key = a12.row_key) 
 join ldb.d_lov_incident_sub_status_c a153
 on (a12.sub_status_src_c_key = a153.row_key)
 union
@@ -341,7 +341,7 @@ union
 select 'ldb.d_internal_organization_caller_id_department_c a156 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11
 join ldb.d_incident a12
-on (a11.incident_key = a12.row_key) join ldb.d_internal_contact_caller_id_c a129
+on (a11.incident_key = a12.row_key)  join ldb.d_internal_contact_caller_id_c a129
 on (a12.opened_by_c_key = a129.row_key)
 join ldb.d_internal_organization_caller_id_department_c a156
 on (a129.department_key = a156.row_key)
@@ -363,7 +363,10 @@ union
 select 'ldb.d_internal_contact_opened_by_manager_c a159 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident a11
 join ldb.d_incident a12
-on (a11.incident_key = a12.row_key) join ldb.d_internal_contact_opened_by_c a121
+on (a11.incident_key = a12.row_key)  join ldb.d_internal_contact_opened_by_c a121
 on (a12.opened_by_key = a121.row_key)
 join ldb.d_internal_contact_opened_by_manager_c a159
 on (a121.manager_key = a159.row_key)
+union
+select 'ldb.backlog_flag = '' ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_incident a11
