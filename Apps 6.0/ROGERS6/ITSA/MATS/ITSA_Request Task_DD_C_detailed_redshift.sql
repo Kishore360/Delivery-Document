@@ -93,7 +93,7 @@ join ldb.d_calendar_date a17
 on (a11.date_key = a17.row_key)
 join ldb.d_calendar_week a117
 on (a17.week_start_date_key = a117.row_key)
- 
+union 
 select 'ldb.d_calendar_year a118 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_request_task a11
 join ldb.d_calendar_date a17
