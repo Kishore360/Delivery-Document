@@ -6,13 +6,10 @@ FROM
 (
 
 SELECT  Count(1) as CNT 
-
-
 FROM png_mdsdb.cmdb_ci_final SRC 
 LEFT JOIN png_mdwdb.d_configuration_item TRGT ON SRC.sys_id=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id
 LEFT JOIN png_mdwdb.d_lov LKP ON 
 COALESCE(CONCAT('CMDB_CI~INSTALL_STATUS~',UPPER(SRC.install_status)),'UNSPECIFIED')=LKP.row_id AND SRC.sourceinstance=LKP.source_id 
-
 JOIN 
 (
 SELECT sys_id,sourceinstance,group_concat(hardware_status) as hardware_status from 
@@ -25,7 +22,6 @@ SELECT sys_id,sourceinstance,u_pg_hardware_status from png_mdsdb.cmdb_ci_voice_h
 group by 1,2
 )aa
 ON SRC.sys_id = aa.sys_id and SRC.sourceinstance  = aa.sourceinstance
-
 
 WHERE 
 (
