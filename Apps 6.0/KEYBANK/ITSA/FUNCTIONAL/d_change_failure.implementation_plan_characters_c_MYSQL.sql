@@ -8,4 +8,4 @@ FROM keybank_mdsdb.change_request_final SRC
 LEFT JOIN keybank_mdwdb.d_change_failure TRGT ON (SRC.sys_id=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id)
 WHERE coalesce(char_length(REPLACE(SRC.implementation_plan,' ','')),0)
 <>TRGT.implementation_plan_characters_c
-AND SRC.cdctype='X' ) temp;
+AND SRC.cdctype='X' and TRGT.current_flag='Y') temp;

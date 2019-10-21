@@ -7,4 +7,4 @@ SELECT Count(1) AS CNT
 FROM keybank_mdsdb.change_request_final SRC 
 LEFT JOIN keybank_mdwdb.d_change_failure TRGT ON (SRC.sys_id=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id)
 WHERE case when SRC.u_user_val_ops=1 then 'Y' when SRC.u_user_val_ops=0 then 'N' else 'X' end<>TRGT.user_validation_by_ops_lob_c
-AND SRC.cdctype='X' ) temp;
+AND SRC.cdctype='X' and TRGT.current_flag='Y' ) temp;

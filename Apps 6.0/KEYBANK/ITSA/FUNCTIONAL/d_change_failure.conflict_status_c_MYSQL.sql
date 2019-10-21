@@ -7,4 +7,4 @@ SELECT Count(1) AS CNT
 FROM keybank_mdsdb.change_request_final SRC 
 LEFT JOIN keybank_mdwdb.d_change_failure TRGT ON (SRC.sys_id=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id)
 WHERE coalesce(SRC.conflict_status,'UNSPECIFIED')<>TRGT.conflict_status_c
-AND SRC.cdctype='X' ) temp;
+AND SRC.cdctype='X' and TRGT.current_flag='Y') temp;

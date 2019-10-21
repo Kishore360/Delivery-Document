@@ -9,4 +9,4 @@ FROM keybank_mdsdb.change_request_final SRC
 LEFT JOIN keybank_mdwdb.d_change_failure TRGT ON (SRC.sys_id=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id)
 WHERE hour(SRC.start_date)
 <>TRGT.planned_start_hour_of_day_c
-AND SRC.cdctype='X' ) temp;
+AND SRC.cdctype='X' and TRGT.current_flag='Y' ) temp;

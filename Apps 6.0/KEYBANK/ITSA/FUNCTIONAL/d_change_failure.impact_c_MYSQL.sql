@@ -8,4 +8,4 @@ FROM keybank_mdsdb.change_request_final SRC
 LEFT JOIN keybank_mdwdb.d_change_failure TRGT ON (SRC.sys_id=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id)
 WHERE case when SRC.impact=1 then '1 - Very High' when SRC.impact=2 then '2 - High' when 
 SRC.impact=3 then '3 - Medium' when SRC.impact=4 then '4 - Low' else 'UNSPECIFIED' END<>TRGT.impact_c
-AND SRC.cdctype='X' ) temp;
+AND SRC.cdctype='X' and TRGT.current_flag='Y' ) temp;

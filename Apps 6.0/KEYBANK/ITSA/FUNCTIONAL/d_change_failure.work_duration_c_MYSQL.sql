@@ -7,5 +7,5 @@ SELECT Count(1) AS CNT
 FROM keybank_mdsdb.change_request_final SRC 
 LEFT JOIN keybank_mdwdb.d_change_failure TRGT ON (SRC.sys_id=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id)
 WHERE timestampdiff(second,'1970-01-01 00:00:00',
-convert_tz(SRC.u_work_duration,'GMT','America/New_York'))*1000<>TRGT.work_duration_c
-AND SRC.cdctype='X' ) temp;
+convert_tz(SRC.u_work_duration,'GMT','America/New_York'))<>TRGT.work_duration_c
+AND SRC.cdctype='X' and TRGT.current_flag='Y' ) temp;

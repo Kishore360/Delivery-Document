@@ -6,6 +6,6 @@ FROM
 SELECT Count(1) AS CNT 
 FROM keybank_mdsdb.change_request_final SRC 
 LEFT JOIN keybank_mdwdb.d_change_failure TRGT ON (SRC.sys_id=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id)
-WHERE timestampdiff(second,convert_tz(SRC.start_date,'GMT','America/New_York') ,convert_tz(SRC.end_date,'GMT','America/New_York'))*1000
+WHERE timestampdiff(second,convert_tz(SRC.start_date,'GMT','America/New_York') ,convert_tz(SRC.end_date,'GMT','America/New_York'))
 <>TRGT.planned_duration_c
-AND SRC.cdctype='X' ) temp;
+AND SRC.cdctype='X' and TRGT.current_flag='Y') temp;

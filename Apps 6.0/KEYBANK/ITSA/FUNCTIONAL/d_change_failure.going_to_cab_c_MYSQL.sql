@@ -8,4 +8,4 @@ FROM keybank_mdsdb.change_request_final SRC
 LEFT JOIN keybank_mdwdb.d_change_failure TRGT ON (SRC.sys_id=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id)
 WHERE case when SRC.cab_required=1 then 'Y' when SRC.cab_required=0 then 'N'
  else 'X' end<>TRGT.going_to_cab_c
-AND SRC.cdctype='X' ) temp;
+AND SRC.cdctype='X'  and TRGT.current_flag='Y' ) temp;
