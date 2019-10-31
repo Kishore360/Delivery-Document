@@ -18,7 +18,7 @@ where
  d.failure_flag_c <>
 
 
-case when lov.dimension_name in('Closed','Post-Implementation Review') 
+(case when lov.dimension_name in('Closed','Post-Implementation Review') 
 and lov1.dimension_name in
 ('Backed Out','ELF','Failed') and lov2.dimension_name<>'Not Attempted' then 'Y' 
 when lov.dimension_name in('Closed','Post-Implementation Review') and
@@ -29,4 +29,6 @@ lov1.dimension_name in('Partial Success','Successful','Closed Successful') then 
 
 lov1.dimension_name in('Cancelled','Closed Incomplete','Not Attempted','UNSPECIFIED') OR
 
-lov2.dimension_name='Not Attempted' or lov.dimension_name in('Open','Planning','Work in Progress') then 'X' end;
+lov2.dimension_name='Not Attempted' or lov.dimension_name in('Open','Planning','Work in Progress') then 'X' end)
+and d.current_flag='Y' and d1.cdctype='X'
+
