@@ -5,4 +5,4 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  LEFT JOIN whirlpool_mdwdb.d_application TRGT 
  ON (concat('APPLICATION~', SRC.sys_id)  =TRGT.row_id  
  AND SRC.sourceinstance=TRGT.source_id )
- WHERE COALESCE( SRC.assigned_to ,'')<> COALESCE(TRGT.assigned_to ,'')
+ WHERE COALESCE( SRC.assigned_to ,'')<> COALESCE(TRGT.assigned_to ,'') and SRC.cdctype='X'

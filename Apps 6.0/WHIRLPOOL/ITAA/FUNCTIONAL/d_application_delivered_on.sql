@@ -5,4 +5,4 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  LEFT JOIN whirlpool_mdwdb.d_application TRGT 
  ON (concat('APPLICATION~', SRC.sys_id)  =TRGT.row_id  
  AND SRC.sourceinstance=TRGT.source_id )
- WHERE convert_tz(SRC.delivery_date,'GMT','America/New_York') <> TRGT.delivered_on 
+ WHERE convert_tz(SRC.delivery_date,'GMT','America/New_York') <> TRGT.delivered_on  and SRC.cdctype='X'

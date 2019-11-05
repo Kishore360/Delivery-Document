@@ -5,4 +5,4 @@ CASE WHEN cnt THEN 'MDS to DWH data validation failed for f_asset.depreciated_do
  LEFT JOIN whirlpool_mdwdb.f_asset TRGT 
  ON ( SRC.sys_id=TRGT.row_id 
  AND SRC.sourceinstance=TRGT.source_id) 
-  WHERE SRC.depreciated_amount<> TRGT.depreciated_doc_amount)b;
+  WHERE SRC.depreciated_amount<> TRGT.depreciated_doc_amount and SRC.cdctype='X')b;

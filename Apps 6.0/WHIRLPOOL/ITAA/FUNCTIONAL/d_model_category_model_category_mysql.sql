@@ -4,4 +4,4 @@ FROM whirlpool_mdsdb.cmdb_model_category_final SRC
  LEFT JOIN whirlpool_mdwdb.d_model_category TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
- WHERE name <> TRGT.category_name
+ WHERE name <> TRGT.category_name and SRC.cdctype='X'

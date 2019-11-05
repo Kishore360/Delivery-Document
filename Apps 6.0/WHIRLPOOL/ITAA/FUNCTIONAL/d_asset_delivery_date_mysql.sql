@@ -4,4 +4,4 @@ CASE WHEN cnt THEN 'MDS to DWH data validation failed for d_incident.opened_on' 
  FROM  whirlpool_mdsdb.alm_asset_final SRC   
  JOIN whirlpool_mdwdb.d_asset TRGT  
  ON (CONCAT('ASSET~',SRC.sys_id) =TRGT.row_id   AND SRC.sourceinstance= TRGT.source_id  ) 
- WHERE convert_tz(SRC.delivery_date,'GMT','US/Pacific')<> TRGT.delivery_date)b;
+ WHERE convert_tz(SRC.delivery_date,'GMT','US/Pacific')<> TRGT.delivery_date and SRC.cdctype='X')b;

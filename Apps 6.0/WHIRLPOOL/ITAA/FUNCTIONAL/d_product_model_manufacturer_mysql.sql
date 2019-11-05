@@ -4,4 +4,4 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  LEFT JOIN whirlpool_mdwdb.d_product_model TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
- WHERE SRC.manufacturer <> TRGT.manufacturer
+ WHERE SRC.manufacturer <> TRGT.manufacturer and SRC.cdctype='X'

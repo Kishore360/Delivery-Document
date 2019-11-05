@@ -12,6 +12,6 @@ JOIN whirlpool_mdwdb.f_asset TRGT
 COALESCE(CONCAT('ASSET~SUBSTATUS~~',SRC.substatus),'UNSPECIFIED') END) =LKP.row_id 
 AND (SRC.sourceinstance )= LKP.source_id 
  WHERE COALESCE(LKP.row_key, CASE WHEN SRC.substatus IS NULL  THEN 0 else '-1' end)<> COALESCE(TRGT.asset_substatus_key,'')
-
+and SRC.cdctype='X'
  
  

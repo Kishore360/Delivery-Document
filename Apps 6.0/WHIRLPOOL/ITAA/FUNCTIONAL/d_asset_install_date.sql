@@ -5,7 +5,7 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  ON (SRC.sys_id=TRGT.row_id 
  AND SRC.sourceinstance=TRGT.source_id )
 WHERE COALESCE( convert_tz(SRC.install_date,'GMT','America/Los_Angeles') ,'')<> COALESCE(TRGT.install_date ,'')
-
+and SRC.cdctype='X'
 
  
  

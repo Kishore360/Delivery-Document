@@ -9,3 +9,4 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  ON SRC.assigned= LKP.row_id 
  AND SRC.sourceinstance = LKP.source_id
  WHERE COALESCE(LKP.row_key,CASE WHEN SRC.assigned IS NULL THEN NULL else '-1' end)<> COALESCE(TRGT.asset_assigned_on_key,'')
+and SRC.cdctype='X'

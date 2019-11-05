@@ -6,3 +6,4 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  ON (concat('APPLICATION~', SRC.sys_id)  =TRGT.row_id  
  AND SRC.sourceinstance=TRGT.source_id )
  WHERE COALESCE( SRC.asset_tag ,'')<> COALESCE(TRGT.asset_tag ,'')
+ and SRC.cdctype='X'

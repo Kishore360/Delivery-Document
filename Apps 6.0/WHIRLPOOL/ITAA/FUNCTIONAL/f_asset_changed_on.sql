@@ -6,4 +6,5 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  ON (SRC.sys_id=TRGT.row_id 
  AND SRC.sourceinstance=TRGT.source_id )
 
- WHERE convert_tz(SRC.sys_updated_on,'GMT','America/New_York') <> TRGT.changed_on 
+ WHERE convert_tz(SRC.sys_updated_on,'GMT','America/New_York') <> TRGT.changed_on
+and SRC.cdctype='X' 

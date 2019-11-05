@@ -8,6 +8,7 @@ and a.source_id=b.sourceinstance
   JOIN  whirlpool_mdwdb.d_service LKP  
  ON (COALESCE(CONCAT('BUSINESS_SERVICE~',b.u_business_service),'UNSPECIFIED'))= LKP.row_id 
 AND b.sourceinstance= LKP.source_id 
- WHERE COALESCE(LKP.row_key,CASE WHEN u_business_service is null  THEN 0 else -1 end) <> (a.business_service_key))x
+ WHERE COALESCE(LKP.row_key,CASE WHEN u_business_service is null  THEN 0 else -1 end) <> (a.business_service_key)
+ and b.cdctype='X')x
  
  

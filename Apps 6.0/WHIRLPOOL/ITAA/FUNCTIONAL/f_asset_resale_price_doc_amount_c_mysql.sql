@@ -5,4 +5,4 @@ whirlpool_mdsdb.alm_asset_final SRC
  LEFT JOIN whirlpool_mdwdb.f_asset TRGT 
  ON ( SRC.sys_id=TRGT.row_id 
  AND SRC.sourceinstance=TRGT.source_id) 
-  WHERE SRC.resale_price <> TRGT.resale_price_doc_amount)t ;
+  WHERE SRC.resale_price <> TRGT.resale_price_doc_amount and SRC.cdctype='X')t ;

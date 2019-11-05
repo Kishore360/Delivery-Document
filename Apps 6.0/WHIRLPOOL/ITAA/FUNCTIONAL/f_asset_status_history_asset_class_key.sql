@@ -10,4 +10,5 @@ LEFT JOIN whirlpool_mdsdb.sys_db_object_final sys
  ON ( sys.sys_id = LKP.row_id 
 AND SRC.sourceinstance = LKP.source_id )
  WHERE COALESCE(LKP.row_key,CASE WHEN SRC.sys_class_name IS NULL THEN 0 else '-1' end)<> COALESCE(TRGT.asset_class_key,'')
+ and SRC.cdctype='X'
 
