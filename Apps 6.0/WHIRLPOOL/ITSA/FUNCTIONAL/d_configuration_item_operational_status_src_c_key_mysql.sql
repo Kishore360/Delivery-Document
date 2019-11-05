@@ -6,10 +6,10 @@ FROM whirlpool_mdsdb.cmdb_ci_final SRC
 JOIN whirlpool_mdwdb.d_configuration_item TRGT 
 ON (SRC.sys_id =TRGT.row_id  AND SRC.sourceinstance= TRGT.source_id  )
 left JOIN whirlpool_mdwdb.d_lov SRC1 ON 
-COALESCE(CONCAT('OPERATIONAL_STATUS~CMDB_CI~~~',UPPER(SRC.operational_status)),'UNSPECIFIED')=SRC1.row_id 
+COALESCE(CONCAT('OPERATIONAL_STATUS~CMDB_CI~',UPPER(SRC.operational_status)),'UNSPECIFIED')=SRC1.row_id 
 and SRC.sourceinstance=SRC1.source_id
 WHERE  coalesce(SRC1.row_key,case when SRC.operational_status is null then 0 else -1 end ) <> 
-TRGT.operational_status_src_c_key)b;
+TRGT.operational_status_src_c_key and SRC.cdctype='X')b;
 
  
  
