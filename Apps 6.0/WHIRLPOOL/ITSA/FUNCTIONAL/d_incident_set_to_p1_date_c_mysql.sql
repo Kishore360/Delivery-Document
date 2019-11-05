@@ -4,5 +4,6 @@ FROM whirlpool_mdwdb.d_incident trgt
 RIGHT JOIN whirlpool_mdsdb.incident_final src
 on src.sys_id = trgt.row_id and src.sourceinstance = trgt.source_id
 WHERE set_to_p1_date_c <>convert_tz(src.u_set_to_p1,'GMT','America/New_York')
+and src.cdctype='X'
 ;
 

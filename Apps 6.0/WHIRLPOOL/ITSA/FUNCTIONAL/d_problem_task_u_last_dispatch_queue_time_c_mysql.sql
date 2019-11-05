@@ -7,4 +7,5 @@ select count(1) as cnt
 from whirlpool_mdsdb.problem_task_final a
  JOIN   whirlpool_mdwdb.d_problem_task b
 on  b.ROW_ID=a.SYS_ID and a.sourceinstance=b.source_id
- where convert_tz(a.u_last_dispatch_queue_time,'GMT','America/New_York') <> b.u_last_dispatch_queue_time_c) temp;
+ where convert_tz(a.u_last_dispatch_queue_time,'GMT','America/New_York') <> b.u_last_dispatch_queue_time_c
+ and a.CDCTYPE='X') temp;

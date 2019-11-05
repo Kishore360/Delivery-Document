@@ -4,5 +4,5 @@ CASE WHEN cnt>0 THEN 'MDS to DWH data validation failed for d_global_wireless_co
 whirlpool_mdsdb.us_gwcm_global_wlc_inventory_final src
 left join whirlpool_mdwdb.d_global_wireless_compatibility_c trgt
 on concat(COALESCE(src.hostname,'UNSPECIFIED'),'~',COALESCE(src.version,'UNSPECIFIED'))=trgt.row_id and src.sourceinstance=trgt.source_id 
-where src.location<>trgt.location_c)ma
+where src.location<>trgt.location_c and src.cdctype='X')ma
 

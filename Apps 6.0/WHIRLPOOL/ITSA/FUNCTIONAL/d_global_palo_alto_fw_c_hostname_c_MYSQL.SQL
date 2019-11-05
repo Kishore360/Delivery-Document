@@ -4,6 +4,6 @@ CASE WHEN cnt>0 THEN 'MDS to DWH data validation failed for d_global_palo_alto_f
 whirlpool_mdsdb.us_gpafi_consolidated_final src
 left join whirlpool_mdwdb.d_global_palo_alto_fw_c trgt
 on concat(COALESCE(src.hostname,'UNSPECIFIED'),'~',COALESCE(src.version,'UNSPECIFIED'))=trgt.row_id and src.sourceinstance=trgt.source_id 
-where src.hostname<>trgt.hostname_c
+where src.hostname<>trgt.hostname_c and src.cdctype='X'
 )ma;
 

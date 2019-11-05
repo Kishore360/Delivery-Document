@@ -7,4 +7,4 @@ select count(1) as cnt
 from whirlpool_mdsdb.problem_final a
  JOIN   whirlpool_mdwdb.d_problem b
 on  b.ROW_ID=a.SYS_ID and a.sourceinstance=b.source_id
- where coalesce(a.u_device_asset_name, '') <> b.device_asset_name_c ) temp;
+ where coalesce(a.u_device_asset_name, '') <> b.device_asset_name_c and a.CDCTYPE='X' ) temp;

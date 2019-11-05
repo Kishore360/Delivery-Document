@@ -5,5 +5,5 @@ FROM
 SELECT count(1) as cnt from whirlpool_mdsdb.cmdb_rel_type_final a11
 left join whirlpool_mdwdb.d_cmdb_rel_type_c a12
 on a11.sys_id=a12.row_id and a11.sourceinstance=a12.source_id
-where a11.sys_created_by<>a12.created_by
+where a11.sys_created_by<>a12.created_by and a11.CDCTYPE='X'
 ) temp;

@@ -4,5 +4,6 @@ FROM whirlpool_mdwdb.d_incident trgt
 RIGHT JOIN whirlpool_mdsdb.incident_final src
 on src.sys_id = trgt.row_id and src.sourceinstance = trgt.source_id
 WHERE trgt.downgrade_authorized_person_c <>u_downgrade_authorized_person
+and src.cdctype='X'
 ;
 

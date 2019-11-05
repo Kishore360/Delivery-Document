@@ -7,4 +7,5 @@ select count(1) as cnt
 from  whirlpool_mdsdb.problem_task_final a
  JOIN    whirlpool_mdwdb.d_problem_task b
 on  b.ROW_ID=a.SYS_ID and a.sourceinstance=b.source_id
- where convert_tz(a.u_next_target_date,'GMT','America/New_York') <> b.u_next_target_date_c) temp;
+ where convert_tz(a.u_next_target_date,'GMT','America/New_York') <> b.u_next_target_date_c
+ and a.CDCTYPE='X') temp;

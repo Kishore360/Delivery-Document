@@ -5,5 +5,6 @@ RIGHT JOIN whirlpool_mdsdb.problem_final src
 on src.sys_id = trgt.row_id 
 and src.sourceinstance = trgt.source_id
 WHERE current_presentation_date_c  <>convert_tz(src.u_current_presentation_date,'GMT','America/New_York')
+and src.CDCTYPE='X'
 ;
 

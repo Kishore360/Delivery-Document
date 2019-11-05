@@ -6,3 +6,4 @@ FROM whirlpool_mdsdb.change_request_final SRC
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
 where (case when SRC.u_rescheduled_change=1  then 'Y' else 'N' end) <>(TRGT.rescheduled_flag)
+and SRC.cdctype='X'

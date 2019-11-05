@@ -4,4 +4,4 @@ join  whirlpool_mdwdb.f_incident TRGTF  ON TRGTF.incident_key=TRGT.row_key
 JOIN whirlpool_mdwdb.d_lov_map lkp
 on TRGTF.state_src_key = lkp.src_key
 WHERE convert_tz(coalesce(SRC.resolved_at,sys_updated_on),'GMT','America/New_York')<> (TRGT.closed_on)
-AND dimension_wh_code = 'CLOSED'
+AND dimension_wh_code = 'CLOSED' and SRC.cdctype='X'

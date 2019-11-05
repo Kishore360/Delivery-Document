@@ -5,4 +5,5 @@ FROM whirlpool_mdsdb.change_request_final SRC
  LEFT JOIN whirlpool_mdwdb.d_change_request TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
-where (case when SRC.u_reviewed_during_cab=1  then 'Y' else 'N' end) <>(TRGT.reviewed_during_cab_c_flag);
+where (case when SRC.u_reviewed_during_cab=1  then 'Y' else 'N' end) <>(TRGT.reviewed_during_cab_c_flag)
+and SRC.CDCTYPE='X'

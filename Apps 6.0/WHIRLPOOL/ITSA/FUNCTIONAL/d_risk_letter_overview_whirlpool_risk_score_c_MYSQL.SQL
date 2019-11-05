@@ -7,7 +7,7 @@ FROM
 SELECT count(1) as cnt 
 FROM whirlpool_mdsdb.us_rlo_history_final SRC 
 LEFT JOIN whirlpool_mdwdb.d_risk_letter_overview TRGT ON SRC.row_id=TRGT.row_id and SRC.sourceinstance=TRGT.source_id
-WHERE coalesce(SRC.whirlpoolriskscore,'UNSPECIFIED')<>TRGT.whirlpool_risk_score_c)ma
+WHERE coalesce(SRC.whirlpoolriskscore,'UNSPECIFIED')<>TRGT.whirlpool_risk_score_c and SRC.CDCTYPE='X')ma
 
 
 

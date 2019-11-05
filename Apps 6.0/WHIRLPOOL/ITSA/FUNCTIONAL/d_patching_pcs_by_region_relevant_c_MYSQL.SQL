@@ -7,7 +7,7 @@ FROM
 SELECT count(1) as cnt 
 FROM  whirlpool_mdsdb.us_ppbr_consolidated_final  src
 left join whirlpool_mdwdb.d_patching_pcs_by_region trgt on src.row_id=trgt.row_id and src.sourceinstance=trgt.source_id
-where CAST(src.relevant AS DECIMAL(0))<>trgt.relevant_c
+where CAST(src.relevant AS DECIMAL(0))<>trgt.relevant_c and src.cdctype='X'
 ) temp; 
 
 

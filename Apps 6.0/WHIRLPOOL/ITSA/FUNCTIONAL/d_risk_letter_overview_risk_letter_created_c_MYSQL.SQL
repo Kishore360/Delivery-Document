@@ -7,7 +7,7 @@ FROM
 SELECT count(1) as cnt 
 FROM whirlpool_mdsdb.us_rlo_history_final SRC 
 LEFT JOIN whirlpool_mdwdb.d_risk_letter_overview TRGT ON SRC.row_id=TRGT.row_id and SRC.sourceinstance=TRGT.source_id
-WHERE SRC.risklettercreateddate<>TRGT.risk_letter_created_c 
+WHERE SRC.risklettercreateddate<>TRGT.risk_letter_created_c and SRC.CDCTYPE='X'
 ) temp; 
 
 

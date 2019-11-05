@@ -5,3 +5,4 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
  WHERE CASE WHEN SRC.knowledge = 1 THEN 'Y' ELSE 'N' END <> TRGT.knowledge_flag
+ and SRC.cdctype='X'
