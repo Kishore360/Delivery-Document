@@ -7,6 +7,6 @@ FROM
 count(1) as CNT
  from mercury_mdsdb.gd_containers_report_final SRC
  join mercury_mdwdb.f_gd_containers_report_c TRGT on SRC.container_ID=TRGT.row_id and SRC.sourceinstance=TRGT.source_id
- where coalesce(SRC.Device_OS_Version,'UNSPECIFIED') <>TRGT.device_os_version_c)a;
+ where coalesce(nullif(SRC.Device_OS_Version,''),'UNSPECIFIED') <>TRGT.device_os_version_c)a;
  
  

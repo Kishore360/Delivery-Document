@@ -5,7 +5,7 @@ FROM
 (
 SELECT Count(1) AS CNT 
 FROM keybank_mdsdb.change_request_final SRC 
-LEFT JOIN keybankcrp_mdwdb.d_change_failure TRGT ON (SRC.sys_id=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id)
-WHERE dayofweek(SRC.start_date)
+LEFT JOIN keybank_mdwdb.d_change_failure TRGT ON (SRC.sys_id=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id)
+WHERE dayname(SRC.start_date)
 <>TRGT.planned_start_day_of_week_c
-AND SRC.cdctype='X' ) temp;
+AND SRC.cdctype='X' and TRGT.current_flag='Y' ) temp;

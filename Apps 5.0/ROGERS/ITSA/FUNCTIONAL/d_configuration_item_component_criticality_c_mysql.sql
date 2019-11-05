@@ -15,4 +15,5 @@ ON ci.sys_id = appl.sys_id and ci.sourceinstance= appl.sourceinstance
 LEFT JOIN rogers_mdsdb.u_cmdb_ci_middleware_final middle
 ON ci.sys_id = middle.sys_id and ci.sourceinstance= middle.sourceinstance
 where component_criticality_c <> COALESCE(ser.classification,middle.u_component_criticality,appl.u_component_criticality,'UNSPECIFIED')
-and config.CDCTYPE='X' and ci.cdctype='X')a
+and config.CDCTYPE='X' and ci.cdctype='X' and ser.CDCTYPE='X' and appl.CDCTYPE='X' and middle.CDCTYPE='X'
+)a

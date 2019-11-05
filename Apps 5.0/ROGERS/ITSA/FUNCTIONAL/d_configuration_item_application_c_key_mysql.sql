@@ -12,4 +12,5 @@ JOIN rogers_mdsdb.cmdb_ci_appl_final ci
 on ci.sys_id  = config.row_id and ci.sourceinstance  = config.source_id
 left join rogers_mdwdb.d_application d 
 on COALESCE(CONCAT('APPLICATION~',ci.sys_id),'UNSPECIFIED')=d.row_id
-where d.soft_deleted_flag='N' and application_c_key <> coalesce(d.row_key,case when ci.sys_id is null then 0 else -1 end))a
+where d.soft_deleted_flag='N' and application_c_key <> coalesce(d.row_key,case when ci.sys_id is null then 0 else -1 end)
+and config.CDCTYPE='X' and ci.cdctype='X' )a

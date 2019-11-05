@@ -11,5 +11,7 @@ left join rogers_mdsdb.cmdb_ci_db_instance_final db on ci.sys_id=db.sys_id and c
 left join rogers_mdwdb.d_lov d 
 on CONCAT('U_MANAGED_BY','~','CMDB_CI','~','~','~',UPPER(COALESCE(cs.u_managed_by,net.u_managed_by,md.u_managed_by,db.u_managed_by,'UNSPECIFIED')))=d.row_id
 where d.soft_deleted_flag='N' and u_managed_by_c_key <> coalesce(d.row_key,case when COALESCE(cs.u_managed_by,net.u_managed_by,md.u_managed_by,db.u_managed_by,'UNSPECIFIED')
- is null then 0 else -1 end)) a;
+ is null then 0 else -1 end)
+and ci.CDCTYPE='X' and cs.CDCTYPE='X' and net.CDCTYPE='X' and md.CDCTYPE='X' and db.CDCTYPE='X' and d.soft_deleted_flag='N'
+) a;
 

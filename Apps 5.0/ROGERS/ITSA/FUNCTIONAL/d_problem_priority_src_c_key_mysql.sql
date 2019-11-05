@@ -9,4 +9,5 @@ SELECT CASE WHEN cnt THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 LEFT JOIN rogers_mdwdb.d_lov LKP 
  ON ( concat('PRIORITY','~','problem','~','~','~',upper(priority))= LKP.src_rowid 
 AND SRC.sourceinstance= LKP.source_id )
- WHERE COALESCE(LKP.row_key,CASE WHEN SRC.priority IS NULL THEN 0 else -1 end)<> (TRGT.priority_src_key))b
+ WHERE COALESCE(LKP.row_key,CASE WHEN SRC.priority IS NULL THEN 0 else -1 end)<> (TRGT.priority_src_key)
+and SRC.CDCTYPE='X' and LKP.soft_deleted_flag='N')b

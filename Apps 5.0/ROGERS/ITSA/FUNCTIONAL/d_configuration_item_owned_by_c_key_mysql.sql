@@ -10,4 +10,4 @@ on ci.sys_id  = config.row_id and ci.sourceinstance  = config.source_id
 left join rogers_mdwdb.d_internal_contact d 
 on COALESCE(CONCAT('INTERNAL_CONTACT~',ci.owned_by) ,'UNSPECIFIED')=d.row_id
 where d.soft_deleted_flag='N' and owned_by_c_key <> coalesce(d.row_key,case when ci.owned_by is null then 0 else -1 end)
-and config.CDCTYPE='X' and ci.cdctype='X')a
+and config.CDCTYPE='X' and ci.cdctype='X' and d.soft_deleted_flag='N')a

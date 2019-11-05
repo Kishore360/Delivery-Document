@@ -5,7 +5,7 @@ FROM
 (
 SELECT Count(1) AS CNT 
 FROM keybank_mdsdb.change_request_final SRC 
-LEFT JOIN keybankcrp_mdwdb.d_change_failure TRGT ON (SRC.sys_id=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id)
+LEFT JOIN keybank_mdwdb.d_change_failure TRGT ON (SRC.sys_id=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id)
 WHERE case when SRC.u_val_by_app_team=1 then 'Y' when SRC.u_val_by_app_team=0 then 'N' else 'X' end
 <>TRGT.validated_by_apps_team_c
-AND SRC.cdctype='X' ) temp;
+AND SRC.cdctype='X' and TRGT.current_flag='Y' ) temp;

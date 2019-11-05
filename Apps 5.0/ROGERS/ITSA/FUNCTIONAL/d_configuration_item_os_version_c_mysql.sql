@@ -18,4 +18,4 @@ ON ci.sys_id = comp.sys_id and ci.sourceinstance= comp.sourceinstance
 
 where 
 os_version_c <> COALESCE(ser.os_version,ins.u_os_version,comp.os_version,'UNSPECIFIED')
-and config.CDCTYPE='X' and ci.cdctype='X')a
+and config.CDCTYPE='X' and ci.cdctype='X' and ser.CDCTYPE='X' and ins.CDCTYPE='X' and comp.CDCTYPE='X' )a

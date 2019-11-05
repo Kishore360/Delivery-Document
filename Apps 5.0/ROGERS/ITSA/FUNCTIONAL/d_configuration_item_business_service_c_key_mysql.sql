@@ -12,4 +12,4 @@ JOIN rogers_mdsdb.cmdb_ci_final ci
 on ci.sys_id  = config.row_id and ci.sourceinstance  = config.source_id
 left join rogers_mdwdb.d_service d 
 on COALESCE(CONCAT('BUSINESS_SERVICE~',ci.sys_id),'UNSPECIFIED')=d.row_id
-where d.soft_deleted_flag='N' and business_service_c_key <> coalesce(d.row_key,case when ci.sys_id is null then 0 else -1 end))a
+where d.soft_deleted_flag='N' and business_service_c_key <> coalesce(d.row_key,case when ci.sys_id is null then 0 else -1 end) and config.CDCTYPE='X' and ci.cdctype='X' and d.soft_deleted_flag='N')a

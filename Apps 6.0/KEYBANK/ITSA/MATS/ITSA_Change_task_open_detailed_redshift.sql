@@ -133,13 +133,7 @@ select 'ldb.d_change_task_reported_type a124 ' as Table_name, count(a11.row_key)
  on (a11.change_task_key = a14.row_key) 
 	join ldb.d_change_task_reported_type a124 
 	on (a14.reported_type_src_key = a124.row_key)  
-union
-select 'ldb.d_change_task_deployment_c a125 ' as Table_name, count(a11.row_key) Row_Count
- from ldb.f_change_task a11 
- join ldb.d_change_task a14 
- on (a11.change_task_key = a14.row_key) 
-	join ldb.d_change_task_deployment_c a125 
-	on (a14.change_task_deployment_c_key = a125.row_key)  
+ 
 union
 select 'ldb.d_change_task_impact a126 ' as Table_name, count(a11.row_key) Row_Count
  from ldb.f_change_task a11 
@@ -175,4 +169,5 @@ select 'ldb.d_change_task_urgency a130 ' as Table_name, count(a11.row_key) Row_C
  on (a11.change_task_key = a14.row_key) 
 	join ldb.d_change_task_urgency a130 
 	on (a14.urgency_src_key = a130.row_key) 
+
 
