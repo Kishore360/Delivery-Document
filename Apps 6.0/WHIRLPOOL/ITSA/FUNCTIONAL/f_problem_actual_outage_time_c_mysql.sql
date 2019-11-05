@@ -11,3 +11,4 @@ CASE
  WHEN TIMESTAMPDIFF(SECOND,'1970-01-01 00:00:00',SRC.u_act_out_time ) < 0 THEN NULL    
  WHEN TIMESTAMPDIFF(SECOND,'1970-01-01 00:00:00',SRC.u_act_out_time ) > 214748364 THEN NULL     
  ELSE TIMESTAMPDIFF(SECOND,'1970-01-01 00:00:00',SRC.u_act_out_time ) end <> actual_outage_time_c
+ and SRC.cdctype='X'

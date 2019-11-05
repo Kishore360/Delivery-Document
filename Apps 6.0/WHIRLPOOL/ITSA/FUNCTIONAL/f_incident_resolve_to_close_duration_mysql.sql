@@ -9,4 +9,4 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  ON TRGT.state_src_key = br.src_key
 WHERE   br.dimension_wh_code IN ('CLOSED') 
 AND  TIMESTAMPDIFF(second,SRC.closed_at,resolved_at)
-<> TRGT.resolve_to_close_duration
+<> TRGT.resolve_to_close_duration and SRC.cdctype='X'
