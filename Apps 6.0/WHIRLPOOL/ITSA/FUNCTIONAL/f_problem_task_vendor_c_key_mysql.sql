@@ -8,3 +8,4 @@ LEFT JOIN whirlpool_mdwdb.d_internal_organization LKP
  ON ( COALESCE(CONCAT('SUBSIDIARY~',SRC.u_vendor ),'UNSPECIFIED')= LKP.row_id 
 AND SRC.sourceinstance= LKP.source_id )
  WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_vendor IS NULL THEN 0 else -1 end)<> (TRGT.vendor_c_key)
+ and SRC.cdctype='X'

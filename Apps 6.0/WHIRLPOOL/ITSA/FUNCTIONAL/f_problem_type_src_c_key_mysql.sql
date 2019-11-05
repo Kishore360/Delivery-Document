@@ -8,3 +8,4 @@ LEFT JOIN whirlpool_mdwdb.d_lov LKP
  ON ( COALESCE(CONCAT('U_TYPE~PROBLEM~~~',UPPER(SRC.u_type )),'UNSPECIFIED')= LKP.row_id 
 AND SRC.sourceinstance= LKP.source_id )
  WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_type IS NULL THEN 0 else -1 end)<> (TRGT.type_src_c_key)
+ and SRC.cdctype='X'
