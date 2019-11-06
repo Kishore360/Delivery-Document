@@ -11,7 +11,8 @@ SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
   JOIN whirlpool_mdwdb.d_internal_organization LKP 
   ON (COALESCE(CONCAT('GROUP~',cmdb_ci.support_group),'UNSPECIFIED'))= LKP.row_id 
  AND b.sourceinstance= LKP.source_id 
-  WHERE COALESCE(LKP.row_key,CASE WHEN support_group is null THEN 0 else -1 end) <> (a.support_group_key))x
+  WHERE COALESCE(LKP.row_key,CASE WHEN support_group is null THEN 0 else -1 end) <> (a.support_group_key)
+  and b.cdctype='X')x
   
   
  

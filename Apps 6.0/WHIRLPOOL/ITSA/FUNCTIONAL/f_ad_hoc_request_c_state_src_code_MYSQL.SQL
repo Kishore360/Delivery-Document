@@ -4,7 +4,7 @@ CASE WHEN cnt>0 THEN 'MDS to DWH data validation failed for f_ad_hoc_request_c.s
  whirlpool_mdsdb.u_ad_hoc_request_final a
  left join whirlpool_mdwdb.f_ad_hoc_request_c b
  on a.sys_id=b.row_id and a.sourceinstance=b.source_id 
- where a.state<>b.state_src_code)ma
+ where a.state<>b.state_src_code and a.cdctype='X')ma
   ;
 
 

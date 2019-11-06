@@ -7,7 +7,8 @@ CASE WHEN cnt>0 THEN 'MDS to DWH data validation failed for f_ad_hoc_request_c.r
  
  where case WHEN (a.u_adhoc_resolved_dt is null or a.closed_at is null) THEN NULL   
 	 WHEN TIMESTAMPDIFF(SECOND,a.u_adhoc_resolved_dt,a.closed_at) < 0 THEN NULL
-	 ELSE TIMESTAMPDIFF(SECOND,a.u_adhoc_resolved_dt,a.closed_at) end<>b. resolve_to_close_duration)ma
+	 ELSE TIMESTAMPDIFF(SECOND,a.u_adhoc_resolved_dt,a.closed_at) end<>b. resolve_to_close_duration
+	 and a.cdctype='X')ma
   ;
 
 
