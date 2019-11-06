@@ -4,4 +4,4 @@ FROM whirlpool_mdsdb.alm_stockroom_final SRC
  LEFT JOIN whirlpool_mdwdb.d_storage_location TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
- WHERE SRC.manager <> TRGT.manager
+ WHERE SRC.manager <> TRGT.manager and SRC.cdctype='X'

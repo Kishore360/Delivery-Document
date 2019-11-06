@@ -9,3 +9,4 @@ on (CONCAT(SRC.sys_id,'~',DATE_FORMAT(SRC.sys_created_on,'%Y%m%d%H%i%S') )  =TRG
  ON ( SRC.model = LKP.row_id 
 AND SRC.sourceinstance = LKP.source_id )
  WHERE COALESCE(LKP.row_key,CASE WHEN SRC.model IS NULL THEN 0 else '-1' end)<> COALESCE(TRGT.product_model_key,'')
+ and SRC.cdctype='X'

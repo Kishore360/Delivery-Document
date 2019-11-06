@@ -5,4 +5,4 @@ CASE WHEN cnt THEN 'MDS to DWH data validation failed for d_incident.opened_on' 
  LEFT JOIN whirlpool_mdwdb.d_asset TRGT 
  ON ( CONCAT('ASSET~',SRC.sys_id)=TRGT.row_id 
  AND SRC.sourceinstance=TRGT.source_id) 
-  WHERE SRC.comments<> TRGT.comments)t;
+  WHERE SRC.comments<> TRGT.comments and SRC.cdctype='X')t;

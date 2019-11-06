@@ -10,6 +10,7 @@ LEFT JOIN whirlpool_mdwdb.d_calendar_date LKP
 on (LKP.row_id = date_format(convert_tz(coalesce(SRC.resolved_at,sys_updated_on),'GMT','America/New_York'),'%Y%m%d') and LKP.source_id=0
 )
 WHERE  case when dlm.dimension_wh_code = 'CLOSED' then (LKP.row_key) else null end <> (TRGT.closed_on_key)
+and SRC.cdctype='X'
 
 
 

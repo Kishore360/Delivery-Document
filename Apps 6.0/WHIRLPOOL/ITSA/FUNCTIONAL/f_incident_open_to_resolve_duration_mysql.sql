@@ -7,5 +7,6 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  LEFT JOIN whirlpool_mdwdb.d_lov_map br 
  ON TRGT.state_src_key = br.src_key
 WHERE   br.dimension_wh_code IN ('RESOLVED')
-AND TIMESTAMPDIFF(SECOND,SRC.opened_at,coalesce(SRC.closed_at,SRC.resolved_at))  <> TRGT.open_to_resolve_duration;
+AND TIMESTAMPDIFF(SECOND,SRC.opened_at,coalesce(SRC.closed_at,SRC.resolved_at))  <> TRGT.open_to_resolve_duration
+and SRC.cdctype='X';
 

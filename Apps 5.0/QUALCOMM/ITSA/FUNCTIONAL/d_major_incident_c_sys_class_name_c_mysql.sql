@@ -7,4 +7,4 @@ LEFT JOIN qualcomm_mdwdb.d_major_incident_c TRGT
  LEFT JOIN qualcomm_mdwdb.d_lov LKP 
  ON COALESCE(CONCAT('TASK_TYPE~TASK~~~',(SRC.sys_class_name)),'UNSPECIFIED')= LKP.row_id 
 AND SRC.sourceinstance= LKP.source_id 
-WHERE COALESCE(LKP.row_key,CASE WHEN SRC.sys_class_name IS NULL THEN 0 else -1 end)<>(TRGT.task_type_c_key);
+WHERE COALESCE(LKP.row_key,CASE WHEN SRC.sys_class_name IS NULL THEN 0 else -1 end)<>(TRGT.task_type_c_key) and SRC.cdctype='X';

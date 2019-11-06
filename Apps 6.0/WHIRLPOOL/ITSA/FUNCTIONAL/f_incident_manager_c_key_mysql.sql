@@ -8,6 +8,6 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
   ON ( COALESCE(CONCAT('INTERNAL_CONTACT~',s.u_manager),'UNSPECIFIED')= LKP.row_id 
  AND s.sourceinstance= LKP.source_id )
   WHERE COALESCE(LKP.row_key,CASE WHEN s.u_manager IS NULL THEN 0 else -1 end) <>
-  (TRGT.manager_c_key)
+  (TRGT.manager_c_key) and s.cdctype='X'
   
   

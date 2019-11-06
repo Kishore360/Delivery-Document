@@ -6,3 +6,4 @@ ON (SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id )
 join whirlpool_mdwdb.d_configuration_item ref  
 on SRC.cmdb_ci =ref.Row_id AND ref.source_id= SRC.sourceinstance
  WHERE coalesce(ref.row_key,case when SRC.cmdb_ci is null then 0 else -1 end)<> (TRGT.configuration_item_key) 
+ and SRC.cdctype='X'

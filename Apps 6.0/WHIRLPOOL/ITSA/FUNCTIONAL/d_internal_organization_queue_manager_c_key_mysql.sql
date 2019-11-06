@@ -11,6 +11,6 @@ on concat('INTERNAL_CONTACT~',left(a.u_queue_manager,32))=b.row_id
  whirlpool_mdwdb.d_internal_organization c
 on a.sourceinstance=c.source_id and c.row_id=concat('GROUP~',a.sys_id)
   where c.queue_manager_c_key<>coalesce(b.row_key,case when u_queue_manager is null then 0 else -1 end)
-
+and a.cdctype='X'
 )E;
 

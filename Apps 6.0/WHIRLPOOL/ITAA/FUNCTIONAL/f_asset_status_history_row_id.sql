@@ -5,4 +5,5 @@
  ON (CONCAT(SRC.sys_id,'~',DATE_FORMAT(SRC.sys_created_on,'%Y%m%d%H%i%S') )  =TRGT.row_id  
  AND SRC.sourceinstance=TRGT.source_id )
  WHERE COALESCE( CONCAT(SRC.sys_id,'~',DATE_FORMAT(SRC.sys_created_on,'%Y%m%d%H%i%S') ),'')<> COALESCE(TRGT.row_id ,'')
+ and SRC.cdctype='X'
  

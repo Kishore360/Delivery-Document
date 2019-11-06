@@ -10,7 +10,7 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
   ON (COALESCE(CONCAT('GROUP~',cmdb_ci.support_group),'UNSPECIFIED')= LKP.row_id 
  AND s.sourceinstance= LKP.source_id )
   WHERE COALESCE(LKP.row_key,CASE WHEN cmdb_ci.support_group IS NULL THEN 0 else -1 end) <>
-  (TRGT.support_group_c_key)
+  (TRGT.support_group_c_key) and s.cdctype='X'
   
   
   

@@ -5,4 +5,4 @@ FROM qualcomm_mdsdb.u_major_incident_final SRC
  LEFT JOIN qualcomm_mdwdb.f_major_incident_c TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
- WHERE SRC.reassignment_count  <> TRGT.reassignment_count_c;
+ WHERE SRC.reassignment_count  <> TRGT.reassignment_count_c and SRC.cdctype='X';

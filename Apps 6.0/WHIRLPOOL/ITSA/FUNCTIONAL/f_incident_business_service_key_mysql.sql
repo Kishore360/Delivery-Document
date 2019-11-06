@@ -9,7 +9,8 @@ JOIN whirlpool_mdsdb.incident_final incf ON dfi.row_id = incf.sys_id AND dfi.sou
 join
 whirlpool_mdwdb.d_service lkp
 on COALESCE(CONCAT('BUSINESS_SERVICE','~',incf.business_service),'UNSPECIFIED')=lkp.row_id
-where coalesce(lkp.row_key,case when incf.business_service is null then 0 else -1 end )<>dfi.business_service_key)a
+where coalesce(lkp.row_key,case when incf.business_service is null then 0 else -1 end )<>dfi.business_service_key
+and incf.cdctype='X')a
   
   
   

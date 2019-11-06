@@ -9,3 +9,4 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  ON ( SRC.reference_currency = LKP.row_id 
 AND SRC.sourceinstance = LKP.source_id )
  WHERE COALESCE(LKP.row_key,CASE WHEN SRC.reference_currency IS NULL THEN NULL else '-1' end)<> COALESCE(TRGT.doc_currency_key,'')
+ and SRC.cdctype='X'

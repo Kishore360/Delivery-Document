@@ -4,4 +4,4 @@ FROM qualcomm_mdsdb.u_major_incident_final SRC
  LEFT JOIN qualcomm_mdwdb.d_major_incident_c TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
-WHERE SRC.sys_updated_by  <> TRGT.changed_by ;
+WHERE SRC.sys_updated_by  <> TRGT.changed_by and SRC.cdctype='X' ;

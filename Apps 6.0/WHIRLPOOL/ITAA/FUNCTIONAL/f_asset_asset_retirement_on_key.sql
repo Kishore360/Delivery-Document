@@ -9,3 +9,4 @@ LEFT JOIN whirlpool_mdwdb.d_calendar_date LKP
 on (LKP.row_id  = date_format(convert_tz(SRC.retired,'GMT','America/New_York'),'%Y%m%d')  and LKP.source_id=0
 )
 WHERE COALESCE(LKP.row_key,CASE WHEN SRC.retired IS NULL THEN NULL else '-1' end)  <> COALESCE(TRGT.asset_retirement_on_key,'') 
+and SRC.cdctype='X'

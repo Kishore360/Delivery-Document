@@ -4,4 +4,4 @@ FROM whirlpool_mdsdb.alm_stockroom_final SRC
  LEFT JOIN whirlpool_mdwdb.d_storage_location TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
- WHERE case when external = 0 then 'N' else 'Y' END <> TRGT.is_external
+ WHERE case when external = 0 then 'N' else 'Y' END <> TRGT.is_external and SRC.cdctype='X'

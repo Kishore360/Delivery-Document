@@ -10,4 +10,4 @@ ON f.state_src_key = dlm.src_key
 case when
  dlm.dimension_wh_code = 'RESOLVED' then 
  convert_tz(SRC.closed_at,'GMT','America/New_York') else null end 
-<> TRGT.last_resolved_on)x
+<> TRGT.last_resolved_on and SRC.cdctype='X')x

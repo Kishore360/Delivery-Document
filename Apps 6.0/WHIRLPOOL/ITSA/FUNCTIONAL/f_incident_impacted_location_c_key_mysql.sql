@@ -8,6 +8,6 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
   ON ( COALESCE(s.u_impacted_location,'UNSPECIFIED')= LKP.row_id 
  AND s.sourceinstance= LKP.source_id )
   WHERE COALESCE(LKP.row_key,CASE WHEN s.u_impacted_location IS NULL THEN 0 else -1 end) <>
-  (TRGT.impacted_location_c_key)
+  (TRGT.impacted_location_c_key) and s.cdctype='X'
   
   

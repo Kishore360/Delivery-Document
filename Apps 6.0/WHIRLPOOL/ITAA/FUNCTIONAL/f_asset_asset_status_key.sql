@@ -5,8 +5,9 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  ON ( SRC.sys_id   =TRGT.row_id  
  AND SRC.sourceinstance=TRGT.source_id )
  LEFT JOIN whirlpool_mdwdb.d_lov LKP 
- ON COALESCE(CONCAT('ASSET~STATUS~~',SRC.install_status) ,'UNSPECIFIED')  = LKP.row_id 
+ ON COALESCE(CONCAT('ASSET~STATUS~',SRC.install_status) ,'UNSPECIFIED')  = LKP.row_id 
 AND SRC.sourceinstance = LKP.source_id 
 AND LKP.dimension_class ='ASSET'
 AND LKP.dimension_type = 'STATUS'
  WHERE COALESCE(LKP.row_key,CASE WHEN SRC.install_status IS NULL THEN 0 else '-1' end)<> COALESCE(TRGT.asset_status_key,'')
+ and SRC.cdctype='X'

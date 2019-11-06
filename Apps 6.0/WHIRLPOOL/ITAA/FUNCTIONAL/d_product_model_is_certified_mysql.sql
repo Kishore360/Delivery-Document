@@ -5,3 +5,4 @@ FROM whirlpool_mdsdb.cmdb_model_final SRC
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
  WHERE case when certified = '1' then 'Y' else 'N' END <> TRGT.is_certified
+ and SRC.cdctype='X'

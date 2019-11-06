@@ -8,4 +8,4 @@ select count(1) as cnt
 from whirlpool_mdsdb.problem_task_final a
  JOIN   whirlpool_mdwdb.f_problem_task b
 on  b.ROW_ID=a.SYS_ID and a.sourceinstance=b.source_id
- where a.u_total_extensions <> b.u_total_extensions_c) temp;
+ where a.u_total_extensions <> b.u_total_extensions_c and a.cdctype='X') temp;

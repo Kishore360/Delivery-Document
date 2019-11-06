@@ -11,4 +11,8 @@ CASE
  WHEN TIMESTAMPDIFF(SECOND,'1970-01-01 00:00:00',SRC.u_fin_duration ) < 0 THEN NULL    
  WHEN TIMESTAMPDIFF(SECOND,'1970-01-01 00:00:00',SRC.u_fin_duration ) > 214748364 THEN NULL     
  ELSE TIMESTAMPDIFF(SECOND,'1970-01-01 00:00:00',SRC.u_fin_duration ) end <> fin_duration_c
+<<<<<<< HEAD
 and SRC.CDCTYPE='X'
+=======
+ and SRC.cdctype='X'
+>>>>>>> 9090f642d78b2876f16aceb3bf589190f5fc5da4
