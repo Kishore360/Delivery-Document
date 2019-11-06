@@ -3,7 +3,7 @@ CASE WHEN cnt>0 THEN 'MDS to DWH data validation failed for d_asset.lease_id_c' 
  FROM (select count(1) as cnt from 
   whirlpool_mdsdb.alm_asset_final a
  left join whirlpool_mdwdb.d_asset b
- on a.sys_id=right(b.row_id,32) and a.sourceinstance=b.source_id
+ on a.sys_id=right(b.row_id,32) and a.sourceinstance=b.source_id and SRC.cdctype='X'
  where coalesce(a.lease_id,'UNSPECIFIED')<>b.lease_id_c  and b.soft_deleted_flag='N')ma;
  
  
