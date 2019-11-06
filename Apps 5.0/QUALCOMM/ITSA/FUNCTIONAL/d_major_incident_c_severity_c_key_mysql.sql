@@ -7,4 +7,5 @@ FROM qualcomm_mdsdb.u_major_incident_final SRC
  LEFT JOIN qualcomm_mdwdb.d_lov LKP 
  ON COALESCE( CONCAT('U_SEVERITY~U_MAJOR_INCIDENT~~~',UPPER(SRC.u_severity)),'UNSPECIFIED')= LKP.row_id 
 AND SRC.sourceinstance= LKP.source_id 
-WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_severity IS NULL THEN 0 else -1 end)<> (TRGT.severity_c_key);
+WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_severity IS NULL THEN 0 else -1 end)<> (TRGT.severity_c_key)
+and SRC.CDCTYPE='X'

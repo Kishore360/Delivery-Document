@@ -16,4 +16,4 @@ on tf.request_item = SRC2.request_item
 and tf.sourceinstance = SRC2.sourceinstance
 join  qualcomm_mdsdb.sc_item_variables_task_final vt 
 on vt.variable = SRC.sys_id and vt.task =  tf.sys_id 
-WHERE  SRC.question_text <> LKP.question_text
+WHERE  SRC.question_text <> LKP.question_text and TRGT.soft_deleted_flag='N'

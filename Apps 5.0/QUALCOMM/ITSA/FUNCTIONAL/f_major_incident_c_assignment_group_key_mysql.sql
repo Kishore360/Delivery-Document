@@ -7,4 +7,5 @@ FROM qualcomm_mdsdb.u_major_incident_final SRC
  LEFT JOIN qualcomm_mdwdb.d_internal_organization LKP 
  ON ( concat('GROUP~',assignment_group)= LKP.row_id 
 AND SRC.sourceinstance= LKP.source_id )
-WHERE COALESCE(LKP.row_key,CASE WHEN SRC.assignment_group IS NULL THEN 0 else -1 end)<> (TRGT.assignment_group_key);
+WHERE COALESCE(LKP.row_key,CASE WHEN SRC.assignment_group IS NULL THEN 0 else -1 end)<> (TRGT.assignment_group_key)
+and SRC.CDCTYPE='X';

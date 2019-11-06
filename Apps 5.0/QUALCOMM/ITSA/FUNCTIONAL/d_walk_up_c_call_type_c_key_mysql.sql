@@ -7,7 +7,7 @@ FROM qualcomm_mdsdb.u_walk_up_call_final SRC
 LEFT JOIN qualcomm_mdwdb.d_lov LKP 
  ON concat('CALL_TYPE~U_WALK_UP_CALL~~~',call_type )=  LKP.row_id 
 AND SRC.sourceinstance= LKP.source_id 
-WHERE COALESCE(LKP.row_key,CASE WHEN SRC.call_type IS NULL THEN 0 else -1 end)<> (TRGT.walk_up_call_type_c_key);
-
+WHERE COALESCE(LKP.row_key,CASE WHEN SRC.call_type IS NULL THEN 0 else -1 end)<> (TRGT.walk_up_call_type_c_key)
+and SRC.CDCTYPE='X';
 
 

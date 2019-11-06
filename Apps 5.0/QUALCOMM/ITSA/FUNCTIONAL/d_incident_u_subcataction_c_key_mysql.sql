@@ -7,4 +7,6 @@ FROM qualcomm_mdsdb.incident_final SRC
 LEFT JOIN qualcomm_mdwdb.d_lov LKP 
  ON ( concat('U_SUBCATACTION','~','INCIDENT','~','~','~',upper(u_subcataction))= LKP.src_rowid 
 AND SRC.sourceinstance= LKP.source_id )
-WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_subcataction IS NULL THEN 0 else -1 end) <> (TRGT.u_subcataction_c_key);
+WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_subcataction IS NULL THEN 0 else -1 end) <> (TRGT.u_subcataction_c_key)
+and SRC.CDCTYPE='X';
+

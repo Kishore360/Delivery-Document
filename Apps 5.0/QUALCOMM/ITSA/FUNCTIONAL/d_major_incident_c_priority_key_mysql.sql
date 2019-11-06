@@ -9,4 +9,5 @@ FROM qualcomm_mdsdb.u_major_incident_final SRC
  LEFT JOIN qualcomm_mdwdb.d_lov LKP 
  ON COALESCE( CONCAT('PRIORITY~U_MAJOR_INCIDENT~~~',UPPER(SRC.priority)),'UNSPECIFIED')= LKP.row_id 
 AND SRC.sourceinstance= LKP.source_id 
-WHERE COALESCE(LKP.row_key,CASE WHEN SRC.priority IS NULL THEN 0 else -1 end)<> (TRGT.priority_key);
+WHERE COALESCE(LKP.row_key,CASE WHEN SRC.priority IS NULL THEN 0 else -1 end)<> (TRGT.priority_key)
+and SRC.CDCTYPE='X';

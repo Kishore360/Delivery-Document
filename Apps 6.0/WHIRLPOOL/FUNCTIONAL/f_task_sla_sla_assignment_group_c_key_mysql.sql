@@ -9,3 +9,4 @@ LEFT JOIN whirlpool_mdwdb.d_internal_organization LKP
  ON ( COALESCE(CONCAT('GROUP~',SRC.u_sla_assignment_group),'UNSPECIFIED')= LKP.row_id 
 AND SRC.sourceinstance= LKP.source_id )
  WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_sla_assignment_group IS NULL THEN 0 else -1 end)<> (TRGT.sla_assignment_group_c_key)
+and SRC.CDCTYPE='X'

@@ -8,4 +8,5 @@ LEFT JOIN qualcomm_mdsdb.task_final task
 LEFT JOIN  qualcomm_mdwdb.d_task_approval_c TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
-WHERE SRC.sys_updated_by  <> TRGT.changed_by ;
+WHERE SRC.sys_updated_by  <> TRGT.changed_by 
+and SRC.CDCTYPE='X';

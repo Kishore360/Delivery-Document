@@ -9,6 +9,5 @@ LEFT JOIN qualcomm_mdwdb.f_task_approval_c TRGT
  AND SRC.sourceinstance= TRGT.source_id  )
   left join qualcomm_mdwdb.d_lov LKP 
 	on COALESCE( CONCAT('STATE','~','SYSAPPROVAL_APPROVER','~','~','~',(SRC.state)),'UNSPECIFIED')=LKP.row_id and SRC.sourceinstance=LKP.source_id
- WHERE COALESCE(LKP.row_key,CASE WHEN SRC.state IS NULL THEN 0 else -1 end) <> (TRGT.approval_state_c_key
-
-);
+ WHERE COALESCE(LKP.row_key,CASE WHEN SRC.state IS NULL THEN 0 else -1 end) <> (TRGT.approval_state_c_key)
+ and SRC.CDCTYPE='X';
