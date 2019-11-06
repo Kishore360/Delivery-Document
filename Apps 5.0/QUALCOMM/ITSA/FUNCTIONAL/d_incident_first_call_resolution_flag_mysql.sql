@@ -11,6 +11,6 @@
  LEFT JOIN qualcomm_mdwdb.d_lov_map LM ON TRGTF.state_src_key=LM.src_key and LM.dimension_class='STATE~INCIDENT'
  WHERE LM.dimension_wh_code IN('RESOLVED','CLOSED') and 
  CASE WHEN TIMESTAMPDIFF(MINUTE,coalesce(SRC.opened_at,'1970-01-01 00:00:00'), coalesce(SRC.resolved_at,SRC.closed_at))<30
-  THEN 'Y' ELSE 'N' END  <> (TRGT.first_call_resolution_flag ))a
+  THEN 'Y' ELSE 'N' END  <> (TRGT.first_call_resolution_flag )and SRC.cdctype='X')a
 
 

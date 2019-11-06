@@ -7,5 +7,5 @@ FROM qualcomm_mdsdb.new_call_final SRC
 LEFT JOIN qualcomm_mdwdb.d_lov LKP 
  ON CONCAT('CALL_TYPE~CALL~~~',UPPER(SRC.call_type))=  LKP.row_id 
 AND SRC.sourceinstance= LKP.source_id 
-WHERE COALESCE(LKP.row_key,CASE WHEN SRC.call_type IS NULL THEN 0 else -1 end)<> (TRGT.call_type_src_key);
+WHERE COALESCE(LKP.row_key,CASE WHEN SRC.call_type IS NULL THEN 0 else -1 end)<> (TRGT.call_type_src_key) and SRC.cdctype='X';
 

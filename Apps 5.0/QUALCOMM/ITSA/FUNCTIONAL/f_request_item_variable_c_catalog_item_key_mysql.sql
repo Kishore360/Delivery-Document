@@ -9,4 +9,4 @@ join qualcomm_mdwdb.f_request_item_variable_c TRGT
 ON ((concat(SRC1.sys_id,'~',SRC2.request_item) =TRGT.row_id) AND SRC1.sourceinstance= TRGT.source_id  )
 join qualcomm_mdwdb.d_master_item LKP
 on COALESCE(SRC.cat_item ,'UNSPECIFIED')  = LKP.row_id and SRC.sourceinstance=LKP.source_id
-WHERE  COALESCE(LKP.row_key,case when SRC.cat_item is null then 0 else -1 end ) <> TRGT.catalog_item_key
+WHERE  COALESCE(LKP.row_key,case when SRC.cat_item is null then 0 else -1 end ) <> TRGT.catalog_item_key and SRC.cdctype='X'

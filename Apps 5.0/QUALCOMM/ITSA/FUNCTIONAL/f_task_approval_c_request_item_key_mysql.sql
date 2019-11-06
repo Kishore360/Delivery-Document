@@ -12,4 +12,4 @@ LEFT JOIN qualcomm_mdwdb.f_task_approval_c TRGT
  WHERE COALESCE(LKP.row_key,CASE WHEN SRC.sysapproval IS NULL THEN 0 else -1 end) <> (TRGT.request_item_key
 
 
-);
+)and SRC.cdctype='X';

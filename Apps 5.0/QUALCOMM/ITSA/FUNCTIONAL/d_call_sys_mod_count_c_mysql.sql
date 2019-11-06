@@ -5,5 +5,5 @@ FROM qualcomm_mdsdb.new_call_final SRC
  LEFT JOIN qualcomm_mdwdb.d_call TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
-WHERE SRC.sys_mod_count <> (TRGT.sys_mod_count_c);
+WHERE SRC.sys_mod_count <> (TRGT.sys_mod_count_c) and SRC.cdctype='X';
 

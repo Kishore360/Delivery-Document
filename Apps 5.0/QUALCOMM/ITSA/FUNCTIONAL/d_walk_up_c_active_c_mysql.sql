@@ -4,4 +4,4 @@ FROM qualcomm_mdsdb.u_walk_up_call_final SRC
  LEFT JOIN qualcomm_mdwdb.d_walk_up_call_c TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
-WHERE CASE WHEN SRC.u_active= '1' THEN 'Y' ELSE 'N' END <> TRGT.u_active_c_flag ;
+WHERE CASE WHEN SRC.u_active= '1' THEN 'Y' ELSE 'N' END <> TRGT.u_active_c_flag and SRC.cdctype='X' ;

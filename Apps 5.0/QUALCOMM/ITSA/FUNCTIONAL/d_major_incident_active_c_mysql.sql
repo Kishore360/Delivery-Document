@@ -5,4 +5,4 @@ FROM qualcomm_mdsdb.u_major_incident_final SRC
  LEFT JOIN qualcomm_mdwdb.d_major_incident_c TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
-WHERE case when SRC.active =1 then 'Y' else 'N' end  <> TRGT.active_c ;
+WHERE case when SRC.active =1 then 'Y' else 'N' end  <> TRGT.active_c and SRC.cdctype='X';

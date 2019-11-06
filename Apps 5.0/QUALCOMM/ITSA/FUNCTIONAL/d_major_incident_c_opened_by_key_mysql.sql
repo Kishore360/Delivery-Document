@@ -7,4 +7,4 @@ FROM qualcomm_mdsdb.u_major_incident_final SRC
  LEFT JOIN qualcomm_mdwdb.d_internal_contact LKP 
  ON ( concat('INTERNAL_CONTACT~',opened_by)= LKP.row_id 
 AND SRC.sourceinstance= LKP.source_id )
-WHERE COALESCE(LKP.row_key,CASE WHEN SRC.opened_by IS NULL THEN 0 else -1 end)<> (TRGT.opened_by_key);
+WHERE COALESCE(LKP.row_key,CASE WHEN SRC.opened_by IS NULL THEN 0 else -1 end)<> (TRGT.opened_by_key) and SRC.cdctype='X';
