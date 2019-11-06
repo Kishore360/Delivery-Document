@@ -5,7 +5,7 @@ FROM whirlpool_mdsdb.change_request_final  SRC
 JOIN whirlpool_mdwdb.f_change_request TRGT 
 ON (SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id )  
 LEFT JOIN whirlpool_mdwdb.d_lov LKP 
-ON ( concat( 'U_IMPLEMENTATION_RESULT~CHANGE_REQUEST~' ,upper( SRC.u_implementation_result)) = LKP.row_id 
+ON ( concat( 'U_IMPLEMENTATION_RESULT~CHANGE_REQUEST~~~' ,upper( SRC.u_implementation_result)) = LKP.row_id 
 AND SRC.sourceinstance = LKP.source_id ) 
 JOIN whirlpool_mdwdb.d_lov_map br on 
 TRGT.implementation_result_src_c_key = br.src_key
