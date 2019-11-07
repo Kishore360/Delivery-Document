@@ -5,6 +5,6 @@ ELSE 'SUCCESS' END as Message
 FROM 
 ( select 
 count(1) as CNT
- from mercury_mdsdb.gd_containers_report_final SRC
- join mercury_mdwdb.f_gd_containers_report_c TRGT on SRC.container_ID=TRGT.row_id and SRC.sourceinstance=TRGT.source_id
- where STR_TO_DATE(substring((SRC.Last_connection_time_to_GC),1,19), '%m/%d/%Y %H:%i:%s') <>TRGT.last_connection_time_to_gc_c)a;
+ from meritsa_mdsdb.gd_containers_report_final SRC
+ join meritsa_mdwdb.f_gd_containers_report_c TRGT on SRC.container_ID=TRGT.row_id and SRC.sourceinstance=TRGT.source_id
+ where (SRC.Last_connection_time_to_GC) <>TRGT.last_connection_time_to_gc_c);
