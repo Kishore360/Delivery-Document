@@ -1,7 +1,7 @@
 
 SELECT 
 CASE WHEN count(1) > 0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, 
-CASE WHEN count(1) > 0  THEN 'MDS to DWH data validation failed for d_request_item.response_sla_c_flag' ELSE 'SUCCESS' END as Message 
+CASE WHEN count(1) > 0  THEN 'MDS to DWH data validation failed for d_incident.associated_incident_alert_flag_c' ELSE 'SUCCESS' END as Message 
 FROM 
 (
 SELECT trgt.row_id,src.sys_id,u_incident_alert,associated_incident_alert_flag_c

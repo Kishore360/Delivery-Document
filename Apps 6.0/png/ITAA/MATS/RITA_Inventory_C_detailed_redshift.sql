@@ -18,7 +18,7 @@ from  ldb.f_png_ot_processing_activities_inventory_c       a11
  join ldb.d_png_ot_processing_activities_inventory_c       a12
 on (a11.png_ot_inventory_c_key = a12.row_key)
 join ldb.d_lov_pa_priv_imp_asmt_stats_c       a14
-on (a12.priv_imp_asmt_stats_c = a14.row_key)
+on (a12.priv_imp_asmt_stats_c_key = a14.row_key)
 union
 select'ldb.d_lov_pa_ret_stats_c' as Table_Name, count(a11.row_key) Row_Count
 from  ldb.f_png_ot_processing_activities_inventory_c       a11 
