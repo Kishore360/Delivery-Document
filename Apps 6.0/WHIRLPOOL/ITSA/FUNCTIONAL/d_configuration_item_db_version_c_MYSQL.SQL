@@ -11,5 +11,6 @@ LEFT join  whirlpool_mdsdb.cmdb_ci_db_ora_instance_final ora
 on a.row_id=ora.sys_id and a.source_id=ora.sourceinstance
 LEFT join  whirlpool_mdsdb.u_cmdb_ci_appl_sap_instance_final sap
 on a.row_id=sap.sys_id and a.source_id=sap.sourceinstance
- where COALESCE(mssql.version,db2.version,ora.version,sap.version,'UNSPECIFIED') <>a.db_version_c )ma
+ where COALESCE(mssql.version,db2.version,ora.version,sap.version,'UNSPECIFIED') <>a.db_version_c
+and a.soft_deleted_flag='N' )ma
  

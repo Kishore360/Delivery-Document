@@ -11,4 +11,4 @@ select source_id,max(lastupdated) as lastupdated from  whirlpool_workdb.d_o_data
 group by source_id
 ) df ON TRGT.source_id = df.source_id
 where  lm.dimension_wh_code = 'OPEN'  and TIMESTAMPDIFF(SECOND,SRC.sys_updated_on,CONVERT_TZ(df.lastupdated ,'America/New_York','GMT'))
-<> TRGT.dormancy_age 
+<> TRGT.dormancy_age and SRC.cdctype='X'
