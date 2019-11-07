@@ -9,5 +9,6 @@ join
 whirlpool_mdwdb.d_lov c         
 on COALESCE(CONCAT('LKP_REGION_C~ASSET','~~~',b.u_region_ref),'UNSPECIFIED')=c.row_id         
 where          
-coalesce(c.row_key,case when b.u_region_ref is null then 0 else -1 end)<>a.lkp_region_c_key         
+coalesce(c.row_key,case when b.u_region_ref is null then 0 else -1 end)<>a.lkp_region_c_key   
+and b.cdctype='X'      
 

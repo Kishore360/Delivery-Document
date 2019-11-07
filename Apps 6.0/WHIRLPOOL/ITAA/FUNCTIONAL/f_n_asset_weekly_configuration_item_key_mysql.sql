@@ -6,4 +6,5 @@ on TRGT.row_id=SRC.sys_id and TRGT.source_id=SRC.sourceinstance
 LEFT join whirlpool_mdwdb.d_configuration_item LKP
 on COALESCE(SRC.ci,'UNSPECIFIED')=LKP.row_id and SRC.sourceinstance=LKP.source_id
  WHERE coalesce(LKP.row_key,case when SRC.ci is null then 0 else -1 end)<>TRGT.configuration_item_key
+ and SRC.cdctype='X'
 

@@ -14,3 +14,4 @@ AND LKP.dimension_class ='EXPENSE_ITEM'
 AND LKP.dimension_type = 'TYPE'
  WHERE SRC.asset Is Null 
 AND COALESCE(LKP.row_key,CASE WHEN SRC.type IS NULL THEN 0 else '-1' end)<> COALESCE(TRGT.expense_type_key,'')
+and SRC.cdctype='X'

@@ -7,4 +7,5 @@ AND SRC.sourceinstance=TRGT.source_id )
 LEFT JOIN whirlpool_mdwdb.d_calendar_date LKP
 ON COALESCE(DATE_FORMAT(convert_tz(SRC.date,'GMT','America/Los_Angeles'),'%Y%m%d')) = LKP.row_id
 -- AND SRC.sourceinstance = LKP.source_id )
-WHERE COALESCE(LKP.row_key,CASE WHEN SRC.date IS NULL THEN NULL else '-1' end)<> COALESCE(TRGT.generated_on_key,'')and SRC.asset is not null;
+WHERE COALESCE(LKP.row_key,CASE WHEN SRC.date IS NULL THEN NULL else '-1' end)<> COALESCE(TRGT.generated_on_key,'')and
+SRC.cdctype='X' and  SRC.asset is not null;

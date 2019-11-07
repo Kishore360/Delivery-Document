@@ -8,4 +8,5 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  LEFT join whirlpool_mdwdb.d_calendar_date LKP 
  ON ( SRC.sys_created_on = LKP.row_id 
 AND SRC.sourceinstance = LKP.source_id )
- WHERE COALESCE(LKP.row_key,CASE WHEN SRC.sys_created_on IS NULL THEN NULL else '-1' end)<> COALESCE(TRGT.expense_created_on_key,'')and SRC.asset is not null;
+ WHERE COALESCE(LKP.row_key,CASE WHEN SRC.sys_created_on IS NULL THEN NULL else '-1' end)<> COALESCE(TRGT.expense_created_on_key,'')
+ and SRC.cdctype='X' and SRC.asset is not null;

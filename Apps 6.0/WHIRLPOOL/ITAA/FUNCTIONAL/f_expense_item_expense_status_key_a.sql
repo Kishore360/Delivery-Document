@@ -11,6 +11,6 @@ AND SRC.sourceinstance = LKP.source_id
 AND LKP.dimension_class ='EXPENSE_ITEM'
 AND LKP.dimension_type = 'STATUS'
  WHERE COALESCE(LKP.row_key,CASE WHEN SRC.state IS NULL THEN 0 else '-1' end)<> COALESCE(TRGT.expense_status_key,'')
-and SRC.asset is not null;
+and SRC.cdctype='X' and SRC.asset is not null;
 
 

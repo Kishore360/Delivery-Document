@@ -12,3 +12,4 @@ join whirlpool_mdsdb.pm_project_task_final SRC_PT ON (SRC_PT.sys_id = SRC.task)
 AND 0 =LKP.source_id)
  WHERE SRC.asset Is Null 
 AND COALESCE(LKP.row_key,CASE WHEN SRC.sys_created_on IS NULL THEN NULL else '-1' end) <> COALESCE(TRGT.expense_created_on_key,'')
+and SRC.cdctype='X'

@@ -11,3 +11,4 @@ JOIN whirlpool_mdsdb.pm_project_task_final SRC_PT ON (SRC_PT.sys_id = SRC.task)
 
  WHERE SRC.asset Is Null 
 AND convert_tz(SRC.sys_created_on,'GMT','America/New_York') <> TRGT.created_on 
+and SRC.cdctype='X'

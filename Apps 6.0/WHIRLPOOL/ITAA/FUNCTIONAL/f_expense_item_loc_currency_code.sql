@@ -7,4 +7,4 @@ ON(FX1.id=SRC.sys_id and FX1.field='amount')
  LEFT JOIN whirlpool_mdwdb.f_expense_item TRGT 
  ON (SRC.sys_id=TRGT.row_id
  AND SRC.sourceinstance=TRGT.source_id )
- WHERE COALESCE( FX1.currency ,'')<> COALESCE(TRGT.loc_currency_code ,'')
+ WHERE COALESCE( FX1.currency ,'')<> COALESCE(TRGT.loc_currency_code ,'') and SRC.cdctype='X'

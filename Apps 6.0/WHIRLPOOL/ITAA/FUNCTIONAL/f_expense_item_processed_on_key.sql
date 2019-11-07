@@ -8,5 +8,5 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  ON(date_format(convert_tz(SRC.process_date,'GMT','America/New_York'),'%Y%m%d') =LKP.row_id
 AND 0 =LKP.source_id)
  WHERE COALESCE(LKP.row_key,CASE WHEN SRC.process_date IS NULL THEN NULL else '-1' end) <> COALESCE(TRGT.processed_on_key,'')
- AND SRC.asset is not null;
+ AND SRC.cdctype='X' and  SRC.asset is not null;
  

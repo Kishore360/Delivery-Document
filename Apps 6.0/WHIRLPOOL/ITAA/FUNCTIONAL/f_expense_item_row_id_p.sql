@@ -9,4 +9,4 @@ JOIN whirlpool_mdsdb.pm_project_final SRC_P ON (SRC_P.sys_id = SRC.task)
  ON (SRC.sys_id=TRGT.row_id 
  AND SRC.sourceinstance=TRGT.source_id )
  WHERE SRC.asset Is Null 
-AND COALESCE( SRC.sys_id ,'')<> COALESCE(TRGT.row_id ,'')
+AND COALESCE( SRC.sys_id ,'')<> COALESCE(TRGT.row_id ,'') and SRC.cdctype='X'

@@ -9,3 +9,4 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  ON ( SRC.contract = LKP.row_id 
 AND SRC.sourceinstance = LKP.source_id )
  WHERE COALESCE(LKP.row_key,CASE WHEN SRC.contract IS NULL THEN 0 else '-1' end)<> COALESCE(TRGT.contract_key,'')
+ and SRC.cdctype='X'

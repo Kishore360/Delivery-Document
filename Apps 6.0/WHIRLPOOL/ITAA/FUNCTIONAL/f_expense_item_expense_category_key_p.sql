@@ -8,12 +8,13 @@ join whirlpool_mdsdb.pm_project_final SRC_P ON (SRC_P.sys_id = SRC.task)
  ON (SRC.sys_id=TRGT.row_id 
  AND SRC.sourceinstance=TRGT.source_id )
  LEFT join whirlpool_mdwdb.d_lov LKP 
- ON (  UCASE( COALESCE(CONCAT('EXPENSE_ITEM~CATEGORY~~' ,SRC.category))) = LKP.row_id 
+ ON (  UCASE( COALESCE(CONCAT('EXPENSE_ITEM~CATEGORY~' ,SRC.category))) = LKP.row_id 
 AND SRC.sourceinstance = LKP.source_id )
 AND LKP.dimension_class ='EXPENSE_ITEM'
 AND LKP.dimension_type = 'CATEGORY'
  WHERE SRC.asset Is Null 
 AND COALESCE(LKP.row_key,CASE WHEN SRC.category IS NULL THEN 0 else '-1' end)<> COALESCE(TRGT.expense_item_category_key,'')
+and SRC.cdctype='X'
 
 
 

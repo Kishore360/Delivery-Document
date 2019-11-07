@@ -9,7 +9,7 @@ FROM  whirlpool_mdsdb.alm_asset_final SRC
 AND (SRC.sourceinstance )= LKP.source_id 
  WHERE  -- n_date='2017-09-04 00:00:00' and 
  TRGT.soft_deleted_flag='N' and  COALESCE(LKP.row_key,CASE WHEN SRC.substatus IS NULL THEN 0 else '-1' end)<>
- (TRGT.asset_substatus_key);
+ (TRGT.asset_substatus_key) and SRC.cdctype='X';
  
  
  

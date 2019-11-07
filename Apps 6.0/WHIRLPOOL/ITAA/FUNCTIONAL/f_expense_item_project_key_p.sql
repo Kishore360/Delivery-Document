@@ -13,3 +13,4 @@ JOIN whirlpool_mdsdb.pm_project_final SRC_P ON (SRC_P.sys_id = SRC.task)
 AND SRC.sourceinstance = LKP.source_id )
  WHERE SRC.asset Is Null 
 AND COALESCE(LKP.row_key,CASE WHEN SRC.task IS NULL THEN 0 else '-1' end)<> COALESCE(TRGT.project_key,'')
+and SRC.cdctype='X'

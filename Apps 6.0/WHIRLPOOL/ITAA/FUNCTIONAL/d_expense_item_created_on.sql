@@ -13,4 +13,5 @@ JOIN whirlpool_mdwdb.d_expense_item TRGT
  ON (SRC.sys_id=TRGT.row_id 
  AND SRC.sourceinstance=TRGT.source_id )
  WHERE convert_tz(SRC.sys_created_on,'GMT','America/New_York')<> TRGT.created_on
+ 
 

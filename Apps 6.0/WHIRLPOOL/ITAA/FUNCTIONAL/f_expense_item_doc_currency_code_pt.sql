@@ -12,3 +12,4 @@ ON(FX1.id=SRC.sys_id and FX1.field='amount')
  AND SRC.sourceinstance=TRGT.source_id )
  WHERE SRC.asset Is Null 
 AND COALESCE( FX1.reference_currency ,'')<> COALESCE(TRGT.doc_currency_code ,'')
+and SRC.cdctype='X'
