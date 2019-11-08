@@ -6,3 +6,4 @@ on TRGT.row_id=SRC.sys_id and TRGT.source_id=SRC.sourceinstance
 join whirlpool_mdwdb.d_internal_organization LKP
 on COALESCE(CONCAT('SUBSIDIARY~',SRC.u_support_vendor),'UNSPECIFIED')=LKP.row_id and SRC.sourceinstance=LKP.source_id
  WHERE coalesce(LKP.row_key,case when SRC.u_support_vendor is null then 0 else -1 end)<>TRGT.support_vendor_c_key
+ and SRC.cdctype='X'

@@ -12,6 +12,6 @@ LEFT JOIN qualcomm_mdwdb.d_internal_contact LKP
 AND TRGT.pivot_date
 BETWEEN LKP.effective_from AND LKP.effective_to
  WHERE COALESCE(LKP.row_key,CASE WHEN SRC.user IS NULL THEN 0 else -1 end) <> (TRGT.user_c_key
-);
+)and SRC.CDCTYPE='X';
 
 

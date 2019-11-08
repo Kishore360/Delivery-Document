@@ -5,4 +5,5 @@ FROM qualcomm_mdsdb.sc_task_final SRC
  LEFT JOIN qualcomm_mdwdb.d_request_task TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
- WHERE SRC.reassignment_count  <> TRGT.reassignment_count;
+ WHERE SRC.reassignment_count  <> TRGT.reassignment_count
+ and SRC.CDCTYPE='X';

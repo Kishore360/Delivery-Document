@@ -11,4 +11,5 @@ LEFT JOIN whirlpool_mdwdb.d_configuration_item LKP
 AND tf.sourceinstance= LKP.source_id )
 join whirlpool_mdwdb.f_task_survey ts on  ts.row_id=tsd.sys_id and ts.source_id=tsd.sourceinstance
  WHERE LKP.soft_deleted_flag='N' and  COALESCE(LKP.row_key,CASE WHEN tf.cmdb_ci IS NULL THEN 0 else -1 end)<> (ts.configuration_item_c_key)
+ and tf.cdctype='X'
  

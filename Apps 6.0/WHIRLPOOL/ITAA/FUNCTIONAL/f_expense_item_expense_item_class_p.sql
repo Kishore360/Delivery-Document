@@ -9,4 +9,4 @@ LEFT JOIN whirlpool_mdwdb.f_expense_item TRGT
 ON (SRC.sys_id=TRGT.row_id
 AND SRC.sourceinstance=TRGT.source_id )
 WHERE SRC.asset Is Null AND SRC.task is not null 
-AND 'PROJECT/TASK'<> COALESCE(TRGT.expense_class ,'');
+AND 'PROJECT/TASK'<> COALESCE(TRGT.expense_class ,'') and SRC.cdctype='X';

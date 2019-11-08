@@ -10,5 +10,6 @@ left join whirlpool_mdsdb.u_countries_final e
 on d.country=e.sys_id and d.sourceinstance=e.sourceinstance
 join
 whirlpool_mdwdb.d_lov LKP
-on COALESCE(concat('COUNTRIES~U_AD_HOC_REQUEST','~~~',upper(e.sys_id)),'UNSPECIFIED')=LKP.row_id
+on COALESCE(concat('COUNTRIES~U_AD_HOC_REQUEST','~',upper(e.sys_id)),'UNSPECIFIED')=LKP.row_id
 where coalesce(LKP.row_key,case when e.sys_id is null then 0 else -1 end ) <> a.adhoc_requested_for_location_key
+and b.cdctype='X'

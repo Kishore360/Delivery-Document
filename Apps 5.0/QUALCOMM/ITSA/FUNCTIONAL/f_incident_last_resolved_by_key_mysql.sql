@@ -16,6 +16,5 @@ where last_resolved_by_key<>
 case when (coalesce(z.row_key,case when resolved_by is null then 0 end ))=0 
 then coalesce(y.row_key,-1) else coalesce(z.row_key,case when resolved_by is null then 0 else -1 end) end
 and map.dimension_wh_code ='RESOLVED' and  B.pivot_date between z.effective_from and z.effective_to
-and last_resolved_by_key<>-2)temp;  
-
-
+and last_resolved_by_key<>-2
+and x.CDCTYPE='X')temp;  

@@ -4,4 +4,5 @@ CASE WHEN cnt>0 THEN 'MDS to DWH data validation failed for d_configuration_item
   whirlpool_mdsdb.cmdb_ci_server_final a
  left join whirlpool_mdwdb.d_configuration_item b
  on a.sys_id=b.row_id and a.sourceinstance=b.source_id
- where a.sys_class_name<>b.parent_class_c  and b.soft_deleted_flag='N')ma
+ where a.sys_class_name<>b.parent_class_c  and b.soft_deleted_flag='N'
+ and a.cdctype='X')ma

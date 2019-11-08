@@ -6,3 +6,4 @@ on TRGT.row_id=SRC.sys_id and TRGT.source_id=SRC.sourceinstance
 join whirlpool_mdwdb.d_internal_contact LKP
 on COALESCE(CONCAT('INTERNAL_CONTACT~',SRC.assigned_to),'UNSPECIFIED')=LKP.row_id and SRC.sourceinstance=LKP.source_id
  WHERE coalesce(LKP.row_key,case when SRC.assigned_to is null then 0 else -1 end)<>TRGT.asset_assigned_to_key
+ and SRC.cdctype='X'

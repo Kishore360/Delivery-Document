@@ -10,5 +10,6 @@ AND SRC.sourceinstance = LKP.sourceinstance
 LEFT JOIN whirlpool_mdwdb.d_internal_organization LKP1
 on LKP1.row_id=COALESCE(CONCAT('DEPARTMENT~',LKP.department),CONCAT('DEPARTMENT~',SRC.department),'UNSPECIFIED')
  WHERE COALESCE(LKP1.row_key,CASE WHEN COALESCE(SRC.department, LKP.department)IS NULL then 0 else '-1' end)<> TRGT.department_key
+ and SRC.cdctype='X'
  
  

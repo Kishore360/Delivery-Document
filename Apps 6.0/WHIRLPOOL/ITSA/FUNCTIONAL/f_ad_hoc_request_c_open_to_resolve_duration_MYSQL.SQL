@@ -6,7 +6,8 @@ CASE WHEN cnt>0 THEN 'MDS to DWH data validation failed for f_ad_hoc_request_c.o
  on a.sys_id=b.row_id and a.sourceinstance=b.source_id
  where CASE WHEN (a.opened_at is null or a.u_adhoc_resolved_dt is null) THEN NULL   
 	 WHEN TIMESTAMPDIFF(SECOND,a.opened_at,a.u_adhoc_resolved_dt) < 0 THEN NULL
-     ELSE TIMESTAMPDIFF(SECOND,a.opened_at,a.u_adhoc_resolved_dt) end <>b.open_to_resolve_duration)ma
+     ELSE TIMESTAMPDIFF(SECOND,a.opened_at,a.u_adhoc_resolved_dt) end <>b.open_to_resolve_duration
+	 and a.cdctype='X')ma
   ;
 
 

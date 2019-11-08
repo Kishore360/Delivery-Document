@@ -10,4 +10,4 @@ JOIN whirlpool_mdsdb.pm_project_task_final SRC_PT ON (SRC_PT.sys_id = SRC.task)
  AND SRC.sourceinstance=TRGT.source_id )
 
  WHERE SRC.asset Is Null 
-AND convert_tz(SRC.sys_updated_on,'GMT','America/New_York') <> TRGT.changed_on 
+AND convert_tz(SRC.sys_updated_on,'GMT','America/New_York') <> TRGT.changed_on and SRC.cdctype='X'

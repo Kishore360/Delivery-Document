@@ -6,5 +6,5 @@ select count(1) as cnt
 from qualcomm_mdsdb.u_walk_up_call_final s
 left  JOIN qualcomm_mdwdb.d_walk_up_call_c t 
 on  t.ROW_ID=s.SYS_ID and s.sourceinstance=t.source_id 
-WHERE t.description <> s.description  ) temp
-
+WHERE t.description <> s.description  
+and s.CDCTYPE) temp

@@ -8,5 +8,6 @@
  ON(date_format(convert_tz(SRC.sys_created_on,'GMT','America/New_York'),'%Y%m%d') =LKP.row_id
 AND 0 =LKP.source_id)
  WHERE COALESCE(LKP.row_key,CASE WHEN SRC.sys_created_on IS NULL THEN NULL else '-1' end) <> COALESCE(TRGT.expense_created_on_key,'')
+ and SRC.cdctype='X'
  AND SRC.asset is not null;
  

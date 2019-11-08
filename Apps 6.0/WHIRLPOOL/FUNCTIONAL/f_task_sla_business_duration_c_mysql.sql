@@ -11,3 +11,4 @@ CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 					 WHEN TIMESTAMPDIFF(SECOND,'1970-01-01 00:00:00',SRC.business_duration) < 0 THEN NULL    
 					 WHEN TIMESTAMPDIFF(SECOND,'1970-01-01 00:00:00',SRC.business_duration) > 214748364 THEN NULL     
 					 ELSE TIMESTAMPDIFF(SECOND,'1970-01-01 00:00:00',SRC.business_duration) end <> business_duration_c
+and SRC.CDCTYPE='X'

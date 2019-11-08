@@ -6,4 +6,4 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  ON (SRC.sys_id=TRGT.row_id 
  AND SRC.sourceinstance=TRGT.source_id )
  WHERE COALESCE( CAST(SRC.amount as decimal(20,10)),'')<> COALESCE(TRGT.expense_doc_amount, '')
- and SRC.asset is not null;
+ and SRC.cdctype='X' and SRC.asset is not null;

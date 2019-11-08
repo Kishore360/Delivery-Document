@@ -8,4 +8,5 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  LEFT JOIN whirlpool_mdwdb.d_configuration_item LKP 
  ON ( SRC.ci = LKP.row_id 
 AND SRC.sourceinstance = LKP.source_id )
- WHERE COALESCE(LKP.row_key,CASE WHEN SRC.ci IS NULL THEN 0 else '-1' end)<> COALESCE(TRGT.configuration_item_key,'')and SRC.asset is not null;
+ WHERE COALESCE(LKP.row_key,CASE WHEN SRC.ci IS NULL THEN 0 else '-1' end)<> COALESCE(TRGT.configuration_item_key,'')and
+SRC.cdctype='X' and  SRC.asset is not null;

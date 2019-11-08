@@ -5,7 +5,7 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  and src.sourceinstance=trgt.source_id
         join  qualcomm_mdwdb.d_internal_contact lkp on coalesce(concat('INTERNAL_CONTACT~',src.manager),'UNSPECIFIED')=lkp.row_id
         and src.sourceinstance=lkp.source_id
-        where COALESCE(lkp.row_key,CASE WHEN src.manager IS NULL THEN 0 else -1 end) <> (trgt.manager_key)
+        where COALESCE(lkp.row_key,CASE WHEN src.manager IS NULL THEN 0 else -1 end) <> (trgt.manager_key) and src.CDCTYPE='X'
 		
 		
 		

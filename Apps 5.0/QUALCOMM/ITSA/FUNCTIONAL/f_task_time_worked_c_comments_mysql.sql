@@ -6,5 +6,5 @@ FROM (
 Select Count(1) as CNT
 from qualcomm_mdsdb.task_time_worked_final SRC 
 JOIN qualcomm_mdwdb.f_task_time_worked_c TRGT ON SRC.sys_id=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id
-WHERE SRC.comments<>TRGT.comments
+WHERE SRC.comments<>TRGT.comments and SRC.CDCTYPE='X'
 ) temp;

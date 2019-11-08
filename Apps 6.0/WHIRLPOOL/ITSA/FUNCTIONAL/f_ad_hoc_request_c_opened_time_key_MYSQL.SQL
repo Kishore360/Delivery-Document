@@ -7,6 +7,7 @@ CASE WHEN cnt>0 THEN 'MDS to DWH data validation failed for f_ad_hoc_request_c.o
  LEFT JOIN whirlpool_mdwdb.d_calendar_time LKP 
 on LKP.row_id = COALESCE(DATE_FORMAT(CONVERT_TZ(a.opened_at,'GMT','America/New_York'),'%H%i'),'UNSPECIFIED')
 WHERE COALESCE(LKP.row_key,case when a.opened_at is null then 0 else -1 end)<>(b.opened_time_key)
+and a.cdctype='X'
 )ma
  
 

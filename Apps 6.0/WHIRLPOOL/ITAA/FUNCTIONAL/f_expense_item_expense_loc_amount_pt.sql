@@ -11,4 +11,5 @@ JOIN whirlpool_mdsdb.pm_project_task_final SRC_PT ON (SRC_PT.sys_id = SRC.task)
  AND SRC.sourceinstance=TRGT.source_id )
  WHERE SRC.asset Is Null 
 AND COALESCE( CAST(SRC2.amount as decimal(20,10)),'')<> COALESCE(TRGT.expense_loc_amount ,'')
+and SRC.cdctype='X'
  

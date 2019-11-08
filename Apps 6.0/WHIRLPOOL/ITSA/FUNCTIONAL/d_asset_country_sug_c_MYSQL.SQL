@@ -4,7 +4,8 @@ CASE WHEN cnt>0 THEN 'MDS to DWH data validation failed for d_asset.country_sug_
   whirlpool_mdsdb.alm_asset_final a
  left join whirlpool_mdwdb.d_asset b
  on a.sys_id=right(b.row_id,32) and a.sourceinstance=b.source_id
- where coalesce(a.u_country_sug,'UNSPECIFIED')<>b.country_sug_c  and b.soft_deleted_flag='N')ma;
+ where coalesce(a.u_country_sug,'UNSPECIFIED')<>b.country_sug_c  and b.soft_deleted_flag='N'
+ and a.cdctype='X')ma;
  
  
  

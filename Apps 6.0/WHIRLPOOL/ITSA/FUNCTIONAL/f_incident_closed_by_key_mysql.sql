@@ -12,5 +12,5 @@ AND SRC.sourceinstance= LKP.source_id
 AND TRGT.pivot_date
  BETWEEN LKP.effective_from AND LKP.effective_to) 
 
- WHERE COALESCE(LKP.row_key,CASE WHEN SRC.resolved_by IS NULL THEN 0 else -1 end)<> (TRGT.closed_by_key) ;
+ WHERE COALESCE(LKP.row_key,CASE WHEN SRC.resolved_by IS NULL THEN 0 else -1 end)<> (TRGT.closed_by_key) and SRC.cdctype='X' ;
  

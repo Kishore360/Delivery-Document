@@ -12,7 +12,7 @@ where  CASE
                 ELSE TIMESTAMPDIFF(SECOND,
                 '1970-01-01 00:00:00',
                 SRC.time_worked) 
-            end <>(TRGT.time_worked )
+            end <>(TRGT.time_worked )and SRC.CDCTYPE='X'
 			
 			
 			

@@ -8,3 +8,4 @@ ON(FX1.id=SRC.sys_id and FX1.field='amount')
  ON (SRC.sys_id=TRGT.row_id
  AND SRC.sourceinstance=TRGT.source_id )
  WHERE COALESCE( FX1.reference_currency ,'')<> COALESCE(TRGT.doc_currency_code ,'')
+ and SRC.cdctype='X'

@@ -12,3 +12,4 @@ ON COALESCE(DATE_FORMAT(convert_tz(SRC.date,'GMT','America/Los_Angeles'),'%Y%m%d
 -- AND SRC.sourceinstance = LKP.source_id )
 WHERE SRC.asset Is Null 
 AND COALESCE(LKP.row_key,CASE WHEN SRC.date IS NULL THEN NULL else '-1' end)<> COALESCE(TRGT.generated_on_key,'')
+and SRC.cdctype='X'

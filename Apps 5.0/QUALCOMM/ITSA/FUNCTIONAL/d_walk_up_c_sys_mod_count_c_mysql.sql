@@ -4,4 +4,5 @@ FROM qualcomm_mdsdb.u_walk_up_call_final SRC
  LEFT JOIN qualcomm_mdwdb.d_walk_up_call_c TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
-WHERE TRGT.sys_mod_count_c<> SRC.sys_mod_count;
+WHERE TRGT.sys_mod_count_c<> SRC.sys_mod_count
+and SRC.CDCTYPE='X';

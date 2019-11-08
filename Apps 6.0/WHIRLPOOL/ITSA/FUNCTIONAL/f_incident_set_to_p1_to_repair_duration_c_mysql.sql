@@ -9,4 +9,4 @@ WHERE
 CASE 
  WHEN SRC.u_time_to_repair  is null  THEN NULL   
  WHEN TIMESTAMPDIFF(SECOND,SRC.u_set_to_p1,SRC.u_time_to_repair) < 0 THEN 0  ELSE  TIMESTAMPDIFF(SECOND,SRC.u_set_to_p1,SRC.u_time_to_repair)
- end <> TRGT.set_to_p1_to_repair_duration_c
+ end <> TRGT.set_to_p1_to_repair_duration_c and SRC.cdctype='X'
