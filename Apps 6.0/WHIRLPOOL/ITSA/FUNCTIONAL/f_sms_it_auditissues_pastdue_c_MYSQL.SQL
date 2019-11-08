@@ -7,7 +7,7 @@ FROM
 SELECT count(1) as cnt 
 FROM  whirlpool_mdsdb.us_sms_it_auditissues_trends_final  src
 left join whirlpool_mdwdb.f_sms_it_auditissues trgt on src.row_id=trgt.row_id and src.sourceinstance=trgt.source_id
-where CAST(src.pastdue AS DECIMAL)<>trgt.pastdue_c
+where CAST(src.pastdue AS DECIMAL)<>trgt.pastdue_c and src.cdctype='X'
 ) temp; 
 
 

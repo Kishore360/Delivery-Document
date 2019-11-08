@@ -1,5 +1,5 @@
 SELECT CASE WHEN cnt>0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, 
-CASE WHEN cnt>0 THEN 'MDS to DWH data validation failed for f_cmdb_relationship_c.parent_configuration_item_c_key' ELSE 'SUCCESS' END as Message 
+CASE WHEN cnt>0 THEN 'MDS to DWH data validation failed for f_cmdb_relationship_c.portfolio_c_key' ELSE 'SUCCESS' END as Message 
  FROM (select count(1) as cnt from 
  whirlpool_mdsdb.cmdb_rel_ci_final SRC
  left join whirlpool_workdb.f_cmdb_relationship_c TRGT
