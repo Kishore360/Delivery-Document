@@ -4,7 +4,7 @@
 from
 (
 select count(1) as cnt FROM (select sys_updated_on,sys_id,sourceinstance,opened_at,resolved_at,closed_at 
-from whirlpool_mdsdb.incident_final where opened_at < coalesce(closed_at,resolved_at)) SRC 
+from whirlpool_mdsdb.incident_final where opened_at < coalesce(closed_at,resolved_at) and cdctype='X') SRC 
   join whirlpool_mdwdb.f_incident f ON (SRC.sys_id =f.row_id  
  AND SRC.sourceinstance= f.source_id  )
 JOIN whirlpool_mdwdb.d_lov_map br ON f.state_src_key = br.src_key
