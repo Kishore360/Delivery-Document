@@ -8,5 +8,5 @@ left join wpl_mdwdb.d_configuration_item LKP
 on SRC.parent=LKP.row_id
 and SRC.sourceinstance=LKP.source_id
 where COALESCE(LKP.row_key,CASE WHEN SRC.parent IS NULL THEN 0 else -1 end)<> (TRGT.parent_configuration_item_c_key)
- and CDCTYPE='X')ma
+ and SRC.CDCTYPE='X')ma
   ;

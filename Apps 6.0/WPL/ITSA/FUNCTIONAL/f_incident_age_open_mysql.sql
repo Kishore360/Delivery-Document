@@ -9,6 +9,6 @@ from
 JOIN wpl_mdwdb.d_lov_map br ON f.state_src_key = br.src_key
 AND br.dimension_wh_code = 'OPEN' and br.dimension_class = 'STATE~INCIDENT'
 
-WHERE TIMESTAMPDIFF(second,SRC.opened_at,(SELECT CONVERT_TZ((lastupdated),'America/New_york','GMT') AS lastupdated FROM wpl_mdwdb.d_o_data_freshness WHERE sourcename like 'ServiceNow%' and etl_run_number=f.etl_run_number))<> f.age 
+WHERE TIMESTAMPDIFF(second,SRC.opened_at,(SELECT max(CONVERT_TZ((lastupdated),'America/New_york','GMT')) AS lastupdated FROM wpl_mdwdb.d_o_data_freshness WHERE sourcename like 'ServiceNow%' ) )<> f.age 
 
  )A
