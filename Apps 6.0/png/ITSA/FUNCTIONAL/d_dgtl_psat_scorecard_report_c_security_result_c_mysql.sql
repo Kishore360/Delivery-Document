@@ -1,12 +1,15 @@
-SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
- CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for d_dgtl_psat_scorecard_report_c.security_result_c' ELSE 'SUCCESS' END as Message
- FROM
-   png_mdsdb.us_dgtl_psat_scorecard_report_final SRC
- JOIN png_mdwdb.d_dgtl_psat_scorecard_report_c TRGT
-ON concat (COALESCE(FLOOR(SRC.Touchpoint_Number),'-','UNSPECIFIED'),COALESCE(SRC.FileDate,'UNSPECIFIED')) = TRGT.row_id AND SRC.sourceinstance=TRGT.source_id
-WHERE CASE WHEN SRC.Security_Scan_Status_Reporting IN ('#N/A' , 'N/A' , 'NA' , '0', '') THEN 'Ignore'
-	WHEN SRC.Security_Scan_Status_Reporting IN ('#N/A' , 'N/A' , 'NA' , '0', '') then 'Ignore'
-    ELSE SUBSTRING(SRC.Security_Scan_Status_Reporting,1,instr(SRC.Security_Scan_Status_Reporting,':')) 
-    end <> TRGT.security_result_c;
+SELECT 
+CASE WHEN CNT > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+CASE WHEN CNT > 0 THEN 'MDS to DWH data validation failed for d_dgtl_psat_scorecard_report_c.security_result_c' ELSE 'SUCCESS' END as Message
+FROM 
+(
+SELECT Count(1) as CNT 
+FROM png_mdsdb.u_pg_cs_scanning_final SRC 
+LEFT JOIN png_mdwdb.d_dgtl_psat_scorecard_report_c TRGT 
+ON SRC.Sys_id = TRGT.row_id 
+AND SRC.sourceinstance=TRGT.source_id
+WHERE CASE WHEN u_scan_type= 'Security' THEN SRC.u_status END  <> TRGT.security_result_c
+AND SRC.cdctype<>'D'
+) temp;
 
 
