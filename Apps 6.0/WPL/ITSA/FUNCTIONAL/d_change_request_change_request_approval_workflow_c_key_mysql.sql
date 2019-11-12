@@ -4,6 +4,6 @@ FROM wpl_mdsdb.change_request_final  SRC
 JOIN wpl_mdwdb.d_change_request TRGT 
 ON (SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id )  
 LEFT JOIN wpl_mdwdb.d_lov LKP 
-ON (COALESCE(CONCAT('APPROVAL_WORKFLOW~CHANGE_REQUEST~',UPPER(SRC.u_approval_workflow)),'UNSPECIFIED') = LKP.row_id AND SRC.sourceinstance = LKP.source_id ) 
-WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_approval_workflow IS NULL THEN 0 else -1 end)<> (TRGT.change_request_approval_workflow_c_key) 
+ON (COALESCE(CONCAT('APPROVAL_WORKFLOW~CHANGE_REQUEST~',UPPER(incf.u_approval_workflow)),'UNSPECIFIED') = LKP.row_id AND SRC.sourceinstance = LKP.source_id ) 
+WHERE COALESCE(LKP.row_key,CASE WHEN incf.u_approval_workflow IS NULL THEN 0 else -1 end)<> (TRGT.change_request_approval_workflow_c_key) 
 and SRC.cdctype='X'
