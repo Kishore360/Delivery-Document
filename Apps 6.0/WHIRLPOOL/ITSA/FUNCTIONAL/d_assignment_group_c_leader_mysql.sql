@@ -3,7 +3,7 @@ CASE WHEN count(1)  THEN 'MDS to DWH data validation failed for d_assignment_gro
 FROM whirlpool_mdsdb.us_MATFN_AssignmentGroupLeader_final  SRC 
 JOIN whirlpool_mdwdb.d_assignment_group_c TRGT 
 ON ((concat(SRC.assignmentgroup,'~',SRC.leader) = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id )
- WHERE SRC.leader <> (TRGT.leader) and SRC.CDCTYPE='X'
+ WHERE SRC.leader <> (TRGT.leader) and SRC.CDCTYPE<>'D'
  
  
  
