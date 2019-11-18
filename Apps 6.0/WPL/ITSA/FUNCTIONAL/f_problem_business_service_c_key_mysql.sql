@@ -7,5 +7,5 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 LEFT JOIN wpl_mdwdb.d_service LKP 
  ON ( COALESCE(CONCAT('BUSINESS_SERVICE~',UPPER(SRC.u_business_service)),'UNSPECIFIED')= LKP.row_id 
 AND SRC.sourceinstance= LKP.source_id )
- WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_business_service  IS NULL THEN 0 else -1 end)<> (TRGT.business_service_c_key)
+ WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_business_service  IS NULL THEN 0 else -1 end)<> (TRGT.business_service_key)
 
