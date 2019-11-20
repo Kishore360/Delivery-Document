@@ -6,7 +6,7 @@ CASE WHEN CNT > 0 THEN 'MDS to DWH data validation failed for d_rita_application
 FROM 
 (
 SELECT Count(1) as CNT 
-FROM png_mdsdb.pg_mega_pgb_application_rita_final SRC 
+FROM png_mdsdb.pg_mega_cmdb_ci_appl_final SRC 
 LEFT JOIN 
 (
 SELECT a.MEGA_HEX_ID,a.Assessment_Status,a.sourceinstance,

@@ -8,12 +8,12 @@ FROM
 (
 SELECT NAME,sourceinstance,cdctype,GROUP_CONCAT(DISTINCT le_name ORDER BY le_name ) AS le_name FROM 
 (
-SELECT a.NAME,a.sourceinstance,LEG.le_name,cdctype
-FROM png_mdsdb.pg_mega_pgb_application_rita_final a 
+SELECT a.sys_id as NAME,a.sourceinstance,LEG.le_name,cdctype
+FROM png_mdsdb.pg_mega_cmdb_ci_appl_final a 
 LEFT JOIN 
 (SELECT app_hexid,sourceinstance,le_hexid,le_name,count(1) FROM png_mdsdb.pg_mega_pgv_app_le_final 
 WHERE (le_hexid IS NOT NULL AND le_hexid<>'') AND (app_hexid IS NOT NULL AND cdctype<>'D')
-GROUP BY 1,2,3,4) LEG ON a.NAME=LEG.app_hexid AND a.sourceinstance=LEG.sourceinstance
+GROUP BY 1,2,3,4) LEG ON a.u_pg_source_system_id=LEG.app_hexid AND a.sourceinstance=LEG.sourceinstance
 ) X 
 GROUP BY NAME 
 ) SRC 

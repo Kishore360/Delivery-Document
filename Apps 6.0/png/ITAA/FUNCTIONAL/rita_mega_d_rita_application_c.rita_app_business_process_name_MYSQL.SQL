@@ -10,12 +10,12 @@ FROM
 SELECT NAME,sourceinstance,cdctype,GROUP_CONCAT(DISTINCT BP_NAME ORDER BY BP_NAME) AS BP_NAME
 FROM 
 (
-SELECT a.NAME,a.sourceinstance,BP.BP_NAME,cdctype FROM png_mdsdb.pg_mega_pgb_application_rita_final a 
+SELECT a.sys_id as NAME,a.sourceinstance,BP.BP_NAME,cdctype FROM png_mdsdb.pg_mega_cmdb_ci_appl_final a 
 LEFT JOIN 
 (
 SELECT app_hex,sourceinstance,BP_NAME,Count(1) FROM png_mdsdb.pg_mega_snv_app_assoc_business_process_final
 WHERE (app_hex IS NOT NULL )AND (BP_NAME IS NOT NULL and BP_NAME <>'') AND cdctype <>'D'
-GROUP BY 1,2,3) BP ON a.NAME=BP.app_hex AND a.sourceinstance=BP.sourceinstance
+GROUP BY 1,2,3) BP ON a.u_pg_source_system_id=BP.app_hex AND a.sourceinstance=BP.sourceinstance
 ) X 
 GROUP BY NAME
 ) SRC 

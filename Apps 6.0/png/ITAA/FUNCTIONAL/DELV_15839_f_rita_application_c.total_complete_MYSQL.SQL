@@ -16,69 +16,53 @@ select name,count(1) as total_complete
 ,17- (count(1)) as total_incomplete
 from(SELECT Y.name, field, value from png_mdsdb.pg_mega_pgb_application_rita_final A
 JOIN (
-select name,'PG_APPLICATION_DESCRIPTION' as field, PG_APPLICATION_DESCRIPTION  as value
-from  png_mdsdb.pg_mega_pgb_application_rita_final
-where PG_APPLICATION_DESCRIPTION is not null and PG_APPLICATION_DESCRIPTION <> ''
+select name,'PG_APPLICATION_DESCRIPTION' as field, short_description  as value
+from  png_mdsdb.pg_mega_cmdb_ci_appl_final
+where short_description is not null and short_description <> ''
 union all
-select name,'LEGITIMATE_INTEREST' as field, LEGITIMATE_INTEREST as value
-from png_mdsdb.pg_mega_pgb_application_rita_final
-where LEGITIMATE_INTEREST is not null and LEGITIMATE_INTEREST <> ''
+select name,'VOLUME_OF_RECORDS_EU' as field, u_pg_volume_records_eu  as value
+from png_mdsdb.pg_mega_cmdb_ci_appl_final
+where u_pg_volume_records_eu  is not null and u_pg_volume_records_eu  <> ''
 union all
-select name,'RETENTION_SPAN_YEARS' as field, RETENTION_SPAN_YEARS as value
-from png_mdsdb.pg_mega_pgb_application_rita_final
-where RETENTION_SPAN_YEARS is not null and RETENTION_SPAN_YEARS <> ''
+select name,'VOLUME_OF_RECORDS_ALL' as field, u_pg_volume_records_all  as value
+from png_mdsdb.pg_mega_cmdb_ci_appl_final
+where u_pg_volume_records_all  is not null and u_pg_volume_records_all  <> ''
 union all
-select name,'VOLUME_OF_RECORDS_EU' as field, VOLUME_OF_RECORDS_EU as value
-from png_mdsdb.pg_mega_pgb_application_rita_final
-where VOLUME_OF_RECORDS_EU is not null and VOLUME_OF_RECORDS_EU <> ''
-union all
-select name,'VOLUME_OF_RECORDS_ALL' as field, VOLUME_OF_RECORDS_ALL as value
-from png_mdsdb.pg_mega_pgb_application_rita_final
-where VOLUME_OF_RECORDS_ALL is not null and VOLUME_OF_RECORDS_ALL <> ''
-union all
-select name,'AUTOMATED_DECISION_MAKING' as field, AUTOMATED_DECISION_MAKING as value
-from png_mdsdb.pg_mega_pgb_application_rita_final
-where AUTOMATED_DECISION_MAKING is not null and AUTOMATED_DECISION_MAKING <> ''
+select name,'AUTOMATED_DECISION_MAKING' as field, u_pg_automateddecision_making  as value
+from png_mdsdb.pg_mega_cmdb_ci_appl_final
+where u_pg_automateddecision_making  is not null and u_pg_automateddecision_making  <> ''
 -- References
 union all
-select app_hexid as name, 'Owning Organization', max(responsible_org_unit_hexid) as value
-from png_mdsdb.pg_mega_pgv_app_responsible_org_person_final 
-where (pg_development_org <>'N' AND pg_development_org is not null ) and cdctype <>'D' and app_hexid is not null and  responsible_org_unit_hexid is not null and responsible_org_unit_hexid <>''
+select a.sys_id as name, 'Owning Organization', max(responsible_org_unit_hexid) as value , 1 as scope
+from png_mds_viewdb.pg_mega_cmdb_ci_appl_final a
+JOIN png_mds_viewdb.pg_mega_pgv_app_responsible_org_person_final b
+ON a.u_pg_source_system_id = b.app_hexid
+where (b.pg_development_org <>'N' AND b.pg_development_org is not null ) and b.cdctype <>'D' and b.app_hexid is not null and  b.responsible_org_unit_hexid is not null and responsible_org_unit_hexid <>''
 group by app_hexid 
 union all
-select app_hexid as name, 'P&G Asset Owner', max(person_intranet_id) as value
-from png_mdsdb.pg_mega_pgv_app_responsible_org_person_final 
-where (application_manager <> 'N' AND application_manager is not null ) and cdctype <>'D' and  app_hexid is not null and person_intranet_id is not null and person_intranet_id is not null
-group by app_hexid
+select sys_id as name, 'P&G Asset Owner', max(owned_by) as value , 1 as scope
+from png_mds_viewdb.pg_mega_cmdb_ci_appl_final 
+where owned_by is not null
 union all 
-select app_hexid as name, 'Service Operations Supplier SAP Code', max(org.CARDINAL) as value
-from png_mdsdb.pg_mega_pgv_app_responsible_org_person_final as rp
-inner join  (select distinct name,CARDINAL from png_mdsdb.pg_mega_pgb_org_unit_final) as org
-on rp.responsible_org_unit_hexid = org.name
-where (pg_service_manager_supplier <>'N' AND  pg_service_manager_supplier is not null) and rp.cdctype <>'D' and app_hexid is not null and  responsible_org_unit_hexid is not null and org.CARDINAL <> '' AND org.CARDINAL IS NOT NULL
-group by app_hexid
+select u_configuration_item as name, 'Service Operations Supplier SAP Code', max(u_vendor) as value , 1 as scope
+from png_mds_viewdb.pg_mega_u_ci_responsible_vendor_final rp
+where (u_role = 'Service Operations Supplier') and rp.cdctype <>'D' 
+group by 1
 union all 
-select app_hexid as name, 'Software Supplier SAP Codee', max(org.CARDINAL) as value
-from png_mdsdb.pg_mega_pgv_app_responsible_org_person_final as rp
-inner join  (select distinct name,CARDINAL from png_mdsdb.pg_mega_pgb_org_unit_final) as org
-on rp.responsible_org_unit_hexid = org.name
-where  (pg_software_supplier <>'N' AND pg_software_supplier is not null) and rp.cdctype <>'D' and 
- app_hexid is not null and  responsible_org_unit_hexid is not null and org.CARDINAL <> ''  AND org.CARDINAL IS NOT NULL
-group by app_hexid
+select u_configuration_item as name, 'Software Supplier SAP Code', max(u_role) as value , 1 as scope
+from png_mds_viewdb.pg_mega_u_ci_responsible_vendor_final rp
+where (u_role = 'Software Supplier') and rp.cdctype <>'D' 
+group by 1
 union all 
-select app_hexid as name, 'Technology Supplier SAP Code', max(org.CARDINAL) as value
-from png_mdsdb.pg_mega_pgv_app_responsible_org_person_final as rp
-inner join  (select distinct name,CARDINAL from png_mdsdb.pg_mega_pgb_org_unit_final) as org
-on rp.responsible_org_unit_hexid = org.name
-where (supplier <>'N' AND supplier  is not null) and rp.cdctype <>'D' and  app_hexid is not null and  responsible_org_unit_hexid is not null and org.CARDINAL <> ''   AND org.CARDINAL IS NOT NULL
-group by app_hexid
+select u_configuration_item as name, 'Technology Supplier SAP Code', max(u_role) as value , 1 as scope
+from png_mds_viewdb.pg_mega_u_ci_responsible_vendor_final rp
+where (u_role = 'Technology Supplier') and rp.cdctype <>'D' 
+group by 1
 union all 
-select app_hexid as name, 'Implementation Supplier SAP Code', max(org.CARDINAL) as value
-from png_mdsdb.pg_mega_pgv_app_responsible_org_person_final as rp
-inner join  (select distinct name,CARDINAL from png_mdsdb.pg_mega_pgb_org_unit_final) as org
-on rp.responsible_org_unit_hexid = org.name
-where (pg_implementation_supplier <>'N' AND pg_implementation_supplier is not null) and rp.cdctype <>'D' and  app_hexid is not null and  responsible_org_unit_hexid is not null and org.CARDINAL <> ''   AND org.CARDINAL IS NOT NULL
-group by app_hexid
+select u_configuration_item as name, 'Implementation Supplier SAP Code', max(u_role) as value , 1 as scope
+from png_mds_viewdb.pg_mega_u_ci_responsible_vendor_final rp
+where (u_role = 'Implementation Supplier') and rp.cdctype <>'D' 
+group by 1
 UNION ALL
 -- removed as part of DELV-16543
 /* select app_hexid as name, 'Other Supplier SAP Code', max(org.CARDINAL) as value
@@ -90,21 +74,24 @@ where  (third_party_with_access <>'No' AND third_party_with_access is not null) 
 app_hexid is not null and  responsible_org_unit_hexid is not null and org.CARDINAL <> '' AND org.CARDINAL IS NOT NULL
 group by app_hexid
 union all */
-select app_hexid as name,'Data Category', max(DATA_CAT_HEXID) as value from png_mdsdb.pg_mega_pgv_app_data_cat_final 
-where app_hexid is not null and DATA_CAT_HEXID is not null and DATA_CAT_HEXID <> '' and cdctype <> 'D'
-group by app_hexid
+select b.sys_id as name,'In which country are you collecting PII?',max(SITE_HEX) as value , 1 as scope from png_mds_viewdb.pg_mega_pgv_application_site_pii_final a 
+JOIN png_mds_viewdb.pg_mega_cmdb_ci_appl_final b 
+on b.u_pg_source_system_id = a.app_hex and a.sourceinstance = b.sourceinstance 
+where app_hex is not null and SITE_HEX is not null and SITE_HEX <> ''  and b.cdctype <>'D'
+ group by 1
 union all
-select app_hex as name,'In which country are you collecting PII?',max(SITE_HEX) as value from png_mdsdb.pg_mega_pgv_application_site_pii_final 
-where app_hex is not null and SITE_HEX is not null and SITE_HEX <> ''  and cdctype <>'D'
- group by app_hex
+select b.sys_id  as name,'Business Process / Service - P&G Hierarchy',max(bp_hex) as value , 1 as scope from png_mds_viewdb.pg_mega_snv_app_assoc_business_process_final
+a 
+JOIN png_mds_viewdb.pg_mega_cmdb_ci_appl_final b 
+on b.u_pg_source_system_id = a.app_hex and a.sourceinstance = b.sourceinstance 
+where app_hex is not null and bp_hex is not null and bp_hex <> ''  and a.cdctype <>'D'
+ group by 1
 union all
-select app_hex as name,'Business Process / Service - P&G Hierarchy',max(bp_hex) as value from png_mdsdb.pg_mega_snv_app_assoc_business_process_final 
-where app_hex is not null and bp_hex is not null and bp_hex <> ''  and cdctype <>'D'
- group by app_hex
-union all
-select app_hexid as name,'Contractual Data: What are the LE(s) receiving the services',max(le_hexid) as value from png_mdsdb.pg_mega_pgv_app_le_final 
-where app_hexid is not null and le_hexid is not null and le_hexid<> '' and cdctype <>'D'
-group by app_hexid
+select b.sys_id as name,'Contractual Data: What are the LE(s) receiving the services',max(le_hexid) as value, 1 as scope from png_mds_viewdb.pg_mega_pgv_app_le_final a 
+JOIN png_mds_viewdb.pg_mega_cmdb_ci_appl_final b 
+on b.u_pg_source_system_id = a.app_hexid and a.sourceinstance = b.sourceinstance
+where app_hexid is not null and le_hexid is not null and le_hexid<> '' and a.cdctype <>'D'
+group by 1
 UNION ALL 
 SELECT app_hex,'Data Elements Combined flag',max(ATTRIBUTE_NAME) as value 
 FROM (SELECT app_hex,replace(ATTRIBUTE_NAME,char('124'),'@') as ATTRIBUTE_NAME FROM png_mdsdb.pg_mega_pgv_application_data_model_final where cdctype='X') a11

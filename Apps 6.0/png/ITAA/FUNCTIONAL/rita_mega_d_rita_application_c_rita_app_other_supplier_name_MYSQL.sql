@@ -1,30 +1,33 @@
 SELECT 
-CASE WHEN COUNT(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
-CASE WHEN COUNT(1) > 0 THEN 'MDS to DWH data validation failed' ELSE 'SUCCESS' END as Message
+CASE WHEN CNT > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+CASE WHEN CNT > 0 THEN 'MDS to DWH data validation failed' ELSE 'SUCCESS' END as Message
 FROM 
 (
-select app_hexid,GROUP_CONCAT(distinct organization_name order by organization_name) as organization_name,
-GROUP_CONCAT(distinct cardinal order by organization_name) as cardinal ,sourceinstance from
-(
-select app.name as app_hexid, responsible_org_unit,
-CASE WHEN cardinal is null or cardinal='' or cardinal=responsible_org_unit then responsible_org_unit 
-else LEFT(replace(replace(responsible_org_unit,CONCAT(' - ',cardinal),''),cardinal,'') ,255) end as organization_name, cardinal
-,app.sourceinstance from (
-png_mdsdb.pg_mega_pgb_application_rita_final app
-left join (select app_hexid,responsible_org_unit_hexid,responsible_org_unit,sourceinstance,count(1) from png_mdsdb.pg_mega_pgv_app_responsible_org_person_final 
-where (third_party_with_access <>'No' AND third_party_with_access is not null) and app_hexid is not null and responsible_org_unit_hexid is not null
-and cdctype='X' 
-group by 1,2,3,4)org
-on app.name=org.app_hexid and app.sourceinstance=org.sourceinstance 
-left join (select distinct name,LEFT((cardinal),255) as CARDINAL from  png_mdsdb.pg_mega_pgb_org_unit_final
-where  (cardinal is not null and cardinal<>'') 
-) as organization 
-on responsible_org_unit_hexid = organization.name 
-))Z
-group by app_hexid
-
-) SRC1  
-LEFT JOIN 
-png_mdwdb.d_rita_application_c TRGT ON SRC1.app_hexid=TRGT.row_id AND SRC1.sourceinstance=TRGT.source_id
-WHERE COALESCE(SRC1.Organization_NAME,'UNSPECIFIED')<>TRGT.rita_app_other_supplier_name and TRGT.soft_deleted_flag ='N'
+select count(1) as CNT
+from
+png_mdwdb.d_rita_application_c d_rita_application_c
+join
+(select group_concat(distinct CASE 
+                WHEN u_ci_responsible_vendor.u_role='Other Suppliers' THEN d_internal_organization.organization_name 
+                else '' 
+            END 
+        order by
+            1 asc) as other_suppliers, SRC.row_key as row_key
+from png_mdsdb.pg_mega_u_ci_responsible_vendor_final u_ci_responsible_vendor
+join 
+(select  organization_name, row_id, source_id from
+png_mdwdb.d_internal_organization d_internal_organization) d_internal_organization 			
+on ((COALESCE(CONCAT('SUBSIDIARY~',u_ci_responsible_vendor.u_vendor),'UNSPECIFIED'))=d_internal_organization.row_id and d_internal_organization.source_id=2)
+join
+(select row_id, source_id, cdctype, max(row_key) as row_key from png_mdwdb.d_rita_application_c group by 1,2,3) SRC
+on (u_ci_responsible_vendor.u_configuration_item=SRC.row_id and u_ci_responsible_vendor.sourceinstance=SRC.source_id)
+group by SRC.row_key) SRC1
+on (d_rita_application_c.row_key=SRC1.row_key)
+where
+d_rita_application_c.rita_app_other_supplier_code<>
+CASE 
+WHEN SRC1.other_suppliers LIKE ',%' THEN REPLACE(SRC1.other_suppliers,
+',',
+'')  
+WHEN SRC1.other_suppliers ='' THEN 'UNSPECIFIED' ELSE SRC1.other_suppliers END) temp;
 

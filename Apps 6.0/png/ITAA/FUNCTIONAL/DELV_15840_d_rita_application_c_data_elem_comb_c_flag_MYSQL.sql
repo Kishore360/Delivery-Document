@@ -1,4 +1,3 @@
-
 SELECT 
 CASE WHEN CNT > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 CASE WHEN CNT > 0 THEN 'MDS to DWH data validation failed for d_rita_application_c.data_elem_comb_c_flag' ELSE 'SUCCESS' END as Message
@@ -9,73 +8,77 @@ FROM
 
 (
 
-SELECT app_hex, sourceinstance,'Data Elements Combined flag',max(ATTRIBUTE_NAME) as value 
-FROM (SELECT app_hex,sourceinstance,replace(ATTRIBUTE_NAME,char('124'),'@') as ATTRIBUTE_NAME FROM png_mdsdb.pg_mega_pgv_application_data_model_final where cdctype = 'X') a11
-WHERE 
-a11.ATTRIBUTE_NAME ='Data about teens 16-18' OR a11.ATTRIBUTE_NAME like '%@Data about teens 16-18@%' OR a11.ATTRIBUTE_NAME like '%@Data about teens 16-18' OR a11.ATTRIBUTE_NAME like 'Data about teens 16-18@%'
-OR a11.ATTRIBUTE_NAME ='Other (e.g. customer) account username and password' OR a11.ATTRIBUTE_NAME like '%@Other (e.g. customer) account username and password@%' OR a11.ATTRIBUTE_NAME like '%@Other (e.g. customer) account username and password' OR a11.ATTRIBUTE_NAME like 'Other (e.g. customer) account username and password@%'
-OR a11.ATTRIBUTE_NAME ='Employee account username and password' OR a11.ATTRIBUTE_NAME like '%@Employee account username and password@%' OR a11.ATTRIBUTE_NAME like '%@Employee account username and password' OR a11.ATTRIBUTE_NAME like 'Employee account username and password@%'
-										
-OR a11.ATTRIBUTE_NAME ='Birthdate' OR a11.ATTRIBUTE_NAME like '%@Birthdate@%' OR a11.ATTRIBUTE_NAME like '%@Birthdate' OR a11.ATTRIBUTE_NAME like 'Birthdate@%'
-OR a11.ATTRIBUTE_NAME ='Behavioral Data' OR a11.ATTRIBUTE_NAME like '%@Behavioral Data@%' OR a11.ATTRIBUTE_NAME like '%@Behavioral Data' OR a11.ATTRIBUTE_NAME like 'Behavioral Data@%'
-OR a11.ATTRIBUTE_NAME ='Browser Cookie Data' OR a11.ATTRIBUTE_NAME like '%@Browser Cookie Data@%' OR a11.ATTRIBUTE_NAME like '%@Browser Cookie Data' OR a11.ATTRIBUTE_NAME like 'Browser Cookie Data@%'
-OR a11.ATTRIBUTE_NAME ='Email address' OR a11.ATTRIBUTE_NAME like '%@Email address@%' OR a11.ATTRIBUTE_NAME like '%@Email address' OR a11.ATTRIBUTE_NAME like 'Email address@%'
-OR a11.ATTRIBUTE_NAME ='Employee Band Level' OR a11.ATTRIBUTE_NAME like '%@Employee Band Level@%' OR a11.ATTRIBUTE_NAME like '%@Employee Band Level' OR a11.ATTRIBUTE_NAME like 'Employee Band Level@%'
-OR a11.ATTRIBUTE_NAME ='Employee T#' OR a11.ATTRIBUTE_NAME like '%@Employee T#@%' OR a11.ATTRIBUTE_NAME like '%@Employee T#' OR a11.ATTRIBUTE_NAME like 'Employee T#@%'
-OR a11.ATTRIBUTE_NAME ='Employee Work Location' OR a11.ATTRIBUTE_NAME like '%@Employee Work Location@%' OR a11.ATTRIBUTE_NAME like '%@Employee Work Location' OR a11.ATTRIBUTE_NAME like 'Employee Work Location@%'
-OR a11.ATTRIBUTE_NAME ='Gender' OR a11.ATTRIBUTE_NAME like '%@Gender@%' OR a11.ATTRIBUTE_NAME like '%@Gender' OR a11.ATTRIBUTE_NAME like 'Gender@%'
-OR a11.ATTRIBUTE_NAME ='Geographic data, Imprecise (not within 3.2187KM)' OR a11.ATTRIBUTE_NAME like '%@Geographic data, Imprecise (not within 3.2187KM)@%' OR a11.ATTRIBUTE_NAME like '%@Geographic data, Imprecise (not within 3.2187KM)' OR a11.ATTRIBUTE_NAME like 'Geographic data, Imprecise (not within 3.2187KM)@%'
-OR a11.ATTRIBUTE_NAME ='Information which contans\"pseudonymized data\"' OR a11.ATTRIBUTE_NAME like '%@Information which contans\"pseudonymized data\"@%' OR a11.ATTRIBUTE_NAME like '%@Information which contans\"pseudonymized data\"' OR a11.ATTRIBUTE_NAME like 'Information which contans\"pseudonymized data\"@%'
-										 
-OR a11.ATTRIBUTE_NAME ='IP Address' OR a11.ATTRIBUTE_NAME like '%@IP Address@%' OR a11.ATTRIBUTE_NAME like '%@IP Address' OR a11.ATTRIBUTE_NAME like 'IP Address@%'
-OR a11.ATTRIBUTE_NAME ='Mac Address' OR a11.ATTRIBUTE_NAME like '%@Mac Address@%' OR a11.ATTRIBUTE_NAME like '%@Mac Address' OR a11.ATTRIBUTE_NAME like 'Mac Address@%'
-OR a11.ATTRIBUTE_NAME ='Marital Status' OR a11.ATTRIBUTE_NAME like '%@Marital Status@%' OR a11.ATTRIBUTE_NAME like '%@Marital Status' OR a11.ATTRIBUTE_NAME like 'Marital Status@%'
-OR a11.ATTRIBUTE_NAME ='Mobile device Ids' OR a11.ATTRIBUTE_NAME like '%@Mobile device Ids@%' OR a11.ATTRIBUTE_NAME like '%@Mobile device Ids' OR a11.ATTRIBUTE_NAME like 'Mobile device Ids@%'
-OR a11.ATTRIBUTE_NAME ='Mobile Phone Number' OR a11.ATTRIBUTE_NAME like '%@Mobile Phone Number@%' OR a11.ATTRIBUTE_NAME like '%@Mobile Phone Number' OR a11.ATTRIBUTE_NAME like 'Mobile Phone Number@%'
-OR a11.ATTRIBUTE_NAME ='Name' OR a11.ATTRIBUTE_NAME like '%@Name@%' OR a11.ATTRIBUTE_NAME like '%@Name' OR a11.ATTRIBUTE_NAME like 'Name@%'
-OR a11.ATTRIBUTE_NAME ='Phone Numbers (not Mobile)' OR a11.ATTRIBUTE_NAME like '%@Phone Numbers (not Mobile)@%' OR a11.ATTRIBUTE_NAME like '%@Phone Numbers (not Mobile)' OR a11.ATTRIBUTE_NAME like 'Phone Numbers (not Mobile)@%'
-OR a11.ATTRIBUTE_NAME ='Other demographic and behavioral data gathered online' OR a11.ATTRIBUTE_NAME like '%@Other demographic and behavioral data gathered online@%' OR a11.ATTRIBUTE_NAME like '%@Other demographic and behavioral data gathered online' OR a11.ATTRIBUTE_NAME like 'Other demographic and behavioral data gathered online@%'
-											 
-OR a11.ATTRIBUTE_NAME ='Postal address' OR a11.ATTRIBUTE_NAME like '%@Postal address@%' OR a11.ATTRIBUTE_NAME like '%@Postal address' OR a11.ATTRIBUTE_NAME like 'Postal address@%'
-OR a11.ATTRIBUTE_NAME ='Salary amount or level' OR a11.ATTRIBUTE_NAME like '%@Salary amount or level@%' OR a11.ATTRIBUTE_NAME like '%@Salary amount or level' OR a11.ATTRIBUTE_NAME like 'Salary amount or level@%'
-OR a11.ATTRIBUTE_NAME ='Salary or benefits data' OR a11.ATTRIBUTE_NAME like '%@Salary or benefits data@%' OR a11.ATTRIBUTE_NAME like '%@Salary or benefits data' OR a11.ATTRIBUTE_NAME like 'Salary or benefits data@%'
-OR a11.ATTRIBUTE_NAME ='Zip codes' OR a11.ATTRIBUTE_NAME like '%@Zip codes@%' OR a11.ATTRIBUTE_NAME like '%@Zip codes' OR a11.ATTRIBUTE_NAME like 'Zip codes@%'
-OR a11.ATTRIBUTE_NAME ='Government ID, government-issued ID' OR a11.ATTRIBUTE_NAME like '%@Government ID, government-issued ID@%' OR a11.ATTRIBUTE_NAME like '%@Government ID, government-issued ID' OR a11.ATTRIBUTE_NAME like 'Government ID, government-issued ID@%'
-												  
-OR a11.ATTRIBUTE_NAME ='Credit card numbers' OR a11.ATTRIBUTE_NAME like '%@Credit card numbers@%' OR a11.ATTRIBUTE_NAME like '%@Credit card numbers' OR a11.ATTRIBUTE_NAME like 'Credit card numbers@%'
-OR a11.ATTRIBUTE_NAME ='Financial account number' OR a11.ATTRIBUTE_NAME like '%@Financial account number@%' OR a11.ATTRIBUTE_NAME like '%@Financial account number' OR a11.ATTRIBUTE_NAME like 'Financial account number@%'
-OR a11.ATTRIBUTE_NAME ='Genetic data' OR a11.ATTRIBUTE_NAME like '%@Genetic data@%' OR a11.ATTRIBUTE_NAME like '%@Genetic data' OR a11.ATTRIBUTE_NAME like 'Genetic data@%'
-OR a11.ATTRIBUTE_NAME ='Biometric data' OR a11.ATTRIBUTE_NAME like '%@Biometric data@%' OR a11.ATTRIBUTE_NAME like '%@Biometric data' OR a11.ATTRIBUTE_NAME like 'Biometric data@%'
-OR a11.ATTRIBUTE_NAME ='Sex life, sexual orientation questions' OR a11.ATTRIBUTE_NAME like '%@Sex life, sexual orientation questions@%' OR a11.ATTRIBUTE_NAME like '%@Sex life, sexual orientation questions' OR a11.ATTRIBUTE_NAME like 'Sex life, sexual orientation questions@%'
-OR a11.ATTRIBUTE_NAME ='Data about children under 13' OR a11.ATTRIBUTE_NAME like '%@Data about children under 13@%' OR a11.ATTRIBUTE_NAME like '%@Data about children under 13' OR a11.ATTRIBUTE_NAME like 'Data about children under 13@%'
-OR a11.ATTRIBUTE_NAME ='Criminal or judicial records' OR a11.ATTRIBUTE_NAME like '%@Criminal or judicial records@%' OR a11.ATTRIBUTE_NAME like '%@Criminal or judicial records' OR a11.ATTRIBUTE_NAME like 'Criminal or judicial records@%'
-														
-OR a11.ATTRIBUTE_NAME ='Precise geo location data' OR a11.ATTRIBUTE_NAME like '%@Precise geo location data@%' OR a11.ATTRIBUTE_NAME like '%@Precise geo location data' OR a11.ATTRIBUTE_NAME like 'Precise geo location data@%'
-OR a11.ATTRIBUTE_NAME ='Racial or ethnic origin' OR a11.ATTRIBUTE_NAME like '%@Racial or ethnic origin@%' OR a11.ATTRIBUTE_NAME like '%@Racial or ethnic origin' OR a11.ATTRIBUTE_NAME like 'Racial or ethnic origin@%'
-OR a11.ATTRIBUTE_NAME ='Political opinions, political party affiliation' OR a11.ATTRIBUTE_NAME like '%@Political opinions, political party affiliation@%' OR a11.ATTRIBUTE_NAME like '%@Political opinions, political party affiliation' OR a11.ATTRIBUTE_NAME like 'Political opinions, political party affiliation@%'
-OR a11.ATTRIBUTE_NAME ='Trade union membership' OR a11.ATTRIBUTE_NAME like '%@Trade union membership@%' OR a11.ATTRIBUTE_NAME like '%@Trade union membership' OR a11.ATTRIBUTE_NAME like 'Trade union membership@%'
-OR a11.ATTRIBUTE_NAME ='Protected Health Information (\“PHI\”) as defined by HIPAA' OR a11.ATTRIBUTE_NAME like '%@Protected Health Information (\“PHI\”) as defined by HIPAA@%' OR a11.ATTRIBUTE_NAME like '%@Protected Health Information (\“PHI\”) as defined by HIPAA' OR a11.ATTRIBUTE_NAME like 'Protected Health Information (\“PHI\”) as defined by HIPAA@%'
-														   
-OR a11.ATTRIBUTE_NAME ='Other health or medical data' OR a11.ATTRIBUTE_NAME like '%@Other health or medical data@%' OR a11.ATTRIBUTE_NAME like '%@Other health or medical data' OR a11.ATTRIBUTE_NAME like 'Other health or medical data@%'
-OR a11.ATTRIBUTE_NAME ='Digital signature data' OR a11.ATTRIBUTE_NAME like '%@Digital signature data@%' OR a11.ATTRIBUTE_NAME like '%@Digital signature data' OR a11.ATTRIBUTE_NAME like 'Digital signature data@%'
-OR a11.ATTRIBUTE_NAME ='Data about teens between 13-15 years old' OR a11.ATTRIBUTE_NAME like '%@Data about teens between 13-15 years old@%' OR a11.ATTRIBUTE_NAME like '%@Data about teens between 13-15 years old' OR a11.ATTRIBUTE_NAME like 'Data about teens between 13-15 years old@%'
-OR a11.ATTRIBUTE_NAME ='Consumer account username and password' OR a11.ATTRIBUTE_NAME like '%@Consumer account username and password@%' OR a11.ATTRIBUTE_NAME like '%@Consumer account username and password' OR a11.ATTRIBUTE_NAME like 'Consumer account username and password@%'
-														
-OR a11.ATTRIBUTE_NAME ='Adverse event information' OR a11.ATTRIBUTE_NAME like '%@Adverse event information@%' OR a11.ATTRIBUTE_NAME like '%@Adverse event information' OR a11.ATTRIBUTE_NAME like 'Adverse event information@%'
-OR a11.ATTRIBUTE_NAME ='Identification Data' OR a11.ATTRIBUTE_NAME like '%@Identification Data@%' OR a11.ATTRIBUTE_NAME like '%@Identification Data' OR a11.ATTRIBUTE_NAME like 'Identification Data@%'
-OR a11.ATTRIBUTE_NAME ='Electronic identification data' OR a11.ATTRIBUTE_NAME like '%@Electronic identification data@%' OR a11.ATTRIBUTE_NAME like '%@Electronic identification data' OR a11.ATTRIBUTE_NAME like 'Electronic identification data@%'
-													   
-OR a11.ATTRIBUTE_NAME ='Personal characteristics' OR a11.ATTRIBUTE_NAME like '%@Personal characteristics@%' OR a11.ATTRIBUTE_NAME like '%@Personal characteristics' OR a11.ATTRIBUTE_NAME like 'Personal characteristics@%'
-OR a11.ATTRIBUTE_NAME ='Family composition' OR a11.ATTRIBUTE_NAME like '%@Family composition@%' OR a11.ATTRIBUTE_NAME like '%@Family composition' OR a11.ATTRIBUTE_NAME like 'Family composition@%'
-OR a11.ATTRIBUTE_NAME ='Profession' OR a11.ATTRIBUTE_NAME like '%@Profession@%' OR a11.ATTRIBUTE_NAME like '%@Profession' OR a11.ATTRIBUTE_NAME like 'Profession@%'
-OR a11.ATTRIBUTE_NAME ='Image/sound recordings' OR a11.ATTRIBUTE_NAME like '%@Image/sound recordings@%' OR a11.ATTRIBUTE_NAME like '%@Image/sound recordings' OR a11.ATTRIBUTE_NAME like 'Image/sound recordings@%'
-GROUP BY 1,2
+select
+a.sys_id, a.sourceinstance, group_concat(c.u_name) AS attribute_name
+        FROM
+            png_mdsdb.pg_mega_cmdb_ci_appl_final a      
+        INNER JOIN
+            png_mdsdb.pg_mega_u_m2m_ci_data_privacy_final b
+                ON a.sys_id=b.u_configuration_item and a.sourceinstance=b.sourceinstance 
+        INNER JOIN
+            png_mdsdb.pg_mega_u_data_privacy_attributes_final c  
+                ON b.u_data_privacy_attributes=c.sys_id and b.sourceinstance=c.sourceinstance
+        WHERE
+            1=1 
+        GROUP BY
+            a.sys_id, a.sourceinstance  
 
 ) a11
 
-LEFT JOIN png_mdwdb.d_rita_application_c TRGT ON a11.app_hex=TRGT.row_id AND a11.sourceinstance=TRGT.source_id 
+LEFT JOIN png_mdwdb.d_rita_application_c TRGT ON a11.sys_id=TRGT.row_id AND a11.sourceinstance=TRGT.source_id 
  
-WHERE IF(a11.app_hex IS NOT NULL ,'Y','N')<>TRGT.data_elem_comb_c_flag
+WHERE 
+(case 
+          when a11.attribute_name LIKE '%Data about teens 16-18%' 
+            OR a11.attribute_name LIKE '%Other (e.g. customer) account username and password%' 
+            OR a11.attribute_name LIKE '%Employee account username and password%' 
+            OR a11.attribute_name LIKE '%Birthdate%' 
+            OR a11.attribute_name LIKE '%Behavioral Data%' 
+            OR a11.attribute_name LIKE '%Browser Cookie Data%' 
+            OR a11.attribute_name LIKE '%Email address%' 
+            OR a11.attribute_name LIKE '%Employee Band Level%' 
+            OR a11.attribute_name LIKE '%Employee T#%' 
+            OR a11.attribute_name LIKE '%Employee Work Location%' 
+            OR a11.attribute_name LIKE '%Gender%' 
+            OR a11.attribute_name LIKE '%Geographic data, Imprecise (not within 3.2187KM)%' 
+            OR a11.attribute_name LIKE '%Information which contans\"pseudonymized data\"%' 
+            OR a11.attribute_name LIKE '%IP Address%' 
+            OR a11.attribute_name LIKE '%Mac Address%' 
+            OR a11.attribute_name LIKE '%Marital Status%' 
+            OR a11.attribute_name LIKE '%Mobile device Ids%' 
+            OR a11.attribute_name LIKE '%Mobile Phone Number%' 
+            OR a11.attribute_name LIKE '%Name%' 
+            OR a11.attribute_name LIKE '%Phone Numbers (not Mobile)%' 
+            OR a11.attribute_name LIKE '%Other demographic and behavioral data gathered online%' 
+            OR a11.attribute_name LIKE '%Postal address%' 
+            OR a11.attribute_name LIKE '%Salary amount or level%' 
+            OR a11.attribute_name LIKE '%Salary or benefits data%' 
+            OR a11.attribute_name LIKE '%Zip codes%' 
+            OR a11.attribute_name LIKE '%Government ID, government-issued ID%' 
+            OR a11.attribute_name LIKE '%Credit card numbers%' 
+            OR a11.attribute_name LIKE '%Financial account number%' 
+            OR a11.attribute_name LIKE '%Genetic data%' 
+            OR a11.attribute_name LIKE '%Biometric data%' 
+            OR a11.attribute_name LIKE '%Sex life, sexual orientation questions%' 
+            OR a11.attribute_name LIKE '%Data about children under 13%' 
+            OR a11.attribute_name LIKE '%Criminal or judicial records%' 
+            OR a11.attribute_name LIKE '%Precise geo location data%' 
+            OR a11.attribute_name LIKE '%Racial or ethnic origin%' 
+            OR a11.attribute_name LIKE '%Political opinions, political party affiliation%' 
+            OR a11.attribute_name LIKE '%Trade union membership%' 
+            OR a11.attribute_name LIKE '%Protected Health Information (\âPHI\â) as defined by HIPAA%' 
+            OR a11.attribute_name LIKE '%Other health or medical data%' 
+            OR a11.attribute_name LIKE '%Digital signature data%' 
+            OR a11.attribute_name LIKE '%Data about teens between 13-15 years old%' 
+            OR a11.attribute_name LIKE '%Consumer account username and password%' 
+            OR a11.attribute_name LIKE '%Adverse event information%' 
+            OR a11.attribute_name LIKE '%Identification Data%' 
+            OR a11.attribute_name LIKE '%Electronic identification data%' 
+            OR a11.attribute_name LIKE '%Personal characteristics%' 
+            OR a11.attribute_name LIKE '%Family composition%' 
+            OR a11.attribute_name LIKE '%Profession%' 
+            OR a11.attribute_name LIKE '%Image/sound recordings%'  then 'Y' 
+            else 'N' end)<>TRGT.data_elem_comb_c_flag
 
 AND TRGT.soft_deleted_flag ='N'
 

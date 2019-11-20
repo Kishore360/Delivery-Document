@@ -5,9 +5,9 @@ FROM
 (
 
 SELECT Count(1) as CNT 
-FROM png_mdsdb.pg_mega_pgb_application_rita_final SRC 
-LEFT JOIN  png_mdwdb.d_rita_application_ext_c TRGT ON SRC.NAME=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id
-WHERE COALESCE(date_format(substring(replace(SRC.RAMP_Date,' ',''),1,14),'%Y-%m-%d'),'')<>TRGT.ramp_date_c
+FROM png_mdsdb.pg_mega_cmdb_ci_appl_final SRC 
+LEFT JOIN  png_mdwdb.d_rita_application_ext_c TRGT ON SRC.sys_id=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id
+WHERE COALESCE(SRC.U_RAMP_Date,'')<>TRGT.ramp_date_c
 ) temp;
 
 

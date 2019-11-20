@@ -11,7 +11,7 @@ LEFT JOIN png_mdwdb.d_location LKP ON SRC.location=LKP.row_id AND SRC.sourceinst
 WHERE
 ( 
 CASE 
-WHEN (SRC1.u_pg_site_code IS NULL OR SRC1.u_pg_site_code <>'') THEN 'N'
+WHEN (SRC1.u_pg_site_code002 IS NULL OR SRC1.u_pg_site_code002 <>'') THEN 'N'
 WHEN SRC1.u_active ='0' THEN 'N'
 WHEN SRC1.u_pg_site_type NOT IN ('COUNTRY','AREA','REGION','GROUP','SUB GROUP') THEN 'N'
 ELSE 'Y' END)

@@ -6,7 +6,7 @@ FROM
 SELECT Count(1) as CNT 
 FROM 
 (
-select ra.name,ra.SHORT_NAME,ra.sourceinstance,
+select ra.name,ra.sourceinstance,
 CASE WHEN sum(case when irwi.mega_hex_id is not null then 1 else 0 END) > 0 THEN  'Y' ELSE 'N' END as exists_in_iRisk_flag 
 ,CASE WHEN sum(case when Status_VS_Baseline = 'Complete' THEN 1 ELSE 0 END) > 0 THEN  'Y' ELSE 'N' END as exists_in_legacy1
 , 
@@ -24,12 +24,12 @@ ELSE 'N/A' END
 	end) as iRisk_Open_Issues
  
 
-from png_mdsdb.pg_mega_pgb_application_rita_final as ra
+from png_mdsdb.pg_mega_cmdb_ci_appl_final as ra
 left join png_mdsdb.pg_mega_irisk_assessment_issues_final as irwi on ra.name = irwi.MEGA_HEX_ID and ra.sourceinstance = irwi.sourceinstance and irwi.cdctype ='X'
 left join png_mdsdb.pg_mega_legacyg1_final as irl1 on ra.name = irl1.MEGA_ID and ra.sourceinstance = irl1.sourceinstance and irl1.cdctype ='X'
 left join png_mdsdb.pg_mega_legacyg234_final as irl234 on ra.name = irl234.MEGA_ID  and ra.sourceinstance = irl234.sourceinstance and irl234.cdctype ='X'
 where ra.cdctype = 'X'
-group by 1,2,3
+group by 1,2
 
 ) SRC 
 LEFT JOIN png_mdwdb.d_rita_application_c TRGT ON SRC.NAME=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id
