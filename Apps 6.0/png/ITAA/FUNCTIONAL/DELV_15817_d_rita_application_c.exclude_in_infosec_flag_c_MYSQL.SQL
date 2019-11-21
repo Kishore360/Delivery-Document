@@ -5,7 +5,7 @@ FROM
 (
 SELECT 
 Count(1) as CNT 
-FROM png_mdsdb.pg_mega_pgb_application_rita_final SRC
+FROM png_mdsdb.pg_mega_cmdb_ci_appl_final SRC
 LEFT JOIN 
 (
 Select a.APP_HEXID,a.sourceinstance,GROUP_CONCAT(a.KEYWORD_NAME) AS KEYWORD_NAME

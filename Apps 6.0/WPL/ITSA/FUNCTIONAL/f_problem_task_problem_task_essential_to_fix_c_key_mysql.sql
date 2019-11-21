@@ -9,8 +9,6 @@ LEFT JOIN wpl_mdwdb.d_lov LKP
                 '~',
                 'PROBLEM_TASK',
                 '~',
-                '~',
-                '~',
                 UPPER(SRC.u_essential_to_fix)),
                 'UNSPECIFIED')= LKP.row_id 
 AND SRC.sourceinstance= LKP.source_id )

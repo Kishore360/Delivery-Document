@@ -3,30 +3,32 @@ CASE WHEN CNT > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 CASE WHEN CNT > 0 THEN 'MDS to DWH data validation failed for d_rita_application_c.grace_period_start_date' ELSE 'SUCCESS' END as Message
 FROM 
 (
-SELECT COUNT(1) as CNT 
-FROM png_mdsdb.pg_mega_pgb_application_rita_final SRC 
-LEFT JOIN png_mdwdb.d_rita_application_c TRGT ON SRC.NAME=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id
-LEFT JOIN (select source_id,max(lastupdated) as lastupdated from png_mdwdb.o_data_freshness
-group by source_id) OD ON TRGT.source_id=OD.source_id
-LEFT JOIN 
-(SELECT a.app_hexid,a.sourceinstance,MIN(COALESCE(a.responsible_org_unit_hexid,'UNSPECIFIED')) as responsible_org_unit_hexid   
-FROM png_mdsdb.pg_mega_pgv_app_responsible_org_person_final a WHERE (a.pg_development_org = 'Y' AND a.app_hexid IS NOT NULL AND cdctype <> 'D')
-group by a.app_hexid,a.sourceinstance) SRC1 ON (SRC.NAME=SRC1.app_hexid AND SRC.sourceinstance=SRC1.sourceinstance )
-LEFT JOIN png_mdsdb.pg_mega_pgv_org_itam_gbs_final level1
-ON ((SRC1.responsible_org_unit_hexid=level1.LVL3_ORG_HEX or SRC1.responsible_org_unit_hexid=level1.LVL2_ORG_HEX
-or SRC1.responsible_org_unit_hexid=level1.LVL1_ORG_HEX) AND SRC1.sourceinstance=level1.sourceinstance )
-WHERE 
-CASE WHEN 
-SRC.APPLICATION_NATURE IN ('Generic','XOApplication','NonDigital','Component','Platform','XOPlatform')
-AND SRC.LIFE_CYCLE_STATUS  NOT IN ('Decomissioned','Exception Use','not_used','Undecided','Exception')
-AND TRGT.gdpr_relevant_c_flag ='Y' 
-AND level1.LVL1_ORG_NAME IN 
-('Information Security','IT Consumer Solutions','IT Customer Solutions & Delivery','IT Data & Analytics Organization','IT IT Development Organization',
-'IT IT Innovation Organization','IT Solutions','Consumer Services','FPSS','IDQ','MANAGEMENT SERVICES','Master Data Organization','MY PG SERVICES',
-'PS Shared Services & Technology Operations','PTW'
-)
-THEN COALESCE(TRGT.grace_period_start_date,CONVERT_TZ(OD.lastupdated,'GMT','America/New_York')) 
-ELSE NULL END <> TRGT.grace_period_start_date
+select count(1) as CNT
+from
+png_mdsdb.pg_mega_cmdb_ci_appl_final cmdb_ci_appl_final
+join
+png_mdwdb.d_rita_application_c a
+on (cmdb_ci_appl_final.sys_id=a.row_id and cmdb_ci_appl_final.sourceinstance=a.source_id)
+join 
+png_mdwdb.f_rita_application_c src ON a.row_key = src.rita_application_c_key
+join png_mdwdb.d_rita_application_c app
+on app.row_id=a.row_id and app.source_id=a.source_id
+LEFT JOIN png_mdwdb.d_lov b
+on a.data_asset_lifecycle_status_key=b.row_key AND (b.dimension_class ='OT_LIFE_CYCLE_STATUS_C~PROCESSING_ACTIVITIES' OR b.row_key IN(0,-1))
+LEFT JOIN png_mdwdb.d_lov c 
+on a.application_nature_c_key=c.row_key AND (c.dimension_class='OT_PA_REPOSITORY_TYPE_C~PROCESSING_ACTIVITIES' OR c.row_key IN(0,-1))
+LEFT JOIN png_mdwdb.d_internal_organization_hierarchy_c hier ON COALESCE(src.png_ot_organization_c_key,0) = hier.lvl_owning_organization_c_key
+LEFT JOIN png_mdwdb.d_internal_organization org ON COALESCE(hier.lvl0_organization_c_key,0) = org.row_key
+JOIN (select source_id,max(lastupdated) as lastupdated from png_mdwdb.d_o_data_freshness
+group by source_id
+) df ON a.source_id = df.source_id
+where 
+a.grace_period_start_date=(CASE WHEN COALESCE(b.dimension_name,'UNSPECIFIED') not in ('Decomissioned','Exception Use','Not Used / Reference','Undecided') 
+			and COALESCE(c.dimension_name,'UNSPECIFIED') in ('application','application_platform','component')
+			and a.gdpr_relevant_c_flag='Y' 
+			and COALESCE(org.organization_name,'UNSPECIFIED') in ('Corporate Function - IT (CF-IT)','Global Business Services Organization (GBS)')
+		then COALESCE(app.grace_period_start_date,CONVERT_TZ(df.lastupdated,'America/New_York','GMT'))
+ELSE NULL END) 
 ) temp;
 
 

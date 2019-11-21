@@ -4,9 +4,9 @@ CASE WHEN cnt>0 THEN 'MDS to DWH data validation failed for f_ad_hoc_request_c.o
  wpl_mdsdb.u_ad_hoc_request_final a
  left join wpl_mdwdb.f_ad_hoc_request_c b
  on a.sys_id=b.row_id and a.sourceinstance=b.source_id
- where CASE WHEN (a.opened_at is null or a.closed_at is null) THEN NULL   
-	 WHEN TIMESTAMPDIFF(SECOND,a.opened_at,a.closed_at) < 0 THEN NULL
-	 ELSE TIMESTAMPDIFF(SECOND,a.opened_at,a.closed_at) end<>b.open_to_close_duration
+ where CASE WHEN (convert_tz(a.opened_at,'GMT','America/New_York') is null or convert_tz(a.closed_at,'GMT','America/New_York') is null) THEN NULL   
+	 WHEN TIMESTAMPDIFF(SECOND,convert_tz(a.opened_at,'GMT','America/New_York'),convert_tz(a.closed_at,'GMT','America/New_York')) < 0 THEN NULL
+	 ELSE TIMESTAMPDIFF(SECOND,convert_tz(a.opened_at,'GMT','America/New_York'),convert_tz(a.closed_at,'GMT','America/New_York')) end<>b.open_to_close_duration
 	 and a.cdctype='X')ma
   ;
 

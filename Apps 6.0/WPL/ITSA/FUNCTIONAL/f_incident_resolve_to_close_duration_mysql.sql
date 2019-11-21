@@ -8,5 +8,5 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
   LEFT JOIN wpl_mdwdb.d_lov_map br 
  ON TRGT.state_src_key = br.src_key
 WHERE   br.dimension_wh_code IN ('CLOSED') 
-AND  TIMESTAMPDIFF(second,SRC.closed_at,resolved_at)
+AND  TIMESTAMPDIFF(second,convert_tz(SRC.resolved_at,'GMT','America/New_York'),convert_tz(SRC.closed_at,'GMT','America/New_York'))
 <> TRGT.resolve_to_close_duration and SRC.cdctype='X'

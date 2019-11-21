@@ -5,11 +5,11 @@ FROM
 (
 select app_hexid,sourceinstance,GROUP_CONCAT(distinct organization_name order by organization_name ) as organization_name,
 GROUP_CONCAT(distinct cardinal order by organization_name) as cardinal  from
-(select app.name as app_hexid, responsible_org_unit,
+(select app.sys_id as app_hexid, responsible_org_unit,
 CASE WHEN cardinal is null or cardinal='' or cardinal=responsible_org_unit then responsible_org_unit 
 else LEFT(replace(replace(responsible_org_unit,CONCAT(' - ',cardinal),''),cardinal,'') ,255) end as organization_name, cardinal
 ,app.sourceinstance from (
-png_mdsdb.pg_mega_pgb_application_rita_final app
+png_mdsdb.pg_mega_cmdb_ci_appl_final app
 left join (select app_hexid,responsible_org_unit_hexid,responsible_org_unit,sourceinstance,count(1) from png_mdsdb.pg_mega_pgv_app_responsible_org_person_final 
 where (((third_party_with_access <>'No' AND third_party_with_access is not null)
 or (pg_software_supplier  <>'N' AND pg_software_supplier is not null)
@@ -18,7 +18,7 @@ or (pg_implementation_supplier <>'N' AND pg_implementation_supplier is not null)
 or (supplier <>'N' AND supplier is not null))) and app_hexid is not null and responsible_org_unit_hexid is not null
 and cdctype='X' 
 group by 1,2,3,4)org
-on app.name=org.app_hexid and app.sourceinstance=org.sourceinstance 
+on app.u_pg_source_system_id=org.app_hexid and app.sourceinstance=org.sourceinstance 
 left join (select distinct name,LEFT((cardinal),255) as CARDINAL from  png_mdsdb.pg_mega_pgb_org_unit_final
 where  (cardinal is not null and cardinal<>'') 
 ) as organization 
