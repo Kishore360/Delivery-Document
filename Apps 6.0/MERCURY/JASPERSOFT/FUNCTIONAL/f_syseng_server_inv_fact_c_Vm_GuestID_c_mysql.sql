@@ -20,7 +20,7 @@ FROM
                 'UNSPECIFIED'),
                 '~',
                 COALESCE(syseng_server_inv.Environment,
-                'UNSPECIFIED'))=TRGT.row_id and syseng_server_inv.sourceinstance=TRGT.source_id and syseng_server_inv.cdcVm_GuestID<>'D' 
+                'UNSPECIFIED'))=TRGT.row_id and syseng_server_inv.sourceinstance=TRGT.source_id and syseng_server_inv.cdctype<>'D' 
 				where 
 COALESCE(syseng_server_inv.Vm_GuestID,'UNSPECIFIED')   <>TRGT.Vm_GuestID_c
 				)a
