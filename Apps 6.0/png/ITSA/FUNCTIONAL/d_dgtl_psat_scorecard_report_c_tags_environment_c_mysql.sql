@@ -5,7 +5,7 @@ FROM
 (
 SELECT Count(1) as CNT 
 FROM png_mdsdb.u_pg_cs_scanning_final SRC 
-LEFT JOIN pgdyna_mdwdb.d_dgtl_psat_scorecard_report_c TRGT 
+LEFT JOIN png_mdwdb.d_dgtl_psat_scorecard_report_c TRGT 
 ON SRC.Sys_id = TRGT.row_id 
 AND SRC.sourceinstance=TRGT.source_id
 WHERE CASE WHEN u_scan_type= 'Tags' THEN SRC.u_environment END  <> TRGT.tags_environment_c
