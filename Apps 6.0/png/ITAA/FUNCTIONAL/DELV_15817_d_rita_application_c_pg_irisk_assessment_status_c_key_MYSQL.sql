@@ -90,7 +90,7 @@ AND
 ELSE '7' END
 AS SOURCE_CATEGORY,
 SUM(CASE WHEN b.Assessment_Status IN ('Complete','Cancelled','Canceled') THEN 1 ELSE 0 END) AS STATUS_COUNT 
-FROM png_mdsdb.pg_mega_pgb_application_rita_final a 
+FROM png_mdsdb.pg_mega_cmdb_ci_appl_final a 
 LEFT JOIN png_mdsdb.pg_mega_irisk_assessment_issues_final b ON a.NAME=b.MEGA_HEX_ID AND a.sourceinstance=b.sourceinstance AND b.cdctype<>'D'
 LEFT JOIN png_mdsdb.pg_mega_legacyg1_final SRC2 ON a.NAME=SRC2.MEGA_ID AND a.sourceinstance=SRC2.sourceinstance AND SRC2.cdctype<>'D'
 LEFT JOIN png_mdsdb.pg_mega_legacyg234_final SRC3 ON a.NAME=SRC3.Mega_ID AND a.sourceinstance=SRC3.sourceinstance AND SRC3.cdctype<>'D'

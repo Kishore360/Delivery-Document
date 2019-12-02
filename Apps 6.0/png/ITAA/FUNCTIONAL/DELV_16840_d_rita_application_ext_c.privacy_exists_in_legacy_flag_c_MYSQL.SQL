@@ -3,21 +3,14 @@ CASE WHEN CNT > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 CASE WHEN CNT > 0 THEN 'MDS to DWH data validation failed for d_rita_application_ext_c.privacy_exists_in_legacy_flag_c' ELSE 'SUCCESS' END as Message
 FROM 
 (
-SELECT 
-Count(1) as CNT 
-FROM png_mdsdb.pg_mega_pgb_application_rita_final SRC
-LEFT JOIN 
-(
-Select a.APP_HEXID,a.sourceinstance,GROUP_CONCAT(a.KEYWORD_NAME) AS KEYWORD_NAME
-FROM png_mdsdb.pg_mega_pgb_app_keyword_final a WHERE a.cdctype='X'
-GROUP BY 1,2
-) SRC1 ON SRC.NAME=SRC1.APP_HEXID AND SRC.sourceinstance=SRC1.sourceinstance
-LEFT JOIN png_mdwdb.d_rita_application_ext_c TRGT ON SRC.NAME=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id
-WHERE 
-(CASE WHEN SRC1.APP_HEXID IS NOT NULL AND (SRC1.KEYWORD_NAME like '%ITAM: GDPR - Report Exclusion: Privacy%') THEN 'Y' ELSE 'N' END)
-<>TRGT.privacy_excluded_apps_flag_c
-AND SRC.cdctype='X'
+select count(1) as CNT
+from png_mdsdb.pg_mega_cmdb_ci_appl_final a
+join (select MegaID, sourceinstance from png_mdsdb.pg_mega_privacy_excluded_apps_c_final where cdctype='X') b
+on (a.u_pg_source_system_id=b.MegaID and a.sourceinstance=b.sourceinstance)
+join png_mdwdb.d_rita_application_ext_c c
+on (a.sys_id=c.row_id and a.sourceinstance=c.source_id)
+where (case when b.MegaID is not null then 'Y' else 'N' end)=c.privacy_excluded_apps_flag_c
+and a.cdctype='X'
 ) temp;
-
 
 

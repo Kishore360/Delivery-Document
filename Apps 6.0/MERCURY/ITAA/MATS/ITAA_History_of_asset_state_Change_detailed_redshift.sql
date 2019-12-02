@@ -182,4 +182,26 @@ on (a11.assigned_to_key = a14.row_key)
 join ldb.d_location_assigned_to a117
 
 on (a14.location_key = a117.row_key)
+union
 
+select 'ldb.d_lov_asset_substatus_view a13 ' as Table_name, count(a11.row_key) Row_Count
+
+from ldb.f_asset_activity_c a11
+
+join ldb.d_asset a13
+
+on (a11.asset_key = a13.row_key)
+join ldb.d_lov_asset_substatus_view a118 on 
+a13.asset_substatus_key=a118.row_key
+union
+
+
+select 'ldb.d_configuration_item a13 ' as Table_name, count(a11.row_key) Row_Count
+
+from ldb.f_asset_activity_c a11
+
+join ldb.d_asset a13
+
+on (a11.asset_key = a13.row_key)
+join ldb.d_configuration_item a119 on 
+a13.configuration_item_key=a119.row_key

@@ -5,22 +5,26 @@ FROM
 (
 
 SELECT Count(1) as CNT 
-FROM png_mdsdb.pg_mega_pgb_application_rita_final as app
-LEFT JOIN
-(
-SELECT app_hex, sourceinstance,group_concat(DISTINCT ATTRIBUTE_NAME) as res
-FROM 
-(
-SELECT app_hex,sourceinstance,replace(ATTRIBUTE_NAME,char('124'),'@') AS ATTRIBUTE_NAME 
-FROM png_mdsdb.pg_mega_pgv_application_data_model_final where app_hex  IS NOT NULL and ATTRIBUTE_NAME IS NOT NULL AND cdctype<>'D'
-) SRC1 
+FROM (
+select
+a.sys_id, a.sourceinstance, group_concat(c.u_name) AS attribute_name
+        FROM
+            png_mdsdb.pg_mega_cmdb_ci_appl_final a      
+        INNER JOIN
+            png_mdsdb.pg_mega_u_m2m_ci_data_privacy_final b
+                ON a.sys_id=b.u_configuration_item and a.sourceinstance=b.sourceinstance 
+        INNER JOIN
+            png_mdsdb.pg_mega_u_data_privacy_attributes_final c  
+                ON b.u_data_privacy_attributes=c.sys_id and b.sourceinstance=c.sourceinstance
+        WHERE
+            1=1 
+        GROUP BY
+            a.sys_id, a.sourceinstance  
+
+) a11
+LEFT JOIN png_mdwdb.d_rita_application_c TRGT ON a11.sys_id=TRGT.row_id AND a11.sourceinstance=TRGT.source_id
 WHERE 
-SRC1.ATTRIBUTE_NAME ='Phone Numbers (not Mobile)' OR SRC1.ATTRIBUTE_NAME like '%@Phone Numbers (not Mobile)@%' OR SRC1.ATTRIBUTE_NAME like '%@Phone Numbers (not Mobile)' OR SRC1.ATTRIBUTE_NAME like 'Phone Numbers (not Mobile)@%'
-GROUP BY 1,2
-) X ON app.NAME=X.app_hex AND app.sourceinstance=X.sourceinstance
-LEFT JOIN png_mdwdb.d_rita_application_c TRGT ON app.NAME=TRGT.row_id AND app.sourceinstance=TRGT.source_id
-WHERE 
-IF(X.res like '%Phone Numbers (not Mobile)%','Y','N')<>TRGT.phone_no_c_flag
+IF(a11.attribute_name like '%Phone Numbers (not Mobile)%','Y','N')<>TRGT.phone_no_c_flag
 
 )temp;
 

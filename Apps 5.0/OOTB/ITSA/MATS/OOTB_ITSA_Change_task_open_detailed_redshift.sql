@@ -1,3 +1,17 @@
+-- DELV-17544  - Need to exclude these assingment groups -- 
+-- DELV-20066  -the cubes contain other filter Domain as Global corporate --
+
+
+ 'XRX/BRIDGE','MCD/SUPPLY CHAIN MASTER DATA L4 SUPPORT','MCD/GROIP L3 CA','MCD/RS RFM GCOE','Middleware L3 Mulesoft','CS/SD/RTPAAS/SCCM/L3/MCD','MCD/RS L3 RIDM US',
+'CS/OE/SERVER ADMIN/MCD','MCD/GDW GBL SUPPORT','MCD/RS CM US RFM','MCD/CA OurLounge Support T2','MCD/GDW ITEM MASTER SUPPORT','ACCO/ACS/3RD LEVEL ORACLE/SQL DATABASE S','NewPOS Team',
+'CS/SD/PORTAL ENGINEERING/MCD','CS/GSD/SE/OSE/LINUX/MCDONALDS','MCD/GENESIS','McWeb Support CA','MBS SUPPORT - IT CORE','MCD/EAI L2 ES','MCD/EAI L2 DE','AccessMcD Support',
+'MCD/GROIP L2 CA','MCD/GDW INFRASTRUCTURE DBA-L2','MCD/TWK-BUSINESS','MCD/RS L1 RIDM US','Field Services','Service Café Enhancement','RS IT Delivery RTPaaS EU APMEA','MCD/RS L4 VERIFONE',
+'MCD/MERLIN L4 ORACLE','MCD/ITF GLOBAL ACCOUNT PORTAL SUPPORT','MCD/TLD-SUPPORT','CS/OE/USERACCESS/APPCAT/MCD','MTM Data Support','MCD/RS L4 RIDM','Service Desk Level 1',
+'MCD/RS RFM2 DEPLOYMENT','MCD/MERLIN L2 AR','MCD/GLMS L3 TECHNICAL','MCD/RS RTPAAS CHANGE MGMT','MCD/RS L3 LATAM RDI','MCD/GLOBAL HRMS TECH SUPPORT','MCD/RS L3 AP FAST',
+'MCD/DATAPIPE','CS/OE/USERACCESS/SIMSYSTEMADMIN/MCD','EASS /DSS Cassandra DBA Support','Back Office','Virtual Provisioning Cloud Administrators','MCD/CANADA','XRX/ITSD - L1',
+'MCD/COMPASS','MCD/RS L3 EU TECH SERVICES','MCD/US IT SECURITY','RTPaaS RSM L3 Support','MicroServices Support','MCD/X-APPS','MCD/CA Restaurant Application Development L3','Datavail Corp DB Admin','CA Migration',
+'ECP ID','MCD/GBS-People',
+
 select 'ldb.f_change_task a11 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_change_task a11
 union

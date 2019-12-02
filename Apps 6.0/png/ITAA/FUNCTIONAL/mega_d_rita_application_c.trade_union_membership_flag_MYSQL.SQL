@@ -5,23 +5,18 @@ CASE WHEN CNT > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 CASE WHEN CNT > 0 THEN 'MDS to DWH data validation failed for d_rita_application_c.trade_union_membership_flag' ELSE 'SUCCESS' END as Message
 FROM 
 (
-SELECT Count(1) as CNT 
-FROM 
-(
-SELECT NAME,sourceinstance,GROUP_CONCAT(DISTINCT ATTRIBUTE_NAME ORDER BY ATTRIBUTE_NAME) AS ATTRIBUTE_NAME
-FROM 
-(
-SELECT app.NAME,app.sourceinstance,app.cdctype,
-ATT.ATTRIBUTE_NAME
-FROM png_mdsdb.pg_mega_pgb_application_rita_final as app 
-LEFT JOIN 
-(SELECT app_hex,sourceinstance,ATTRIBUTE_NAME,count(1) 
-FROM png_mdsdb.pg_mega_pgv_application_data_model_final where app_hex  IS NOT NULL and ATTRIBUTE_NAME IS NOT NULL AND cdctype<>'D'
-group by 1,2,3) AS ATT ON app.NAME=ATT.app_hex AND app.sourceinstance=ATT.sourceinstance AND app.cdctype<>'D'
-) Y 
-Group BY NAME
-) SRC 
-LEFT JOIN png_mdwdb.d_rita_application_c TRGT ON SRC.NAME=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id AND TRGT.soft_deleted_flag='N'
-WHERE (CASE WHEN SRC.ATTRIBUTE_NAME like '%Trade union membership%' THEN 'Y' ELSE 'N' END)<>TRGT.trade_union_membership_flag
+select count(1) as CNT
+from png_mdsdb.pg_mega_cmdb_ci_appl_final a
+join png_mdwdb.d_rita_application_c b
+on (a.sys_id=b.row_id and a.sourceinstance=b.source_id)
+join 
+(select fa.rita_application_c_key,group_concat(distinct de.data_element_collected), 
+case when group_concat(distinct de.data_element_collected) like '%Trade union membership%' then 'Y' else 'N' end as trade_union_membership_flag
+from png_mdwdb.f_rita_application_data_elements_c as fa
+inner join png_mdwdb.d_png_ot_data_elements_collected_c as de on fa.png_ot_data_elements_collected_c_key = de.row_key
+where fa.soft_deleted_flag = 'N'
+group by fa.rita_application_c_key) as c
+on (b.row_key=c.rita_application_c_key)
+where c.trade_union_membership_flag<>b.trade_union_membership_flag
 )temp;
 

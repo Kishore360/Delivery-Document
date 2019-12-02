@@ -6,9 +6,9 @@ CASE WHEN CNT > 0 THEN 'MDS to DWH data validation failed for d_rita_application
 FROM 
 (
 SELECT Count(1) as CNT 
-FROM png_mdsdb.pg_mega_pgb_application_rita_final SRC
-LEFT JOIN png_mdwdb.d_rita_application_ext_c TRGT ON SRC.NAME=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id
-WHERE COALESCE(SRC.PG_STANDARD,'UNSPECIFIED')<>TRGT.pg_standard_c
+FROM png_mdsdb.pg_mega_cmdb_ci_appl_final SRC
+LEFT JOIN png_mdwdb.d_rita_application_ext_c TRGT ON SRC.sys_id=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id
+WHERE (case when SRC.U_PG_STANDARD='yes' then 'Y' when SRC.U_PG_STANDARD='no' then 'N' else 'UNSPECIFIED' end)<>TRGT.pg_standard_c
 AND SRC.cdctype<>'D'
 ) temp;
 

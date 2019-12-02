@@ -6,6 +6,6 @@ ELSE 'SUCCESS' END as Message
 FROM 
 (select 
 count(1) as CNT
- from meritsa_mdsdb.qpwm_data_final SRC
-left  join meritsa_mdwdb.f_qpwm_data_fact_c TRGT on SRC.row_date=TRGT.row_id and SRC.sourceinstance=TRGT.source_id
+ from mercury_mdsdb.qpwm_data_final SRC
+left  join mercury_mdwdb.f_qpwm_data_fact_c TRGT on SRC.row_date=TRGT.row_id and SRC.sourceinstance=TRGT.source_id
  where coalesce(nullif(SRC.change_success,''),'UNSPECIFIED') <>TRGT.change_success_c and SRC.cdctype<>'D')a;

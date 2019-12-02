@@ -92,7 +92,7 @@ AND
 (SRC3.MEGA_ID IS NOT NULL AND (SRC3.CIS_Rough_cut_assessment_done_YesNo='YES' OR SRC3.CIS_Rough_cut_assessment_done_YesNo='Y')) THEN '3'
 ELSE '7' END
 AS SOURCE_CATEGORY
-FROM png_mdsdb.pg_mega_pgb_application_rita_final a 
+FROM png_mdsdb.pg_mega_cmdb_ci_appl_final a 
 LEFT JOIN png_mdsdb.pg_mega_irisk_assessment_issues_final b ON a.NAME=b.MEGA_HEX_ID AND a.sourceinstance=b.sourceinstance AND b.cdctype<>'D'
 LEFT JOIN png_mdsdb.pg_mega_legacyg1_final SRC2 ON a.NAME=SRC2.MEGA_ID AND a.sourceinstance=SRC2.sourceinstance AND SRC2.cdctype<>'D'
 LEFT JOIN png_mdsdb.pg_mega_legacyg234_final SRC3 ON a.NAME=SRC3.Mega_ID AND a.sourceinstance=SRC3.sourceinstance AND SRC3.cdctype<>'D'

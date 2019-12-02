@@ -13,7 +13,7 @@ select app.name as app_hexid, responsible_org_unit,
 CASE WHEN cardinal is null or cardinal='' or cardinal=responsible_org_unit then responsible_org_unit 
 else LEFT(replace(replace(responsible_org_unit,CONCAT(' - ',cardinal),''),cardinal,'') ,255) end as organization_name, cardinal
 ,app.sourceinstance from (
-png_mdsdb.pg_mega_pgb_application_rita_final app
+png_mdsdb.pg_mega_cmdb_ci_appl_final app
 left join (select app_hexid,responsible_org_unit_hexid,responsible_org_unit,sourceinstance,count(1) from png_mdsdb.pg_mega_pgv_app_responsible_org_person_final 
 where (supplier <> 'N' AND supplier IS NOT NULL) and app_hexid is not null and responsible_org_unit_hexid is not null
 and cdctype='X' 

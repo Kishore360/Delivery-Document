@@ -5,6 +5,23 @@ CREATE INDEX IDX_GROUPING_ID4 ON png_mdsdb.pg_mega_pgv_app_data_cat_final(app_he
 CREATE INDEX IDX_GROUPING_ID5 ON png_mdsdb.pg_mega_snv_app_assoc_business_process_final(app_hex,sourceinstance)
 CREATE INDEX IDX_GROUPING_ID6 ON png_mdsdb.pg_mega_pgv_app_le_final(APP_HEXID,sourceinstance) */
 
+
+Code has been changed as per the DELV-19795
+
+
+now only 13 mandaoty Fileds, 
+
+17- 4 (DELV-19795 was removed). 
+
+There are the below 4 values :
+LEs receiving the service
+Data retention period in days
+Automated decision making
+Reason for data collection
+If these fields are used in any other GDPR reports sourcing from Mega/ServiceNow please also remove them.
+
+
+
 SELECT COUNT(Distinct SRC.NAME) as CNT 
 FROM png_mdsdb.pg_mega_pgb_application_rita_final SRC
 LEFT JOIN 
