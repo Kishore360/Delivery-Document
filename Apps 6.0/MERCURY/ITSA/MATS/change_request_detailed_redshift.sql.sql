@@ -122,10 +122,10 @@ from ldb.f_change_request a11
 join ldb.d_change_request_scope a123 
 on (a11.scope_src_key = a123.row_key) 
 union
-select 'ldb.d_change_request_state a124 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_change_request_state a119 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_change_request a11 
-join ldb.d_change_request_state a124 
-on (a11.state_src_key = a124.row_key) 
+join ldb.d_change_request_state a119 
+on (a11.state_src_key = a119.row_key) 
 union
 select 'ldb.d_change_request_type a125 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_change_request a11 
