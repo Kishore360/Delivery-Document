@@ -1,4 +1,3 @@
-
 SELECT 
 CASE WHEN CNT > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 CASE WHEN CNT > 0 THEN 'MDS to DWH data validation failed for d_configuration_item.lifecycle_status_accuracy_flag_c' ELSE 'SUCCESS' END as Message
@@ -17,7 +16,8 @@ WHERE
 (
 CASE WHEN (SRC.last_discovered  IS NULL  OR TRGT.source_type_c ='Tenable' OR TRGT.hardware_applicable_flag_c='N') THEN 'X'
 WHEN 
-(SRC1.hardware_status ='Installed' AND SRC1.discovery_source  NOT IN ('Direct') AND FAC.last_seen_duration_c > 5184000) THEN 'N' ELSE 'Y'
+(SRC1.hardware_status ='Installed' AND SRC1.discovery_source  NOT IN ('Direct') AND FAC.last_seen_duration_c > 5184000
+AND TRGT.pg_yn_network_connected_flag_c <> 'No' ) THEN 'N' ELSE 'Y'
 END
 )<>TRGT.lifecycle_status_accuracy_flag_c
 AND SRC.cdctype='X'
