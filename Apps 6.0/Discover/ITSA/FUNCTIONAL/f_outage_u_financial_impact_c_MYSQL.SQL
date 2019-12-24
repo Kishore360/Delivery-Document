@@ -1,0 +1,4 @@
+SELECT CASE WHEN count(1)  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, 
+CASE WHEN count(1)  THEN 'MDS to DWH data validation failed for f_outage.u_financial_impact_c' ELSE 'SUCCESS' END as Message FROM discover_mdsdb.cmdb_ci_outage_final  SRC 
+JOIN discover_mdwdb.f_outage TRGT ON (SRC.sys_id = TRGT.row_id  AND SRC.sourceinstance = TRGT.source_id )  
+WHERE SRC.u_financial_impact <> (TRGT.u_financial_impact_c) 
