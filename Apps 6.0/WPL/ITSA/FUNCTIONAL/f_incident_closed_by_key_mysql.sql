@@ -1,16 +1,12 @@
- SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
- CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for f_incident.closed_by_key' ELSE 'SUCCESS' END as Message
- FROM wpl_mdsdb.incident_final SRC 
- LEFT JOIN wpl_mdwdb.f_incident TRGT 
- ON (SRC.sys_id =TRGT.row_id  
- AND SRC.sourceinstance= TRGT.source_id  )
-  LEFT JOIN wpl_mdwdb.d_lov_map dlm 
-ON TRGT.state_src_key = dlm.src_key AND dlm.dimension_wh_code = 'CLOSED'
-LEFT JOIN wpl_mdwdb.d_internal_contact LKP 
- ON ( concat('INTERNAL_CONTACT~',resolved_by)= LKP.row_id 
-AND SRC.sourceinstance= LKP.source_id 
-AND TRGT.pivot_date
- BETWEEN LKP.effective_from AND LKP.effective_to) 
+SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+  CASE WHEN cnt >0 THEN 'MDS to DWH data validation failed for f_incidnet.closed_by_key' ELSE 'SUCCESS' END as Message from(
+  select count(1) cnt from wpl_mdsdb.incident_final incident
+left join wpl_mdwdb.f_incident f on incident.sys_id= f.row_id and incident.sourceinstance=f.source_id
+join wpl_mdwdb.d_lov_map lv on f.state_src_key=lv.src_key and lv.dimension_wh_code in  ('RESOLVED','CLOSED')
+join wpl_mdwdb.d_internal_contact di on di.row_id = concat('INTERNAL_CONTACT~',incident.resolved_by)
 
- WHERE COALESCE(LKP.row_key,CASE WHEN SRC.resolved_by IS NULL THEN 0 else -1 end)<> (TRGT.closed_by_key) and SRC.cdctype='X' ;
+where(case when incident.resolved_by is null then 0 else di.row_key end) <> f.closed_by_key and incident.cdctype<>'D'
+        
+
  
+)a;
