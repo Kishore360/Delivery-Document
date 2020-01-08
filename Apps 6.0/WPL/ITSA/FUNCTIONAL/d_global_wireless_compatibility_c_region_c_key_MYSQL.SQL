@@ -4,6 +4,6 @@ CASE WHEN cnt>0 THEN 'MDS to DWH data validation failed for d_global_wireless_co
 wpl_mdsdb.us_gwcm_global_wlc_inventory_final src
 left join wpl_mdwdb.d_global_wireless_compatibility_c trgt
 on concat(COALESCE(src.hostname,'UNSPECIFIED'),'~',COALESCE(src.version,'UNSPECIFIED'))=trgt.row_id and src.sourceinstance=trgt.source_id
-join wpl_mdwdb.d_lov lkp on COALESCE( CONCAT('GLOBAL_WLC~REGION~',src.region),'UNSPECIFIED')=lkp.row_id and src.sourceinstance=lkp.source_id
-where coalesce(lkp.row_key,case when src.region is null then 0 else -1 end)<>trgt.region_c_key and src.cdctype='X')ma
+join wpl_mdwdb.d_lov lkp on COALESCE( CONCAT('REGION~GLOBAL_WLC~',src.region),'UNSPECIFIED')=lkp.row_id and src.sourceinstance=lkp.source_id
+where src.cdctype<>'D' and coalesce(lkp.row_key,case when src.region is null then 0 else -1 end)<>trgt.region_c_key)ma;
 
