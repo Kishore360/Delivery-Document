@@ -11,4 +11,4 @@ left join  mercury_mdsdb.hp_kcrt_request_details_final kcrt_req_request_details 
  and kcrt_requests.sourceinstance=kcrt_req_request_details.sourceinstance
 join  mercury_mdwdb.d_demand TRGT on kcrt_fg_pfm_proposal.REQUEST_ID=TRGT.row_id
 
-where coalesce(kcrt_req_request_details.VISIBLE_PARAMETER4,'UNSPECIFIED')<> TRGT.rating_related_c)a
+where coalesce(kcrt_req_request_details.VISIBLE_PARAMETER4,'N')<> TRGT.rating_related_c)a
