@@ -5,6 +5,7 @@ ELSE 'SUCCESS' END as Message
 FROM 
 (select 
 count(1) as CNT
- from mercury_mdsdb.gd_containers_report_final SRC
+ from mercury_mdsdb.gd_containers_report_custom_final SRC
  join mercury_mdwdb.f_gd_containers_report_c TRGT on SRC.container_ID=TRGT.row_id and SRC.sourceinstance=TRGT.source_id
- where coalesce(Display_Name,'UNSPECIFIED') <>TRGT.display_name_c)a;
+ where coalesce(nullif(SRC.Display_Name,''),'UNSPECIFIED')
+ <>TRGT.display_name_c)a;

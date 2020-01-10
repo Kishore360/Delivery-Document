@@ -8,7 +8,7 @@ left JOIN mercury_mdwdb.f_incident_asc_c b
 on 
 a.sys_id=b.row_id AND a.sourceinstance=b.source_id
 LEFT  JOIN  mercury_mdwdb.d_lov c
-on COALESCE(CONCAT('CALLER_TYPE~ASC_INCIDENT~~~',a.u_caller_type),'UNSPECIFIED')=c.ROW_ID 
+on COALESCE(CONCAT('CALLER_TYPE~ASC_INCIDENT~',a.u_caller_type),'UNSPECIFIED')=c.ROW_ID 
 AND c.source_id = a.sourceinstance
 where 
 case when a.u_caller_type is null then 0
