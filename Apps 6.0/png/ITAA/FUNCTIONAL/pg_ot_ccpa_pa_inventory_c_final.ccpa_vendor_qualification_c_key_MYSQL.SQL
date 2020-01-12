@@ -4,7 +4,7 @@ CASE WHEN CNT > 0 THEN 'MDS to DWH data validation failed for pg_ot_ccpa_pa_inve
 ELSE 'SUCCESS' END as Message  from(
 select count(1) as CNT 
 FROM  png_mdsdb.pg_ot_ccpa_pa_inventory_c_final  src
-LEFT JOIN  pgrita_mdwdb.d_png_ot_ccpa_numerita_c trgt
+LEFT JOIN  png_mdwdb.d_png_ot_ccpa_numerita_c trgt
 on src.id = trgt.row_id and src.sourceinstance = trgt.source_id
 JOIN png_mdwdb.d_lov lkp
 ON COALESCE(CONCAT('OT_CCPA_VENDOR_QUALIFICATION_C~PROCESSING_ACTIVITIES~',src.Vendor_qualification),'UNSPECIFIED') =lkp.row_id
