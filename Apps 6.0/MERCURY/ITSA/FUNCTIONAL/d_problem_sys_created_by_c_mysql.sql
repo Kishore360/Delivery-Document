@@ -3,5 +3,5 @@ CASE WHEN count(1)  THEN 'MDS to DWH data validation failed for f_task_c.urgency
 FROM mercury_mdsdb.problem_final  SRC 
 JOIN mercury_mdwdb.d_problem TRGT 
 ON (SRC.sys_id = TRGT.row_id  
-AND SRC.sourceinstance = TRGT.source_id )  
+AND SRC.sourceinstance = TRGT.source_id and SRC.cdctype='X' )  
 WHERE SRC.sys_created_by<>(TRGT.sys_created_by_c) 
