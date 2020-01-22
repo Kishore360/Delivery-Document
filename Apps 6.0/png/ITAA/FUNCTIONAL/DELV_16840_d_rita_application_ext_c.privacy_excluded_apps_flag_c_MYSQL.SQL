@@ -11,6 +11,6 @@ on (a.mega_id_c=b.megaid and a.source_id=b.sourceinstance)
 join 
 png_mdsdb.pg_mega_cmdb_ci_appl_final c
 on (a.row_id=c.sys_id and a.source_id=c.sourceinstance)
-where (case when b.megaid is not null then 'Y' else 'N' end)= a.privacy_excluded_apps_flag_c
+where (case when b.megaid is not null then 'Y' else 'N' end)<> a.privacy_excluded_apps_flag_c
 ) temp;
 	 
