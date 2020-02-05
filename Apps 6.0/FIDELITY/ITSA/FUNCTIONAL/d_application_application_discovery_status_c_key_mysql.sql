@@ -7,7 +7,8 @@ COALESCE(CONCAT('DISCOVERY_STATUS~APPLICATION~',u_application_discovery_status),
 and SRC.sourceinstance=LKP.source_id
 JOIN  fidelity_mdwdb.d_application TRGT 
 ON (concat('APPLICATION~',SRC.sys_id) = TRGT.row_id AND SRC.sourceinstance= TRGT.source_id)
-WHERE coalesce(LKP.row_key,case when SRC.u_application_discovery_status  is null then 0 else -1 end)<> TRGT.application_discovery_status_c_key;  
+WHERE coalesce(LKP.row_key,case when SRC.u_application_discovery_status  is null then 0 else -1 end)<> TRGT.application_discovery_status_c_key and SRC.cdctype<>'D'
+;  
 
 
 

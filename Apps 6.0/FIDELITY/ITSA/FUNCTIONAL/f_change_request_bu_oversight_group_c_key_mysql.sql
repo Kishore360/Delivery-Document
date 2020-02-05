@@ -7,5 +7,5 @@ ON (SRC.sourceinstance =TRGT.source_id
 and coalesce(concat('GROUP~',SRC.u_bu_oversight_group),'UNSPECIFIED' )= TRGT.row_id )
 JOIN fidelity_mdwdb.f_change_request trgt1
 on SRC.sys_id = trgt1.row_id and SRC.sourceinstance = trgt1.source_id
-WHERE coalesce(TRGT.row_key,case when SRC.u_bu_oversight_group is null then 0 else -1 end) <>trgt1.bu_oversight_group_c_key
+WHERE coalesce(TRGT.row_key,case when SRC.u_bu_oversight_group is null then 0 else -1 end) <>trgt1.bu_oversight_group_c_key and SRC.cdctype<>'D'
 

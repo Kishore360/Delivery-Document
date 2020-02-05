@@ -13,4 +13,4 @@ JOIN fidelity_mdwdb.d_incident c
 ON  b.incident_key = c.row_key where  b.soft_deleted_flag='N'
 group by 1
 ) b ON a.row_key = b.problem_key
-where a.u_related_incidents_url_c <> b.source_url
+where coalesce(a.u_related_incidents_url_c,'unspecified') <> b.source_url and a.soft_deleted_flag = 'N'

@@ -3,7 +3,7 @@ CASE WHEN count(1)  THEN 'MDS to DWH data validation failed for d_time_sheet_c.d
 FROM  fidelity_mdsdb.problem_final SRC
 JOIN  fidelity_mdwdb.d_problem TRGT 
 ON (SRC.sys_id = TRGT.row_id AND SRC.sourceinstance= TRGT.source_id)
-WHERE convert_tz(u_review_date,'GMT','America/New_York') <>TRGT.u_review_date_c; 
+WHERE convert_tz(u_review_date,'GMT','America/New_York') <>TRGT.u_review_date_c and SRC.cdctype<>'D'; 
 
 
 

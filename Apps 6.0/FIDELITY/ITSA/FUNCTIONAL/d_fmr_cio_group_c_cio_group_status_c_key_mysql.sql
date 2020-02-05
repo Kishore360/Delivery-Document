@@ -7,7 +7,7 @@ on SRC.sys_id = trgt1.row_id and SRC.sourceinstance = trgt1.source_id
 join
 fidelity_mdwdb.d_lov lkp
 on  COALESCE(CONCAT('STATUS_C~CIO_GROUP~', SRC.u_status), 'UNSPECIFIED')=lkp.row_id and SRC.sourceinstance=lkp.source_id
-WHERE coalesce(lkp.row_key,case when SRC.u_status is null then 0 else -1 end)  <>trgt1.cio_group_status_c_key
+WHERE coalesce(lkp.row_key,case when SRC.u_status is null then 0 else -1 end)  <>trgt1.cio_group_status_c_key and SRC.cdctype<>'D'
 
 
 

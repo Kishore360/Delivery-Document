@@ -11,5 +11,5 @@ fidelity_mdsdb.change_request_final  SRC
 JOIN fidelity_mdwdb.d_change_failure TRGT 
 ON (SRC.sys_id = TRGT.row_id  AND SRC.sourceinstance = TRGT.source_id ) 
  
-WHERE (CASE WHEN SRC.u_ecm = 1 then 'Y' else 'N' END) <> (TRGT.u_ecm_flag_c) ) temp;
+WHERE (CASE WHEN SRC.u_ecm = 1 then 'Y' else 'N' END) <> (TRGT.u_ecm_flag_c) and SRC.cdctype<>'D' )  temp;
 

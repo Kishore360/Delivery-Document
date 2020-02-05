@@ -4,4 +4,4 @@ FROM
 fidelity_mdsdb.u_fmr_business_groups_final SRC
 JOIN fidelity_mdwdb.d_fmr_business_group_c trgt1
 on SRC.sys_id = trgt1.row_id and SRC.sourceinstance = trgt1.source_id
-WHERE SRC.u_display_name <>trgt1.name_c
+WHERE coalesce(SRC.u_display_name ,'unspecified') <>trgt1.name_c and SRC.cdctype<>'D'

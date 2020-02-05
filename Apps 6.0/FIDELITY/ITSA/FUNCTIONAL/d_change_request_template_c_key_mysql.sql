@@ -7,6 +7,6 @@ JOIN fidelity_mdwdb.f_change_request TRGT
 ON (SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id )  
 LEFT JOIN fidelity_mdwdb.d_template_c LKP 
 ON ( COALESCE(SRC.u_template,'UNSPECIFIED') = LKP.row_id AND SRC.sourceinstance = LKP.source_id ) 
-WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_template IS NULL THEN 0 else -1 end)<> (TRGT.template_c_key) ) temp;
+WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_template IS NULL THEN 0 else -1 end)<> (TRGT.template_c_key) and SRC.cdctype<>'D' ) temp;
 
 

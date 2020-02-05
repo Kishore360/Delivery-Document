@@ -10,6 +10,6 @@ fidelity_mdsdb.change_request_final  SRC
 JOIN fidelity_mdwdb.d_change_request TRGT 
 ON (SRC.sys_id = TRGT.row_id  AND SRC.sourceinstance = TRGT.source_id ) 
  
-WHERE TRGT.soft_deleted_flag='N'  and (CASE WHEN SRC.outside_maintenance_schedule = 1 then 'Y' else 'N' END) <> (TRGT.outside_maintenance_schedule_flag) ) temp;
+WHERE TRGT.soft_deleted_flag='N'  and (CASE WHEN SRC.outside_maintenance_schedule = 1 then 'Y' else 'N' END) <> (TRGT.outside_maintenance_schedule_flag) and SRC.cdctype<>'D' ) temp;
 
 

@@ -8,7 +8,7 @@ on SRC.sys_id = trgt1.row_id and SRC.sourceinstance = trgt1.source_id
 join
 fidelity_mdwdb.d_lov lkp
 on  COALESCE(CONCAT('RISK', '~', 'CHANGE_REQUEST', '~', UPPER(SRC.risk)), 'UNSPECIFIED') =lkp.row_id and SRC.sourceinstance=lkp.source_id
-WHERE coalesce(lkp.row_key,case when SRC.risk is null then 0 else -1 end)  <>trgt1.risk_src_key
+WHERE coalesce(lkp.row_key,case when SRC.risk is null then 0 else -1 end)  <>trgt1.risk_src_key and SRC.cdctype<>'D'
 
 
 

@@ -7,5 +7,4 @@ ON (SRC.sourceinstance =TRGT.source_id
 and coalesce(concat('INTERNAL_CONTACT~',SRC.u_alt_programmer),'UNSPECIFIED' )= TRGT.row_id )
 JOIN fidelity_mdwdb.f_change_request trgt1
 on SRC.sys_id = trgt1.row_id and SRC.sourceinstance = trgt1.source_id
-WHERE coalesce(TRGT.row_key,case when SRC.u_alt_programmer is null then 0 else -1 end) <>trgt1.alt_programmer_c_key
-
+WHERE coalesce(TRGT.row_key,case when SRC.u_alt_programmer is null then 0 else -1 end) <>trgt1.alt_programmer_c_key and SRC.cdctype<>'D'

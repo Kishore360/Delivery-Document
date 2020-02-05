@@ -12,7 +12,7 @@ FROM fidelity_mdsdb.change_request_final a
  JOIN  fidelity_mdsdb.incident_final b ON a.sys_id=b.u_caused_by_change AND a.sourceinstance =b.sourceinstance
 group by 1,2 )a
 JOIN fidelity_mdwdb.d_change_request c ON a.sys_id = c.row_id  and a.sourceinstance=c.source_id
-where cnt<>Incidents_caused_by_change_c;
+where cnt<>Incidents_caused_by_change_c and SRC.cdctype<>'D';
 
 ) temp;
 

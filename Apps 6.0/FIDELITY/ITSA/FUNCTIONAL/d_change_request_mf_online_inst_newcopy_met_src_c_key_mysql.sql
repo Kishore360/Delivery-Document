@@ -6,6 +6,6 @@ on src.sys_id = trgt.row_id and src.sourceinstance = trgt.source_id
 LEFT JOIN fidelity_mdwdb.d_lov lkp
 ON COALESCE(CONCAT('U_MF_ONLINE_INST_NEWCOPY_MET~CHANGE_REQUEST~',src.u_mf_online_inst_newcopy_met ),'UNSPECIFIED') =lkp.row_id 
 and lkp.source_id=src.sourceinstance and lkp.dimension_class='U_MF_ONLINE_INST_NEWCOPY_MET~CHANGE_REQUEST'
-where COALESCE(lkp.row_key,CASE WHEN src.u_mf_online_inst_newcopy_met  IS NULL THEN 0 else -1 end)<> trgt.mf_online_inst_newcopy_met_src_c_key
+where COALESCE(lkp.row_key,CASE WHEN src.u_mf_online_inst_newcopy_met  IS NULL THEN 0 else -1 end)<> trgt.mf_online_inst_newcopy_met_src_c_key and SRC.cdctype<>'D'
 ;
 

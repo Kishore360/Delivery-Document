@@ -5,7 +5,7 @@ JOIN  fidelity_mdwdb.d_problem TRGT
 ON (SRC.sys_id = TRGT.row_id AND SRC.sourceinstance= TRGT.source_id)
 left join fidelity_mdwdb.d_lov LKP
 on CONCAT('MEETING_STATUS~PROBLEM~',SRC.u_meeting_status)=LKP.row_id
-WHERE coalesce(LKP.row_key,case when SRC.u_meeting_status is null then 0 else -1 end) <>TRGT.problem_meeting_status_c_key; 
+WHERE coalesce(LKP.row_key,case when SRC.u_meeting_status is null then 0 else -1 end) <>TRGT.problem_meeting_status_c_key  and SRC.cdctype<>'D'; 
 
 
 

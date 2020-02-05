@@ -5,4 +5,4 @@ JOIN  fidelity_mdwdb.f_incident TRGT
 ON (SRC.sys_id = TRGT.row_id AND SRC.sourceinstance= TRGT.source_id)
 WHERE CASE WHEN SRC.u_cumulative_impact_duration is null  THEN NULL 
 WHEN TIMESTAMPDIFF(SECOND,'1970-01-01 00:00:00',SRC.u_cumulative_impact_duration) < 0 THEN NULL  
-ELSE TIMESTAMPDIFF(SECOND,'1970-01-01 00:00:00',SRC.u_cumulative_impact_duration)END <> TRGT.u_cumulative_impact_duration_c
+ELSE TIMESTAMPDIFF(SECOND,'1970-01-01 00:00:00',SRC.u_cumulative_impact_duration)END <> TRGT.u_cumulative_impact_duration_c and SRC.cdctype<>'D'

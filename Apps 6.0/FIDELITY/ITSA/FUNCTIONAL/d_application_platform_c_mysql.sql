@@ -16,4 +16,4 @@ ON a.platform collate utf8_unicode_ci = b.sys_id
 group by 2 
 ) b ON a.row_id = b.app_id and a.source_id = b.sourceinstance
 where  
-a.platform_c  <> COALESCE(b.platform,'UNSPECIFIED') 
+a.platform_c  <> COALESCE(b.platform,'UNSPECIFIED') and a.soft_deleted_flag='N'

@@ -4,4 +4,5 @@ FROM
 fidelity_mdsdb.cmdb_ci_appl_final SRC
 JOIN fidelity_mdwdb.d_application trgt1
 on SRC.sys_id = trgt1.row_id and SRC.sourceinstance = trgt1.source_id
-WHERE SRC.sys_class_name <>trgt1.class
+WHERE COALESCE(SRC.sys_class_name,' UNSPECIFIED') <>trgt1.class and SRC.cdctype<>'D'
+

@@ -11,4 +11,4 @@ ON (SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id )
 LEFT JOIN fidelity_mdwdb.d_lov LKP 
 ON (COALESCE(CONCAT('FSC_SERVICES_REQUIRED_C~CHANGE_REQUEST~',SRC.u_fsc_services_required),'UNSPECIFIED') = LKP.row_id AND SRC.sourceinstance = LKP.source_id ) 
 
-WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_fsc_services_required IS NULL THEN 0 else -1 end) <> (TRGT.fsc_services_required_src_c_key) ) temp;
+WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_fsc_services_required IS NULL THEN 0 else -1 end) <> (TRGT.fsc_services_required_src_c_key) and SRC.cdctype<>'D') temp;

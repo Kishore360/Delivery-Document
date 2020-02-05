@@ -7,7 +7,7 @@ FROM fidelity_mdsdb.change_request_final SRC
 JOIN fidelity_mdwdb.d_change_request TRGT 
 ON SRC.sys_id = TRGT.row_id 
 and  SRC.sourceinstance = TRGT.source_id   and TRGT.soft_deleted_flag = 'N'
-WHERE COALESCE( convert_tz(SRC.u_outage_start_time,'GMT','America/New_York'),'') <> COALESCE(TRGT.u_outage_start_time_c ,''))b
+WHERE convert_tz(SRC.u_outage_start_time,'GMT','America/New_York') <> TRGT.u_outage_start_time_c and SRC.cdctype<>'D' )b
 
 
 

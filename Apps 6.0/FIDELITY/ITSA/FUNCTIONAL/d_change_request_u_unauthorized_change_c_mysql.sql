@@ -4,7 +4,7 @@ FROM
 fidelity_mdsdb.change_request_final SRC
 JOIN fidelity_mdwdb.d_change_request trgt1
 on SRC.sys_id = trgt1.row_id and SRC.sourceinstance = trgt1.source_id
-WHERE case when SRC.u_unauthorized_change = 1 then 'Y' else 'N' end <>trgt1.u_unauthorized_change_c
+WHERE case when SRC.u_unauthorized_change = 1 then 'Y' else 'N' end <>trgt1.u_unauthorized_change_c and SRC.cdctype<>'D'
 
 
 

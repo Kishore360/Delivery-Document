@@ -8,5 +8,5 @@ and coalesce(concat('INTERNAL_CONTACT~',SRC.u_on_behalf_of),'UNSPECIFIED' )= TRG
 JOIN fidelity_mdwdb.f_incident trgt1
 on SRC.sys_id = trgt1.row_id and SRC.sourceinstance = trgt1.source_id
 WHERE coalesce(TRGT.row_key,case when SRC.u_on_behalf_of is null then 0 else -1 end) 
-<>trgt1.on_behalf_of_c_key
+<>trgt1.on_behalf_of_c_key and SRC.cdctype<>'D'
 

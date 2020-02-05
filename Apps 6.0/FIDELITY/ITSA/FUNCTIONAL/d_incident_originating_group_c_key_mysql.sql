@@ -7,5 +7,5 @@ join fidelity_mdwdb.d_internal_organization LKP
 on case 
 when SRC.u_originating_group is null then 'UNSPECIFIED'
 else concat('GROUP~',SRC.u_originating_group) end=LKP.row_id and LKP.source_id = SRC.sourceinstance and LKP.group_flag ='Y'
-WHERE COALESCE(LKP.row_key,case when SRC.u_originating_group is null then 0 else -1 end ) <> TRGT.originating_group_c_key
+WHERE COALESCE(LKP.row_key,case when SRC.u_originating_group is null then 0 else -1 end ) <> TRGT.originating_group_c_key and SRC.cdctype<>'D'
 ; 

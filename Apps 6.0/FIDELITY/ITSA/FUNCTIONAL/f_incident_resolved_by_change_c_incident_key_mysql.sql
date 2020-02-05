@@ -18,4 +18,4 @@ ON n.n <= 1 + (LENGTH(COALESCE(TRIM(inc.u_resolved_by_change),'UNSPECIFIED')) - 
 on a11.row_id=a12.row_id and a11.source_id=a12.source_id
 join fidelity_mdwdb.d_incident a13
 on a12.incident_id=a13.row_id
-where a13.row_key <>a11.incident_key)a
+where a13.row_key <>a11.incident_key and a11.soft_deleted_flag='N' )a

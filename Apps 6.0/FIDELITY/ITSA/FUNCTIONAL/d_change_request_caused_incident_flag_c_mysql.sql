@@ -8,7 +8,7 @@ SELECT count(1) as CNT
 FROM  fidelity_mdsdb.change_request_final a 
  JOIN  fidelity_mdsdb.incident_final b ON a.sys_id=b.u_caused_by_change AND a.sourceinstance =b.sourceinstance
 JOIN fidelity_mdwdb.d_change_request c ON a.sys_id = c.row_id and a.sourceinstance=c.source_id
-WHERE CASE WHEN b.u_caused_by_change IS NULL THEN 'N' ELSE 'Y' END<>c.caused_incident_flag_c
+WHERE CASE WHEN b.u_caused_by_change IS NULL THEN 'N' ELSE 'Y' END<>c.caused_incident_flag_c and SRC.cdctype<>'D'
 ) temp;
 
 

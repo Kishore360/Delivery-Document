@@ -5,7 +5,7 @@ JOIN  fidelity_mdwdb.d_problem TRGT
 ON (SRC.sys_id = TRGT.row_id AND SRC.sourceinstance= TRGT.source_id)
 left join fidelity_mdwdb.d_lov LKP
 on CONCAT('PHASE~PROBLEM~',SRC.u_phase)=LKP.row_id
-WHERE coalesce(LKP.row_key,case when SRC.u_phase is null then 0 else -1 end) <>TRGT.problem_phase_c_key; 
+WHERE coalesce(LKP.row_key,case when SRC.u_phase is null then 0 else -1 end) <>TRGT.problem_phase_c_key and SRC.cdctype<>'D'; 
 
 
 

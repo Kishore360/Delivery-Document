@@ -3,4 +3,4 @@ WHERE CASE
 WHEN SRC.u_total_impact_duration is null  THEN NULL   
 WHEN TIMESTAMPDIFF(SECOND,'1970-01-01 00:00:00',SRC.u_total_impact_duration) < 0  THEN NULL    
 WHEN TIMESTAMPDIFF(SECOND,'1970-01-01 00:00:00',SRC.u_total_impact_duration) > 214748364  THEN NULL     
-ELSE TIMESTAMPDIFF(SECOND,'1970-01-01 00:00:00',SRC.u_total_impact_duration) end <> (TRGT.primary_impact_duration_c) 
+ELSE TIMESTAMPDIFF(SECOND,'1970-01-01 00:00:00',SRC.u_total_impact_duration) end <> (TRGT.primary_impact_duration_c) and SRC.cdctype<>'D'

@@ -12,4 +12,4 @@ ON (SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id )
 
 LEFT JOIN fidelity_mdwdb.d_lov LKP 
 ON (COALESCE(CONCAT('TIER_4_RESTRICTED_ACCESS_C~CHANGE_REQUEST~',SRC.u_tier_4_restricted_access),'UNSPECIFIED') = LKP.row_id AND SRC.sourceinstance = LKP.source_id ) 
-WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_tier_4_restricted_access IS NULL THEN 0 else -1 end) <> (TRGT.tier_4_restricted_access_src_c_key) ) temp;
+WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_tier_4_restricted_access IS NULL THEN 0 else -1 end) <> (TRGT.tier_4_restricted_access_src_c_key) and SRC.cdctype<>'D') temp;

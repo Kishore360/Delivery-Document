@@ -6,5 +6,5 @@ ON (SRC.sys_id = TRGT.row_id AND SRC.sourceinstance= TRGT.source_id)
 join fidelity_mdwdb.d_lov LKP
 on COALESCE(CONCAT('U_IS_APPLICATION_OUTAGE_REQUIRED','~','CHANGE_REQUEST','~',UPPER(SRC.u_is_application_outage_required)),'UNSPECIFIED') =LKP.row_id
 and LKP.source_id=SRC.sourceinstance and LKP.dimension_class='U_IS_APPLICATION_OUTAGE_REQUIRED~CHANGE_REQUEST'
-WHERE COALESCE(LKP.row_key,case when SRC.u_is_application_outage_required is null then 0 else -1 end ) <> TRGT.is_application_outage_required_src_c_key
+WHERE COALESCE(LKP.row_key,case when SRC.u_is_application_outage_required is null then 0 else -1 end ) <> TRGT.is_application_outage_required_src_c_key and SRC.cdctype<>'D'
 ; 

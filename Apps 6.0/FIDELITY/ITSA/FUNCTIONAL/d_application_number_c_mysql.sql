@@ -3,4 +3,4 @@ CASE WHEN count(1)  THEN 'MDS to DWH data validation failed for d_time_sheet_c.d
 FROM  fidelity_mdsdb.cmdb_ci_appl_final SRC
 JOIN  fidelity_mdwdb.d_application TRGT 
 ON (CONCAT('APPLICATION~',SRC.sys_id) = TRGT.row_id AND SRC.sourceinstance= TRGT.source_id)
-WHERE coalesce(SRC.u_number) <> TRGT.number_c and SRC.cdctype<>'D'  ; 
+WHERE coalesce(SRC.u_number,'unspecified') <> TRGT.number_c and SRC.cdctype<>'D'  ; 

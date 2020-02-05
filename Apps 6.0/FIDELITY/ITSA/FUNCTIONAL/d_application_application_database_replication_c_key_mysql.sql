@@ -4,4 +4,5 @@ JOIN fidelity_mdwdb.d_application TRGT
 ON (CONCAT('APPLICATION~',SRC.sys_id) = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id ) and SRC.cdctype <>'D'  
 LEFT JOIN fidelity_mdwdb.d_lov LKP 
 ON (COALESCE(CONCAT('DATABASE_REPLICATION~APPLICATION~',upper(SRC.u_database_replication_strategy)),'UNSPECIFIED') = LKP.row_id AND SRC.sourceinstance = LKP.source_id ) 
-WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_database_replication_strategy IS NULL THEN 0 else -1 end)=(TRGT.application_database_replication_c_key) 
+WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_database_replication_strategy IS NULL THEN 0 else -1 end)<>(TRGT.application_database_replication_c_key) and SRC.cdctype<>'D'
+

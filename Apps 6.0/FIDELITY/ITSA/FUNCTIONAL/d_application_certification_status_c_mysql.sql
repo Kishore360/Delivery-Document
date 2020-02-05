@@ -6,4 +6,5 @@ WHERE CASE WHEN SRC.u_certification_flag IS FALSE THEN 'Not Certified'
 WHEN SRC.u_certification_flag IS TRUE and SRC.u_certification_date is NULL THEN 'Out of Date'
 WHEN SRC.u_certification_flag IS TRUE and DATEDIFF(date(now()),date(SRC.u_certification_date))<150  THEN 'Certified'
 WHEN SRC.u_certification_flag IS TRUE and (DATEDIFF(date(now()),date(SRC.u_certification_date))>=150 and DATEDIFF(date(now()),date(SRC.u_certification_date))< 180 ) THEN 'Approaching Out of Date'
-WHEN SRC.u_certification_flag IS TRUE and (DATEDIFF(date(now()),date(SRC.u_certification_date))>=180) THEN 'Out of Date' END<>(TRGT.certification_status_c) 
+WHEN SRC.u_certification_flag IS TRUE and (DATEDIFF(date(now()),date(SRC.u_certification_date))>=180) THEN 'Out of Date' END<>(TRGT.certification_status_c) and SRC.cdctype<>'D'
+
