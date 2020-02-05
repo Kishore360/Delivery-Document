@@ -35,7 +35,7 @@ WHERE CASE
                     and SRC.urgency=3 
                     and (SRC.u_impacted_audience is null 
                     or SRC.u_impacted_audience='None' )) THEN '4L'  
-                end <>trgt1.impact_abbreviation_c
+                end <>trgt1.impact_abbreviation_c and SRC.cdctype<>'D'
 
 
 

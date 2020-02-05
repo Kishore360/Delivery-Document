@@ -3,4 +3,4 @@ CASE WHEN count(1)  THEN 'MDS to DWH data validation failed for f_change_request
 FROM fidelity_mdsdb.sys_user_final src
 JOIN fidelity_mdwdb.d_internal_contact trgt
 on concat('INTERNAL_CONTACT~',src.sys_id) = trgt.row_id and src.sourceinstance = trgt.source_id
-where COALESCE(src.u_classification,'UNSPECIFIED')<> trgt.u_classification_c
+where COALESCE(src.u_classification,'UNSPECIFIED')<> trgt.u_classification_c and src.cdctype<>'D' 

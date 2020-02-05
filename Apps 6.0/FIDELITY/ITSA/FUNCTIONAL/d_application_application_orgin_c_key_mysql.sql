@@ -7,8 +7,8 @@ JOIN
 on SRC.sys_id = trgt1.row_id and SRC.sourceinstance = trgt1.source_id
 join
 fidelity_mdwdb.d_lov lkp
-on COALESCE(CONCAT('SOURCECODE_CLASSIFICATION~APPLICATION~', upper(SRC.u_source_code_classification)), 'UNSPECIFIED') =lkp.row_id and SRC.sourceinstance=lkp.source_id
-WHERE coalesce(lkp.row_key,case when SRC.u_source_code_classification is null then 0 else -1 end)  <>trgt1.application_sourcecode_classification_c_key and SRC.cdctype<>'D'
+on COALESCE(CONCAT('ORGIN~APPLICATION~', upper(SRC.u_application_origin)),  'UNSPECIFIED') =lkp.row_id and SRC.sourceinstance=lkp.source_id
+WHERE coalesce(lkp.row_key,case when SRC.u_application_origin is null then 0 else -1 end)  <>trgt1.application_orgin_c_key
 
 
 

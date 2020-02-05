@@ -5,7 +5,7 @@ FROM  fidelity_mdsdb.incident_final SRC
 LEFT JOIN fidelity_mdwdb.d_problem_type_and_symptoms_c LKP on SRC.u_ci_symptom =LKP.row_id and SRC.sourceinstance=LKP.source_id
 JOIN  fidelity_mdwdb.f_incident TRGT 
 ON (SRC.sys_id = TRGT.row_id AND SRC.sourceinstance= TRGT.source_id)
-WHERE coalesce(LKP.row_key,case when SRC.u_ci_symptom  is null then 0 else -1 end)<> TRGT.problem_type_and_symptoms_c_key; 
+WHERE coalesce(LKP.row_key,case when SRC.u_ci_symptom  is null then 0 else -1 end)<> TRGT.problem_type_and_symptoms_c_key  and SRC.cdctype<>'D' ; 
 
 
 
