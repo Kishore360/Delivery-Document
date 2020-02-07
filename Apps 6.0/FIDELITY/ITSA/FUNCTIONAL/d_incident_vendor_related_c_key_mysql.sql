@@ -3,7 +3,7 @@ CASE WHEN count(1)  THEN 'MDS to DWH data validation failed for d_time_sheet_c.d
 FROM  
 fidelity_mdsdb.incident_final SRC 
 LEFT JOIN fidelity_mdwdb.d_lov LKP on COALESCE(CONCAT('VENDOR_RELATED~INCIDENT~',u_vendor_related,'UNSPECIFIED')) =LKP.row_id and SRC.sourceinstance=LKP.source_id
-JOIN  fidelity_mdwdb.d_application TRGT 
+JOIN  fidelity_mdwdb.d_incident TRGT 
 ON (SRC.sys_id = TRGT.row_id AND SRC.sourceinstance= TRGT.source_id)
 WHERE coalesce(LKP.row_key,case when SRC.u_vendor_related  is null then 0 else -1 end)<> TRGT.vendor_related_c_key and SRC.cdctype<>'D'; 
 

@@ -6,15 +6,18 @@ FROM
 (
 SELECT count(1) as CNT  
 FROM  
-(SELECT a.sys_id,a.sourceinstance,count(b.number) cnt
--- a.sys_id , c.row_id ,CASE WHEN b.u_caused_by_change IS NULL THEN 'N' ELSE 'Y' END,c.caused_incident_flag_c
-FROM fidelity_mdsdb.change_request_final a 
- JOIN  fidelity_mdsdb.incident_final b ON a.sys_id=b.u_caused_by_change AND a.sourceinstance =b.sourceinstance
-group by 1,2 )a
-JOIN fidelity_mdwdb.d_change_request c ON a.sys_id = c.row_id  and a.sourceinstance=c.source_id
-where cnt<>Incidents_caused_by_change_c and SRC.cdctype<>'D';
+( SELECT
+            COUNT(incident_key) AS incident_count,
+            change_request_key AS change_request_key
+			FROM fidelity_mdwdb.f_incident_caused_by_change_c   
+			WHERE soft_deleted_flag = 'N'   and   change_request_key>0 
+        GROUP BY 2 )a
+JOIN fidelity_mdwdb.d_change_request c ON  c.row_key= a.change_request_key
+where a.incident_count<>c.Incidents_caused_by_change_c 
 
 ) temp;
+
+
 
 
 
