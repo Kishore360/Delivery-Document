@@ -1,29 +1,21 @@
-SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
-CASE WHEN cnt >0 THEN 'MDS to DWH data validation failed for f_incident.impact_src_code' 
-ELSE 'MDS to DWH data validation passed for f_incident.impact_src_code' END as Message from 
-(select count(1) cnt 
-FROM equifax_mdsdb.task_ci_final f1
-left  join equifax_mdsdb.incident_final f2
-on f1.task=f2.sys_id and f1.sourceinstance=f2.sourceinstance
-left join equifax_mdsdb.change_request_final f3
-on f1.task=f3.sys_id and f1.sourceinstance=f3.sourceinstance
-left join equifax_mdsdb.sc_request_final f4
-on f1.task=f4.sys_id and f1.sourceinstance=f4.sourceinstance
-left join equifax_mdsdb.problem_final f5
-on f1.task=f5.sys_id and f1.sourceinstance=f5.sourceinstance
- left join equifax_mdsdb.sc_req_item_final f6
-on f1.task=f6.sys_id and f1.sourceinstance=f6.sourceinstance
-left join  equifax_mdsdb.sc_task_final f7
-on f1.task=f7.sys_id and f1.sourceinstance=f7.sourceinstance
-JOIN equifax_mdwdb.d_task_ci_c TRGT 
-ON f1.sys_id = TRGT.row_id 
-and  f1.sourceinstance = TRGT.source_id  
-WHERE (case 
-when f1.task=f2.sys_id then f2.sys_class_name
-when f1.task=f3.sys_id then f3.sys_class_name
-when  f1.task=f4.sys_id then f4.sys_class_name
-when  f1.task=f5.sys_id then f5.sys_class_name
-when  f1.task=f6.sys_id then f6.sys_class_name
-when  f1.task=f7.sys_id then f7.sys_class_name
-else 'Others'
-end)  <> TRGT.sys_class_name_c)b
+SELECT 
+CASE WHEN cnt>0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, 
+CASE WHEN cnt>0  THEN 'MDS to DWH data validation failed for d_task_ci_c.sys_class_name_c' ELSE 'SUCCESS' END as Message
+FROM 
+(select count(1)  as cnt FROM 
+equifax_mdsdb.task_ci_final SRC  
+join equifax_mdsdb.incident_final            SRC1 on SRC.task=SRC1.sys_id and SRC.sourceinstance=SRC1.sourceinstance
+JOIN equifax_mdsdb.change_request_final SRC2 on SRC.task=SRC2.sys_id and SRC.sourceinstance=SRC2.sourceinstance
+join equifax_mdsdb.sc_request_final     SRC3 on SRC.task=SRC3.sys_id and SRC.sourceinstance=SRC3.sourceinstance
+join equifax_mdsdb.problem_final        SRC4 on SRC.task=SRC4.sys_id and SRC.sourceinstance=SRC4.sourceinstance
+join equifax_mdsdb.sc_req_item_final    SRC5 on SRC.task=SRC5.sys_id and SRC.sourceinstance=SRC5.sourceinstance
+join equifax_mdsdb.sc_task_final        SRC6 on SRC.task=SRC6.sys_id and SRC.sourceinstance=SRC6.sourceinstance
+join equifax_mdwdb.d_task_ci_c          TRGT on SRC.sys_id=TRGT.row_id and SRC.sourceinstance=TRGT.source_id
+where  
+(CASE when  SRC.task=SRC1.sys_id THEN SRC1.sys_class_name 
+when SRC.task=SRC2.sys_id THEN SRC2.sys_class_name  
+when SRC.task=SRC3.sys_id THEN SRC3.sys_class_name  
+when SRC.task=SRC4.sys_id THEN SRC4.sys_class_name  
+when SRC.task=SRC5.sys_id THEN SRC5.sys_class_name  	
+when SRC.task=SRC6.sys_id THEN SRC6.sys_class_name else  'others' END) and SRC.cdctype<>'D' <>TRGT.sys_class_name_c 
+)temp;
