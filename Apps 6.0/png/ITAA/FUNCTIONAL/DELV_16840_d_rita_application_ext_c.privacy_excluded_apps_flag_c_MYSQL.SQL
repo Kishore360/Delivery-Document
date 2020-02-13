@@ -5,12 +5,19 @@ FROM
 (
 SELECT 
 Count(1) as CNT 
-FROM png_mdwdb.d_rita_application_ext_c a
-join (select megaid, sourceinstance from png_mdsdb.pg_mega_privacy_excluded_apps_c_final where cdctype='X') b
-on (a.mega_id_c=b.megaid and a.source_id=b.sourceinstance)
-join 
-png_mdsdb.pg_mega_cmdb_ci_appl_final c
-on (a.row_id=c.sys_id and a.source_id=c.sourceinstance)
-where (case when b.megaid is not null then 'Y' else 'N' end)<> a.privacy_excluded_apps_flag_c
+FROM png_mdsdb.pg_mega_cmdb_ci_appl_final SRC
+LEFT JOIN 
+(
+Select a.APP_HEXID,a.sourceinstance,GROUP_CONCAT(a.KEYWORD_NAME) AS KEYWORD_NAME
+FROM png_mdsdb.pg_mega_pgb_app_keyword_final a WHERE a.cdctype='X'
+GROUP BY 1,2
+) SRC1 ON SRC.u_pg_source_system_id=SRC1.APP_HEXID AND SRC.sourceinstance=SRC1.sourceinstance
+LEFT JOIN png_mdwdb.d_rita_application_c TRGT ON SRC.sys_id=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id
+JOIN png_mdwdb.d_rita_application_ext_c TRGT1 ON TRGT.rita_application_ext_c_key=TRGT1.row_key
+WHERE 
+(CASE WHEN SRC1.APP_HEXID IS NOT NULL AND (SRC1.KEYWORD_NAME like '%ITAM: GDPR - Report Exclusion: Privacy%') THEN 'Y' ELSE 'N' END)
+<>TRGT1.privacy_excluded_apps_flag_c
+AND SRC.cdctype='X'
 ) temp;
+	 
 	 
