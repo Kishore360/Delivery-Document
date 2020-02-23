@@ -9,7 +9,7 @@ ELSE 'N'
 end as programmer_automated_flag
 from  fidelity_mdsdb.change_request_final a
 left join  fidelity_mdsdb.sys_user_final b on assigned_to=b.sys_id WHERE  a.CDCTYPE<>'D') SRC
-left join (SELECT * FROM  fidelity_mdwdb.d_change_failure where year(effective_to)=2999 
+left join (SELECT programmer_automated_flag_c,row_id,source_id FROM  fidelity_mdwdb.d_change_failure where year(effective_to)=2999 
 ) TRGT 
  ON (SRC.sys_id=TRGT.row_id 
  AND SRC.sourceinstance=TRGT.source_id )
