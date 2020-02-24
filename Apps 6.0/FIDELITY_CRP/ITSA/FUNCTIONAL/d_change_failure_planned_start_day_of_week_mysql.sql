@@ -1,7 +1,8 @@
 
 SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for f_change_request.planned_start_day_of_week' ELSE 'SUCCESS' END as Message
-FROM ( SELECT sys_id,sourceinstance,work_start,start_date FROM fidelity_mdsdb.change_request_final WHERE CDCTYPE<>'D') SRC
+FROM ( SELECT sys_id,sourceinstance,work_start,start_date FROM fidelity_mdsdb.change_request_final WHERE CDCTYPE<>'D'  and coalesce(work_start,start_date,closed_at)>'2019-01-01'
+                and u_environment='Production' ) SRC
 left join (SELECT row_id,source_id,change_state_src_key,planned_start_day_of_week FROM fidelity_mdwdb.d_change_failure where year(effective_to)=2999) TRGT 
  ON (SRC.sys_id=TRGT.row_id 
  AND SRC.sourceinstance=TRGT.source_id )
