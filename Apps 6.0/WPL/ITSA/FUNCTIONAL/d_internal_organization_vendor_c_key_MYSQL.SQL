@@ -10,5 +10,5 @@ ON RIGHT(f.row_id,32)=s.sys_id and f.source_id=s.sourceinstance
 LEFT JOIN wpl_mdwdb.d_internal_organization  LKP
 on COALESCE(CONCAT('SUBSIDIARY~',s.u_vendor),'UNSPECIFIED') =LKP.row_id
 where COALESCE(LKP.row_key,CASE WHEN s.u_vendor IS NULL THEN 0 else -1 end)<> (f.vendor_c_key)
-and s.cdctype<>'D'
+and s.cdctype='X'
 )E;

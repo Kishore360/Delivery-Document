@@ -8,6 +8,6 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  AND SRC.sourceinstance= TRGT.source_id  )  
  LEFT JOIN mercury_mdwdb.d_configuration_item LKP 
  ON ( SRC.u_ci_name= LKP.row_id 
-AND SRC.sourceinstance= LKP.source_id )and LKP.soft_deleted_flag='N'
+AND SRC.sourceinstance= LKP.source_id )and LKP.soft_deleted_flag='N' 
  WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_ci_name IS NULL THEN 0 else -1 end)<> (TRGT.cmdb_ci_c_key)
-and  SRC.CDCTYPE= 'X'
+and  SRC.CDCTYPE= 'X' and LKP.current_flag='Y'

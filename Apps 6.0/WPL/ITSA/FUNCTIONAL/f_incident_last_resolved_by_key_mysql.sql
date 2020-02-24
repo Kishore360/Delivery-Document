@@ -1,11 +1,12 @@
-SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
-,CASE WHEN cnt > 0 THEN 'Data did not Match.' 
-ELSE 'Data Matched' END AS Message 
-FROM (
-select count(1) as cnt from
-wpl_mdsdb.incident_final x  left join 
-wpl_mdwdb.d_internal_contact y on 
-CONCAT('INTERNAL_CONTACT~',x.closed_by)=row_id  AND sourceinstance= source_id 
- JOIN   wpl_mdwdb.f_incident B on x.sourceinstance=B.source_id AND B.ROW_ID=SYS_ID
-WHERE  B.last_resolved_by_key <> CASE WHEN x.closed_by is null then 0 
-WHEN (x.closed_by is not null and B.pivot_date is null) then -1 else y.row_key end and x.cdctype='X')E; 
+SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+  CASE WHEN cnt >0 THEN 'MDS to DWH data validation failed for f_incidnet.closed_by_key' ELSE 'SUCCESS' END as Message from(
+  select count(1) cnt from wpl_mdsdb.incident_final incident
+left join wpl_mdwdb.f_incident f on incident.sys_id= f.row_id and incident.sourceinstance=f.source_id
+join wpl_mdwdb.d_lov_map lv on f.state_src_key=lv.src_key and lv.dimension_wh_code in  ('RESOLVED','CLOSED')
+join wpl_mdwdb.d_internal_contact di on di.row_id = concat('INTERNAL_CONTACT~',incident.closed_by)
+
+where(case when incident.closed_by is null then 0 else di.row_key end) <>    f.last_resolved_by_key and incident.cdctype<>'D'
+        
+
+ 
+)a;

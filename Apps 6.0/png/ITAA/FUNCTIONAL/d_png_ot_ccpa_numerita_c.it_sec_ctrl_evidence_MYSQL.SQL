@@ -5,7 +5,7 @@ FROM
 (
 SELECT Count(1) as CNT 
 FROM png_mdsdb.pg_ot_ccpa_pa_inventory_c_final SRC 
-LEFT JOIN pgrita_mdwdb.d_png_ot_ccpa_numerita_c TRGT ON SRC.ID=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id
+LEFT JOIN png_mdwdb.d_png_ot_ccpa_numerita_c TRGT ON SRC.ID=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id
 WHERE IF(SRC.Reasonable_InfoSec_Evidence IS NOT NULL  AND SRC.Reasonable_InfoSec_Evidence <>'',SRC.Reasonable_InfoSec_Evidence,'UNSPECIFIED')
 <>TRGT.infosec_evidence_c
 AND SRC.cdctype='X'

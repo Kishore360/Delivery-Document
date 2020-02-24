@@ -11,10 +11,11 @@ JOIN wpl_mdwdb.d_ad_hoc_request_c LKP
 ON LKP.row_id =  case when upper(tsd.trigger_table) = 'U_AD_HOC_REQUEST' then COALESCE(tsd.trigger_id,'UNSPECIFIED') else 'UNSPECIFIED' end  
 AND LKP.source_id =  tsd.sourceinstance 
 -- AND DATE_FORMAT(ts.pivot_date, '%Y-%m-%d %H:%i:%s') BETWEEN effective_from AND effective_to  
-WHERE COALESCE(LKP.row_key,CASE WHEN COALESCE(tsd.trigger_id,'UNSPECIFIED') IS NULL THEN 0 else '-1' end)= COALESCE(ts.ad_hoc_request_c_key,'')
-  and tf.CDCTYPE<>'D'
+WHERE COALESCE(LKP.row_key,CASE WHEN COALESCE(tsd.trigger_id,'UNSPECIFIED') IS NULL THEN 0 else '-1' end)<>COALESCE(ts.ad_hoc_request_c_key,'')
+  and tf.CDCTYPE='X'
   )x
   
   
   
+ 
  

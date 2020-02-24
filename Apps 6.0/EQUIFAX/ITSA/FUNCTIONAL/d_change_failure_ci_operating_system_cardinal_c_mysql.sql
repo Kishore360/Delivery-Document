@@ -6,4 +6,4 @@ ON (SRC.sys_id  = TRGT.row_id
 AND SRC.sourceinstance = TRGT.source_id ) and SRC.cdctype<>'D' and TRGT.current_flag='Y'
 LEFT JOIN equifax_mdsdb.us_predictor_variable_c_final LKP
 ON TRGT.ci_operating_system_c=LKP.value and TRGT.source_id=LKP.sourceinstance and LKP.predictor_variable='os'
-WHERE CASE WHEN LKP.value is null then ci_operating_system_c else 'OTHERS' end <>ci_operating_system_cardinal_c
+WHERE CASE WHEN LKP.value is null then ci_operating_system_c else 'OTHERS' end <>ci_operating_system_cardinal_c and  SRC.cdctype<>'D'

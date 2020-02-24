@@ -8,8 +8,8 @@ SELECT count(1) as CNT
 FROM equifax_mdsdb.cmdb_ci_final SRC
  
 LEFT JOIN equifax_mdwdb.d_configuration_item TRGT
-  ON (SRC.sys_id= TRGT.row_id AND SRC.sourceinstance=TRGT.source_id)
+  ON (SRC.sys_id= TRGT.row_id AND SRC.sourceinstance=TRGT.source_id) 
 
 where 
-coalesce(SRC.model_number,'UNSPECIFIED')<>TRGT.model_number
+coalesce(SRC.model_number,'UNSPECIFIED')<>TRGT.model_number and SRC.cdctype<>'D'
 )temp;
