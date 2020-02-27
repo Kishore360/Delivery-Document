@@ -13,4 +13,5 @@ ON (SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id )
 LEFT JOIN fidelity_mdwdb.d_lov LKP 
 ON ( COALESCE(CONCAT('TEMPLATE_TYPE_C~CHANGE_REQUEST~',SRC.u_template_type),'UNSPECIFIED') = LKP.row_id AND SRC.sourceinstance = LKP.source_id ) 
 
-WHERE  CDCTYPE<>'D'and  year(TRGT.effective_to)=2999 and  COALESCE(LKP.row_key,CASE WHEN SRC.u_template_type IS NULL THEN 0 else -1 end) <> (TRGT.template_type_c_key) and SRC.cdctype<>'D') temp;
+WHERE  SRC.CDCTYPE<>'D'  and coalesce(work_start,start_date,closed_at)>'2019-01-01'
+                and u_environment='Production' and  year(TRGT.effective_to)=2999 and  COALESCE(LKP.row_key,CASE WHEN SRC.u_template_type IS NULL THEN 0 else -1 end) <> (TRGT.template_type_c_key) and SRC.cdctype<>'D') temp;
