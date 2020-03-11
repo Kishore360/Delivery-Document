@@ -12,6 +12,6 @@ FROM equifax_mdsdb.change_request_final SRC
  
 LEFT JOIN equifax_mdwdb.d_change_request TRGT ON SRC.sys_id=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id
 
-WHERE COALESCE(SRC.u_expedite_reason_details,'UNSPECIFIED')<>TRGT.u_expedite_reason_details_c
+WHERE COALESCE(SRC.u_expedite_reason_details,'UNSPECIFIED')<>TRGT.u_expedite_reason_details_c and SRC.cdctype<>'D'
 
 )temp;

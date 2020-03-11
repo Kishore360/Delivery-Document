@@ -9,6 +9,6 @@ src.sys_id=trgt.row_id and src.sourceinstance=trgt.source_id
 
 left join equifax_mdwdb.d_internal_contact lkp on coalesce(concat('INTERNAL_CONTACT~',src.u_slt_approver),'UNSPECIFIED')=
 lkp.row_id and src.sourceinstance=lkp.source_id
-where coalesce(lkp.row_key,case when src.u_slt_approver is null then 0 else -1 end) <> trgt.change_slt_approver_c_key
+where coalesce(lkp.row_key,case when src.u_slt_approver is null then 0 else -1 end) <> trgt.change_slt_approver_c_key and src.cdctype<>'D'
 ) temp; 
  

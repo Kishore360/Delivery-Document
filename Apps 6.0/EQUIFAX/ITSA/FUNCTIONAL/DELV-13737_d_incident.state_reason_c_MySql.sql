@@ -6,5 +6,5 @@ FROM
 Select Count(1) AS CNT 
 FROM equifax_mdsdb.incident_final SRC 
 LEFT JOIN equifax_mdwdb.d_incident TRGT ON SRC.sys_id=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id
-WHERE SRC.u_state_reason<>TRGT.state_reason_c
+WHERE SRC.u_state_reason<>TRGT.state_reason_c and SRC.cdctype<>'D'
 ) temp;

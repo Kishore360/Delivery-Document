@@ -14,4 +14,4 @@ AND SRC.sourceinstance = TRGT.source_id ) and SRC.cdctype<>'D' and TRGT.current_
     LEFT OUTER JOIN
         equifax_mdwdb.d_lov d_lov1 
             ON d_service.criticality_key=d_lov1.row_key  
-WHERE d_lov1.dimension_name<>TRGT.business_service_criticality_c;
+WHERE d_lov1.dimension_name<>TRGT.business_service_criticality_c and SRC.cdctype<>'D';

@@ -8,4 +8,4 @@ JOIN equifax_mdsdb.sys_db_object_final LKP
 ON SRC.sys_class_name = LKP.name
 LEFT JOIN equifax_mdwdb.d_configuration_item TRGT
   ON (SRC.sys_id= TRGT.row_id AND SRC.sourceinstance=TRGT.source_id)
-where coalesce(LKP.label,'UNSPECIFIED')<>TRGT.class)temp
+where coalesce(LKP.label,'UNSPECIFIED')<>TRGT.class and SRC.cdctype<>'D')temp

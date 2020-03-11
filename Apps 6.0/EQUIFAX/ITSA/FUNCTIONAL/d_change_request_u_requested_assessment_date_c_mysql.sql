@@ -7,4 +7,4 @@ equifax_mdsdb.change_request_final a
 join
 equifax_mdwdb.d_change_request b
 on a.sys_id=b.row_id and a.sourceinstance=b.source_id
-where CONVERT_TZ(a.u_requested_assessment_date,'GMT','America/New_York')<>u_requested_assessment_date_c)b
+where CONVERT_TZ(a.u_requested_assessment_date,'GMT','America/New_York')<>u_requested_assessment_date_c and a.cdctype<>'D')b

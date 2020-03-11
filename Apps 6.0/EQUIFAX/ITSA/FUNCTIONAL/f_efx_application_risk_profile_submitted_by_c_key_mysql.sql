@@ -9,4 +9,4 @@ and  SRC.sourceinstance = TRGT.source_id
 join
 equifax_mdwdb.d_internal_contact lkp
 on COALESCE(CONCAT('INTERNAL_CONTACT','~',SRC.u_risk_profile_submitted_by),'UNSPECIFIED') =lkp.row_id
-WHERE COALESCE(lkp.row_key, case when SRC.u_risk_profile_submitted_by is null then 0 else -1 end) <> TRGT.risk_profile_submitted_by_c_key)b
+WHERE COALESCE(lkp.row_key, case when SRC.u_risk_profile_submitted_by is null then 0 else -1 end) <> TRGT.risk_profile_submitted_by_c_key and SRC.cdctype<>'D')b

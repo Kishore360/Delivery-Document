@@ -13,6 +13,6 @@ FROM equifax_mdsdb.u_maintenance_window_final SRC
 
 LEFT JOIN equifax_mdwdb.d_maintenance_window_c TRGT ON SRC.sys_id=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id
 
-WHERE SRC.u_day<>TRGT.day_c
+WHERE SRC.u_day<>TRGT.day_c and SRC.cdctype<>'D'
 ) temp;
 

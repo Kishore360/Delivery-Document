@@ -18,4 +18,4 @@ WHERE COALESCE(CASE
             WHEN d_lov_map.dimension_wh_code='OPEN' then HOUR(planned_start_on) 
             WHEN d_lov_map.dimension_wh_code='CLOSED' then HOUR(work_start_on) 
         end,
-        -1) <>TRGT.planned_start_hour_c;
+        -1) <>TRGT.planned_start_hour_c and SRC.cdctype<>'D';

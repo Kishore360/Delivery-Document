@@ -11,7 +11,7 @@ src.u_impact_duration) < 0 THEN NULL
 ELSE TIMESTAMPDIFF(SECOND,
 '1970-01-01 00:00:00',
 src.u_impact_duration)                  
-end <>t.impact_duration_c    ;
+end <>t.impact_duration_c   and src.cdctype<>'D'  ;
 
 
 

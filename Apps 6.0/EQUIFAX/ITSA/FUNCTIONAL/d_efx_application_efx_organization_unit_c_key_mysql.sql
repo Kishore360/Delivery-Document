@@ -9,4 +9,4 @@ and  SRC.sourceinstance = TRGT.source_id
 join
 equifax_mdwdb.d_internal_organization lkp
 on COALESCE(CONCAT('DEPARTMENT~',SRC.u_department),'UNSPECIFIED') =lkp.row_id
-WHERE COALESCE(lkp.row_key, case when SRC.u_department is null then 0 else -1 end) <> TRGT.efx_organization_unit_c_key)b
+WHERE COALESCE(lkp.row_key, case when SRC.u_department is null then 0 else -1 end) <> TRGT.efx_organization_unit_c_key and SRC.cdctype<>'D')b

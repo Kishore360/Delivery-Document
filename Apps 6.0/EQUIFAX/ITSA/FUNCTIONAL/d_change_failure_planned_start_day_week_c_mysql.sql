@@ -18,4 +18,4 @@ WHERE COALESCE(CASE
             WHEN d_lov_map.dimension_wh_code='OPEN' then DAYNAME(planned_start_on) 
             WHEN d_lov_map.dimension_wh_code='CLOSED' then DAYNAME(work_start_on) 
         end,
-        'UNSPECIFIED') <>TRGT.planned_start_day_week_c;
+        'UNSPECIFIED') <>TRGT.planned_start_day_week_c and SRC.cdctype<>'D';

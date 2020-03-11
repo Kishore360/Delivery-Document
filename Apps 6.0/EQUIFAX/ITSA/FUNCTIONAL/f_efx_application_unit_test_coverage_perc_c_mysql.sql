@@ -11,4 +11,4 @@ WHERE  case when u_unit_test_coverage ="0 - 25" then 0.05
     when u_unit_test_coverage = "51 - 75"  then 0.15
     when u_unit_test_coverage = "76 - 99"  then 0.20
     when u_unit_test_coverage = 100 then 0.25
-    else u_unit_test_coverage/100 end <> TRGT.unit_test_coverage_perc_c)b
+    else u_unit_test_coverage/100 end <> TRGT.unit_test_coverage_perc_c and SRC.cdctype<>'D')b

@@ -7,5 +7,5 @@ AND SRC.sourceinstance = TRGT.source_id ) and SRC.cdctype<>'D' and TRGT.current_
 LEFT JOIN (select value, sourceinstance, label from equifax_mdsdb.sys_choice_final
 where name='change_request' and element = 'impact') ch
 on SRC.impact=ch.value and SRC.sourceinstance=ch.sourceinstance
-WHERE CASE WHEN ch.value is null then 'UNKNOWN' when SRC.impact is null then 'UNSPECIFIED' else ch.label end<>TRGT.change_impact;
+WHERE CASE WHEN ch.value is null then 'UNKNOWN' when SRC.impact is null then 'UNSPECIFIED' else ch.label end<>TRGT.change_impact and SRC.cdctype<>'D';
 

@@ -18,4 +18,5 @@ when SRC.task=SRC3.sys_id THEN SRC3.sys_class_name
 when SRC.task=SRC4.sys_id THEN SRC4.sys_class_name  
 when SRC.task=SRC5.sys_id THEN SRC5.sys_class_name  	
 when SRC.task=SRC6.sys_id THEN SRC6.sys_class_name else  'others' END) and SRC.cdctype<>'D' <>TRGT.sys_class_name_c 
+and SRC.cdctype<>'D'
 )temp;

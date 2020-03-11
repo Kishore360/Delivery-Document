@@ -23,5 +23,5 @@ WHEN TRGT.class in ('Application', 'Apache Web Server', 'IBM Websphere', 'Tomcat
 'Business Service', 'Patch Group', 'DML', 'Platform', 'PostgreSQL Instance', 'JBoss', 'MySQL Instance', 'Weblogic', 'Database', 'DB2 Instance', 'JavaServer', 
 'Database Instance', 'Sybase Instance', 'GlassFish', 'HBase Instance') AND TRGT.version_c ='UNSPECIFIED' THEN 'N'
  WHEN  (TRGT.ci_maintenance_schedule_c_key ='UNSPECIFIED') THEN 'N'
- ELSE 'Y' END <>TRGT.recommended_flag_c
+ ELSE 'Y' END <>TRGT.recommended_flag_c and SRC.cdctype<>'D'
  )temp;

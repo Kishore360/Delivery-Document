@@ -9,5 +9,5 @@ from
 select count(1) as cnt from(select sys_id, sourceinstance,u_cancellation_justification from equifax_mdsdb.incident_final where CDCTYPE<>'D') src 
 left join equifax_mdwdb.d_incident trgt on 
 src.sys_id=trgt.row_id and src.sourceinstance=trgt.source_id
- where  coalesce(src.u_cancellation_justification,'UNSPECIFIED') <> trgt.u_cancellation_justification_c
+ where  coalesce(src.u_cancellation_justification,'UNSPECIFIED') <> trgt.u_cancellation_justification_c and src.cdctype<>'D'
 ) temp;

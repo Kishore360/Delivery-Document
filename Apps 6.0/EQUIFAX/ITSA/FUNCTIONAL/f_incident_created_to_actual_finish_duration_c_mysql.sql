@@ -11,4 +11,4 @@ where CASE
 WHEN a.sys_created_on is null then 0 
 when a.u_actual_finish is null then 0 
 WHEN TIMESTAMPDIFF(SECOND , a.sys_created_on, a.u_actual_finish) < 0 THEN 0 
-ELSE TIMESTAMPDIFF(SECOND ,a.sys_created_on,a.u_actual_finish)   end<>created_to_actual_finish_duration_c)b
+ELSE TIMESTAMPDIFF(SECOND ,a.sys_created_on,a.u_actual_finish)   end<>created_to_actual_finish_duration_c and a.cdctype<>'D')b

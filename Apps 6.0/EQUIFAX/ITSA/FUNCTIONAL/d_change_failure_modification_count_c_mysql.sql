@@ -11,4 +11,4 @@ GROUP BY chg.sys_id, chg.sourceinstance) X
 on TRGT.row_id=X.sys_id and TRGT.source_id=X.sourceinstance and TRGT.current_flag='Y'
 WHERE CASE WHEN X.sys_id is null then 'UNSPECIFIED'
 WHEN  mod_cnt<=10 then 'lte_10'
-WHEN  mod_cnt>10 then 'gt_10' end <>TRGT.modification_count_c;
+WHEN  mod_cnt>10 then 'gt_10' end <>TRGT.modification_count_c and SRC.cdctype<>'D';

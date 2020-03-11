@@ -9,5 +9,5 @@ on SRC.cmdb_ci=ci.sys_id and ci.sourceinstance=SRC.sourceinstance
 left join equifax_mdsdb.cmn_location_final loc
 on ci.u_location_logical=loc.sys_id and ci.sourceinstance=loc.sourceinstance
 WHERE CASE WHEN SRC.cmdb_ci is null or ci.u_location_logical is null or loc.name is null then 'UNSPECIFIED'
-WHEN ci.sys_id is null or loc.sys_id is null then 'UNKNOWN' else loc.name end<>TRGT.ci_logical_location_c;
+WHEN ci.sys_id is null or loc.sys_id is null then 'UNKNOWN' else loc.name end<>TRGT.ci_logical_location_c and SRC.cdctype<>'D';
 

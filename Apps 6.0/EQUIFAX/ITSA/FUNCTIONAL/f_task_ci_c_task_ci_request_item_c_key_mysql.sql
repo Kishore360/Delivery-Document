@@ -10,5 +10,5 @@ on a.sys_id=b.row_id and a.sourceinstance=b.source_id
 join
 equifax_mdwdb.d_request_item c
 on COALESCE(a.task,'UNSPECIFIED')=c.row_id and a.sourceinstance=c.source_id
-where  coalesce(c.row_key,case when a.task is null then 0 else -1 end ) <> b.task_ci_request_item_c_key
+where  coalesce(c.row_key,case when a.task is null then 0 else -1 end ) <> b.task_ci_request_item_c_key and a.cdctype<>'D'
 )b

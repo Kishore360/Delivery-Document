@@ -13,4 +13,4 @@ left join  equifax_mdwdb.d_change_request trgt on
 src.sys_id=trgt.row_id and src.sourceinstance=trgt.source_id
 
 where (case when u_lock_environment_from_rp
-=0  THEN 'N' ELSE 'Y' END) <> trgt.u_lock_environment_from_rp_c) temp;
+=0  THEN 'N' ELSE 'Y' END) <> trgt.u_lock_environment_from_rp_c and src.cdctype<>'D') temp;

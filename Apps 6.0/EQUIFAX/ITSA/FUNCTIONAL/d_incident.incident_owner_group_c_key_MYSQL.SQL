@@ -13,6 +13,6 @@ left join equifax_mdwdb.d_incident TRGT on SRC.sys_id=TRGT.row_id and SRC.source
 
 left join equifax_mdwdb.d_internal_organization lkp on coalesce(concat('GROUP~', SRC.u_owner_group),'UNSPECIFIED')=lkp.row_id AND SRC.sourceinstance= lkp.source_id
  where  
-coalesce(lkp.row_key, case when SRC.u_owner_group is null then 0 else -1 end)<>TRGT.incident_owner_group_c_key
+coalesce(lkp.row_key, case when SRC.u_owner_group is null then 0 else -1 end)<>TRGT.incident_owner_group_c_key and SRC.cdctype<>'D'
 
 ) temp; 

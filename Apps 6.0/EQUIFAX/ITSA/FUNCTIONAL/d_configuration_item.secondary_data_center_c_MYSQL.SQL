@@ -6,5 +6,5 @@ SELECT count(1) as CNT
 FROM equifax_mdsdb.cmdb_ci_final SRC 
 LEFT JOIN equifax_mdwdb.d_configuration_item TRGT
   ON (SRC.sys_id= TRGT.row_id AND SRC.sourceinstance=TRGT.source_id)
-where coalesce(SRC.u_efx_secondary_data_center,'UNSPECIFIED')<>TRGT.secondary_data_center_c
+where coalesce(SRC.u_efx_secondary_data_center,'UNSPECIFIED')<>TRGT.secondary_data_center_c and SRC.cdctype<>'D'
 )temp;

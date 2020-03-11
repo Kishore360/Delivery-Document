@@ -7,4 +7,4 @@ FROM equifax_mdsdb.u_efx_application_final SRC
 JOIN equifax_mdwdb.d_efx_application_c TRGT 
 ON SRC.sys_id = TRGT.row_id 
 and  SRC.sourceinstance = TRGT.source_id  
-WHERE COALESCE(SRC.u_inherent_risk_rating,'UNSPECIFIED')<> TRGT.inherent_risk_rating)b
+WHERE COALESCE(SRC.u_inherent_risk_rating,'UNSPECIFIED')<> TRGT.inherent_risk_rating and SRC.cdctype<>'D')b

@@ -10,4 +10,4 @@ on a.sys_id=b.row_id and a.sourceinstance=b.source_id
 join
 equifax_mdwdb.d_configuration_item c
 on a.sys_id=c.row_id
-where  coalesce(c.row_key,case when a.sys_id is null then 0 else -1 end ) <> b.configuration_item_key)b
+where  coalesce(c.row_key,case when a.sys_id is null then 0 else -1 end ) <> b.configuration_item_key and a.cdctype<>'D')b
