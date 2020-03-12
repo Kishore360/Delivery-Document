@@ -8,5 +8,5 @@ ON f.incident_key=d.row_key
 JOIN watson_mdsdb.sys_audit_final saf 
 ON saf.documentkey=a.sys_id 
 AND saf.tablename='incident' AND saf.fieldname='u_confirmed_cie'
-WHERE f.resolved_to_confirmed_cie_duration_c <> CASE WHEN (a.resolved_at is null  or saf.sys_created_on is null) THEN NULL WHEN TIMESTAMPDIFF(SECOND,saf.sys_created_on,a.resolved_at ) < 0
-										THEN NULL ELSE TIMESTAMPDIFF(SECOND,saf.sys_created_on,a.resolved_at) end
+WHERE f.resolved_to_confirmed_cie_duration_c <> Coalesce(resolved_to_confirmed_cie_duration_c,CASE WHEN (a.resolved_at is null  or saf.sys_created_on is null) THEN NULL WHEN TIMESTAMPDIFF(SECOND,saf.sys_created_on,a.resolved_at ) < 0
+										THEN NULL ELSE TIMESTAMPDIFF(SECOND,saf.sys_created_on,a.resolved_at) end)

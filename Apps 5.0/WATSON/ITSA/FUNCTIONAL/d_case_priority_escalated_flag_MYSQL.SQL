@@ -19,5 +19,5 @@ THEN 1 ELSE 0 END) AS priority_escalated
  ) SRCF
  on F.case_key = SRCF.case_key
   WHERE TRGT.row_key not in (0, -1) and 
-COALESCE(CASE WHEN SRCF.priority_escalated>0 THEN 'Y' ELSE 'N' END ,'')
+COALESCE(COALESCE(priority_escalated_flag,CASE WHEN SRCF.priority_escalated>=0 THEN 'Y' ELSE 'N' END) ,'')
  <> COALESCE(TRGT.priority_escalated_flag ,'')

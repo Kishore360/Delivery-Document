@@ -1,3 +1,5 @@
+
+---- 
 SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed' ELSE 'SUCCESS' END as Message
 FROM  
@@ -8,4 +10,4 @@ LEFT JOIN watson_mdsdb.label_final c
 ON b.label = c.sys_id
 
 where
-a.tag_name <> c.name;
+a.tag_name <> c.name and b.CDCTYPE <>'D';

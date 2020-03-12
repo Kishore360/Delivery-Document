@@ -11,14 +11,13 @@ LEFT JOIN (
  ) df 
   ON (TRGT.source_id = df.source_id )
  
-where  TRGT.age is null or TRGT.age < 0
-or  TRGT.age <>
+where    TRGT.age <>
 case 
     when coalesce(TRGT.opened_on, 0) > coalesce (TRGT.closed_on, TRGT.last_resolved_on, df.lastupdated) then 0
     when lm.dimension_wh_code in ('OPEN') 
-    then TIMESTAMPDIFF(DAY, coalesce(convert_tz(TRGT.opened_on, 'GMT','America/New_York'),0), 
-         convert_tz(df.lastupdated, 'GMT','America/New_York'))
+    then TIMESTAMPDIFF(SECOND, coalesce(convert_tz(TRGT.opened_on, 'UTC','GMT'),0), 
+         convert_tz(df.lastupdated, 'UTC','GMT'))
     when lm.dimension_wh_code in ('RESOLVED', 'CLOSED')
-    then TIMESTAMPDIFF(DAY, coalesce(convert_tz(TRGT.opened_on, 'GMT','America/New_York'),0),
-    convert_tz(coalesce(TRGT.last_resolved_on,df.lastupdated), 'GMT','America/New_York'))
+    then TIMESTAMPDIFF(SECOND, coalesce(convert_tz(TRGT.opened_on, 'UTC','GMT'),0),
+    convert_tz(coalesce(TRGT.last_resolved_on,df.lastupdated), 'UTC','GMT'))
 end
