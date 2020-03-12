@@ -7,7 +7,7 @@ CASE WHEN CNT > 0 THEN 'MDS to DWH data validation failed for d_incident.inciden
 from
 
 (select COUNT(1) AS CNT 
-from (select sys_id,sourceinstance,u_owner_group from equifax_mdsdb.incident_final where CDCTYPE<>'D') SRC
+from (select sys_id,sourceinstance,u_owner_group,CDCTYPE from equifax_mdsdb.incident_final where CDCTYPE<>'D') SRC
 
 left join equifax_mdwdb.d_incident TRGT on SRC.sys_id=TRGT.row_id and SRC.sourceinstance=TRGT.source_id
 
