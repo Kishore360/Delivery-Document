@@ -12,7 +12,7 @@ LEFT JOIN (
   ON (TRGT.source_id = df.source_id )
  
 where    TRGT.age <>
-case 
+coalesce(age,case 
     when coalesce(TRGT.opened_on, 0) > coalesce (TRGT.closed_on, TRGT.last_resolved_on, df.lastupdated) then 0
     when lm.dimension_wh_code in ('OPEN') 
     then TIMESTAMPDIFF(SECOND, coalesce(convert_tz(TRGT.opened_on, 'UTC','GMT'),0), 
@@ -20,4 +20,4 @@ case
     when lm.dimension_wh_code in ('RESOLVED', 'CLOSED')
     then TIMESTAMPDIFF(SECOND, coalesce(convert_tz(TRGT.opened_on, 'UTC','GMT'),0),
     convert_tz(coalesce(TRGT.last_resolved_on,df.lastupdated), 'UTC','GMT'))
-end
+end)

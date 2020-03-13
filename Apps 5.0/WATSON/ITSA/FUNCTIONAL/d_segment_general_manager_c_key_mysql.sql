@@ -8,4 +8,4 @@ LEFT join watson_mdwdb.d_internal_contact d
 on d.row_id = COALESCE(CONCAT('INTERNAL_CONTACT~',b.u_general_manager),'UNSPECIFIED')
 
 where
-a.general_manager_c_key <> COALESCE(d.row_key,CASE WHEN b.u_general_manager IS NULL THEN 0 else -1 end);
+a.general_manager_c_key <> COALESCE(d.row_key,CASE WHEN b.u_general_manager IS NULL THEN 0 else -1 end) and b.CDCTYPE<>'D';

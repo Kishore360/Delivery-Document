@@ -11,5 +11,5 @@ inner join (select name,element,value,label from watson_mdsdb.sys_choice_final w
 on lov_new.value=a.newvalue
 where tablename='sn_customerservice_case' and fieldname = 'state' )A
 where oldvalue=1 group by 1 )r on di.row_id=r.documentkey
-where fi.avg_time_to_respond_c <> timestampdiff(second, di.opened_on, r.sys_created_on)
+where fi.avg_time_to_respond_c <> coalesce(avg_time_to_respond_c ,timestampdiff(second, di.opened_on, r.sys_created_on))
 ;
