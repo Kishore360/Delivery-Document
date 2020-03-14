@@ -5,4 +5,4 @@ aetna_mdwdb.d_incident a
 JOIN aetna_mdsdb.incident_final b
 ON a.row_id = b.sys_id and a.source_id = b.sourceinstance 
 where
-a.caused_by_change_flag <> CASE WHEN b.caused_by is not null or b.u_temp_caused_by	 is not null THEN 'N'  ELSE 'Y' END
+a.caused_by_change_flag <> CASE WHEN b.caused_by is not null or b.u_temp_caused_by	 is not null THEN 'Y'  ELSE 'N' END

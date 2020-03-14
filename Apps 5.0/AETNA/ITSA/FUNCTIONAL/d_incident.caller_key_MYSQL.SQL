@@ -5,8 +5,9 @@ FROM
 (
 SELECT Count(1) as CNT 
 FROM aetna_mdsdb.incident_final SRC 
-LEFT JOIN aetna_mdwdb.f_incident TRGT ON (SRC.sys_id =TRGT.row_id  AND SRC.sourceinstance= TRGT.source_id )
-JOIN aetna_mdwdb.d_change_request LKP ON (SRC.caused_by=LKP.row_id AND SRC.sourceinstance=LKP.source_id)
+JOIN aetna_mdwdb.d_incident TRGT ON (SRC.sys_id =TRGT.row_id  AND SRC.sourceinstance= TRGT.source_id )
+left join aetna_mdwdb.d_internal_contact lkp
+on  caller_id =lkp.row_id and SRC.sourceinstance=lkp.source_id
 WHERE TRGT.soft_deleted_flag='N'
-AND COALESCE(LKP.row_key,CASE WHEN SRC.caused_by IS NULL THEN 0 else -1 end)<>TRGT.change_request_key
+AND COALESCE(lkp.row_key,CASE WHEN SRC.caller_id IS NULL THEN 0 else -1 end)<>TRGT. caller_key
 and SRC.cdctype<>'D') temp;
