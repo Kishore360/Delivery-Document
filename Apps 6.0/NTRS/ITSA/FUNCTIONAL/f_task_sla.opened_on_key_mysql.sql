@@ -4,13 +4,13 @@ FROM
 (
 select count(1) as CNT
 from
-ntrust_mds_viewdb.task_sla_final SRC
-JOIN ntrustccs_mdwdb.f_task_sla TRGT ON (SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id )
+ntrust_mdsdb.task_sla_final SRC
+JOIN ntrust_mdwdb.f_task_sla TRGT ON (SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id )
 join
-ntrust_mds_viewdb.task_final SRC1
+ntrust_mdsdb.task_final SRC1
 on SRC.task=SRC1.sys_id join
 ntrust_mdwdb.d_calendar_date LKP
-on (DATE_FORMAT(coalesce(SRC1.opened_at,SRC1.sys_created_on),'%Y%m%d'))=TRGT.row_id --  SRC.sourceinstance=TRGT.source_id
+on (DATE_FORMAT(coalesce(SRC1.opened_at,SRC1.sys_created_on),'%Y%m%d'))=TRGT.row_id 
 where
 TRGT.opened_on_key<>COALESCE(LKP.row_key,case when coalesce(SRC1.opened_at,SRC1.sys_created_on)=0 then 0 else -1 end )
 and SRC.cdctype='X'
