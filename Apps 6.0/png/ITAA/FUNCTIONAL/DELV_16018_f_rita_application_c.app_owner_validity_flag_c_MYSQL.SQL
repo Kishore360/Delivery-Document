@@ -22,5 +22,17 @@ and cmdb_ci_appl.cdctype='X';
 ) temp;
 
 
-
-
+-- Failed need to apply the below logic 
+-- DELV-22495-- P&G: Recognize applications that are with a subsidiary owner as valid
+/* 
+select CASE WHEN (SRC1.u_employee_type='Employee'
+AND SRC1.active='1')
+OR (SRC2.notes like '#subsidiary') THEN 'Y' ELSE 'N' END AS App_Owner,count(1) as CNT
+from
+png_mdsdb.pg_mega_cmdb_ci_appl_final SRC
+LEFT JOIN png_mdsdb.sys_user_final SRC1 ON SRC.owned_by=SRC1.sys_id 
+LEFT JOIN png_mdsdb.core_company_final SRC2 ON SRC1.company=SRC2.sys_id
+WHERE SRC.sys_class_name='cmdb_ci_appl' AND SRC.install_status NOT IN ('14','111') 
+AND SRC.u_pg_category IN ('application','application_platform')
+AND SRC.cdctype='X'
+group by 1; */
