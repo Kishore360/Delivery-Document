@@ -6,4 +6,4 @@ FROM
 join equifax_mdwdb.d_incident trgt on src.sys_id=trgt.row_id and src.sourceinstance=trgt.source_id
 left join equifax_mdwdb.d_lov LKP on coalesce(concat('U_DETECTION_METHOD~INCIDENT~',src.u_detection_method),'UNSPECIFIED')=LKP.row_id
 and src.sourceinstance=trgt.source_id
-where coalesce(LKP.row_key,case when src.u_detection_method is null then 0 else -1 end)<>trgt.incident_detection_method_c_key)ma;
+where coalesce(LKP.row_key,case when src.u_detection_method is null then 0 else -1 end)<>trgt.incident_detection_method_c_key and src.cdctype<>'D')ma;

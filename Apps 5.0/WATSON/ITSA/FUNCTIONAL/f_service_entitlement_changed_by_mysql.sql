@@ -5,4 +5,4 @@ FROM watson_mdsdb.service_entitlement_final SRC
 LEFT JOIN watson_mdwdb.f_service_entitlement TRGT 
 	ON (SRC.sys_id =TRGT.row_id 
 	AND SRC.sourceinstance =TRGT.source_id )
-WHERE COALESCE(SRC.sys_updated_by,'')<> COALESCE(TRGT.changed_by,'')
+WHERE COALESCE(SRC.sys_updated_by,'')<> COALESCE(TRGT.changed_by,'') and SRC.CDCTYPE<>'D';

@@ -9,4 +9,4 @@ on SRC.cmdb_ci=ci.sys_id and ci.sourceinstance=SRC.sourceinstance
 left join equifax_mdsdb.core_company_final comp
 on ci.manufacturer=comp.sys_id and ci.sourceinstance=comp.sourceinstance
 WHERE CASE WHEN SRC.cmdb_ci is null or ci.manufacturer is null or comp.name is null then 'UNSPECIFIED'
-WHEN ci.sys_id is null or comp.sys_id is null then 'UNKNOWN' else comp.name end<>TRGT.ci_manufacturer_c;
+WHEN ci.sys_id is null or comp.sys_id is null then 'UNKNOWN' else comp.name end<>TRGT.ci_manufacturer_c and SRC.cdctype<>'D';

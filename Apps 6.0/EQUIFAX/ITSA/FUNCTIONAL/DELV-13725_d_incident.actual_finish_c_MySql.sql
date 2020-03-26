@@ -7,5 +7,5 @@ FROM
 Select Count(1) AS CNT 
 FROM equifax_mdsdb.incident_final SRC 
 LEFT JOIN equifax_mdwdb.d_incident TRGT ON SRC.sys_id=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id
-WHERE CONVERT_TZ(SRC.u_actual_finish,'GMT','America/New_York')<>TRGT.actual_finish_c
+WHERE CONVERT_TZ(SRC.u_actual_finish,'GMT','America/New_York')<>TRGT.actual_finish_c and SRC.cdctype<>'D'
 ) temp;

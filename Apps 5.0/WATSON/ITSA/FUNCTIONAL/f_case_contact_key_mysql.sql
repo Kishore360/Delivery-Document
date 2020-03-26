@@ -9,3 +9,4 @@ LEFT JOIN watson_mdwdb.d_contact LKP
 	ON ( coalesce(concat('CUST_CON~',SRC.contact),'UNSPECIFIED') = LKP.row_id
 	AND SRC.sourceinstance=LKP.source_id)
 WHERE COALESCE(LKP.row_key,CASE WHEN SRC.contact IS NULL THEN 0 else '-1' end)<> COALESCE(TRGT.contact_key ,'')
+and SRC.cdctype<>'D'

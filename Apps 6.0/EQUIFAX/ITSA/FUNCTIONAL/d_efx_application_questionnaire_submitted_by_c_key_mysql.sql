@@ -10,4 +10,4 @@ and  SRC.sourceinstance = TRGT.source_id
 join
 equifax_mdwdb.d_internal_contact lkp
 on COALESCE(CONCAT('INTERNAL_CONTACT~',SRC.u_questionnaire_submitted_by),'UNSPECIFIED')=lkp.row_id
-WHERE coalesce(lkp.row_key,case when SRC.u_questionnaire_submitted_by is null then 0 else -1 end  ) <> TRGT.questionnaire_submitted_by_c_key)b
+WHERE coalesce(lkp.row_key,case when SRC.u_questionnaire_submitted_by is null then 0 else -1 end  ) <> TRGT.questionnaire_submitted_by_c_key and SRC.cdctype<>'D')b

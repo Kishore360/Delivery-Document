@@ -1,8 +1,9 @@
+
 select CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for f_case.age_key' ELSE 'SUCCESS' END as Message
 from watson_mdwdb.f_case f  
 LEFT JOIN watson_mdwdb.d_lov L  
 ON ((f.age BETWEEN L.lower_range_value AND L.upper_range_value)
 	AND L.dimension_class = 'AGEBUCKET_WH~CASE' )
-WHERE COALESCE(L.row_key, case when f.age is null or f.age = 0 THEN 0 else -1 end ) 
- <> f.case_age_key
+WHERE COALESCE(L.row_key, -1 ) <> f.case_age_key and  f.soft_deleted_flag<>'Y'
+-- COALESCE(L.row_key, case when f.age is null or f.age = 0 THEN 0 else -1 end ) 

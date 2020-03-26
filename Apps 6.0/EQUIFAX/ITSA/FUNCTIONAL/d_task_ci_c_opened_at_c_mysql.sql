@@ -18,4 +18,4 @@ on f1.task=f7.sys_id and f1.sourceinstance=f7.sourceinstance
 JOIN equifax_mdwdb.d_task_ci_c TRGT 
 ON f1.sys_id = TRGT.row_id 
 and  f1.sourceinstance = TRGT.source_id  
-WHERE CONVERT_TZ (COALESCE( coalesce(f2.opened_at,f2.sys_created_on),coalesce(f3.opened_at,f3.sys_created_on),coalesce(f4.opened_at,f4.sys_created_on),coalesce(f5.opened_at,f5.sys_created_on),coalesce(f6.opened_at,f6.sys_created_on),coalesce(f7.opened_at,f7.sys_created_on)),'GMT','America/New_York')  <> TRGT.opened_at_c)b
+WHERE CONVERT_TZ (COALESCE( coalesce(f2.opened_at,f2.sys_created_on),coalesce(f3.opened_at,f3.sys_created_on),coalesce(f4.opened_at,f4.sys_created_on),coalesce(f5.opened_at,f5.sys_created_on),coalesce(f6.opened_at,f6.sys_created_on),coalesce(f7.opened_at,f7.sys_created_on)),'GMT','America/New_York')  <> TRGT.opened_at_c and f1.cdctype<>'D')b

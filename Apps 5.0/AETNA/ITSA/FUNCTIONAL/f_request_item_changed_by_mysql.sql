@@ -3,5 +3,8 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  FROM aetna_mdsdb.sc_req_item_final SRC 
  LEFT JOIN aetna_mdwdb.f_request_item TRGT 
  ON (SRC.sys_id =TRGT.row_id  
- AND SRC.sourceinstance= TRGT.source_id and TRGT.soft_deleted_flag = 'N' )
- WHERE COALESCE( SRC.sys_updated_by,'')<> COALESCE(TRGT.changed_by)
+ AND SRC.sourceinstance= TRGT.source_id  )
+ WHERE TRGT.soft_deleted_flag = 'N' and COALESCE( SRC.sys_updated_by,'UNSPECIFIED')<>
+ COALESCE(TRGT.changed_by)
+ 
+ 

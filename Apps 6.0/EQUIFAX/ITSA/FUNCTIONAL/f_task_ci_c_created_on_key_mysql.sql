@@ -10,4 +10,4 @@ on a.sys_id=b.row_id and a.sourceinstance=b.source_id
 join
 equifax_mdwdb.d_calendar_date c
 on COALESCE(DATE_FORMAT(CONVERT_TZ( a.sys_created_on,'GMT','America/New_York'),'%Y%m%d'),'UNSPECIFIED')=c.row_id and a.sourceinstance=c.source_id
-where  coalesce(c.row_key,case when a.sys_created_on is null then 0 else -1 end ) <> b.created_on_key)b
+where  coalesce(c.row_key,case when a.sys_created_on is null then 0 else -1 end ) <> b.created_on_key and a.cdctype<>'D')b

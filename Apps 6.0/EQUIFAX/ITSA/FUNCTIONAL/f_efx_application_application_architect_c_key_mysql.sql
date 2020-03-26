@@ -9,4 +9,4 @@ and  SRC.sourceinstance = TRGT.source_id
 join
 equifax_mdwdb.d_internal_contact lkp
 on COALESCE(CONCAT('INTERNAL_CONTACT','~',SRC.u_efx_application_architect),'UNSPECIFIED') =lkp.row_id
-WHERE COALESCE(lkp.row_key, case when SRC.u_efx_application_architect is null then 0 else -1 end) <> TRGT.application_architect_c_key)b
+WHERE COALESCE(lkp.row_key, case when SRC.u_efx_application_architect is null then 0 else -1 end) <> TRGT.application_architect_c_key and SRC.cdctype<>'D')b

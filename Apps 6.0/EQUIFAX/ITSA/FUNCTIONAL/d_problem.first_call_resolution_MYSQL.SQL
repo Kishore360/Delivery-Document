@@ -5,5 +5,5 @@ FROM
 (select COUNT(1) AS CNT 
 FROM equifax_mdsdb.problem_final SRC
 LEFT JOIN equifax_mdwdb.d_problem TRGT ON SRC.sys_id=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id
-WHERE (case when SRC.u_first_call_resolution = 1 then  'Y' else 'N' end)<>TRGT.first_call_resolution_flag_c
+WHERE (case when SRC.u_first_call_resolution = 1 then  'Y' else 'N' end)<>TRGT.first_call_resolution_flag_c and SRC.cdctype<>'D'
 )temp;

@@ -8,5 +8,5 @@ from
 (select count(1) as cnt from(select sys_id, sourceinstance,u_fcr from equifax_mdsdb.incident_final where CDCTYPE<>'D') src
 left join  equifax_mdwdb.d_incident trgt on 
 src.sys_id=trgt.row_id and src.sourceinstance=trgt.source_id 
-where ( case when u_fcr=0 THEN 'N' ELSE 'Y' END) <> trgt.u_fcr_c
+where ( case when u_fcr=0 THEN 'N' ELSE 'Y' END) <> trgt.u_fcr_c and src.cdctype<>'D'
 ) temp;

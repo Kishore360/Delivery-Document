@@ -9,4 +9,4 @@ and  SRC.sourceinstance = TRGT.source_id
 join
 equifax_mdwdb.d_lov lkp
 on COALESCE(CONCAT('CUSTOMER_TYPE~EFX_APPLICATION~',SRC.u_efx_customer_type),'UNSPECIFIED') =lkp.row_id
-WHERE COALESCE(lkp.row_key, case when SRC.u_efx_customer_type is null then 0 else -1 end) <> TRGT.efx_customer_type_c_key)b
+WHERE COALESCE(lkp.row_key, case when SRC.u_efx_customer_type is null then 0 else -1 end) <> TRGT.efx_customer_type_c_key and SRC.cdctype<>'D')b

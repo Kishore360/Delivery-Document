@@ -11,3 +11,4 @@ LEFT JOIN watson_mdwdb.d_internal_contact LKP
   AND LM.dimension_wh_code not in ('RESOLVED','CLOSED')
 WHERE 
 COALESCE(LKP.row_key,CASE WHEN SRC.closed_by IS NULL THEN 0 else '-1' end)<> COALESCE(TRGT.closed_by_key ,'')
+and SRC.cdctype<>'D' and LM.dimension_wh_code is not null

@@ -4,5 +4,5 @@ CASE WHEN CNT > 0 THEN 'MDS to DWH data validation failed for d_configuration_it
 from
 (select count(1) as CNT from (select * from equifax_mdsdb.cmdb_ci_final where CDCTYPE<>'D') SRC
 left join equifax_mdwdb.d_configuration_item TRGT on SRC.sys_id=TRGT.row_id and SRC.sourceinstance=TRGT.source_id
-where coalesce(SRC.name,'UNSPECIFIED')<>TRGT.name
+where coalesce(SRC.name,'UNSPECIFIED')<>TRGT.name and SRC.cdctype<>'D'
 )temp;

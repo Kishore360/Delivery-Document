@@ -22,4 +22,4 @@ group by 1 having count(1)>1
  select name,ip_address_c from equifax_mdwdb.d_configuration_item where
 class in ('Linux Server', 'Windows Server', 'Server', 'Solaris Server', 'AIX Server', 'ESX Server', 'Hyper V Server', 'IBM Mainframe LPAR', 'OS/X Server')
 group by 1,2 having count(1)>1 
- ) d on src.name=d.name and src.ip_address_c=d.ip_address_c and src.duplicate_flag_c <>'Y')ma
+ ) d on src.name=d.name and src.ip_address_c=d.ip_address_c and src.duplicate_flag_c <>'Y' and src.soft_deleted_flag='N')ma

@@ -8,5 +8,5 @@ from
 select count(1) as cnt from(select sys_id, sourceinstance,u_resolution_codes from equifax_mdsdb.incident_final where CDCTYPE<>'D') src 
 left join  equifax_mdwdb.d_incident trgt on 
 src.sys_id=trgt.row_id and src.sourceinstance=trgt.source_id
-where coalesce(u_resolution_codes,'UNSPECIFIED') <> trgt.u_resolution_codes_c
+where coalesce(u_resolution_codes,'UNSPECIFIED') <> trgt.u_resolution_codes_c  and src.cdctype<>'D'
 ) temp;

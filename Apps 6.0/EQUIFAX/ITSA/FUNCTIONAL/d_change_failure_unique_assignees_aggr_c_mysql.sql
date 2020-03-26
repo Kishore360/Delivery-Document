@@ -11,5 +11,5 @@ GROUP BY chg.sys_id, chg.sourceinstance) X
 on TRGT.row_id=X.sys_id and TRGT.source_id=X.sourceinstance and TRGT.current_flag='Y'
 WHERE CASE WHEN X.sys_id is null then 'UNSPECIFIED'
 WHEN  chg_tsk_assignee_cnt<=2 then 'lte_2'
-WHEN  chg_tsk_assignee_cnt>2 then 'gt_2' end <>TRGT.unique_assignees_aggr_c;
+WHEN  chg_tsk_assignee_cnt>2 then 'gt_2' end <>TRGT.unique_assignees_aggr_c and SRC.cdctype<>'D';
 

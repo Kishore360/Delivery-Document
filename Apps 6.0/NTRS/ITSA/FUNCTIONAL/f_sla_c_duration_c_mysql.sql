@@ -5,6 +5,6 @@ FROM
 (
 Select Count(1) as CNT
 FROM ntrust_mdsdb.contract_sla_final SRC
-JOIN ntrustbrn_mdwdb.f_sla_c TRGT ON (SRC.sys_id=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id)
+JOIN ntrust_mdwdb.f_sla_c TRGT ON (SRC.sys_id=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id)
 WHERE timestampdiff(second,'1970-01-01 00:00:00',SRC.duration)<>TRGT.duration_c
 AND SRC.cdctype='X' ) temp; 

@@ -5,7 +5,7 @@ FROM
 (select count(1)  as cnt FROM  equifax_mdsdb.task_ci_final SRC 
 LEFT JOIN equifax_mdwdb.d_configuration_item LKP ON SRC.ci_item=LKP.row_id AND SRC.sourceinstance=LKP.source_id
 JOIN equifax_mdwdb.f_task_ci_c TRGT ON SRC.sys_id=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id
-WHERE COALESCE(LKP.row_key,CASE WHEN SRC.ci_item IS NULL THEN 0 ELSE -1 END )<>TRGT.task_ci_item_c_key
+WHERE COALESCE(LKP.row_key,CASE WHEN SRC.ci_item IS NULL THEN 0 ELSE -1 END )<>TRGT.task_ci_item_c_key and SRC.cdctype<>'D'
 )temp;
 
 

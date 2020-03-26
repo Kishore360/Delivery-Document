@@ -6,5 +6,5 @@ FROM equifax_mdsdb.u_efx_application_final SRC
 JOIN equifax_mdwdb.d_efx_application_c TRGT 
 ON SRC.sys_id = TRGT.row_id 
 and  SRC.sourceinstance = TRGT.source_id  
-WHERE case when u_service_enrolled_snow in ('Yes',1)  then 'Y' else 'N' end  <> TRGT.service_enrolled_snow_c_flag
+WHERE case when u_service_enrolled_snow in ('Yes',1)  then 'Y' else 'N' end  <> TRGT.service_enrolled_snow_c_flag and SRC.cdctype<>'D'
 )b

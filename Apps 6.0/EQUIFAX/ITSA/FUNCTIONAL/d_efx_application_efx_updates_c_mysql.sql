@@ -7,4 +7,4 @@ FROM equifax_mdsdb.u_efx_application_final SRC
 JOIN equifax_mdwdb.d_efx_application_c TRGT 
 ON SRC.sys_id = TRGT.row_id 
 and  SRC.sourceinstance = TRGT.source_id  
-WHERE SRC.sys_mod_count<> TRGT.efx_updates_c)b
+WHERE SRC.sys_mod_count<> TRGT.efx_updates_c and SRC.cdctype<>'D')b

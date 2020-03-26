@@ -25,4 +25,4 @@ LEFT JOIN equifax_mdsdb.cmdb_ci_service_final LKP6
 ON (SRC.sys_id= LKP6.sys_id AND SRC.sourceinstance=LKP6.sourceinstance)
 LEFT JOIN equifax_mdsdb.cmdb_ci_ucs_equipment_final LKP7
 ON (SRC.sys_id= LKP7.sys_id AND SRC.sourceinstance=LKP7.sourceinstance)
-where COALESCE(LKP1.version,LKP2.version,LKP3.version,LKP4.version,LKP5.version,LKP6.version,LKP7.version,'UNSPECIFIED')<>TRGT.version_c )TEMP
+where COALESCE(LKP1.version,LKP2.version,LKP3.version,LKP4.version,LKP5.version,LKP6.version,LKP7.version,'UNSPECIFIED')<>TRGT.version_c and SRC.cdctype<>'D' )TEMP

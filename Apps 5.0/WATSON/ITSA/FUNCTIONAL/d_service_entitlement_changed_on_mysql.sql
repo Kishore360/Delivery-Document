@@ -6,4 +6,4 @@ LEFT JOIN watson_mdwdb.d_service_entitlement TRGT
 	ON (SRC.sys_id =TRGT.row_id 
 	AND SRC.sourceinstance =TRGT.source_id )
 WHERE TRGT.row_key not in (0, -1) and 
-convert_tz(SRC.sys_updated_on, 'GMT', 'America/New_York')<> TRGT.changed_on 
+convert_tz(SRC.sys_updated_on, 'UTC','GMT')<> TRGT.changed_on 

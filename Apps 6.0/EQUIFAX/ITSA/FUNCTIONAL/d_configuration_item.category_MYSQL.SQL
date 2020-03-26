@@ -8,5 +8,5 @@ FROM equifax_mdsdb.cmdb_ci_final a
 LEFT JOIN equifax_mdwdb.d_configuration_item b ON (a.sys_id=b.row_id and a.sourceinstance=b.source_id)
 JOIN equifax_mdsdb.sys_choice_final lkp
 on (a.sys_id=lkp.name)
-WHERE COALESCE(lkp.name,'UNSPECIFIED')<>b.category
+WHERE COALESCE(lkp.name,'UNSPECIFIED')<>b.category and a.cdctype<>'D'
 ) temp;

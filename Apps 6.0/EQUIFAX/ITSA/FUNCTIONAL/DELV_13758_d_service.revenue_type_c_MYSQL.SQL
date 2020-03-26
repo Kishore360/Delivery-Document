@@ -6,7 +6,7 @@ FROM
 SELECT Count(1) AS CNT 
 FROM (select * from equifax_mdsdb.cmdb_ci_service_final where cdctype<>'D')src
 left join equifax_mdwdb.d_service t on RIGHT(t.row_id,32)=src.sys_id and src.sourceinstance=t.source_id
-WHERE COALESCE(src.u_revenue_type,'UNSPECIFIED')<>t.revenue_type_c
+WHERE COALESCE(src.u_revenue_type,'UNSPECIFIED')<>t.revenue_type_c and src.cdctype<>'D'
 ) temp;
 
 

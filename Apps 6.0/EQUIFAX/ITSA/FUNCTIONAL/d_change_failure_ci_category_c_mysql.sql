@@ -11,4 +11,4 @@ AND SRC.sourceinstance = TRGT.source_id ) and SRC.cdctype<>'D' and TRGT.current_
    LEFT OUTER JOIN
         equifax_mdwdb.d_configuration_item d_configuration_item 
             ON f_change_request.configuration_item_key=d_configuration_item.row_key  
-WHERE d_configuration_item.category<>TRGT.ci_category_c;
+WHERE d_configuration_item.category<>TRGT.ci_category_c and SRC.cdctype<>'D';

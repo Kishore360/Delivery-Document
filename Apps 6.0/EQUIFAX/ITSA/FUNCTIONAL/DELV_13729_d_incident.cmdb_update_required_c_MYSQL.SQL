@@ -6,7 +6,7 @@ FROM
 Select Count(1) AS CNT 
 FROM equifax_mdsdb.incident_final SRC 
 LEFT JOIN equifax_mdwdb.d_incident TRGT ON SRC.sys_id=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id
-WHERE case when SRC.u_cmdb_update_required=1 then 'Y' else 'N' end <>TRGT.cmdb_update_required_c
+WHERE case when SRC.u_cmdb_update_required=1 then 'Y' else 'N' end <>TRGT.cmdb_update_required_c and SRC.cdctype<>'D'
 ) temp;
 
 

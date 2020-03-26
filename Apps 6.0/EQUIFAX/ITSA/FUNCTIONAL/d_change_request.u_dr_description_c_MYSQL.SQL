@@ -12,7 +12,7 @@ FROM equifax_mdsdb.change_request_final SRC
 
 LEFT JOIN equifax_mdwdb.d_change_request TRGT ON SRC.sys_id=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id
 
-WHERE COALESCE(SRC.u_dr_description,'UNSPECIFIED')<>TRGT.u_dr_description_c
+WHERE COALESCE(SRC.u_dr_description,'UNSPECIFIED')<>TRGT.u_dr_description_c and SRC.cdctype<>'D'
 
 )temp;
 

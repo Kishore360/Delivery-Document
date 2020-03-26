@@ -6,4 +6,4 @@ FROM equifax_mdsdb.u_efx_application_final SRC
 JOIN equifax_mdwdb.d_efx_application_c TRGT 
 ON SRC.sys_id = TRGT.row_id 
 and  SRC.sourceinstance = TRGT.source_id  
-WHERE date_format(CONVERT_TZ(SRC.u_questionnaire_submitted,'GMT','America/New_York'),'%Y%m%d') <> TRGT.questtionaire_submitted_datekey_c)b
+WHERE date_format(CONVERT_TZ(SRC.u_questionnaire_submitted,'GMT','America/New_York'),'%Y%m%d') <> TRGT.questtionaire_submitted_datekey_c and SRC.cdctype<>'D')b

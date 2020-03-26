@@ -7,7 +7,7 @@ Select Count(1) AS CNT
 FROM equifax_mdsdb.change_request_final SRC 
 LEFT JOIN equifax_mdwdb.f_change_request TRGT ON SRC.sys_id=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id
 JOIN equifax_mdwdb.d_internal_contact LKP ON CONCAT('INTERNAL_CONTACT~',SRC.u_slt_expedited)=LKP.row_id AND SRC.sourceinstance=LKP.source_id
-WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_slt_expedited IS NULL THEN 0 ELSE -1 END)<>TRGT.slt_expedited_c_key
+WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_slt_expedited IS NULL THEN 0 ELSE -1 END)<>TRGT.slt_expedited_c_key and SRC.cdctype<>'D'
 ) temp;
 
 

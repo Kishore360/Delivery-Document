@@ -14,4 +14,4 @@ LEFT OUTER JOIN
     LEFT OUTER JOIN
         equifax_mdwdb.d_internal_organization d_internal_organization1 
             ON d_internal_organization.group_bu_c_key=d_internal_organization1.row_key  
-WHERE d_internal_organization1.organization_name<>TRGT.business_unit_dept_c;
+WHERE d_internal_organization1.organization_name<>TRGT.business_unit_dept_c and SRC.cdctype<>'D';  

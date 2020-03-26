@@ -5,4 +5,4 @@ SELECT
  FROM equifax_mdsdb.cmdb_ci_netgear_final SRC
  JOIN equifax_mdwdb.d_configuration_item TRGT
  ON (SRC.sys_id=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id)
-  WHERE  SRC.device_type <>TRGT.device_type_c)temp;
+  WHERE  SRC.device_type <>TRGT.device_type_c and SRC.cdctype<>'D')temp;

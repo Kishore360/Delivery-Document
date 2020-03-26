@@ -6,5 +6,5 @@ SELECT count(1) as CNT
 FROM equifax_mdsdb.cmdb_ci_final SRC 
 LEFT JOIN equifax_mdwdb.d_configuration_item TRGT
   ON (SRC.sys_id= TRGT.row_id AND SRC.sourceinstance=TRGT.source_id)
-where (CASE when SRC.u_efx_internet_facing_web_app IS NULL then'N' else 'Y' end) <>TRGT.internet_facing_web_app_flag_c)
+where (CASE when SRC.u_efx_internet_facing_web_app IS NULL then'N' else 'Y' end) <>TRGT.internet_facing_web_app_flag_c and SRC.cdctype<>'D')
 temp;

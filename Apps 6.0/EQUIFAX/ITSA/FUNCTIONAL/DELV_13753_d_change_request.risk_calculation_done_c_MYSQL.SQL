@@ -11,7 +11,7 @@ FROM (select * from equifax_mdsdb.change_request_final where cdctype<>'D') SRC
 
 LEFT JOIN equifax_mdwdb.d_change_request TRGT ON SRC.sys_id=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id
 
-WHERE CASE WHEN SRC.u_risk_calculation_done THEN 'Y' ELSE 'N' END<>TRGT.risk_calculation_done_c
+WHERE CASE WHEN SRC.u_risk_calculation_done THEN 'Y' ELSE 'N' END<>TRGT.risk_calculation_done_c and SRC.cdctype<>'D'
 ) 
 temp;
 

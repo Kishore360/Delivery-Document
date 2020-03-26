@@ -6,4 +6,4 @@ FROM equifax_mdsdb.x_59673_equifax_bu_equifax_business_impact_table_final SRC
 JOIN equifax_mdwdb.d_equifax_bu_equifax_business_impact_c TRGT 
 ON SRC.sys_id = TRGT.row_id 
 and  SRC.sourceinstance = TRGT.source_id  
-WHERE SRC.number  <> TRGT.number_c)b
+WHERE SRC.number  <> TRGT.number_c and SRC.cdctype<>'D')b

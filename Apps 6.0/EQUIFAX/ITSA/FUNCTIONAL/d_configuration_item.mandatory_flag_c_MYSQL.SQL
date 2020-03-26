@@ -18,4 +18,4 @@ and TRGT.country_c ='UNSPECIFIED' or TRGT.ci_customer_type_c_key ='UNSPECIFIED' 
 when (TRGT.class in ('Linux Server','Computer','Windows Server','Server','IP Switch','Solaris Server','AIX Server','Windows Cluster','IP Router','Network Gear',
 'Load Balancer','ESX Server','IP Firewall','Bluecoat','Storage Switch','Mainframe Hardware','IBM Mainframe LPAR','Modem Hardware','Wireless Access Point','OS/X Server',
 'Storage Area Network','Virtual Private Network','Printer') and TRGT.mac_address_c ='UNSPECIFIED' ) then 'N'
-ELSE 'Y' END <>TRGT.mandatory_flag_c)temp;
+ELSE 'Y' END <>TRGT.mandatory_flag_c and SRC.cdctype<>'D')temp;

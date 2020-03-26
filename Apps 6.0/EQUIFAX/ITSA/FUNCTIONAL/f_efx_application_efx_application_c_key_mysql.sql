@@ -9,4 +9,4 @@ and  SRC.sourceinstance = TRGT.source_id
 join
 equifax_mdwdb.d_efx_application_c lkp
 on COALESCE(SRC.sys_id,'UNSPECIFIED') =lkp.row_id
-WHERE COALESCE(lkp.row_key, case when SRC.sys_id is null then 0 else -1 end) <> TRGT.efx_application_c_key)b
+WHERE COALESCE(lkp.row_key, case when SRC.sys_id is null then 0 else -1 end) <> TRGT.efx_application_c_key and SRC.cdctype<>'D')b

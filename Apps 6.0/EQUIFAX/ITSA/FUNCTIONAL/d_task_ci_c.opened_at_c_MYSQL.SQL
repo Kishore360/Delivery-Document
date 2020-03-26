@@ -15,7 +15,7 @@ where
 coalesce(coalesce(SRC1.opened_at,SRC1.sys_created_on),coalesce(SRC2.opened_at,SRC2.sys_created_on),
 coalesce(SRC3.opened_at,SRC3.sys_created_on),coalesce(SRC4.opened_at,SRC4.sys_created_on),
 coalesce(SRC5.opened_at,SRC5.sys_created_on),coalesce(SRC6.opened_at,SRC.sys_created_on),'')
- and SRC.cdctype<>'D'<>TRGT.opened_at_c 
+ and SRC.cdctype<>'D'<>TRGT.opened_at_c and SRC.cdctype<>'D'
 )temp;
 
 

@@ -6,4 +6,4 @@ FROM equifax_mdsdb.u_efx_application_final SRC
 JOIN equifax_mdwdb.d_efx_application_c TRGT 
 ON SRC.sys_id = TRGT.row_id 
 and  SRC.sourceinstance = TRGT.source_id  
-WHERE COALESCE(SRC.u_data_volume,'UNSPECIFIED') <> TRGT.data_volume_c)b
+WHERE COALESCE(SRC.u_data_volume,'UNSPECIFIED') <> TRGT.data_volume_c and SRC.cdctype<>'D')b

@@ -18,5 +18,5 @@ WHERE COALESCE(CASE
             WHEN d_lov_map.dimension_wh_code='OPEN' then DAY(planned_start_on) 
             WHEN d_lov_map.dimension_wh_code='CLOSED' then DAY(work_start_on) 
         end ,
-        -1) <>TRGT.change_start_day_c;
+        -1) <>TRGT.change_start_day_c and SRC.cdctype<>'D';
 
