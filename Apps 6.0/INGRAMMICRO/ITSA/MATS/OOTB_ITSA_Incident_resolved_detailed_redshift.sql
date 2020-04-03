@@ -5,7 +5,7 @@ select 'ldb.f_incident_resolved' as Table_Name, count(1) Row_Count
 from ldb.f_incident_resolved a11 
 join ldb.d_calendar_date_fiscal a14 
 on (a11.last_resolved_on_key  = a14.row_key) 
-union
+/*union
 select 'ldb.d_calendar_fiscal_quarter a114 ' as Table_name, count(1) Row_Count
 from ldb.f_incident_resolved a11 
 join ldb.d_calendar_date_fiscal a14 
@@ -18,7 +18,7 @@ from ldb.f_incident_resolved a11
 join ldb.d_calendar_date_fiscal a14 
 on (a11.last_resolved_on_key  = a14.row_key)  
 join ldb.d_calendar_fiscal_year a114 
-on (a14.year_start_date_key = a114.row_key)
+on (a14.year_start_date_key = a114.row_key)*/
 
 union
 select'ldb.d_customer' as Table_Name, count(1) Row_Count
@@ -113,13 +113,13 @@ select'ldb.d_internal_contact_mdm' as Table_Name, count(1) Row_Count
 on (a11.last_resolved_by_key = a13.row_key)
 join ldb.d_internal_contact_mdm       a118
 on (a13.row_current_key = a118.row_current_key)
-union
+/*union
 select'ldb.d_calendar_time_hour' as Table_Name, count(1) Row_Count
  from  ldb.f_incident_resolved       a11 
  join ldb.d_calendar_time       a14
 on (a11.opened_time_key = a14.row_key)
 join ldb.d_calendar_time_hour       a119
-on (a14.hour_24_format_num = a119.hour_24_format_num)
+on (a14.hour_24_format_num = a119.hour_24_format_num)*/
 union
 select'ldb.d_incident_contacttype' as Table_Name, count(1) Row_Count
  from  ldb.f_incident_resolved       a11 
@@ -168,7 +168,7 @@ select'ldb.d_calendar_week' as Table_Name, count(1) Row_Count
 on (a11.last_resolved_on_key = a18.row_key)
 join ldb.d_calendar_week       a127
 on (a18.week_start_date_key = a127.row_key)
-union
+/*union
 select'ldb.d_calendar_quarter' as Table_Name, count(1) Row_Count
  from  ldb.f_incident_resolved       a11 
  join ldb.d_calendar_date       a18
@@ -181,7 +181,7 @@ select'ldb.d_calendar_year' as Table_Name, count(1) Row_Count
  join ldb.d_calendar_date       a18
 on (a11.last_resolved_on_key = a18.row_key)
 join ldb.d_calendar_year       a137
-on (a18.year_start_date_key = a137.row_key)
+on (a18.year_start_date_key = a137.row_key)*/
 union
 select'ldb.d_incident_category' as Table_Name, count(1) Row_Count
  from  ldb.f_incident_resolved       a11 

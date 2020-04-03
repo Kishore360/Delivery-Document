@@ -15,13 +15,13 @@ select'ldb.d_internal_organization_group' as Table_Name, count(1) Row_Count
  from  ldb.f_change_request       a11 
 join ldb.d_internal_organization_group       a14
 on (a11.assignment_group_key = a14.row_key)
-union
+/*union
 select'ldb.dh_user_group_hierarchy' as Table_Name, count(1) Row_Count
  from  ldb.f_change_request       a11
  join ldb.d_internal_organization_group       a14
 on (a11.assignment_group_key = a14.row_key)
 join ldb.dh_user_group_hierarchy       a15
-on (a14.row_dn_key = a15.lev_0_key)
+on (a14.row_dn_key = a15.lev_0_key)*/
 union
 select'ldb.d_business_service' as Table_Name, count(1) Row_Count
  from  ldb.f_change_request       a11 
@@ -124,7 +124,7 @@ select'ldb.d_location' as Table_Name, count(1) Row_Count
  from  ldb.f_change_request       a11 
 join ldb.d_location       a125
 on (a11.location_key = a125.row_key)
-union
+/*union
 select'ldb.dh_user_group_level1' as Table_Name, count(1) Row_Count
  from  ldb.f_change_request       a11 
   join ldb.d_internal_organization_group       a14
@@ -141,7 +141,7 @@ on (a11.assignment_group_key = a14.row_key)
 join ldb.dh_user_group_hierarchy       a15
 on (a14.row_dn_key = a15.lev_0_key)
 join ldb.dh_user_group_level2       a131
-on (a15.lev_2_key = a131.row_key)
+on (a15.lev_2_key = a131.row_key)*/
 union
 select'ldb.d_business_service_criticality' as Table_Name, count(1) Row_Count
  from  ldb.f_change_request       a11
@@ -170,7 +170,7 @@ select'ldb.d_calendar_week' as Table_Name, count(1) Row_Count
 on (a11.opened_on_key = a17.row_key)
 join ldb.d_calendar_week       a130
 on (a17.week_start_date_key = a130.row_key)
-union
+/*union
 select'ldb.d_calendar_quarter' as Table_Name, count(1) Row_Count
  from  ldb.f_change_request       a11 
  join ldb.d_calendar_date       a17
@@ -183,7 +183,7 @@ select'ldb.d_calendar_year' as Table_Name, count(1) Row_Count
  join ldb.d_calendar_date       a17
 on (a11.opened_on_key = a17.row_key)
 join ldb.d_calendar_year       a133
-on (a17.year_start_date_key = a133.row_key)
+on (a17.year_start_date_key = a133.row_key)*/
 
 
 
