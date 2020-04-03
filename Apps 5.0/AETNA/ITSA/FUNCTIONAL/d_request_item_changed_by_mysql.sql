@@ -7,7 +7,7 @@ select count(1) as cnt
 from aetna_mdsdb.sc_req_item_final s
 left join aetna_mdwdb.d_request_item   t
 on s.sys_id=t.row_id and s.sourceinstance=t.source_id
-WHERE s.sys_updated_by <> t.changed_by
+WHERE  s.cdctype<>'D' and s.sys_updated_by <> t.changed_by
 ) temp
 
 
