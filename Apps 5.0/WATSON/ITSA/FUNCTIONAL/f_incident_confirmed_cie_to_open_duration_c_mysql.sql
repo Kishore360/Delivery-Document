@@ -9,8 +9,5 @@ JOIN watson_mdsdb.sys_audit_final saf
 ON saf.documentkey=a.sys_id 
 AND saf.tablename='incident' AND saf.fieldname='u_confirmed_cie'
 WHERE f.confirmed_cie_to_open_duration_c <> CASE WHEN (a.opened_at is null  or saf.sys_created_on is null) THEN NULL WHEN TIMESTAMPDIFF(SECOND,a.opened_at ,saf.sys_created_on) < 0
-		
-
-								THEN NULL ELSE TIMESTAMPDIFF(SECOND,a.opened_at,saf.sys_created_on ) end
-
-and a.and a.u_confirmed_cie = 1 and a.cdctype='X';
+THEN NULL ELSE TIMESTAMPDIFF(SECOND,a.opened_at,saf.sys_created_on ) end
+and a.u_confirmed_cie = 1 and a.cdctype='X';
