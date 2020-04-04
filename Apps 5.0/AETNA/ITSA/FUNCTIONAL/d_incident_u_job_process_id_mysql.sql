@@ -5,9 +5,11 @@ FROM
 (
  SELECT Count(1) as CNT 
  FROM aetna_mdsdb.incident_final SRC 
- LEFT JOIN aetna_mdwdb.d_incident TRGT 
- ON (SRC.sys_id =TRGT.row_id  AND SRC.sourceinstance= TRGT.source_id  )
- WHERE SRC.u_job_process_id <> TRGT.u_job_process_id and SRC.cdctype<>'D'
- AND TRGT.soft_deleted_flag='N'
+ join (select source_id,max(lastupdated) as lastupdated from aetna_mdwdb.d_o_data_freshness where source_id=2 group by source_id) f1 on
+ (f1.source_id = SRC.sourceinstance) AND  (SRC.cdctime<=f1.lastupdated) and SRC.cdctype<>'D'
+ JOIN aetna_mdwdb.d_incident TRGT 
+ ON (SRC.sys_id =TRGT.row_id  AND SRC.sourceinstance= TRGT.source_id   )
+ WHERE SRC.u_job_process_id <> TRGT.u_job_process_id 
+ 
  ) temp;
  

@@ -8,6 +8,8 @@ SELECT count(1) as CNT
 FROM aetna_mdwdb.d_request_item REQ_ITM 
 join aetna_mdwdb.f_request_item f ON( REQ_ITM.row_key = f.request_item_key )
 JOIN aetna_mdwdb.d_lov_map br ON (f.state_src_key = br.src_key AND br.dimension_wh_code = 'OPEN')
+join (select source_id,max(lastupdated) as lastupdated from aetna_mdwdb.d_o_data_freshness group by source_id) f1 on
+ (f1.source_id = b.sourceinstance)  and  (b.cdctime<=f1.lastupdated) )
 WHERE REQ_ITM.soft_deleted_flag ='N' 
 and  REQ_ITM.over_due_flag <> CASE WHEN (REQ_ITM.active_flag = 'Y' and REQ_ITM.soft_deleted_flag ='N')
 && (REQ_ITM.due_on < (SELECT max(lastupdated) AS lastupdated FROM aetna_mdwdb.d_o_data_freshness 
