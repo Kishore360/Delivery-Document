@@ -9,4 +9,5 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  LEFT JOIN   mercury_mdwdb.d_internal_organization LKP
  ON ( concat('DEPARTMENT~',LOKP.department)= LKP.row_id 
  AND SRC.sourceinstance= LKP.source_id ) 
- WHERE COALESCE(LKP.row_key,case when u_caller is null then 0 else -1 end)<> (TRGT.asc_incident_opened_by_department_c_key)
+ WHERE  COALESCE(LKP.row_key,CASE WHEN LOKP.sys_id is null and u_caller is not NULL THEN -1  WHEN ( LOKP.department IS NULL )
+ THEN 0  else -1 end)<> (TRGT.asc_incident_opened_by_department_c_key)
