@@ -4,6 +4,6 @@ FROM ingrammicro_mdsdb.change_request_final SRC
 JOIN ingrammicro_mdwdb.d_change_request TRGT
 ON SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id
 WHERE COALESCE(SRC.u_post_deployment_status ,'UNSPECIFIED')<> TRGT.post_deployment_status_c
-and SRC.CDCTYPE<>'D
+and SRC.CDCTYPE<>'D'
 
 

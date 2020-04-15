@@ -6,7 +6,7 @@ FROM
 ( Select count(1) as CNT
 FROM  ingrammicro_mdsdb.change_task_final SRC 
 LEFT JOIN ingrammicro_mdwdb.d_change_task TRGT
-ON (SRC.sys_id=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id)
+ON (SRC.sys_id=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id and SRC.cdctype<>'D')
 left JOIN ingrammicro_mdwdb.d_lov LKP ON
 COALESCE(CONCAT('POST_DEPLOYMENT_STATUS_C','~','CHANGE_TASK','~','','',UPPER(SRC.u_post_deployment_status)),
                 'UNSPECIFIED')=LKP.row_id AND SRC.sourceinstance=LKP.source_id

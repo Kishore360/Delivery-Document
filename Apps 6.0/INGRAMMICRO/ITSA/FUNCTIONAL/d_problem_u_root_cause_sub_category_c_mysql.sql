@@ -6,7 +6,7 @@ FROM
 ( Select count(1) as CNT
 FROM  ingrammicro_mdsdb.problem_final SRC 
 LEFT JOIN ingrammicro_mdwdb.d_problem TRGT
-ON (SRC.sys_id=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id)
+ON (SRC.sys_id=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id and SRC.cdctype<>'D')
 left JOIN ingrammicro_mdwdb.d_lov LKP ON
 CONCAT('ROOT_CAUSE_SUB_CATEGORY_C','~','PROBLEM','~',upper(SRC.u_root_cause_sub_category))=LKP.row_id AND SRC.sourceinstance=LKP.source_id
 WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_root_cause_sub_category iS NULL THEN 0 ELSE -1 END) <> TRGT.u_root_cause_sub_category_c_key
