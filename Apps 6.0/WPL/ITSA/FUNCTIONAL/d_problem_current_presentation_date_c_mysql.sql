@@ -4,7 +4,7 @@ FROM wpl_mdwdb.d_problem trgt
 RIGHT JOIN wpl_mdsdb.problem_final src
 on src.sys_id = trgt.row_id 
 and src.sourceinstance = trgt.source_id
-WHERE current_presentation_date_c  <>convert_tz(src.u_current_presentation_date,'GMT','America/New_York')
+WHERE current_presentation_date_c  <>src.u_current_presentation_date
 and src.CDCTYPE='X'
 ;
 
