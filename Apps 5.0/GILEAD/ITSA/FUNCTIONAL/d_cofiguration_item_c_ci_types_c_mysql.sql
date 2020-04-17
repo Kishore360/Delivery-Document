@@ -24,4 +24,4 @@ join (SELECT a.N + b.N * 10 +1 AS n
     - char_length(replace(u_class_names, ',', '')) 
     >= n - 1) LKP
 ON SRC.sys_class_name = LKP.class_name
-WHERE CASE WHEN SRC.sys_class_name is NULL THEN 'UNSPECIFIED' WHEN SRC.sys_class_name is NOT NULL THEN COALESCE(LKP.u_ci_type,'UNKNOWN') END  <> TRGT.ci_types_c)b
+WHERE CASE WHEN SRC.sys_class_name is NULL THEN 'UNSPECIFIED' WHEN SRC.sys_class_name is NOT NULL THEN COALESCE(LKP.u_ci_type,'UNKNOWN') END  <> TRGT.ci_types_c and SRC.cdctype='X')b
