@@ -15,9 +15,8 @@ GROUP BY 1,2
 LEFT JOIN png_mdwdb.d_rita_application_c TRGT ON SRC.sys_id=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id
 JOIN png_mdwdb.d_rita_application_ext_c TRGT1 ON TRGT.rita_application_ext_c_key=TRGT1.row_key
 WHERE 
-(CASE WHEN SRC1.APP_HEXID IS NOT NULL AND (SRC1.KEYWORD_NAME like '%ITAM: GDPR - Report Exclusion: Privacy%') THEN 'Y' ELSE 'N' END)
+(CASE WHEN SRC1.APP_HEXID IS NOT NULL AND (SRC1.KEYWORD_NAME like '%ITAM: GDPR - Report Exclusion: Privacy%')  OR 
+(SRC1.KEYWORD_NAME like '%ITAM: GDPR Report Exclusion Privacy%') THEN 'Y' ELSE 'N' END)
 <>TRGT1.privacy_excluded_apps_flag_c
 AND SRC.cdctype='X'
 ) temp;
-	 
-	 
