@@ -10,4 +10,4 @@ and  SRC.sourceinstance = TRGT.source_id
 left join gilead_mdwdb.d_lov LKP
 on  COALESCE(CONCAT('OPERATIONAL_STATUS_C~CONFIGURATION_ITEM','~~~',UPPER(SRC.operational_status)),'UNSPECIFIED')=LKP.row_id
 where coalesce(LKP.row_key,case when SRC.operational_status is null then 0 else -1 end ) <> TRGT.operational_status_src_c_key
-and TRGT.current_flag ='Y') b
+and TRGT.current_flag ='Y' and SRC.cdctype='X') b

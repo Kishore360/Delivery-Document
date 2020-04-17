@@ -11,4 +11,5 @@ FROM gilead_mdsdb.cmdb_ci_final SRC
 LEFT JOIN gilead_mdwdb.d_lov LKP 
  ON COALESCE(CONCAT('U_BUSINESS_CRITICALITY_C~CONFIGURATION_ITEM','~~~',UPPER(SRC.u_business_criticality)),'UNSPECIFIED')= LKP.row_id 
 AND SRC.sourceinstance= LKP.source_id 
- WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_business_criticality IS NULL THEN 0 else -1 end)<> (TRGT.business_criticality_src_c_key))temp;
+ WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_business_criticality IS NULL THEN 0 else -1 end)<> (TRGT.business_criticality_src_c_key)
+ and SRC.cdctype='X')temp;
