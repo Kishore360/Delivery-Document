@@ -9,4 +9,4 @@ and  SRC.sourceinstance = TRGT.source_id
 join gilead_mdwdb.d_location LKP
 on  COALESCE(SRC.location,'UNSPECIFIED')=LKP.row_id
 where coalesce(LKP.row_key,case when SRC.location is null then 0 else -1 end ) <> TRGT.location_key
-and TRGT.current_flag='Y') ma
+and TRGT.current_flag='Y' and SRC.cdctype='X') ma
