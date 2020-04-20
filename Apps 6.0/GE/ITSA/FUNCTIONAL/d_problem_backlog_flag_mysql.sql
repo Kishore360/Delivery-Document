@@ -4,10 +4,5 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  LEFT JOIN ge_mdwdb.d_problem TRGT 
  ON (SRC.sys_id=TRGT.row_id 
  AND SRC.sourceinstance=TRGT.source_id )
-  LEFT JOIN  ge_mdwdb.f_problem TRGTF 
- ON (TRGTF.problem_key =TRGT.row_key
- AND TRGTF.source_id =TRGT.source_id)
-LEFT JOIN ge_mdwdb.d_lov_map LM
-on (TRGTF.state_src_key = LM.src_key  AND LM.dimension_class ='STATE~PROBLEM')
-WHERE COALESCE( CASE WHEN LM.dimension_wh_code IN('OPEN') THEN 'Y' ELSE 'N' END ,'')<> COALESCE(TRGT.backlog_flag ,'')
+WHERE CASE WHEN SRC.problem_state in (1,2,3) THEN 'Y' ELSE 'N' END <> TRGT.backlog_flag 
 

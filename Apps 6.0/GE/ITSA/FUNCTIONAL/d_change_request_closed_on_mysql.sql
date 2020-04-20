@@ -11,9 +11,5 @@ JOIN ge_mdwdb.f_change_request TRGTF
  
 JOIN ge_mdwdb.d_lov_map LM
  on(LM.dimension_code=TRGTF.state_src_code
- AND LM.dimension_class='STATE~CHANGE_REQUEST')
- 
-
-WHERE CASE WHEN LM.dimension_wh_code='CLOSED' THEN 
-COALESCE( convert_tz(coalesce(SRC.closed_at,SRC.sys_updated_on) ,'<<TENANT_SSI_TIME_ZONE>>','<<DW_TARGET_TIME_ZONE>>') ,'')
-ELSE '' END <> COALESCE(TRGT.closed_on ,'')
+ AND LM.dimension_class='STATE~CHANGE_REQUEST')and LM.dimension_wh_code='CLOSED'
+WHERE  convert_tz(coalesce(SRC.closed_at,SRC.sys_updated_on) ,'UTC','US/Central') <> TRGT.closed_on 
