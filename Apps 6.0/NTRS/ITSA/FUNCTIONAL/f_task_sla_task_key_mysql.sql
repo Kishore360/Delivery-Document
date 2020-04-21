@@ -4,8 +4,8 @@ FROM  ntrust_mds_viewdb.task_sla_final SRC
 JOIN
                 ntrust_mdsdb.task_final task 
                     ON task.sys_id=SRC.task 
-                    and task.sourceinstance=SRC.sourceinstance 
+                    and task.sourceinstance=SRC.sourceinstance and task.sys_class_name in ('incident','problem')
 JOIN ntrust_mdwdb.f_task_sla TRGT ON (SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id)
-join ntrust_mdwdb.d_task Lkp on (task.sys_id=Lkp.row_id)
+join ntrust_mdwdb.d_task Lkp on (SRC.task=Lkp.row_id and SRC.sourceinstance = Lkp.source_id)
 WHERE COALESCE(Lkp.row_key,CASE WHEN SRC.task is NULL THEN 0 ELSE -1 END) <> TRGT.task_key
 and SRC.cdctype<>'D';
