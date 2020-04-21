@@ -8,7 +8,7 @@ FROM png_mdsdb.u_pg_cs_scanning_final SRC
 LEFT JOIN png_mdwdb.d_dgtl_psat_scorecard_report_c TRGT 
 ON SRC.Sys_id = TRGT.row_id 
 AND SRC.sourceinstance=TRGT.source_id
-WHERE CASE WHEN u_scan_type= 'Privacy' THEN SRC.u_finish_date END  <> TRGT.privacy_finished_date_c
+WHERE CASE WHEN u_scan_type= 'Privacy' THEN convert_tz(SRC.u_finish_date,'GMT','America/New_York') END  <> TRGT.privacy_finished_date_c
 AND SRC.cdctype<>'D'
 ) temp;
 

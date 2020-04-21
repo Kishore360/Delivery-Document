@@ -7,7 +7,7 @@ Select count(1) as CNT
 FROM ingrammicro_mdsdb.u_server_modification_task_final SRC 
 JOIN ingrammicro_mdwdb.f_u_server_modification_task_fact_c TRGT ON (SRC.sys_id=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id)
 JOIN ingrammicro_mdwdb.d_u_server_modification_task_c d on d.row_key=TRGT.u_server_modification_task_c_key
-JOIN ingrammicro_mdwdb.d_lov_map map on map.src_key=TRGT.task_state_key
+JOIN ingrammicro_mdwdb.d_lov_map map on map.src_key=TRGT.server_modification_state_c_key
 WHERE  case 
             when (d.overdue_flag_c='Y' 
             and  d.closed_on_c > d.due_date_c ) then TIMESTAMPDIFF(SECOND,

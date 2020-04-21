@@ -8,7 +8,7 @@ FROM
 (
 SELECT Count(1) AS CNT 
 FROM png_mdsdb.task_final a 
-LEFT JOIN png_mdsdb.task_sla_final b ON (a.sys_id=b.task AND a.sourceinstance=b.sourceinstance)
+LEFT JOIN png_mdsdb.task_sla_final b ON (a.sys_id=b.task AND a.sourceinstance=b.sourceinstance and a.sys_class_name='incident')
 LEFT JOIN png_mdsdb.contract_sla_final c ON (b.sla=c.sys_id AND b.sourceinstance=c.sourceinstance)
 JOIN png_mdwdb.d_task_sla d ON (c.sys_id=d.row_id AND c.sourceinstance=d.source_id)
 WHERE COALESCE(c.type,'UNSPECIFIED')<>d.type_c
