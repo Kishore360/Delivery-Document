@@ -12,7 +12,7 @@ Select
               else 24*60*60  end
                                 )
     ) time_diff_sec
-From   ( select sys_id, opened_at  , closed_at  from mercury_mdsdb.problem_final  where cdctype = 'X') f
+From   ( select sys_id, opened_at  , closed_at  from mercury_mdsdb.problem_final  where cdctype = 'X' and state in (4,701,703,702,704)) f
 join mercury_mdwdb.d_calendar_date dt
     on dt.calendar_date between date(CONVERT_TZ(opened_at, 'GMT','America/Los_Angeles')) and date(CONVERT_TZ(closed_at, 'GMT','America/Los_Angeles'))
 group by  sys_id,CONVERT_TZ(opened_at, 'GMT','America/Los_Angeles'), CONVERT_TZ(closed_at, 'GMT','America/Los_Angeles')

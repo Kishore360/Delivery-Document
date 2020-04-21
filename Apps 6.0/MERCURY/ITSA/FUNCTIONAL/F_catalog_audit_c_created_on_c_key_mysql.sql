@@ -5,8 +5,7 @@ JOIN mercury_mdwdb.f_catalog_audit_c TRGT
 ON (SRC.sys_id = TRGT.row_id  
 AND SRC.sourceinstance = TRGT.source_id ) and SRC.tablename in ('sc_cat_item','item_option_new')
 join
-mercury_mdwdb.d_calendar_time LKP
-on COALESCE(DATE_FORMAT(CONVERT_TZ(SRC.sys_created_on,'GMT','America/Los_Angeles'),'%H%i'),'UNSPECIFIED')= LKP.row_id 
-WHERE coalesce(LKP.row_key,case when SRC.sys_created_on is  null then 0 else -1 end )<>(TRGT.created_time_key) 
-
+mercury_mdwdb.d_calendar_date LKP
+on COALESCE(DATE_FORMAT(CONVERT_TZ(SRC.sys_created_on,'GMT','America/Los_Angeles'),'%Y%m%d'),'UNSPECIFIED')= LKP.row_id 
+WHERE coalesce(LKP.row_key,case when SRC.sys_created_on is  null then 0 else -1 end )<>(TRGT.created_on_key) 
 	
