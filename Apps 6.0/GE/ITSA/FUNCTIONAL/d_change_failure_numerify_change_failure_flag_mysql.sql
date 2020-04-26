@@ -23,8 +23,8 @@ WHEN COALESCE(a.close_code,'UNSPECIFIED') in ('successful_issues','unsuccessful'
 OR b.row_id is not null OR c.row_id is not null THEN 'Y'
 WHEN (COALESCE(a.close_code,'UNSPECIFIED') not in ('successful_issues','unsuccessful')
 AND b.row_id is null AND c.row_id is null) AND lm.dimension_wh_code <> ('CANCELED')
-AND (date_format(a.end_date,'%d-%m-%Y') < '25-03-2020' OR lm.dimension_wh_code = ('CLOSED')) THEN 'N'
+AND (a.end_date< '2020-03-25 00:00:00' OR lm.dimension_wh_code = ('CLOSED')) THEN 'N'
 WHEN (COALESCE(a.close_code,'UNSPECIFIED') not in ('successful_issues','unsuccessful')
 AND b.row_id is null AND c.row_id is null) AND (lm.dimension_wh_code = ('CANCELED')
-OR ((date_format(a.end_date,'%d-%m-%Y') >= '25-03-2020' AND lm.dimension_wh_code <> ('CLOSED')))) THEN 'X'
+OR ((a.end_date >= '2020-03-25 00:00:00' AND lm.dimension_wh_code <> ('CLOSED')))) THEN 'X'
 ELSE 'X' END) <> d.failure_flag);

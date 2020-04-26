@@ -8,4 +8,4 @@ left join (SELECT * FROM ge_mdwdb.d_change_failure where year(effective_to)=2999
 LEFT JOIN ge_mdwdb.d_internal_contact LKP 
  ON ( concat('INTERNAL_CONTACT~',assigned_to) = LKP.row_id 
 AND SRC.sourceinstance = LKP.source_id )
- WHERE COALESCE(LKP.row_key,CASE WHEN SRC.assigned_to IS NULL THEN 0 else '-1' end)<> COALESCE(TRGT.change_assigned_to_key ,'')
+ WHERE COALESCE(LKP.row_key,CASE WHEN SRC.assigned_to IS NULL THEN 0 else '-1' end)<>  TRGT.change_assigned_to_key  

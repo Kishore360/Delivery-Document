@@ -9,4 +9,4 @@ left join (SELECT * FROM ge_mdwdb.d_change_failure where year(effective_to)=2999
  LEFT JOIN ge_mdwdb.d_lov LKP 
  ON ( CONCAT('APPROVAL','~','CHANGE_REQUEST','~',UPPER(approval)) = LKP.src_rowid 
  AND SRC.sourceinstance = LKP.source_id )
- WHERE COALESCE(LKP.row_key,CASE WHEN SRC.approval IS NULL THEN 0 else '-1' end)<> COALESCE(TRGT.change_approval_state_src_key,'')
+ WHERE COALESCE(LKP.row_key,CASE WHEN SRC.approval IS NULL THEN 0 else '-1' end)<> TRGT.change_approval_state_src_key
