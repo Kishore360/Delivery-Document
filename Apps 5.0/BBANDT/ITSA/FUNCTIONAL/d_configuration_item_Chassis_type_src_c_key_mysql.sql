@@ -11,4 +11,5 @@
  JOIN bbandt_mdwdb.d_lov LKP
  ON ((COALESCE(CONCAT('CHASSIS_TYPE_C~CONFIGURATION_ITEM','~~~',UPPER(SRC.chassis_type)),'UNSPECIFIED'))=LKP.row_id
  AND SRC.sourceinstance=LKP.source_id)
- WHERE COALESCE(LKP.row_key,CASE WHEN SRC.chassis_type IS NULL THEN 0 ELSE -1 END)<>(TRGT.Chassis_type_src_c_key))temp;
+ WHERE COALESCE(LKP.row_key,CASE WHEN SRC.chassis_type IS NULL THEN 0 ELSE -1 END)<>(TRGT.Chassis_type_src_c_key)
+and SRC.cdctype='X')temp;

@@ -9,4 +9,4 @@ and SRC.sourceinstance = lkp.sourceinstance
  AND SRC.sourceinstance= TRGT.source_id  )
  WHERE COALESCE( SRC.number,'')<> COALESCE(TRGT.incident_number ,'') -- 46303
  and ((lkp.name not like 'ITSM-LOB-Branchinfo%' and name not like 'ITSM-LOB-HumanSystems%' and name not like 'ITSM-LOB-CPS%'
-and name not like 'ITSM-LOB-LoanServices%' and name not like 'ITSM-LOB-Wealth%') or lkp.name is null);
+and name not like 'ITSM-LOB-LoanServices%' and name not like 'ITSM-LOB-Wealth%') or lkp.name is null and SRC.cdctype='X');

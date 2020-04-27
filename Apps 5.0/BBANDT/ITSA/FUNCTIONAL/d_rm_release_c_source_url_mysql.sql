@@ -5,4 +5,5 @@ FROM bbandt_mdwdb.d_rm_release_c trgt
 RIGHT JOIN bbandt_mdsdb.rm_release_final src
 on src.sys_id = trgt.row_id and src.sourceinstance = trgt.source_id
 where  CONCAT('<a href="','https://bbitprod.service-now.com/nav_to.do?uri=', 'rm_release.do?sys_id=',src.sys_id,
-                '\" target=\"_blank\">',src.number,'</a>')<>trgt.source_url;
+                '\" target=\"_blank\">',src.number,'</a>')<>trgt.source_url
+and src.cdctype='X';

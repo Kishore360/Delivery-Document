@@ -8,4 +8,5 @@ inner join (select value,label from bbandt_mdsdb.sys_choice_final where name = '
   JOIN bbandt_mdwdb.d_configuration_item TRGT 
  ON (src.sys_id =TRGT.row_id  
  AND src.sourceinstance= TRGT.source_id  )
-where case when src.location is null then 'Y' else 'N' end <>TRGT.missing_location_c_flag;
+where case when src.location is null then 'Y' else 'N' end <>TRGT.missing_location_c_flag
+and src.cdctype='X';

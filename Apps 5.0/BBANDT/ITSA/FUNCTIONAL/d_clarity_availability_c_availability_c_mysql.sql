@@ -3,4 +3,5 @@ CASE WHEN count(1)  THEN 'MDS to DWH data validation failed for d_clarity_availa
 FROM bbandt_mdwdb.d_clarity_availability_c trgt
 RIGHT JOIN bbandt_mdsdb.bbt_availability_v_final src
 on trgt.row_id = CONCAT(src.team_user_id,'~',src.type,'~',src.year,'~',src.month) and src.sourceinstance = trgt.source_id
-where trgt.availability_c <>src.availability;
+where trgt.availability_c <>src.availability
+and src.cdctype='X';
