@@ -4,8 +4,9 @@ FROM
 watson_mdwdb.d_segment_c a 
 JOIN watson_mdsdb.u_segment_final b
 ON a.row_id = b.sys_id and a.source_id = b.sourceinstance 
-LEFT join watson_mdwdb.d_internal_contact d
-on d.row_id = COALESCE(CONCAT('INTERNAL_CONTACT~',b.u_general_manager),'UNSPECIFIED')
+LEFT join watson_mdwdb.d_o_data_freshness d
+on a.general_manager_c_key=d.row_id and a.source_id=d.source_id 
 
 where
-a.general_manager_c_key <> COALESCE(d.row_key,CASE WHEN b.u_general_manager IS NULL THEN 0 else -1 end);
+a.general_manager_c_key <>COALESCE(d.row_key,CASE WHEN b.u_general_manager IS NULL THEN 0 else -1 end);
+and a.cdctype='X'

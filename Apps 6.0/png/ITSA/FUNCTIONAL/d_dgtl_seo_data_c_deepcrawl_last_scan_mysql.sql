@@ -9,7 +9,7 @@ LEFT JOIN png_mdwdb.d_dgtl_seo_data_c TRGT
 ON concat ( COALESCE(floor(SRC.TP_ID),'UNSPECIFIED'),  COALESCE(SRC.DeepCrawl_Last_Scan,'UNSPECIFIED') )
 =
 TRGT.row_id AND SRC.sourceinstance=TRGT.source_id
-WHERE SRC.deepcrawl_last_scan <> TRGT.deepcrawl_last_scan
+WHERE convert_tz(SRC.deepcrawl_last_scan,'GMT','America/New_York') <> TRGT.deepcrawl_last_scan
 and SRC.TP_ID <> 0
 AND SRC.cdctype<>'D'
 ) temp;

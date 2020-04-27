@@ -8,4 +8,4 @@ left join (SELECT * FROM ge_mdwdb.d_change_failure where year(effective_to)=2999
 left join ge_mdwdb.d_service ser
 on ser.row_id = CONCAT('BUSINESS_SERVICE~',SRC.business_service)
 AND SRC.sourceinstance = ser.source_id   
- where coalesce(ser.name,'UNSPECIFIED') <> coalesce(TRGT.business_service,'')
+ where coalesce(ser.name,'UNSPECIFIED') <>  TRGT.business_service 

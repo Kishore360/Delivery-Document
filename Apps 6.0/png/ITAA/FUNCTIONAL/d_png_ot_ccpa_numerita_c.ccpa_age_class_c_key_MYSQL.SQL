@@ -1,9 +1,9 @@
 SELECT
-CASE WHEN CNT  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, 
-CASE WHEN CNT  THEN 'MDS to DWH data validation failed for d_png_ot_ccpa_numerita_c.ccpa_age_class_c_key' ELSE 'SUCCESS' END as Message 
+CASE WHEN CNT  > 0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, 
+CASE WHEN CNT  > 0  THEN 'MDS to DWH data validation failed for d_png_ot_ccpa_numerita_c.ccpa_age_class_c_key' ELSE 'SUCCESS' END as Message 
 FROM 
 (
-Select Count(1)
+Select Count(1) as CNT 
 FROM png_mdsdb.pg_ot_ccpa_pa_inventory_c_final a 
 LEFT JOIN 
 (Select x.source_id,max(x.lastupdated) as Lastupdated 

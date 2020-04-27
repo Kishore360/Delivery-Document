@@ -8,4 +8,4 @@ left join (SELECT * FROM ge_mdwdb.d_change_failure where year(effective_to)=2999
 left outer join ge_mdwdb.d_lov lov 
 on concat('RISK~CHANGE_REQUEST~',RISK)=lov.row_id
 AND SRC.sourceinstance = lov.source_id 
- where coalesce(lov.dimension_name,'UNSPECIFIED') <> coalesce(TRGT.change_risk,'');
+ where coalesce(lov.dimension_name,'UNSPECIFIED') <>  TRGT.change_risk ;

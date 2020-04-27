@@ -13,8 +13,7 @@ LEFT JOIN  png_mdwdb.d_rita_application_c TRGT ON SRC.sys_id=TRGT.row_id AND SRC
 WHERE 
 (CASE WHEN SRC1.KEYWORD_NAME like '%ITAM: GDPR - Relevance: No%' THEN 'N'
 WHEN SRC1.KEYWORD_NAME like '%ITAM: GDPR - Relevance: Yes%' THEN 'Y' ELSE 
-IF ((SRC.VOLUME_OF_RECORDS_EU) = '0' OR (SRC.VOLUME_OF_RECORDS_EU) IS NULL OR ((SRC.VOLUME_OF_RECORDS_EU) = '' ),'N','Y')
+IF ((SRC.u_pg_volume_records_eu) = '0' OR (SRC.u_pg_volume_records_eu) IS NULL OR ((SRC.u_pg_volume_records_eu) = '' ),'N','Y')
  END)<>TRGT.gdpr_relevant_c_flag
 AND SRC.cdctype='X'
 ) temp;
-

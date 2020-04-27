@@ -6,5 +6,5 @@ FROM
 SELECT  count(1) as CNT
 FROM ingrammicro_mdsdb.problem_final SRC 
 LEFT JOIN ingrammicro_mdwdb.d_problem TRGT ON (SRC.sys_id=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id)
-WHERE  substring(COALESCE(SRC.u_permanent_work_around,'UNSPECIFIED'),1,700) <> TRGT.u_permanent_work_around_c
+WHERE  COALESCE(SRC.u_permanent_work_around,'UNSPECIFIED') <> TRGT.u_permanent_work_around_c
 AND SRC.cdctype='X' ) temp;

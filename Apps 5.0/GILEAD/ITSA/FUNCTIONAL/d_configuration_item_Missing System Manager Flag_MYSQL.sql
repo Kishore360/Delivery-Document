@@ -8,4 +8,4 @@ FROM gilead_mdsdb.cmdb_ci_final SRC
 -- JOIN (SELECT VALUE,LABEL FROM gilead_mdsdb.sys_choice_final where name='cmdb_ci' and element='operational_status' and language='en' and label='Active' group by value) as op ON op.value= SRC.operational_status
 -- JOIN (SELECT VALUE,LABEL FROM gilead_mdsdb.sys_choice_final where name='cmdb_ci' and element='install_status' and language='en' and label='installed' group by value) as ins ON ins.value=SRC.install_status
 JOIN gilead_mdwdb.d_configuration_item TRGT ON (SRC.sys_id = TRGT.row_id AND SRC.sourceinstance=TRGT.source_id)
-WHERE CASE WHEN SRC.managed_by is null then 'Y' ELSE 'N' END <> TRGT.missing_system_manager_c_flag)temp;
+WHERE CASE WHEN SRC.managed_by is null then 'Y' ELSE 'N' END <> TRGT.missing_system_manager_c_flag and SRC.cdctype='X')temp;

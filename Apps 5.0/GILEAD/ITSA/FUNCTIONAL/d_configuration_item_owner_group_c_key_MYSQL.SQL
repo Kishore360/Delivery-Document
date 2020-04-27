@@ -10,4 +10,4 @@ JOIN gilead_mdwdb.d_configuration_item TRGT ON (SRC.sys_id =TRGT.row_id AND SRC.
 JOIN gilead_mdwdb.d_internal_organization LKP 
 ON (COALESCE(CONCAT('GROUP~',SRC.support_group),'UNSPECIFIED')= LKP.row_id
 AND SRC.sourceinstance= LKP.source_id)
-WHERE COALESCE (LKP.row_key,CASE WHEN SRC.support_group IS NULl THEN 0 ELSE -1 END) <> (TRGT.owner_group_c_key))temp;
+WHERE COALESCE (LKP.row_key,CASE WHEN SRC.support_group IS NULl THEN 0 ELSE -1 END) <> (TRGT.owner_group_c_key) and SRC.cdctype='X')temp;
