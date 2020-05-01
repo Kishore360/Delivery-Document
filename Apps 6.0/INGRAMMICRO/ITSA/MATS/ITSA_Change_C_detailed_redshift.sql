@@ -297,3 +297,10 @@ on (a17.month_start_date_key = a18.row_key) join ldb.d_calendar_quarter a19
 on (a18.quarter_start_date_key = a19.row_key)
 join ldb.d_calendar_year a151
 on (a19.year_start_date_key = a151.row_key)
+union
+select 'ldb.d_change_parent_assignment_group_c a15 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_change_request a11
+join ldb.d_change_parent_incident_c a12
+on (a11.change_parent_incident_c_key = a12.row_key)
+join ldb.d_change_parent_assignment_group_c a15
+on (a12.assignment_group_c_key = a15.row_key)
