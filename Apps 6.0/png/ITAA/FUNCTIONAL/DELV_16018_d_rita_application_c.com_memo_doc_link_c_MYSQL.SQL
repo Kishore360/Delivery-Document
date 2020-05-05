@@ -10,8 +10,3 @@ where coalesce(SRC.u_commissioning_memo_document_link, 'UNSPECIFIED')<>TRGT.com_
 AND SRC.cdctype='X'
 ) temp;
 
-
-
-
-  
-
