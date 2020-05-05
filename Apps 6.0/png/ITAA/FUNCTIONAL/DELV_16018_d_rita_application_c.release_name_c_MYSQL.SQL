@@ -21,7 +21,7 @@ AND SRC.cdctype<>'D'
 
 
 
-Note:
-*****
+-- Note:
+-- *****
 
-The data is matching except for the order of data display for release_name_c. 
+-- The data is matching except for the order of data display for release_name_c. 
