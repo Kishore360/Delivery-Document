@@ -13,5 +13,5 @@ on (LKP1.row_id = date_format(convert_tz(SRC.opened_at,"GMT","America/New_York")
 )
 WHERE COALESCE(LKP1.row_key,-99)<>  COALESCE(TRGT.opened_time_key,-99) -- 46303
  and ((lkp.name not like 'ITSM-LOB-Branchinfo%' and name not like 'ITSM-LOB-HumanSystems%' and name not like 'ITSM-LOB-CPS%'
-and name not like 'ITSM-LOB-LoanServices%' and name not like 'ITSM-LOB-Wealth%') or lkp.name is null);
+and name not like 'ITSM-LOB-LoanServices%' and name not like 'ITSM-LOB-Wealth%') or lkp.name is null and SRC.cdctype='X');
  

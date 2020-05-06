@@ -12,6 +12,6 @@ on src.sys_id=a.row_id and src.sourceinstance=a.source_id
  on ic.department_key=io.row_key
  join mercury_mdwdb.d_internal_contact mgr
 on ic.manager_key=mgr.row_key
- where ic.manager_key = mgr.row_key
+ where ic.manager_key <> mgr.row_key
  ) der;
  

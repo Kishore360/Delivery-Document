@@ -11,4 +11,4 @@ LEFT JOIN  ge_mdwdb.d_internal_contact LKP1
  LEFT JOIN   ge_mdwdb.d_internal_organization LKP
  ON ( concat('DEPARTMENT~',LKP1.department_code) = LKP.row_id 
  AND LKP1.source_id = LKP.source_id )
- where coalesce(LKP.row_key,case when LKP1.department_code is null then 0 else -1 end)<>COALESCE(TRGT.requested_by_department_key ,'');
+ where coalesce(LKP.row_key,case when LKP1.department_code is null then 0 else -1 end)<> TRGT.requested_by_department_key  ;

@@ -10,4 +10,4 @@ left join (SELECT * FROM ge_mdwdb.d_change_failure where year(effective_to)=2999
  ON ( CONCAT('TYPE','~','CHANGE_REQUEST','~',UPPER(type)) = LKP.src_rowid 
  
 AND SRC.sourceinstance = LKP.source_id )
- WHERE COALESCE(LKP.row_key,CASE WHEN SRC.type IS NULL THEN 0 else '-1' end)<> COALESCE(TRGT.change_type_src_key,'')
+ WHERE COALESCE(LKP.row_key,CASE WHEN SRC.type IS NULL THEN 0 else '-1' end)<> TRGT.change_type_src_key
