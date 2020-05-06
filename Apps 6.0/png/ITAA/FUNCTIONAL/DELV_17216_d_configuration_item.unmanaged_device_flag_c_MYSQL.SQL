@@ -15,7 +15,7 @@ CASE WHEN (TRGT.hardware_applicable_flag_c='N' OR TRGT.source_type_c ='Tenable')
 WHEN 
 (
 (SRC.sys_class_name IN ('cmdb_ci_win_server','cmdb_ci_laptop_pc','cmdb_ci_desktop_pc','u_cmdb_ci_smartphone','u_cmdb_ci_tablet')
-AND LKP1.dimension_name not in ('auCMDB','Interstate','MARIMBA','Airwatch')
+AND LKP1.dimension_name not in ('auCMDB','Interstate','MARIMBA','Airwatch','BigFix')
 AND pg_yn_network_connected_flag_c <> 'No'
 AND LKP.dimension_name = 'installed'
 AND (LKP1.dimension_name IN ('PG','Direct','UNSPECIFIED') OR FACT.assignment_group_key =0)

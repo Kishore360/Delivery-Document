@@ -10,5 +10,6 @@ on src.inventory_id = trgt.row_id and src.sourceinstance = trgt.source_id
 JOIN png_mdwdb.d_lov lkp
 ON COALESCE(CONCAT('OT_CONTROL_STATUS_C~PROCESSING_ACTIVITIES~',src.Lawfulness_Basis_Status),'UNSPECIFIED') =lkp.row_id
 where COALESCE(lkp.row_key,CASE WHEN src.Lawfulness_Basis_Status IS NULL THEN 0 else -1 end)<> trgt.law_basis_stats_c_key
+AND src.cdctype='X'
 ) temp;
 
