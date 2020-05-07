@@ -1,5 +1,5 @@
 SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
- CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for f_change_credit_score.assigned_to_key' ELSE 'SUCCESS' END as Message
+ CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for f_change_credit_score.task_type' ELSE 'SUCCESS' END as Message
  FROM ( SELECT * FROM (select distinct concat('INC_MAJOR~',d_inc.row_id) as row_id, ic.department_key,'INC_MAJOR' as task_type, f_inc.assigned_to_key,f_inc.created_on, 
 f_inc.created_by,f_inc.changed_by,f_inc.configuration_item_key,f_inc.changed_on,f_inc.assignment_group_key,f_inc.source_id,
  f_inc.business_service_key,f_inc.application_key,d_inc.row_key as task_key,null as opened_by_key,
@@ -28,7 +28,7 @@ and timestampdiff(second,coalesce(d_inc.due_on,d_inc.opened_on),od.lastupdated)/
 left join ge_mdwdb.d_lov p2_inc
 on p2_inc.dimension_class = 'WH_MAJOR_INCIDENT_P2_AGE~POINTS_BUCKET' 
 and timestampdiff(second,coalesce(d_inc.due_on,d_inc.opened_on),od.lastupdated)/86400 between p2_inc.lower_range_value and p2_inc.upper_range_value
-where map.dimension_wh_code IN ('CRITICAL','HIGH') and st.dimension_wh_code = 'OPEN'
+where map.dimension_wh_code IN ('CRITICAL','HIGH') and st.dimension_wh_code <> 'CANCELED'
 and timestampdiff(second,coalesce(d_inc.due_on,d_inc.opened_on),od.lastupdated)/86400 between 0 and 120 
 -- major_incidents 			
 union
@@ -58,7 +58,7 @@ left join ge_mdwdb.d_lov p3_inc
 on p3_inc.dimension_class = 'WH_MINOR_INCIDENT_AGE~POINTS_BUCKET' 
 and timestampdiff(second,coalesce(d_inc.due_on,d_inc.opened_on),od.lastupdated)/86400 > p3_inc.lower_range_value 
 and timestampdiff(second,coalesce(d_inc.due_on,d_inc.opened_on),od.lastupdated)/86400 <= p3_inc.upper_range_value
-where map.dimension_wh_code IN ('MEDIUM','LOW') and st.dimension_wh_code = 'OPEN'
+where map.dimension_wh_code IN ('MEDIUM','LOW') and st.dimension_wh_code <> 'CANCELED'
 and timestampdiff(second,coalesce(d_inc.due_on,d_inc.opened_on),od.lastupdated)/86400 between 0 and 120   		
 -- minor_incidents
 union
@@ -141,4 +141,4 @@ on  DATE_FORMAT(chg.opened_on,'%Y%m%d') = curr_month.row_key
 where curr_month.lagging_count_of_month = 0 and st.dimension_wh_code = 'OPEN')a) SRC 
  LEFT JOIN ge_mdwdb.f_change_credit_score TRGT 
  ON (SRC.row_id=TRGT.row_id AND SRC.source_id=TRGT.source_id AND SRC.task_type = TRGT.task_type)
- where COALESCE( SRC.assigned_to_key,'')= COALESCE(TRGT.assigned_to_key,'')
+where  SRC.task_type <>  TRGT.task_type 

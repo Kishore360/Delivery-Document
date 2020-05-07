@@ -28,7 +28,7 @@ and timestampdiff(second,coalesce(d_inc.due_on,d_inc.opened_on),od.lastupdated)/
 left join ge_mdwdb.d_lov p2_inc
 on p2_inc.dimension_class = 'WH_MAJOR_INCIDENT_P2_AGE~POINTS_BUCKET' 
 and timestampdiff(second,coalesce(d_inc.due_on,d_inc.opened_on),od.lastupdated)/86400 between p2_inc.lower_range_value and p2_inc.upper_range_value
-where map.dimension_wh_code IN ('CRITICAL','HIGH') and st.dimension_wh_code = 'OPEN'
+where map.dimension_wh_code IN ('CRITICAL','HIGH') and st.dimension_wh_code <> 'CANCELED'
 and timestampdiff(second,coalesce(d_inc.due_on,d_inc.opened_on),od.lastupdated)/86400 between 0 and 120 
 -- major_incidents 			
 union
@@ -58,7 +58,7 @@ left join ge_mdwdb.d_lov p3_inc
 on p3_inc.dimension_class = 'WH_MINOR_INCIDENT_AGE~POINTS_BUCKET' 
 and timestampdiff(second,coalesce(d_inc.due_on,d_inc.opened_on),od.lastupdated)/86400 > p3_inc.lower_range_value 
 and timestampdiff(second,coalesce(d_inc.due_on,d_inc.opened_on),od.lastupdated)/86400 <= p3_inc.upper_range_value
-where map.dimension_wh_code IN ('MEDIUM','LOW') and st.dimension_wh_code = 'OPEN'
+where map.dimension_wh_code IN ('MEDIUM','LOW') and st.dimension_wh_code <> 'CANCELED'
 and timestampdiff(second,coalesce(d_inc.due_on,d_inc.opened_on),od.lastupdated)/86400 between 0 and 120   		
 -- minor_incidents
 union
