@@ -12,5 +12,5 @@ ON (SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id )
 LEFT JOIN fidelity_mdwdb.d_lov LKP 
 ON ( COALESCE(CONCAT('U_REASON_FOR_APPLICATION_OUTAGE~CHANGE_REQUEST~',SRC.u_reason_for_application_outage),'UNSPECIFIED') = LKP.row_id AND SRC.sourceinstance = LKP.source_id ) 
 
-WHERE  CDCTYPE<>'D'and year(TRGT.effective_to)=2999 and  COALESCE(LKP.row_key,CASE WHEN SRC.u_reason_for_application_outage IS NULL THEN 0 else -1 end) <> (TRGT.reason_for_application_outage_src_c_key)and SRC.cdctype<>'D' ) temp;
+WHERE   year(TRGT.effective_to)=2999 and  COALESCE(LKP.row_key,CASE WHEN SRC.u_reason_for_application_outage IS NULL THEN 0 else -1 end) <> (TRGT.reason_for_application_outage_src_c_key)and SRC.cdctype<>'D' ) temp;
 
