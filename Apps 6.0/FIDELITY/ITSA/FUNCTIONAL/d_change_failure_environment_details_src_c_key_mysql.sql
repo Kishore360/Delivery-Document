@@ -8,7 +8,7 @@ on SRC.sys_id = trgt1.row_id and SRC.sourceinstance = trgt1.source_id
 join
 fidelity_mdwdb.d_lov lkp
 on  COALESCE(CONCAT('U_ENVIRONMENT_DETAILS~CHANGE_REQUEST~',SRC.u_environment_details),'UNSPECIFIED') =lkp.row_id and SRC.sourceinstance=lkp.source_id
-WHERE  CDCTYPE<>'D'and year(TRGT.effective_to)=2999 and coalesce(lkp.row_key,case when SRC.u_environment_details is null then 0 else -1 end)  <>trgt1.environment_details_src_c_key and SRC.cdctype<>'D'
+WHERE  year(TRGT.effective_to)=2999 and coalesce(lkp.row_key,case when SRC.u_environment_details is null then 0 else -1 end)  <>trgt1.environment_details_src_c_key and SRC.cdctype<>'D'
 
 
 
