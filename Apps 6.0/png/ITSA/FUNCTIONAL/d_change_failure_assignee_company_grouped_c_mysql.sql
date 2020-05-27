@@ -163,10 +163,11 @@ when coalesce(succomp.name,'UNSPECIFIED')= 'P&G Intl Ops SA ROHQ' then 'P&G Intl
 when coalesce(succomp.name,'UNSPECIFIED')= 'DXC' then 'DXC'
 end   assignee_company_grouped,f.assignee_company_grouped_c
 from png_mdsdb.change_request_final change_request
-left join png_mdsdb.sys_user_final sugc on change_request.assigned_to=sugc.sys_id and change_request.sourceinstance=sugc.sourceinstance
-left join png_mdsdb.core_company_final succomp on sugc.company=succomp.sys_id and sugc.sourceinstance=succomp.sourceinstance
-join pngcrp_mdwdb.d_change_request d on change_request.sys_id=d.row_id and change_request.sourceinstance=d.source_id and change_request.cdctype<>'D' and change_request.state<>'4'
-join  pngcrp_mdwdb.d_change_failure f on d.row_key=f.change_request_key and d.source_id=f.source_id and f.current_flag='Y'
+left join png_mdsdb.sys_user_final sugc on change_request.assigned_to=sugc.sys_id and change_request.sourceinstance=sugc.sourceinstance and 
+ change_request.cdctype<>'D' and sugc.cdctype<>'D'
+left join png_mdsdb.core_company_final succomp on sugc.company=succomp.sys_id and sugc.sourceinstance=succomp.sourceinstance and succomp.cdctype<>'D'
+join png_mdwdb.d_change_request d on change_request.sys_id=d.row_id and change_request.sourceinstance=d.source_id and change_request.cdctype<>'D' and change_request.state<>'4'
+join  png_mdwdb.d_change_failure f on d.row_key=f.change_request_key and d.source_id=f.source_id and f.current_flag='Y'
 where coalesce(succomp.name,'UNSPECIFIED') in ('Infosys Technologies Limited',
 'Ernst & Young - Philippines',
 'Ernst & Young Philippines',

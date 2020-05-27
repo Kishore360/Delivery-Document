@@ -112,9 +112,10 @@ when coalesce(bs.name,'UNSPECIFIED')= 'UNSPECIFIED' then 'num_group_new_value'
 
 end   business_service_grouped,f.business_service_grouped_c
 from png_mdsdb.change_request_final change_request
-left join png_mdsdb.cmdb_ci_service_final as bs on change_request.business_service = bs.sys_id and change_request.sourceinstance = bs.sourceinstance
-join pngcrp_mdwdb.d_change_request d on change_request.sys_id=d.row_id and change_request.sourceinstance=d.source_id and change_request.cdctype<>'D' and change_request.state<>'4'
-join  pngcrp_mdwdb.d_change_failure f on d.row_key=f.change_request_key and d.source_id=f.source_id and f.current_flag='Y'
+left join png_mdsdb.cmdb_ci_service_final as bs on change_request.business_service = bs.sys_id and change_request.sourceinstance = bs.sourceinstance and 
+ change_request.cdctype<>'D' and bs.cdctype<>'D'
+join png_mdwdb.d_change_request d on change_request.sys_id=d.row_id and change_request.sourceinstance=d.source_id and change_request.cdctype<>'D' and change_request.state<>'4'
+join  png_mdwdb.d_change_failure f on d.row_key=f.change_request_key and d.source_id=f.source_id and f.current_flag='Y'
 where coalesce(bs.name,'UNSPECIFIED') in (
 'GBS Financial Management Services',
 'FSS-Forecasting & Reporting',
