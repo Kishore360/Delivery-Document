@@ -1,0 +1,1 @@
+select row_key,soft_deleted_flag,etl_run_number,row_id from #DWH_TABLE_SCHEMA.d_task_sla order by row_key;

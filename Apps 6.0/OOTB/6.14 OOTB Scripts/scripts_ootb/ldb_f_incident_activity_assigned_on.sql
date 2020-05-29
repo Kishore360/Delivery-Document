@@ -1,0 +1,2 @@
+select row_key,assigned_on,incident_key from ldb.f_incident_activity
+group by row_key,assigned_on,incident_key

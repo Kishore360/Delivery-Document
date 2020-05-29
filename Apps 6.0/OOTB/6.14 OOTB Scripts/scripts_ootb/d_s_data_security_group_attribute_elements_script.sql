@@ -1,0 +1,1 @@
+select row_key,soft_deleted_flag,etl_run_number,row_id from #DWH_TABLE_SCHEMA.d_s_data_security_group_attribute_elements order by row_key;

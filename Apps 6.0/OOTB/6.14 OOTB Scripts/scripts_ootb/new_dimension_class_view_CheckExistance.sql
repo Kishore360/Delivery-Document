@@ -1,0 +1,33 @@
+ select case when count(1)=30 then 'SUCCESS' else 'FAILURE' end as Result
+ ,case when count(1)=30 then 'SUCCESS' else 'View Unavailable' end as Message
+ from pg_views
+ where viewname in ('d_problem_task_reported_type',
+'d_problem_task_impact',
+'d_problem_task_priority',
+'d_problem_task_state',
+'d_problem_task_urgency',
+'d_change_request_reported_type',
+'d_change_request_impact',
+'d_change_request_urgency',
+'d_change_request_priority',
+'d_change_request_approval',
+'d_sc_req_item_approval',
+'d_sc_req_item_impact',
+'d_sc_req_item_urgency',
+'d_sc_req_item_priority',
+'d_hr_change_impact',
+'d_hr_change_priority',
+'d_hr_change_urgency',
+'d_sc_task_urgency',
+'d_sc_task_impact',
+'d_sc_task_priority',
+'d_sc_task_state',
+'d_problem_reported_type',
+'d_problem_impact',
+'d_problem_priority',
+'d_problem_urgency',
+'d_sc_request_urgency',
+'d_sc_request_approval',
+'d_sc_request_impact',
+'d_sc_request_priority' ,'d_hr_change_reported_type'
+)
