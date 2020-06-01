@@ -4,5 +4,5 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  LEFT JOIN firstam_mdwdb.d_problem TRGT 
  ON (SRC.sys_id=TRGT.row_id 
  AND SRC.sourceinstance=TRGT.source_id )
-WHERE CASE WHEN SRC.problem_state in (1,2,3) THEN 'Y' ELSE 'N' END <> TRGT.backlog_flag 
+WHERE CASE WHEN SRC.state in (-5,1,2,20,21,25,26,27,28,29,3,30) THEN 'Y' ELSE 'N' END <> TRGT.backlog_flag 
 

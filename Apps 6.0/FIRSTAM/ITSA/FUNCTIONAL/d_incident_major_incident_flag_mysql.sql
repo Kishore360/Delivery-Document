@@ -6,7 +6,7 @@
 from ( SELECT * FROM firstam_mdsdb.incident_final WHERE CDCTYPE<>'D') SRC 
 left join firstam_mdwdb.d_incident TRG 
 on (SRC.sys_id=TRG.row_id  AND SRC.sourceinstance=TRG.source_id )
-where coalesce(case when SRC.priority in (1) then 'Y' else 'N' end)  
+where coalesce(case when SRC.priority in (1,2,3) then 'Y' else 'N' end)  
 <> coalesce(TRG.major_incident_numerify_flag);
  
  

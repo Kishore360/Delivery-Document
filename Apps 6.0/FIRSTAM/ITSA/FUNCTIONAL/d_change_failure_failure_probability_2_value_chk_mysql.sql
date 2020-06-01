@@ -5,5 +5,5 @@ from
     sum(failure_probability_2) as failure_probability_2_value_chk
   --  sum(failure_probability_2 ) as failure_probability_2_value_chk, 
   --  sum( failure_probability_3 ) as failure_probability_3_value_chk
-from ge_mdwdb.d_change_failure
+from firstam_mdwdb.d_change_failure
 where cdctype<>'D')a
