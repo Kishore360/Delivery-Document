@@ -1,0 +1,28 @@
+d_h_all_hierarchies_lev_0_id_JIRA.sql
+d_h_all_hierarchies_lev_0_key_JIRA.sql
+d_h_all_hierarchies_lev_1_id_JIRA.sql
+d_h_all_hierarchies_lev_1_key_JIRA.sql
+d_h_all_hierarchies_lev_2_id_JIRA.sql
+d_h_all_hierarchies_lev_2_key_JIRA.sql
+d_h_all_hierarchies_lev_3_id_JIRA.sql
+d_h_all_hierarchies_lev_3_key_JIRA.sql
+d_h_all_hierarchies_lev_4_id_JIRA.sql
+d_h_all_hierarchies_lev_4_key_JIRA.sql
+d_h_all_hierarchies_lev_5_id_JIRA.sql
+d_h_all_hierarchies_lev_5_key_JIRA.sql
+d_h_all_hierarchies_lev_6_id_JIRA.sql
+d_h_all_hierarchies_lev_6_key_JIRA.sql
+d_h_all_hierarchies_row_id_JIRA.sql
+d_h_all_hierarchies_source_id_JIRA.sql
+Entire_script_hierarchy_Kunal_orig.sql
+Entire_script_hierarchy_new_logic_yet_to_do.sql
+filelist.txt
+hierarchy_base_final - Copy (2).sql
+hierarchy_base_final.sql
+hierarchy_base_final_1.sql
+hierarchy_base_final_2.sql
+hierarchy_base_final_3.sql
+hierarchy_base_final_4.sql
+hierarchy_base_final_5.sql
+Reference SQLs
+Validation SQLs
