@@ -1,0 +1,54 @@
+SELECT CAL_MONTH.month_name,CC.cost_center_name,D.name Skill,sum(F.abandoned_calls)
+from 
+(select b.agent_key,a.employee_key,a.abandoned_calls,a.skill_key,a.cost_center_key,a.day_key,
+a.soft_deleted_flag,a.group_lvl_key
+   FROM appsnb_cb_hs_mdwdb.f_agent_call_summary a
+   JOIN appsnb_cb_hs_mdwdb.d_internal_contact_organization b 
+   	ON a.employee_key = b.agent_key
+   AND a.pivot_date >= b.start_date AND a.pivot_date <= b.end_date
+  WHERE a.soft_deleted_flag = 'N'
+UNION 
+ SELECT c.employee_key,d.row_key,c.abandoned_calls,c.skill_key,c.cost_center_key,c.day_key,
+ c.soft_deleted_flag,c.group_lvl_key
+ FROM appsnb_cb_hs_mdwdb.f_agent_call_summary c
+   JOIN appsnb_cb_hs_mdwdb.d_internal_contact d
+   	ON c.employee_key = d.row_key 
+   AND c.pivot_date >= d.effective_from AND c.pivot_date <= d.effective_to
+  WHERE c.soft_deleted_flag = 'N') F
+ JOIN appsnb_cb_hs_mdwdb.d_skill D
+ on D.row_key= F.skill_key
+ JOIN appsnb_cb_hs_mdwdb.d_cost_center CC
+ on CC.row_key= F.cost_center_key
+ join (
+   select d_calendar_date.*
+   FROM appsnb_cb_hs_mdwdb.d_calendar_date d_calendar_date
+   LEFT JOIN appsnb_cb_hs_mdwdb.d_calendar_date prev_day 
+   	ON d_calendar_date.previous_day_key = prev_day.row_key
+   LEFT JOIN appsnb_cb_hs_mdwdb.d_calendar_date prev_week 
+   	ON d_calendar_date.previous_week_key = prev_week.row_key AND prev_week.row_key = prev_week.week_start_date_key
+   LEFT JOIN appsnb_cb_hs_mdwdb.d_calendar_date prev_month 
+   	ON d_calendar_date.previous_month_key = prev_month.row_key AND prev_month.row_key = prev_month.month_start_date_key
+   LEFT JOIN appsnb_cb_hs_mdwdb.d_calendar_date prev_quarter 
+   	ON d_calendar_date.previous_quarter_key = prev_quarter.row_key AND prev_quarter.row_key = prev_quarter.quarter_start_date_key
+   LEFT JOIN appsnb_cb_hs_mdwdb.d_calendar_date prev_year 
+   	ON d_calendar_date.previous_year_key = prev_year.row_key AND prev_year.row_key = prev_year.year_start_date_key
+) CAL_DATE
+on F.day_key = CAL_DATE.row_key
+join 
+(
+   select d_calendar_date.*
+   FROM appsnb_cb_hs_mdwdb.d_calendar_date d_calendar_date
+   LEFT JOIN appsnb_cb_hs_mdwdb.d_calendar_date prev_month ON d_calendar_date.previous_month_key = prev_month.row_key AND prev_month.row_key = prev_month.month_start_date_key
+   LEFT JOIN appsnb_cb_hs_mdwdb.d_calendar_date prev_quarter ON d_calendar_date.previous_quarter_key = prev_quarter.row_key AND prev_quarter.row_key = prev_quarter.quarter_start_date_key
+   LEFT JOIN appsnb_cb_hs_mdwdb.d_calendar_date prev_year ON d_calendar_date.previous_year_key = prev_year.row_key AND prev_year.row_key = prev_year.year_start_date_key
+   WHERE d_calendar_date.month_start_date_key = d_calendar_date.row_key AND d_calendar_date.source_id = 0
+) CAL_MONTH
+on CAL_DATE.month_start_date_key = CAL_MONTH.row_key
+JOIN appsnb_cb_hs_mdwdb.d_h_all_hierarchies d_h_all
+on (d_h_all.row_key = F.group_lvl_key
+  and d_h_all.hierarchy_class = 'SKILL' OR d_h_all.hierarchy_class = 'UNSPECIFIED' OR d_h_all.hierarchy_class = 'UNKNOWN'
+  AND d_h_all.current_flag = 'Y')
+where CAL_MONTH.lagging_count_of_month between 0 and 12
+and F.soft_deleted_flag ='N'
+group by CAL_MONTH.month_id,CAL_MONTH.month_name,CC.cost_center_name,D.name
+order by CAL_MONTH.month_id desc,CAL_MONTH.month_name,CC.cost_center_name,D.name

@@ -1,0 +1,16 @@
+SELECT `source_id`,
+    `subject_area`,
+    `full_extraction`,
+    `target_table`,
+    `column_name`,
+    `table_name`,
+    `isCustomized`,
+    `enable_flag`
+from #STAGE_TABLE_SCHEMA.lsm_ls_keyword_metadata order by `source_id`,
+    `subject_area`,
+    `full_extraction`,
+    `target_table`,
+    `column_name`,
+    `table_name`,
+    `isCustomized`,
+    `enable_flag`;

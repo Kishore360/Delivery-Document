@@ -1,0 +1,7 @@
+use #STG_TABLE_SCHEMA;
+
+insert into #STG_TABLE_SCHEMA.f_a_improvement_results_smpo_dppc_base
+(assigned_to_key, assignment_group_key, change_requests_lead_time, closed_change_failure_requests, closed_incidents, closed_problem_tasks, closed_request_items, incident_met_all_slas, incident_open_to_resolve_duration, month_start_date, month_key, opened_change_requests, opened_incidents, opened_problems, opened_request_items, overdue_change_requests, overdue_problem_tasks, pending_incidents, pending_request_items, problem_age, problem_tasks_met_all_slas, request_items_met_all_slas, request_items_open_to_close_duration, resolved_incidents, sys_id, soft_deleted_flag, source_id, successful_change_failure_requests, to_delete_flag, inserted_on, updated_on)
+
+select assigned_to_key, assignment_group_key, change_requests_lead_time, closed_change_failure_requests, closed_incidents, closed_problem_tasks, closed_request_items, incident_met_all_slas, incident_open_to_resolve_duration, month_start_date, month_key, opened_change_requests, opened_incidents, opened_problems, opened_request_items, overdue_change_requests, overdue_problem_tasks, pending_incidents, pending_request_items, problem_age, problem_tasks_met_all_slas, request_items_met_all_slas, request_items_open_to_close_duration, resolved_incidents, sys_id, soft_deleted_flag, source_id, successful_change_failure_requests, to_delete_flag, inserted_on, updated_on
+from #STG_TABLE_SCHEMA.f_a_improvement_results_smpo_dppc_curr_mn;
