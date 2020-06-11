@@ -1,0 +1,23 @@
+SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+ CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for f_work_item_burn_down.story_points_burn' ELSE 'SUCCESS' END as Message
+
+/*select TRGT.row_id, SRC.work_item_key, SRC.source_id,
+  COALESCE(SRC.story_points_burn,0) sr, COALESCE(TRGT.story_points_burn ,'') tg*/
+FROM (
+ select SR.work_item_key, SR.source_id, SR.burn_on_key burn_on_key, max(coalesce(LKP.primary_sequence_id,0)) max_primary_sequence_id, COALESCE(LKP.task_attribute_wh_new_value,0) story_points_burn, SR.sys_id
+ from #STG_TABLE_SCHEMA.burn_down_temp_azure SR
+ left join #DWH_TABLE_SCHEMA.f_work_item_activity LKP
+ on SR.work_item_key = LKP.work_item_key
+ and SR.source_id = LKP.source_id
+ and LKP.task_attribute_wh_name = 'STORY POINTS'
+ and SR.burn_on_key >= LKP.started_on_key
+ and SR.burn_on_key < IF(COALESCE(LKP.ended_on_key,0)=0,'99991231',LKP.ended_on_key)
+group by SR.work_item_key, SR.source_id, SR.burn_on_key
+ ) SRC
+
+LEFT JOIN #DWH_TABLE_SCHEMA.f_work_item_burn_down TRGT 
+-- ON (SRC.work_item_key = TRGT.work_item_key and SRC.burn_on_key = TRGT.work_item_burn_date_key
+ON (SRC.sys_id = TRGT.row_id
+AND SRC.source_id=TRGT.source_id)
+ 
+WHERE TRGT.soft_deleted_flag = 'N' and COALESCE(round(SRC.story_points_burn,10),0) <> COALESCE(TRGT.story_points_burn ,'');

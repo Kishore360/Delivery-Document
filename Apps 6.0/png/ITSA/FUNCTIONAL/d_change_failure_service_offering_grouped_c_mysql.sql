@@ -340,10 +340,11 @@ when coalesce(so.name,'UNSPECIFIED')= 'PGNetwork' then 'PGNetwork'
 when coalesce(so.name,'UNSPECIFIED')= 'RTCIS' then 'RTCIS'
 end service_offering_grouped,f.service_offering_grouped_c 
 FROM png_mdsdb.change_request_final change_request
- join png_mdsdb.service_offering_final as so on change_request.service_offering = so.sys_id and change_request.sourceinstance = so.sourceinstance
+ join png_mdsdb.service_offering_final as so on change_request.service_offering = so.sys_id and change_request.sourceinstance = so.sourceinstance and 
+ change_request.cdctype<>'D' and so.cdctype<>'D'
 
-join pngcrp_mdwdb.d_change_request d on change_request.sys_id=d.row_id and change_request.sourceinstance=d.source_id and change_request.cdctype<>'D' and change_request.state<>'4'
-join  pngcrp_mdwdb.d_change_failure f on d.row_key=f.change_request_key and d.source_id=f.source_id and f.current_flag='Y'
+join png_mdwdb.d_change_request d on change_request.sys_id=d.row_id and change_request.sourceinstance=d.source_id and change_request.cdctype<>'D' and change_request.state<>'4'
+join  png_mdwdb.d_change_failure f on d.row_key=f.change_request_key and d.source_id=f.source_id and f.current_flag='Y'
 where coalesce(so.name,'UNSPECIFIED') in ('Global Manufacturing Insights (GMIP)',
 'Security Architecture',
 'ISES Planning - Initiative Planning',

@@ -1,0 +1,1 @@
+CALL `app_test`.`MySQLData`('#TABLE_NAME', '#DWH_TABLE_SCHEMA');

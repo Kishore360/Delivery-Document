@@ -1,0 +1,4 @@
+select count(fi.row_key)from integratedfull_mdwdb.f_incident fi
+join integratedfull_mdwdb.d_incident di
+on fi.incident_key = di.row_key
+where di.first_call_resolution_flag = 'Y'
