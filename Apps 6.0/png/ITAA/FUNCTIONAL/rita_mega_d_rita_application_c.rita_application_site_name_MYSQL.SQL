@@ -27,3 +27,4 @@ AND TRGT.soft_deleted_flag ='N'
 ) temp;
 
 
+-- DELV-24355 changes to Snow as part of DELV-24355 request
