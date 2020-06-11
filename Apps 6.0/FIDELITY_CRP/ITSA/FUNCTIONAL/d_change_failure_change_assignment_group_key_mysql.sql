@@ -9,4 +9,4 @@ left join (SELECT * FROM fidelity_mdwdb.d_change_failure where year(effective_to
  ON ( CONCAT('GROUP~', SRC.assignment_group) = LKP.row_id 
  
 AND SRC.sourceinstance = LKP.source_id )
- WHERE COALESCE(LKP.row_key,CASE WHEN SRC.assignment_group IS NULL THEN 0 else '-1' end)<> COALESCE(TRGT.change_assignment_group_key,'')
+ WHERE COALESCE(LKP.row_key,CASE WHEN SRC.assignment_group IS NULL THEN 0 else '-1' end)<> (TRGT.change_assignment_group_key)
