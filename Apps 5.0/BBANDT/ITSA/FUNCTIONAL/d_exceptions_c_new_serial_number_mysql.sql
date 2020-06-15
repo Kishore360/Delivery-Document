@@ -7,8 +7,3 @@ on a.sys_id=b.row_id and a.sourceinstance=b.source_id
 where a.u_new_serial_number<>b.new_serial_number
 and a.cdctype='X';
 
-/*Failing for one record 
-source
-WS-R900KZ02
-target
-WS-R90LMX4F */

@@ -12,4 +12,3 @@ ON COALESCE(CONCAT('APPID-',REPLACE(UPPER(SRC1.u_archer_id),'APPID-','')),'UNSPE
  WHERE COALESCE(LKP.row_key,CASE WHEN SRC1.u_archer_id IS NULL THEN 0 ELSE -1 END)<>TRGT.application_archer_c_key
  and SRC.cdctype='X';
  
- /*mismatch for 841 records matching for 359447 records*/
