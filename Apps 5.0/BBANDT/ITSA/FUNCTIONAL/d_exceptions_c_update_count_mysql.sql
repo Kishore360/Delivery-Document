@@ -8,4 +8,4 @@ where COALESCE(a.sys_mod_count,0) <>b.update_count
 and a.cdctype='X';
 
 
--- not matching for 97 records, matching for  310317 records
+

@@ -6,4 +6,4 @@ select count(1) as cnt
 from bbandt_mdsdb.change_request_final a
  left  JOIN   bbandt_mdwdb.d_change_request b
 on  b.ROW_ID=a.SYS_ID and a.sourceinstance=b.source_id
- where a.u_test_results <> b.test_results_c) temp;
+ where a.u_test_results <> b.test_results_c and a.cdctype='X') temp;
