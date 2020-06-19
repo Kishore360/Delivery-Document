@@ -1,5 +1,5 @@
 SELECT CASE WHEN count(1)  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)  THEN 'MDS to DWH data validation failed for d_internal_contact.email_address' ELSE 'SUCCESS' END as Message 
-FROM (select * from   mcdonalds_mdsdb.sc_req_item_final where cdctype<>'D') SRC
+FROM (select request,sys_id,sourceinstance,cdctime from   mcdonalds_mdsdb.sc_req_item_final where cdctype<>'D') SRC
 left join mcdonalds_mdsdb.sc_request_final LKP1 on SRC.request=LKP1.sys_id and SRC.sourceinstance=LKP1.sourceinstance
 left join mcdonalds_mdsdb.sys_user_final LKP2 on LKP1.requested_for=LKP2.sys_id and SRC.sourceinstance=LKP2.sourceinstance
 join mcdonalds_mdwdb.f_request_item f on SRC.sys_id=f.row_id and SRC.sourceinstance=f.source_id

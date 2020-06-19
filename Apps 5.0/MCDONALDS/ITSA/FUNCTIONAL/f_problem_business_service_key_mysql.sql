@@ -5,6 +5,6 @@ RIGHT JOIN mcdonalds_mdsdb.problem_final src
 on src.sys_id = trgt.row_id and src.sourceinstance = trgt.source_id
 LEFT JOIN mcdonalds_mdwdb.d_service lkp
 ON COALESCE(CONCAT('BUSINESS_SERVICE~',u_business_service),'UNSPECIFIED') =lkp.row_id and src.sourceinstance = lkp.source_id
-where COALESCE(lkp.row_key,CASE WHEN src.u_business_service IS NULL THEN 0 else -1 end)<> trgt.business_service_key
+where COALESCE(lkp.row_key,CASE WHEN src.u_business_service IS NULL THEN 0 else -1 end)<> trgt.business_service_c_key
 and src.cdctype='X'
 ;
