@@ -9,14 +9,10 @@ select count(1) cnt from
 select  CASE WHEN src.sys_class_name ='sc_task' 
 			THEN CONVERT_TZ(src.sys_created_on,'GMT','America/New_York')
 			ELSE CONVERT_TZ(src.opened_at,'GMT','America/New_York')
-			END
+			END opened_on_src
 			, opened_on
 FROM gilead_mdwdb.d_task trgt
  JOIN gilead_mdsdb.task_final src
-on src.sys_id = trgt.row_id and src.sourceinstance = trgt.source_id and src.sys_class_name ='sc_task' 
-WHERE  CASE WHEN src.sys_class_name ='sc_task' 
-			THEN CONVERT_TZ(src.sys_created_on,'GMT','America/New_York')
-			ELSE CONVERT_TZ(src.opened_at,'GMT','America/New_York')
-			END
-			<> opened_on)a)b
+on src.sys_id = trgt.row_id and src.sourceinstance = trgt.source_id and src.sys_class_name ='sc_task' )a
+WHERE opened_on_src<> opened_on)b
 ;

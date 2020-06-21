@@ -3,7 +3,7 @@ CASE WHEN count(1)  THEN 'MDS to DWH data validation failed for d_incident.u_sit
 FROM mcdonalds_mdsdb.incident_final  SRC 
 JOIN mcdonalds_mdwdb.d_incident TRGT 
 ON (SRC.sys_id = TRGT.row_id  
-AND SRC.sourceinstance = TRGT.source_id )  
+AND SRC.sourceinstance = TRGT.source_id and SRC.cdctype<>'D' )  
 LEFT JOIN mcdonalds_mdwdb.d_lov LKP 
 ON ( concat( 'U_SITUATION_C~INCIDENT~~~' ,upper( SRC.u_situation)) = LKP.row_id  
 AND SRC.sourceinstance = LKP.source_id )  

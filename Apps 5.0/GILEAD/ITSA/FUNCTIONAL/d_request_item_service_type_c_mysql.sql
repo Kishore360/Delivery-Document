@@ -4,11 +4,11 @@ ELSE 'Data Matched' END AS Message  from (
 select count(1) cnt from 
 (select a.value,d.sys_id,d.sourceinstance from gilead_mdsdb.sc_req_item_final d join 
 gilead_mdsdb.sc_item_option_mtom_final c
-on c.request_item = d.sys_id
+on c.request_item = d.sys_id and c.sourceinstance=d.sourceinstance
 join gilead_mdsdb.sc_item_option_final a
-on c.sc_item_option = a.sys_id 
+on c.sc_item_option = a.sys_id and c.sourceinstance=a.sourceinstance
 join gilead_mdsdb.item_option_new_final b
-on b.sys_id = a.item_option_new
+on b.sys_id = a.item_option_new and b.sourceinstance=a.sourceinstance
 where b.sys_id='88c14d17379f4600580265e2b3990e9d')src
 left join gilead_mdwdb.d_request_item TRGT
 on src.sys_id= TRGT.row_id
