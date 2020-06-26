@@ -1,3 +1,6 @@
+
+-- The logic has been changed from Mega file to Snow as part of DELV-24355
+
 SELECT 
 CASE WHEN CNT > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 CASE WHEN CNT > 0 THEN 'MDS to DWH data validation failed for d_rita_application_c.rita_application_site_name' ELSE 'SUCCESS' END as Message
