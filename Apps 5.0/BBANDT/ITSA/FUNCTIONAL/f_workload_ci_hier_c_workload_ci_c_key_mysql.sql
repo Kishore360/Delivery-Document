@@ -7,10 +7,8 @@ FROM
 JOIN bbandt_mdsdb.cmdb_ci_final a12 
 on a11.child = a12.sys_id and a11.sourceinstance = a12.sourceinstance
 join bbandt_mdwdb.f_workload_ci_hier_c trgt
-on  CONCAT(a11.parent,'~',a11.child)
+on  CONCAT(a11.parent,'~',a11.child)=trgt.row_id and a12.sourceinstance=trgt.source_id
 join bbandt_workdb.d_configuration_item lkp 
 on a11.parent=lkp.row_id 
 where coalesce(lkp.row_key,case when a11.parent is NULL then 0 else -1 end)<>trgt.workload_ci_c_key
 and a12.cdctype='X';
-
-/*code not clear...uses workdb table*/

@@ -7,8 +7,6 @@ FROM
 JOIN bbandt_mdsdb.cmdb_ci_final a12 
 on a11.child = a12.sys_id and a11.sourceinstance = a12.sourceinstance
 join bbandt_mdwdb.f_workload_ci_hier_c trgt
-on  CONCAT(a11.parent,'~',a11.child)
+on  CONCAT(a11.parent,'~',a11.child)=trgt.row_id and a12.sourceinstance=trgt.source_id
 where CONVERT_TZ(a12.sys_created_on,'GMT','America/New_York')<>trgt.pivot_date
 and a12.cdctype='X';
-
-/*code not clear...uses workdb table*/

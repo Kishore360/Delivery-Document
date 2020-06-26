@@ -11,4 +11,4 @@ where ci.sys_class_name in('cmdb_ci_application_software','cmdb_ci_inf_software'
 and ci.install_status = 1 and ci.operational_status = 1 and ci.cdctype = 'X' and lob.cdctype='X'
 group by 1,2)src
 on tgt.app_id=src.archer_id and src.sourceinstance=tgt.source_id
-where COALESCE(src.Tier_rating,'UNSPECIFIED')<>tgt.tier and tgt.current_flag='Y'  and tgt.soft_deleted_flag='N';
+where COALESCE(src.Tier_rating,'UNSPECIFIED')<>tgt.tier and tgt.current_flag='Y'  and tgt.soft_deleted_flag='Y';
