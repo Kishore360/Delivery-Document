@@ -2,7 +2,7 @@ SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
 ,CASE WHEN cnt > 0 THEN 'Data did not Match.' 
 ELSE 'Data Matched' END AS Message 
 FROM (select
-count(*) as cnt
+count(1) as cnt
 from  watson_mdsdb.problem_final a11
 left join watson_mdwdb.d_lov d on d.row_id=concat('AFFECTED_ACTIVITY_C~PROBLEM~~~',u_affected_activity)
  join watson_mdwdb.d_problem  a12

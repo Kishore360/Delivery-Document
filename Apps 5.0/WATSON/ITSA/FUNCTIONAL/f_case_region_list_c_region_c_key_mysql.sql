@@ -1,7 +1,6 @@
 
- SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
- CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for f_change_request_final_region_list_c.pivot_date' ELSE 'SUCCESS' END as Message
- from watson_mdsdb.sn_customer_service_case_final  a
+ SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+ CASE WHEN cnt >0 THEN 'MDS to DWH data validation failed for f_problem_region_list_c.pivot_date' ELSE 'SUCCESS' END as Message from ( select count(1) cnt  from watson_mdsdb.sn_customerservice_case_final  a
  JOIN
 (SELECT a.N + b.N * 10 + 1 AS n
 FROM
@@ -9,10 +8,12 @@ FROM
  (SELECT 0 AS N UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9) b
 ORDER BY n) n
 ON n.n <= 1 + (LENGTH(COALESCE(TRIM(a.u_region_list),'UNSPECIFIED')) - LENGTH(REPLACE(COALESCE(TRIM(a.u_region_list),'UNSPECIFIED'), ',', '')))
- left join watson_mdwdb.d_region_c d on 
+ left join watson_mdwdb.d_region_c d  
+   ON (COALESCE(SUBSTRING_INDEX(SUBSTRING_INDEX(TRIM(a.u_region_list), ',', n.n), ',', -1),'UNSPECIFIED')= d.row_id 
+AND a.sourceinstance= d.source_id )
  left join watson_mdwdb.f_case_region_list_c b
  on  CONCAT(a.sys_id,'~',COALESCE(SUBSTRING_INDEX(SUBSTRING_INDEX(TRIM(a.u_region_list), ',', n.n), ',', -1),'UNSPECIFIED')) =b.row_id  
- where  coalesce(d.row_key,case when u_region_list is null then 0 else -1 end)<>b.region_c_key
+ where  coalesce(d.row_key,case when u_region_list is null then 0 else -1 end)<>b.region_c_key)a
  
  
  

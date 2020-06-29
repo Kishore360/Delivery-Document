@@ -5,7 +5,8 @@ watson_mdwdb.d_task_tag_c a
 JOIN watson_mdsdb.label_entry_final b
 ON a.row_id = b.sys_id and a.source_id = b.sourceinstance 
 LEFT JOIN watson_mdsdb.label_final c
-ON b.label = c.sys_id
+ON b.label = c.sys_id  AND c.sourceinstance = b.sourceinstance
+AND b.CDCTYPE <> 'D'
 
 where
 a.tag_name <> c.name and b.CDCTYPE <>'D';

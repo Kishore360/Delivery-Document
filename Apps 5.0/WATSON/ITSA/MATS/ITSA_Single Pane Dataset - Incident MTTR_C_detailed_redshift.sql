@@ -34,8 +34,9 @@ select 'ldb.d_lov_segment_type_c a17 ' as Table_name, count(a11.row_key) Row_Cou
 from ldb.f_incident_resolved a11
 join ldb.d_segment_c a13
 on (a11.segment_c_key = a13.row_key) join ldb.d_incident a12
-on (a11.incident_key = a12.row_key) join ldb.d_incident_state a13
-on (a12.state_src_key = a13.row_key)
+on (a11.incident_key = a12.row_key) 
+join ldb.d_incident_state a133
+on (a12.state_src_key = a133.row_key)
 join ldb.d_lov_segment_type_c a17
 on (a13.segment_type_c_key = a17.row_key)
 union
