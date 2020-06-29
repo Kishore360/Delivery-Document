@@ -1,7 +1,7 @@
 select 
 CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for f_application_infra_c.infrastructure_extended_eos_score' ELSE 'SUCCESS' END as Message
- from truist_mdwdb.f_application_infra_c 
+ from truist_mdwdb.d_application_infra_c 
  where CASE WHEN db_extended_end_of_support_health='WHITE' and ws_extended_end_of_support_health='WHITE' and os_extended_end_of_support_health='WHITE' 
 then 'WHITE'
 WHEN db_extended_end_of_support_health='RED' or ws_extended_end_of_support_health='RED' or os_extended_end_of_support_health='RED' 

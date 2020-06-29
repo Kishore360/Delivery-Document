@@ -10,5 +10,5 @@ AND fieldname =  'priority' and oldvalue is not null and newvalue is not null
 )a group by a.documentkey
 )b
  join truist_mdsdb.incident_final c on b.documentkey=c.sys_id 
-join truist_mdwdb.d_incident d on c.sys_id = d.row_id and c.sourceinstance = d. source_id
-) e where priority_downgraded_c_flag <> target and c.cdctype<>'D';
+join truist_mdwdb.d_incident d on c.sys_id = d.row_id and c.sourceinstance = d. source_id and c.cdctype<>'D'
+) e where priority_downgraded_c_flag <> target ;
