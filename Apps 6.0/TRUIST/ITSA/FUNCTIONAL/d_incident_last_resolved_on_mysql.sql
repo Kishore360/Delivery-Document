@@ -4,11 +4,6 @@ CASE WHEN cnt >0 THEN 'MDS to DWH data validation failed for d_incident.last_res
 select count(1) as cnt  FROM (select * from truist_mdsdb.incident_final where cdctype<>'D')  SRC  
  JOIN truist_mdwdb.d_incident TRGT  
 ON (SRC.sys_id =TRGT.row_id   AND SRC.sourceinstance= TRGT.source_id  )
- join truist_mdwdb.f_incident f on f.incident_key=TRGT.row_key
-JOIN truist_mdwdb.d_lov_map dlm 
-ON f.state_src_key = dlm.src_key
- WHERE 
-case when
- dlm.dimension_wh_code = 'RESOLVED' then 
- convert_tz(SRC.resolved_at,'GMT','America/New_York') else null end 
+WHERE 
+convert_tz(SRC.resolved_at,'GMT','America/New_York')  
 <> TRGT.last_resolved_on)x
