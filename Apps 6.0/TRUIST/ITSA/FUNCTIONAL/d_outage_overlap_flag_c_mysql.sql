@@ -1,6 +1,6 @@
 SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for d_outage.overlap_flag_c' ELSE 'SUCCESS' END as Message
-FROM bbandt_mdwdb.d_outage a
+FROM truist_mdwdb.d_outage a
 join(
 select outage_key_main as outage_key,max(flg) as overlap_flag_c
 from (select a.application_archer_c_key,a.outage_key as outage_key_main,a.calendar_date,a.modified_start_on,a.modified_end_on,b.outage_key,b.modified_start_on as modified_start_on_1,
@@ -41,10 +41,10 @@ end as outage_duration,
 b.archer_id_c_key as archer_id_c_key1,
 b.priority_c as priority_c,
 b.incident_key as incident_key
-from bbandt_mdwdb.d_outage a ,
- bbandt_mdwdb.f_outage b ,
- bbandt_mdwdb.d_archer_application_c c,
- bbandt_mdwdb.d_calendar_date d
+from truist_mdwdb.d_outage a ,
+ truist_mdwdb.f_outage b ,
+ truist_mdwdb.d_archer_application_c c,
+ truist_mdwdb.d_calendar_date d
  where 1=1
 and a.row_key = b.outage_key
 and b.application_archer_c_key = c.row_key
@@ -80,10 +80,10 @@ end as outage_duration,
 b.archer_id_c_key as archer_id_c_key1,
 b.priority_c as priority_c,
 b.incident_key as incident_key
-from bbandt_mdwdb.d_outage a ,
- bbandt_mdwdb.f_outage b ,
- bbandt_mdwdb.d_archer_application_c c,
- bbandt_mdwdb.d_calendar_date d
+from truist_mdwdb.d_outage a ,
+ truist_mdwdb.f_outage b ,
+ truist_mdwdb.d_archer_application_c c,
+ truist_mdwdb.d_calendar_date d
  where 1=1
 and a.row_key = b.outage_key
 and b.application_archer_c_key = c.row_key
