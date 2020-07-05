@@ -9,7 +9,7 @@ and SRC.sourceinstance = lkp.sourceinstance
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
 LEFT JOIN truist_mdwdb.d_calendar_date LKP1 
-on (LKP1.row_id = date_format(CONVERT_TZ(SRC.due_date,'GMT','America/Los_Angeles'),'%Y%m%d')  and LKP1.source_id=0
+on (LKP1.row_id = date_format(CONVERT_TZ(SRC.due_date,'GMT','America/New_York'),'%Y%m%d')  and LKP1.source_id=0
 )
 WHERE coalesce(LKP1.row_key,-99) <> coalesce(TRGT.due_on_key,-99)
  and ((lkp.name not like 'ITSM-LOB-Branchinfo%' and name not like 'ITSM-LOB-HumanSystems%' and name not like 'ITSM-LOB-CPS%'

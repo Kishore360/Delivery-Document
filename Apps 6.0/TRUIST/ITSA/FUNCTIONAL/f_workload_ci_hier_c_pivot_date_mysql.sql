@@ -8,5 +8,5 @@ JOIN truist_mdsdb.cmdb_ci_final a12
 on a11.child = a12.sys_id and a11.sourceinstance = a12.sourceinstance
 join truist_mdwdb.f_workload_ci_hier_c trgt
 on  CONCAT(a11.parent,'~',a11.child)=trgt.row_id and a12.sourceinstance=trgt.source_id
-where CONVERT_TZ(a12.sys_created_on,'GMT','America/Los_Angeles')<>trgt.pivot_date
+where CONVERT_TZ(a12.sys_created_on,'GMT','America/New_York')<>trgt.pivot_date
 and a12.cdctype='X';

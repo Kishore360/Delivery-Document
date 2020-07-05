@@ -12,5 +12,5 @@ JOIN
 ON n.n <= 1 + (LENGTH(COALESCE(TRIM(u_group_coordinated_with),'UNSPECIFIED')) - LENGTH(REPLACE(COALESCE(TRIM(u_group_coordinated_with),'UNSPECIFIED'), ',', '')))
 join truist_mdwdb.f_group_coordinated_with_c b
 on CONCAT(sys_id,'~',COALESCE(SUBSTRING_INDEX(SUBSTRING_INDEX(TRIM(u_group_coordinated_with), ',', n.n), ',', -1),'UNSPECIFIED'))=b.row_id and a.sourceinstance=b.source_id
-where CONVERT_TZ(sys_updated_on,'GMT','America/Los_Angeles') <> b.pivot_date
+where CONVERT_TZ(sys_updated_on,'GMT','America/New_York') <> b.pivot_date
 and a.cdctype='X';

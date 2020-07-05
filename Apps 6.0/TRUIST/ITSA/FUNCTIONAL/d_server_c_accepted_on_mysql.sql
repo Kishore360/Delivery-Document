@@ -4,4 +4,4 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  LEFT JOIN truist_mdwdb.d_server_c TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
- WHERE CONVERT_TZ (SRC.u_accepted,'GMT','America/Los_Angeles')<> TRGT.accepted_on
+ WHERE CONVERT_TZ (SRC.u_accepted,'GMT','America/New_York')<> TRGT.accepted_on

@@ -4,6 +4,6 @@ CASE WHEN CNT > 0 THEN 'MDS to DWH Data Validation Failed for d_problem_task.u_p
 FROM (SELECT Count(1) as CNT 
 FROM truist_mdsdb.problem_task_final SRC 
 JOIN truist_mdwdb.d_problem_task TRGT ON (SRC.sys_id=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id)
-WHERE CONVERT_TZ (SRC.u_problem_task_actual_date,'GMT','America/Los_Angeles')<>TRGT.u_problem_task_actual_date_c
+WHERE CONVERT_TZ (SRC.u_problem_task_actual_date,'GMT','America/New_York')<>TRGT.u_problem_task_actual_date_c
 )temp; 
 
