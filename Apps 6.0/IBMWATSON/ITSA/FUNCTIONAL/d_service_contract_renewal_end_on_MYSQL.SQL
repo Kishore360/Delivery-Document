@@ -6,5 +6,5 @@ LEFT JOIN ibmwatson_mdwdb.d_service_contract TRGT
 	ON (SRC.sys_id =TRGT.row_id 
 	AND SRC.sourceinstance =TRGT.source_id )
 WHERE SRC.account is not null AND
-COALESCE(date_format(convert_tz(SRC.renewal_end_date,'GMT','America/New_York'),'%Y%m%d'),'')<> 
+COALESCE(date_format(convert_tz(SRC.renewal_end_date,'GMT','UTC'),'%Y%m%d'),'')<> 
 COALESCE(date_format(TRGT.renewal_end_on,'%Y%m%d'),'')

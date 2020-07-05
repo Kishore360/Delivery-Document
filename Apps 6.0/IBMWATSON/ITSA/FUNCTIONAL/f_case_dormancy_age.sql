@@ -15,5 +15,5 @@ FROM  ibmwatson_mdsdb.sn_customerservice_case_final SRC
  )
 where lm.dimension_class = 'STATE~CASE'
 AND  CASE WHEN lm.dimension_wh_code = 'OPEN' THEN TIMESTAMPDIFF( DAY,coalesce(SRC.sys_updated_on,0),
-convert_tz(df.lastupdated, 'GMT','America/New_York'))
+convert_tz(df.lastupdated, 'GMT','UTC'))
 	ELSE 0 END <> TRGT.dormancy_age

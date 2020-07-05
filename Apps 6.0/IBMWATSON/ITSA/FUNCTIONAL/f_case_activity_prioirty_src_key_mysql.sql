@@ -5,6 +5,6 @@ LEFT JOIN ibmwatson_mdwdb.f_case TRGT
 	ON (SRC.sys_id =TRGT.row_id 
 	AND SRC.sourceinstance =TRGT.source_id )
 LEFT JOIN ibmwatson_mdwdb.d_lov LKP 
-	ON ( coalesce(concat('TICKET_PRIORITY_C~CASE~~~',SRC.u_ticket_priority),'UNSPECIFIED') = LKP.row_id
+	ON ( coalesce(concat('TICKET_PRIORITY_C~CASE~',SRC.u_ticket_priority),'UNSPECIFIED') = LKP.row_id
 	AND SRC.sourceinstance=LKP.source_id)
 WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_ticket_priority IS NULL THEN 0 else '-1' end)<> COALESCE(TRGT.ticket_priority_src_c_key ,'')

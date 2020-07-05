@@ -6,4 +6,4 @@ LEFT JOIN ibmwatson_mdwdb.d_service_contract TRGT
 	ON (SRC.sys_id =TRGT.row_id 
 	AND SRC.sourceinstance =TRGT.source_id )
 WHERE SRC.account is not null AND
-convert_tz(SRC.sys_updated_on,'GMT','America/New_York')<> TRGT.changed_on 
+convert_tz(SRC.sys_updated_on,'GMT','UTC')<> TRGT.changed_on 

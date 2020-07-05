@@ -5,7 +5,7 @@ FROM
 (
 select count(1)cnt 
 from ibmwatson_mdsdb.problem_final a
-left join ibmwatson_mdwdb.d_problem b  on sys_id=row_id and b.source_id=2
+left join ibmwatson_mdwdb.d_problem b  on sys_id=row_id and b.source_id=2 and a.cdctype<>'D'
 left join ibmwatson_mdwdb.d_incident c on a.u_incident=c.row_id and c.source_id=2
-coalesce(c.row_key,case when u_incident is null then 0 else -1 end )<>rca_incident_c_key)a
+where coalesce(c.row_key,case when u_incident is null then 0 else -1 end )<>coalesce(rca_incident_c_key,0))a
 

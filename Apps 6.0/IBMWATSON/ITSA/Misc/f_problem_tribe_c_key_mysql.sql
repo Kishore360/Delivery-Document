@@ -1,8 +1,4 @@
 
-
-
---
-
 SELECT CASE WHEN count > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
 ,CASE WHEN count > 0 THEN 'Data did not Match.' 
 ELSE 'Data Matched' END AS Message 

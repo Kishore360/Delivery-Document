@@ -6,7 +6,7 @@ LEFT JOIN ibmwatson_mdwdb.d_case TRGT
 	ON (SRC.sys_id =TRGT.row_id 
 	AND SRC.sourceinstance =TRGT.source_id )
 LEFT JOIN ibmwatson_mdwdb.d_lov LKP 
-	ON ( coalesce(concat('PRIORITY~CASE~~~',SRC.priority),'UNSPECIFIED') = LKP.row_id
+	ON ( coalesce(concat('PRIORITY~CASE~',SRC.priority),'UNSPECIFIED') = LKP.row_id
 	AND SRC.sourceinstance=LKP.source_id AND dimension_class ='PRIORITY~CASE')
 WHERE TRGT.row_key not in (0, -1) and 
-COALESCE(LKP.row_key,CASE WHEN SRC.priority IS NULL THEN 0 else '-1' end)<> COALESCE(TRGT.priority_src_key ,'')
+COALESCE(LKP.row_key,CASE WHEN SRC.priority IS NULL THEN 0 else '-1' end)<> TRGT.priority_src_key 

@@ -6,7 +6,7 @@ LEFT JOIN ibmwatson_mdwdb.d_case TRGT
 	ON (SRC.sys_id =TRGT.row_id 
 	AND SRC.sourceinstance =TRGT.source_id )
 LEFT JOIN ibmwatson_mdwdb.d_lov LKP 
-	ON ( coalesce(concat('IMPACT~CASE~~~',SRC.impact),'UNSPECIFIED') = LKP.row_id
+	ON ( coalesce(concat('IMPACT~CASE~',SRC.impact),'UNSPECIFIED') = LKP.row_id
 	AND SRC.sourceinstance=LKP.source_id AND dimension_class ='IMPACT~CASE')
 WHERE TRGT.row_key not in (0, -1) and 
 COALESCE(LKP.row_key,CASE WHEN SRC.impact IS NULL THEN 0 else '-1' end)<> COALESCE(TRGT.impact_src_key ,'')

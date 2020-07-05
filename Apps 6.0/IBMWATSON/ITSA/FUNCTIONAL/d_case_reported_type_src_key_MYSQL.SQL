@@ -6,7 +6,7 @@ LEFT JOIN ibmwatson_mdwdb.d_case TRGT
 	ON (SRC.sys_id =TRGT.row_id 
 	AND SRC.sourceinstance =TRGT.source_id )
 LEFT JOIN ibmwatson_mdwdb.d_lov LKP 
-	ON ( coalesce(concat('REPORTED_TYPE~CASE~~~',SRC.contact_type),'UNSPECIFIED') = LKP.row_id
+	ON ( coalesce(concat('REPORTED_TYPE~CASE~',SRC.contact_type),'UNSPECIFIED') = LKP.row_id
 	AND SRC.sourceinstance=LKP.source_id AND dimension_class ='REPORTED_TYPE~CASE')
 WHERE TRGT.row_key not in (0, -1) and 
 COALESCE(LKP.row_key,CASE WHEN SRC.contact_type IS NULL THEN 0 else '-1' end)<> COALESCE(TRGT.reported_type_src_key ,'')

@@ -5,7 +5,7 @@ left join ibmwatson_mdwdb.d_internal_contact lkp
 on concat('INTERNAL_CONTACT~',contact) =lkp.row_id
 join ibmwatson_mdwdb.f_case f 
 on src.sys_id=f.row_id and src.sourceinstance=f.source_id
-where f.contact_c_key <>coalesce(lkp.row_key,case when contact is null then 0 else -1 end );
+where f.case_contact_c_key <>coalesce(lkp.row_key,case when contact is null then 0 else -1 end );
 
 
 

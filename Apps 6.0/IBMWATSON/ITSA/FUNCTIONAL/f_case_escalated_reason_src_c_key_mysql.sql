@@ -5,8 +5,8 @@ LEFT JOIN ibmwatson_mdwdb.f_case TRGT
 	ON (SRC.sys_id =TRGT.row_id 
 	AND SRC.sourceinstance =TRGT.source_id )
 LEFT JOIN ibmwatson_mdwdb.d_lov LKP 
-	ON ( coalesce(concat('ESCALATED_REASON_C~CASE~~~',SRC.u_escalated_reason),'UNSPECIFIED') = LKP.row_id
+	ON ( concat('ESCALATED_REASON_C~CASE~',SRC.u_escalated_reason) = LKP.row_id
 	AND SRC.sourceinstance=LKP.source_id)
-WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_escalated_reason IS NULL THEN 0 else '-1' end)<> COALESCE(TRGT.escalated_reason_src_c_key ,'')
+WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_escalated_reason IS NULL THEN 0 else '-1' end)<> TRGT.escalated_reason_src_c_key 
 
 

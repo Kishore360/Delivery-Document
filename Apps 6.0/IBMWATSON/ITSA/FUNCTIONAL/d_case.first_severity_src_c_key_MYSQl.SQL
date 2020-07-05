@@ -19,7 +19,7 @@ group by 1
 ON sys.documentkey=d.documentkey AND sys.sys_created_on=d.created_on
 where tablename= 'sn_customerservice_case' and fieldname='priority'
 ) x ON TRGT.row_id=x.documentkey
-JOIN ibmwatson_mdwdb.d_lov LKP ON coalesce(concat('PRIORITY~CASE~~~',coalesce(x.oldvalue,x.newvalue,SRC.priority)),'UNSPECIFIED') =LKP.row_id
+JOIN ibmwatson_mdwdb.d_lov LKP ON coalesce(concat('PRIORITY~CASE~',coalesce(x.oldvalue,x.newvalue,SRC.priority)),'UNSPECIFIED') =LKP.row_id
 WHERE COALESCE(LKP.row_key,CASE WHEN SRC.priority IS NULL THEN 0 ELSE '-1' END)<>TRGT.first_severity_src_c_key
 ) temp;
 

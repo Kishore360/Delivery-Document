@@ -7,7 +7,7 @@ ON a.row_id = b.sys_id and a.source_id = b.sourceinstance
 LEFT JOIN ibmwatson_mdsdb.label_final c
 ON b.label = c.sys_id
 LEFT join ibmwatson_mdwdb.d_lov d
-on d.row_id = COALESCE(CONCAT('TYPE~LABEL~~~',c.type),'UNSPECIFIED')
+on d.row_id = COALESCE(CONCAT('TYPE~LABEL~',c.type),'UNSPECIFIED')
 
 where
 a.tag_type_src_c_key <> COALESCE(d.row_key,CASE WHEN c.type IS NULL THEN 0 else -1 end);

@@ -6,7 +6,7 @@ LEFT JOIN ibmwatson_mdwdb.d_case TRGT
 	ON (SRC.sys_id =TRGT.row_id 
 	AND SRC.sourceinstance =TRGT.source_id )
 LEFT JOIN ibmwatson_mdwdb.d_lov LKP 
-	ON ( coalesce(concat('APPROVAL~CASE~~~',SRC.approval),'UNSPECIFIED') = LKP.row_id
+	ON ( coalesce(concat('APPROVAL~CASE~',SRC.approval),'UNSPECIFIED') = LKP.row_id
 	AND SRC.sourceinstance=LKP.source_id AND dimension_class ='APPROVAL~CASE')
 WHERE TRGT.row_key not in (0, -1) and 
 COALESCE(LKP.row_key,CASE WHEN SRC.approval IS NULL THEN 0 else '-1' end)<> COALESCE(TRGT.approval_state_src_key ,'')
