@@ -4,5 +4,5 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  LEFT JOIN truist_mdwdb.d_outage TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
- WHERE CONVERT_TZ(SRC.begin,'GMT','America/New_York')<>TRGT.start_on
+ WHERE CONVERT_TZ(SRC.begin,'GMT','America/Los_Angeles')<>TRGT.start_on
  and SRC.CDCTYPE  <>'D'

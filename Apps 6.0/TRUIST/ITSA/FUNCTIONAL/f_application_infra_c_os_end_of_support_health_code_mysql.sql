@@ -1,30 +1,29 @@
 select case when count(1)>0 then 'FAILURE' else 'SUCCESS'  END as result ,
 CASE WHEN count(1)>0 then 'Data mismatch for f_application_infra_c.os_end_of_support_health_code'  ELSE 'SUCCESS'  END as Message
-/*select a11.app_id,a12.Support_End_Date,CONVERT_TZ(a16.lastupdated,'America/New_York','GMT') lastrefreshed,a11.Operating_System,
-timestampdiff(SECOND, CONVERT_TZ(a16.lastupdated,'America/New_York','GMT'),a12.Support_End_Date)/86400 Diff,
-CASE WHEN  timestampdiff(SECOND, CONVERT_TZ(a16.lastupdated,'America/New_York','GMT'),a12.Support_End_Date) is NULL then 'White'
-when timestampdiff(SECOND, CONVERT_TZ(a16.lastupdated,'America/New_York','GMT'),a12.Support_End_Date)/86400<0 then 'Red'
-when timestampdiff(SECOND, CONVERT_TZ(a16.lastupdated,'America/New_York','GMT'),a12.Support_End_Date)/86400= 0 and
-timestampdiff(SECOND, CONVERT_TZ(a16.lastupdated,'America/New_York','GMT'),a12.Support_End_Date)/86400<=180 then 'Orange'
-when timestampdiff(SECOND, CONVERT_TZ(a16.lastupdated,'America/New_York','GMT'),a12.Support_End_Date)/86400> 180 and
-timestampdiff(SECOND, CONVERT_TZ(a16.lastupdated,'America/New_York','GMT'),a12.Support_End_Date)/86400<=5400 then 'Yellow'
-ELSE 'Green' END exp_os_code,a15.os_end_of_support_health_code*/
-from truist_mdsdb.v_app_to_server_to_product_final a11
-left join truist_mdsdb.sa_techportfolio_products_final a12
-on (a11.Operating_System=a12.Name and a11.sourceinstance=a12.sourceinstance)
-left join truist_mdsdb.sa_techportfolio_products_final a13
-on (a11.WebServer_Product=a13.Name and a11.sourceinstance=a13.sourceinstance)
-left join truist_mdsdb.sa_techportfolio_products_final a14
-on (a11.Database_Product=a14.Name and a11.sourceinstance=a14.sourceinstance)
-join truist_mdwdb.d_application_infra_c a15 on 
-(concat(a11.app_id,'~',a11.app_name,'~',a11.infra_resource_name,'~',a11.source)=a15.row_id and a11.sourceinstance=a15.source_id)
-join (select max(lastupdated) as lastupdated,source_id from truist_mdwdb.d_o_data_freshness a group by source_id) a16 
-on (a15.source_id=a16.source_id)
-where CASE WHEN  timestampdiff(SECOND, CONVERT_TZ(a16.lastupdated,'America/New_York','GMT'),a12.Support_End_Date) is NULL then 'White'
-when timestampdiff(SECOND, CONVERT_TZ(a16.lastupdated,'America/New_York','GMT'),a12.Support_End_Date)/86400<0 then 'Red'
-when timestampdiff(SECOND, CONVERT_TZ(a16.lastupdated,'America/New_York','GMT'),a12.Support_End_Date)/86400= 0 and
-timestampdiff(SECOND, CONVERT_TZ(a16.lastupdated,'America/New_York','GMT'),a12.Support_End_Date)/86400<=180 then 'Orange'
-when timestampdiff(SECOND, CONVERT_TZ(a16.lastupdated,'America/New_York','GMT'),a12.Support_End_Date)/86400> 180 and
-timestampdiff(SECOND, CONVERT_TZ(a16.lastupdated,'America/New_York','GMT'),a12.Support_End_Date)/86400<=540 then 'Yellow'
-ELSE 'Green' END<>a15.os_end_of_support_health_code
-and a11.cdctype='X' and a12.cdctype='X';
+from 
+truist_mdwdb.d_application_infra_c d_application_infra_c   
+INNER JOIN
+(select 
+X.application_infra_c_key,
+timestampdiff(SECOND, CONVERT_TZ((select max(lastupdated) from truist_mdwdb.d_o_data_freshness where source_id = 2),'America/New_York','GMT'), os.support_end_date) as os_end_of_support_health_duration
+from 
+(select  sys_updated_on AS sys_updated_on, a.sys_updated_by, a.app_id as app_id,a.cdctime,a.sourceinstance, u_cmdb_sys_id,
+CONCAT(a.app_id,'~',a.app_name,'~',a.infra_resource_name,'~', a.source) as application_infra_c_key,
+a.database_product,a.u_environment,a.infra_resource_name,a.source,a.infra_resource_type,
+a.install_status,a.location,a.operating_system,
+a.operational_status,a.u_role,a.sys_class_name,a.webserver_product, 
+CONCAT(a.app_id,'~',a.app_name,'~',a.infra_resource_name,'~',a.source) as row_id,a.cdctype
+from truist_mdsdb.v_app_to_server_to_product_final a 
+GROUP BY a.app_id,a.app_name,a.infra_resource_name,a.source
+)X
+left outer join truist_mdsdb.sa_techportfolio_products_final os on X.operating_system = os.name and X.sourceinstance = os.sourceinstance) f_application_infra_c 
+ON d_application_infra_c.row_id=f_application_infra_c.application_infra_c_key  
+where  d_application_infra_c.os_end_of_support_health_code <> CASE 
+            WHEN f_application_infra_c.os_end_of_support_health_duration is NULL then 'White'                           
+            When f_application_infra_c.os_end_of_support_health_duration/86400<0 then 'Red'                           
+            when f_application_infra_c.os_end_of_support_health_duration/86400 >= 0 
+            and f_application_infra_c.os_end_of_support_health_duration/86400 <=180 then 'Orange'                           
+            when f_application_infra_c.os_end_of_support_health_duration/86400 >= 180 
+            and f_application_infra_c.os_end_of_support_health_duration/86400 <=540 then 'Yellow'                           
+            ELSE 'Green' 
+        END

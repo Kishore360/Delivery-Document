@@ -7,7 +7,7 @@ FROM
 SELECT Count(1) as CNT 
 FROM 
 (
-SELECT b.MEGA_HEX_ID,a.NAME,a.sourceinstance,
+SELECT b.MEGA_HEX_ID,a.u_pg_source_system_id,a.sourceinstance,
 CASE 
 WHEN b.MEGA_HEX_ID IS NOT NULL 
 AND
@@ -91,14 +91,14 @@ AND
 ELSE '7' END
 AS SOURCE_CATEGORY
 FROM png_mdsdb.pg_mega_cmdb_ci_appl_final a 
-LEFT JOIN png_mdsdb.pg_mega_irisk_assessment_issues_final b ON a.NAME=b.MEGA_HEX_ID AND a.sourceinstance=b.sourceinstance AND b.cdctype<>'D'
-LEFT JOIN png_mdsdb.pg_mega_legacyg1_final SRC2 ON a.NAME=SRC2.MEGA_ID AND a.sourceinstance=SRC2.sourceinstance AND SRC2.cdctype<>'D'
-LEFT JOIN png_mdsdb.pg_mega_legacyg234_final SRC3 ON a.NAME=SRC3.Mega_ID AND a.sourceinstance=SRC3.sourceinstance AND SRC3.cdctype<>'D'
-LEFT JOIN png_mdsdb.pg_mega_excluded_apps_final SRC4 ON a.NAME=SRC4.megaid AND a.sourceinstance=SRC4.sourceinstance AND SRC4.cdctype<>'D'
+LEFT JOIN png_mdsdb.pg_mega_irisk_assessment_issues_final b ON a.u_pg_source_system_id=b.MEGA_HEX_ID AND a.sourceinstance=b.sourceinstance AND b.cdctype<>'D'
+LEFT JOIN png_mdsdb.pg_mega_legacyg1_final SRC2 ON a.u_pg_source_system_id=SRC2.MEGA_ID AND a.sourceinstance=SRC2.sourceinstance AND SRC2.cdctype<>'D'
+LEFT JOIN png_mdsdb.pg_mega_legacyg234_final SRC3 ON a.u_pg_source_system_id=SRC3.Mega_ID AND a.sourceinstance=SRC3.sourceinstance AND SRC3.cdctype<>'D'
+LEFT JOIN png_mdsdb.pg_mega_excluded_apps_final SRC4 ON a.u_pg_source_system_id=SRC4.megaid AND a.sourceinstance=SRC4.sourceinstance AND SRC4.cdctype<>'D'
 Where a.cdctype<>'D'
 group by b.MEGA_HEX_ID
 )SRC 
-LEFT JOIN png_mdwdb.d_rita_application_c TRGT ON SRC.NAME=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id 
+LEFT JOIN png_mdwdb.d_rita_application_c TRGT ON SRC.u_pg_source_system_id=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id 
 WHERE 
 (CASE 
 WHEN SRC.SOURCE_CATEGORY IN (2,3,4) THEN 'Compliant'
