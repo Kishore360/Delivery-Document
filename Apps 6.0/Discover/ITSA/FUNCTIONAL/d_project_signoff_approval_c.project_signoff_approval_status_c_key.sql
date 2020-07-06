@@ -1,0 +1,4 @@
+SELECT CASE WHEN count(1)  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)  THEN 'MDS to DWH data validation failed for d_project_signoff_approval_c.project_signoff_approval_status_c_key' ELSE 'SUCCESS' END as Message 
+FROM discover_mdsdb.u_project_signoff_approval_final  SRC 
+JOIN discover_mdwdb.d_project_signoff_approval_c TRGT ON (SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id )  
+LEFT JOIN discover_mdwdb.d_lov LKP ON (concat('U_STATUS_C~PROJECT_SIGNOFF_APPROVAL_C~',upper(SRC.u_status)) = LKP.row_id AND SRC.sourceinstance = LKP.source_id ) WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_status IS NULL THEN 0 else -1 end) <> (TRGT.project_signoff_approval_status_c_key)  and SRC.cdctype='X'
