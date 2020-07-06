@@ -1,15 +1,14 @@
-SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
-CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for f_case.avg_time_to_respond_c' ELSE 'SUCCESS' END as Message
+SELECT CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+CASE WHEN cnt >0 THEN 'MDS to DWH data validation failed for f_case.avg_time_to_respond_c' ELSE 'SUCCESS' END as Message from (
+select count(1) cnt  
 FROM ibmwatson_mdwdb.f_case fi 
 inner join ibmwatson_mdwdb.d_case di on di.row_key=fi.case_key
-inner join ( select documentkey , min(sys_created_on) as sys_created_on from 
-(select documentkey,sys_created_on,newvalue,oldvalue
+inner join ( select documentkey ,sourceinstance, min(sys_created_on) as sys_created_on from 
+(select documentkey,sys_created_on,newvalue,oldvalue,a.sourceinstance
 from ibmwatson_mdsdb.sys_audit_final a 
- inner join (select name,element,value,label from ibmwatson_mdsdb.sys_choice_final where element='state' and name='sn_customerservice_case' )lov_old
-on lov_old.value=a.oldvalue
-inner join (select name,element,value,label from ibmwatson_mdsdb.sys_choice_final where element='state' and name='sn_customerservice_case' )lov_new
-on lov_new.value=a.newvalue
-where tablename='sn_customerservice_case' and fieldname = 'state' )A
-where oldvalue=1 group by 1 )r on di.row_id=r.documentkey
-where fi.avg_time_to_respond_c <> coalesce(avg_time_to_respond_c ,timestampdiff(second, di.opened_on, r.sys_created_on))
+where tablename='sn_customerservice_case' and fieldname='state' and sourceinstance=2
+ )A
+where oldvalue=1 group by 1,2 )r on di.row_id=r.documentkey and r.sourceinstance=di.source_id
+where fi.avg_time_to_respond_c <> timestampdiff(second, di.opened_on, r.sys_created_on)
+)a
 ;
