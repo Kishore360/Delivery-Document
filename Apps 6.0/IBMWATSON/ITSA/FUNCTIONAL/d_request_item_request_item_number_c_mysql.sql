@@ -6,5 +6,5 @@ FROM (SELECT count(1) as CNT
  LEFT JOIN ibmwatson_mdwdb.d_request_item TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id  )
- WHERE  SRC.number<> TRGT.request_item_number_c ))temp;
+ WHERE  SRC.number<> TRGT.request_item_number_c )temp;
  

@@ -3,7 +3,7 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 FROM ibmwatson_mdsdb.sn_customerservice_case_final SRC 
 LEFT JOIN ibmwatson_mdwdb.d_case TRGT 
 	ON (SRC.sys_id =TRGT.row_id 
-	AND SRC.sourceinstance =TRGT.source_id )
+	AND SRC.sourceinstance =TRGT.source_id and SRC.cdctype<>'D' )
 LEFT JOIN ibmwatson_mdwdb.d_lov LKP 
 	ON ( coalesce(concat('TICKET_PRIORITY_C~CASE~',SRC.u_ticket_priority),'UNSPECIFIED') = LKP.row_id
 	)

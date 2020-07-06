@@ -1,9 +1,0 @@
-  SELECT CASE WHEN count > 0 THEN 'FAILURE' ELSE 'SUCCESS' END AS Result
-,CASE WHEN count > 0 THEN 'Data did not Match.' 
-ELSE 'Data Matched' END AS Message 
-FROM(
-select count(1) as count from
-  ibmwatson_mdsdb.cmdb_ci_environment_final a12
-  left join ibmwatson_mdwdb.d_environment_c  a14 on a12.sys_id=a14.row_id and a12.sourceinstance=a14.source_id and a12.cdctype<>'D'
-  where environment_list_c<>u_environment)a;
-  

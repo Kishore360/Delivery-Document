@@ -8,6 +8,7 @@ ibmwatson_mdsdb.incident_final a12
 left join ibmwatson_mdwdb.d_customerservice_case_c a14 on a12.u_case=a14.row_id and a12.sourceinstance=a14.source_id
  join ibmwatson_mdwdb.f_incident a122
 on a122.row_id=a12.sys_id and a122.source_id=a12.sourceinstance
-where coalesce(a14.row_key,case when a12.u_case is null then 0 else -1 end)<>a122.customerservice_case_c_key)acv
+where coalesce(a14.row_key,case when a12.u_case is null then 0 else -1 end)<>a122.customerservice_case_c_key
+)acv
 
 
