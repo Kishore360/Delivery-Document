@@ -1,11 +1,10 @@
 SELECT 
-CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
-CASE WHEN count(1) > 0 THEN 'MDS to DWH data validation failed for d_configuration_item.device_category_c' ELSE 'SUCCESS' END as Message 
+CASE WHEN CNT > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+CASE WHEN CNT > 0 THEN 'MDS to DWH data validation failed for d_configuration_item.device_category_c' ELSE 'SUCCESS' END as Message 
 FROM 
 (
 SELECT Count(1) as CNT 
-FROM
-from png_mdwdb.d_configuration_item a 
+FROM png_mdwdb.d_configuration_item a 
  JOIN
  (SELECT  tenable_asset.id ,tenable_asset.sourceinstance,  CASE WHEN tenable_asset.fqdns LIKE '%clients%' OR RIGHT(substring_index(tenable_asset.fqdns,'.',1), 3) = '-X7' 
           OR RIGHT(substring_index(tenable_asset.fqdns,'.',1),4) = '-W10'  
@@ -36,5 +35,3 @@ SELECT cmdb_ci.sys_id , cmdb_ci.sourceinstance , CASE WHEN cmdb_ci.fqdn LIKE '%c
      ON a.row_id = b.id and a.source_id= b.sourceinstance
      where a.device_category_c <> b.device_category
 ) temp;
-
- 
