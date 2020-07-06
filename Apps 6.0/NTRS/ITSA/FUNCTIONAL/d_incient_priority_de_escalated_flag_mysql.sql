@@ -10,5 +10,5 @@ AND fieldname =  'priority' and oldvalue is not null and newvalue is not null
 )a group by a.documentkey
 )b
  join ntrust_mdsdb.incident_final c on b.documentkey=c.sys_id
-join ntrustccs_mdwdb.d_incident d on c.sys_id = d.row_id and c.sourceinstance = d. source_id
+join ntrust_mdwdb.d_incident d on c.sys_id = d.row_id and c.sourceinstance = d. source_id
 ) e where priority_de_escalated_flag<>target
