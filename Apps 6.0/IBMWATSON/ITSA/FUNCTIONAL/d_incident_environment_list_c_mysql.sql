@@ -13,6 +13,6 @@ ON n.n <= 1 + (LENGTH(COALESCE(TRIM(a.u_environment),'UNSPECIFIED')) - LENGTH(RE
 AND a.sourceinstance= d.source_id )
  left join ibmwatson_mdwdb.d_incident b
  on  CONCAT(a.sys_id,'~',COALESCE(SUBSTRING_INDEX(SUBSTRING_INDEX(TRIM(a.u_environment), ',', n.n), ',', -1),'UNSPECIFIED')) =b.row_id  
- where b.environment_list_c<>u_environment )a
+ where coalesce(b.environment_list_c,0)<>u_environment )a
  
  
