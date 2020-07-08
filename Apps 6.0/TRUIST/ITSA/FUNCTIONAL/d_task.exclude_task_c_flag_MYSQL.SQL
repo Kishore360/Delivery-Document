@@ -1,9 +1,6 @@
 SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
 CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed ' ELSE 'SUCCESS' END as Message
 from truist_mdwdb.d_task d_task   
-INNER JOIN
-truist_mdwdb.f_task f_task 
-ON d_task.row_key=f_task.task_key  
 LEFT OUTER JOIN
 truist_mdwdb.d_internal_organization d_internal_organization 
 ON f_task.assignment_group_key=d_internal_organization.row_key  
