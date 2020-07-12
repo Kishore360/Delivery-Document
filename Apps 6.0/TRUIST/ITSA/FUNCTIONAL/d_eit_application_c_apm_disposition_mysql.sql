@@ -30,5 +30,5 @@ FROM truist_mdsdb.cmdb_ci_spkg_final
 WHERE cdctype<>'D' and sys_class_name in('cmdb_ci_application_software','cmdb_ci_inf_software','u_cmdb_ci_app_comp_software') and install_status = 1 and operational_status = 1 and (u_archer_id is null or u_archer_id
 NOT IN (SELECT appid from truist_mdsdb.us_technical_health_check_c_final))
 GROUP BY name, u_archer_id,sourceinstance)src
-on tgt.archer_id=src.archer_id
+on tgt.row_id=src.row_id
 where src.apm_disposition<>tgt.apm_disposition and tgt.current_flag='Y'  and tgt.soft_deleted_flag='N';

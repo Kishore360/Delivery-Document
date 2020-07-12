@@ -3,7 +3,7 @@ CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed ' ELSE 'SUCCESS' E
 from truist_mdwdb.d_task d_task   
 LEFT OUTER JOIN
 truist_mdwdb.d_internal_organization d_internal_organization 
-ON f_task.assignment_group_key=d_internal_organization.row_key  
+ON d_task.assignment_group_key=d_internal_organization.row_key  
 where
 d_task.exclude_task_c_flag <> case                      
 when ( (d_internal_organization.organization_name not like 'ITSM-LOB-Branchinfo%'                        
