@@ -12,4 +12,4 @@ LEFT join ibmwatson_mdwdb.d_lov d
 on d.row_id = COALESCE(CONCAT('viewable_by~LABEL~',c.viewable_by),'UNSPECIFIED')
 
 where
-a.viewable_by_src_c_key < COALESCE(d.row_key,CASE WHEN c.viewable_by IS NULL THEN 0 else -1 end);
+a.viewable_by_src_c_key <> COALESCE(d.row_key,CASE WHEN c.viewable_by IS NULL THEN 0 else -1 end);

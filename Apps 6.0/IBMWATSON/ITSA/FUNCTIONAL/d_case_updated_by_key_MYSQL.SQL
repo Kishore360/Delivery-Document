@@ -8,5 +8,5 @@ LEFT JOIN ibmwatson_mdwdb.d_case TRGT
 LEFT JOIN ibmwatson_mdwdb.d_internal_contact LKP 
 	ON ( coalesce(SRC.sys_updated_by,'UNSPECIFIED') = LKP.user_name
 	AND SRC.sourceinstance=LKP.source_id)
-WHERE 
+WHERE state_src_key >0 and 
 COALESCE(LKP.row_key,CASE WHEN SRC.sys_updated_by IS NULL THEN 0 else '-1' end)<> TRGT.updated_by_key ;
