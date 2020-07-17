@@ -27,11 +27,7 @@ select 'ldb.d_task_sla a16 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_sla_c a11
 join ldb.d_task_sla a16
 on (a11.sla_key = a16.row_key)
-union
-select 'ldb.d_case a17 ' as Table_name, count(a11.row_key) Row_Count
-from ldb.f_sla_c a11
-join ldb.d_case a17
-on (a11.case_key = a17.row_key)
+
 union
 select 'ldb.d_problem a18 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_sla_c a11
