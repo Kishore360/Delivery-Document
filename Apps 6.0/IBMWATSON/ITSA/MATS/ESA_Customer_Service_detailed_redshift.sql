@@ -483,3 +483,10 @@ on (a114.quarter_start_date_key = a115.row_key)
 join ldb.d_case_calendar_year a175
 on (a115.year_start_date_key = a175.row_key)
 
+union
+select 'ldb.d_case_cause_code_c a156 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_case a11
+join ldb.d_case a16
+on (a11.case_key = a16.row_key)
+join ldb.d_case_cause_code_c a156
+on (a16.case_cause_code_c_key = a156.row_key)
