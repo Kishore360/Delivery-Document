@@ -57,18 +57,8 @@ join ldb.d_incident a15
 on (a11.incident_key = a15.row_key) 
 join ldb.d_parent_incident a112 
 on (a15.parent_incident_key = a112.row_key) 
-union
-select 'ldb.d_tribe_c a113 ' as Table_name, count(a11.row_key) Row_Count
-from ldb.f_incident_closed a11 
-join ldb.d_tribe_c a113 
-on (a11.tribe_c_key = a113.row_key) 
-union
-select 'ldb.d_segment_c a114 ' as Table_name, count(a11.row_key) Row_Count
-from ldb.f_incident_closed a11 
-join ldb.d_tribe_c a113 
-on (a11.tribe_c_key = a113.row_key) 
-join ldb.d_segment_c a114 
-on (a113.segment_c_key = a114.row_key) 
+
+
 union
 select 'ldb.d_case a115 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident_closed a11 
@@ -98,13 +88,7 @@ select 'ldb.d_domain a119 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident_closed a11 
 join ldb.d_domain a119 
 on (a11.domain_key = a119.row_key) 
-union
-select 'ldb.d_calendar_time_hour a120 ' as Table_name, count(a11.row_key) Row_Count
-from ldb.f_incident_closed a11 
-join ldb.d_calendar_time a14 
-on (a11.opened_time_key = a14.row_key) 
-join ldb.d_calendar_time_hour a120 
-on (a14.hour_24_format_num = a120.hour_24_format_num) 
+
 union
 select 'ldb.d_incident_contacttype a121 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_incident_closed a11 
@@ -228,25 +212,6 @@ join ldb.d_incident a15
 on (a11.incident_key = a15.row_key) 
 join ldb.d_incident_subcategory a139 
 on (a15.sub_category_src_key = a139.row_key) 
-union
-select 'ldb.d_calendar_quarter a140 ' as Table_name, count(a11.row_key) Row_Count
-from ldb.f_incident_closed a11 
-join ldb.d_calendar_date a19 
-on (a11.closed_on_key = a19.row_key) 
-join ldb.d_calendar_quarter a140 
-on (a19.quarter_start_date_key = a140.row_key) 
-union
-select 'ldb.d_internal_contact_general_manager_c a141 ' as Table_name, count(a11.row_key) Row_Count
-from ldb.f_incident_closed a11 
-join ldb.d_tribe_c a113 
-on (a11.tribe_c_key = a113.row_key) join ldb.d_segment_c a114 
-on (a113.segment_c_key = a114.row_key) 
-join ldb.d_internal_contact_general_manager_c a141 
-on (a114.general_manager_c_key = a141.row_key) 
-union
-select 'ldb.d_calendar_year a142 ' as Table_name, count(a11.row_key) Row_Count
-from ldb.f_incident_closed a11 
-join ldb.d_calendar_date a19 
-on (a11.closed_on_key = a19.row_key) 
-join ldb.d_calendar_year a142 
-on (a19.year_start_date_key = a142.row_key) 
+ 
+
+

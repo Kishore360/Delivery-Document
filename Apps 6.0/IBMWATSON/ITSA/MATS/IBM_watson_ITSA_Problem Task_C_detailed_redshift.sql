@@ -33,15 +33,19 @@ on (a11.problem_task_key = a17.row_key)
 union
 select 'ldb.d_tribe_c a18 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_problem_task a11
-join ldb.d_tribe_c a18
-on (a11.tribe_c_key = a18.row_key)
+join	ldb.d_problem_task	a111
+	  on 	(a11.problem_task_key = a111.row_key)
+join	ldb.d_problem_task_configuration_item	a116
+	  on 	(a111.configuration_item_key = a116.row_key)
+join	ldb.d_problem_task_configuration_item_mdm	a117
+	  on 	(a116.mdm_key = a117.row_key)
+join	ldb.d_problem_task_tribe_c	a139
+	  on 	(a117.problem_task_tribe_c_key = a139.row_key)
 union
 select 'ldb.d_segment_c a19 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_problem_task a11
-join ldb.d_tribe_c a18
-on (a11.tribe_c_key = a18.row_key)
 join ldb.d_segment_c a19
-on (a18.segment_c_key = a19.row_key)
+on (a11.segment_c_key = a19.row_key)
 union
 select 'ldb.d_application a110 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_problem_task a11
@@ -131,8 +135,7 @@ on (a11.problem_state_src_key = a125.row_key)
 union
 select 'ldb.d_lov_segment_type_c a126 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_problem_task a11
-join ldb.d_tribe_c a18
-on (a11.tribe_c_key = a18.row_key) join ldb.d_segment_c a19
-on (a18.segment_c_key = a19.row_key)
+join	ldb.d_segment_c	a16
+on 	(a11.segment_c_key = a16.row_key)
 join ldb.d_lov_segment_type_c a126
-on (a19.segment_type_c_key = a126.row_key)
+on (a16.segment_type_c_key = a126.row_key)

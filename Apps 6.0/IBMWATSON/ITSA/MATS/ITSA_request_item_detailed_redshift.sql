@@ -102,8 +102,14 @@ on (a11.state_src_key = a120.row_key)
 union
 select 'ldb.d_request_item_tribe_c a121 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_request_item a11
-join ldb.d_request_item_tribe_c a121
-on (a11.tribe_c_key = a121.row_key)
+join	ldb.d_request_item	a111
+	  on 	(a11.request_item_key = a111.row_key)
+join	ldb.d_request_item_configuration_item	a116
+	  on 	(a111.configuration_item_key = a116.row_key)
+join	ldb.d_request_item_configuration_item_mdm	a117
+	  on 	(a116.mdm_key = a117.row_key)
+join	ldb.d_request_item_tribe_c	a139
+	  on 	(a117.tribe_configuration_item_c_key = a139.row_key)
 union
 select 'ldb.d_sc_req_item_urgency a122 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_request_item a11
@@ -147,17 +153,4 @@ join ldb.d_request a19
 on (a11.request_key = a19.row_key)
 join ldb.d_request_location a128
 on (a19.location_key = a128.row_key)
-union
-select 'ldb.d_calendar_quarter a129 ' as Table_name, count(a11.row_key) Row_Count
-from ldb.f_request_item a11
-join ldb.d_calendar_date a16
-on (a11.opened_on_key = a16.row_key)
-join ldb.d_calendar_quarter a129
-on (a16.quarter_start_date_key = a129.row_key)
-union
-select 'ldb.d_calendar_year a130 ' as Table_name, count(a11.row_key) Row_Count
-from ldb.f_request_item a11
-join ldb.d_calendar_date a16
-on (a11.opened_on_key = a16.row_key)
-join ldb.d_calendar_year a130
-on (a16.year_start_date_key = a130.row_key)
+
