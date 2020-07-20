@@ -1,5 +1,5 @@
-select CASE WHEN cnt > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
- CASE WHEN cnt >0 THEN 'MDS to DWH data validation failed for f_change_benefit_organization_fact' ELSE 'SUCCESS' END as Message from (
+select CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+ CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed for f_change_benefit_organization_fact' ELSE 'SUCCESS' END as Message from (
 SELECT CONCAT(prb.sys_id,'~',COALESCE(SUBSTRING_INDEX(SUBSTRING_INDEX(TRIM(prb.u_benefit_organization), ',', n.n), ',', -1),'UNSPECIFIED')) AS row_id,
    
    prb.sys_id AS change_benefit_organization_c_id,
@@ -20,5 +20,4 @@ where a.u_change_benefit_organization_c_id <> u.row_id and a.change_benefit_orga
 
 ;
 
--- END
 
