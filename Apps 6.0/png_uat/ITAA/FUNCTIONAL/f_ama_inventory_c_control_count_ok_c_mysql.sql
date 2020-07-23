@@ -1,6 +1,6 @@
-select CASE WHEN count(1)  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)  THEN 'MDS to DWH data validation failed for f_ama_inventory_c_fact.control_count_ok_c' ELSE 'SUCCESS' END as Message 
+select CASE WHEN Count(1) > 0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN Count(1) > 0  THEN 'MDS to DWH data validation failed for f_ama_inventory_c_fact.control_count_ok_c' ELSE 'SUCCESS' END as Message 
 FROM 
-png_jul_mdwdb.f_ama_inventory_c_fact f
+png_mdwdb.f_ama_inventory_c_fact f
 JOIN (SELECT coalesce(SUM(CASE 
                 WHEN ( a.control_result_c like '%In line with SCOPE%' ) 
                 and a.control_in_scope_c ='TRUE' THEN 1 

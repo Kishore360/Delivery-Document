@@ -1,6 +1,6 @@
-SELECT CASE WHEN count(1)  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)  THEN 'MDS to DWH data validation failed for d_ama_inventory_ext_c.inventory_scope_c' ELSE 'SUCCESS' END as Message
+SELECT CASE WHEN Count(1) > 0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN Count(1) > 0  THEN 'MDS to DWH data validation failed for d_ama_inventory_ext_c.inventory_scope_c' ELSE 'SUCCESS' END as Message
  FROM png_mdsdb.pg_ot_ama_processing_activity_inventory_c_final  SRC 
- JOIN png_jul_mdwdb.d_ama_inventory_ext_c TRGT ON (SRC.inventory_id = TRGT.row_id  AND SRC.sourceinstance = TRGT.source_id )  
+ JOIN png_mdwdb.d_ama_inventory_ext_c TRGT ON (SRC.inventory_id = TRGT.row_id  AND SRC.sourceinstance = TRGT.source_id )  
  WHERE SRC.cdctype<>'D' AND (CASE 
                     WHEN (((SRC.vendor_qualification = 'DATA CONTROLLER')) 
                     AND (SRC.vendor_involved='TRUE' 
