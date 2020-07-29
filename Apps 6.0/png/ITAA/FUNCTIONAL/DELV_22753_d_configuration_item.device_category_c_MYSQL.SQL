@@ -23,7 +23,7 @@ FROM png_mdwdb.d_configuration_item a
      WHEN tenable_asset.operating_systems LIKE '%Crestron AirMedia%' THEN 'Facilities' 
 	 WHEN tenable_asset.operating_systems LIKE '%Linux Kernel%' THEN 'Linux Kernel' 
      ELSE 'Uncategorized' END device_category FROM
-                png_mdsdb.png_tnbl_tenable_asset_final tenable_asset 
+                png_mdsdb.png_tnbl_tenable_asset_final tenable_asset where tenable_asset.cdctype='X'
 UNION 
 
 SELECT cmdb_ci.sys_id , cmdb_ci.sourceinstance , CASE WHEN cmdb_ci.fqdn LIKE '%clients%' OR RIGHT(substring_index(cmdb_ci.fqdn,'.',1),3) = '-X7' 
@@ -32,7 +32,7 @@ SELECT cmdb_ci.sys_id , cmdb_ci.sourceinstance , CASE WHEN cmdb_ci.fqdn LIKE '%c
      WHEN cmdb_ci.fqdn LIKE '%xerox%' THEN 'Xerox Printer - Printing Services - ITS' 
      WHEN cmdb_ci.comments LIKE '%xerox%' THEN 'Xerox Printer - Printing Services - ITS' 
      ELSE 'Uncategorized' END device_category
-	 from png_mdsdb.cmdb_ci_final cmdb_ci) b 
+	 from png_mdsdb.cmdb_ci_final cmdb_ci where cmdb_ci.cdctype='X') b 
      ON a.row_id = b.id and a.source_id= b.sourceinstance
      where a.device_category_c <> b.device_category
 ) temp;
