@@ -6,10 +6,8 @@ CASE WHEN CNT > 0 THEN 'MDS to DWH data validation failed for d_change_request.c
 from(Select count(1) as CNT
 FROM  ntrust_mdsdb.task_final SRC
 
- JOIN ntrust_mdwdb.d_task TRGT2 ON (b.sys_id=TRGT2.row_id AND SRC.sourceinstance=TRGT2.source_id)
+ JOIN ntrust_mdwdb.d_task TRGT2 ON (SRC.sys_id=TRGT2.row_id AND SRC.sourceinstance=TRGT2.source_id)
 where 
-CONVERT_TZ (SRC.sys_created_on,'GMT','America/Los_Angeles')))<> TRGT2.sys_created_on_c and SRC.cdctype='X') temp;
-
-
+CONVERT_TZ (SRC.sys_created_on,'UTC','US/Central')<> TRGT2.sys_created_on_c and SRC.cdctype='X') temp;
 
 

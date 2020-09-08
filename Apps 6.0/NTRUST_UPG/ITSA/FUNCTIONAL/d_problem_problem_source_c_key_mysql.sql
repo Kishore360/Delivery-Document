@@ -7,7 +7,10 @@ from(Select count(1) as CNT
 FROM   ntrust_mdsdb.problem_final SRC
    join ntrust_mdwdb.d_problem TRGT
  on SRC.sys_id=TRGT.row_id and SRC.sourceinstance=TRGT.source_id
-  left JOIN ntrust_mdwdb.d_internal_organization TRGT2 ON coalesce(concat('DEPARTMENT~',SRC.u_source),'UNSPECIFIED')=TRGT2.row_id
+   JOIN ntrust_mdwdb.d_lov TRGT2 ON  COALESCE(CONCAT('SOURCE_SRC_C~PROBLEM',
+                '~',
+                UPPER(SRC.u_source)),
+                'UNSPECIFIED') =TRGT2.row_id
   AND SRC.sourceinstance=TRGT2.source_id
 where coalesce(TRGT2.row_key,case when SRC.u_source is null then 0 else -1 end)
          <> TRGT.problem_source_c_key and SRC.cdctype='X' )temp;	
