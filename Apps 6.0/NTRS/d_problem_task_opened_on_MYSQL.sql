@@ -6,5 +6,5 @@ FROM
 SELECT Count(1) AS CNT 
 FROM ntrs_mdsdb.u_problem_task_final SRC 
 LEFT JOIN ntrs_mdwdb.d_problem_task TRGT ON (SRC.sys_id=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id)
-WHERE CONVERT_TZ (SRC.opened_at,'GMT','US/Central')<>TRGT.opened_on
+WHERE CONVERT_TZ (SRC.opened_at,'GMT','America/Los_Angeles')<>TRGT.opened_on
 AND SRC.cdctype='X' ) temp; 
