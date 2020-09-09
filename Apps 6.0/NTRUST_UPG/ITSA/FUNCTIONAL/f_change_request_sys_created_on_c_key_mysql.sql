@@ -10,8 +10,8 @@ from(Select count(1) as CNT
 FROM   ntrust_mdsdb.change_request_final SRC
    join ntrust_mdwdb.f_change_request TRGT
  on SRC.sys_id=TRGT.row_id and SRC.sourceinstance=TRGT.source_id
- left JOIN ntrust_mdwdb.d_calendar_date TRGT2 ON
-  on  DATE_FORMAT(convert_tz(coalesce(SRC.sys_created_on),'GMT','America/Los_Angeles'),'%Y%m%d')=TRGT2.row_id
+ left JOIN ntrust_mdwdb.d_calendar_date TRGT2 
+  on  DATE_FORMAT(convert_tz(SRC.sys_created_on,'GMT','America/Los_Angeles'),'%Y%m%d')=TRGT2.row_id
   AND SRC.sourceinstance=TRGT2.source_id
-where (TRGT2.row_key)
+where TRGT2.row_key
          <> TRGT.sys_created_on_c_key and SRC.cdctype='X' )temp;
