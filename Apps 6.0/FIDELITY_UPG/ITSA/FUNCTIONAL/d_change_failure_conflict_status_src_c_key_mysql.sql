@@ -8,7 +8,11 @@ on SRC.sys_id = trgt1.row_id and SRC.sourceinstance = trgt1.source_id
 join
 fidelity_mdwdb.d_lov lkp
 on  COALESCE(CONCAT('CONFLICT_STATUS_C~CHANGE_REQUEST~',SRC.conflict_status),'UNSPECIFIED') =lkp.row_id and SRC.sourceinstance=lkp.source_id
-WHERE coalesce(lkp.row_key,case when SRC.conflict_status is null then 0 else -1 end)  <>trgt1.conflict_status_src_c_key
+WHERE coalesce(lkp.row_key,case when SRC.conflict_status is null then 0 else -1 end)  <>trgt1.conflict_status_src_c_key  and (
+coalesce(SRC.work_start,SRC.start_date,SRC.closed_at)>'2019-01-01'
+and SRC.u_environment='Production'
+and trgt1.current_flag='Y'
+and SRC.cdctype<>'D') 
 
 
 

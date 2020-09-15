@@ -12,4 +12,8 @@ LEFT JOIN ( SELECT value,label from fidelity_mdsdb.sys_choice_final where elemen
 
 ON SRC.u_change_trigger = chg.value
  
-WHERE  TRGT.current_flag ='Y' and COALESCE(chg.label,'UNSPECIFIED') <> (TRGT.change_trigger_c) ) temp;
+WHERE  TRGT.current_flag ='Y' and COALESCE(chg.label,'UNSPECIFIED') <> (TRGT.change_trigger_c)  and (
+coalesce(SRC.work_start,SRC.start_date,SRC.closed_at)>'2019-01-01'
+and SRC.u_environment='Production'
+and TRGT.current_flag='Y'
+and SRC.cdctype<>'D') ) temp;

@@ -32,4 +32,4 @@ when change_request_map.dimension_wh_code = 'SUCCESSFUL'  and coalesce(SRC1.inci
                     or change_request_map.dimension_wh_code = 'SUCCESSFUL_WITH_ISSUES') then 'Y' 
                     when (change_request_map.dimension_wh_code = 'CANCELED' 
                     or change_request_map.dimension_wh_code = 'Withdrawn / Cancelled') then 'N/A' 
-                end <> TRGT.alternative_change_failure_c_flag; 
+                end <> TRGT.alternative_change_failure_c_flag and SRC.cdctype<>'D'; 
