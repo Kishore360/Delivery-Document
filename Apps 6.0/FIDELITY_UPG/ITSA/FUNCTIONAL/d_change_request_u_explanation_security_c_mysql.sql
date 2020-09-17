@@ -4,4 +4,4 @@ SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
  LEFT JOIN fidelity_mdwdb.d_change_request TRGT 
  ON (SRC.sys_id =TRGT.row_id  
  AND SRC.sourceinstance= TRGT.source_id and TRGT.soft_deleted_flag = 'N' )
- WHERE SRC.u_explanation_security<> COALESCE(TRGT.u_explanation_security_c);
+ WHERE SRC.u_explanation_security<> COALESCE(TRGT.u_explanation_security_c) and SRC.cdctype<>'D';

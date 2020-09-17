@@ -5,4 +5,4 @@ JOIN  fidelity_mdwdb.d_fmr_product_c TRGT
 ON (SRC.sys_id = TRGT.row_id AND SRC.sourceinstance= TRGT.source_id)
 join fidelity_mdwdb.d_lov LKP
 on COALESCE(CONCAT('INSTALL_STATUS~FMR_PRODUCT_C~',SRC.install_status),'UNSPECIFIED')=LKP.row_id
-WHERE coalesce(LKP.row_key,case when SRC.install_status is null then 0 else -1 end) <>TRGT.product_install_status_src_c_key; 
+WHERE coalesce(LKP.row_key,case when SRC.install_status is null then 0 else -1 end) <>TRGT.product_install_status_src_c_key and  SRC.cdctype<>'D'; 
