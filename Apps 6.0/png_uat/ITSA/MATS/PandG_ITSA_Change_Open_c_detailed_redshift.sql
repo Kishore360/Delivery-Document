@@ -226,14 +226,6 @@ from ldb.f_change_request a11
 join ldb.d_internal_contact_test_manager_c a143 
 on (a11.test_manager_c_key = a143.row_key) 
 union
-select 'ldb.dh_user_group_level1 a144 ' as Table_name, count(a11.row_key) Row_Count
-from ldb.f_change_request a11 
-join ldb.d_internal_organization_group a14 
-on (a11.assignment_group_key = a14.row_key) join ldb.dh_user_group_hierarchy a17 
-on (a14.row_dn_key = a17.lev_0_key) 
-join ldb.dh_user_group_level1 a144 
-on (a17.lev_1_key = a144.row_key) 
-union
 select 'ldb.d_lov_change_request_impact_classification_c a145 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_change_request a11 
 join ldb.d_change_request a15 
@@ -324,14 +316,6 @@ join ldb.d_change_request a15
 on (a11.change_request_key = a15.row_key) 
 join ldb.d_lov_change_request_capability_to_detect_c a157 
 on (a15.capability_to_detect_src_c_key = a157.row_key) 
-union
-select 'ldb.dh_user_group_level2 a158 ' as Table_name, count(a11.row_key) Row_Count
-from ldb.f_change_request a11 
-join ldb.d_internal_organization_group a14 
-on (a11.assignment_group_key = a14.row_key) join ldb.dh_user_group_hierarchy a17 
-on (a14.row_dn_key = a17.lev_0_key) 
-join ldb.dh_user_group_level2 a158 
-on (a17.lev_2_key = a158.row_key) 
 union
 select 'ldb.d_calendar_quarter a159 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_change_request a11 
