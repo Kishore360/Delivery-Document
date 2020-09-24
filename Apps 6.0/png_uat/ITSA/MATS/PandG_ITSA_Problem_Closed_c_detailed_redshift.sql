@@ -174,12 +174,6 @@ from ldb.f_problem_closed a11
 join ldb.d_internal_contact_assigned_to a17 on (a11.assigned_to_key = a17.row_key) 
 join ldb.d_location_assigned_to a136 on (a17.location_key = a136.row_key) 
 union
-select 'ldb.dh_user_group_level1 a137 ' as Table_name, count(a11.row_key) Row_Count
-from ldb.f_problem_closed a11 
-join ldb.d_internal_organization_group a16 on (a11.assignment_group_key = a16.row_key) 
-join ldb.dh_user_group_hierarchy a18 on (a16.row_dn_key = a18.lev_0_key) 
-join ldb.dh_user_group_level1 a137 on (a18.lev_1_key = a137.row_key) 
-union
 select 'ldb.d_business_service_criticality a138 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_problem_closed a11 
 join ldb.d_business_service a19 on (a11.business_service_key = a19.row_key) 
@@ -237,31 +231,12 @@ from ldb.f_problem_closed a11
 join ldb.d_problem a113 on (a11.problem_key = a113.row_key) 
 join ldb.d_lov_problem_sufficient_impact_to_proceed_c a148 on (a113.sufficient_impact_to_proceed_c_key = a148.row_key) 
 union
-select 'ldb.dh_user_group_level2 a149 ' as Table_name, count(a11.row_key) Row_Count
-from ldb.f_problem_closed a11 
-join ldb.d_internal_organization_group a16 on (a11.assignment_group_key = a16.row_key) 
-join ldb.dh_user_group_hierarchy a18 on (a16.row_dn_key = a18.lev_0_key) 
-join ldb.dh_user_group_level2 a149 on (a18.lev_2_key = a149.row_key) 
-union
 select 'ldb.d_business_service_grand_parent_c a150 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_problem_closed a11 
 join ldb.d_business_service a19 on (a11.business_service_key = a19.row_key) 
 join ldb.d_business_service_parent_c a120 on (a19.parent_business_service_c_key = a120.row_key) 
 join ldb.d_business_service_grand_parent_c a150 on (a120.parent_business_service_c_key = a150.row_key) 
-union
-select 'ldb.dh_user_group_level3 a151 ' as Table_name, count(a11.row_key) Row_Count
-from ldb.f_problem_closed a11 
-join ldb.d_internal_organization_group a16 on (a11.assignment_group_key = a16.row_key) 
-join ldb.dh_user_group_hierarchy a18 on (a16.row_dn_key = a18.lev_0_key) 
-join ldb.dh_user_group_level3 a151 on (a18.lev_3_key = a151.row_key) 
-union
-select 'ldb.dh_user_group_level4 a152 ' as Table_name, count(a11.row_key) Row_Count
-from ldb.f_problem_closed a11 
-join ldb.d_internal_organization_group a16 on (a11.assignment_group_key = a16.row_key) 
-join ldb.dh_user_group_hierarchy a18 on (a16.row_dn_key = a18.lev_0_key) 
-join ldb.dh_user_group_level4 a152 on (a18.lev_4_key = a152.row_key) 
 UNION 
-
 select 'ldb.d_configuration_item_criticality_c a13 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_problem_closed a11 
 join ldb.d_configuration_item a112 on (a11.configuration_item_key = a112.row_key)
