@@ -7,4 +7,4 @@ left join ntrust_mdwdb.d_lov b1 on b1.row_id=COALESCE(CONCAT('CBI_SRC_C~INCIDENT
                 '~',
                 UPPER(a.u_cbi)),
                 'UNSPECIFIED') and a.sourceinstance=b1.source_id
-where  coalesce(b1.row_key,case when u_cbi is null then 0 else -1 end)<>b11.incident_cbi_c_key )a;
+where  coalesce(b1.row_key,case when u_cbi is null then 0 else -1 end)<>b11.incident_cbi_c_key and a.cdctype='X' )a;
