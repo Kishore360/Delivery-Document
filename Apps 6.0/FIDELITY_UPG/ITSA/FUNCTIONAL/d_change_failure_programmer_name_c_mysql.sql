@@ -12,7 +12,11 @@
 	JOIN fidelity_mdwdb.d_change_failure TRGT 
 	ON (SRC.sys_id = TRGT.row_id  AND SRC.sourceinstance = TRGT.source_id ) 
 	 
-	WHERE COALESCE(SRC1.name,'UNSPECIFIED') <> (TRGT.programmer_name_c)) temp ;
+	WHERE COALESCE(SRC1.name,'UNSPECIFIED') <> (TRGT.programmer_name_c) and (
+coalesce(SRC.work_start,SRC.start_date,SRC.closed_at)>'2019-01-01'
+and SRC.u_environment='Production'
+and TRGT.current_flag='Y'
+and SRC.cdctype<>'D') ) temp ;
 	 
 	 
 

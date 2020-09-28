@@ -2,7 +2,11 @@ SELECT CASE WHEN count(1)  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHE
 fidelity_mdsdb.change_request_final  SRC 
 JOIN fidelity_mdwdb.d_change_failure TRGT 
 ON (SRC.sys_id = TRGT.row_id  AND SRC.sourceinstance = TRGT.source_id ) 
- WHERE COALESCE(SRC.u_server_outage,'UNSPECIFIED') <>(TRGT.server_outage_c) ;
+ WHERE COALESCE(SRC.u_server_outage,'UNSPECIFIED') <>(TRGT.server_outage_c) and (
+coalesce(SRC.work_start,SRC.start_date,SRC.closed_at)>'2019-01-01'
+and SRC.u_environment='Production'
+and TRGT.current_flag='Y'
+and SRC.cdctype<>'D')  ;
  
  
 

@@ -58,61 +58,65 @@ from ldb.f_problem a11
 join ldb.d_internal_contact a111
 on (a11.employee_key = a111.row_key)
 union
-select 'ldb.d_calendar_time a112 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_problem a112 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_problem a11
-join ldb.d_calendar_time a112
-on (a11.time_key = a112.row_key)
+join ldb.d_problem a112
+on (a11.problem_key = a112.row_key)
 union
-select 'ldb.d_calendar_week a113 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_incident_alert_c a113 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_problem a11
+join ldb.d_problem a112
+on (a11.problem_key = a112.row_key)
+join ldb.d_incident_alert_c a113
+on (a112.incident_alert_c_key = a113.row_key)
+union
+select 'ldb.d_calendar_time a114 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_problem a11
+join ldb.d_calendar_time a114
+on (a11.time_key = a114.row_key)
+union
+select 'ldb.d_calendar_week a115 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_problem a11
 join ldb.d_calendar_date a16
 on (a11.date_key = a16.row_key)
-join ldb.d_calendar_week a113
-on (a16.week_start_date_key = a113.row_key)
+join ldb.d_calendar_week a115
+on (a16.week_start_date_key = a115.row_key)
 union
-select 'ldb.d_calendar_year a114 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_calendar_year a116 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_problem a11
 join ldb.d_calendar_date a16
 on (a11.date_key = a16.row_key) join ldb.d_calendar_month a17
 on (a16.month_start_date_key = a17.row_key) join ldb.d_calendar_quarter a18
 on (a17.quarter_start_date_key = a18.row_key)
-join ldb.d_calendar_year a114
-on (a18.year_start_date_key = a114.row_key)
+join ldb.d_calendar_year a116
+on (a18.year_start_date_key = a116.row_key)
 union
-select 'ldb.d_problem a115 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_problem_responsible_group_c a117 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_problem a11
-join ldb.d_problem a115
-on (a11.problem_key = a115.row_key)
+join ldb.d_problem a112
+on (a11.problem_key = a112.row_key)
+join ldb.d_problem_responsible_group_c a117
+on (a112.problem_responsible_group_c_key = a117.row_key)
 union
-select 'ldb.d_problem_responsible_group_c a116 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_problem_enterprise_incident_c a118 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_problem a11
-join ldb.d_problem_responsible_group_c a116
-on (a11.problem_responsible_group_c_key = a116.row_key)
+join ldb.d_problem_enterprise_incident_c a118
+on (a11.problem_enterprise_incident_c_key = a118.row_key)
 union
-select 'ldb.d_problem_enterprise_incident_c a117 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_change_request a119 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_problem a11
-join ldb.d_problem_enterprise_incident_c a117
-on (a11.problem_enterprise_incident_c_key = a117.row_key)
+join ldb.d_change_request a119
+on (a11.change_request_key = a119.row_key)
 union
-select 'ldb.d_change_request a118 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_location a120 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_problem a11
-join ldb.d_change_request a118
-on (a11.change_request_key = a118.row_key)
+join ldb.d_location a120
+on (a11.location_key = a120.row_key)
 union
-select 'ldb.d_location a119 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_problem_reported_type a121 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_problem a11
-join ldb.d_location a119
-on (a11.location_key = a119.row_key)
-union
-select 'ldb.d_problem_reported_type a120 ' as Table_name, count(a11.row_key) Row_Count
-from ldb.f_problem a11
-join ldb.d_problem_reported_type a120
-on (a11.reported_type_src_key = a120.row_key)
-union
-select 'ldb.d_incident_alert_c a121 ' as Table_name, count(a11.row_key) Row_Count
-from ldb.f_problem a11
-join ldb.d_incident_alert_c a121
-on (a11.incident_alert_c_key = a121.row_key)
+join ldb.d_problem_reported_type a121
+on (a11.reported_type_src_key = a121.row_key)
 union
 select 'ldb.d_problem_priority a122 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_problem a11
@@ -194,84 +198,87 @@ on (a13.employee_type_c_key = a133.row_key)
 union
 select 'ldb.d_calendar_time_hour a134 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_problem a11
-join ldb.d_calendar_time a112
-on (a11.time_key = a112.row_key)
+join ldb.d_calendar_time a114
+on (a11.time_key = a114.row_key)
 join ldb.d_calendar_time_hour a134
-on (a112.hour_key = a134.row_key)
+on (a114.hour_key = a134.row_key)
 union
 select 'ldb.d_lov_problem_avoidability_c a135 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_problem a11
-join ldb.d_problem a115
-on (a11.problem_key = a115.row_key)
+join ldb.d_problem a112
+on (a11.problem_key = a112.row_key)
 join ldb.d_lov_problem_avoidability_c a135
-on (a115.u_avoidability_c_key = a135.row_key)
+on (a112.u_avoidability_c_key = a135.row_key)
 union
 select 'ldb.d_lov_problem_avoidability_category_c a136 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_problem a11
-join ldb.d_problem a115
-on (a11.problem_key = a115.row_key)
+join ldb.d_problem a112
+on (a11.problem_key = a112.row_key)
 join ldb.d_lov_problem_avoidability_category_c a136
-on (a115.u_avoidability_category_c_key = a136.row_key)
+on (a112.u_avoidability_category_c_key = a136.row_key)
 union
 select 'ldb.d_lov_problem_caused_by_change_c a137 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_problem a11
-join ldb.d_problem a115
-on (a11.problem_key = a115.row_key)
+join ldb.d_problem a112
+on (a11.problem_key = a112.row_key)
 join ldb.d_lov_problem_caused_by_change_c a137
-on (a115.u_problem_caused_by_change_c_key = a137.row_key)
+on (a112.u_problem_caused_by_change_c_key = a137.row_key)
 union
 select 'ldb.d_lov_problem_detection_method_c a138 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_problem a11
-join ldb.d_problem a115
-on (a11.problem_key = a115.row_key)
+join ldb.d_problem a112
+on (a11.problem_key = a112.row_key)
 join ldb.d_lov_problem_detection_method_c a138
-on (a115.u_detection_method_c_key = a138.row_key)
+on (a112.u_detection_method_c_key = a138.row_key)
 union
-select 'ldb.d_internal_contact_problem_director_c a139 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_lov_problem_failed_component_c a139 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_problem a11
-join ldb.d_problem_responsible_group_c a116
-on (a11.problem_responsible_group_c_key = a116.row_key)
-join ldb.d_internal_contact_problem_director_c a139
-on (a116.problem_director_c_key = a139.row_key)
+join ldb.d_problem a112
+on (a11.problem_key = a112.row_key)
+join ldb.d_lov_problem_failed_component_c a139
+on (a112.u_failed_component_c_key = a139.row_key)
 union
-select 'ldb.d_lov_problem_failed_component_c a140 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_lov_problem_sdlc_prevention_activity_c a140 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_problem a11
-join ldb.d_problem a115
-on (a11.problem_key = a115.row_key)
-join ldb.d_lov_problem_failed_component_c a140
-on (a115.u_failed_component_c_key = a140.row_key)
+join ldb.d_problem a112
+on (a11.problem_key = a112.row_key)
+join ldb.d_lov_problem_sdlc_prevention_activity_c a140
+on (a112.u_sdlc_prevention_activity_c_key = a140.row_key)
 union
-select 'ldb.d_lov_problem_sdlc_prevention_activity_c a141 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_problem_state a141 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_problem a11
-join ldb.d_problem a115
-on (a11.problem_key = a115.row_key)
-join ldb.d_lov_problem_sdlc_prevention_activity_c a141
-on (a115.u_sdlc_prevention_activity_c_key = a141.row_key)
+join ldb.d_problem a112
+on (a11.problem_key = a112.row_key)
+join ldb.d_problem_state a141
+on (a112.state_src_key = a141.row_key)
 union
-select 'ldb.d_internal_contact_problem_svp_c a142 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_problem_vendor_c a142 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_problem a11
-join ldb.d_problem_responsible_group_c a116
-on (a11.problem_responsible_group_c_key = a116.row_key)
-join ldb.d_internal_contact_problem_svp_c a142
-on (a116.problem_svp_c_key = a142.row_key)
+join ldb.d_problem a112
+on (a11.problem_key = a112.row_key)
+join ldb.d_problem_vendor_c a142
+on (a112.problem_vendor_c_key = a142.row_key)
 union
-select 'ldb.d_problem_state a143 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_internal_contact_problem_director_c a143 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_problem a11
-join ldb.d_problem a115
-on (a11.problem_key = a115.row_key)
-join ldb.d_problem_state a143
-on (a115.state_src_key = a143.row_key)
+join ldb.d_problem a112
+on (a11.problem_key = a112.row_key) join ldb.d_problem_responsible_group_c a117
+on (a112.problem_responsible_group_c_key = a117.row_key)
+join ldb.d_internal_contact_problem_director_c a143
+on (a117.problem_director_c_key = a143.row_key)
 union
-select 'ldb.d_internal_contact_problem_vp_c a144 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_internal_contact_problem_svp_c a144 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_problem a11
-join ldb.d_problem_responsible_group_c a116
-on (a11.problem_responsible_group_c_key = a116.row_key)
-join ldb.d_internal_contact_problem_vp_c a144
-on (a116.problem_vp_c_key = a144.row_key)
+join ldb.d_problem a112
+on (a11.problem_key = a112.row_key) join ldb.d_problem_responsible_group_c a117
+on (a112.problem_responsible_group_c_key = a117.row_key)
+join ldb.d_internal_contact_problem_svp_c a144
+on (a117.problem_svp_c_key = a144.row_key)
 union
-select 'ldb.d_problem_vendor_c a145 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb.d_internal_contact_problem_vp_c a145 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_problem a11
-join ldb.d_problem a115
-on (a11.problem_key = a115.row_key)
-join ldb.d_problem_vendor_c a145
-on (a115.problem_vendor_c_key = a145.row_key)
+join ldb.d_problem a112
+on (a11.problem_key = a112.row_key) join ldb.d_problem_responsible_group_c a117
+on (a112.problem_responsible_group_c_key = a117.row_key)
+join ldb.d_internal_contact_problem_vp_c a145
+on (a117.problem_vp_c_key = a145.row_key)

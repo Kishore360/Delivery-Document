@@ -11,8 +11,8 @@ FROM
 
 (
 select name,count(1) as total_complete,
-100*((count(1))/17) as perc_completeness,
-100.00 - 100*((count(1))/17) as perc_in_completeness,
+100*((count(1))/13) as perc_completeness,
+100.00 - 100*((count(1))/13) as perc_in_completeness,
 17- (count(1)) as total_incomplete
 from(SELECT Y.name, field, value from png_mdsdb.pg_mega_pgb_application_rita_final A
 JOIN (
