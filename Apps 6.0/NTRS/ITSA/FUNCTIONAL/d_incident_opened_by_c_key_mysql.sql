@@ -8,7 +8,7 @@ CASE WHEN CNT > 0 THEN 'MDS to DWH data validation failed' ELSE 'SUCCESS' END
 as Message from(
 select count(1) as CNT from
 	ntrust_mdsdb.incident_final SRC
-JOIN ntrust_mdwdb.d_incident TRGT
+JOIN ntrust_mdwdb.f_incident TRGT
 ON   	SRC.sys_id				=		TRGT.row_id and TRGT.source_id 		= SRC.sourceinstance
 JOIN 	ntrust_mdwdb.d_internal_contact  TRGT2 
   on  coalesce(concat('INTERNAL_CONTACT~',SRC.opened_by),'UNSPECIFIED')=TRGT2.row_id

@@ -9,12 +9,12 @@ FROM
 (
 select count(1) as CNT
 from
-ntrs_mdsdb.task_sla_final SRC
+ ntrs_mdsdb.task_sla_final SRC
 join
-ntrs_mdwdb.f_task_sla TRGT
+ ntrs_mdwdb.f_task_sla TRGT
 on (SRC.sys_id=TRGT.row_id and SRC.sourceinstance=TRGT.source_id)
 where
-TRGT.planned_end_time_c<>(CONVERT_TZ(SRC.planned_end_time,'GMT','US/Central'))
+TRGT.end_on<>(CONVERT_TZ(SRC.end_time,'GMT','US/Central'))
 and SRC.cdctype='X') temp;
 
 

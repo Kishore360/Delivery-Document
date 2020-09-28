@@ -11,11 +11,11 @@ FROM
 
 ntrust_mdsdb.change_request_final  SRC 
 
-JOIN ntrust_mdwdb.d_change_failure TRGT 
+JOIN  ntrust_mdwdb.d_change_failure TRGT 
 ON (SRC.sys_id = TRGT.row_id  AND SRC.sourceinstance = TRGT.source_id ) 
  
 WHERE coalesce(char_length(REPLACE(SRC.u_pre_implementation_plan,
                 ' ',
                 '')),
-                -1) <> (TRGT.implementation_count_c) ) temp;
+                -1) <> (TRGT.u_pre_implementation_plan_count_c) ) temp;
 				
