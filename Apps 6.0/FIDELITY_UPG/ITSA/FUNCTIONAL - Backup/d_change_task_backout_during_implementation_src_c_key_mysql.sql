@@ -4,4 +4,4 @@ ON (SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id )
  LEFT JOIN fidelity_mdwdb.d_lov LKP 
  ON LKP.row_id=(COALESCE(CONCAT('U_BACKOUT_DURING_IMPLEMENTATION~CHANGE_TASK','~',SRC.u_backout_during_implementation),'UNSPECIFIED') ) 
  and LKP.source_id=SRC.sourceinstance and LKP.dimension_class='U_BACKOUT_DURING_IMPLEMENTATION~CHANGE_TASK'
- WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_backout_during_implementation IS NULL THEN 0 else -1 end)<> (TRGT.backout_during_implementation_src_c_key) 
+ WHERE COALESCE(LKP.row_key,CASE WHEN SRC.u_backout_during_implementation IS NULL THEN 0 else -1 end)<> (TRGT.backout_during_implementation_src_c_key) and SRC.cdctype<>'D'

@@ -4,4 +4,4 @@ JOIN fidelity_mdwdb.d_fmr_product_line_c TRGT
 ON (SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id )  
 LEFT JOIN fidelity_mdwdb.d_cost_center LKP 
 ON (COALESCE(SRC.cost_center,'UNSPECIFIED') = LKP.row_id AND SRC.sourceinstance = LKP.source_id ) 
-WHERE COALESCE(LKP.row_key,CASE WHEN SRC.cost_center IS NULL THEN 0 else -1 end)<> (TRGT.cost_center_c_key) 
+WHERE COALESCE(LKP.row_key,CASE WHEN SRC.cost_center IS NULL THEN 0 else -1 end)<> (TRGT.cost_center_c_key) and SRC.cdctype<>'D' 

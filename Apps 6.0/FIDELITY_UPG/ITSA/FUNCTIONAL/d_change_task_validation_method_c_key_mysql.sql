@@ -11,5 +11,5 @@ LEFT JOIN fidelity_mdwdb.d_lov LKP
 AND SRC.sourceinstance= LKP.source_id )
  WHERE TRGT.soft_deleted_flag='N'
  AND COALESCE(LKP.row_key,CASE WHEN SRC.u_validation_method  IS NULL THEN 0 else -1 end)<> (TRGT.validation_method_c_key
- )
+ ) and SRC.cdctype<>'D'
  )b;

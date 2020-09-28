@@ -6,6 +6,6 @@ on src.sys_id = trgt.row_id and src.sourceinstance = trgt.source_id
 LEFT JOIN fidelity_mdwdb.d_lov lkp
 ON COALESCE(CONCAT('U_ENVIRONMENT_DETAILS~CHANGE_REQUEST~',src.u_environment_details ),'UNSPECIFIED') =lkp.row_id 
 and lkp.source_id=src.sourceinstance and lkp.dimension_class='U_ENVIRONMENT_DETAILS~CHANGE_REQUEST'
-where COALESCE(lkp.row_key,CASE WHEN src.u_environment_details  IS NULL THEN 0 else -1 end)<> trgt.environment_details_src_c_key
+where COALESCE(lkp.row_key,CASE WHEN src.u_environment_details  IS NULL THEN 0 else -1 end)<> trgt.environment_details_src_c_key and src.cdctype<>'D'
 ;
 
