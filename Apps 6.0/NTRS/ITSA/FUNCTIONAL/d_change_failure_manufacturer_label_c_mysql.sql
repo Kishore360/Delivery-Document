@@ -7,7 +7,7 @@ CASE WHEN cnt>0  THEN 'MDS to DWH data validation failed for d_change_failure.ma
 FROM 
 (select count(1) as cnt from 
 
-ntrust_mdsdb.change_request_final  SRC 
+ ntrust_mdsdb.change_request_final  SRC 
 JOIN
                ntrust_mdsdb.cmdb_ci_final cmdb_ci 
                     ON SRC.cmdb_ci=cmdb_ci.sys_id 
@@ -21,4 +21,4 @@ JOIN ntrust_mdwdb.d_change_failure TRGT
 ON (SRC.sys_id = TRGT.row_id  AND SRC.sourceinstance = TRGT.source_id ) 
  
 WHERE   coalesce(core_company.name,
-                'UNSPECIFIED') <> (TRGT.manufacturer_label_c) ) temp;
+                'UNSPECIFIED') <> (TRGT.manufacturer_label_c) and TRGT.current_flag='Y' and SRC.cdctype='X'  ) temp;

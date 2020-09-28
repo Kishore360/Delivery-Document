@@ -16,4 +16,4 @@ WHERE coalesce(case
                     when SRC.u_copied_change  = 0 then 'N' 
                     else 'X' 
                 end,
-                'X') <> (TRGT.U_Copied_Change_C) ) temp;
+                'X') <> (TRGT.U_Copied_Change_C) and TRGT.current_flag='Y' and SRC.cdctype='X' ) temp;

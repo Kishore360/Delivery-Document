@@ -12,9 +12,9 @@ from
 ntrs_mdsdb.task_sla_final SRC
 join
 ntrs_mdwdb.f_task_sla TRGT
-on (SRC.sys_id=TRGT.row_id and SRC.sourceinstance=TRGT.source_id)
+on (SRC.sys_id=TRGT.row_id and SRC.sourceinstance=TRGT.source_id and SRC.cdctype='X')
 where
-TRGT.start_on<>(CONVERT_TZ(SRC.start_time,'GMT','US/Central'))
+TRGT.start_on<>(CONVERT_TZ(SRC.start_time,'UTC','US/Central'))
 and SRC.cdctype='X') temp;
 
 

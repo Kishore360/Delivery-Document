@@ -19,6 +19,5 @@ WHERE  coalesce(case
                     when SRC.u_moratorium_conflict  = 'No' then 'N' 
                     else 'X' 
                 end,
-                'X') <> (TRGT.u_morotonium_conflict_c
-) ) temp;
-
+                'X') <> (TRGT.u_moratorium_conflict_c
+) and TRGT.current_flag='Y' and SRC.cdctype='X'  ) temp;

@@ -16,4 +16,4 @@ ON (SRC.sys_id = TRGT.row_id  AND SRC.sourceinstance = TRGT.source_id )
 WHERE  coalesce(char_length(REPLACE(SRC.risk_impact_analysis,
                 ' ',
                 '')),
-                -1) <> (TRGT.Risk_and_Impact_Analysis_Length_C) ) temp;
+                -1) <> (TRGT.Risk_and_Impact_Analysis_Length_C) and TRGT.current_flag='Y' ) temp;

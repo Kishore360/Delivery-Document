@@ -25,4 +25,4 @@ ON (SRC.sys_id = TRGT.row_id  AND SRC.sourceinstance = TRGT.source_id )
 WHERE 
 				
 				coalesce( assignee_company.name,
-                'UNSPECIFIED' )  <> (TRGT.lead_time) ) temp;	
+                'UNSPECIFIED' )  <> (TRGT.lead_time) and TRGT.current_flag='Y' and SRC.cdctype='X') temp;	

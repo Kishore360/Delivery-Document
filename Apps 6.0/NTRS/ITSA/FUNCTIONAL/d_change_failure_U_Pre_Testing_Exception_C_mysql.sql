@@ -12,7 +12,5 @@ ntrust_mdsdb.change_request_final  SRC
 JOIN ntrust_mdwdb.d_change_failure TRGT 
 ON (SRC.sys_id = TRGT.row_id  AND SRC.sourceinstance = TRGT.source_id ) 
  
-WHERE coalesce(char_length(REPLACE(SRC.u_pre_implementation_plan,
-                ' ',
-                '')),
-                -1) <> (TRGT.U_Pre_Testing_Exception_C) ) temp;
+WHERE coalesce(SRC.U_Pre_Testing_Exception,
+                'UNSPECIFIED') <> (TRGT.U_Pre_Testing_Exception_C)and TRGT.current_flag='Y' and SRC.cdctype='X'  ) temp;

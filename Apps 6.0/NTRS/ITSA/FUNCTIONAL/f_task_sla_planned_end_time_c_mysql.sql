@@ -14,7 +14,7 @@ join
  ntrs_mdwdb.f_task_sla TRGT
 on (SRC.sys_id=TRGT.row_id and SRC.sourceinstance=TRGT.source_id)
 where
-TRGT.end_on<>(CONVERT_TZ(SRC.end_time,'GMT','US/Central'))
+TRGT.end_on<>(CONVERT_TZ(SRC.end_time,'UTC','US/Central'))
 and SRC.cdctype='X') temp;
 
 

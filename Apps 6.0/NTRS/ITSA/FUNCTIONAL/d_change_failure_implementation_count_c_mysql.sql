@@ -17,5 +17,5 @@ ON (SRC.sys_id = TRGT.row_id  AND SRC.sourceinstance = TRGT.source_id )
 WHERE coalesce(char_length(REPLACE(SRC.u_pre_implementation_plan,
                 ' ',
                 '')),
-                -1) <> (TRGT.u_pre_implementation_plan_count_c) ) temp;
+                -1) <> (TRGT.u_pre_implementation_plan_count_c) and TRGT.current_flag='Y' and SRC.cdctype='X') temp;
 				
