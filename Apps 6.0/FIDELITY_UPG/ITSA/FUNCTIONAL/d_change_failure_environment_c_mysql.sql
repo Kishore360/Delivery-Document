@@ -5,7 +5,7 @@ ON (SRC.sys_id = TRGT.row_id  AND SRC.sourceinstance = TRGT.source_id )
  WHERE COALESCE(SRC.u_environment,'UNSPECIFIED') <>(TRGT.environment_c) and 
 coalesce(SRC.work_start,SRC.start_date,SRC.closed_at)>'2019-01-01'
 and SRC.u_environment='Production'
-and trgt1.current_flag='Y'
+and TRGT.current_flag='Y'
 and SRC.cdctype<>'D';
  
  

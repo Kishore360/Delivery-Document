@@ -5,4 +5,4 @@ JOIN  fidelity_mdwdb.d_fmr_product_c TRGT
 ON (SRC.sys_id = TRGT.row_id AND SRC.sourceinstance= TRGT.source_id)
 join fidelity_mdwdb.d_internal_contact LKP
 on COALESCE(CONCAT('INTERNAL_CONTACT~',SRC.u_service_offering_manager),'UNSPECIFIED')=LKP.row_id
-WHERE coalesce(LKP.row_key,case when SRC.u_service_offering_manager is null then 0 else -1 end) <>TRGT.service_offering_manager_c_key; 
+WHERE coalesce(LKP.row_key,case when SRC.u_service_offering_manager is null then 0 else -1 end) <>TRGT.service_offering_manager_c_key and SRC.cdctype<>'D'; 

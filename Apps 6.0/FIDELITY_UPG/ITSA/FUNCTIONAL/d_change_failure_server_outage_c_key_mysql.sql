@@ -11,4 +11,8 @@ ON (SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id )
 LEFT JOIN fidelity_mdwdb.d_lov LKP 
 ON (COALESCE(CONCAT('U_SERVER_OUTAGE~CHANGE_REQUEST~',SRC.u_server_outage),'UNSPECIFIED') = LKP.row_id AND SRC.sourceinstance = LKP.source_id ) 
 
-WHERE   year(TRGT.effective_to)=2999 and  COALESCE(LKP.row_key,CASE WHEN SRC.u_server_outage IS NULL THEN 0 else -1 end) <> (TRGT.server_outage_src_c_key)and SRC.cdctype<>'D') temp; 
+WHERE  COALESCE(LKP.row_key,CASE WHEN SRC.u_server_outage IS NULL THEN 0 else -1 end) <> (TRGT.server_outage_src_c_key) and 
+coalesce(SRC.work_start,SRC.start_date,SRC.closed_at)>'2019-01-01'
+and SRC.u_environment='Production'
+and TRGT.current_flag='Y'
+and SRC.cdctype<>'D') temp; 
