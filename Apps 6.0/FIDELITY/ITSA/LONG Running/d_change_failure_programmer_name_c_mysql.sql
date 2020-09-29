@@ -1,0 +1,22 @@
+	SELECT 
+	CASE WHEN cnt>0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, 
+
+	CASE WHEN cnt>0  THEN 'MDS to DWH data validation failed for d_change_failure.programmer_name_c' ELSE 'SUCCESS' END as Message 
+
+	FROM (select count(1) as cnt from fidelity_mdsdb.change_request_final  SRC 
+
+	join 
+	fidelity_mdsdb.sys_user_final SRC1 
+	ON SRC.u_programmer=SRC1.sys_id and SRC.sourceinstance=SRC1.sourceinstance 
+
+	JOIN fidelity_mdwdb.d_change_failure TRGT 
+	ON (SRC.sys_id = TRGT.row_id  AND SRC.sourceinstance = TRGT.source_id ) 
+	 
+	WHERE COALESCE(SRC1.name,'UNSPECIFIED') <> (TRGT.programmer_name_c) and (
+coalesce(SRC.work_start,SRC.start_date,SRC.closed_at)>'2019-01-01'
+and SRC.u_environment='Production'
+and TRGT.current_flag='Y'
+and SRC.cdctype<>'D') ) temp ;
+	 
+	 
+
