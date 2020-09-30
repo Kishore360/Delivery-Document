@@ -17,4 +17,4 @@ WHERE  coalesce(case
                     else 'X' 
                 end,
                 'X')		
-  <> (TRGT.cab_required_c) and TRGT.current_flag='Y' and SRC.cdctype='X') temp;	
+  <> (TRGT.cab_required_c) and TRGT.current_flag='Y' and SRC.cdctype='X' and SRC.cdctime<=TRGT.dw_inserted_on) temp;	

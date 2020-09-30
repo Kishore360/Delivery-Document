@@ -14,5 +14,5 @@ ON (SRC.sys_id = TRGT.row_id  AND SRC.sourceinstance = TRGT.source_id )
 WHERE coalesce(char_length(REPLACE(SRC.backout_plan,
                 ' ',
                 '')),
-                -1)	  <> (TRGT.back_out_plan_c) and TRGT.current_flag='Y' ) temp;	
+                -1)	  <> (TRGT.back_out_plan_c) and TRGT.current_flag='Y' and SRC.cdctime<=TRGT.dw_inserted_on ) temp;	
 				

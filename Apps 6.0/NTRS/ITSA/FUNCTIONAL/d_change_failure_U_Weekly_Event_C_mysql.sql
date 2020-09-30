@@ -17,4 +17,4 @@ WHERE coalesce(case
                     when SRC.u_weekly_event  = 0 then 'N' 
                     else  'X' 
                 end,
-                'X')  <> (TRGT.U_Weekly_Event_C) and TRGT.current_flag='Y' and SRC.cdctype='X'  ) temp;
+                'X')  <> (TRGT.U_Weekly_Event_C) and TRGT.current_flag='Y' and SRC.cdctype='X'  and SRC.cdctime<=TRGT.dw_inserted_on ) temp;

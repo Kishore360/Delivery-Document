@@ -19,6 +19,6 @@ WHERE coalesce(case
                     when SRC.u_minimum_risk = 4 then '4 - Low' 
                     else SRC.u_minimum_risk 
                 end,
-                'UNSPECIFIED') <> (TRGT.u_minimum_risk_c) and TRGT.current_flag='Y' and SRC.cdctype='X'  ) temp;
+                'UNSPECIFIED') <> (TRGT.u_minimum_risk_c) and TRGT.current_flag='Y' and SRC.cdctype='X' and SRC.cdctime<=TRGT.dw_inserted_on  ) temp;
 				
 	

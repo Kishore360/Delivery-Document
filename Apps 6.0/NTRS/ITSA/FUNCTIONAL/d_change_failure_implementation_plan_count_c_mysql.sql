@@ -18,4 +18,4 @@ WHERE
                 coalesce(char_length(REPLACE(SRC.implementation_plan,
                 ' ',
                 '')),
-                -1) <> (TRGT.implementation_plan_count_c) and TRGT.current_flag='Y' and SRC.cdctype='X' ) temp;
+                -1) <> (TRGT.implementation_plan_count_c) and TRGT.current_flag='Y' and SRC.cdctype='X'  and SRC.cdctime<=TRGT.dw_inserted_on) temp;

@@ -13,4 +13,6 @@ ON (SRC.sys_id = TRGT.row_id  AND SRC.sourceinstance = TRGT.source_id )
  
 WHERE  coalesce(datediff(SRC.start_date,
                 SRC.opened_at),
-                -1) <> (TRGT.actual_lead_time_c) and TRGT.current_flag='Y' ) temp;
+                -1) <> (TRGT.actual_lead_time_c) and TRGT.current_flag='Y' and SRC.cdctype='X'
+                 and SRC.cdctime<=TRGT.dw_inserted_on
+                ) temp;

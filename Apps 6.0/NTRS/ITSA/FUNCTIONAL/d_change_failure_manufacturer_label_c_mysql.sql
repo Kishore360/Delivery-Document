@@ -21,4 +21,4 @@ JOIN ntrust_mdwdb.d_change_failure TRGT
 ON (SRC.sys_id = TRGT.row_id  AND SRC.sourceinstance = TRGT.source_id ) 
  
 WHERE   coalesce(core_company.name,
-                'UNSPECIFIED') <> (TRGT.manufacturer_label_c) and TRGT.current_flag='Y' and SRC.cdctype='X'  ) temp;
+                'UNSPECIFIED') <> (TRGT.manufacturer_label_c) and TRGT.current_flag='Y' and SRC.cdctype='X'  and SRC.cdctime<=TRGT.dw_inserted_on  ) temp;

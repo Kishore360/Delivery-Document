@@ -16,4 +16,4 @@ ON (SRC.sys_id = TRGT.row_id  AND SRC.sourceinstance = TRGT.source_id )
 join  ntrust_mdwdb.d_internal_organization LKP
 on coalesce('INTERNAL_CONTACT~',SRC.assignment_group)=LKP.row_id
  
-WHERE coalesce(LKP.organization_name,'UNSPECIFIED') <> (TRGT.ci_grouped_c) and TRGT.current_flag='Y' ) temp;
+WHERE coalesce(LKP.organization_name,'UNSPECIFIED') <> (TRGT.ci_grouped_c) and TRGT.current_flag='Y' and SRC.cdctime<=TRGT.dw_inserted_on ) temp;
