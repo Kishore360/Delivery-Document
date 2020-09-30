@@ -23,4 +23,4 @@ from ldb."f_ci_relationship_downstream" a11
 join "ldb"."d_parent_ci_downstream" a13
 on (a11.parent_ci_downstream_key = a13.ROW_KEY)
 join "ldb"."d_parent_ci_operational_status_downstream" a15
-on (a13.operational_status_src_key = a15.ROW_KEY
+on (a13.operational_status_src_key = a15.ROW_KEY)
