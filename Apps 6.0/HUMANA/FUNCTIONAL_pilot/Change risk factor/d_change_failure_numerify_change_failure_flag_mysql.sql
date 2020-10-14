@@ -1,0 +1,30 @@
+SELECT CASE WHEN count(1)>0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)
+THEN 'MDS to DWH data validation failed for d_change_request.failure_flag' ELSE 'SUCCESS' END as Message
+FROM humana_mdsdb.change_request_final a
+JOIN humana_mdwdb.d_change_request d ON a.sys_id=d.row_id AND a.sourceinstance=d.source_id
+LEFT JOIN
+(SELECT DISTINCT c.sourceinstance AS source_id,c.sys_id AS row_id,c.cdctype
+FROM humana_mdsdb.change_request_final c
+JOIN humana_mdsdb.incident_final i ON c.sys_id=i.caused_by AND c.sourceinstance=i.sourceinstance
+WHERE i.caused_by IS NOT NULL AND (i.opened_at > c.end_date OR i.opened_at < c.start_date)) b
+ON a.sys_id = b.row_id and a.sourceinstance = b.source_id
+LEFT JOIN
+(SELECT DISTINCT c.sourceinstance AS source_id,c.sys_id AS row_id,c.cdctype
+FROM humana_mdsdb.change_request_final c
+JOIN humana_mdsdb.label_final l ON c.number = l.name AND c.sourceinstance = l.sourceinstance
+JOIN humana_mdsdb.label_entry_final le ON le.label = l.sys_id AND le.sourceinstance = l.sourceinstance
+JOIN humana_mdsdb.incident_final i ON le.table_key = i.sys_id AND le.sourceinstance = i.sourceinstance
+WHERE l.name LIKE 'GECHG%' AND le.id_type = 'Incident' AND (i.opened_at > c.end_date OR i.opened_at < c.start_date)) c
+ON a.sys_id = c.row_id and a.sourceinstance = c.source_id
+LEFT JOIN humana_mdwdb.d_lov_map lm ON lm.dimension_class = 'STATE~CHANGE_REQUEST' AND a.state=lm.dimension_code
+AND lm.source_id=a.sourceinstance
+WHERE a.cdctype<>'D' AND ((CASE
+WHEN COALESCE(a.close_code,'UNSPECIFIED') in ('successful_issues','unsuccessful')
+OR b.row_id is not null OR c.row_id is not null THEN 'Y'
+WHEN (COALESCE(a.close_code,'UNSPECIFIED') not in ('successful_issues','unsuccessful')
+AND b.row_id is null AND c.row_id is null) AND lm.dimension_wh_code <> ('CANCELED')
+AND (a.end_date< '2020-03-25 00:00:00' OR lm.dimension_wh_code = ('CLOSED')) THEN 'N'
+WHEN (COALESCE(a.close_code,'UNSPECIFIED') not in ('successful_issues','unsuccessful')
+AND b.row_id is null AND c.row_id is null) AND (lm.dimension_wh_code = ('CANCELED')
+OR ((a.end_date >= '2020-03-25 00:00:00' AND lm.dimension_wh_code <> ('CLOSED')))) THEN 'X'
+ELSE 'X' END) <> d.failure_flag);
