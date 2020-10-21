@@ -1,0 +1,777 @@
+Classes :
+'cmdb_ci_chassis_server','cmdb_ci_desktop_pc','cmdb_ci_esx_server','cmdb_ci_hardware',
+'cmdb_ci_ip_firewall','cmdb_ci_ip_switch','cmdb_ci_ip_router','cmdb_ci_laptop_pc',
+'cmdb_ci_linux_server','cmdb_ci_netgear','cmdb_ci_printer','cmdb_ci_resource_group',
+'cmdb_ci_storage_device','cmdb_ci_unix_server','cmdb_ci_voice_hardware','cmdb_ci_windows_service',
+'u_cmdb_ci_mobile_device','u_cmdb_ci_smartphone','u_cmdb_ci_tablet','cmdb_ci_wap_network','cmdb_ci_pbx_voice'
+
+
+
+
+Queries :
+Service Now ID:
+Select a.U_number AS Service_Now_ID,Count(distinct a.sys_id) AS CNT
+FROM png_mdsdb.cmdb_ci_final a 
+Where a.sys_class_name IN (
+'cmdb_ci_chassis_server','cmdb_ci_desktop_pc','cmdb_ci_esx_server','cmdb_ci_hardware',
+'cmdb_ci_ip_firewall','cmdb_ci_ip_switch','cmdb_ci_ip_router','cmdb_ci_laptop_pc',
+'cmdb_ci_linux_server','cmdb_ci_netgear','cmdb_ci_printer','cmdb_ci_resource_group',
+'cmdb_ci_storage_device','cmdb_ci_unix_server','cmdb_ci_voice_hardware','cmdb_ci_windows_service',
+'u_cmdb_ci_mobile_device','u_cmdb_ci_smartphone','u_cmdb_ci_tablet''cmdb_ci_wap_network','cmdb_ci_pbx_voice')
+AND a.cdctype='X'
+AND a.u_number IS NULL
+group by 1;
+
+Name:
+Select a.name AS Device_Name,a.sys_class_name,
+Count(distinct a.sys_id) AS CNT
+FROM png_mdsdb.cmdb_ci_final a 
+Where a.sys_class_name IN (
+'cmdb_ci_chassis_server','cmdb_ci_desktop_pc','cmdb_ci_esx_server','cmdb_ci_hardware',
+'cmdb_ci_ip_firewall','cmdb_ci_ip_switch','cmdb_ci_ip_router','cmdb_ci_laptop_pc',
+'cmdb_ci_linux_server','cmdb_ci_netgear','cmdb_ci_printer','cmdb_ci_resource_group',
+'cmdb_ci_storage_device','cmdb_ci_unix_server','cmdb_ci_voice_hardware','cmdb_ci_windows_service',
+'u_cmdb_ci_mobile_device','u_cmdb_ci_smartphone','u_cmdb_ci_tablet''cmdb_ci_wap_network','cmdb_ci_pbx_voice')
+AND a.cdctype='X'
+AND a.name IS NULL or a.name=' '
+group by 1,2;
+
+
+Serial_Number: 
+
+Select a.serial_number AS Serial_Number
+,a.sys_class_name,
+Count(distinct a.sys_id) AS CNT
+FROM png_mdsdb.cmdb_ci_final a 
+Where a.sys_class_name IN (
+'cmdb_ci_chassis_server','cmdb_ci_desktop_pc','cmdb_ci_esx_server','cmdb_ci_hardware',
+'cmdb_ci_ip_firewall','cmdb_ci_ip_switch','cmdb_ci_ip_router','cmdb_ci_laptop_pc',
+'cmdb_ci_linux_server','cmdb_ci_netgear','cmdb_ci_printer','cmdb_ci_resource_group',
+'cmdb_ci_storage_device','cmdb_ci_unix_server','cmdb_ci_voice_hardware','cmdb_ci_windows_service',
+'u_cmdb_ci_mobile_device','u_cmdb_ci_smartphone','u_cmdb_ci_tablet''cmdb_ci_wap_network','cmdb_ci_pbx_voice')
+AND a.cdctype='X'
+AND a.serial_number IS NULL or a.serial_number=' '
+group by 1,2;
+
+
+BIOS_UUID:
+Select a.u_pg_bios_uuid AS BIOS_UUID
+,a.sys_class_name,
+Count(distinct a.sys_id) AS CNT
+FROM png_mdsdb.cmdb_ci_final a 
+Where a.sys_class_name IN (
+'cmdb_ci_chassis_server','cmdb_ci_desktop_pc','cmdb_ci_esx_server','cmdb_ci_hardware',
+'cmdb_ci_ip_firewall','cmdb_ci_ip_switch','cmdb_ci_ip_router','cmdb_ci_laptop_pc',
+'cmdb_ci_linux_server','cmdb_ci_netgear','cmdb_ci_printer','cmdb_ci_resource_group',
+'cmdb_ci_storage_device','cmdb_ci_unix_server','cmdb_ci_voice_hardware','cmdb_ci_windows_service',
+'u_cmdb_ci_mobile_device','u_cmdb_ci_smartphone','u_cmdb_ci_tablet''cmdb_ci_wap_network','cmdb_ci_pbx_voice')
+AND a.cdctype='X'
+AND a.u_pg_bios_uuid IS NULL or a.u_pg_bios_uuid=' '
+group by 1,2;
+
+
+Unique System ID:
+
+Select a.u_pg_source_system_id AS Unique_System_ID
+,a.sys_class_name,
+Count(distinct a.sys_id) AS CNT
+FROM png_mdsdb.cmdb_ci_final a 
+Where a.sys_class_name IN (
+'cmdb_ci_chassis_server','cmdb_ci_desktop_pc','cmdb_ci_esx_server','cmdb_ci_hardware',
+'cmdb_ci_ip_firewall','cmdb_ci_ip_switch','cmdb_ci_ip_router','cmdb_ci_laptop_pc',
+'cmdb_ci_linux_server','cmdb_ci_netgear','cmdb_ci_printer','cmdb_ci_resource_group',
+'cmdb_ci_storage_device','cmdb_ci_unix_server','cmdb_ci_voice_hardware','cmdb_ci_windows_service',
+'u_cmdb_ci_mobile_device','u_cmdb_ci_smartphone','u_cmdb_ci_tablet''cmdb_ci_wap_network','cmdb_ci_pbx_voice')
+AND a.cdctype='X'
+AND a.u_pg_source_system_id IS NULL or a.u_pg_source_system_id=' '
+group by 1,2;
+
+Primiary_Mac_Address: 
+
+Select a.mac_address AS Primiary_Mac_Address
+,a.sys_class_name,
+Count(distinct a.sys_id) AS CNT
+FROM png_mdsdb.cmdb_ci_final a 
+Where a.sys_class_name IN (
+'cmdb_ci_chassis_server','cmdb_ci_desktop_pc','cmdb_ci_esx_server','cmdb_ci_hardware',
+'cmdb_ci_ip_firewall','cmdb_ci_ip_switch','cmdb_ci_ip_router','cmdb_ci_laptop_pc',
+'cmdb_ci_linux_server','cmdb_ci_netgear','cmdb_ci_printer','cmdb_ci_resource_group',
+'cmdb_ci_storage_device','cmdb_ci_unix_server','cmdb_ci_voice_hardware','cmdb_ci_windows_service',
+'u_cmdb_ci_mobile_device','u_cmdb_ci_smartphone','u_cmdb_ci_tablet''cmdb_ci_wap_network','cmdb_ci_pbx_voice')
+AND a.cdctype='X'
+AND a.mac_address IS NULL or a.mac_address=' '
+group by 1,2;
+
+Primiary_IP_Address:
+
+Select a.ip_address AS Primiary_IP_Address
+,a.sys_class_name,
+Count(distinct a.sys_id) AS CNT
+FROM png_mdsdb.cmdb_ci_final a 
+Where a.sys_class_name IN (
+'cmdb_ci_chassis_server','cmdb_ci_desktop_pc','cmdb_ci_esx_server','cmdb_ci_hardware',
+'cmdb_ci_ip_firewall','cmdb_ci_ip_switch','cmdb_ci_ip_router','cmdb_ci_laptop_pc',
+'cmdb_ci_linux_server','cmdb_ci_netgear','cmdb_ci_printer','cmdb_ci_resource_group',
+'cmdb_ci_storage_device','cmdb_ci_unix_server','cmdb_ci_voice_hardware','cmdb_ci_windows_service',
+'u_cmdb_ci_mobile_device','u_cmdb_ci_smartphone','u_cmdb_ci_tablet''cmdb_ci_wap_network','cmdb_ci_pbx_voice')
+AND a.cdctype='X'
+AND a.ip_address IS NULL or a.ip_address=' '
+group by 1,2;
+
+
+ 
+Owned By : Completeness 
+
+Select a.owned_by AS Owned_By
+,a.sys_class_name,
+Count(distinct a.sys_id) AS CNT
+FROM png_mdsdb.cmdb_ci_final a 
+Where a.sys_class_name IN (
+'cmdb_ci_chassis_server','cmdb_ci_desktop_pc','cmdb_ci_esx_server','cmdb_ci_hardware',
+'cmdb_ci_ip_firewall','cmdb_ci_ip_switch','cmdb_ci_ip_router','cmdb_ci_laptop_pc',
+'cmdb_ci_linux_server','cmdb_ci_netgear','cmdb_ci_printer','cmdb_ci_resource_group',
+'cmdb_ci_storage_device','cmdb_ci_unix_server','cmdb_ci_voice_hardware','cmdb_ci_windows_service',
+'u_cmdb_ci_mobile_device','u_cmdb_ci_smartphone','u_cmdb_ci_tablet''cmdb_ci_wap_network','cmdb_ci_pbx_voice')
+AND a.cdctype='X'
+AND a.owned_by IS NULL or a.owned_by=' '
+group by 1,2;
+
+
+Owned By : Correctness 
+
+Select a.owned_by AS Owned_By
+,a.sys_class_name,
+Count(distinct a.sys_id) AS CNT
+FROM png_mdsdb.cmdb_ci_final a 
+Where a.sys_class_name IN (
+'cmdb_ci_chassis_server','cmdb_ci_desktop_pc','cmdb_ci_esx_server','cmdb_ci_hardware',
+'cmdb_ci_ip_firewall','cmdb_ci_ip_switch','cmdb_ci_ip_router','cmdb_ci_laptop_pc',
+'cmdb_ci_linux_server','cmdb_ci_netgear','cmdb_ci_printer','cmdb_ci_resource_group',
+'cmdb_ci_storage_device','cmdb_ci_unix_server','cmdb_ci_voice_hardware','cmdb_ci_windows_service',
+'u_cmdb_ci_mobile_device','u_cmdb_ci_smartphone','u_cmdb_ci_tablet''cmdb_ci_wap_network','cmdb_ci_pbx_voice')
+AND a.cdctype='X'
+AND a.owned_by IS NULL or a.owned_by=' '
+group by 1,2;
+
+Location: Completeness 
+Select a.location AS Location
+,a.sys_class_name,
+Count(distinct a.sys_id) AS CNT
+FROM png_mdsdb.cmdb_ci_final a 
+Where a.sys_class_name IN (
+'cmdb_ci_chassis_server','cmdb_ci_desktop_pc','cmdb_ci_esx_server','cmdb_ci_hardware',
+'cmdb_ci_ip_firewall','cmdb_ci_ip_switch','cmdb_ci_ip_router','cmdb_ci_laptop_pc',
+'cmdb_ci_linux_server','cmdb_ci_netgear','cmdb_ci_printer','cmdb_ci_resource_group',
+'cmdb_ci_storage_device','cmdb_ci_unix_server','cmdb_ci_voice_hardware','cmdb_ci_windows_service',
+'u_cmdb_ci_mobile_device','u_cmdb_ci_smartphone','u_cmdb_ci_tablet''cmdb_ci_wap_network','cmdb_ci_pbx_voice')
+AND a.cdctype='X'
+AND a.location IS NULL or a.owned_by=' '
+group by 1,2;
+
+Location Correctness 
+
+Select a.sys_class_name,
+Count(distinct a.sys_id) AS CNT
+FROM png_mdsdb.cmdb_ci_final a 
+LEFT JOIN png_mdsdb.cmn_location_final b ON a.location=b.sys_id AND a.sourceinstance=b.sourceinstance
+Where a.sys_class_name IN (
+'cmdb_ci_chassis_server','cmdb_ci_desktop_pc','cmdb_ci_esx_server','cmdb_ci_hardware',
+'cmdb_ci_ip_firewall','cmdb_ci_ip_switch','cmdb_ci_ip_router','cmdb_ci_laptop_pc',
+'cmdb_ci_linux_server','cmdb_ci_netgear','cmdb_ci_printer','cmdb_ci_resource_group',
+'cmdb_ci_storage_device','cmdb_ci_unix_server','cmdb_ci_voice_hardware','cmdb_ci_windows_service',
+'u_cmdb_ci_mobile_device','u_cmdb_ci_smartphone','u_cmdb_ci_tablet''cmdb_ci_wap_network','cmdb_ci_pbx_voice')
+AND a.cdctype='X'
+AND a.location IS not NULL 
+AND  b.u_active=0
+group by 1;
+
+
+Most_Recent_Discovered_Date:
+
+Select a.last_discovered AS Most_recent_discovery_date,a.sys_class_name,
+Count(distinct a.sys_id) AS CNT
+FROM png_mdsdb.cmdb_ci_final a 
+Where a.sys_class_name IN (
+'cmdb_ci_chassis_server','cmdb_ci_desktop_pc','cmdb_ci_esx_server','cmdb_ci_hardware',
+'cmdb_ci_ip_firewall','cmdb_ci_ip_switch','cmdb_ci_ip_router','cmdb_ci_laptop_pc',
+'cmdb_ci_linux_server','cmdb_ci_netgear','cmdb_ci_printer','cmdb_ci_resource_group',
+'cmdb_ci_storage_device','cmdb_ci_unix_server','cmdb_ci_voice_hardware','cmdb_ci_windows_service',
+'u_cmdb_ci_mobile_device','u_cmdb_ci_smartphone','u_cmdb_ci_tablet''cmdb_ci_wap_network','cmdb_ci_pbx_voice')
+AND a.cdctype='X'
+AND a.last_discovered IS NULL or a.last_discovered=' '
+group by 1,2;
+
+
+
+
+
+==================================================================
+
+SELECT CASE WHEN count(1)>0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)
+THEN 'MDS to DWH data validation failed for d_configuration_item.u_pg_bios_uuid_c' ELSE 'SUCCESS' END as Message
+FROM png_mdsdb.cmdb_ci_final SRC
+JOIN pgcmdb_mdwdb.d_configuration_item TRGT
+ON SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id AND SRC.CDCTYPE<>'D'
+WHERE COALESCE(SRC.u_pg_bios_uuid,'UNSPECIFIED')<>TRGT.u_pg_bios_uuid_c ;
+
+
+SELECT CASE WHEN count(1)>0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)
+THEN 'MDS to DWH data validation failed for d_configuration_item.u_pg_source_system_id_c' ELSE 'SUCCESS' END as Message
+FROM png_mdsdb.cmdb_ci_final SRC
+JOIN pgcmdb_mdwdb.d_configuration_item TRGT
+ON SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id AND SRC.CDCTYPE<>'D'
+WHERE COALESCE(SRC.u_pg_source_system_id,'UNSPECIFIED')<>TRGT.u_pg_source_system_id_c ;
+
+
+SELECT CASE WHEN count(1)>0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)
+THEN 'MDS to DWH data validation failed for d_configuration_item.first_discovered_c' ELSE 'SUCCESS' END as Message
+FROM png_mdsdb.cmdb_ci_final SRC
+JOIN pgcmdb_mdwdb.d_configuration_item TRGT
+ON SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id AND SRC.CDCTYPE<>'D'
+WHERE CONVERT_TZ(SRC.first_discovered,'GMT','America/New_York')<>TRGT.first_discovered_c ;
+
+
+SELECT CASE WHEN count(1)>0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)
+THEN 'MDS to DWH data validation failed for d_configuration_item.u_pg_storage_allocated_c' ELSE 'SUCCESS' END as Message
+FROM png_mdsdb.cmdb_ci_final SRC
+JOIN pgcmdb_mdwdb.d_configuration_item TRGT
+ON SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id AND SRC.CDCTYPE<>'D'
+WHERE SRC.u_pg_storage_allocated <> TRGT.u_pg_storage_allocated_c ;
+
+
+SELECT CASE WHEN count(1)>0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)
+THEN 'MDS to DWH data validation failed for d_configuration_item.checked_out_c' ELSE 'SUCCESS' END as Message
+FROM png_mdsdb.cmdb_ci_final SRC
+JOIN pgcmdb_mdwdb.d_configuration_item TRGT
+ON SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id AND SRC.CDCTYPE<>'D'
+WHERE CONVERT_TZ(SRC.checked_out,'GMT','America/New_York')<>TRGT.checked_out_c ;
+
+
+SELECT CASE WHEN count(1)>0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)
+THEN 'MDS to DWH data validation failed for d_configuration_item.checked_in_c' ELSE 'SUCCESS' END as Message
+FROM png_mdsdb.cmdb_ci_final SRC
+JOIN pgcmdb_mdwdb.d_configuration_item TRGT
+ON SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id AND SRC.CDCTYPE<>'D'
+WHERE CONVERT_TZ(SRC.checked_in,'GMT','America/New_York')<>TRGT.checked_in_c ;
+
+
+SELECT CASE WHEN count(1)>0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)
+THEN 'MDS to DWH data validation failed for d_configuration_item.monitor_c_flag' ELSE 'SUCCESS' END as Message
+FROM png_mdsdb.cmdb_ci_final SRC
+JOIN pgcmdb_mdwdb.d_configuration_item TRGT
+ON SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id AND SRC.CDCTYPE<>'D'
+WHERE CASE WHEN SRC.monitor=1 THEN 'Y' ELSE 'N' END <>TRGT.monitor_c_flag ;
+
+
+SELECT CASE WHEN count(1)>0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)
+THEN 'MDS to DWH data validation failed for d_configuration_item.u_pg_esa_c_flag' ELSE 'SUCCESS' END as Message
+FROM png_mdsdb.cmdb_ci_final SRC
+JOIN pgcmdb_mdwdb.d_configuration_item TRGT
+ON SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id AND SRC.CDCTYPE<>'D'
+WHERE CASE WHEN SRC.u_pg_esa=1 THEN 'Y' ELSE 'N' END <>TRGT.u_pg_esa_c_flag ;
+
+
+SELECT CASE WHEN count(1)>0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)
+THEN 'MDS to DWH data validation failed for d_configuration_item.warranty_expiration_c' ELSE 'SUCCESS' END as Message
+FROM png_mdsdb.cmdb_ci_final SRC
+JOIN pgcmdb_mdwdb.d_configuration_item TRGT
+ON SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id AND SRC.CDCTYPE<>'D'
+WHERE CONVERT_TZ(SRC.warranty_expiration,'GMT','America/New_York')<>TRGT.warranty_expiration_c ;
+
+
+SELECT CASE WHEN count(1)>0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)
+THEN 'MDS to DWH data validation failed for d_configuration_item.u_pg_dr_storage_req_c' ELSE 'SUCCESS' END as Message
+FROM png_mdsdb.cmdb_ci_final SRC
+JOIN pgcmdb_mdwdb.d_configuration_item TRGT
+ON SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id AND SRC.CDCTYPE<>'D'
+WHERE SRC.u_pg_dr_storage_req <> TRGT.u_pg_dr_storage_req_c ;
+
+
+SELECT CASE WHEN count(1)>0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)
+THEN 'MDS to DWH data validation failed for d_configuration_item.u_pg_sox_critical_c_flag' ELSE 'SUCCESS' END as Message
+FROM png_mdsdb.cmdb_ci_final SRC
+JOIN pgcmdb_mdwdb.d_configuration_item TRGT
+ON SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id AND SRC.CDCTYPE<>'D'
+WHERE CASE WHEN SRC.u_pg_sox_critical=1 THEN 'Y' ELSE 'N' END <>TRGT.u_pg_sox_critical_c_flag ;
+
+
+SELECT CASE WHEN count(1)>0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)
+THEN 'MDS to DWH data validation failed for d_configuration_item.free_space_c' ELSE 'SUCCESS' END as Message
+FROM png_mdsdb.cmdb_ci_final SRC
+JOIN pgcmdb_mdwdb.d_configuration_item TRGT
+ON SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id AND SRC.CDCTYPE<>'D'
+WHERE (SRC.u_pg_storage_allocated-SRC.u_pg_storage_used) <> TRGT.free_space_c ;
+
+
+SELECT CASE WHEN count(1)>0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)
+THEN 'MDS to DWH data validation failed for d_configuration_item.u_pg_cloud_subscription_c' ELSE 'SUCCESS' END as Message
+FROM png_mdsdb.cmdb_ci_final SRC
+LEFT JOIN png_mdsdb.cmdb_ci_server_final SRC1 ON SRC.sys_id=SRC1.sys_id AND SRC.sourceinstance=SRC1.sourceinstance
+JOIN pgcmdb_mdwdb.d_configuration_item TRGT
+ON SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id AND SRC.CDCTYPE<>'D'
+WHERE COALESCE(SRC1.u_pg_cloud_subscription,'UNSPECIFIED')<>TRGT.u_pg_cloud_subscription_c ;
+
+
+SELECT CASE WHEN count(1)>0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)
+THEN 'MDS to DWH data validation failed for d_configuration_item.u_pg_cloud_resource_group_c' ELSE 'SUCCESS' END as Message
+FROM png_mdsdb.cmdb_ci_final SRC
+LEFT JOIN png_mdsdb.cmdb_ci_server_final SRC1 ON SRC.sys_id=SRC1.sys_id AND SRC.sourceinstance=SRC1.sourceinstance
+JOIN pgcmdb_mdwdb.d_configuration_item TRGT
+ON SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id AND SRC.CDCTYPE<>'D'
+WHERE COALESCE(SRC1.u_pg_cloud_resource_group,'UNSPECIFIED')<>TRGT.u_pg_cloud_resource_group_c ;
+
+
+SELECT CASE WHEN count(1)>0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)
+THEN 'MDS to DWH data validation failed for d_configuration_item.ci_pg_environment_c_key' ELSE 'SUCCESS' END as Message
+FROM png_mdsdb.cmdb_ci_final SRC
+JOIN pgcmdb_mdwdb.d_configuration_item TRGT
+ON SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id AND SRC.CDCTYPE<>'D'
+LEFT JOIN pgcmdb_mdwdb.d_lov LKP ON LKP.dimension_class='PG_ENVIRONMENT_C~CMDB_CI' AND SRC.u_pg_environment=LKP.dimension_code
+WHERE COALESCE(LKP.row_key,(CASE WHEN SRC.u_pg_environment IS NULL THEN 0 ELSE -1 END))<>TRGT.ci_pg_environment_c_key ;
+
+
+SELECT CASE WHEN count(1)>0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)
+THEN 'MDS to DWH data validation failed for d_configuration_item.ci_pg_fda_status_c_key' ELSE 'SUCCESS' END as Message
+FROM png_mdsdb.cmdb_ci_final SRC
+JOIN pgcmdb_mdwdb.d_configuration_item TRGT
+ON SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id AND SRC.CDCTYPE<>'D'
+LEFT JOIN pgcmdb_mdwdb.d_lov LKP ON LKP.dimension_class='PG_FDA_STATUS_C~CMDB_CI' AND SRC.u_pg_fda_status=LKP.dimension_code
+WHERE COALESCE(LKP.row_key,(CASE WHEN SRC.u_pg_fda_status IS NULL THEN 0 ELSE -1 END))<>TRGT.ci_pg_fda_status_c_key ;
+
+
+SELECT CASE WHEN count(1)>0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)
+THEN 'MDS to DWH data validation failed for d_configuration_item.ci_operational_status_c_key' ELSE 'SUCCESS' END as Message
+FROM png_mdsdb.cmdb_ci_final SRC
+JOIN pgcmdb_mdwdb.d_configuration_item TRGT
+ON SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id AND SRC.CDCTYPE<>'D'
+LEFT JOIN pgcmdb_mdwdb.d_lov LKP ON LKP.dimension_class='OPERATIONAL_STATUS_C~CMDB_CI' AND SRC.operational_status=LKP.dimension_code
+WHERE COALESCE(LKP.row_key,(CASE WHEN SRC.operational_status IS NULL THEN 0 ELSE -1 END))<>TRGT.ci_operational_status_c_key ;
+
+
+SELECT CASE WHEN count(1)>0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)
+THEN 'MDS to DWH data validation failed for d_configuration_item.ci_pg_evp_solution_provider_c_key' ELSE 'SUCCESS' END as Message
+FROM png_mdsdb.cmdb_ci_final SRC
+JOIN pgcmdb_mdwdb.d_configuration_item TRGT
+ON SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id AND SRC.CDCTYPE<>'D'
+LEFT JOIN pgcmdb_mdwdb.d_lov LKP ON LKP.dimension_class='PG_EVP_SOLUTION_PROVIDER_C~CMDB_CI' AND SRC.u_pg_evp_solution_provider=LKP.dimension_code
+WHERE COALESCE(LKP.row_key,(CASE WHEN SRC.u_pg_evp_solution_provider IS NULL THEN 0 ELSE -1 END))<>TRGT.ci_pg_evp_solution_provider_c_key ;
+
+
+SELECT CASE WHEN count(1)>0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)
+THEN 'MDS to DWH data validation failed for d_configuration_item.ci_pg_evp_service_c_key' ELSE 'SUCCESS' END as Message
+FROM png_mdsdb.cmdb_ci_final SRC
+JOIN pgcmdb_mdwdb.d_configuration_item TRGT
+ON SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id AND SRC.CDCTYPE<>'D'
+LEFT JOIN pgcmdb_mdwdb.d_lov LKP ON LKP.dimension_class='PG_EVP_SERVICE_C~CMDB_CI' AND SRC.u_pg_evp_service=LKP.dimension_code
+WHERE COALESCE(LKP.row_key,(CASE WHEN SRC.u_pg_evp_service IS NULL THEN 0 ELSE -1 END))<>TRGT.ci_pg_evp_service_c_key ;
+
+
+SELECT CASE WHEN count(1)>0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)
+THEN 'MDS to DWH data validation failed for d_configuration_item.ci_pg_data_classification_c_key' ELSE 'SUCCESS' END as Message
+FROM png_mdsdb.cmdb_ci_final SRC
+JOIN pgcmdb_mdwdb.d_configuration_item TRGT
+ON SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id AND SRC.CDCTYPE<>'D'
+LEFT JOIN pgcmdb_mdwdb.d_lov LKP ON LKP.dimension_class='PG_DATA_CLASSIFICATION_C~CMDB_CI' AND SRC.u_pg_data_classificaion=LKP.dimension_code
+WHERE COALESCE(LKP.row_key,(CASE WHEN SRC.u_pg_data_classificaion IS NULL THEN 0 ELSE -1 END))<>TRGT.ci_pg_data_classification_c_key ;
+
+
+SELECT CASE WHEN count(1)>0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)
+THEN 'MDS to DWH data validation failed for d_configuration_item.hardware_pg_network_connected_c_key' ELSE 'SUCCESS' END as Message
+FROM png_mdsdb.cmdb_ci_final SRC
+LEFT JOIN png_mdsdb.cmdb_ci_hardware_final SRC1 ON SRC.sys_id=SRC1.sys_id AND SRC.sourceinstance=SRC1.sourceinstance
+JOIN pgcmdb_mdwdb.d_configuration_item TRGT
+ON SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id AND SRC.CDCTYPE<>'D'
+LEFT JOIN pgcmdb_mdwdb.d_lov LKP ON LKP.dimension_class='PG_NETWORK_CONNECTED_C~CMDB_CI_HARDWARE' AND SRC1.u_pg_yn_network_connected=LKP.dimension_code
+WHERE COALESCE(LKP.row_key,(CASE WHEN SRC1.u_pg_yn_network_connected IS NULL THEN 0 ELSE -1 END))<>TRGT.hardware_pg_network_connected_c_key ;
+
+
+SELECT CASE WHEN count(1)>0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)
+THEN 'MDS to DWH data validation failed for f_configuration_item.assigned_to_key' ELSE 'SUCCESS' END as Message
+FROM png_mdsdb.cmdb_ci_final SRC
+JOIN pgcmdb_mdwdb.f_configuration_item TRGT
+ON SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id AND SRC.CDCTYPE<>'D'
+LEFT JOIN (SELECT RIGHT(row_id,32) as row_id,source_id,row_key from pgcmdb_mdwdb.d_internal_contact) LKP ON SRC.assigned_to=LKP.row_id AND SRC.sourceinstance=LKP.source_id
+WHERE COALESCE(LKP.row_key,(CASE WHEN SRC.assigned_to IS NULL THEN 0 ELSE -1 END))<>TRGT.assigned_to_key ;
+
+
+SELECT CASE WHEN count(1)>0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)
+THEN 'MDS to DWH data validation failed for f_configuration_item.support_group_c_key' ELSE 'SUCCESS' END as Message
+FROM png_mdsdb.cmdb_ci_final SRC
+JOIN pgcmdb_mdwdb.f_configuration_item TRGT
+ON SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id AND SRC.CDCTYPE<>'D'
+LEFT JOIN (SELECT RIGHT(row_id,32) as row_id,source_id,row_key from pgcmdb_mdwdb.d_internal_organization) LKP ON SRC.support_group=LKP.row_id AND SRC.sourceinstance=LKP.source_id
+WHERE COALESCE(LKP.row_key,(CASE WHEN SRC.support_group IS NULL THEN 0 ELSE -1 END))<>TRGT.support_group_c_key ;
+
+
+SELECT CASE WHEN count(1)>0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)
+THEN 'MDS to DWH data validation failed for f_configuration_item.ci_asset_c_key' ELSE 'SUCCESS' END as Message
+FROM png_mdsdb.cmdb_ci_final SRC
+JOIN pgcmdb_mdwdb.f_configuration_item TRGT
+ON SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id AND SRC.CDCTYPE<>'D'
+LEFT JOIN (SELECT RIGHT(row_id,32) as row_id,source_id,row_key from pgcmdb_mdwdb.d_asset) LKP ON SRC.asset=LKP.row_id AND SRC.sourceinstance=LKP.source_id
+WHERE COALESCE(LKP.row_key,(CASE WHEN SRC.asset IS NULL THEN 0 ELSE -1 END))<>TRGT.ci_asset_c_key ;
+
+
+SELECT CASE WHEN count(1)>0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)
+THEN 'MDS to DWH data validation failed for f_configuration_item.ci_cost_center_c_key' ELSE 'SUCCESS' END as Message
+FROM png_mdsdb.cmdb_ci_final SRC
+JOIN pgcmdb_mdwdb.f_configuration_item TRGT
+ON SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id AND SRC.CDCTYPE<>'D'
+LEFT JOIN pgcmdb_mdwdb.d_cost_center LKP ON SRC.cost_center=LKP.row_id AND SRC.sourceinstance=LKP.source_id
+WHERE COALESCE(LKP.row_key,(CASE WHEN SRC.cost_center IS NULL THEN 0 ELSE -1 END))<>TRGT.ci_cost_center_c_key ;
+
+
+
+SELECT CASE WHEN count(1)>0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)
+THEN 'MDS to DWH data validation failed for d_configuration_item_ext_c.os_version_c' ELSE 'SUCCESS' END as Message
+FROM png_mdsdb.cmdb_ci_final SRC
+LEFT JOIN png_mdsdb.cmdb_ci_computer_final SRC1 ON SRC.sys_id=SRC1.sys_id AND SRC.sourceinstance=SRC1.sourceinstance
+JOIN pgcmdb_mdwdb.d_configuration_item_ext_c TRGT
+ON SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id AND SRC.CDCTYPE<>'D'
+WHERE COALESCE(SRC1.os_version,'UNSPECIFIED')<>TRGT.os_version_c ;
+
+
+SELECT CASE WHEN count(1)>0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)
+THEN 'MDS to DWH data validation failed for d_configuration_item_ext_c.ram_c' ELSE 'SUCCESS' END as Message
+FROM png_mdsdb.cmdb_ci_final SRC
+LEFT JOIN png_mdsdb.cmdb_ci_computer_final SRC1 ON SRC.sys_id=SRC1.sys_id AND SRC.sourceinstance=SRC1.sourceinstance
+JOIN pgcmdb_mdwdb.d_configuration_item_ext_c TRGT
+ON SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id AND SRC.CDCTYPE<>'D'
+WHERE SRC1.ram<>TRGT.ram_c ;
+
+
+SELECT CASE WHEN count(1)>0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)
+THEN 'MDS to DWH data validation failed for d_configuration_item_ext_c.virtual_c_flag' ELSE 'SUCCESS' END as Message
+FROM png_mdsdb.cmdb_ci_final SRC
+LEFT JOIN png_mdsdb.cmdb_ci_computer_final SRC1 ON SRC.sys_id=SRC1.sys_id AND SRC.sourceinstance=SRC1.sourceinstance
+JOIN pgcmdb_mdwdb.d_configuration_item_ext_c TRGT
+ON SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id AND SRC.CDCTYPE<>'D'
+WHERE CASE WHEN SRC1.virtual=1 THEN 'Y' ELSE 'N' END <>TRGT.virtual_c_flag ;
+
+
+SELECT CASE WHEN count(1)>0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)
+THEN 'MDS to DWH data validation failed for d_configuration_item_ext_c.cpu_name_c' ELSE 'SUCCESS' END as Message
+FROM png_mdsdb.cmdb_ci_final SRC
+LEFT JOIN png_mdsdb.cmdb_ci_computer_final SRC1 ON SRC.sys_id=SRC1.sys_id AND SRC.sourceinstance=SRC1.sourceinstance
+JOIN pgcmdb_mdwdb.d_configuration_item_ext_c TRGT
+ON SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id AND SRC.CDCTYPE<>'D'
+WHERE COALESCE(SRC1.cpu_name,'UNSPECIFIED')<>TRGT.cpu_name_c ;
+
+
+SELECT CASE WHEN count(1)>0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)
+THEN 'MDS to DWH data validation failed for d_configuration_item_ext_c.short_description_c' ELSE 'SUCCESS' END as Message
+FROM png_mdsdb.cmdb_ci_final SRC
+LEFT JOIN png_mdsdb.cmdb_ci_computer_final SRC1 ON SRC.sys_id=SRC1.sys_id AND SRC.sourceinstance=SRC1.sourceinstance
+JOIN pgcmdb_mdwdb.d_configuration_item_ext_c TRGT
+ON SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id AND SRC.CDCTYPE<>'D'
+WHERE COALESCE(SRC.short_description,'UNSPECIFIED')<>TRGT.short_description_c ;
+
+
+SELECT CASE WHEN count(1)>0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)
+THEN 'MDS to DWH data validation failed for d_configuration_item_ext_c.u_pg_os_minor_version_c' ELSE 'SUCCESS' END as Message
+FROM png_mdsdb.cmdb_ci_final SRC
+LEFT JOIN png_mdsdb.cmdb_ci_computer_final SRC1 ON SRC.sys_id=SRC1.sys_id AND SRC.sourceinstance=SRC1.sourceinstance
+JOIN pgcmdb_mdwdb.d_configuration_item_ext_c TRGT
+ON SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id AND SRC.CDCTYPE<>'D'
+WHERE COALESCE(SRC1.u_pg_os_minor_version,'UNSPECIFIED')<>TRGT.u_pg_os_minor_version_c ;
+
+
+SELECT CASE WHEN count(1)>0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)
+THEN 'MDS to DWH data validation failed for d_configuration_item_ext_c.cpu_type_c' ELSE 'SUCCESS' END as Message
+FROM png_mdsdb.cmdb_ci_final SRC
+LEFT JOIN png_mdsdb.cmdb_ci_computer_final SRC1 ON SRC.sys_id=SRC1.sys_id AND SRC.sourceinstance=SRC1.sourceinstance
+JOIN pgcmdb_mdwdb.d_configuration_item_ext_c TRGT
+ON SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id AND SRC.CDCTYPE<>'D'
+WHERE COALESCE(SRC1.cpu_type,'UNSPECIFIED')<>TRGT.cpu_type_c ;
+
+
+SELECT CASE WHEN count(1)>0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)
+THEN 'MDS to DWH data validation failed for d_configuration_item_ext_c.cpu_speed_c' ELSE 'SUCCESS' END as Message
+FROM png_mdsdb.cmdb_ci_final SRC
+LEFT JOIN png_mdsdb.cmdb_ci_computer_final SRC1 ON SRC.sys_id=SRC1.sys_id AND SRC.sourceinstance=SRC1.sourceinstance
+JOIN pgcmdb_mdwdb.d_configuration_item_ext_c TRGT
+ON SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id AND SRC.CDCTYPE<>'D'
+WHERE SRC1.cpu_speed<>TRGT.cpu_speed_c ;
+
+
+SELECT CASE WHEN count(1)>0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)
+THEN 'MDS to DWH data validation failed for d_configuration_item_ext_c.cpu_count_c' ELSE 'SUCCESS' END as Message
+FROM png_mdsdb.cmdb_ci_final SRC
+LEFT JOIN png_mdsdb.cmdb_ci_computer_final SRC1 ON SRC.sys_id=SRC1.sys_id AND SRC.sourceinstance=SRC1.sourceinstance
+JOIN pgcmdb_mdwdb.d_configuration_item_ext_c TRGT
+ON SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id AND SRC.CDCTYPE<>'D'
+WHERE SRC1.cpu_count<>TRGT.cpu_count_c ;
+
+
+SELECT CASE WHEN count(1)>0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)
+THEN 'MDS to DWH data validation failed for d_configuration_item_ext_c.cpu_core_thread_c' ELSE 'SUCCESS' END as Message
+FROM png_mdsdb.cmdb_ci_final SRC
+LEFT JOIN png_mdsdb.cmdb_ci_computer_final SRC1 ON SRC.sys_id=SRC1.sys_id AND SRC.sourceinstance=SRC1.sourceinstance
+JOIN pgcmdb_mdwdb.d_configuration_item_ext_c TRGT
+ON SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id AND SRC.CDCTYPE<>'D'
+WHERE SRC1.cpu_core_thread<>TRGT.cpu_core_thread_c ;
+
+
+SELECT CASE WHEN count(1)>0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)
+THEN 'MDS to DWH data validation failed for d_configuration_item_ext_c.cpu_core_count_c' ELSE 'SUCCESS' END as Message
+FROM png_mdsdb.cmdb_ci_final SRC
+LEFT JOIN png_mdsdb.cmdb_ci_computer_final SRC1 ON SRC.sys_id=SRC1.sys_id AND SRC.sourceinstance=SRC1.sourceinstance
+JOIN pgcmdb_mdwdb.d_configuration_item_ext_c TRGT
+ON SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id AND SRC.CDCTYPE<>'D'
+WHERE SRC1.cpu_core_count<>TRGT.cpu_core_count_c ;
+
+
+SELECT CASE WHEN count(1)>0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)
+THEN 'MDS to DWH data validation failed for d_configuration_item_ext_c.u_pg_sap_fixed_asset_number_c' ELSE 'SUCCESS' END as Message
+FROM png_mdsdb.cmdb_ci_final SRC
+LEFT JOIN png_mdsdb.cmdb_ci_computer_final SRC1 ON SRC.sys_id=SRC1.sys_id AND SRC.sourceinstance=SRC1.sourceinstance
+JOIN pgcmdb_mdwdb.d_configuration_item_ext_c TRGT
+ON SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id AND SRC.CDCTYPE<>'D'
+WHERE COALESCE(SRC1.u_pg_sap_fixed_asset_number,'UNSPECIFIED')<>TRGT.u_pg_sap_fixed_asset_number_c ;
+
+
+SELECT CASE WHEN count(1)>0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)
+THEN 'MDS to DWH data validation failed for d_configuration_item_ext_c.u_pg_data_classification_reason_c' ELSE 'SUCCESS' END as Message
+FROM png_mdsdb.cmdb_ci_final SRC
+LEFT JOIN png_mdsdb.cmdb_ci_computer_final SRC1 ON SRC.sys_id=SRC1.sys_id AND SRC.sourceinstance=SRC1.sourceinstance
+JOIN pgcmdb_mdwdb.d_configuration_item_ext_c TRGT
+ON SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id AND SRC.CDCTYPE<>'D'
+WHERE COALESCE(SRC1.u_pg_data_classification_reason,'UNSPECIFIED')<>TRGT.u_pg_data_classification_reason_c ;
+
+
+SELECT CASE WHEN count(1)>0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)
+THEN 'MDS to DWH data validation failed for d_configuration_item_ext_c.os_c_key' ELSE 'SUCCESS' END as Message
+FROM png_mdsdb.cmdb_ci_final SRC
+LEFT JOIN png_mdsdb.cmdb_ci_computer_final SRC1 ON SRC.sys_id=SRC1.sys_id AND SRC.sourceinstance=SRC1.sourceinstance
+JOIN pgcmdb_mdwdb.d_configuration_item_ext_c TRGT
+ON SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id AND SRC.CDCTYPE<>'D'
+LEFT JOIN pgcmdb_mdwdb.d_lov LKP ON LKP.dimension_class='OS_C~CMDB_CI_COMPUTER' AND SRC1.os=LKP.dimension_code
+WHERE COALESCE(LKP.row_key,(CASE WHEN SRC1.os IS NULL THEN 0 ELSE -1 END))<>TRGT.os_c_key ;
+
+
+SELECT CASE WHEN count(1)>0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)
+THEN 'MDS to DWH data validation failed for d_configuration_item_ext_c.os_vendor_c_key' ELSE 'SUCCESS' END as Message
+FROM png_mdsdb.cmdb_ci_final SRC
+LEFT JOIN png_mdsdb.cmdb_ci_computer_final SRC1 ON SRC.sys_id=SRC1.sys_id AND SRC.sourceinstance=SRC1.sourceinstance
+JOIN pgcmdb_mdwdb.d_configuration_item_ext_c TRGT
+ON SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id AND SRC.CDCTYPE<>'D'
+LEFT JOIN (SELECT RIGHT(row_id,32) as row_id,source_id,row_key from pgcmdb_mdwdb.d_internal_organization) LKP ON SRC1.u_pg_os_vendor=LKP.row_id AND SRC1.sourceinstance=LKP.source_id
+WHERE COALESCE(LKP.row_key,(CASE WHEN SRC1.u_pg_os_vendor IS NULL THEN 0 ELSE -1 END))<>TRGT.os_vendor_c_key ;
+
+
+SELECT CASE WHEN count(1)>0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)
+THEN 'MDS to DWH data validation failed for d_configuration_item_ext_c.cpu_manufacturer_c_key' ELSE 'SUCCESS' END as Message
+FROM png_mdsdb.cmdb_ci_final SRC
+LEFT JOIN png_mdsdb.cmdb_ci_computer_final SRC1 ON SRC.sys_id=SRC1.sys_id AND SRC.sourceinstance=SRC1.sourceinstance
+JOIN pgcmdb_mdwdb.d_configuration_item_ext_c TRGT
+ON SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id AND SRC.CDCTYPE<>'D'
+LEFT JOIN (SELECT RIGHT(row_id,32) as row_id,source_id,row_key from pgcmdb_mdwdb.d_internal_organization) LKP ON SRC1.cpu_manufacturer=LKP.row_id AND SRC1.sourceinstance=LKP.source_id
+WHERE COALESCE(LKP.row_key,(CASE WHEN SRC1.cpu_manufacturer IS NULL THEN 0 ELSE -1 END))<>TRGT.cpu_manufacturer_c_key ;
+
+
+SELECT CASE WHEN count(1)>0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)
+THEN 'MDS to DWH data validation failed for d_configuration_item_ext_c.pg_ics_firewall_c_key' ELSE 'SUCCESS' END as Message
+FROM png_mdsdb.cmdb_ci_final SRC
+LEFT JOIN png_mdsdb.cmdb_ci_computer_final SRC1 ON SRC.sys_id=SRC1.sys_id AND SRC.sourceinstance=SRC1.sourceinstance
+JOIN pgcmdb_mdwdb.d_configuration_item_ext_c TRGT
+ON SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id AND SRC.CDCTYPE<>'D'
+LEFT JOIN pgcmdb_mdwdb.d_lov LKP ON LKP.dimension_class='ICS_FIREWALL_C~CMDB_CI_COMPUTER' AND SRC1.u_pg_yn_above_ics_firewall=LKP.dimension_code
+WHERE COALESCE(LKP.row_key,(CASE WHEN SRC1.u_pg_yn_above_ics_firewall IS NULL THEN 0 ELSE -1 END))<>TRGT.pg_ics_firewall_c_key ;
+
+
+SELECT CASE WHEN count(1)>0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)
+THEN 'MDS to DWH data validation failed for d_configuration_item_ext_c.pg_iq_oq_c_key' ELSE 'SUCCESS' END as Message
+FROM png_mdsdb.cmdb_ci_final SRC
+LEFT JOIN png_mdsdb.cmdb_ci_computer_final SRC1 ON SRC.sys_id=SRC1.sys_id AND SRC.sourceinstance=SRC1.sourceinstance
+JOIN pgcmdb_mdwdb.d_configuration_item_ext_c TRGT
+ON SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id AND SRC.CDCTYPE<>'D'
+LEFT JOIN pgcmdb_mdwdb.d_lov LKP ON LKP.dimension_class='IQ_OQ_C~CMDB_CI_COMPUTER' AND SRC1.u_pg_yn_iq_oq=LKP.dimension_code
+WHERE COALESCE(LKP.row_key,(CASE WHEN SRC1.u_pg_yn_iq_oq IS NULL THEN 0 ELSE -1 END))<>TRGT.pg_iq_oq_c_key ;
+
+
+SELECT CASE WHEN count(1)>0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)
+THEN 'MDS to DWH data validation failed for d_configuration_item_ext_c.pg_byod_c_key' ELSE 'SUCCESS' END as Message
+FROM png_mdsdb.cmdb_ci_final SRC
+LEFT JOIN png_mdsdb.cmdb_ci_computer_final SRC1 ON SRC.sys_id=SRC1.sys_id AND SRC.sourceinstance=SRC1.sourceinstance
+JOIN pgcmdb_mdwdb.d_configuration_item_ext_c TRGT
+ON SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id AND SRC.CDCTYPE<>'D'
+LEFT JOIN pgcmdb_mdwdb.d_lov LKP ON LKP.dimension_class='BYOD_C~CMDB_CI_COMPUTER' AND SRC1.u_pg_yn_byod=LKP.dimension_code
+WHERE COALESCE(LKP.row_key,(CASE WHEN SRC1.u_pg_yn_byod IS NULL THEN 0 ELSE -1 END))<>TRGT.pg_byod_c_key ;
+
+
+SELECT CASE WHEN count(1)>0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)
+THEN 'MDS to DWH data validation failed for d_configuration_item_ext_c.pg_data_type_c_key' ELSE 'SUCCESS' END as Message
+FROM png_mdsdb.cmdb_ci_final SRC
+LEFT JOIN png_mdsdb.cmdb_ci_computer_final SRC1 ON SRC.sys_id=SRC1.sys_id AND SRC.sourceinstance=SRC1.sourceinstance
+JOIN pgcmdb_mdwdb.d_configuration_item_ext_c TRGT
+ON SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id AND SRC.CDCTYPE<>'D'
+LEFT JOIN pgcmdb_mdwdb.d_lov LKP ON LKP.dimension_class='DATA_TYPE_C~CMDB_CI_COMPUTER' AND SRC1.u_pg_ii_data_type=LKP.dimension_code
+WHERE COALESCE(LKP.row_key,(CASE WHEN SRC1.u_pg_ii_data_type IS NULL THEN 0 ELSE -1 END))<>TRGT.pg_data_type_c_key ;
+
+
+SELECT CASE WHEN count(1)>0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)
+THEN 'MDS to DWH data validation failed for d_configuration_item.support_group' ELSE 'SUCCESS' END as Message
+FROM png_mdsdb.cmdb_ci_final SRC
+JOIN pgcmdb_mdwdb.f_configuration_item TRGT
+ON SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id AND SRC.CDCTYPE<>'D'
+JOIN pgcmdb_mdwdb.d_configuration_item d on TRGT.configuration_item_key=d.row_key
+LEFT JOIN (SELECT RIGHT(row_id,32) as row_id,source_id,row_key,organization_name from pgcmdb_mdwdb.d_internal_organization) LKP ON SRC.support_group=LKP.row_id AND SRC.sourceinstance=LKP.source_id
+WHERE d.support_group<>LKP.organization_name ;
+
+
+SELECT CASE WHEN count(1)>0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)
+THEN 'MDS to DWH data validation failed for d_configuration_item.assigned_to' ELSE 'SUCCESS' END as Message
+FROM png_mdsdb.cmdb_ci_final SRC
+JOIN pgcmdb_mdwdb.f_configuration_item TRGT
+ON SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id AND SRC.CDCTYPE<>'D'
+JOIN pgcmdb_mdwdb.d_configuration_item d on TRGT.configuration_item_key=d.row_key
+LEFT JOIN (SELECT RIGHT(row_id,32) as row_id,source_id,row_key,full_name from pgcmdb_mdwdb.d_internal_contact) LKP ON SRC.assigned_to=LKP.row_id AND SRC.sourceinstance=LKP.source_id
+WHERE d.assigned_to<>LKP.full_name ;
+
+
+SELECT CASE WHEN count(1)>0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)
+THEN 'MDS to DWH data validation failed for d_configuration_item.application_c_key' ELSE 'SUCCESS' END as Message
+FROM png_mdsdb.cmdb_ci_final SRC
+LEFT JOIN png_mdsdb.cmdb_ci_appl_final SRC1 ON SRC.sys_id=SRC1.sys_id AND SRC.sourceinstance=SRC1.sourceinstance
+JOIN pgcmdb_mdwdb.d_configuration_item TRGT
+ON SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id AND SRC.CDCTYPE<>'D'
+JOIN pgcmdb_mdwdb.d_application LKP ON CONCAT('APPLICATION~',SRC1.sys_id)=LKP.row_id AND SRC.sourceinstance=LKP.source_id
+WHERE COALESCE(LKP.row_key,(CASE WHEN SRC1.sys_id IS NULL THEN 0 ELSE -1 END))<>TRGT.application_c_key ;
+
+
+SELECT CASE WHEN count(1)>0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)
+THEN 'MDS to DWH data validation failed for d_application.u_pg_category_c' ELSE 'SUCCESS' END as Message
+FROM png_mdsdb.cmdb_ci_appl_final SRC
+JOIN pgcmdb_mdwdb.d_application TRGT
+ON CONCAT('APPLICATION~',SRC.sys_id) = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id AND SRC.CDCTYPE<>'D'
+WHERE COALESCE(u_pg_category,'UNSPECIFIED')<>TRGT.u_pg_category_c ;
+
+SELECT CASE WHEN count(1)>0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)
+THEN 'MDS to DWH data validation failed for d_configuration_item.configuration_item_ext_c_key' ELSE 'SUCCESS' END as Message
+FROM png_mdsdb.cmdb_ci_final SRC
+JOIN pgcmdb_mdwdb.d_configuration_item TRGT
+ON SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id AND SRC.CDCTYPE<>'D'
+JOIN pgcmdb_mdwdb.d_configuration_item_ext_c LKP ON SRC.sys_id=LKP.row_id AND SRC.sourceinstance=LKP.source_id
+WHERE COALESCE(LKP.row_key,(CASE WHEN SRC.sys_id IS NULL THEN 0 ELSE -1 END))<>TRGT.configuration_item_ext_c_key ;
+
+SELECT CASE WHEN count(1)>0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)
+THEN 'MDS to DWH data validation failed for f_configuration_item.ci_managed_by_c_key' ELSE 'SUCCESS' END as Message
+FROM png_mdsdb.cmdb_ci_final SRC
+JOIN pgcmdb_mdwdb.f_configuration_item TRGT
+ON SRC.sys_id = TRGT.row_id AND SRC.sourceinstance = TRGT.source_id AND SRC.CDCTYPE<>'D'
+JOIN (SELECT RIGHT(row_id,32) as row_id,source_id,row_key from pgcmdb_mdwdb.d_internal_contact) LKP ON SRC.managed_by=LKP.row_id AND SRC.sourceinstance=LKP.source_id
+WHERE COALESCE(LKP.row_key,(CASE WHEN SRC.managed_by IS NULL THEN 0 ELSE -1 END))<>TRGT.ci_managed_by_c_key ;
+
+Application_Relationship:
+
+
+select CASE WHEN count(1)>0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)
+THEN 'MDS to DWH data validation failed for d_configuration_item_ext_c.application_relationship_c' ELSE 'SUCCESS' END as Message
+from png_mdsdb.cmdb_ci_final SRC
+join pgcmdb_mdwdb.d_configuration_item_ext_c TRGT ON SRC.sys_id=TRGT.row_id and SRC.sourceinstance=TRGT.source_id
+left join(select b.child,b.sourceinstance,group_concat(distinct d.name separator ' , ') as application_relationship
+from png_mdsdb.cmdb_ci_hardware_final a
+join png_mdsdb.cmdb_rel_ci_final b on a.sys_id=b.child and a.sourceinstance=b.sourceinstance 
+join png_mdsdb.cmdb_rel_type_final c on b.type=c.sys_id and c.sourceinstance=b.sourceinstance 
+AND c.name='Runs on::Runs' 
+join png_mdsdb.cmdb_ci_final d on b.parent=d.sys_id and b.sourceinstance=d.sourceinstance
+where a.cdctype<>'D'
+group by b.child, b.sourceinstance
+) LKP ON SRC.sys_id=LKP.child AND SRC.sourceinstance=LKP.sourceinstance
+WHERE COALESCE(LKP.application_relationship,'UNSPECIFIED') <> TRGT.application_relationship_c;
+
+
+Application_Platform :
+
+select CASE WHEN count(1)>0  THEN 'FAILURE' ELSE 'SUCCESS' END as Result, CASE WHEN count(1)
+THEN 'MDS to DWH data validation failed for d_configuration_item_ext_c.platform_c' ELSE 'SUCCESS' END as Message
+from png_mdsdb.cmdb_ci_final SRC
+join pgcmdb_mdwdb.d_configuration_item_ext_c TRGT ON SRC.sys_id=TRGT.row_id and SRC.sourceinstance=TRGT.source_id
+left join(select b.child,b.sourceinstance,group_concat(distinct d.name separator ' , ') as platform
+from png_mdsdb.cmdb_ci_hardware_final a
+join png_mdsdb.cmdb_rel_ci_final b on a.sys_id=b.child and a.sourceinstance=b.sourceinstance 
+join png_mdsdb.cmdb_rel_type_final c on b.type=c.sys_id and c.sourceinstance=b.sourceinstance 
+AND c.name='Runs on::Runs' 
+join png_mdsdb.cmdb_ci_final d on b.parent=d.sys_id and b.sourceinstance=d.sourceinstance
+join png_mdsdb.cmdb_ci_appl_final e on d.sys_id=e.sys_id and d.sourceinstance=e.sourceinstance
+where a.cdctype<>'D' and e.u_pg_category='application_platform'
+group by b.child, b.sourceinstance
+) LKP ON SRC.sys_id=LKP.child AND SRC.sourceinstance=LKP.sourceinstance
+WHERE COALESCE(LKP.platform,'UNSPECIFIED') <> TRGT.platform_c;
+
+Completeness Code:
+
+
+select d.row_key,completeness_total_count_c,completeness_scope_count_c,completeness_missing_data_c
+,s.u_number,s.name,s.serial_number,s.u_pg_bios_uuid, s.u_pg_source_system_id, s.mac_address, s.owned_by, s.location,s.last_discovered
+,s.assignment_group,s.model_id,s.manufacturer,s.sys_class_name,s.install_status,
+coalesce(c.hardware_status, sd.u_pg_hardware_status,e.u_pg_hardware_status) as hardware_status,
+coalesce(s.discovery_source,c.discovery_source, sd.discovery_source,e.discovery_source) as discovery_source,
+ c.u_pg_yn_network_connected
+from pgcmdb_mdwdb.f_configuration_item f
+join pgcmdb_mdwdb.d_configuration_item d on f.configuration_item_key=d.row_key
+join png_mdsdb.cmdb_ci_final s on d.row_id=s.sys_id and d.source_id=s.sourceinstance
+left join png_mdsdb.cmdb_ci_hardware_final c on s.sys_id=c.sys_id and s.sourceinstance=c.sourceinstance
+left join png_mdsdb.cmdb_ci_storage_device_final sd on s.sys_id=sd.sys_id and s.sourceinstance=sd.sourceinstance
+left join png_mdsdb.cmdb_ci_voice_hardware_final e on s.sys_id=e.sys_id and s.sourceinstance=e.sourceinstance
+where class='Server chassis' and f.soft_deleted_flag='N'					
+
+Correctness Code :
+
+select d.row_id,d.row_key,correctness_total_count_c,correctness_scope_count_c,correctness_missing_data_c
+,s.owned_by,su.active,s.location,cl.u_active,s.last_discovered,df.lastupdated,
+timestampdiff(second,convert_tz(s.last_discovered,'GMT','America/New_York'),df.lastupdated)/86400 as a
+,s.model_id,cd.name,s.sys_class_name,s.install_status,application_relationship_c
+,coalesce(c.hardware_status, sd.u_pg_hardware_status,e.u_pg_hardware_status) as hardware_status,
+coalesce(s.discovery_source,c.discovery_source, sd.discovery_source,e.discovery_source) as discovery_source,c.u_pg_yn_network_connected,
+ci.os,ci.ram,sg.name
+from pgcmdb_mdwdb.f_configuration_item f
+join pgcmdb_mdwdb.d_configuration_item d on f.configuration_item_key=d.row_key
+left join pgcmdb_mdwdb.d_configuration_item_ext_c de on d.configuration_item_ext_c_key=de.row_key
+join png_mdsdb.cmdb_ci_final s on d.row_id=s.sys_id and d.source_id=s.sourceinstance
+left join png_mdsdb.cmdb_ci_hardware_final c on s.sys_id=c.sys_id and s.sourceinstance=c.sourceinstance
+left join png_mdsdb.cmdb_ci_storage_device_final sd on s.sys_id=sd.sys_id and s.sourceinstance=sd.sourceinstance
+left join png_mdsdb.cmdb_ci_voice_hardware_final e on s.sys_id=e.sys_id and s.sourceinstance=e.sourceinstance
+left join png_mdsdb.cmdb_ci_computer_final ci on s.sys_id=ci.sys_id and s.sourceinstance=ci.sourceinstance
+left join png_mdsdb.sys_user_final su on s.owned_by=su.sys_id and s.sourceinstance=su.sourceinstance
+left join png_mdsdb.sys_user_group_final sg on s.assignment_group=sg.sys_id and s.sourceinstance=sg.sourceinstance
+left join png_mdsdb.cmn_location_final cl on s.location=cl.sys_id and s.sourceinstance=cl.sourceinstance
+left join png_mdsdb.cmdb_model_final cd on s.model_id=cd.sys_id and s.sourceinstance=cd.sourceinstance
+left join (select max(lastupdated) lastupdated,source_id from pgcmdb_mdwdb.d_o_data_freshness group by source_id) df on f.source_id=df.source_id
+where class='Server Chassis' and f.soft_deleted_flag='N';					
+
+
+Snapshot Code :
+
+Count check with base table :
+select count(*),n_key
+from pgcmdb_mdwdb.f_n_configuration_item_monthly_tgf_c
+where soft_deleted_flag='N'
+group by n_key;
+
+Base table query used:
+
+select count(*) from 
+(SELECT MAX(d.row_id) as row_id,
+       MAX(d.row_key) as row_key,
+       MAX(d.source_id) as source_id,
+       MAX(d.cdctype) as cdctype,
+       MAX(d.changed_by) as changed_by,
+       MAX(d.changed_on) as changed_on,
+       MAX(d.created_by) as created_by,
+       MAX(d.created_on) as created_on,
+	   MAX(d.dw_updated_on) as dw_updated_on,
+	   MAX(d.dw_inserted_on) as dw_inserted_on,
+       MAX(d.secondary1_changed_on) as secondary1_changed_on,
+       MAX(d.secondary2_changed_on) as secondary2_changed_on,
+       MAX(d.soft_deleted_flag) as soft_deleted_flag,
+       0 as calendar_code,
+	   MAX(d.created_on) as pivot_date,
+d.scorecard_name_c, f.assignment_group_key, d.location_key, d.cmdb_ci_discovery_source_c_key, d.class,
+SUM(f.completeness_total_count_c) as completeness_total_count_c, SUM(completeness_scope_count_c) as completeness_scope_count_c, SUM(correctness_total_count_c) as correctness_total_count_c, SUM(correctness_scope_count_c) as correctness_scope_count_c
+FROM pgcmdb_mdwdb.f_configuration_item f
+JOIN pgcmdb_mdwdb.d_configuration_item d ON f.configuration_item_key=d.row_key
+WHERE f.soft_deleted_flag='N' AND d.source_type_c='Service Now'
+GROUP BY d.scorecard_name_c, f.assignment_group_key, d.location_key, d.cmdb_ci_discovery_source_c_key, d.class
+) a;
+
