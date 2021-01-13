@@ -421,3 +421,11 @@ on (a119.month_start_date_key = a120.row_key) join ldb.d_problem_calendar_quarte
 on (a120.quarter_start_date_key = a121.row_key)
 join ldb.d_problem_calendar_year a165
 on (a121.year_start_date_key = a165.row_key)
+union
+select 'ldb.d_lov_problem_erca_status_c a125 ' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_problem a11
+join ldb.d_problem a114
+on (a11.problem_key = a114.row_key)
+join ldb.d_lov_problem_erca_status_c a125
+on (a114.erca_status_src_c_key = a125.row_key)
+
