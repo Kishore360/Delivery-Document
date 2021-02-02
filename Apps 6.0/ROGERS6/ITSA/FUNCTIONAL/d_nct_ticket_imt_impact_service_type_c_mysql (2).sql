@@ -1,42 +1,36 @@
-SELECT CASE WHEN count(1) > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
- CASE WHEN count(1) >0 THEN 'MDS to DWH data validation failed' ELSE 'SUCCESS' END as Message
-FROM  
-rogers6_mdwdb.d_nct_ticket_c a 
- JOIN (                  SELECT
-
-            GROUP_CONCAT(DISTINCT d_imt_main_c.NETWORK_IMPACT 
-        ORDER BY
-            d_imt_main_c.NETWORK_IMPACT ASC SEPARATOR ' , ') AS Service_type,
-           d_nct_ticket_c.nct_id,
-            d_nct_ticket_c.sourceinstance     
-        FROM
-            rogers6_mdsdb.bmc_nct_ticket_final d_nct_ticket_c      
-        INNER JOIN
-            rogers6_mdsdb.bmc_com_associated_ticket_final d_com_associated_ticket_c 
-                ON d_nct_ticket_c.NCT_ID  = d_com_associated_ticket_c.SOURCE_ID 
-				and d_nct_ticket_c.sourceinstance = d_com_associated_ticket_c.sourceinstance 				
-                and d_com_associated_ticket_c.TICKET_CATEGORY  ='IMT - Cause' 
-        INNER JOIN
-            rogers6_mdsdb.bmc_imt_main_final d_imt_main_c 
-                ON d_com_associated_ticket_c.ASSOCIATED_ID  = d_imt_main_c.IMT_ID  
-				and  d_com_associated_ticket_c.sourceinstance  = d_imt_main_c.sourceinstance  
-                and CEIL(d_com_associated_ticket_c.status)=0 
-         
-        WHERE
-            d_nct_ticket_c.cdctype ='X' 
-            and d_com_associated_ticket_c.cdctype ='X' 
-            and d_imt_main_c.cdctype ='X' 
+SELECT 
+CASE WHEN CNT  > 0 THEN 'FAILURE' ELSE 'SUCCESS' END as Result,
+CASE WHEN CNT > 0 THEN 'MDS to DWH data validation failed' ELSE 'SUCCESS' END as Message
+ FROM
+ (
+ SELECT Count(1) as CNT 
+FROM rogers6_mdwdb.d_nct_ticket_c X 
+JOIN 
+(
+Select  
+SUM(CASE WHEN LKP.dimension_name='None' THEN 1 ELSE 0 END) AS none_cnt,
+SUM(CASE WHEN LKP.dimension_name='Degraded' THEN 1 ELSE 0 END) AS degrade_cnt,
+SUM(CASE WHEN LKP.dimension_name='Outage' THEN 1 ELSE 0  END) AS outage_cnt,
+SUM(CASE WHEN LKP.dimension_name<>'None' THEN 1 ELSE 0 END) AS impacting_cnt,
+GROUP_CONCAT(DISTINCT LKP.dimension_name ORDER BY LKP.dimension_name ASC SEPARATOR ' , ') AS Servict_type,
+COUNT(SRC3.row_key) AS inc_due_chg_cnt,
+SUM(CASE WHEN LKP.dimension_name='Threatened' THEN 1 ELSE 0 END) AS threatened_cnt,
+COUNT(SRC3.row_key) AS imt_cnt,
+SRC.row_key AS nct_key
+FROM rogers6_mdwdb.d_nct_ticket_c SRC
+JOIN rogers6_mdwdb.d_com_associated_ticket_c SRC1 ON SRC.row_key=SRC1.nct_ticket_c_key AND SRC1.com_associated_ticket_category_c ='IMT - Cause'
+JOIN rogers6_mdwdb.d_imt_main_c SRC3 ON SRC1.associated_imt_main_c_key=SRC3.row_key AND CEIL(SRC1.status_c)=0
+JOIN rogers6_mdwdb.d_lov LKP ON SRC3.network_impact_c_key=LKP.row_key 
+Where SRC.soft_deleted_flag ='N' AND SRC1.soft_deleted_flag ='N' AND SRC3.soft_deleted_flag ='N' AND SRC3.row_key > 0
+group by SRC.row_key
+) Y On X.row_key=Y.nct_key
+WHERE 
+(
+CASE 
+WHEN Y.Servict_type = 'None' THEN 'None Only'  
+WHEN Y.Servict_type = 'Outage' THEN 'Outage Only' 
+WHEN Y.Servict_type = 'Degraded' THEN 'Degraded Only' 
+WHEN Y.Servict_type = 'Threatened' THEN 'UNSPECIFIED'  ELSE replace (Y.Servict_type,'Threatened','UNSPECIFIED') END 
+)<> X.imt_impact_service_type_c
+ ) temp;
  
-        GROUP By
-            d_nct_ticket_c.nct_id,d_nct_ticket_c.sourceinstance  )b
-ON a.row_id = b.nct_id and a.source_id = b.sourceinstance 
-
-
-where
-a.imt_impact_service_type_c
- <>CASE              
-            WHEN b.Service_type = 'None' THEN 'None Only'               
-            WHEN b.Service_type = 'Outage' THEN 'Outage Only'              
-            WHEN b.Service_type = 'Degraded' THEN 'Degraded Only'              
-            WHEN b.Service_type = 'Threatened' THEN 'Threatened Only'              
-            ELSE b.Service_type END
