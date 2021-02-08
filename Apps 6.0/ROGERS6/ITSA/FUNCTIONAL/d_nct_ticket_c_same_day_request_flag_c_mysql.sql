@@ -8,5 +8,6 @@ FROM rogers6_mdsdb.bmc_nct_ticket_final  SRC
 JOIN rogers6_mdwdb.d_nct_ticket_c TRGT ON SRC.NCT_ID = TRGT.row_id AND SRC.sourceinstance=TRGT.source_id
 WHERE  
 IF(SRC.WINDOW_START_DATE_TIME = SRC.SUBMITTED_ON ,'Y', 'N') <> (TRGT.same_day_request_flag_c) 
-and TRGT.soft_deleted_flag ='N' and (CEIL(SRC.TRAINING_TICKET)<>0  or SRC.TRAINING_TICKET is null)
+and (CEIL(SRC.TRAINING_TICKET)<>0  or SRC.TRAINING_TICKET is null)
+AND SRC.cdctype='X'
 ) temp;
