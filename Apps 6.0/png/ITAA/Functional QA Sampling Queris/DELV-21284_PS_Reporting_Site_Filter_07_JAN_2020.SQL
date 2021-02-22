@@ -27,3 +27,6 @@ LEFT JOIN png_mdsdb.pg_mega_u_cmdb_ci_appl_instance_final SRC2 ON SRC.sys_id=SRC
 LEFT JOIN png_mdsdb.cmn_location_final SRC3 ON SRC2.u_pg_using_site=SRC3.sys_id
 Where SRC.u_pg_source_system_id IN ('094E0B63570650C9','0B4B0BC259281A87')
 AND SRC.cdctype='X';
+
+
+u_cmdb_ci_appl_instance.owned_by 

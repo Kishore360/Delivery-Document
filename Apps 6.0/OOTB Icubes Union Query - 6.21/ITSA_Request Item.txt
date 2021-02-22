@@ -1,0 +1,225 @@
+select 'ldb."F_REQUEST_ITEM" a11 ' as Table_name, count(a11.row_key) Row_Count
+from ldb."F_REQUEST_ITEM" a11
+union
+select 'ldb."D_REQUEST_ITEM_EMPLOYEE" a12 ' as Table_name, count(a11.row_key) Row_Count
+from ldb."F_REQUEST_ITEM" a11
+join "ldb"."D_REQUEST_ITEM_EMPLOYEE" a12
+on (a11.request_item_employee_key = a12.row_key)
+union
+select 'ldb."D_REQUEST_ITEM" a13 ' as Table_name, count(a11.row_key) Row_Count
+from ldb."F_REQUEST_ITEM" a11
+join "ldb"."D_REQUEST_ITEM" a13
+on (a11.request_item_key = a13.row_key)
+union
+select 'ldb."D_REQUEST_ITEM_ASSIGNED_TO" a14 ' as Table_name, count(a11.row_key) Row_Count
+from ldb."F_REQUEST_ITEM" a11
+join "ldb"."D_REQUEST_ITEM" a13
+on (a11.request_item_key = a13.row_key)
+join "ldb"."D_REQUEST_ITEM_ASSIGNED_TO" a14
+on (a13.assigned_to_key = a14.row_key)
+union
+select 'ldb."D_REQUEST_ITEM_ASSIGNMENT_GROUP" a15 ' as Table_name, count(a11.row_key) Row_Count
+from ldb."F_REQUEST_ITEM" a11
+join "ldb"."D_REQUEST_ITEM" a13
+on (a11.request_item_key = a13.row_key)
+join "ldb"."D_REQUEST_ITEM_ASSIGNMENT_GROUP" a15
+on (a13.assignment_group_key = a15.row_key)
+union
+select 'ldb."D_REQUEST_ITEM_DATE" a16 ' as Table_name, count(a11.row_key) Row_Count
+from ldb."F_REQUEST_ITEM" a11
+join "ldb"."D_REQUEST_ITEM_DATE" a16
+on (a11.request_item_date_key = a16.row_key)
+union
+select 'ldb."D_REQUEST_ITEM_CALENDAR_MONTH" a17 ' as Table_name, count(a11.row_key) Row_Count
+from ldb."F_REQUEST_ITEM" a11
+join "ldb"."D_REQUEST_ITEM_DATE" a16
+on (a11.request_item_date_key = a16.row_key)
+join "ldb"."D_REQUEST_ITEM_CALENDAR_MONTH" a17
+on (a16.month_start_date_key = a17.row_key)
+union
+select 'ldb."D_REQUEST_ITEM_CALENDAR_QUARTER" a18 ' as Table_name, count(a11.row_key) Row_Count
+from ldb."F_REQUEST_ITEM" a11
+join "ldb"."D_REQUEST_ITEM_DATE" a16
+on (a11.request_item_date_key = a16.row_key) join "ldb"."D_REQUEST_ITEM_CALENDAR_MONTH" a17
+on (a16.month_start_date_key = a17.row_key)
+join "ldb"."D_REQUEST_ITEM_CALENDAR_QUARTER" a18
+on (a17.quarter_start_date_key = a18.row_key)
+union
+select 'ldb."D_REQUEST_ITEM_MASTER_ITEM" a19 ' as Table_name, count(a11.row_key) Row_Count
+from ldb."F_REQUEST_ITEM" a11
+join "ldb"."D_REQUEST_ITEM" a13
+on (a11.request_item_key = a13.row_key)
+join "ldb"."D_REQUEST_ITEM_MASTER_ITEM" a19
+on (a13.catalog_item_key = a19.row_key)
+union
+select 'ldb."D_REQ_ITEM_OPENED_BY" a110 ' as Table_name, count(a11.row_key) Row_Count
+from ldb."F_REQUEST_ITEM" a11
+join "ldb"."D_REQUEST_ITEM" a13
+on (a11.request_item_key = a13.row_key)
+join "ldb"."D_REQ_ITEM_OPENED_BY" a110
+on (a13.opened_by_key = a110.row_key)
+union
+select 'ldb."D_REQUEST_ITEM_REQUESTED_FOR" a111 ' as Table_name, count(a11.row_key) Row_Count
+from ldb."F_REQUEST_ITEM" a11
+join "ldb"."D_REQUEST_ITEM" a13
+on (a11.request_item_key = a13.row_key)
+join "ldb"."D_REQUEST_ITEM_REQUESTED_FOR" a111
+on (a13.requested_for_key = a111.row_key)
+union
+select 'ldb."D_REQUEST" a112 ' as Table_name, count(a11.row_key) Row_Count
+from ldb."F_REQUEST_ITEM" a11
+join "ldb"."D_REQUEST" a112
+on (a11.request_key = a112.row_key)
+union
+select 'ldb."D_SC_REQ_ITEM_APPROVAL" a113 ' as Table_name, count(a11.row_key) Row_Count
+from ldb."F_REQUEST_ITEM" a11
+join "ldb"."D_SC_REQ_ITEM_APPROVAL" a113
+on (a11.approval_state_src_key = a113.row_key)
+union
+select 'ldb."D_REQUEST_ITEM_CONTACTTYPE" a114 ' as Table_name, count(a11.row_key) Row_Count
+from ldb."F_REQUEST_ITEM" a11
+join "ldb"."D_REQUEST_ITEM_CONTACTTYPE" a114
+on (a11.reported_type_src_key = a114.row_key)
+union
+select 'ldb."D_REQUEST_ITEM_DEPARTMENT" a115 ' as Table_name, count(a11.row_key) Row_Count
+from ldb."F_REQUEST_ITEM" a11
+join "ldb"."D_REQUEST_ITEM_EMPLOYEE" a12
+on (a11.request_item_employee_key = a12.row_key)
+join "ldb"."D_REQUEST_ITEM_DEPARTMENT" a115
+on (a12.department_key = a115.row_key)
+union
+select 'ldb."D_REQUEST_ITEM_EMPLOYEE_MDM" a116 ' as Table_name, count(a11.row_key) Row_Count
+from ldb."F_REQUEST_ITEM" a11
+join "ldb"."D_REQUEST_ITEM_EMPLOYEE" a12
+on (a11.request_item_employee_key = a12.row_key)
+join "ldb"."D_REQUEST_ITEM_EMPLOYEE_MDM" a116
+on (a12.employee_mdm_key = a116.row_key)
+union
+select 'ldb."D_SC_REQ_ITEM_IMPACT" a117 ' as Table_name, count(a11.row_key) Row_Count
+from ldb."F_REQUEST_ITEM" a11
+join "ldb"."D_SC_REQ_ITEM_IMPACT" a117
+on (a11.impact_src_key = a117.row_key)
+union
+select 'ldb."D_SC_REQ_ITEM_PRIORITY" a118 ' as Table_name, count(a11.row_key) Row_Count
+from ldb."F_REQUEST_ITEM" a11
+join "ldb"."D_SC_REQ_ITEM_PRIORITY" a118
+on (a11.priority_src_key = a118.row_key)
+union
+select 'ldb."D_REQUEST_ITEM_STAGE" a119 ' as Table_name, count(a11.row_key) Row_Count
+from ldb."F_REQUEST_ITEM" a11
+join "ldb"."D_REQUEST_ITEM_STAGE" a119
+on (a11.stage_src_key = a119.row_key)
+union
+select 'ldb."D_REQUEST_ITEM_STATE" a120 ' as Table_name, count(a11.row_key) Row_Count
+from ldb."F_REQUEST_ITEM" a11
+join "ldb"."D_REQUEST_ITEM_STATE" a120
+on (a11.state_src_key = a120.row_key)
+union
+select 'ldb."D_SC_REQ_ITEM_URGENCY" a121 ' as Table_name, count(a11.row_key) Row_Count
+from ldb."F_REQUEST_ITEM" a11
+join "ldb"."D_SC_REQ_ITEM_URGENCY" a121
+on (a11.urgency_src_key = a121.row_key)
+union
+select 'ldb."D_INTERNAL_CONTACT_REQUESTED_FOR" a122 ' as Table_name, count(a11.row_key) Row_Count
+from ldb."F_REQUEST_ITEM" a11
+join "ldb"."D_INTERNAL_CONTACT_REQUESTED_FOR" a122
+on (a11.requested_for_key = a122.row_key)
+union
+select 'ldb."D_REQUEST_ITEM_CALENDAR_WEEK" a123 ' as Table_name, count(a11.row_key) Row_Count
+from ldb."F_REQUEST_ITEM" a11
+join "ldb"."D_REQUEST_ITEM_DATE" a16
+on (a11.request_item_date_key = a16.row_key)
+join "ldb"."D_REQUEST_ITEM_CALENDAR_WEEK" a123
+on (a16.week_start_date_key = a123.row_key)
+union
+select 'ldb."D_REQUEST_ITEM_CLOSED_BY" a124 ' as Table_name, count(a11.row_key) Row_Count
+from ldb."F_REQUEST_ITEM" a11
+join "ldb"."D_REQUEST_ITEM" a13
+on (a11.request_item_key = a13.row_key)
+join "ldb"."D_REQUEST_ITEM_CLOSED_BY" a124
+on (a13.closed_by_key = a124.row_key)
+union
+select 'ldb."D_REQUEST_ITEM_HR_CHANGE_CATEGORY" a125 ' as Table_name, count(a11.row_key) Row_Count
+from ldb."F_REQUEST_ITEM" a11
+join "ldb"."D_REQUEST_ITEM" a13
+on (a11.request_item_key = a13.row_key)
+join "ldb"."D_REQUEST_ITEM_HR_CHANGE_CATEGORY" a125
+on (a13.hr_category_src_key = a125.row_key)
+union
+select 'ldb."D_REQUEST_ITEM_HR_CHANGE" a126 ' as Table_name, count(a11.row_key) Row_Count
+from ldb."F_REQUEST_ITEM" a11
+join "ldb"."D_REQUEST_ITEM" a13
+on (a11.request_item_key = a13.row_key)
+join "ldb"."D_REQUEST_ITEM_HR_CHANGE" a126
+on (a13.hr_change_key = a126.row_key)
+union
+select 'ldb."D_REQUEST_ITEM_LOCATION" a127 ' as Table_name, count(a11.row_key) Row_Count
+from ldb."F_REQUEST_ITEM" a11
+join "ldb"."D_REQUEST_ITEM" a13
+on (a11.request_item_key = a13.row_key)
+join "ldb"."D_REQUEST_ITEM_LOCATION" a127
+on (a13.location_key = a127.row_key)
+union
+select 'ldb."D_REQUEST_LOCATION" a128 ' as Table_name, count(a11.row_key) Row_Count
+from ldb."F_REQUEST_ITEM" a11
+join "ldb"."D_REQUEST" a112
+on (a11.request_key = a112.row_key)
+join "ldb"."D_REQUEST_LOCATION" a128
+on (a112.location_key = a128.row_key)
+union
+select 'ldb."D_REQUEST_ITEM_ASSIGNMENT_GROUP_MANAGER" a129 ' as Table_name, count(a11.row_key) Row_Count
+from ldb."F_REQUEST_ITEM" a11
+join "ldb"."D_REQUEST_ITEM" a13
+on (a11.request_item_key = a13.row_key) join "ldb"."D_REQUEST_ITEM_ASSIGNMENT_GROUP" a15
+on (a13.assignment_group_key = a15.row_key)
+join "ldb"."D_REQUEST_ITEM_ASSIGNMENT_GROUP_MANAGER" a129
+on (a15.manager_key = a129.row_key)
+union
+select 'ldb."D_REQUEST_ITEM_ITEM_CATEGORY" a130 ' as Table_name, count(a11.row_key) Row_Count
+from ldb."F_REQUEST_ITEM" a11
+join "ldb"."D_REQUEST_ITEM" a13
+on (a11.request_item_key = a13.row_key) join "ldb"."D_REQUEST_ITEM_MASTER_ITEM" a19
+on (a13.catalog_item_key = a19.row_key)
+join "ldb"."D_REQUEST_ITEM_ITEM_CATEGORY" a130
+on (a19.item_category_key = a130.row_key)
+union
+select 'ldb."d_request_item_item_type" a131 ' as Table_name, count(a11.row_key) Row_Count
+from ldb."F_REQUEST_ITEM" a11
+join "ldb"."D_REQUEST_ITEM" a13
+on (a11.request_item_key = a13.row_key) join "ldb"."D_REQUEST_ITEM_MASTER_ITEM" a19
+on (a13.catalog_item_key = a19.row_key)
+join "ldb"."d_request_item_item_type" a131
+on (a19.item_type_code_key = a131.row_key)
+union
+select 'ldb."D_REQ_ITEM_OPEN_BY_DEPT" a132 ' as Table_name, count(a11.row_key) Row_Count
+from ldb."F_REQUEST_ITEM" a11
+join "ldb"."D_REQUEST_ITEM" a13
+on (a11.request_item_key = a13.row_key) join "ldb"."D_REQ_ITEM_OPENED_BY" a110
+on (a13.opened_by_key = a110.row_key)
+join "ldb"."D_REQ_ITEM_OPEN_BY_DEPT" a132
+on (a110.department_key = a132.row_key)
+union
+select 'ldb."D_REQ_ITEM_OPEN_BY_LOC" a133 ' as Table_name, count(a11.row_key) Row_Count
+from ldb."F_REQUEST_ITEM" a11
+join "ldb"."D_REQUEST_ITEM" a13
+on (a11.request_item_key = a13.row_key) join "ldb"."D_REQ_ITEM_OPENED_BY" a110
+on (a13.opened_by_key = a110.row_key)
+join "ldb"."D_REQ_ITEM_OPEN_BY_LOC" a133
+on (a110.location_key = a133.row_key)
+union
+select 'ldb."D_REQ_ITEM_REQ_FOR_LOC" a134 ' as Table_name, count(a11.row_key) Row_Count
+from ldb."F_REQUEST_ITEM" a11
+join "ldb"."D_REQUEST_ITEM" a13
+on (a11.request_item_key = a13.row_key) join "ldb"."D_REQUEST_ITEM_REQUESTED_FOR" a111
+on (a13.requested_for_key = a111.row_key)
+join "ldb"."D_REQ_ITEM_REQ_FOR_LOC" a134
+on (a111.location_key = a134.row_key)
+union
+select 'ldb."D_REQUEST_ITEM_CALENDAR_YEAR" a135 ' as Table_name, count(a11.row_key) Row_Count
+from ldb."F_REQUEST_ITEM" a11
+join "ldb"."D_REQUEST_ITEM_DATE" a16
+on (a11.request_item_date_key = a16.row_key) join "ldb"."D_REQUEST_ITEM_CALENDAR_MONTH" a17
+on (a16.month_start_date_key = a17.row_key) join "ldb"."D_REQUEST_ITEM_CALENDAR_QUARTER" a18
+on (a17.quarter_start_date_key = a18.row_key)
+join "ldb"."D_REQUEST_ITEM_CALENDAR_YEAR" a135
+on (a18.year_start_date_key = a135.row_key)

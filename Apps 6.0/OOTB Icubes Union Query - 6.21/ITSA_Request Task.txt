@@ -1,0 +1,203 @@
+select 'ldb."F_REQUEST_TASK" a11 ' as Table_name, count(a11.row_key) Row_Count
+from ldb."F_REQUEST_TASK" a11
+union
+select 'ldb."D_REQUEST_TASK_EMPLOYEE" a12 ' as Table_name, count(a11.row_key) Row_Count
+from ldb."F_REQUEST_TASK" a11
+join "ldb"."D_REQUEST_TASK_EMPLOYEE" a12
+on (a11.request_task_employee_key = a12.row_key)
+union
+select 'ldb."D_REQUEST_TASK" a13 ' as Table_name, count(a11.row_key) Row_Count
+from ldb."F_REQUEST_TASK" a11
+join "ldb"."D_REQUEST_TASK" a13
+on (a11.request_task_key = a13.row_key)
+union
+select 'ldb."D_REQUEST_ITEM" a14 ' as Table_name, count(a11.row_key) Row_Count
+from ldb."F_REQUEST_TASK" a11
+join "ldb"."D_REQUEST_ITEM" a14
+on (a11.request_item_key = a14.row_key)
+union
+select 'ldb."D_REQ_ITEM_OPENED_BY" a15 ' as Table_name, count(a11.row_key) Row_Count
+from ldb."F_REQUEST_TASK" a11
+join "ldb"."D_REQUEST_ITEM" a14
+on (a11.request_item_key = a14.row_key)
+join "ldb"."D_REQ_ITEM_OPENED_BY" a15
+on (a14.opened_by_key = a15.row_key)
+union
+select 'ldb."D_REQUEST_ITEM_REQUESTED_FOR" a16 ' as Table_name, count(a11.row_key) Row_Count
+from ldb."F_REQUEST_TASK" a11
+join "ldb"."D_REQUEST_ITEM" a14
+on (a11.request_item_key = a14.row_key)
+join "ldb"."D_REQUEST_ITEM_REQUESTED_FOR" a16
+on (a14.requested_for_key = a16.row_key)
+union
+select 'ldb."D_REQUEST" a17 ' as Table_name, count(a11.row_key) Row_Count
+from ldb."F_REQUEST_TASK" a11
+join "ldb"."D_REQUEST" a17
+on (a11.request_key = a17.row_key)
+union
+select 'ldb."D_REQUEST_OPENED_BY" a18 ' as Table_name, count(a11.row_key) Row_Count
+from ldb."F_REQUEST_TASK" a11
+join "ldb"."D_REQUEST" a17
+on (a11.request_key = a17.row_key)
+join "ldb"."D_REQUEST_OPENED_BY" a18
+on (a17.opened_by_key = a18.row_key)
+union
+select 'ldb."D_REQUEST_REQUESTED_FOR" a19 ' as Table_name, count(a11.row_key) Row_Count
+from ldb."F_REQUEST_TASK" a11
+join "ldb"."D_REQUEST" a17
+on (a11.request_key = a17.row_key)
+join "ldb"."D_REQUEST_REQUESTED_FOR" a19
+on (a17.requested_for_key = a19.row_key)
+union
+select 'ldb."D_REQUEST_TASK_ASSIGNED_TO" a110 ' as Table_name, count(a11.row_key) Row_Count
+from ldb."F_REQUEST_TASK" a11
+join "ldb"."D_REQUEST_TASK" a13
+on (a11.request_task_key = a13.row_key)
+join "ldb"."D_REQUEST_TASK_ASSIGNED_TO" a110
+on (a13.assigned_to_key = a110.row_key)
+union
+select 'ldb."D_REQUEST_TASK_ASSIGNMENT_GROUP" a111 ' as Table_name, count(a11.row_key) Row_Count
+from ldb."F_REQUEST_TASK" a11
+join "ldb"."D_REQUEST_TASK" a13
+on (a11.request_task_key = a13.row_key)
+join "ldb"."D_REQUEST_TASK_ASSIGNMENT_GROUP" a111
+on (a13.assignment_group_key = a111.row_key)
+union
+select 'ldb."D_REQUEST_TASK_DATE" a112 ' as Table_name, count(a11.row_key) Row_Count
+from ldb."F_REQUEST_TASK" a11
+join "ldb"."D_REQUEST_TASK_DATE" a112
+on (a11.request_task_date_key = a112.row_key)
+union
+select 'ldb."D_REQUEST_TASK_CALENDAR_MONTH" a113 ' as Table_name, count(a11.row_key) Row_Count
+from ldb."F_REQUEST_TASK" a11
+join "ldb"."D_REQUEST_TASK_DATE" a112
+on (a11.request_task_date_key = a112.row_key)
+join "ldb"."D_REQUEST_TASK_CALENDAR_MONTH" a113
+on (a112.month_start_date_key = a113.row_key)
+union
+select 'ldb."D_REQUEST_TASK_CALENDAR_QUARTER" a114 ' as Table_name, count(a11.row_key) Row_Count
+from ldb."F_REQUEST_TASK" a11
+join "ldb"."D_REQUEST_TASK_DATE" a112
+on (a11.request_task_date_key = a112.row_key) join "ldb"."D_REQUEST_TASK_CALENDAR_MONTH" a113
+on (a112.month_start_date_key = a113.row_key)
+join "ldb"."D_REQUEST_TASK_CALENDAR_QUARTER" a114
+on (a113.quarter_start_date_key = a114.row_key)
+union
+select 'ldb."D_REQUEST_TASK_CONFIGURATION_ITEM" a115 ' as Table_name, count(a11.row_key) Row_Count
+from ldb."F_REQUEST_TASK" a11
+join "ldb"."D_REQUEST_TASK" a13
+on (a11.request_task_key = a13.row_key)
+join "ldb"."D_REQUEST_TASK_CONFIGURATION_ITEM" a115
+on (a13.configuration_item_key = a115.row_key)
+union
+select 'ldb."D_REQUEST_TASK_EMPLOYEE_MDM" a116 ' as Table_name, count(a11.row_key) Row_Count
+from ldb."F_REQUEST_TASK" a11
+join "ldb"."D_REQUEST_TASK_EMPLOYEE" a12
+on (a11.request_task_employee_key = a12.row_key)
+join "ldb"."D_REQUEST_TASK_EMPLOYEE_MDM" a116
+on (a12.employee_mdm_key = a116.row_key)
+union
+select 'ldb."D_SC_TASK_PRIORITY" a117 ' as Table_name, count(a11.row_key) Row_Count
+from ldb."F_REQUEST_TASK" a11
+join "ldb"."D_SC_TASK_PRIORITY" a117
+on (a11.priority_src_key = a117.row_key)
+union
+select 'ldb."D_SC_TASK_STATE" a118 ' as Table_name, count(a11.row_key) Row_Count
+from ldb."F_REQUEST_TASK" a11
+join "ldb"."D_SC_TASK_STATE" a118
+on (a11.state_src_key = a118.row_key)
+union
+select 'ldb."D_REQUEST_TASK_CALENDAR_WEEK" a119 ' as Table_name, count(a11.row_key) Row_Count
+from ldb."F_REQUEST_TASK" a11
+join "ldb"."D_REQUEST_TASK_DATE" a112
+on (a11.request_task_date_key = a112.row_key)
+join "ldb"."D_REQUEST_TASK_CALENDAR_WEEK" a119
+on (a112.week_start_date_key = a119.row_key)
+union
+select 'ldb."D_REQUEST_TASK_CONFIGURATION_ITEM_MDM" a120 ' as Table_name, count(a11.row_key) Row_Count
+from ldb."F_REQUEST_TASK" a11
+join "ldb"."D_REQUEST_TASK" a13
+on (a11.request_task_key = a13.row_key) join "ldb"."D_REQUEST_TASK_CONFIGURATION_ITEM" a115
+on (a13.configuration_item_key = a115.row_key)
+join "ldb"."D_REQUEST_TASK_CONFIGURATION_ITEM_MDM" a120
+on (a115.mdm_key = a120.row_key)
+union
+select 'ldb."D_REQUEST_TASK_LOCATION" a121 ' as Table_name, count(a11.row_key) Row_Count
+from ldb."F_REQUEST_TASK" a11
+join "ldb"."D_REQUEST_TASK" a13
+on (a11.request_task_key = a13.row_key)
+join "ldb"."D_REQUEST_TASK_LOCATION" a121
+on (a13.location_key = a121.row_key)
+union
+select 'ldb."D_REQ_ITEM_OPEN_BY_DEPT" a122 ' as Table_name, count(a11.row_key) Row_Count
+from ldb."F_REQUEST_TASK" a11
+join "ldb"."D_REQUEST_ITEM" a14
+on (a11.request_item_key = a14.row_key) join "ldb"."D_REQ_ITEM_OPENED_BY" a15
+on (a14.opened_by_key = a15.row_key)
+join "ldb"."D_REQ_ITEM_OPEN_BY_DEPT" a122
+on (a15.department_key = a122.row_key)
+union
+select 'ldb."D_REQ_ITEM_OPEN_BY_LOC" a123 ' as Table_name, count(a11.row_key) Row_Count
+from ldb."F_REQUEST_TASK" a11
+join "ldb"."D_REQUEST_ITEM" a14
+on (a11.request_item_key = a14.row_key) join "ldb"."D_REQ_ITEM_OPENED_BY" a15
+on (a14.opened_by_key = a15.row_key)
+join "ldb"."D_REQ_ITEM_OPEN_BY_LOC" a123
+on (a15.location_key = a123.row_key)
+union
+select 'ldb."D_REQ_ITEM_REQ_FOR_LOC" a124 ' as Table_name, count(a11.row_key) Row_Count
+from ldb."F_REQUEST_TASK" a11
+join "ldb"."D_REQUEST_ITEM" a14
+on (a11.request_item_key = a14.row_key) join "ldb"."D_REQUEST_ITEM_REQUESTED_FOR" a16
+on (a14.requested_for_key = a16.row_key)
+join "ldb"."D_REQ_ITEM_REQ_FOR_LOC" a124
+on (a16.location_key = a124.row_key)
+union
+select 'ldb."D_REQUEST_OPENED_BY_DEPT" a125 ' as Table_name, count(a11.row_key) Row_Count
+from ldb."F_REQUEST_TASK" a11
+join "ldb"."D_REQUEST" a17
+on (a11.request_key = a17.row_key) join "ldb"."D_REQUEST_OPENED_BY" a18
+on (a17.opened_by_key = a18.row_key)
+join "ldb"."D_REQUEST_OPENED_BY_DEPT" a125
+on (a18.department_key = a125.row_key)
+union
+select 'ldb."D_REQUEST_OPENED_BY_LOC" a126 ' as Table_name, count(a11.row_key) Row_Count
+from ldb."F_REQUEST_TASK" a11
+join "ldb"."D_REQUEST" a17
+on (a11.request_key = a17.row_key) join "ldb"."D_REQUEST_OPENED_BY" a18
+on (a17.opened_by_key = a18.row_key)
+join "ldb"."D_REQUEST_OPENED_BY_LOC" a126
+on (a18.location_key = a126.row_key)
+union
+select 'ldb."D_REQUEST_REQ_FOR_DEPART" a127 ' as Table_name, count(a11.row_key) Row_Count
+from ldb."F_REQUEST_TASK" a11
+join "ldb"."D_REQUEST" a17
+on (a11.request_key = a17.row_key) join "ldb"."D_REQUEST_REQUESTED_FOR" a19
+on (a17.requested_for_key = a19.row_key)
+join "ldb"."D_REQUEST_REQ_FOR_DEPART" a127
+on (a19.department_key = a127.row_key)
+union
+select 'ldb."D_REQUEST_REQ_FOR_LOC" a128 ' as Table_name, count(a11.row_key) Row_Count
+from ldb."F_REQUEST_TASK" a11
+join "ldb"."D_REQUEST" a17
+on (a11.request_key = a17.row_key) join "ldb"."D_REQUEST_REQUESTED_FOR" a19
+on (a17.requested_for_key = a19.row_key)
+join "ldb"."D_REQUEST_REQ_FOR_LOC" a128
+on (a19.location_key = a128.row_key)
+union
+select 'ldb."D_REQUEST_TASK_ASSIGNMENT_GROUP_MANAGER" a129 ' as Table_name, count(a11.row_key) Row_Count
+from ldb."F_REQUEST_TASK" a11
+join "ldb"."D_REQUEST_TASK" a13
+on (a11.request_task_key = a13.row_key) join "ldb"."D_REQUEST_TASK_ASSIGNMENT_GROUP" a111
+on (a13.assignment_group_key = a111.row_key)
+join "ldb"."D_REQUEST_TASK_ASSIGNMENT_GROUP_MANAGER" a129
+on (a111.manager_key = a129.row_key)
+union
+select 'ldb."D_REQUEST_TASK_CALENDAR_YEAR" a130 ' as Table_name, count(a11.row_key) Row_Count
+from ldb."F_REQUEST_TASK" a11
+join "ldb"."D_REQUEST_TASK_DATE" a112
+on (a11.request_task_date_key = a112.row_key) join "ldb"."D_REQUEST_TASK_CALENDAR_MONTH" a113
+on (a112.month_start_date_key = a113.row_key) join "ldb"."D_REQUEST_TASK_CALENDAR_QUARTER" a114
+on (a113.quarter_start_date_key = a114.row_key)
+join "ldb"."D_REQUEST_TASK_CALENDAR_YEAR" a130
+on (a114.year_start_date_key = a130.row_key)
