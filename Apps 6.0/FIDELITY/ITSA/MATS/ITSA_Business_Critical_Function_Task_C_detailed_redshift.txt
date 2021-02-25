@@ -1,0 +1,53 @@
+select 'ldb."F_BUSINESS_SERVICE_APPLICATION_C" a11 ' as Table_name, count(a11.row_key) Row_Count
+ from ldb."F_BUSINESS_SERVICE_APPLICATION_C" a11 
+ union
+select 'ldb."D_TASK_BUSINESS_SERVICE_C" a12 ' as Table_name, count(a11.row_key) Row_Count
+ from ldb."F_BUSINESS_SERVICE_APPLICATION_C" a11 
+ join "ldb"."D_TASK_BUSINESS_SERVICE_C" a12 
+	on (a11.TASK_BUSINESS_SERVICE_C_KEY = a12.ROW_KEY)  
+ union
+select 'ldb."D_TASK_APPLICATION_C" a13 ' as Table_name, count(a11.row_key) Row_Count
+ from ldb."F_BUSINESS_SERVICE_APPLICATION_C" a11 
+ join "ldb"."D_TASK_APPLICATION_C" a13 
+	on (a11.TASK_APPLICATION_C_KEY = a13.ROW_KEY)  
+ union
+select 'ldb."d_task" a14 ' as Table_name, count(a11.row_key) Row_Count
+ from ldb."F_BUSINESS_SERVICE_APPLICATION_C" a11 
+ join "ldb"."d_task" a14 
+	on (a11.TASK_KEY = a14.ROW_KEY)  
+ union
+select 'ldb."D_LOV_BUSINESS_SERVICE_CRITICALITY_C" a15 ' as Table_name, count(a11.row_key) Row_Count
+ from ldb."F_BUSINESS_SERVICE_APPLICATION_C" a11 
+ join "ldb"."D_TASK_BUSINESS_SERVICE_C" a12 
+ on (a11.TASK_BUSINESS_SERVICE_C_KEY = a12.ROW_KEY) 
+	join "ldb"."D_LOV_BUSINESS_SERVICE_CRITICALITY_C" a15 
+	on (a12.BUSINESS_SERVICE_CRITICALITY_C_KEY = a15.ROW_KEY)  
+ union
+select 'ldb."D_LOV_BUSINESS_SERVICE_OPERATIONAL_STATUS_C" a16 ' as Table_name, count(a11.row_key) Row_Count
+ from ldb."F_BUSINESS_SERVICE_APPLICATION_C" a11 
+ join "ldb"."D_TASK_BUSINESS_SERVICE_C" a12 
+ on (a11.TASK_BUSINESS_SERVICE_C_KEY = a12.ROW_KEY) 
+	join "ldb"."D_LOV_BUSINESS_SERVICE_OPERATIONAL_STATUS_C" a16 
+	on (a12.BUSINESS_SERVICE_OPERATIONAL_STATUS_C_KEY = a16.ROW_KEY)  
+ union
+select 'ldb."D_BUSINESS_SERVICE_OWNED_BY_C" a17 ' as Table_name, count(a11.row_key) Row_Count
+ from ldb."F_BUSINESS_SERVICE_APPLICATION_C" a11 
+ join "ldb"."D_TASK_BUSINESS_SERVICE_C" a12 
+ on (a11.TASK_BUSINESS_SERVICE_C_KEY = a12.ROW_KEY) 
+	join "ldb"."D_BUSINESS_SERVICE_OWNED_BY_C" a17 
+	on (a12.BUSINESS_SERVICE_OWNED_BY_C_KEY = a17.ROW_KEY)  
+ union
+select 'ldb."D_LOV_BUSINESS_SERVICE_USED_FOR_C" a18 ' as Table_name, count(a11.row_key) Row_Count
+ from ldb."F_BUSINESS_SERVICE_APPLICATION_C" a11 
+ join "ldb"."D_TASK_BUSINESS_SERVICE_C" a12 
+ on (a11.TASK_BUSINESS_SERVICE_C_KEY = a12.ROW_KEY) 
+	join "ldb"."D_LOV_BUSINESS_SERVICE_USED_FOR_C" a18 
+	on (a12.BUSINESS_SERVICE_USED_FOR_C_KEY = a18.ROW_KEY)  
+ union
+select 'ldb."d_task_type" a19 ' as Table_name, count(a11.row_key) Row_Count
+ from ldb."F_BUSINESS_SERVICE_APPLICATION_C" a11 
+ join "ldb"."d_task" a14 
+ on (a11.TASK_KEY = a14.ROW_KEY) 
+	join "ldb"."d_task_type" a19 
+	on (a14.task_type_src_key = a19.ROW_KEY)  
+
