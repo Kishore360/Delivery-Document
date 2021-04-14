@@ -1,0 +1,58 @@
+select	a13.step_id AS step_id,
+	a11.test_step_key AS ROW_KEY,
+	max(a13.step_name) AS step_name,
+	a11.avg_response_time AS avg_response_time,
+	a11.response_time_90_perc AS response_time_90_perc,
+	a11.response_time_95_perc AS response_time_95_perc,
+	a11.response_time_99_perc AS response_time_99_perc,
+	a11.max_response_time AS max_response_time,
+	a11.min_response_time AS min_response_time,
+	a11.response_time AS response_time,
+	a11.avg_througput AS avg_througput,
+	a11.error_count AS error_count,
+	a11.concurrency AS concurrency,
+	a12.test_type_src_key AS ROW_KEY0,
+	max(a15.source_dimension_name) AS source_dimension_name,
+	a12.testcase_count AS testcase_count,
+	a12.user_count AS user_count,
+	a12.request_count AS request_count,
+	a12.test_execution_created_by AS ROW_KEY1,
+	max(a14.full_name) AS full_name,
+	a11.test_execution_key AS ROW_KEY2,
+	max(a12.execution_name) AS execution_name,
+	a12.image_url AS execution_id,
+	max(a12.execution_id) AS execution_id0,
+	a11.samples_count AS samples_count,
+	sum(a11.average_throughput) AS WJXBFS1,
+	sum(a11.latency) AS WJXBFS2,
+	sum(a11.no_of_errors) AS WJXBFS3,
+	sum(a11.no_of_requests) AS WJXBFS4
+from	"ldb"."f_test_execution_result"	a11
+	join	"ldb"."d_test_execution"	a12
+	  on 	(a11.test_execution_key = a12.ROW_KEY)
+	join	"ldb"."d_test_step"	a13
+	  on 	(a11.test_step_key = a13.ROW_KEY)
+	join	"ldb"."d_internal_contact_test_execution_created_by"	a14
+	  on 	(a12.test_execution_created_by = a14.ROW_KEY)
+	join	"ldb"."d_lov_test_execution_test_type"	a15
+	  on 	(a12.test_type_src_key = a15.ROW_KEY)
+group by	a13.step_id,
+	a11.test_step_key,
+	a11.avg_response_time,
+	a11.response_time_90_perc,
+	a11.response_time_95_perc,
+	a11.response_time_99_perc,
+	a11.max_response_time,
+	a11.min_response_time,
+	a11.response_time,
+	a11.avg_througput,
+	a11.error_count,
+	a11.concurrency,
+	a12.test_type_src_key,
+	a12.testcase_count,
+	a12.user_count,
+	a12.request_count,
+	a12.test_execution_created_by,
+	a11.test_execution_key,
+	a12.image_url,
+	a11.samples_count

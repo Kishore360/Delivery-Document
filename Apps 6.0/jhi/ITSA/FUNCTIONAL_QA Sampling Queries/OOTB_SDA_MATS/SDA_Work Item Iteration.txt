@@ -1,0 +1,57 @@
+select	a14.end_date AS end_date,
+	a14.start_date AS start_date,
+	a11.work_item_key AS work_item_key,
+	max(a13.work_item_number) AS work_item_number,
+	a13.work_item_resolved_by_key AS work_item_resolved_by_key,
+	max(a110.full_name) AS full_name,
+	a13.resolved_on AS resolved_on,
+	a13.work_item_status_src_key AS work_item_status_src_key,
+	max(a15.source_dimension_name) AS source_dimension_name,
+	a13.work_item_priority_src_key AS work_item_priority_src_key,
+	max(a19.source_dimension_name) AS source_dimension_name0,
+	a13.image_url AS image_url,
+	max(a13.work_item_number_d) AS work_item_number_d,
+	a11.work_item_iteration_m2m_key AS ROW_KEY,
+	max(a14.name) AS name,
+	a14.completion_date AS completion_date,
+	a11.project_key AS project_key,
+	max(a17.project_name) AS project_name,
+	a13.earliest_fixed_version_key AS earliest_fix_version_key,
+	max(a18.name) AS name0,
+	a11.lagging_count_project_iteration AS lagging_count_project_iteration,
+	max(a11.work_item_count_from_iteration) AS WJXBFS1
+from	"ldb"."f_work_item_iteration"	a11
+	join	"ldb"."d_calendar_date"	a12
+	  on 	(a11.date_key = a12.ROW_KEY)
+	join	"ldb"."d_work_item"	a13
+	  on 	(a11.work_item_key = a13.ROW_KEY)
+	join	"ldb"."d_work_item_iteration_m2m"	a14
+	  on 	(a11.work_item_iteration_m2m_key = a14.ROW_KEY)
+	join	"ldb"."d_work_item_status"	a15
+	  on 	(a13.work_item_status_src_key = a15.ROW_KEY)
+	join	"ldb"."d_calendar_month"	a16
+	  on 	(a12.month_start_date_key = a16.ROW_KEY)
+	join	"ldb"."d_project"	a17
+	  on 	(a11.project_key = a17.ROW_KEY)
+	join	"ldb"."d_work_item_earliest_fixed_version"	a18
+	  on 	(a13.earliest_fixed_version_key = a18.ROW_KEY)
+	join	"ldb"."d_work_item_priority"	a19
+	  on 	(a13.work_item_priority_src_key = a19.ROW_KEY)
+	join	"ldb"."d_work_item_resolved_by"	a110
+	  on 	(a13.work_item_resolved_by_key = a110.ROW_KEY)
+where	(a15.wh_dimension_name = 'PROPOSED'
+ or a15.wh_dimension_name = 'IN PROGRESS'
+ or a16.lagging_count_of_month_d between 0 and 12)
+group by	a14.end_date,
+	a14.start_date,
+	a11.work_item_key,
+	a13.work_item_resolved_by_key,
+	a13.resolved_on,
+	a13.work_item_status_src_key,
+	a13.work_item_priority_src_key,
+	a13.image_url,
+	a11.work_item_iteration_m2m_key,
+	a14.completion_date,
+	a11.project_key,
+	a13.earliest_fixed_version_key,
+	a11.lagging_count_project_iteration

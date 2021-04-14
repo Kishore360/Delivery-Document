@@ -1,0 +1,91 @@
+select	a11.state_on AS state_on,
+	a11.state_sequence_id AS state_sequence_id,
+	a11.work_item_to_state_src_key AS ROW_KEY,
+	max(a19.source_dimension_name) AS source_dimension_name,
+	a11.work_item_key AS work_item_key,
+	max(a13.work_item_number) AS work_item_number,
+	a13.iteration_key AS iteration_key,
+	max(a112.name) AS name,
+	a13.work_item_status_category_src_key AS work_item_status_category_src_key,
+	max(a114.source_dimension_name) AS source_dimension_name0,
+	a13.work_item_priority_src_key AS work_item_priority_src_key,
+	max(a113.source_dimension_name) AS source_dimension_name1,
+	a13.reopened_flag AS reopened_flag,
+	a13.created_on AS created_on,
+	a13.resolved_on AS resolved_on,
+	a13.work_start_on AS work_start_on,
+	a13.completed_on AS completed_on,
+	a13.row_key_short_desc AS row_key_short_desc,
+	max(a13.short_description) AS short_description,
+	a13.row_key_description AS row_key_description,
+	max(a13.description) AS short_description0,
+	a13.work_item_status_src_key AS work_item_status_src_key,
+	max(a15.source_dimension_name) AS source_dimension_name2,
+	a13.earliest_fixed_version_key AS earliest_fix_version_key,
+	max(a111.name) AS name0,
+	a13.image_url AS image_url,
+	max(a13.work_item_number_d) AS work_item_number_d,
+	a11.work_item_from_state_src_key AS work_item_from_state_src_key,
+	max(a18.source_dimension_name) AS source_dimension_name3,
+	a13.work_item_assigned_to_key AS work_item_assigned_to_key,
+	max(a110.full_name) AS full_name,
+	a11.project_key AS project_key,
+	max(a17.project_name) AS project_name,
+	a13.work_item_epic_key AS ROW_KEY0,
+	max(a14.epic_id) AS epic_number,
+	a14.epic_name AS epic_name,
+	a13.state_change_count AS state_change_count,
+	sum((a11.state_duration / 86400.0)) AS WJXBFS1
+from	"ldb"."f_work_item_status"	a11
+	join	"ldb"."d_calendar_date"	a12
+	  on 	(a11.date_key = a12.ROW_KEY)
+	join	"ldb"."d_work_item"	a13
+	  on 	(a11.work_item_key = a13.ROW_KEY)
+	join	"ldb"."d_work_item_epic"	a14
+	  on 	(a13.work_item_epic_key = a14.ROW_KEY)
+	join	"ldb"."d_work_item_status"	a15
+	  on 	(a13.work_item_status_src_key = a15.ROW_KEY)
+	join	"ldb"."d_calendar_month"	a16
+	  on 	(a12.month_start_date_key = a16.ROW_KEY)
+	join	"ldb"."d_project"	a17
+	  on 	(a11.project_key = a17.ROW_KEY)
+	join	"ldb"."d_work_item_status_from"	a18
+	  on 	(a11.work_item_from_state_src_key = a18.ROW_KEY)
+	join	"ldb"."d_work_item_status_to"	a19
+	  on 	(a11.work_item_to_state_src_key = a19.ROW_KEY)
+	join	"ldb"."d_work_item_assigned_to"	a110
+	  on 	(a13.work_item_assigned_to_key = a110.ROW_KEY)
+	join	"ldb"."d_work_item_earliest_fixed_version"	a111
+	  on 	(a13.earliest_fixed_version_key = a111.ROW_KEY)
+	join	"ldb"."d_iteration"	a112
+	  on 	(a13.iteration_key = a112.ROW_KEY)
+	join	"ldb"."d_work_item_priority"	a113
+	  on 	(a13.work_item_priority_src_key = a113.ROW_KEY)
+	join	"ldb"."d_work_item_status_category"	a114
+	  on 	(a13.work_item_status_category_src_key = a114.ROW_KEY)
+where	(a15.wh_dimension_name = 'PROPOSED'
+ or a15.wh_dimension_name = 'IN PROGRESS'
+ or a16.lagging_count_of_month_d between 0 and 12)
+group by	a11.state_on,
+	a11.state_sequence_id,
+	a11.work_item_to_state_src_key,
+	a11.work_item_key,
+	a13.iteration_key,
+	a13.work_item_status_category_src_key,
+	a13.work_item_priority_src_key,
+	a13.reopened_flag,
+	a13.created_on,
+	a13.resolved_on,
+	a13.work_start_on,
+	a13.completed_on,
+	a13.row_key_short_desc,
+	a13.row_key_description,
+	a13.work_item_status_src_key,
+	a13.earliest_fixed_version_key,
+	a13.image_url,
+	a11.work_item_from_state_src_key,
+	a13.work_item_assigned_to_key,
+	a11.project_key,
+	a13.work_item_epic_key,
+	a14.epic_name,
+	a13.state_change_count

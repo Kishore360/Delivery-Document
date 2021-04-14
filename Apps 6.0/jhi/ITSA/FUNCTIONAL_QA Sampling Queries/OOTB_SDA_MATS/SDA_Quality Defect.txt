@@ -1,0 +1,172 @@
+select	a16.lagging_count_of_weeks AS lagging_count_of_weeks,
+	a17.lagging_count_of_year AS lagging_count_of_year,
+	a18.created_on AS created_on,
+	a18.work_start_on AS work_start_on,
+	a18.defect_regression_flag AS defect_regression_flag,
+	a18.reopened_flag AS reopened_flag,
+	a18.work_item_reported_by_key AS work_item_reported_by_key,
+	max(a118.full_name) AS full_name,
+	a18.resolved_on AS resolved_on,
+	a18.row_key_description AS row_key_description,
+	max(a18.description) AS short_description,
+	a18.row_key_short_desc AS row_key_short_desc,
+	max(a18.short_description) AS short_description0,
+	a11.work_item_key AS work_item_key,
+	max(a18.work_item_number) AS work_item_number,
+	a18.completed_on AS completed_on,
+	a11.date_key AS Calendar_Date_Row_key,
+	max(a13.calendar_date_d) AS calendar_date,
+	a13.calendar_date AS calendar_date_greg,
+	a13.month_start_date_key AS month_start_date_key,
+	max(a14.month_year) AS month_name,
+	a14.quarter_start_date_key AS ROW_KEY,
+	max(a15.quarter_name) AS quarter_name,
+	a13.week_start_date_key AS ROW_KEY0,
+	max(a16.week_start_day_name) AS week_name,
+	a15.year_start_date_key AS ROW_KEY1,
+	max(a17.year_name) AS year_name,
+	a13.day_of_month AS day_of_month,
+	a13.day_of_week AS day_of_week,
+	max(a13.day_name_d) AS week_day_flag,
+	a13.day_of_year AS day_of_year,
+	a11.project_key AS project_key,
+	max(a114.project_name) AS project_name,
+	a18.work_item_updated_by_key AS changed_by,
+	max(a121.full_name) AS full_name0,
+	a18.work_item_updated_on AS changed_on,
+	a18.work_item_status_src_key AS work_item_status_src_key,
+	max(a110.source_dimension_name) AS source_dimension_name,
+	a11.work_item_assigned_to_key AS ROW_KEY2,
+	max(a112.full_name) AS full_name1,
+	a12.employee_mdm_key AS row_current_key,
+	max(a113.full_name) AS full_name2,
+	a18.iteration_key AS iteration_key,
+	max(a116.name) AS name,
+	a13.lagging_count_of_days AS lagging_count_of_days0,
+	a14.lagging_count_of_month AS lagging_count_of_month0,
+	a18.work_item_risk_src_key AS work_item_risk_src_key,
+	max(a119.source_dimension_name) AS source_dimension_name0,
+	a18.work_item_severity_src_key AS work_item_severity_src_key,
+	max(a120.source_dimension_name) AS source_dimension_name1,
+	a18.image_url AS image_url,
+	max(a18.work_item_number_d) AS work_item_number_d,
+	a18.environment AS environment,
+	a18.work_item_priority_src_key AS work_item_priority_src_key,
+	max(a117.source_dimension_name) AS source_dimension_name2,
+	a18.work_item_resolution_src_key AS work_item_resolution_src_key,
+	max(a19.source_dimension_name) AS source_dimension_name3,
+	a110.wh_row_id AS wh_row_id,
+	max(a110.wh_dimension_name) AS wh_dimension_name,
+	a15.lagging_count_of_quarter AS lagging_count_of_quarter0,
+	a18.defect_type_src_key AS ROW_KEY3,
+	max(a125.source_dimension_name) AS source_dimension_name4,
+	a18.defect_root_cause_src_key AS ROW_KEY4,
+	max(a124.source_dimension_name) AS source_dimension_name5,
+	a18.defect_fixed_build_run_key AS ROW_KEY5,
+	max(a123.name) AS name0,
+	a18.defect_detected_build_run_key AS ROW_KEY6,
+	max(a122.name) AS name1,
+	a18.reopened_on AS reopened_on,
+	a18.first_iteration_key AS ROW_KEY7,
+	max(a115.name) AS name2,
+	a18.work_item_type_src_key AS work_item_type_src_key,
+	max(a111.source_dimension_name) AS source_dimension_name6,
+	count(a11.created_work_items) AS WJXBFS1
+from	"ldb"."f_work_item"	a11
+	join	"ldb"."d_internal_contact"	a12
+	  on 	(a11.employee_key = a12.ROW_KEY)
+	join	"ldb"."d_calendar_date"	a13
+	  on 	(a11.date_key = a13.ROW_KEY)
+	join	"ldb"."d_calendar_month"	a14
+	  on 	(a13.month_start_date_key = a14.ROW_KEY)
+	join	"ldb"."d_calendar_quarter"	a15
+	  on 	(a14.quarter_start_date_key = a15.ROW_KEY)
+	join	"ldb"."d_calendar_week"	a16
+	  on 	(a13.week_start_date_key = a16.ROW_KEY)
+	join	"ldb"."d_calendar_year"	a17
+	  on 	(a15.year_start_date_key = a17.ROW_KEY)
+	join	"ldb"."d_work_item"	a18
+	  on 	(a11.work_item_key = a18.ROW_KEY)
+	join	"ldb"."d_work_item_resolution"	a19
+	  on 	(a18.work_item_resolution_src_key = a19.ROW_KEY)
+	join	"ldb"."d_work_item_status"	a110
+	  on 	(a18.work_item_status_src_key = a110.ROW_KEY)
+	join	"ldb"."d_work_item_type"	a111
+	  on 	(a18.work_item_type_src_key = a111.ROW_KEY)
+	join	"ldb"."d_internal_contact_assigned_to"	a112
+	  on 	(a11.work_item_assigned_to_key = a112.ROW_KEY)
+	join	"ldb"."d_internal_contact_mdm"	a113
+	  on 	(a12.employee_mdm_key = a113.ROW_KEY)
+	join	"ldb"."d_project"	a114
+	  on 	(a11.project_key = a114.ROW_KEY)
+	join	"ldb"."d_first_iteration"	a115
+	  on 	(a18.first_iteration_key = a115.ROW_KEY)
+	join	"ldb"."d_iteration"	a116
+	  on 	(a18.iteration_key = a116.ROW_KEY)
+	join	"ldb"."d_work_item_priority"	a117
+	  on 	(a18.work_item_priority_src_key = a117.ROW_KEY)
+	join	"ldb"."d_work_item_reported_by"	a118
+	  on 	(a18.work_item_reported_by_key = a118.ROW_KEY)
+	join	"ldb"."d_work_item_risk"	a119
+	  on 	(a18.work_item_risk_src_key = a119.ROW_KEY)
+	join	"ldb"."d_work_item_severity"	a120
+	  on 	(a18.work_item_severity_src_key = a120.ROW_KEY)
+	join	"ldb"."d_work_item_updated_by"	a121
+	  on 	(a18.work_item_updated_by_key = a121.ROW_KEY)
+	join	"ldb"."d_defect_detected_build_run"	a122
+	  on 	(a18.defect_detected_build_run_key = a122.ROW_KEY)
+	join	"ldb"."d_defect_fixed_build_run"	a123
+	  on 	(a18.defect_fixed_build_run_key = a123.ROW_KEY)
+	join	"ldb"."d_defect_root_cause"	a124
+	  on 	(a18.defect_root_cause_src_key = a124.ROW_KEY)
+	join	"ldb"."d_defect_type"	a125
+	  on 	(a18.defect_type_src_key = a125.ROW_KEY)
+where	(a111.wh_dimension_code = 'BUG'
+ and a19.wh_row_id not in ('WH_RESOLUTION~WORK_ITEM~DEFERRED', 'WH_RESOLUTION~WORK_ITEM~CANCELLED')
+ and a110.wh_row_id in ('WH_STATUS~WORK_ITEM~RESOLVED', 'WH_STATUS~WORK_ITEM~COMPLETED')
+ and a14.lagging_count_of_month_d between 0 and 12)
+group by	a16.lagging_count_of_weeks,
+	a17.lagging_count_of_year,
+	a18.created_on,
+	a18.work_start_on,
+	a18.defect_regression_flag,
+	a18.reopened_flag,
+	a18.work_item_reported_by_key,
+	a18.resolved_on,
+	a18.row_key_description,
+	a18.row_key_short_desc,
+	a11.work_item_key,
+	a18.completed_on,
+	a11.date_key,
+	a13.calendar_date,
+	a13.month_start_date_key,
+	a14.quarter_start_date_key,
+	a13.week_start_date_key,
+	a15.year_start_date_key,
+	a13.day_of_month,
+	a13.day_of_week,
+	a13.day_of_year,
+	a11.project_key,
+	a18.work_item_updated_by_key,
+	a18.work_item_updated_on,
+	a18.work_item_status_src_key,
+	a11.work_item_assigned_to_key,
+	a12.employee_mdm_key,
+	a18.iteration_key,
+	a13.lagging_count_of_days,
+	a14.lagging_count_of_month,
+	a18.work_item_risk_src_key,
+	a18.work_item_severity_src_key,
+	a18.image_url,
+	a18.environment,
+	a18.work_item_priority_src_key,
+	a18.work_item_resolution_src_key,
+	a110.wh_row_id,
+	a15.lagging_count_of_quarter,
+	a18.defect_type_src_key,
+	a18.defect_root_cause_src_key,
+	a18.defect_fixed_build_run_key,
+	a18.defect_detected_build_run_key,
+	a18.reopened_on,
+	a18.first_iteration_key,
+	a18.work_item_type_src_key

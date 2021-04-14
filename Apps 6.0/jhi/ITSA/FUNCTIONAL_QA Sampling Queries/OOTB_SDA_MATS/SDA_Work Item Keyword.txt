@@ -1,0 +1,94 @@
+select	a11.work_item_key AS work_item_key,
+	max(a12.work_item_number) AS work_item_number,
+	a12.image_url AS image_url,
+	max(a12.work_item_number_d) AS work_item_number_d,
+	a12.work_item_priority_src_key AS work_item_priority_src_key,
+	max(a19.source_dimension_name) AS source_dimension_name,
+	a12.iteration_key AS iteration_key,
+	max(a17.name) AS name,
+	a12.earliest_fixed_version_key AS earliest_fix_version_key,
+	max(a16.name) AS name0,
+	a12.work_item_assigned_to_key AS work_item_assigned_to_key,
+	max(a14.full_name) AS full_name,
+	a12.created_by_key AS work_item_created_by_key,
+	max(a15.full_name) AS full_name0,
+	a12.primary_component_key AS primary_component_key,
+	max(a18.name) AS name1,
+	a12.work_item_type_src_key AS work_item_type_src_key,
+	max(a114.source_dimension_name) AS source_dimension_name0,
+	a12.work_item_status_category_src_key AS work_item_status_category_src_key,
+	max(a113.source_dimension_name) AS source_dimension_name1,
+	a12.work_item_status_src_key AS work_item_status_src_key,
+	max(a112.source_dimension_name) AS source_dimension_name2,
+	a12.work_item_reported_by_key AS work_item_reported_by_key,
+	max(a110.full_name) AS full_name1,
+	a12.work_item_resolution_src_key AS work_item_resolution_src_key,
+	max(a111.source_dimension_name) AS source_dimension_name3,
+	a12.created_on AS created_on,
+	a12.completed_on AS completed_on,
+	a12.due_on AS due_on,
+	a12.work_start_on AS work_start_on,
+	a12.row_key_description AS row_key_description,
+	max(a12.description) AS short_description,
+	a12.work_item_updated_by_key AS changed_by,
+	max(a115.full_name) AS full_name2,
+	a12.row_key_short_desc AS row_key_short_desc,
+	max(a12.short_description) AS short_description0,
+	a11.keyword AS keyword,
+	a11.column_name AS column_name,
+	a11.project_key AS project_key,
+	max(a13.project_name) AS project_name,
+	count(distinct a11.work_item_with_keyword_fact) AS WJXBFS1,
+	sum(a11.work_item_keyword_occurrence) AS WJXBFS2
+from	"ldb"."f_work_item_keyword"	a11
+	join	"ldb"."d_work_item"	a12
+	  on 	(a11.work_item_key = a12.ROW_KEY)
+	join	"ldb"."d_project"	a13
+	  on 	(a11.project_key = a13.ROW_KEY)
+	join	"ldb"."d_work_item_assigned_to"	a14
+	  on 	(a12.work_item_assigned_to_key = a14.ROW_KEY)
+	join	"ldb"."d_work_item_created_by"	a15
+	  on 	(a12.created_by_key = a15.ROW_KEY)
+	join	"ldb"."d_work_item_earliest_fixed_version"	a16
+	  on 	(a12.earliest_fixed_version_key = a16.ROW_KEY)
+	join	"ldb"."d_iteration"	a17
+	  on 	(a12.iteration_key = a17.ROW_KEY)
+	join	"ldb"."d_primary_component"	a18
+	  on 	(a12.primary_component_key = a18.ROW_KEY)
+	join	"ldb"."d_work_item_priority"	a19
+	  on 	(a12.work_item_priority_src_key = a19.ROW_KEY)
+	join	"ldb"."d_work_item_reported_by"	a110
+	  on 	(a12.work_item_reported_by_key = a110.ROW_KEY)
+	join	"ldb"."d_work_item_resolution"	a111
+	  on 	(a12.work_item_resolution_src_key = a111.ROW_KEY)
+	join	"ldb"."d_work_item_status"	a112
+	  on 	(a12.work_item_status_src_key = a112.ROW_KEY)
+	join	"ldb"."d_work_item_status_category"	a113
+	  on 	(a12.work_item_status_category_src_key = a113.ROW_KEY)
+	join	"ldb"."d_work_item_type"	a114
+	  on 	(a12.work_item_type_src_key = a114.ROW_KEY)
+	join	"ldb"."d_work_item_updated_by"	a115
+	  on 	(a12.work_item_updated_by_key = a115.ROW_KEY)
+group by	a11.work_item_key,
+	a12.image_url,
+	a12.work_item_priority_src_key,
+	a12.iteration_key,
+	a12.earliest_fixed_version_key,
+	a12.work_item_assigned_to_key,
+	a12.created_by_key,
+	a12.primary_component_key,
+	a12.work_item_type_src_key,
+	a12.work_item_status_category_src_key,
+	a12.work_item_status_src_key,
+	a12.work_item_reported_by_key,
+	a12.work_item_resolution_src_key,
+	a12.created_on,
+	a12.completed_on,
+	a12.due_on,
+	a12.work_start_on,
+	a12.row_key_description,
+	a12.work_item_updated_by_key,
+	a12.row_key_short_desc,
+	a11.keyword,
+	a11.column_name,
+	a11.project_key

@@ -1,0 +1,95 @@
+select	a11.work_item_key AS work_item_key,
+	max(a14.work_item_number) AS work_item_number,
+	a14.image_url AS image_url,
+	max(a14.work_item_number_d) AS work_item_number_d,
+	a11.iteration_key AS ROW_KEY,
+	max(a18.name) AS name,
+	a12.employee_mdm_key AS row_current_key,
+	max(a16.full_name) AS full_name,
+	a11.date_key AS Calendar_Date_Row_key,
+	max(a13.calendar_date_d) AS calendar_date,
+	a11.project_key AS project_key,
+	max(a17.project_name) AS project_name,
+	a14.work_item_type_src_key AS work_item_type_src_key,
+	max(a116.source_dimension_name) AS source_dimension_name,
+	a14.work_item_status_src_key AS work_item_status_src_key,
+	max(a114.source_dimension_name) AS source_dimension_name0,
+	a14.work_item_status_category_src_key AS work_item_status_category_src_key,
+	max(a115.source_dimension_name) AS source_dimension_name1,
+	a14.multiple_assignment_flag AS multiple_assignment_flag,
+	a14.created_on AS created_on,
+	a14.work_start_on AS work_start_on,
+	a14.resolved_on AS resolved_on,
+	a14.completed_on AS completed_on,
+	a14.story_points AS story_points,
+	a11.time_spent_row_key AS time_spent,
+	max(a11.time_spent) AS time_spent0,
+	a14.work_item_priority_src_key AS work_item_priority_src_key,
+	max(a112.source_dimension_name) AS source_dimension_name2,
+	a14.earliest_fixed_version_key AS earliest_fix_version_key,
+	max(a111.name) AS name0,
+	a14.time_spent_update_count AS time_spent_update_count,
+	a11.time_spent_updated_on AS time_spent_updated_on,
+	a11.work_item_timespent_logged_by_key AS ROW_KEY0,
+	max(a19.full_name) AS full_name0,
+	a14.work_item_reported_by_key AS work_item_reported_by_key,
+	max(a113.full_name) AS full_name1,
+	a11.work_item_assigned_to_key AS ROW_KEY1,
+	max(a15.full_name) AS full_name2,
+	max(a15.image) AS CustCol_134,
+	sum((a11.time_spent_sec / 3600.0)) AS WJXBFS1
+from	"ldb"."f_work_item_time_spent"	a11
+	join	"ldb"."d_internal_contact"	a12
+	  on 	(a11.employee_key = a12.ROW_KEY)
+	join	"ldb"."d_calendar_date"	a13
+	  on 	(a11.date_key = a13.ROW_KEY)
+	join	"ldb"."d_work_item"	a14
+	  on 	(a11.work_item_key = a14.ROW_KEY)
+	join	"ldb"."d_internal_contact_assigned_to"	a15
+	  on 	(a11.work_item_assigned_to_key = a15.ROW_KEY)
+	join	"ldb"."d_internal_contact_mdm"	a16
+	  on 	(a12.employee_mdm_key = a16.ROW_KEY)
+	join	"ldb"."d_project"	a17
+	  on 	(a11.project_key = a17.ROW_KEY)
+	join	"ldb"."d_work_item_iteration_m2m"	a18
+	  on 	(a11.iteration_key = a18.ROW_KEY)
+	join	"ldb"."d_work_item_timespent_logged_by"	a19
+	  on 	(a11.work_item_timespent_logged_by_key = a19.ROW_KEY)
+	join	"ldb"."d_calendar_month"	a110
+	  on 	(a13.month_start_date_key = a110.ROW_KEY)
+	join	"ldb"."d_work_item_earliest_fixed_version"	a111
+	  on 	(a14.earliest_fixed_version_key = a111.ROW_KEY)
+	join	"ldb"."d_work_item_priority"	a112
+	  on 	(a14.work_item_priority_src_key = a112.ROW_KEY)
+	join	"ldb"."d_work_item_reported_by"	a113
+	  on 	(a14.work_item_reported_by_key = a113.ROW_KEY)
+	join	"ldb"."d_work_item_status"	a114
+	  on 	(a14.work_item_status_src_key = a114.ROW_KEY)
+	join	"ldb"."d_work_item_status_category"	a115
+	  on 	(a14.work_item_status_category_src_key = a115.ROW_KEY)
+	join	"ldb"."d_work_item_type"	a116
+	  on 	(a14.work_item_type_src_key = a116.ROW_KEY)
+where	a110.lagging_count_of_month_d between 0 and 12
+group by	a11.work_item_key,
+	a14.image_url,
+	a11.iteration_key,
+	a12.employee_mdm_key,
+	a11.date_key,
+	a11.project_key,
+	a14.work_item_type_src_key,
+	a14.work_item_status_src_key,
+	a14.work_item_status_category_src_key,
+	a14.multiple_assignment_flag,
+	a14.created_on,
+	a14.work_start_on,
+	a14.resolved_on,
+	a14.completed_on,
+	a14.story_points,
+	a11.time_spent_row_key,
+	a14.work_item_priority_src_key,
+	a14.earliest_fixed_version_key,
+	a14.time_spent_update_count,
+	a11.time_spent_updated_on,
+	a11.work_item_timespent_logged_by_key,
+	a14.work_item_reported_by_key,
+	a11.work_item_assigned_to_key

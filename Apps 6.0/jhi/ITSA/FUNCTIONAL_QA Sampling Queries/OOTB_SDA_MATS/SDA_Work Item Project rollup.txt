@@ -1,0 +1,32 @@
+select	a11.work_item_key AS work_item_key,
+	max(a12.work_item_number) AS work_item_number,
+	a12.image_url AS image_url,
+	max(a12.work_item_number_d) AS work_item_number_d,
+	a11.work_item_iteration_m2m_key AS ROW_KEY,
+	max(a14.name) AS name,
+	a11.project_key AS project_key,
+	max(a13.project_name) AS project_name,
+	sum(a11.committed_count) AS WJXBFS1,
+	sum(a11.completed_count) AS WJXBFS2,
+	sum(a11.committed_velocity) AS WJXBFS3,
+	sum(a11.completed_velocity) AS WJXBFS4,
+	sum(a11.committed_hours) AS WJXBFS5,
+	sum(a11.committed_tasks) AS WJXBFS6,
+	sum(a11.completed_tasks) AS WJXBFS7,
+	sum(a11.defects_found) AS WJXBFS8,
+	sum(a11.defects_committed) AS WJXBFS9,
+	sum(a11.defects_fixed) AS WJXBFSa,
+	sum(a11.stories_added) AS WJXBFSb,
+	sum(a11.stories_committed) AS WJXBFSc,
+	sum(a11.stories_completed) AS WJXBFSd
+from	"ldb"."f_work_item_project_iteration"	a11
+	join	"ldb"."d_work_item"	a12
+	  on 	(a11.work_item_key = a12.ROW_KEY)
+	join	"ldb"."d_project"	a13
+	  on 	(a11.project_key = a13.ROW_KEY)
+	join	"ldb"."d_work_item_iteration_m2m"	a14
+	  on 	(a11.work_item_iteration_m2m_key = a14.ROW_KEY)
+group by	a11.work_item_key,
+	a12.image_url,
+	a11.work_item_iteration_m2m_key,
+	a11.project_key

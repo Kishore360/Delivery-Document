@@ -1,0 +1,79 @@
+select	a11.build_project_key AS ROW_KEY,
+	max(a12.name) AS name,
+	a12.description AS description,
+	a12.url AS url,
+	a12.last_build_run_key AS ROW_KEY0,
+	max(a14.name) AS name0,
+	a14.build_number AS build_number,
+	a12.last_stable_build_run_key AS ROW_KEY1,
+	max(a17.name) AS name1,
+	a17.build_number AS build_number0,
+	a12.last_successful_build_run_key AS ROW_KEY2,
+	max(a18.name) AS name2,
+	a18.build_number AS build_number1,
+	a12.last_completed_build_run_key AS ROW_KEY3,
+	max(a15.name) AS name3,
+	a15.build_number AS build_number2,
+	a12.last_unstable_build_run_key AS ROW_KEY4,
+	max(a19.name) AS name4,
+	a19.build_number AS build_number3,
+	a12.last_unsuccessful_build_run_key AS ROW_KEY5,
+	max(a110.name) AS name5,
+	a110.build_number AS build_number4,
+	a12.first_build_run_key AS ROW_KEY6,
+	max(a13.name) AS name6,
+	a13.build_number AS build_number5,
+	a12.last_failed_build_run_key AS ROW_KEY7,
+	max(a16.name) AS name7,
+	a16.build_number AS build_number6,
+	sum(a11.builds_aborted) AS WJXBFS1,
+	sum(a11.builds_failed) AS WJXBFS2,
+	sum(a11.builds_passed) AS WJXBFS3,
+	sum(a11.builds_total) AS WJXBFS4,
+	sum(a11.builds_unstable) AS WJXBFS5,
+	sum(a11.cobertura_score) AS WJXBFS6,
+	COALESCE((sum(a11.tests_passed) / ((sum(a11.tests_passed) + sum(a11.tests_failed)) + sum(a11.tests_skipped))), 0) AS WJXBFS7,
+	sum(a11.tests_failed) AS WJXBFS8,
+	sum(a11.tests_passed) AS WJXBFS9,
+	sum(a11.tests_skipped) AS WJXBFSa,
+	((sum(a11.tests_passed) + sum(a11.tests_failed)) + sum(a11.tests_skipped)) AS WJXBFSb,
+	COALESCE((sum(a11.builds_passed) / sum(a11.builds_total)), 0) AS WJXBFSc,
+	sum(a11.builds_not_executed) AS WJXBFSd
+from	"ldb"."f_build_project"	a11
+	join	"ldb"."d_build_project"	a12
+	  on 	(a11.build_project_key = a12.ROW_KEY)
+	join	"ldb"."d_first_build_run"	a13
+	  on 	(a12.first_build_run_key = a13.ROW_KEY)
+	join	"ldb"."d_last_build_run"	a14
+	  on 	(a12.last_build_run_key = a14.ROW_KEY)
+	join	"ldb"."d_last_completed_build_run"	a15
+	  on 	(a12.last_completed_build_run_key = a15.ROW_KEY)
+	join	"ldb"."d_last_failed_build_run"	a16
+	  on 	(a12.last_failed_build_run_key = a16.ROW_KEY)
+	join	"ldb"."d_last_stable_build_run"	a17
+	  on 	(a12.last_stable_build_run_key = a17.ROW_KEY)
+	join	"ldb"."d_last_successful_build_run"	a18
+	  on 	(a12.last_successful_build_run_key = a18.ROW_KEY)
+	join	"ldb"."d_last_unstable_build_run"	a19
+	  on 	(a12.last_unstable_build_run_key = a19.ROW_KEY)
+	join	"ldb"."d_last_unsuccessful_build"	a110
+	  on 	(a12.last_unsuccessful_build_run_key = a110.ROW_KEY)
+group by	a11.build_project_key,
+	a12.description,
+	a12.url,
+	a12.last_build_run_key,
+	a14.build_number,
+	a12.last_stable_build_run_key,
+	a17.build_number,
+	a12.last_successful_build_run_key,
+	a18.build_number,
+	a12.last_completed_build_run_key,
+	a15.build_number,
+	a12.last_unstable_build_run_key,
+	a19.build_number,
+	a12.last_unsuccessful_build_run_key,
+	a110.build_number,
+	a12.first_build_run_key,
+	a13.build_number,
+	a12.last_failed_build_run_key,
+	a16.build_number

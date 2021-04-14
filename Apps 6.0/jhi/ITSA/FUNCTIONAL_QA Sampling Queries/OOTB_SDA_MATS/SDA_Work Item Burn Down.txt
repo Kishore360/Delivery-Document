@@ -1,0 +1,72 @@
+select	a17.start_date AS start_date,
+	a14.lagging_count_of_quarter AS lagging_count_of_quarter,
+	a15.lagging_count_of_weeks AS lagging_count_of_weeks,
+	a16.lagging_count_of_year AS lagging_count_of_year,
+	a11.work_item_key AS work_item_key,
+	max(a18.work_item_number) AS work_item_number,
+	a11.date_key AS Calendar_Date_Row_key,
+	max(a12.calendar_date_d) AS calendar_date,
+	a12.calendar_date AS calendar_date_greg,
+	a12.month_start_date_key AS month_start_date_key,
+	max(a13.month_year) AS month_name,
+	a13.quarter_start_date_key AS ROW_KEY,
+	max(a14.quarter_name) AS quarter_name,
+	a12.week_start_date_key AS ROW_KEY0,
+	max(a15.week_start_day_name) AS week_name,
+	a14.year_start_date_key AS ROW_KEY1,
+	max(a16.year_name) AS year_name,
+	a12.day_of_month AS day_of_month,
+	a12.day_of_week AS day_of_week,
+	max(a12.day_name_d) AS week_day_flag,
+	a12.day_of_year AS day_of_year,
+	a12.lagging_count_of_days AS lagging_count_of_days0,
+	a13.lagging_count_of_month AS lagging_count_of_month0,
+	a11.project_key AS project_key,
+	max(a19.project_name) AS project_name,
+	a11.work_item_iteration_m2m_key AS ROW_KEY2,
+	max(a17.name) AS name,
+	a18.image_url AS image_url,
+	max(a18.work_item_number_d) AS work_item_number_d,
+	a17.completion_date AS completion_date,
+	a17.end_date AS end_date,
+	a11.event_type AS evnt_type,
+	sum(a11.estimate_added) AS WJXBFS1
+from	"ldb"."f_work_item_burn_down"	a11
+	join	"ldb"."d_calendar_date"	a12
+	  on 	(a11.date_key = a12.ROW_KEY)
+	join	"ldb"."d_calendar_month"	a13
+	  on 	(a12.month_start_date_key = a13.ROW_KEY)
+	join	"ldb"."d_calendar_quarter"	a14
+	  on 	(a13.quarter_start_date_key = a14.ROW_KEY)
+	join	"ldb"."d_calendar_week"	a15
+	  on 	(a12.week_start_date_key = a15.ROW_KEY)
+	join	"ldb"."d_calendar_year"	a16
+	  on 	(a14.year_start_date_key = a16.ROW_KEY)
+	join	"ldb"."d_work_item_iteration_m2m"	a17
+	  on 	(a11.work_item_iteration_m2m_key = a17.ROW_KEY)
+	join	"ldb"."d_work_item"	a18
+	  on 	(a11.work_item_key = a18.ROW_KEY)
+	join	"ldb"."d_project"	a19
+	  on 	(a11.project_key = a19.ROW_KEY)
+group by	a17.start_date,
+	a14.lagging_count_of_quarter,
+	a15.lagging_count_of_weeks,
+	a16.lagging_count_of_year,
+	a11.work_item_key,
+	a11.date_key,
+	a12.calendar_date,
+	a12.month_start_date_key,
+	a13.quarter_start_date_key,
+	a12.week_start_date_key,
+	a14.year_start_date_key,
+	a12.day_of_month,
+	a12.day_of_week,
+	a12.day_of_year,
+	a12.lagging_count_of_days,
+	a13.lagging_count_of_month,
+	a11.project_key,
+	a11.work_item_iteration_m2m_key,
+	a18.image_url,
+	a17.completion_date,
+	a17.end_date,
+	a11.event_type

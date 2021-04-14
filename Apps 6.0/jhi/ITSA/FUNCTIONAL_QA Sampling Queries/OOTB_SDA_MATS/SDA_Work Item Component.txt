@@ -1,0 +1,43 @@
+select	a11.work_item_key AS work_item_key,
+	max(a13.work_item_number) AS work_item_number,
+	a11.component_key AS component_key,
+	max(a16.name) AS name,
+	a13.work_item_type_src_key AS work_item_type_src_key,
+	max(a19.source_dimension_name) AS source_dimension_name,
+	a13.work_item_priority_src_key AS work_item_priority_src_key,
+	max(a18.source_dimension_name) AS source_dimension_name0,
+	a13.work_item_status_src_key AS work_item_status_src_key,
+	max(a14.source_dimension_name) AS source_dimension_name1,
+	a13.work_item_assigned_to_key AS work_item_assigned_to_key,
+	max(a17.full_name) AS full_name,
+	a13.image_url AS image_url,
+	max(a13.work_item_number_d) AS work_item_number_d,
+	max(a11.component_count) AS WJXBFS1,
+	max(a11.work_item_count_from_component) AS WJXBFS2
+from	"ldb"."f_work_item_component"	a11
+	join	"ldb"."d_calendar_date"	a12
+	  on 	(a11.date_key = a12.ROW_KEY)
+	join	"ldb"."d_work_item"	a13
+	  on 	(a11.work_item_key = a13.ROW_KEY)
+	join	"ldb"."d_work_item_status"	a14
+	  on 	(a13.work_item_status_src_key = a14.ROW_KEY)
+	join	"ldb"."d_calendar_month"	a15
+	  on 	(a12.month_start_date_key = a15.ROW_KEY)
+	join	"ldb"."d_component"	a16
+	  on 	(a11.component_key = a16.ROW_KEY)
+	join	"ldb"."d_work_item_assigned_to"	a17
+	  on 	(a13.work_item_assigned_to_key = a17.ROW_KEY)
+	join	"ldb"."d_work_item_priority"	a18
+	  on 	(a13.work_item_priority_src_key = a18.ROW_KEY)
+	join	"ldb"."d_work_item_type"	a19
+	  on 	(a13.work_item_type_src_key = a19.ROW_KEY)
+where	(a14.wh_dimension_name = 'PROPOSED'
+ or a14.wh_dimension_name = 'IN PROGRESS'
+ or a15.lagging_count_of_month_d between 0 and 12)
+group by	a11.work_item_key,
+	a11.component_key,
+	a13.work_item_type_src_key,
+	a13.work_item_priority_src_key,
+	a13.work_item_status_src_key,
+	a13.work_item_assigned_to_key,
+	a13.image_url

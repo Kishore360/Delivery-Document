@@ -1,0 +1,110 @@
+select	a15.lagging_count_of_quarter AS lagging_count_of_quarter,
+	a16.lagging_count_of_weeks AS lagging_count_of_weeks,
+	a17.lagging_count_of_year AS lagging_count_of_year,
+	a18.created_on AS created_on,
+	a18.created_by_key AS work_item_created_by_key,
+	max(a113.full_name) AS full_name,
+	a18.row_key_description AS row_key_description,
+	max(a18.description) AS short_description,
+	a18.row_key_short_desc AS row_key_short_desc,
+	max(a18.short_description) AS short_description0,
+	a11.work_item_key AS work_item_key,
+	max(a18.work_item_number) AS work_item_number,
+	a11.date_key AS Calendar_Date_Row_key,
+	max(a13.calendar_date_d) AS calendar_date,
+	a13.calendar_date AS calendar_date_greg,
+	a13.month_start_date_key AS month_start_date_key,
+	max(a14.month_year) AS month_name,
+	a14.quarter_start_date_key AS ROW_KEY,
+	max(a15.quarter_name) AS quarter_name,
+	a13.week_start_date_key AS ROW_KEY0,
+	max(a16.week_start_day_name) AS week_name,
+	a15.year_start_date_key AS ROW_KEY1,
+	max(a17.year_name) AS year_name,
+	a13.day_of_month AS day_of_month,
+	a13.day_of_year AS day_of_year,
+	a11.project_key AS project_key,
+	max(a112.project_name) AS project_name,
+	a18.work_item_updated_by_key AS changed_by,
+	max(a117.full_name) AS full_name0,
+	a18.work_item_updated_on AS changed_on,
+	a18.work_item_status_src_key AS work_item_status_src_key,
+	max(a19.source_dimension_name) AS source_dimension_name,
+	a12.employee_mdm_key AS row_current_key,
+	max(a111.full_name) AS full_name1,
+	a18.iteration_key AS iteration_key,
+	max(a114.name) AS name,
+	a14.lagging_count_of_month AS lagging_count_of_month0,
+	a18.work_item_priority_src_key AS work_item_priority_src_key,
+	max(a116.source_dimension_name) AS source_dimension_name0,
+	a19.wh_row_id AS wh_row_id,
+	max(a19.wh_dimension_name) AS wh_dimension_name,
+	a18.tc_automated_flag AS tc_automated_flag,
+	a18.parent_work_item_key AS ROW_KEY2,
+	max(a115.work_item_number) AS work_item_number0,
+	a18.work_item_type_src_key AS work_item_type_src_key,
+	max(a110.source_dimension_name) AS source_dimension_name1,
+	count(a11.created_work_items) AS WJXBFS1
+from	"ldb"."f_work_item"	a11
+	join	"ldb"."d_internal_contact"	a12
+	  on 	(a11.employee_key = a12.ROW_KEY)
+	join	"ldb"."d_calendar_date"	a13
+	  on 	(a11.date_key = a13.ROW_KEY)
+	join	"ldb"."d_calendar_month"	a14
+	  on 	(a13.month_start_date_key = a14.ROW_KEY)
+	join	"ldb"."d_calendar_quarter"	a15
+	  on 	(a14.quarter_start_date_key = a15.ROW_KEY)
+	join	"ldb"."d_calendar_week"	a16
+	  on 	(a13.week_start_date_key = a16.ROW_KEY)
+	join	"ldb"."d_calendar_year"	a17
+	  on 	(a15.year_start_date_key = a17.ROW_KEY)
+	join	"ldb"."d_work_item"	a18
+	  on 	(a11.work_item_key = a18.ROW_KEY)
+	join	"ldb"."d_work_item_status"	a19
+	  on 	(a18.work_item_status_src_key = a19.ROW_KEY)
+	join	"ldb"."d_work_item_type"	a110
+	  on 	(a18.work_item_type_src_key = a110.ROW_KEY)
+	join	"ldb"."d_internal_contact_mdm"	a111
+	  on 	(a12.employee_mdm_key = a111.ROW_KEY)
+	join	"ldb"."d_project"	a112
+	  on 	(a11.project_key = a112.ROW_KEY)
+	join	"ldb"."d_work_item_created_by"	a113
+	  on 	(a18.created_by_key = a113.ROW_KEY)
+	join	"ldb"."d_iteration"	a114
+	  on 	(a18.iteration_key = a114.ROW_KEY)
+	join	"ldb"."d_work_item_parent"	a115
+	  on 	(a18.parent_work_item_key = a115.ROW_KEY)
+	join	"ldb"."d_work_item_priority"	a116
+	  on 	(a18.work_item_priority_src_key = a116.ROW_KEY)
+	join	"ldb"."d_work_item_updated_by"	a117
+	  on 	(a18.work_item_updated_by_key = a117.ROW_KEY)
+where	(a110.wh_dimension_code = 'TEST CASE'
+ and a14.lagging_count_of_month_d between 0 and 12)
+group by	a15.lagging_count_of_quarter,
+	a16.lagging_count_of_weeks,
+	a17.lagging_count_of_year,
+	a18.created_on,
+	a18.created_by_key,
+	a18.row_key_description,
+	a18.row_key_short_desc,
+	a11.work_item_key,
+	a11.date_key,
+	a13.calendar_date,
+	a13.month_start_date_key,
+	a14.quarter_start_date_key,
+	a13.week_start_date_key,
+	a15.year_start_date_key,
+	a13.day_of_month,
+	a13.day_of_year,
+	a11.project_key,
+	a18.work_item_updated_by_key,
+	a18.work_item_updated_on,
+	a18.work_item_status_src_key,
+	a12.employee_mdm_key,
+	a18.iteration_key,
+	a14.lagging_count_of_month,
+	a18.work_item_priority_src_key,
+	a19.wh_row_id,
+	a18.tc_automated_flag,
+	a18.parent_work_item_key,
+	a18.work_item_type_src_key
