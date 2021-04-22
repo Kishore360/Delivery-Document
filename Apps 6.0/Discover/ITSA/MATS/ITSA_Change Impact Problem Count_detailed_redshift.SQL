@@ -14,9 +14,10 @@ select 'ldb."d_application" a12 ' as Table_name, count(a11.row_key) Row_Count
  from ldb."f_problem" a11 
  join "ldb"."d_application" a12 on (a11.application_key = a12.row_key)  
  union
-select 'ldb.d_problem_application' as Table_name, count(a11.row_key) Row_Count
-from ldb."f_problem" a11
-join d_problem_application pa13 on (a11.problem_application = pa13.row_key)  
+select 'ldb."D_APPLICATION_MDM" a12 ' as Table_name, count(a11.row_key) Row_Count
+ from ldb."f_problem" a11 
+ join "ldb"."d_application" a12 on (a11.application_key = a12.row_key) 
+ join ldb.D_APPLICATION_MDM a13 ON a12.mdm_key=a13.row_key
 union
 select 'ldb."d_calendar_date" a14 ' as Table_name, count(a11.row_key) Row_Count
 from ldb."f_problem" a11 
