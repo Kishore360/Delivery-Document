@@ -6,17 +6,17 @@ from ldb."F_CHANGE_REQUEST" a11
 join "ldb"."D_CHANGE_REQUEST" a12
 on (a11.CHANGE_REQUEST_KEY = a12.ROW_KEY)
 union
-select 'ldb."d_application" a13 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb."D_APPLICATION" a13 ' as Table_name, count(a11.row_key) Row_Count
 from ldb."F_CHANGE_REQUEST" a11
-join "ldb"."d_application" a13
+join "ldb"."D_APPLICATION" a13
 on (a11.APPLICATION_KEY = a13.ROW_KEY)
 union
-select 'ldb."d_application_mdm" a14 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb."D_APPLICATION_MDM" a14 ' as Table_name, count(a11.row_key) Row_Count
 from ldb."F_CHANGE_REQUEST" a11
-join "ldb"."d_application" a13
+join "ldb"."D_APPLICATION" a13
 on (a11.APPLICATION_KEY = a13.ROW_KEY)
-join "ldb"."d_application_mdm" a14
-on (a13.mdm_key = a14.ROW_KEY)
+join "ldb"."D_APPLICATION_MDM" a14
+on (a13.MDM_KEY = a14.ROW_KEY)
 union
 select 'ldb."d_internal_contact_assigned_to" a15 ' as Table_name, count(a11.row_key) Row_Count
 from ldb."F_CHANGE_REQUEST" a11
@@ -28,23 +28,23 @@ from ldb."F_CHANGE_REQUEST" a11
 join "ldb"."d_internal_organization_group" a16
 on (a11.ASSIGNMENT_GROUP_KEY = a16.ROW_KEY)
 union
-select 'ldb."d_calendar_date" a17 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb."D_CALENDAR_DATE" a17 ' as Table_name, count(a11.row_key) Row_Count
 from ldb."F_CHANGE_REQUEST" a11
-join "ldb"."d_calendar_date" a17
+join "ldb"."D_CALENDAR_DATE" a17
 on (a11.DATE_KEY = a17.ROW_KEY)
 union
 select 'ldb."d_calendar_month" a18 ' as Table_name, count(a11.row_key) Row_Count
 from ldb."F_CHANGE_REQUEST" a11
-join "ldb"."d_calendar_date" a17
+join "ldb"."D_CALENDAR_DATE" a17
 on (a11.DATE_KEY = a17.ROW_KEY)
 join "ldb"."d_calendar_month" a18
-on (a17.month_start_date_key = a18.ROW_KEY)
+on (a17.MONTH_START_DATE_KEY = a18.ROW_KEY)
 union
 select 'ldb."d_calendar_quarter" a19 ' as Table_name, count(a11.row_key) Row_Count
 from ldb."F_CHANGE_REQUEST" a11
-join "ldb"."d_calendar_date" a17
+join "ldb"."D_CALENDAR_DATE" a17
 on (a11.DATE_KEY = a17.ROW_KEY) join "ldb"."d_calendar_month" a18
-on (a17.month_start_date_key = a18.ROW_KEY)
+on (a17.MONTH_START_DATE_KEY = a18.ROW_KEY)
 join "ldb"."d_calendar_quarter" a19
 on (a18.quarter_start_date_key = a19.ROW_KEY)
 union
@@ -74,17 +74,17 @@ from ldb."F_CHANGE_REQUEST" a11
 join "ldb"."d_change_request_risk" a113
 on (a11.RISK_SRC_KEY = a113.ROW_KEY)
 union
-select 'ldb."d_configuration_item" a114 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb."D_CONFIGURATION_ITEM" a114 ' as Table_name, count(a11.row_key) Row_Count
 from ldb."F_CHANGE_REQUEST" a11
-join "ldb"."d_configuration_item" a114
+join "ldb"."D_CONFIGURATION_ITEM" a114
 on (a11.CONFIGURATION_ITEM_KEY = a114.ROW_KEY)
 union
-select 'ldb."d_configuration_item_mdm" a115 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb."D_CONFIGURATION_ITEM_MDM" a115 ' as Table_name, count(a11.row_key) Row_Count
 from ldb."F_CHANGE_REQUEST" a11
-join "ldb"."d_configuration_item" a114
+join "ldb"."D_CONFIGURATION_ITEM" a114
 on (a11.CONFIGURATION_ITEM_KEY = a114.ROW_KEY)
-join "ldb"."d_configuration_item_mdm" a115
-on (a114.mdm_key = a115.ROW_KEY)
+join "ldb"."D_CONFIGURATION_ITEM_MDM" a115
+on (a114.MDM_KEY = a115.ROW_KEY)
 union
 select 'ldb."d_internal_contact" a116 ' as Table_name, count(a11.row_key) Row_Count
 from ldb."F_CHANGE_REQUEST" a11
@@ -93,18 +93,18 @@ on (a11.EMPLOYEE_KEY = a116.ROW_KEY)
 union
 select 'ldb."d_calendar_week" a117 ' as Table_name, count(a11.row_key) Row_Count
 from ldb."F_CHANGE_REQUEST" a11
-join "ldb"."d_calendar_date" a17
+join "ldb"."D_CALENDAR_DATE" a17
 on (a11.DATE_KEY = a17.ROW_KEY)
 join "ldb"."d_calendar_week" a117
-on (a17.week_start_date_key = a117.ROW_KEY)
+on (a17.WEEK_START_DATE_KEY = a117.ROW_KEY)
 union
-select 'ldb."d_calendar_year" a118 ' as Table_name, count(a11.row_key) Row_Count
+select 'ldb."D_CALENDAR_YEAR" a118 ' as Table_name, count(a11.row_key) Row_Count
 from ldb."F_CHANGE_REQUEST" a11
-join "ldb"."d_calendar_date" a17
+join "ldb"."D_CALENDAR_DATE" a17
 on (a11.DATE_KEY = a17.ROW_KEY) join "ldb"."d_calendar_month" a18
-on (a17.month_start_date_key = a18.ROW_KEY) join "ldb"."d_calendar_quarter" a19
+on (a17.MONTH_START_DATE_KEY = a18.ROW_KEY) join "ldb"."d_calendar_quarter" a19
 on (a18.quarter_start_date_key = a19.ROW_KEY)
-join "ldb"."d_calendar_year" a118
+join "ldb"."D_CALENDAR_YEAR" a118
 on (a19.year_start_date_key = a118.ROW_KEY)
 union
 select 'ldb."d_internal_contact_programmer_c" a119 ' as Table_name, count(a11.row_key) Row_Count
@@ -191,7 +191,7 @@ from ldb."F_CHANGE_REQUEST" a11
 join "ldb"."d_internal_organization_group" a16
 on (a11.ASSIGNMENT_GROUP_KEY = a16.ROW_KEY)
 join "ldb"."d_assignment_group_manager" a134
-on (a16.assignment_group_manager_key = a134.ROW_KEY)
+on (a16.ASSIGNMENT_GROUP_MANAGER_KEY = a134.ROW_KEY)
 union
 select 'ldb."d_internal_organization_bu_oversight_group_c" a135 ' as Table_name, count(a11.row_key) Row_Count
 from ldb."F_CHANGE_REQUEST" a11
@@ -385,4 +385,4 @@ from ldb."F_CHANGE_REQUEST" a11
 join "ldb"."D_CHANGE_REQUEST" a12
 on (a11.CHANGE_REQUEST_KEY = a12.ROW_KEY)
 join "ldb"."d_lov_change_request_sysplex_c" a162
-on (a12.SYSPLEX_SRC_C_KEY = a162.ROW_KEY)
+on (a12.SYSPLEX_SRC_C_KEY = a162.ROW_KEY);
