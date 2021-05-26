@@ -1,0 +1,193 @@
+/* Tables Accessed:
+D_INCIDENT
+D_INCIDENT_OPENED_BY
+D_INCIDENT_PRIORITY
+D_LOV_CSAT_RANGE_BUCKET_C
+D_QUESTION_TYPE
+D_SURVEY
+D_SURVEY_CALENDAR_DATE
+D_SURVEY_CALENDAR_MONTH
+D_SURVEY_CALENDAR_QUARTER
+D_SURVEY_CALENDAR_WEEK
+D_SURVEY_CALENDAR_YEAR
+D_SURVEY_DEPARTMENT
+D_SURVEY_EMPLOYEE_MDM
+D_SURVEY_INSTANCE
+D_SURVEY_QUESTION
+D_SURVEY_STATE
+D_TASK
+D_TASK_ASSIGNED_TO
+D_TASK_ASSIGNMENT_GROUP_MANAGER
+D_TASK_CONFIGURATION_ITEM
+D_TASK_CONFIGURATION_ITEM_MDM
+D_TASK_INTERNAL_ORGANIZATION_GROUP
+D_TASK_LOCATION
+F_INCIDENT_RESPONSE
+
+
+ */
+select 'ldb."F_INCIDENT_RESPONSE" a110 ' as Table_name, count(a11.row_key) Row_Count
+ from ldb."F_INCIDENT_RESPONSE" a110 
+ union
+select 'ldb.ROW_KEY = a110.INCIDENT_KEY and ' as Table_name, count(a11.row_key) Row_Count
+ from ldb."F_INCIDENT_RESPONSE" a110 
+
+ on (a12.ROW_KEY = a110.INCIDENT_KEY and 
+a13.ROW_KEY = a110.SURVEY_KEY and  
+ union
+select 'ldb.ROW_KEY = a110.CSAT_RANGE_BUCKET_C_KEY and ' as Table_name, count(a11.row_key) Row_Count
+ from ldb."F_INCIDENT_RESPONSE" a110 
+
+a14.ROW_KEY = a110.CSAT_RANGE_BUCKET_C_KEY and 
+a15.ROW_KEY = a110.SURVEY_DATE_KEY and  
+ union
+select 'ldb.ROW_KEY = a110.SURVEY_DEPARTMENT_KEY and ' as Table_name, count(a11.row_key) Row_Count
+ from ldb."F_INCIDENT_RESPONSE" a110 
+
+a16.ROW_KEY = a110.SURVEY_DEPARTMENT_KEY and 
+a18.ROW_KEY = a110.SURVEY_INSTANCE_KEY and  
+ union
+select 'ldb.ROW_KEY = a110.QUESTION_KEY and ' as Table_name, count(a11.row_key) Row_Count
+ from ldb."F_INCIDENT_RESPONSE" a110 
+
+a19.ROW_KEY = a110.QUESTION_KEY and 
+pa11.TASK_NUMBER = a110.TASK_NUMBER)  
+ union
+select 'ldb."D_TASK" a111 ' as Table_name, count(a11.row_key) Row_Count
+ from ldb."F_INCIDENT_RESPONSE" a110 
+ on (a12.ROW_KEY = a110.INCIDENT_KEY and 
+ a13.ROW_KEY = a110.SURVEY_KEY and a14.ROW_KEY = a110.CSAT_RANGE_BUCKET_C_KEY and 
+ a15.ROW_KEY = a110.SURVEY_DATE_KEY and a16.ROW_KEY = a110.SURVEY_DEPARTMENT_KEY and 
+ a18.ROW_KEY = a110.SURVEY_INSTANCE_KEY and a19.ROW_KEY = a110.QUESTION_KEY and 
+ pa11.TASK_NUMBER = a110.TASK_NUMBER) 
+join "ldb"."D_TASK" a111 
+ on (a110.TASK_KEY = a111.ROW_KEY)  
+ union
+select 'ldb."D_TASK_CONFIGURATION_ITEM" a112 ' as Table_name, count(a11.row_key) Row_Count
+ from ldb."F_INCIDENT_RESPONSE" a110 
+ on (a12.ROW_KEY = a110.INCIDENT_KEY and 
+ a13.ROW_KEY = a110.SURVEY_KEY and a14.ROW_KEY = a110.CSAT_RANGE_BUCKET_C_KEY and 
+ a15.ROW_KEY = a110.SURVEY_DATE_KEY and a16.ROW_KEY = a110.SURVEY_DEPARTMENT_KEY and 
+ a18.ROW_KEY = a110.SURVEY_INSTANCE_KEY and a19.ROW_KEY = a110.QUESTION_KEY and 
+ pa11.TASK_NUMBER = a110.TASK_NUMBER) join "ldb"."D_TASK" a111 
+ on (a110.TASK_KEY = a111.ROW_KEY) 
+join "ldb"."D_TASK_CONFIGURATION_ITEM" a112 
+ on (a111.CONFIGURATION_ITEM_KEY = a112.ROW_KEY)  
+ union
+select 'ldb."D_SURVEY_CALENDAR_MONTH" a113 ' as Table_name, count(a11.row_key) Row_Count
+ from ldb."F_INCIDENT_RESPONSE" a110 
+
+join "ldb"."D_SURVEY_CALENDAR_MONTH" a113 
+ on (a15.month_start_date_key = a113.ROW_KEY)  
+ union
+select 'ldb."D_SURVEY_CALENDAR_QUARTER" a114 ' as Table_name, count(a11.row_key) Row_Count
+ from ldb."F_INCIDENT_RESPONSE" a110 
+ join "ldb"."D_SURVEY_CALENDAR_MONTH" a113 
+ on (a15.month_start_date_key = a113.ROW_KEY) 
+join "ldb"."D_SURVEY_CALENDAR_QUARTER" a114 
+ on (a113.quarter_start_date_key = a114.ROW_KEY)  
+ union
+select 'ldb."D_TASK_ASSIGNED_TO" a115 ' as Table_name, count(a11.row_key) Row_Count
+ from ldb."F_INCIDENT_RESPONSE" a110 
+ on (a12.ROW_KEY = a110.INCIDENT_KEY and 
+ a13.ROW_KEY = a110.SURVEY_KEY and a14.ROW_KEY = a110.CSAT_RANGE_BUCKET_C_KEY and 
+ a15.ROW_KEY = a110.SURVEY_DATE_KEY and a16.ROW_KEY = a110.SURVEY_DEPARTMENT_KEY and 
+ a18.ROW_KEY = a110.SURVEY_INSTANCE_KEY and a19.ROW_KEY = a110.QUESTION_KEY and 
+ pa11.TASK_NUMBER = a110.TASK_NUMBER) join "ldb"."D_TASK" a111 
+ on (a110.TASK_KEY = a111.ROW_KEY) 
+join "ldb"."D_TASK_ASSIGNED_TO" a115 
+ on (a111.ASSIGNED_TO_KEY = a115.ROW_KEY)  
+ union
+select 'ldb."D_TASK_INTERNAL_ORGANIZATION_GROUP" a116 ' as Table_name, count(a11.row_key) Row_Count
+ from ldb."F_INCIDENT_RESPONSE" a110 
+ on (a12.ROW_KEY = a110.INCIDENT_KEY and 
+ a13.ROW_KEY = a110.SURVEY_KEY and a14.ROW_KEY = a110.CSAT_RANGE_BUCKET_C_KEY and 
+ a15.ROW_KEY = a110.SURVEY_DATE_KEY and a16.ROW_KEY = a110.SURVEY_DEPARTMENT_KEY and 
+ a18.ROW_KEY = a110.SURVEY_INSTANCE_KEY and a19.ROW_KEY = a110.QUESTION_KEY and 
+ pa11.TASK_NUMBER = a110.TASK_NUMBER) join "ldb"."D_TASK" a111 
+ on (a110.TASK_KEY = a111.ROW_KEY) 
+join "ldb"."D_TASK_INTERNAL_ORGANIZATION_GROUP" a116 
+ on (a111.ASSIGNMENT_GROUP_KEY = a116.ROW_KEY)  
+ union
+select 'ldb."D_SURVEY_STATE" a117 ' as Table_name, count(a11.row_key) Row_Count
+ from ldb."F_INCIDENT_RESPONSE" a110 
+ on (a12.ROW_KEY = a110.INCIDENT_KEY and 
+ a13.ROW_KEY = a110.SURVEY_KEY and a14.ROW_KEY = a110.CSAT_RANGE_BUCKET_C_KEY and 
+ a15.ROW_KEY = a110.SURVEY_DATE_KEY and a16.ROW_KEY = a110.SURVEY_DEPARTMENT_KEY and 
+ a18.ROW_KEY = a110.SURVEY_INSTANCE_KEY and a19.ROW_KEY = a110.QUESTION_KEY and 
+ pa11.TASK_NUMBER = a110.TASK_NUMBER) 
+join "ldb"."D_SURVEY_STATE" a117 
+ on (a110.STATE_SRC_KEY = a117.ROW_KEY)  
+ union
+select 'ldb."D_TASK_CONFIGURATION_ITEM_MDM" a118 ' as Table_name, count(a11.row_key) Row_Count
+ from ldb."F_INCIDENT_RESPONSE" a110 
+ on (a12.ROW_KEY = a110.INCIDENT_KEY and 
+ a13.ROW_KEY = a110.SURVEY_KEY and a14.ROW_KEY = a110.CSAT_RANGE_BUCKET_C_KEY and 
+ a15.ROW_KEY = a110.SURVEY_DATE_KEY and a16.ROW_KEY = a110.SURVEY_DEPARTMENT_KEY and 
+ a18.ROW_KEY = a110.SURVEY_INSTANCE_KEY and a19.ROW_KEY = a110.QUESTION_KEY and 
+ pa11.TASK_NUMBER = a110.TASK_NUMBER) join "ldb"."D_TASK" a111 
+ on (a110.TASK_KEY = a111.ROW_KEY) join "ldb"."D_TASK_CONFIGURATION_ITEM" a112 
+ on (a111.CONFIGURATION_ITEM_KEY = a112.ROW_KEY) 
+join "ldb"."D_TASK_CONFIGURATION_ITEM_MDM" a118 
+ on (a112.MDM_KEY = a118.ROW_KEY)  
+ union
+select 'ldb."D_TASK_LOCATION" a119 ' as Table_name, count(a11.row_key) Row_Count
+ from ldb."F_INCIDENT_RESPONSE" a110 
+ on (a12.ROW_KEY = a110.INCIDENT_KEY and 
+ a13.ROW_KEY = a110.SURVEY_KEY and a14.ROW_KEY = a110.CSAT_RANGE_BUCKET_C_KEY and 
+ a15.ROW_KEY = a110.SURVEY_DATE_KEY and a16.ROW_KEY = a110.SURVEY_DEPARTMENT_KEY and 
+ a18.ROW_KEY = a110.SURVEY_INSTANCE_KEY and a19.ROW_KEY = a110.QUESTION_KEY and 
+ pa11.TASK_NUMBER = a110.TASK_NUMBER) join "ldb"."D_TASK" a111 
+ on (a110.TASK_KEY = a111.ROW_KEY) 
+join "ldb"."D_TASK_LOCATION" a119 
+ on (a111.LOCATION_KEY = a119.ROW_KEY)  
+ union
+select 'ldb."D_INCIDENT_OPENED_BY" a120 ' as Table_name, count(a11.row_key) Row_Count
+ from ldb."F_INCIDENT_RESPONSE" a110 
+ on (a12.ROW_KEY = a110.INCIDENT_KEY and 
+ a13.ROW_KEY = a110.SURVEY_KEY and 
+join "ldb"."D_INCIDENT_OPENED_BY" a120 
+ on (a12.OPENED_BY_KEY = a120.ROW_KEY)  
+ union
+select 'ldb."D_INCIDENT_PRIORITY" a121 ' as Table_name, count(a11.row_key) Row_Count
+ from ldb."F_INCIDENT_RESPONSE" a110 
+ on (a12.ROW_KEY = a110.INCIDENT_KEY and 
+ a13.ROW_KEY = a110.SURVEY_KEY and 
+join "ldb"."D_INCIDENT_PRIORITY" a121 
+ on (a12.PRIORITY_SRC_KEY = a121.ROW_KEY)  
+ union
+select 'ldb."D_SURVEY_CALENDAR_WEEK" a122 ' as Table_name, count(a11.row_key) Row_Count
+ from ldb."F_INCIDENT_RESPONSE" a110 
+
+join "ldb"."D_SURVEY_CALENDAR_WEEK" a122 
+ on (a15.week_start_date_key = a122.ROW_KEY)  
+ union
+select 'ldb."D_QUESTION_TYPE" a123 ' as Table_name, count(a11.row_key) Row_Count
+ from ldb."F_INCIDENT_RESPONSE" a110 
+ a19.ROW_KEY = a110.QUESTION_KEY and 
+ pa11.TASK_NUMBER = a110.TASK_NUMBER) 
+join "ldb"."D_QUESTION_TYPE" a123 
+ on (a19.question_type_src_key = a123.ROW_KEY)  
+ union
+select 'ldb."D_TASK_ASSIGNMENT_GROUP_MANAGER" a124 ' as Table_name, count(a11.row_key) Row_Count
+ from ldb."F_INCIDENT_RESPONSE" a110 
+ on (a12.ROW_KEY = a110.INCIDENT_KEY and 
+ a13.ROW_KEY = a110.SURVEY_KEY and a14.ROW_KEY = a110.CSAT_RANGE_BUCKET_C_KEY and 
+ a15.ROW_KEY = a110.SURVEY_DATE_KEY and a16.ROW_KEY = a110.SURVEY_DEPARTMENT_KEY and 
+ a18.ROW_KEY = a110.SURVEY_INSTANCE_KEY and a19.ROW_KEY = a110.QUESTION_KEY and 
+ pa11.TASK_NUMBER = a110.TASK_NUMBER) join "ldb"."D_TASK" a111 
+ on (a110.TASK_KEY = a111.ROW_KEY) join "ldb"."D_TASK_INTERNAL_ORGANIZATION_GROUP" a116 
+ on (a111.ASSIGNMENT_GROUP_KEY = a116.ROW_KEY) 
+join "ldb"."D_TASK_ASSIGNMENT_GROUP_MANAGER" a124 
+ on (a116.MANAGER_KEY = a124.ROW_KEY)  
+ union
+select 'ldb."D_SURVEY_CALENDAR_YEAR" a125 ' as Table_name, count(a11.row_key) Row_Count
+ from ldb."F_INCIDENT_RESPONSE" a110 
+ join "ldb"."D_SURVEY_CALENDAR_MONTH" a113 
+ on (a15.month_start_date_key = a113.ROW_KEY) join "ldb"."D_SURVEY_CALENDAR_QUARTER" a114 
+ on (a113.quarter_start_date_key = a114.ROW_KEY) 
+join "ldb"."D_SURVEY_CALENDAR_YEAR" a125 
+ on (a114.year_start_date_key = a125.ROW_KEY)  
+
+
+ 
