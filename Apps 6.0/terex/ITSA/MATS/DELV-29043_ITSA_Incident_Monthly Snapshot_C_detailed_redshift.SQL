@@ -71,3 +71,8 @@ select 'ldb."d_incident_state_snapshot" a114 ' as Table_name, count(a11.row_key)
 from ldb."n_incident_monthly" a11
 join "ldb"."d_incident_state_snapshot" a114
 on (a11.STATE_SRC_KEY = a114.ROW_KEY)
+UNION 
+select 'ldb."D_MOC_INC_MONTHLY_SNAPSHOT_C" a114 ' as Table_name, count(a11.row_key) Row_Count
+from ldb."n_incident_monthly" a11
+join "ldb"."D_MOC_INC_MONTHLY_SNAPSHOT_C" a114
+on (a11.snap_seg_group_c_key = a114.ROW_KEY)
