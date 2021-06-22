@@ -1,0 +1,12 @@
+/* Tables Accessed:
+D_CALENDAR_DATE
+D_CALENDAR_MONTH
+D_CHANGE_FAILURE
+F_CHANGE_FAILURE_CLOSED
+F_CRP_THRESHOLDS
+F_DQ_CHANGE_THRESHOLDS
+ */
+ 
+select 'ldb."F_DQ_CHANGE_THRESHOLDS" a11 ' as Table_name, count(a11.row_key) Row_Count
+from ldb."F_DQ_CHANGE_THRESHOLDS" a11 
+
