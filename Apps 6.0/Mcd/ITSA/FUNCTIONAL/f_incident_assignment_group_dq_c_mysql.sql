@@ -10,10 +10,10 @@ when assignment_group  is  null and sys_user_group.sys_id is null then 0
 	 or name='' or name=' ' then 0
 else 1
 end) 
-from  mcdonalds_mdsdb.incident_final incident
-left join mcdonalds_mdsdb.sys_user_group_final sys_user_group    
+from  mcd_mdsdb.incident_final incident
+left join mcd_mdsdb.sys_user_group_final sys_user_group    
 on incident.assignment_group =sys_user_group.sys_id and incident.sourceinstance=sys_user_group.sourceinstance
-join     mcdonalds_mdwdb.f_incident tgt
+join     mcd_mdwdb.f_incident tgt
 on incident.sys_id=tgt.row_id and incident.sourceinstance=tgt.source_id
 where tgt.assignment_group_dq_c<>(case when assignment_group  is not null and sys_user_group.sys_id is null then 0 
 when assignment_group  is  null and sys_user_group.sys_id is null then 0 

@@ -10,8 +10,8 @@ when incident.u_closure_code in ('UNSPECIFED', 'unspecified', 'Unspecified', 'nu
    else 1 end 
 
  
-from  mcdonalds_mdsdb.change_request_final incident
-left join  mcdonalds_mdwdb.f_change_request tgt
+from  mcd_mdsdb.change_request_final incident
+left join  mcd_mdwdb.f_change_request tgt
 on incident.sys_id=tgt.row_id and incident.sourceinstance=tgt.source_id
 where  tgt.alternative_change_failure_flag_dq_c<>(case when incident.u_closure_code  is  null  then 0 
 when incident.u_closure_code   = 'router'    then 0 

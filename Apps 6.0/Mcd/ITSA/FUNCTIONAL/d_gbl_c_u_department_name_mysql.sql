@@ -5,8 +5,8 @@ FROM
 (
 SELECT count(1) as cnt
 from 
-mcdonalds_mdsdb.u_gbl_final a
-JOIN mcdonalds_mdwdb.d_gbl_c b on b.row_id=a.sys_id and b.source_id=a.sourceinstance
+mcd_mdsdb.u_gbl_final a
+JOIN mcd_mdwdb.d_gbl_c b on b.row_id=a.sys_id and b.source_id=a.sourceinstance
  where a.u_department_name<>b.u_department_name )a
  
  

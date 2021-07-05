@@ -12,12 +12,12 @@ select number,assignment_group, sys_user_group.u_vendor ,assignment_group_vendor
 	 or core_company.name='' or core_company.name=' ' then 0
   else 1 end 
 )  
-from  mcdonalds_mdsdb.incident_final incident
-left join mcdonalds_mdsdb.sys_user_group_final sys_user_group    
+from  mcd_mdsdb.incident_final incident
+left join mcd_mdsdb.sys_user_group_final sys_user_group    
 on incident.assignment_group =sys_user_group.sys_id and incident.sourceinstance=sys_user_group.sourceinstance
- left join  mcdonalds_mdsdb.core_company_final core_company    
+ left join  mcd_mdsdb.core_company_final core_company    
  on sys_user_group.u_vendor=core_company.sys_id
-join     mcdonalds_mdwdb.f_incident tgt
+join     mcd_mdwdb.f_incident tgt
 on incident.sys_id=tgt.row_id and incident.sourceinstance=tgt.source_id
 where tgt.assignment_group_vendor_dq_c<>(case when assignment_group  is  null  then 0 
  when sys_user_group.u_vendor  is  null  then 0 
