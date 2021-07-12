@@ -1,3 +1,0 @@
-SELECT Count(distinct a.ID) as CNT 
-FROM png_mdsdb.pg_ot_ccpa_pa_inventory_c_final a 
-where a.cdctype='X';
