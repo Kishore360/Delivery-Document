@@ -9,10 +9,10 @@ when u_integration_srms_location.u_name in ('UNSPECIFED', 'unspecified', 'Unspec
 	 or u_name='' or u_name=' ' then 0
    else 1 end 
 )  
-from  mcdonalds_mdsdb.incident_final incident
-left join mcdonalds_mdsdb.u_integration_srms_location_final u_integration_srms_location 
+from  mcd_mdsdb.incident_final incident
+left join mcd_mdsdb.u_integration_srms_location_final u_integration_srms_location 
 on incident.u_workplace_location=u_integration_srms_location.sys_id and incident.sourceinstance= u_integration_srms_location.sourceinstance
-left join  mcdonalds_mdwdb.f_incident tgt
+left join  mcd_mdwdb.f_incident tgt
 on incident.sys_id=tgt.row_id and incident.sourceinstance=tgt.source_id
 where  tgt.workplace_location_dq_c<>(case when incident.u_workplace_location  is  null  then 0 
 when incident.u_workplace_location  is not  null  and  u_integration_srms_location.sys_id is null then 0 

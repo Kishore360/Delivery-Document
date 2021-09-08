@@ -16,15 +16,15 @@ when e.name = 'Restaurant File Maintenance 1 (RFM1)' or e.name = 'Restaurant Fil
 when e.name = 'Digital Engagement Platform (DEP)' or e.name = 'Digital Nutrition Application (DNA)' or e.name = 'Burgey' or e.name = 'Burgey Support Services'
  or e.name = 'Adobe Analytics' or upper(b.short_description) like '%AEM%' then 'DEP'
 else 'UNSPECIFIED' end abc
- from mcdonalds_mdsdb.cmdb_ci_service_final e
-join mcdonalds_mdsdb.incident_final b on b.subcategory = e.sys_id and b.sourceinstance = e.sourceinstance
+ from mcd_mdsdb.cmdb_ci_service_final e
+join mcd_mdsdb.incident_final b on b.subcategory = e.sys_id and b.sourceinstance = e.sourceinstance
 -- and convert_tz(date_format(b.opened_at,'%Y%m%d'),'GMT','US/Central')>='20180601'
 
 )a
 group by 1 )a
 left join 
 (
-select derived_business_application_c abc ,count(distinct incident_number) cnt from mcdonalds_mdwdb.d_incident
+select derived_business_application_c abc ,count(distinct incident_number) cnt from mcd_mdwdb.d_incident
  -- where convert_tz(date_format(created_on,'%Y%m%d'),'GMT','US/Central')>='20180601' 
  group by 1
 )b on a.abc=b.abc where a.cnt<>b.cnt;

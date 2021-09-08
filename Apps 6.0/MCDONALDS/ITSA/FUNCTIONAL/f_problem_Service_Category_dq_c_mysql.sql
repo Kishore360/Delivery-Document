@@ -8,8 +8,8 @@ when u_service_catagory in ('UNSPECIFED', 'unspecified', 'Unspecified', 'null', 
 	 or u_service_catagory='' or u_service_catagory=' ' then 0 
    else 1 end 
 )  
-from  mcdonalds_mdsdb.problem_final incident
-left join  mcdonalds_mdwdb.f_problem tgt
+from  mcd_mdsdb.problem_final incident
+left join  mcd_mdwdb.f_problem tgt
 on incident.sys_id=tgt.row_id and incident.sourceinstance=tgt.source_id
 where  tgt.Service_Category_dq_c<>(case when u_service_catagory  is  null  then 0
 when u_service_catagory in ('UNSPECIFED', 'unspecified', 'Unspecified', 'null', 'spaces', 'UNALLOCATED', 'Unallocated', 

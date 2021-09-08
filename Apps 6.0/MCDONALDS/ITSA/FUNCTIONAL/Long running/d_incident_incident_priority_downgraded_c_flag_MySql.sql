@@ -4,13 +4,13 @@ CASE WHEN  cnt > 0 THEN 'd_inciden.incident_priority_downgraded_c_flag Failed'  
 FROM 
 (
 SELECT count(1) as cnt  
-FROM mcdonalds_mdsdb.incident_final SRC
+FROM mcd_mdsdb.incident_final SRC
 LEFT JOIN 
 (SELECT distinct documentkey,sourceinstance,newvalue,oldvalue FROM 
-mcdonalds_mdsdb.sys_audit_final where tablename='incident' and fieldname='priority'
+mcd_mdsdb.sys_audit_final where tablename='incident' and fieldname='priority'
 and Newvalue> oldvalue ) TA
 ON (SRC.sys_id=TA.documentkey AND SRC.sourceinstance=TA.sourceinstance) 
-JOIN mcdonalds_mdwdb.d_incident TRGT ON SRC.sys_id=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id
+JOIN mcd_mdwdb.d_incident TRGT ON SRC.sys_id=TRGT.row_id AND SRC.sourceinstance=TRGT.source_id
 WHERE 
 CASE WHEN TA.documentkey is not NULL THEN 'Y' ELSE 'N' END<> TRGT.incident_priority_downgraded_c_flag
 )temp;

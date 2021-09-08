@@ -8,8 +8,8 @@ when review_status in ('UNSPECIFED', 'unspecified', 'Unspecified', 'null', 'spac
 	 or review_status='' or review_status=' ' then 0 
    else 1 end 
 )  
-from  mcdonalds_mdsdb.change_request_final incident
-left join  mcdonalds_mdwdb.f_change_request tgt
+from  mcd_mdsdb.change_request_final incident
+left join  mcd_mdwdb.f_change_request tgt
 on incident.sys_id=tgt.row_id and incident.sourceinstance=tgt.source_id
 where  tgt.change_review_status_dq_c<>(case when review_status   is  null  then 0 
 when review_status in ('UNSPECIFED', 'unspecified', 'Unspecified', 'null', 'spaces', 'UNALLOCATED', 'Unallocated', 

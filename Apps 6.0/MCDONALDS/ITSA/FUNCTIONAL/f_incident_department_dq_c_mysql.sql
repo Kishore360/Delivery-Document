@@ -12,12 +12,12 @@ case when opened_by is null then 0
 	 or cmn_department.name='' or cmn_department.name=' ' then 0 
    else 1 end 
 )  
-from  mcdonalds_mdsdb.incident_final incident
-left join mcdonalds_mdsdb.sys_user_final sys_user    
+from  mcd_mdsdb.incident_final incident
+left join mcd_mdsdb.sys_user_final sys_user    
 on incident.opened_by =sys_user.sys_id and incident.sourceinstance=sys_user.sourceinstance
-left join mcdonalds_mdsdb.cmn_department_final cmn_department
+left join mcd_mdsdb.cmn_department_final cmn_department
 on sys_user.department=cmn_department.sys_id and incident.sourceinstance=cmn_department.sourceinstance
- join  mcdonalds_mdwdb.f_incident tgt
+ join  mcd_mdwdb.f_incident tgt
 on incident.sys_id=tgt.row_id and incident.sourceinstance=tgt.source_id
 where  tgt.department_dq_c<>(
 case when opened_by is null then 0

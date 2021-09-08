@@ -8,8 +8,8 @@ when urgency in ('UNSPECIFED', 'unspecified', 'Unspecified', 'null', 'spaces', '
 	 or urgency='' or urgency=' ' then 0 
    else 1 end 
 )  
-from  mcdonalds_mdsdb.change_request_final incident
-left join  mcdonalds_mdwdb.f_change_request tgt
+from  mcd_mdsdb.change_request_final incident
+left join  mcd_mdwdb.f_change_request tgt
 on incident.sys_id=tgt.row_id and incident.sourceinstance=tgt.source_id
 where  tgt.change_urgency_dq_c<>(case when urgency   is  null  then 0 
 when urgency in ('UNSPECIFED', 'unspecified', 'Unspecified', 'null', 'spaces', 'UNALLOCATED', 'Unallocated', 

@@ -7,8 +7,8 @@ CASE WHEN CNT THEN 'MDS to DWH data validation failed for d_macm_c_component_mac
 FROM
 (
 SELECT count(1) as CNT 
-FROM mcdonalds_mdsdb.x_scafe_mcdcr_chan_mcdcr_change_request_final macm
-JOIN mcdonalds_mdwdb.d_macm_c TRGT 
+FROM mcd_mdsdb.x_scafe_mcdcr_chan_mcdcr_change_request_final macm
+JOIN mcd_mdwdb.d_macm_c TRGT 
 ON (macm.SYS_ID=TRGT.row_id AND macm.sourceinstance=TRGT.source_id) 
 where CONCAT('<a href=\"','https://servicecafe.service-now.com/nav_to.do?uri=','x_scafe_mcdcr_chan_mcdcr_change_request.do?sys_id=',macm.sys_id,'\" target=\"_blank\">',macm.number,'</a>')<>source_url)a
 

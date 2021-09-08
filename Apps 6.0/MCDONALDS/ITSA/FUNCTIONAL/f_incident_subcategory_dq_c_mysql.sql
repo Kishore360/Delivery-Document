@@ -9,10 +9,10 @@ when u_subcategory.u_subcategory in ('UNSPECIFED', 'unspecified', 'Unspecified',
 	 or u_subcategory.u_subcategory='' or u_subcategory.u_subcategory=' ' then 0
    else 1 end 
 )  
-from  mcdonalds_mdsdb.incident_final incident
-left join mcdonalds_mdsdb.u_subcategory_final u_subcategory    
+from  mcd_mdsdb.incident_final incident
+left join mcd_mdsdb.u_subcategory_final u_subcategory    
 on incident.u_subcategory =u_subcategory.sys_id
-left join  mcdonalds_mdwdb.f_incident tgt
+left join  mcd_mdwdb.f_incident tgt
 on incident.sys_id=tgt.row_id and incident.sourceinstance=tgt.source_id
 where  tgt.subcategory_dq_c<>(case when incident.u_subcategory  is  null  then 0 
 when incident.u_subcategory  is not  null  and  u_subcategory.sys_id is null then 0 

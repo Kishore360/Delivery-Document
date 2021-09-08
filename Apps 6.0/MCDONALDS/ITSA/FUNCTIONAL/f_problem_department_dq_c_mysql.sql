@@ -10,10 +10,10 @@ when cmn.name in ('UNSPECIFED', 'unspecified', 'Unspecified', 'null', 'spaces', 
    else 1 end 
 
  -- select count(1)
-from  mcdonalds_mdsdb.problem_final incident
- join mcdonalds_mdsdb.sys_user_final suf on incident.opened_by =suf.sys_id
- join  mcdonalds_mdsdb.cmn_department_final cmn on suf.department =cmn.sys_id
- join  mcdonalds_mdwdb.f_problem tgt
+from  mcd_mdsdb.problem_final incident
+ join mcd_mdsdb.sys_user_final suf on incident.opened_by =suf.sys_id
+ join  mcd_mdsdb.cmn_department_final cmn on suf.department =cmn.sys_id
+ join  mcd_mdwdb.f_problem tgt
 on incident.sys_id=tgt.row_id and incident.sourceinstance=tgt.source_id
 where  tgt.department_dq_c<>(case when suf.department  is  null  then 0 
 when suf.department  is not  null  and  cmn.sys_id is null then 0 
