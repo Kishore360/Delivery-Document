@@ -1,3 +1,22 @@
+
+/* Tables Accessed:
+d_business_service
+d_business_service_owned_by_c
+d_business_service_owned_by_department_c
+d_calendar_date
+d_calendar_date_current_date_c
+d_ci_criticality
+d_ci_department
+d_ci_location
+d_ci_managed_by
+d_ci_owned_by
+d_ci_support_group
+d_ci_supported_by
+d_configuration_item
+d_configuration_item_mdm
+d_major_incident_risk_prediction
+f_n_major_incident */
+
 select 'ldb.f_n_major_incident a11 ' as Table_name, count(a11.row_key) Row_Count
 from ldb.f_n_major_incident a11
 union
@@ -81,3 +100,14 @@ join ldb.d_configuration_item a12
 on (a11.configuration_item_key = a12.row_key)
 join ldb.d_ci_supported_by a114
 on (a12.supported_by_key = a114.row_key)
+UNION 
+select 'ldb.d_business_service_owned_by_c a18' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_n_major_incident a11
+join ldb.d_business_service a17 on (a11.business_service_c_key = a17.row_key)
+join ldb.d_business_service_owned_by_c a18 ON (a17.business_service_owned_by_c_key=a18.row_key)
+UNION 
+select 'ldb.d_business_service_owned_by_department_c a18' as Table_name, count(a11.row_key) Row_Count
+from ldb.f_n_major_incident a11
+join ldb.d_business_service a17 on (a11.business_service_c_key = a17.row_key)
+join ldb.d_business_service_owned_by_c a18 ON (a17.business_service_owned_by_c_key=a18.row_key)
+join ldb.d_business_service_owned_by_department_c a19 ON (a18.department_key=a19.row_key)
