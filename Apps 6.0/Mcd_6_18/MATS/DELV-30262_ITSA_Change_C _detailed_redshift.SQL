@@ -73,31 +73,38 @@ select 'ldb."d_change_request" "a13" ' as Table_name, count(a11.row_key) Row_Cou
  union
 select 'ldb."d_change_application" "a14" ' as Table_name, count(a11.row_key) Row_Count
  from ldb."F_CHANGE_REQUEST" "a11" 
-
+join "ldb"."d_change_request" "a13" 
+	on ("a11"."change_request_key" = "a13"."row_key") 
 	join "ldb"."d_change_application" "a14" 
 	on ("a13"."application_key" = "a14"."row_key")  
  union
 select 'ldb."D_CHANGE_INTERNAL_CONTACT_ASSIGNED_TO" "a15" ' as Table_name, count(a11.row_key) Row_Count
  from ldb."F_CHANGE_REQUEST" "a11" 
-
+join	"ldb"."d_change_request"	"a13"
+	  on 	("a11"."change_request_key" = "a13"."row_key")
 	join "ldb"."D_CHANGE_INTERNAL_CONTACT_ASSIGNED_TO" "a15" 
 	on ("a13"."assigned_to_key" = "a15"."row_key")  
  union
 select 'ldb."d_change_request_assignment_group" "a16" ' as Table_name, count(a11.row_key) Row_Count
  from ldb."F_CHANGE_REQUEST" "a11" 
-
+join	"ldb"."d_change_request"	"a13"
+	  on 	("a11"."change_request_key" = "a13"."row_key")
 	join "ldb"."d_change_request_assignment_group" "a16" 
 	on ("a13"."assignment_group_key" = "a16"."row_key")  
  union
 select 'ldb."d_h_change_assignment_group" "a17" ' as Table_name, count(a11.row_key) Row_Count
  from ldb."F_CHANGE_REQUEST" "a11" 
-
+join	"ldb"."d_change_request"	"a13"
+	  on 	("a11"."change_request_key" = "a13"."row_key")
+	join "ldb"."d_change_request_assignment_group" "a16" 
+	on ("a13"."assignment_group_key" = "a16"."row_key")
 	join "ldb"."d_h_change_assignment_group" "a17" 
 	on ("a16"."group_hierarchy_key" = "a17"."row_key")  
  union
 select 'ldb."D_CHANGE_BUSINESS_SERVICE" "a18" ' as Table_name, count(a11.row_key) Row_Count
  from ldb."F_CHANGE_REQUEST" "a11" 
-
+join	"ldb"."d_change_request"	"a13"
+	  on 	("a11"."change_request_key" = "a13"."row_key")
 	join "ldb"."D_CHANGE_BUSINESS_SERVICE" "a18" 
 	on ("a13"."business_service_key" = "a18"."row_key")  
  union
@@ -109,31 +116,42 @@ select 'ldb."d_change_date" "a19" ' as Table_name, count(a11.row_key) Row_Count
  union
 select 'ldb."d_change_calendar_month" "a110" ' as Table_name, count(a11.row_key) Row_Count
  from ldb."F_CHANGE_REQUEST" "a11" 
-
+join "ldb"."d_change_date" "a19" 
+	on ("a11"."change_date_key" = "a19"."row_key") 
 	join "ldb"."d_change_calendar_month" "a110" 
 	on ("a19"."month_start_date_key" = "a110"."row_key")  
  union
 select 'ldb."d_change_calendar_quarter" "a111" ' as Table_name, count(a11.row_key) Row_Count
  from ldb."F_CHANGE_REQUEST" "a11" 
-
+join "ldb"."d_change_date" "a19" 
+	on ("a11"."change_date_key" = "a19"."row_key") 
+	join "ldb"."d_change_calendar_month" "a110" 
+	on ("a19"."month_start_date_key" = "a110"."row_key")
 	join "ldb"."d_change_calendar_quarter" "a111" 
 	on ("a110"."quarter_start_date_key" = "a111"."row_key")  
  union
 select 'ldb."D_CHANGE_CONFIGURATION_ITEM" "a112" ' as Table_name, count(a11.row_key) Row_Count
  from ldb."F_CHANGE_REQUEST" "a11" 
-
+join	"ldb"."d_change_request"	"a13"
+	  on 	("a11"."change_request_key" = "a13"."row_key")
 	join "ldb"."D_CHANGE_CONFIGURATION_ITEM" "a112" 
 	on ("a13"."configuration_item_key" = "a112"."row_key")  
  union
 select 'ldb."d_change_configuration_item_mdm" "a113" ' as Table_name, count(a11.row_key) Row_Count
  from ldb."F_CHANGE_REQUEST" "a11" 
-
+join	"ldb"."d_change_request"	"a13"
+	  on 	("a11"."change_request_key" = "a13"."row_key")
+	join "ldb"."D_CHANGE_CONFIGURATION_ITEM" "a112" 
+	on ("a13"."configuration_item_key" = "a112"."row_key") 
 	join "ldb"."d_change_configuration_item_mdm" "a113" 
 	on ("a112"."MDM_KEY" = "a113"."row_key")  
  union
 select 'ldb."D_CHANGE_GBL_C" "a114" ' as Table_name, count(a11.row_key) Row_Count
  from ldb."F_CHANGE_REQUEST" "a11" 
-
+join	"ldb"."d_change_request"	"a13"
+	  on 	("a11"."change_request_key" = "a13"."row_key")
+	join "ldb"."D_CHANGE_INTERNAL_CONTACT_ASSIGNED_TO" "a15" 
+	on ("a13"."assigned_to_key" = "a15"."row_key")
 	join "ldb"."D_CHANGE_GBL_C" "a114" 
 	on ("a15"."CHANGE_GBL_C_KEY" = "a114"."row_key")  
  union
@@ -170,6 +188,8 @@ select 'ldb."d_change_request_reported_type" "a119" ' as Table_name, count(a11.r
 select 'ldb."d_change_employee_mdm" "a120" ' as Table_name, count(a11.row_key) Row_Count
  from ldb."F_CHANGE_REQUEST" "a11" 
 
+	join "ldb"."d_change_employee" "a12" 
+	on ("a11"."CHANGE_EMPLOYEE_KEY" = "a12"."row_key")
 	join "ldb"."d_change_employee_mdm" "a120" 
 	on ("a12"."employee_mdm_key" = "a120"."row_key")  
  union
@@ -217,13 +237,17 @@ select 'ldb."o_data_freshness" "a127" ' as Table_name, count(a11.row_key) Row_Co
  union
 select 'ldb."D_LOV_CHANGE_REQUEST_AFFECTED_ENVIRONMENT_C" "a128" ' as Table_name, count(a11.row_key) Row_Count
  from ldb."F_CHANGE_REQUEST" "a11" 
-
+join "ldb"."d_change_request" "a13" 
+	on ("a11"."change_request_key" = "a13"."row_key")
 	join "ldb"."D_LOV_CHANGE_REQUEST_AFFECTED_ENVIRONMENT_C" "a128" 
 	on ("a13"."CHANGE_AFFECTED_ENVIRONMENT_SRC_C_KEY" = "a128"."row_key")  
  union
 select 'ldb."d_change_application_mdm" "a129" ' as Table_name, count(a11.row_key) Row_Count
  from ldb."F_CHANGE_REQUEST" "a11" 
-
+join "ldb"."d_change_request" "a13" 
+	on ("a11"."change_request_key" = "a13"."row_key") 
+	join "ldb"."d_change_application" "a14" 
+	on ("a13"."application_key" = "a14"."row_key")
 	join "ldb"."d_change_application_mdm" "a129" 
 	on ("a14"."MDM_KEY" = "a129"."row_key")  
  union
@@ -235,31 +259,36 @@ select 'ldb."d_change_request_approval" "a130" ' as Table_name, count(a11.row_ke
  union
 select 'ldb."D_INTERNAL_CONTACT_CHANGE_APPROVER_C" "a131" ' as Table_name, count(a11.row_key) Row_Count
  from ldb."F_CHANGE_REQUEST" "a11" 
-
+join "ldb"."d_change_request" "a13" 
+	on ("a11"."change_request_key" = "a13"."row_key")
 	join "ldb"."D_INTERNAL_CONTACT_CHANGE_APPROVER_C" "a131" 
 	on ("a13"."CHANGE_APPROVER_C_KEY" = "a131"."row_key")  
  union
 select 'ldb."d_change_calendar_week" "a132" ' as Table_name, count(a11.row_key) Row_Count
  from ldb."F_CHANGE_REQUEST" "a11" 
-
+join "ldb"."d_change_date" "a19" 
+	on ("a11"."change_date_key" = "a19"."row_key") 
 	join "ldb"."d_change_calendar_week" "a132" 
 	on ("a19"."week_start_date_key" = "a132"."row_key")  
  union
 select 'ldb."D_LOV_CHANGE_REQUEST_CLOSURE_CODE_C" "a133" ' as Table_name, count(a11.row_key) Row_Count
  from ldb."F_CHANGE_REQUEST" "a11" 
-
+join "ldb"."d_change_request" "a13" 
+	on ("a11"."change_request_key" = "a13"."row_key")
 	join "ldb"."D_LOV_CHANGE_REQUEST_CLOSURE_CODE_C" "a133" 
 	on ("a13"."CHANGE_CLOSURE_CODE_SRC_C_KEY" = "a133"."row_key")  
  union
 select 'ldb."D_CHANGE_REQUEST_DATA_CENTER_C" "a134" ' as Table_name, count(a11.row_key) Row_Count
  from ldb."F_CHANGE_REQUEST" "a11" 
-
+join "ldb"."d_change_request" "a13" 
+	on ("a11"."change_request_key" = "a13"."row_key")
 	join "ldb"."D_CHANGE_REQUEST_DATA_CENTER_C" "a134" 
 	on ("a13"."CHANGE_DATA_CENTER_C_KEY" = "a134"."row_key")  
  union
 select 'ldb."D_LOV_CHANGE_REQUEST_DATABASE_TYPE_C" "a135" ' as Table_name, count(a11.row_key) Row_Count
  from ldb."F_CHANGE_REQUEST" "a11" 
-
+join "ldb"."d_change_request" "a13" 
+	on ("a11"."change_request_key" = "a13"."row_key")
 	join "ldb"."D_LOV_CHANGE_REQUEST_DATABASE_TYPE_C" "a135" 
 	on ("a13"."CHANGE_DATABASE_TYPE_SRC_C_KEY" = "a135"."row_key")  
  union
@@ -271,19 +300,22 @@ select 'ldb."d_change_department" "a136" ' as Table_name, count(a11.row_key) Row
  union
 select 'ldb."d_change_domain" "a137" ' as Table_name, count(a11.row_key) Row_Count
  from ldb."F_CHANGE_REQUEST" "a11" 
-
+join "ldb"."d_change_request" "a13" 
+	on ("a11"."change_request_key" = "a13"."row_key")
 	join "ldb"."d_change_domain" "a137" 
 	on ("a13"."domain_key" = "a137"."row_key")  
  union
 select 'ldb."d_change_location" "a138" ' as Table_name, count(a11.row_key) Row_Count
  from ldb."F_CHANGE_REQUEST" "a11" 
-
+join "ldb"."d_change_request" "a13" 
+	on ("a11"."change_request_key" = "a13"."row_key")
 	join "ldb"."d_change_location" "a138" 
 	on ("a13"."location_key" = "a138"."row_key")  
  union
 select 'ldb."D_CHANGE_SCAFE_CORE_REALM_C" "a139" ' as Table_name, count(a11.row_key) Row_Count
  from ldb."F_CHANGE_REQUEST" "a11" 
-
+join "ldb"."d_change_request" "a13" 
+	on ("a11"."change_request_key" = "a13"."row_key")
 	join "ldb"."D_CHANGE_SCAFE_CORE_REALM_C" "a139" 
 	on ("a13"."CHANGE_SCAFE_CORE_REALM_C_KEY" = "a139"."row_key")  
  union
@@ -295,67 +327,102 @@ select 'ldb."d_change_request_type" "a140" ' as Table_name, count(a11.row_key) R
  union
 select 'ldb."D_CHANGE_REQUEST_THIRD_PARTY_C" "a141" ' as Table_name, count(a11.row_key) Row_Count
  from ldb."F_CHANGE_REQUEST" "a11" 
-
+join "ldb"."d_change_request" "a13" 
+	on ("a11"."change_request_key" = "a13"."row_key")
 	join "ldb"."D_CHANGE_REQUEST_THIRD_PARTY_C" "a141" 
 	on ("a13"."CHANGE_THIRD_PARTY_C_KEY" = "a141"."row_key")  
  union
 select 'ldb."D_CHANGE_REQUEST_CMDB_LOCATION_C" "a142" ' as Table_name, count(a11.row_key) Row_Count
  from ldb."F_CHANGE_REQUEST" "a11" 
-
+join	"ldb"."d_change_request"	"a13"
+	  on 	("a11"."change_request_key" = "a13"."row_key")
+	join "ldb"."D_CHANGE_CONFIGURATION_ITEM" "a112" 
+	on ("a13"."configuration_item_key" = "a112"."row_key") 
 	join "ldb"."D_CHANGE_REQUEST_CMDB_LOCATION_C" "a142" 
 	on ("a112"."CHANGE_CMDB_LOCATION_C_KEY" = "a142"."row_key")  
  union
 select 'ldb."D_CHANGE_REQUEST_STANDARD_CHANGE_C" "a143" ' as Table_name, count(a11.row_key) Row_Count
  from ldb."F_CHANGE_REQUEST" "a11" 
-
+join "ldb"."d_change_request" "a13" 
+	on ("a11"."change_request_key" = "a13"."row_key")
 	join "ldb"."D_CHANGE_REQUEST_STANDARD_CHANGE_C" "a143" 
 	on ("a13"."STANDARD_CHANGE_C_KEY" = "a143"."row_key")  
  union
 select 'ldb."d_change_assignment_group_level_1" "a144" ' as Table_name, count(a11.row_key) Row_Count
  from ldb."F_CHANGE_REQUEST" "a11" 
-
+join	"ldb"."d_change_request"	"a13"
+	  on 	("a11"."change_request_key" = "a13"."row_key")
+	join "ldb"."d_change_request_assignment_group" "a16" 
+	on ("a13"."assignment_group_key" = "a16"."row_key")
+	join "ldb"."d_h_change_assignment_group" "a17" 
+	on ("a16"."group_hierarchy_key" = "a17"."row_key")
 	join "ldb"."d_change_assignment_group_level_1" "a144" 
 	on ("a17"."group_level_1_key" = "a144"."row_key")  
  union
 select 'ldb."d_change_assignment_group_level_2" "a145" ' as Table_name, count(a11.row_key) Row_Count
  from ldb."F_CHANGE_REQUEST" "a11" 
-
+join	"ldb"."d_change_request"	"a13"
+	  on 	("a11"."change_request_key" = "a13"."row_key")
+	join "ldb"."d_change_request_assignment_group" "a16" 
+	on ("a13"."assignment_group_key" = "a16"."row_key")
+	join "ldb"."d_h_change_assignment_group" "a17" 
+	on ("a16"."group_hierarchy_key" = "a17"."row_key")
 	join "ldb"."d_change_assignment_group_level_2" "a145" 
 	on ("a17"."group_level_2_key" = "a145"."row_key")  
  union
 select 'ldb."d_change_assignment_group_manager" "a146" ' as Table_name, count(a11.row_key) Row_Count
  from ldb."F_CHANGE_REQUEST" "a11" 
-
+join	"ldb"."d_change_request"	"a13"
+	  on 	("a11"."change_request_key" = "a13"."row_key")
+	join "ldb"."d_change_request_assignment_group" "a16" 
+	on ("a13"."assignment_group_key" = "a16"."row_key")
 	join "ldb"."d_change_assignment_group_manager" "a146" 
 	on ("a16"."manager_key" = "a146"."row_key")  
  union
 select 'ldb."D_INTERNAL_ORGANIZATION_CHANGE_VENDOR_C" "a147" ' as Table_name, count(a11.row_key) Row_Count
  from ldb."F_CHANGE_REQUEST" "a11" 
-
+join	"ldb"."d_change_request"	"a13"
+	  on 	("a11"."change_request_key" = "a13"."row_key")
+	join "ldb"."d_change_request_assignment_group" "a16" 
+	on ("a13"."assignment_group_key" = "a16"."row_key")
 	join "ldb"."D_INTERNAL_ORGANIZATION_CHANGE_VENDOR_C" "a147" 
 	on ("a16"."CHANGE_VENDOR_C_KEY" = "a147"."row_key")  
  union
 select 'ldb."d_change_business_service_criticality" "a148" ' as Table_name, count(a11.row_key) Row_Count
  from ldb."F_CHANGE_REQUEST" "a11" 
-
+join	"ldb"."d_change_request"	"a13"
+	  on 	("a11"."change_request_key" = "a13"."row_key")
+	join "ldb"."D_CHANGE_BUSINESS_SERVICE" "a18" 
+	on ("a13"."business_service_key" = "a18"."row_key") 
 	join "ldb"."d_change_business_service_criticality" "a148" 
 	on ("a18"."CRITICALITY_KEY" = "a148"."row_key")  
  union
 select 'ldb."D_INTERNAL_CONTACT_CHANGE_SERVICE_OWNED_BY_C" "a149" ' as Table_name, count(a11.row_key) Row_Count
  from ldb."F_CHANGE_REQUEST" "a11" 
-
+join	"ldb"."d_change_request"	"a13"
+	  on 	("a11"."change_request_key" = "a13"."row_key")
+	join "ldb"."D_CHANGE_BUSINESS_SERVICE" "a18" 
+	on ("a13"."business_service_key" = "a18"."row_key") 
 	join "ldb"."D_INTERNAL_CONTACT_CHANGE_SERVICE_OWNED_BY_C" "a149" 
 	on ("a18"."CHANGE_SERVICE_OWNED_BY_C_KEY" = "a149"."row_key")  
  union
 select 'ldb."d_change_business_service_used_for" "a150" ' as Table_name, count(a11.row_key) Row_Count
  from ldb."F_CHANGE_REQUEST" "a11" 
-
+join	"ldb"."d_change_request"	"a13"
+	  on 	("a11"."change_request_key" = "a13"."row_key")
+	join "ldb"."D_CHANGE_BUSINESS_SERVICE" "a18" 
+	on ("a13"."business_service_key" = "a18"."row_key") 
 	join "ldb"."d_change_business_service_used_for" "a150" 
 	on ("a18"."USED_FOR_SRC_KEY" = "a150"."row_key")  
  union
 select 'ldb."d_change_calendar_year" "a151" ' as Table_name, count(a11.row_key) Row_Count
  from ldb."F_CHANGE_REQUEST" "a11" 
-
+join "ldb"."d_change_date" "a19" 
+	on ("a11"."change_date_key" = "a19"."row_key") 
+	join "ldb"."d_change_calendar_month" "a110" 
+	on ("a19"."month_start_date_key" = "a110"."row_key")
+	join "ldb"."d_change_calendar_quarter" "a111" 
+	on ("a110"."quarter_start_date_key" = "a111"."row_key")
 	join "ldb"."d_change_calendar_year" "a151" 
 	on ("a111"."year_start_date_key" = "a151"."row_key")  
  union
