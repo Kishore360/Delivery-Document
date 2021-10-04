@@ -8,8 +8,8 @@ when priority in ('UNSPECIFED', 'unspecified', 'Unspecified', 'null', 'spaces', 
 	 or priority='' or priority=' ' then 0 
    else 1 end 
 )  
-from  mcdonalds_mdsdb.change_request_final incident
-left join  mcdonalds_mdwdb.f_change_request tgt
+from  mcd_mdsdb.change_request_final incident
+left join  mcd_mdwdb.f_change_request tgt
 on incident.sys_id=tgt.row_id and incident.sourceinstance=tgt.source_id
 where  tgt.change_priority_dq_c<>(case when priority   is  null  then 0 
 when priority in ('UNSPECIFED', 'unspecified', 'Unspecified', 'null', 'spaces', 'UNALLOCATED', 'Unallocated', 

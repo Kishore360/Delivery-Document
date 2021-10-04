@@ -4,8 +4,8 @@ FROM (
 select incident.number,incident.short_description,incident.sys_id,tgt.row_id,CASE WHEN length(incident.short_description)<=20 or incident.short_description is null 
 or incident.short_description in ('UNSPECIFIED','UNKNOWN','UNALLOCATED','UNDEFINED','',' ','UNSPECIFED','UNKONWN','NULL')then 0
 ELSE 1 end as derived_col,tgt.short_description_dq_c
-from  mcdonalds_mdsdb.incident_final incident
-left join  mcdonalds_mdwdb.f_incident tgt
+from  mcd_mdsdb.incident_final incident
+left join  mcd_mdwdb.f_incident tgt
 on incident.sys_id=tgt.row_id and incident.sourceinstance=tgt.source_id
 where tgt.short_description_dq_c<>(CASE WHEN length(incident.short_description)<=20 or incident.short_description is null 
 or incident.short_description in ('UNSPECIFIED','UNKNOWN','UNALLOCATED','UNDEFINED','',' ','UNSPECIFED','UNKONWN','NULL')then 0

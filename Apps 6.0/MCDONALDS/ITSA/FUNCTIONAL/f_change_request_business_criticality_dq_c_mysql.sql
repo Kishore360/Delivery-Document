@@ -10,10 +10,10 @@ when u_integration_srms_location.busines_criticality in ('UNSPECIFED', 'unspecif
    else 1 end 
 
  
-from  mcdonalds_mdsdb.change_request_final incident
-left join mcdonalds_mdsdb.cmdb_ci_service_final  u_integration_srms_location 
+from  mcd_mdsdb.change_request_final incident
+left join mcd_mdsdb.cmdb_ci_service_final  u_integration_srms_location 
 on incident.u_business_service =u_integration_srms_location.sys_id and incident.sourceinstance= u_integration_srms_location.sourceinstance
-left join  mcdonalds_mdwdb.f_change_request tgt
+left join  mcd_mdwdb.f_change_request tgt
 on incident.sys_id=tgt.row_id and incident.sourceinstance=tgt.source_id
 where  tgt.business_criticality_dq_c<>(case when incident.u_business_service   is  null  then 0 
 when incident.u_business_service   is not  null  and  u_integration_srms_location.sys_id is null then 0 

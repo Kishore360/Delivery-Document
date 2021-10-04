@@ -10,12 +10,12 @@ when s2.name in ('UNSPECIFED', 'unspecified', 'Unspecified', 'null', 'spaces', '
    else 1 end 
  
  
-from  mcdonalds_mdsdb.problem_final incident
-left join mcdonalds_mdsdb.sys_user_final s1 
+from  mcd_mdsdb.problem_final incident
+left join mcd_mdsdb.sys_user_final s1 
 on incident.assigned_to=s1.sys_id and incident.sourceinstance= s1.sourceinstance
-left join mcdonalds_mdsdb.sys_user_final s2 
+left join mcd_mdsdb.sys_user_final s2 
 on s1.manager=s2.sys_id and s2.sourceinstance= s1.sourceinstance
-left join  mcdonalds_mdwdb.f_problem tgt
+left join  mcd_mdwdb.f_problem tgt
 on incident.sys_id=tgt.row_id and incident.sourceinstance=tgt.source_id
 where  tgt.Assigned_To_Manager_dq_c<>(case when s1.manager  is  null  then 0 
 when s1.manager  is not  null  and  s1.sys_id is null then 0 

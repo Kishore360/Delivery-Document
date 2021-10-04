@@ -8,8 +8,8 @@ when incident.u_vendor in ('UNSPECIFED', 'unspecified', 'Unspecified', 'null', '
 	 or incident.u_vendor='' or incident.u_vendor=' ' then 0
    else 1 end 
 )  
-from  mcdonalds_mdsdb.incident_final incident
-left join  mcdonalds_mdwdb.f_incident tgt
+from  mcd_mdsdb.incident_final incident
+left join  mcd_mdwdb.f_incident tgt
 on incident.sys_id=tgt.row_id and incident.sourceinstance=tgt.source_id
 where  tgt.vendor_dq_c<>(case when incident.u_vendor  is  null  then 0 
 when incident.u_vendor in ('UNSPECIFED', 'unspecified', 'Unspecified', 'null', 'spaces', 'UNALLOCATED', 'Unallocated', 

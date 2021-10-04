@@ -7,8 +7,8 @@ when upper(known_error) in ('UNSPECIFIED','UNKNOWN','UNALLOCATED','UNDEFINED',''
  then 0 
    else 1 end 
 )  
-from  mcdonalds_mdsdb.problem_final incident
-left join  mcdonalds_mdwdb.f_problem tgt
+from  mcd_mdsdb.problem_final incident
+left join  mcd_mdwdb.f_problem tgt
 on incident.sys_id=tgt.row_id and incident.sourceinstance=tgt.source_id
 where  tgt.Known_Error_dq_c<>(case when known_error  is  null  then 0
 when upper(known_error) in ('UNSPECIFIED','UNKNOWN','UNALLOCATED','UNDEFINED','',' ','UNSPECIFED','UNKONWN','NULL') 

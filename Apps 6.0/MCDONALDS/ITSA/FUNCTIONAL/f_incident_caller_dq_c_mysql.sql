@@ -10,10 +10,10 @@ select number,assignment_group ,caller_dq_c,
 	 or name='' or name=' ' then 0
   else 1 end 
 )  
-from  mcdonalds_mdsdb.incident_final incident
-left join mcdonalds_mdsdb.sys_user_final sys_user    
+from  mcd_mdsdb.incident_final incident
+left join mcd_mdsdb.sys_user_final sys_user    
 on incident.caller_id =sys_user.sys_id and incident.sourceinstance=sys_user.sourceinstance
-left join  mcdonalds_mdwdb.f_incident tgt
+left join  mcd_mdwdb.f_incident tgt
 on incident.sys_id=tgt.row_id and incident.sourceinstance=tgt.source_id
 where  tgt.caller_dq_c<>(case when caller_id  is  null  then 0 
  when sys_user.sys_id  is  null  then 0 
