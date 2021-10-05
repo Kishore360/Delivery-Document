@@ -1,4 +1,4 @@
-Tables Accessed:
+/* Tables Accessed:
 D_INCIDENT_ASSIGNED_TO
 D_INCIDENT_ASSIGNMENT_GROUP_MANAGER
 D_INCIDENT_BUSINESS_SERVICE
@@ -14,7 +14,7 @@ d_incident_priority
 d_incident_state
 d_incident_state_from
 d_incident_state_to
-f_incident_state
+f_incident_state */
 
 select 'ldb."f_incident_state" a11 ' as Table_name, count(a11.row_key) Row_Count
  from ldb."f_incident_state" a11 
