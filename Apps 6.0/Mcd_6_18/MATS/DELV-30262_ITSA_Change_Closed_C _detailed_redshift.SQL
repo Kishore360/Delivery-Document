@@ -469,4 +469,3 @@ join "ldb"."d_change_request" "a13"
 	on ("a15"."CHANGE_GBL_C_KEY" = "a114"."row_key")
 	join "ldb"."D_GBL_CHANGE_VICE_PRESIDENT_NAME_C" "a155" 
 	on ("a114"."CHANGE_VICE_PRESIDENT_NAME_C_KEY" = "a155"."row_key") 
-
